@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Commitment_ceiling;
 use App\Models\Fire_commitment_ceiling;
 use App\Models\Mobile_warranty;
@@ -11,8 +12,10 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Shetabit\Multipay\Exceptions\PurchaseFailedException;
+use Shetabit\Multipay\Exceptions\InvalidPaymentException;
 use Shetabit\Multipay\Invoice;
 use Shetabit\Payment\Facade\Payment;
+use SoapFault;
 
 class PaymentController extends Controller
 {
@@ -58,7 +61,7 @@ class PaymentController extends Controller
                 $transaction->save();
             });
             return $payment->pay()->render();
-        }catch (PurchaseFailedException|\Exception|\SoapFault $e){
+        }catch (PurchaseFailedException|Exception|SoapFault $e){
             $transaction->transaction_result = $e;
             $transaction->status = Transaction::STATUS_FAILED;
             $transaction->save();
@@ -83,19 +86,41 @@ class PaymentController extends Controller
         if ($transaction->mobile_warranty_id <> $invoice_id){
             return view('purchase_result')->with('status','failed');
         }
-
-        $cart_detail = Mobile_warranty::find($invoice_id);
-        $price_range = Commitment_ceiling::find($cart_detail->price_range)->price;
-
-
-        $fire_addition_price = 0;
-        if ($cart_detail->addition_fire_commitment_id != 0) {
-            $fire_addition_price = Fire_commitment_ceiling::find($cart_detail->addition_fire_commitment_id)->price;
+        if ($transaction->status <> Transaction::STATUS_PENDING){
+            return view('purchase_result')->with('status','failed');
         }
-        $amount = $fire_addition_price + $price_range;
-        $receipt = Payment::amount($amount)
-            ->transactionId($request->Authority)
-            ->verify();
-        $receipt->dd();
+
+        try {
+            $cart_detail = Mobile_warranty::find($invoice_id);
+            $price_range = Commitment_ceiling::find($cart_detail->price_range)->price;
+
+            $fire_addition_price = 0;
+            if ($cart_detail->addition_fire_commitment_id != 0) {
+                $fire_addition_price = Fire_commitment_ceiling::find($cart_detail->addition_fire_commitment_id)->price;
+            }
+            $amount = $fire_addition_price + $price_range;
+            $receipt = Payment::amount($amount)
+                ->transactionId($request->Authority)
+                ->verify();
+        }catch (Exception|InvalidPaymentException $e){
+            if ($e->getCode() < 0){
+                $transaction->status = Transaction::STATUS_FAILED;
+                $transaction->transaction_result =[
+                    'message' => $e->getMessage(),
+                    'code' => $e->getCode()
+                ];
+                $transaction->save();
+
+                /*
+                 * For manage error use this code ****
+                 * */
+                /*return view('purchase_result')
+                    ->with([
+                        'message' => $e->getMessage(),
+                        'code' => $e->getCode()
+                    ]);*/
+            }
+        }
+
     }
 }
