@@ -1,0 +1,1459 @@
+<div class="stepper stepper-links d-flex flex-column" id="kt_modal_create_project_stepper">
+    <!--begin::Container-->
+    <div class="container">
+        <!--begin::Nav-->
+        <div class="stepper-nav justify-content-center py-2">
+            <!--begin::Step 1-->
+            <div class="stepper-item me-5 me-md-15 current" data-kt-stepper-element="nav">
+                <h3 class="stepper-title">نوع فراگارانتی</h3>
+            </div>
+            <!--end::Step 1-->
+            <!--begin::Step 2-->
+            <div class="stepper-item me-5 me-md-15" data-kt-stepper-element="nav">
+                <h3 class="stepper-title">تعیین بازه قیمت</h3>
+            </div>
+            <!--end::Step 2-->
+            <!--begin::Step 3-->
+            <div class="stepper-item me-5 me-md-15" data-kt-stepper-element="nav">
+                <h3 class="stepper-title">ثبت IMEI</h3>
+            </div>
+            <!--end::Step 3-->
+            <!--begin::Step 4-->
+            <div class="stepper-item me-5 me-md-15" data-kt-stepper-element="nav">
+                <h3 class="stepper-title">آپلود عکس موبایل</h3>
+            </div>
+            <!--end::Step 4-->
+            <!--begin::Step 5-->
+            <div class="stepper-item me-5 me-md-15" data-kt-stepper-element="nav">
+                <h3 class="stepper-title">هدیه بیمه آتش سوزی فراگارانتی</h3>
+            </div>
+            <!--end::Step 5-->
+            <!--begin::Step 6-->
+            <div class="stepper-item me-5 me-md-15" data-kt-stepper-element="nav">
+                <h3 class="stepper-title">Upload Files</h3>
+            </div>
+            <!--end::Step 6-->
+            <!--begin::Step 7-->
+            <div class="stepper-item" data-kt-stepper-element="nav">
+                <h3 class="stepper-title">Completed</h3>
+            </div>
+            <!--end::Step 7-->
+        </div>
+        <!--end::Nav-->
+        <!--begin::Form-->
+        <form class="mx-auto w-100 mw-600px pt-15 pb-10" novalidate="novalidate"
+              id="kt_modal_create_project_form" method="post">
+            <!--begin::Type-->
+            <div class="current" data-kt-stepper-element="content">
+                <!--begin::Wrapper-->
+                <div class="w-100">
+                    <!--begin::Heading-->
+                    <div class="pb-7 pb-lg-12">
+                        <!--begin::Title-->
+                        <h1 class="fw-bolder text-dark">نوع فراگارانتی</h1>
+                        <!--end::Title-->
+                        <!--begin::Description-->
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Heading-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-15" data-kt-buttons="true">
+                        <!--begin::Option-->
+                        <label
+                            class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6 active">
+                            <!--begin::Input-->
+                            <input class="btn-check" type="radio" checked="checked"
+                                   name="project_type" value="1"/>
+                            <!--end::Input-->
+                            <!--begin::Label-->
+                            <span class="d-flex">
+																			<!--begin::Icon-->
+                                <!--begin::Svg Icon | path: icons/duotone/General/User.svg-->
+																			<span class="svg-icon svg-icon-3hx">
+																				<svg xmlns="http://www.w3.org/2000/svg"
+                                                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                     width="24px" height="24px"
+                                                                                     viewBox="0 0 24 24" version="1.1">
+																					<g stroke="none" stroke-width="1"
+                                                                                       fill="none" fill-rule="evenodd">
+																						<polygon
+                                                                                            points="0 0 24 0 24 24 0 24"/>
+																						<path
+                                                                                            d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+                                                                                            fill="#000000"
+                                                                                            fill-rule="nonzero"
+                                                                                            opacity="0.3"/>
+																						<path
+                                                                                            d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+                                                                                            fill="#000000"
+                                                                                            fill-rule="nonzero"/>
+																					</g>
+																				</svg>
+																			</span>
+                                <!--end::Svg Icon-->
+                                <!--end::Icon-->
+                                <!--begin::Info-->
+																			<span class="ms-4">
+																				<span
+                                                                                    class="fs-3 fw-bolder text-gray-900 mb-2 d-block">فراگارانتی تلفن همراه خودم</span>
+																				<span
+                                                                                    class="fw-bold fs-4 text-muted">{{ $user->phone_brand->name." / ".$user->phone_model->name }}</span>
+																			</span>
+                                <!--end::Info-->
+																		</span>
+                            <!--end::Label-->
+                        </label>
+                        <!--end::Option-->
+                        <!--begin::Option-->
+                        <label
+                            class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6">
+                            <!--begin::Input-->
+                            <input class="btn-check" type="radio" name="project_type"
+                                   value="2"/>
+                            <!--end::Input-->
+                            <!--begin::Label-->
+                            <span class="d-flex">
+																			<!--begin::Icon-->
+                                <!--begin::Svg Icon | path: icons/duotone/Layout/Layout-4-blocks-2.svg-->
+																			<span class="svg-icon svg-icon-3hx">
+																				<svg xmlns="http://www.w3.org/2000/svg"
+                                                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                     width="24px" height="24px"
+                                                                                     viewBox="0 0 24 24" version="1.1">
+																					<g stroke="none" stroke-width="1"
+                                                                                       fill="none" fill-rule="evenodd">
+																						<rect x="5" y="5" width="5"
+                                                                                              height="5" rx="1"
+                                                                                              fill="#000000"/>
+																						<rect x="14" y="5" width="5"
+                                                                                              height="5" rx="1"
+                                                                                              fill="#000000"
+                                                                                              opacity="0.3"/>
+																						<rect x="5" y="14" width="5"
+                                                                                              height="5" rx="1"
+                                                                                              fill="#000000"
+                                                                                              opacity="0.3"/>
+																						<rect x="14" y="14" width="5"
+                                                                                              height="5" rx="1"
+                                                                                              fill="#000000"
+                                                                                              opacity="0.3"/>
+																					</g>
+																				</svg>
+																			</span>
+                                <!--end::Svg Icon-->
+                                <!--end::Icon-->
+                                <!--begin::Info-->
+																			<span class="ms-4">
+																				<span
+                                                                                    class="fs-3 fw-bolder text-gray-900 mb-2 d-block">فراگارانتی تلفن جدید</span>
+																				{{--<span class="fw-bold fs-4 text-muted">Create corporate account to manage users</span>--}}
+																			</span>
+                                <!--end::Info-->
+																		</span>
+                            <!--end::Label-->
+                        </label>
+                        <!--end::Option-->
+
+
+                        <div id="kt_signin_email_button" class="d-none ms-auto">
+                            <input id="kt_signin_cancel">
+                            <button class="btn btn-light btn-active-light-primary"></button>
+                        </div>
+                        <!--begin::Password-->
+                        <div class="d-flex flex-wrap align-items-center mb-10">
+                            <!--begin::Label-->
+                            <!--end::Label-->
+                            <!--begin::Edit-->
+                            <div id="kt_signin_password_edit" class="flex-row-fluid d-none">
+                                <!--begin::Form-->
+                                <div id="kt_signin_change_password" class="form"
+                                     novalidate="novalidate">
+                                    <div class="row mb-1">
+                                        <div class="col-lg-4">
+                                            <div class="fv-row mb-0">
+                                                <label for="currentpassword"
+                                                       class="form-label fs-6 fw-bolder mb-3">رمز
+                                                    عبور فعلی</label>
+                                                <input type="password"
+                                                       class="form-control form-control-lg form-control-solid"
+                                                       name="currentpassword"
+                                                       id="currentpassword"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="fv-row mb-0">
+                                                <label for="newpassword"
+                                                       class="form-label fs-6 fw-bolder mb-3">رمز
+                                                    عبور جدید</label>
+                                                <input type="password"
+                                                       class="form-control form-control-lg form-control-solid"
+                                                       name="newpassword" id="newpassword"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="fv-row mb-0">
+                                                <label for="confirmpassword"
+                                                       class="form-label fs-6 fw-bolder mb-3">تکرار
+                                                    رمز عبور جدید</label>
+                                                <input type="password"
+                                                       class="form-control form-control-lg form-control-solid"
+                                                       name="confirmpassword"
+                                                       id="confirmpassword"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-text mb-5">رمز عبور باید شامل حداقل 8
+                                        کاراکتر باشد.
+                                    </div>
+                                    <div class="d-flex">
+                                        <button id="kt_password_submit" type="button"
+                                                class="btn btn-primary me-2 px-6">
+                                            بروزرسانی رمز عبور
+                                        </button>
+                                        <button id="kt_password_cancel" type="button"
+                                                class="btn btn-color-gray-400 btn-active-light-primary px-6">
+                                            لغو
+                                        </button>
+                                    </div>
+                                </div>
+                                <!--end::Form-->
+                            </div>
+                            <!--end::Edit-->
+                            <!--begin::Action-->
+                            <label
+                                class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6">
+                                <!--begin::Input-->
+                                <div id="kt_signin_password_button">
+                                    <button class="btn-check" type="radio" name="project_type"
+                                            value="2"/>
+                                </div>
+                                <!--end::Input-->
+                                <!--begin::Label-->
+                                <span class="d-flex">
+																			<!--begin::Icon-->
+                                    <!--begin::Svg Icon | path: icons/duotone/Layout/Layout-4-blocks-2.svg-->
+																			<span class="svg-icon svg-icon-3hx">
+																				<svg xmlns="http://www.w3.org/2000/svg"
+                                                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                     width="24px" height="24px"
+                                                                                     viewBox="0 0 24 24" version="1.1">
+																					<g stroke="none" stroke-width="1"
+                                                                                       fill="none" fill-rule="evenodd">
+																						<rect x="5" y="5" width="5"
+                                                                                              height="5" rx="1"
+                                                                                              fill="#000000"/>
+																						<rect x="14" y="5" width="5"
+                                                                                              height="5" rx="1"
+                                                                                              fill="#000000"
+                                                                                              opacity="0.3"/>
+																						<rect x="5" y="14" width="5"
+                                                                                              height="5" rx="1"
+                                                                                              fill="#000000"
+                                                                                              opacity="0.3"/>
+																						<rect x="14" y="14" width="5"
+                                                                                              height="5" rx="1"
+                                                                                              fill="#000000"
+                                                                                              opacity="0.3"/>
+																					</g>
+																				</svg>
+																			</span>
+                                    <!--end::Svg Icon-->
+                                    <!--end::Icon-->
+                                    <!--begin::Info-->
+																			<span class="ms-4">
+																				<span
+                                                                                    class="fs-3 fw-bolder text-gray-900 mb-2 d-block">فراگارانتی تلفن جدید</span>
+																				{{--<span class="fw-bold fs-4 text-muted">Create corporate account to manage users</span>--}}
+																			</span>
+                                    <!--end::Info-->
+																		</span>
+                                <!--end::Label-->
+                            </label>
+                            <!--end::Action-->
+                        </div>
+                        <!--end::Password-->
+
+
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Actions-->
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-lg btn-primary"
+                                data-kt-element="type-next">
+                            <span class="indicator-label">تعیین بازه قیمت</span>
+                            <span class="indicator-progress">لطفا صبر کنید...
+																		<span
+                                                                            class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
+                    <!--end::Actions-->
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::Type-->
+            <!--begin::Settings-->
+            <div data-kt-stepper-element="content">
+                <!--begin::Wrapper-->
+                <div class="w-100">
+                    <!--begin::Heading-->
+                    <div class="pb-12">
+                        <!--begin::Title-->
+                        <h1 class="fw-bolder text-dark">تعیین بازه قیمت</h1>
+                        <!--end::Title-->
+                        <!--begin::Description-->
+                        {{-- <div class="text-muted fw-bold fs-4">If you need more info, please check
+                        <a href="#" class="link-primary">Project Guidelines</a></div>--}}
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Heading-->
+
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-8">
+                        <!--begin::Label-->
+                        <div id="kt_modal_create_project_settings_logo">
+                            <label class="required fs-6 fw-bold mb-2">بازه قیمت دستگاه تلفن
+                                همراه</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <select class="form-select form-select-solid" data-control="select2"
+                                    data-hide-search="true" data-placeholder="Select..."
+                                    name="settings_customer">
+                                <option></option>
+                                <option value="1">2 میلیون تومان-3 میلیون تومان</option>
+                                <option value="2">3 میلیون تومان-5 میلیون تومان</option>
+                            </select>
+                            <!--end::Input-->
+                            <p>
+
+                            </p>
+                        </div>
+                    </div>
+                    <!--end::Input group-->
+
+                    <!--begin::Actions-->
+                    <div class="d-flex flex-stack">
+                        <button type="button" class="btn btn-lg btn-light me-3"
+                                data-kt-element="settings-previous">نوع فراگارانتی
+                        </button>
+                        <button type="button" class="btn btn-lg btn-primary"
+                                data-kt-element="settings-next">
+                            <span class="indicator-label">ثبت IMEI</span>
+                            <span class="indicator-progress">لطفا صبر کنید...
+																		<span
+                                                                            class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
+                    <!--end::Actions-->
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::Settings-->
+            <!--begin::Budget-->
+            <div data-kt-stepper-element="content">
+                <!--begin::Wrapper-->
+                <div class="w-100">
+                    <!--begin::Heading-->
+                    <div class="pb-10 pb-lg-12">
+                        <!--begin::Title-->
+                        <h1 class="fw-bolder text-dark">ثبت IMEI</h1>
+                        <!--end::Title-->
+                        {{--<!--begin::Description-->
+                        <div class="text-muted fw-bold fs-4">If you need more info, please check
+                            <a href="#" class="link-primary">Project Guidelines</a></div>
+                        <!--end::Description-->--}}
+                    </div>
+                    <!--end::Heading-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-8">
+                        <!--begin::Dialer-->
+                        <div class="position-relative"
+                             id="kt_modal_create_project_budget_setup" data-kt-dialer="true">
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">IMEI
+                                    1</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-6 fv-row">
+                                    <input type="text" name="imei1"
+                                           class="form-control form-control-lg form-control-solid"
+                                           value="">
+                                </div>
+
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">IMEI
+                                    2</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-6 fv-row">
+                                    <input type="text" name="imei2"
+                                           class="form-control form-control-lg form-control-solid"
+                                           value="">
+                                </div>
+
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <!--end::Dialer-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Actions-->
+                    <div class="d-flex flex-stack">
+                        <button type="button" class="btn btn-lg btn-light me-3"
+                                data-kt-element="budget-previous">تعیین بازه قیمت
+                        </button>
+                        <button type="button" class="btn btn-lg btn-primary"
+                                data-kt-element="budget-next">
+                            <span class="indicator-label">آپلود عکس موبایل</span>
+                            <span class="indicator-progress">لطفا صبر کنید...
+																		<span
+                                                                            class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
+                    <!--end::Actions-->
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::Budget-->
+
+            <!--begin::Targets-->
+            <div data-kt-stepper-element="content">
+                <!--begin::Wrapper-->
+                <div class="w-100">
+                    <!--begin::Heading-->
+                    <div class="pb-12">
+                        <!--begin::Title-->
+                        <h1 class="fw-bolder text-dark">آپلود عکس موبایل</h1>
+                        <!--end::Title-->
+                        {{--<!--begin::Title-->
+                        <div class="text-muted fw-bold fs-4">If you need more info, please check
+                            <a href="#" class="link-primary">Project Guidelines</a></div>
+                        <!--end::Title-->--}}
+                    </div>
+                    <!--end::Heading-->
+
+
+                    <div class="row justify-content-center">
+
+                        <div class="col-md-6">
+                            <!--begin::عکس از پشت جعبه-->
+                            <div class="row  mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">عکس از پشت
+                                    جعبه</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8">
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline"
+                                         data-kt-image-input="true"
+                                         style="background-image: url('')">
+                                        <!--begin::Preview existing avatar-->
+                                        <div class="image-input-wrapper w-125px h-125px"
+                                             style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                        <!--end::Preview existing avatar-->
+                                        <!--begin::Label-->
+                                        <label
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="change"
+                                            data-bs-toggle="tooltip"
+                                            title="Change avatar">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" name="phone_b_photo"
+                                                   accept=".png, .jpg, .jpeg"/>
+                                            <input type="hidden" name="phone_b_photo_remove"/>
+                                            <!--end::Inputs-->
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Cancel-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="cancel"
+                                            data-bs-toggle="tooltip"
+                                            title="Cancel avatar">
+															<i class="bi bi-x fs-2"></i>
+														</span>
+                                        <!--end::Cancel-->
+                                        <!--begin::Remove-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="remove"
+                                            data-bs-toggle="tooltip"
+                                            title="Remove avatar">
+															<i class="bi bi-x fs-2"></i>
+														</span>
+                                        <!--end::Remove-->
+                                    </div>
+
+                                    <!--end::Image input-->
+                                    <!--begin::Hint-->
+                                    <div class="form-text">
+                                        کد های IMEI باید قابل مشاهده باشند.
+                                    </div>
+                                    <!--end::Hint-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::عکس از پشت جعبه-->
+                        </div>
+                        <div class="col-md-6">
+                            <!--begin::عکس از روی جعبه-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">عکس از روی
+                                    جعبه</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8">
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline"
+                                         data-kt-image-input="true"
+                                         style="background-image: url('')">
+                                        <!--begin::Preview existing avatar-->
+                                        <div class="image-input-wrapper w-125px h-125px"
+                                             style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                        <!--end::Preview existing avatar-->
+                                        <!--begin::Label-->
+                                        <label
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="change"
+                                            data-bs-toggle="tooltip"
+                                            title="Change avatar">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" name="phone_f_photo"
+                                                   accept=".png, .jpg, .jpeg"/>
+                                            <input type="hidden" name="phone_f_photo_remove"/>
+                                            <!--end::Inputs-->
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Cancel-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="cancel"
+                                            data-bs-toggle="tooltip"
+                                            title="Cancel avatar">
+															<i class="bi bi-x fs-2"></i>
+														</span>
+                                        <!--end::Cancel-->
+                                        <!--begin::Remove-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="remove"
+                                            data-bs-toggle="tooltip"
+                                            title="Remove avatar">
+															<i class="bi bi-x fs-2"></i>
+														</span>
+                                        <!--end::Remove-->
+                                    </div>
+
+                                    <!--end::Image input-->
+                                    <!--begin::Hint-->
+                                    <div class="form-text">
+                                        کد های IMEI باید قابل مشاهده باشند.
+                                    </div>
+                                    <!--end::Hint-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::عکس از روی جعبه-->
+                        </div>
+                        <div class="col-md-6">
+                            <!--begin::  عکس از صفحه-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">عکس از روی
+                                    صفحه</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8">
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline"
+                                         data-kt-image-input="true"
+                                         style="background-image: url('')">
+                                        <!--begin::Preview existing avatar-->
+                                        <div class="image-input-wrapper w-125px h-125px"
+                                             style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                        <!--end::Preview existing avatar-->
+                                        <!--begin::Label-->
+                                        <label
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="change"
+                                            data-bs-toggle="tooltip"
+                                            title="Change avatar">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" name="phone_screen_photo"
+                                                   accept=".png, .jpg, .jpeg"/>
+                                            <input type="hidden"
+                                                   name="phone_screen_photo_remove"/>
+                                            <!--end::Inputs-->
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Cancel-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="cancel"
+                                            data-bs-toggle="tooltip"
+                                            title="Cancel avatar">
+															<i class="bi bi-x fs-2"></i>
+														</span>
+                                        <!--end::Cancel-->
+                                        <!--begin::Remove-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="remove"
+                                            data-bs-toggle="tooltip"
+                                            title="Remove avatar">
+															<i class="bi bi-x fs-2"></i>
+														</span>
+                                        <!--end::Remove-->
+                                    </div>
+
+                                    <!--end::Image input-->
+
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::عکس از صفحه-->
+                        </div>
+                        <div class="col-md-6">
+                            <!--begin::  عکس از پشت گوشی-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">عکس از پشت
+                                    گوشی</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8">
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline"
+                                         data-kt-image-input="true"
+                                         style="background-image: url('')">
+                                        <!--begin::Preview existing avatar-->
+                                        <div class="image-input-wrapper w-125px h-125px"
+                                             style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                        <!--end::Preview existing avatar-->
+                                        <!--begin::Label-->
+                                        <label
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="change"
+                                            data-bs-toggle="tooltip"
+                                            title="Change avatar">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" name="phone_back_photo"
+                                                   accept=".png, .jpg, .jpeg"/>
+                                            <input type="hidden"
+                                                   name="phone_back_photo_remove"/>
+                                            <!--end::Inputs-->
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Cancel-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="cancel"
+                                            data-bs-toggle="tooltip"
+                                            title="Cancel avatar">
+															<i class="bi bi-x fs-2"></i>
+														</span>
+                                        <!--end::Cancel-->
+                                        <!--begin::Remove-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="remove"
+                                            data-bs-toggle="tooltip"
+                                            title="Remove avatar">
+															<i class="bi bi-x fs-2"></i>
+														</span>
+                                        <!--end::Remove-->
+                                    </div>
+
+                                    <!--end::Image input-->
+
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::عکس از پشت گوشی-->
+
+                        </div>
+                        <div class="col-md-6">
+                            <!--begin::  عکس از کناره سمت راست گوشی -->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">عکس از کناره
+                                    سمت راست
+                                    گوشی</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8">
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline"
+                                         data-kt-image-input="true"
+                                         style="background-image: url('')">
+                                        <!--begin::Preview existing avatar-->
+                                        <div class="image-input-wrapper w-125px h-125px"
+                                             style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                        <!--end::Preview existing avatar-->
+                                        <!--begin::Label-->
+                                        <label
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="change"
+                                            data-bs-toggle="tooltip"
+                                            title="Change avatar">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" name="phone_right_photo"
+                                                   accept=".png, .jpg, .jpeg"/>
+                                            <input type="hidden"
+                                                   name="phone_right_photo_remove"/>
+                                            <!--end::Inputs-->
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Cancel-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="cancel"
+                                            data-bs-toggle="tooltip"
+                                            title="Cancel avatar">
+															<i class="bi bi-x fs-2"></i>
+														</span>
+                                        <!--end::Cancel-->
+                                        <!--begin::Remove-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="remove"
+                                            data-bs-toggle="tooltip"
+                                            title="Remove avatar">
+															<i class="bi bi-x fs-2"></i>
+														</span>
+                                        <!--end::Remove-->
+                                    </div>
+
+                                    <!--end::Image input-->
+
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::عکس از کناره سمت راست گوشی-->
+                        </div>
+                        <div class="col-md-6">
+                            <!--begin::  عکس از کناره سمت چپ گوشی -->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">عکس از کناره
+                                    سمت چپ
+                                    گوشی</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8">
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline"
+                                         data-kt-image-input="true"
+                                         style="background-image: url('')">
+                                        <!--begin::Preview existing avatar-->
+                                        <div class="image-input-wrapper w-125px h-125px"
+                                             style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                        <!--end::Preview existing avatar-->
+                                        <!--begin::Label-->
+                                        <label
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="change"
+                                            data-bs-toggle="tooltip"
+                                            title="Change avatar">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" name="phone_left_photo"
+                                                   accept=".png, .jpg, .jpeg"/>
+                                            <input type="hidden"
+                                                   name="phone_left_photo_remove"/>
+                                            <!--end::Inputs-->
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Cancel-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="cancel"
+                                            data-bs-toggle="tooltip"
+                                            title="Cancel avatar">
+															<i class="bi bi-x fs-2"></i>
+														</span>
+                                        <!--end::Cancel-->
+                                        <!--begin::Remove-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="remove"
+                                            data-bs-toggle="tooltip"
+                                            title="Remove avatar">
+															<i class="bi bi-x fs-2"></i>
+														</span>
+                                        <!--end::Remove-->
+                                    </div>
+
+                                    <!--end::Image input-->
+
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::عکس از کناره سمت چپ گوشی-->
+                        </div>
+                        <div class="col-md-6">
+                            <!--begin::  عکس از بالای گوشی -->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">عکس از بالای
+                                    گوشی</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8">
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline"
+                                         data-kt-image-input="true"
+                                         style="background-image: url('')">
+                                        <!--begin::Preview existing avatar-->
+                                        <div class="image-input-wrapper w-125px h-125px"
+                                             style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                        <!--end::Preview existing avatar-->
+                                        <!--begin::Label-->
+                                        <label
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="change"
+                                            data-bs-toggle="tooltip"
+                                            title="Change avatar">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" name="phone_top_photo"
+                                                   accept=".png, .jpg, .jpeg"/>
+                                            <input type="hidden" name="phone_top_photo_remove"/>
+                                            <!--end::Inputs-->
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Cancel-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="cancel"
+                                            data-bs-toggle="tooltip"
+                                            title="Cancel avatar">
+															<i class="bi bi-x fs-2"></i>
+														</span>
+                                        <!--end::Cancel-->
+                                        <!--begin::Remove-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="remove"
+                                            data-bs-toggle="tooltip"
+                                            title="Remove avatar">
+															<i class="bi bi-x fs-2"></i>
+														</span>
+                                        <!--end::Remove-->
+                                    </div>
+
+                                    <!--end::Image input-->
+
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::عکس از بالای گوشی-->
+                        </div>
+
+                        <div class="col-md-6">
+                            <!--begin::  عکس از پایین گوشی -->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">عکس از
+                                    انتهای گوشی</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8">
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline"
+                                         data-kt-image-input="true"
+                                         style="background-image: url('')">
+                                        <!--begin::Preview existing avatar-->
+                                        <div class="image-input-wrapper w-125px h-125px"
+                                             style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                        <!--end::Preview existing avatar-->
+                                        <!--begin::Label-->
+                                        <label
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="change"
+                                            data-bs-toggle="tooltip"
+                                            title="Change avatar">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" name="phone_bottom_photo"
+                                                   accept=".png, .jpg, .jpeg"/>
+                                            <input type="hidden"
+                                                   name="phone_bottom_photo_remove"/>
+                                            <!--end::Inputs-->
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Cancel-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="cancel"
+                                            data-bs-toggle="tooltip"
+                                            title="Cancel avatar">
+															<i class="bi bi-x fs-2"></i>
+														</span>
+                                        <!--end::Cancel-->
+                                        <!--begin::Remove-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="remove"
+                                            data-bs-toggle="tooltip"
+                                            title="Remove avatar">
+															<i class="bi bi-x fs-2"></i>
+														</span>
+                                        <!--end::Remove-->
+                                    </div>
+
+                                    <!--end::Image input-->
+
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::عکس از پایین گوشی-->
+                        </div>
+                        <div class="col-md-6">
+                            <!--begin::  عکس از imei گوشی -->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">عکس از
+                                    IMEI</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8">
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline"
+                                         data-kt-image-input="true"
+                                         style="background-image: url('')">
+                                        <!--begin::Preview existing avatar-->
+                                        <div class="image-input-wrapper w-125px h-125px"
+                                             style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                        <!--end::Preview existing avatar-->
+                                        <!--begin::Label-->
+                                        <label
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="change"
+                                            data-bs-toggle="tooltip"
+                                            title="Change avatar">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" name="imei_photo"
+                                                   accept=".png, .jpg, .jpeg"/>
+                                            <input type="hidden" name="imei_photo_remove"/>
+                                            <!--end::Inputs-->
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Cancel-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="cancel"
+                                            data-bs-toggle="tooltip"
+                                            title="Cancel avatar">
+															<i class="bi bi-x fs-2"></i>
+														</span>
+                                        <!--end::Cancel-->
+                                        <!--begin::Remove-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="remove"
+                                            data-bs-toggle="tooltip"
+                                            title="Remove avatar">
+															<i class="bi bi-x fs-2"></i>
+														</span>
+                                        <!--end::Remove-->
+                                    </div>
+
+                                    <!--end::Image input-->
+                                    <!--begin::Hint-->
+                                    <div class="form-text">
+                                        با استفاده از کد دستوری #06#* کد های IMEI گوشی خود را
+                                        بدست
+                                        آورید.
+                                    </div>
+                                    <!--end::Hint-->
+
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::عکس از imei گوشی-->
+                        </div>
+                        <div class="col-md-6">
+                            <!--begin::  عکس از گارانتی گوشی -->
+                            <div class="row mb-8">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">عکس از
+                                    گارانتی گوشی
+                                    (اختیاری)</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8">
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline"
+                                         data-kt-image-input="true"
+                                         style="background-image: url('')">
+                                        <!--begin::Preview existing avatar-->
+                                        <div class="image-input-wrapper w-125px h-125px"
+                                             style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                        <!--end::Preview existing avatar-->
+                                        <!--begin::Label-->
+                                        <label
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="change"
+                                            data-bs-toggle="tooltip"
+                                            title="Change avatar">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" name="phone_g_photo"
+                                                   accept=".png, .jpg, .jpeg"/>
+                                            <input type="hidden" name="phone_g_photo_remove"/>
+                                            <!--end::Inputs-->
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Cancel-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="cancel"
+                                            data-bs-toggle="tooltip"
+                                            title="Cancel avatar">
+															<i class="bi bi-x fs-2"></i>
+														</span>
+                                        <!--end::Cancel-->
+                                        <!--begin::Remove-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="remove"
+                                            data-bs-toggle="tooltip"
+                                            title="Remove avatar">
+															<i class="bi bi-x fs-2"></i>
+                                                            {{--<input type="hidden" class="form-control form-control-solid" value="Important, Urgent"
+                                                                       name="target_tags"/>--}}
+														</span>
+                                        <!--end::Remove-->
+                                    </div>
+
+                                    <!--end::Image input-->
+
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::عکس از گارانتی گوشی-->
+                        </div>
+                    </div>
+
+                    <div class="d-none fv-row">
+                        <input name="target_tags"/>
+                    </div>
+                    {{--<!--begin::Input group-->
+                    <div class="fv-row mb-8">
+                        <label class="required fs-6 fw-bold mb-2">Tags</label>
+                        <input class="form-control form-control-solid" value="Important, Urgent"
+                               name="target_tags"/>
+                    </div>
+                    <!--end::Input group-->--}}
+
+
+
+                    <!--begin::Actions-->
+                    <div class="d-flex flex-stack">
+                        <button type="button" class="btn btn-lg btn-light me-3"
+                                data-kt-element="targets-previous">ثبت IMEI
+                        </button>
+                        <button type="button" class="btn btn-lg btn-primary"
+                                data-kt-element="targets-next">
+                                                    <span class="indicator-label">
+هدیه بیمه آتش سوزی فراگارانتی</span>
+                            <span class="indicator-progress">لطفا صبر کنید...
+																		<span
+                                                                            class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
+                    <!--end::Actions-->
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::Targets-->
+
+            <!--begin::هدیه بیمه آتش سوزی فراگارانتی-->
+            <div data-kt-stepper-element="content">
+                <!--begin::Wrapper-->
+                <div class="w-100">
+                    <!--begin::Heading-->
+                    <div class="pb-12">
+                        <!--begin::Title-->
+                        <h1 class="fw-bolder text-dark">هدیه بیمه آتش سوزی فراگارانتی</h1>
+                        <!--end::Title-->
+                        {{--<!--begin::Description-->
+                        <div class="text-muted fw-bold fs-4">If you need more info, please check
+                            <a href="#" class="link-primary">Project Guidelines</a></div>
+                        <!--end::Description-->--}}
+                    </div>
+                    <!--end::Heading-->
+                    <div class="alert alert-success" role="alert">
+                        تا سقف 150 میلیون تومان پوشش
+                    </div>
+                    <div class="alert alert-dark" role="alert">
+                        در صورت تمایل به افزایش پوشش بیمه آتش سوزی از فیلد زیر گزینه مورد نظر
+                        خود را انتخاب کنید.
+                    </div>
+                    <!--begin::Input group-->
+                    <div class="row mb-6">
+                        <!--begin::Label-->
+                        <label class="col-lg-4 col-form-label fw-bold fs-6">انتخاب قیمت</label>
+                        <!--end::Label-->
+                        <!--begin::Col-->
+                        <div class="col-lg-6 fv-row ">
+                            <select name="fire_addition_price" aria-label="Select a city"
+                                    data-control="select2"
+                                    data-placeholder="استان محل سکونت خود را انتخاب کنید"
+                                    class="form-select form-select-solid form-select-lg fw-bold">
+                                <option value="">انتخاب استان</option>
+                                <option data-kt-flag="flags/afghanistan.svg" value="1">
+                                    10میلیون
+                                </option>
+                                <option data-kt-flag="flags/aland-islands.svg" value="2">20
+                                    میلیون
+                                </option>
+                            </select>
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Actions-->
+                    <div class="d-flex flex-stack">
+                        <button type="button" class="btn btn-lg btn-light me-3"
+                                data-kt-element="team-previous">آپلود عکس موبایل
+                        </button>
+                        <button type="button" class="btn btn-lg btn-primary"
+                                data-kt-element="team-next">
+                            <span class="indicator-label">فاکتور نهایی</span>
+                            <span class="indicator-progress">لطفا صبر کنید...
+																		<span
+                                                                            class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
+                    <!--end::Actions-->
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::هدیه بیمه آتش سوزی فراگارانتی-->
+
+            <!--begin::Files-->
+            <div data-kt-stepper-element="content">
+                <!--begin::Wrapper-->
+                <div class="w-100">
+                    <!--begin::Heading-->
+                    <div class="pb-10 pb-lg-12">
+                        <!--begin::Title-->
+                        <h1 class="fw-bolder text-dark">Upload Files</h1>
+                        <!--end::Title-->
+                        <!--begin::Description-->
+                        <div class="text-muted fw-bold fs-4">If you need more info, please check
+                            <a href="#" class="link-primary">Project Guidelines</a></div>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Heading-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-8">
+                        <!--begin::Dropzone-->
+                        <div class="dropzone" id="kt_modal_create_project_files_upload">
+                            <!--begin::Message-->
+                            <div class="dz-message needsclick">
+                                <!--begin::Icon-->
+                                <!--begin::Svg Icon | path: icons/duotone/Files/Uploaded-file.svg-->
+                                <span class="svg-icon svg-icon-3hx svg-icon-primary">
+																				<svg xmlns="http://www.w3.org/2000/svg"
+                                                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                     width="24px" height="24px"
+                                                                                     viewBox="0 0 24 24" version="1.1">
+																					<g stroke="none" stroke-width="1"
+                                                                                       fill="none" fill-rule="evenodd">
+																						<polygon
+                                                                                            points="0 0 24 0 24 24 0 24"/>
+																						<path
+                                                                                            d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z"
+                                                                                            fill="#000000"
+                                                                                            fill-rule="nonzero"
+                                                                                            opacity="0.3"/>
+																						<path
+                                                                                            d="M8.95128003,13.8153448 L10.9077535,13.8153448 L10.9077535,15.8230161 C10.9077535,16.0991584 11.1316112,16.3230161 11.4077535,16.3230161 L12.4310522,16.3230161 C12.7071946,16.3230161 12.9310522,16.0991584 12.9310522,15.8230161 L12.9310522,13.8153448 L14.8875257,13.8153448 C15.1636681,13.8153448 15.3875257,13.5914871 15.3875257,13.3153448 C15.3875257,13.1970331 15.345572,13.0825545 15.2691225,12.9922598 L12.3009997,9.48659872 C12.1225648,9.27584861 11.8070681,9.24965194 11.596318,9.42808682 C11.5752308,9.44594059 11.5556598,9.46551156 11.5378061,9.48659872 L8.56968321,12.9922598 C8.39124833,13.2030099 8.417445,13.5185067 8.62819511,13.6969416 C8.71848979,13.773391 8.8329684,13.8153448 8.95128003,13.8153448 Z"
+                                                                                            fill="#000000"/>
+																					</g>
+																				</svg>
+																			</span>
+                                <!--end::Svg Icon-->
+                                <!--end::Icon-->
+                                <!--begin::Info-->
+                                <div class="ms-4">
+                                    <h3 class="dfs-3 fw-bolder text-gray-900 mb-1">Drop files
+                                        here or click to upload.</h3>
+                                    <span
+                                        class="fw-bold fs-4 text-muted">Upload up to 10 files</span>
+                                </div>
+                                <!--end::Info-->
+                            </div>
+                        </div>
+                        <!--end::Dropzone-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="mb-8">
+                        <!--begin::Label-->
+                        <label class="fs-6 fw-bold mb-2">Uploaded File</label>
+                        <!--End::Label-->
+                        <!--begin::Files-->
+                        <div class="mh-300px scroll-y me-n7 pe-7">
+                            <!--begin::File-->
+                            <div
+                                class="d-flex flex-stack py-4 border border-top-0 border-left-0 border-right-0 border-dashed">
+                                <div class="d-flex align-items-center">
+                                    <!--begin::Avatar-->
+                                    <div class="symbol symbol-35px">
+                                        <img src="assets/media/svg/files/pdf.svg" alt="icon"/>
+                                    </div>
+                                    <!--end::Avatar-->
+                                    <!--begin::Details-->
+                                    <div class="ms-6">
+                                        <a href="#"
+                                           class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Avionica
+                                            Technical Requirements</a>
+                                        <div class="fw-bold text-muted">230kb</div>
+                                    </div>
+                                    <!--end::Details-->
+                                </div>
+                                <!--begin::Menu-->
+                                <div class="min-w-100px">
+                                    <select class="form-select form-select-solid form-select-sm"
+                                            data-control="select2" data-hide-search="true"
+                                            data-placeholder="Edit">
+                                        <option></option>
+                                        <option value="1">Remove</option>
+                                        <option value="2">Modify</option>
+                                        <option value="3">Select</option>
+                                    </select>
+                                </div>
+                                <!--end::Menu-->
+                            </div>
+                            <!--end::File-->
+                            <!--begin::File-->
+                            <div
+                                class="d-flex flex-stack py-4 border border-top-0 border-left-0 border-right-0 border-dashed">
+                                <div class="d-flex align-items-center">
+                                    <!--begin::Avatar-->
+                                    <div class="symbol symbol-35px">
+                                        <img src="assets/media/svg/files/doc.svg" alt="icon"/>
+                                    </div>
+                                    <!--end::Avatar-->
+                                    <!--begin::Details-->
+                                    <div class="ms-6">
+                                        <a href="#"
+                                           class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">9
+                                            Degree CURD draftplan</a>
+                                        <div class="fw-bold text-muted">3.6mb</div>
+                                    </div>
+                                    <!--end::Details-->
+                                </div>
+                                <!--begin::Menu-->
+                                <div class="min-w-100px">
+                                    <select class="form-select form-select-solid form-select-sm"
+                                            data-control="select2" data-hide-search="true"
+                                            data-placeholder="Edit">
+                                        <option></option>
+                                        <option value="1">Remove</option>
+                                        <option value="2">Modify</option>
+                                        <option value="3">Select</option>
+                                    </select>
+                                </div>
+                                <!--end::Menu-->
+                            </div>
+                            <!--end::File-->
+                            <!--begin::File-->
+                            <div
+                                class="d-flex flex-stack py-4 border border-top-0 border-left-0 border-right-0 border-dashed">
+                                <div class="d-flex align-items-center">
+                                    <!--begin::Avatar-->
+                                    <div class="symbol symbol-35px">
+                                        <img src="assets/media/svg/files/css.svg" alt="icon"/>
+                                    </div>
+                                    <!--end::Avatar-->
+                                    <!--begin::Details-->
+                                    <div class="ms-6">
+                                        <a href="#"
+                                           class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">User
+                                            CRUD Styles</a>
+                                        <div class="fw-bold text-muted">85kb</div>
+                                    </div>
+                                    <!--end::Details-->
+                                </div>
+                                <!--begin::Menu-->
+                                <div class="min-w-100px">
+                                    <select class="form-select form-select-solid form-select-sm"
+                                            data-control="select2" data-hide-search="true"
+                                            data-placeholder="Edit">
+                                        <option></option>
+                                        <option value="1">Remove</option>
+                                        <option value="2">Modify</option>
+                                        <option value="3">Select</option>
+                                    </select>
+                                </div>
+                                <!--end::Menu-->
+                            </div>
+                            <!--end::File-->
+                            <!--begin::File-->
+                            <div
+                                class="d-flex flex-stack py-4 border border-top-0 border-left-0 border-right-0 border-dashed">
+                                <div class="d-flex align-items-center">
+                                    <!--begin::Avatar-->
+                                    <div class="symbol symbol-35px">
+                                        <img src="assets/media/svg/files/ai.svg" alt="icon"/>
+                                    </div>
+                                    <!--end::Avatar-->
+                                    <!--begin::Details-->
+                                    <div class="ms-6">
+                                        <a href="#"
+                                           class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Design
+                                            Initial Logo</a>
+                                        <div class="fw-bold text-muted">40kb</div>
+                                    </div>
+                                    <!--end::Details-->
+                                </div>
+                                <!--begin::Menu-->
+                                <div class="min-w-100px">
+                                    <select class="form-select form-select-solid form-select-sm"
+                                            data-control="select2" data-hide-search="true"
+                                            data-placeholder="Edit">
+                                        <option></option>
+                                        <option value="1">Remove</option>
+                                        <option value="2">Modify</option>
+                                        <option value="3">Select</option>
+                                    </select>
+                                </div>
+                                <!--end::Menu-->
+                            </div>
+                            <!--end::File-->
+                            <!--begin::File-->
+                            <div class="d-flex flex-stack py-4">
+                                <div class="d-flex align-items-center">
+                                    <!--begin::Avatar-->
+                                    <div class="symbol symbol-35px">
+                                        <img src="assets/media/svg/files/tif.svg" alt="icon"/>
+                                    </div>
+                                    <!--end::Avatar-->
+                                    <!--begin::Details-->
+                                    <div class="ms-6">
+                                        <a href="#"
+                                           class="fs-5 fw-bolder text-gray-900 text-hover-primary mb-2">Tower
+                                            Hill Bilboard</a>
+                                        <div class="fw-bold text-muted">27mb</div>
+                                    </div>
+                                    <!--end::Details-->
+                                </div>
+                                <!--begin::Menu-->
+                                <div class="min-w-100px">
+                                    <select class="form-select form-select-solid form-select-sm"
+                                            data-control="select2" data-hide-search="true"
+                                            data-placeholder="Edit">
+                                        <option></option>
+                                        <option value="1">Remove</option>
+                                        <option value="2">Modify</option>
+                                        <option value="3">Select</option>
+                                    </select>
+                                </div>
+                                <!--end::Menu-->
+                            </div>
+                            <!--end::File-->
+                        </div>
+                        <!--end::Files-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-8">
+                        <!--begin::Wrapper-->
+                        <div class="d-flex flex-stack">
+                            <!--begin::Label-->
+                            <div class="me-5">
+                                <label class="fs-6 fw-bold">Allow Changes in Budget</label>
+                                <div class="fs-7 fw-bold text-muted">If you need more info,
+                                    please check budget planning
+                                </div>
+                            </div>
+                            <!--end::Label-->
+                            <!--begin::Switch-->
+                            <label
+                                class="form-check form-switch form-check-custom form-check-solid">
+                                <input class="form-check-input" type="checkbox" value="1"
+                                       name="target_allow" checked="checked"/>
+                                <span class="form-check-label fw-bold text-muted">Allowed</span>
+                            </label>
+                            <!--end::Switch-->
+                        </div>
+                        <!--end::Wrapper-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Actions-->
+                    <div class="d-flex flex-stack">
+                        <button type="button" class="btn btn-lg btn-light me-3"
+                                data-kt-element="files-previous">Set First Target
+                        </button>
+                        <button type="button" class="btn btn-lg btn-primary"
+                                data-kt-element="files-next">
+                            <span class="indicator-label">Complete</span>
+                            <span class="indicator-progress">Please wait...
+																		<span
+                                                                            class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
+                    <!--end::Actions-->
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::Files-->
+            <!--begin::Complete-->
+            <div data-kt-stepper-element="content">
+                <!--begin::Wrapper-->
+                <div class="w-100">
+                    <!--begin::Heading-->
+                    <div class="pb-12 text-center">
+                        <!--begin::Title-->
+                        <h1 class="fw-bolder text-dark">Project Created!</h1>
+                        <!--end::Title-->
+                        <!--begin::Description-->
+                        <div class="text-muted fw-bold fs-4">If you need more info, please check
+                            how to create project
+                        </div>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Heading-->
+                    <!--begin::Actions-->
+                    <div class="d-flex flex-center pb-20">
+                        <button type="button" class="btn btn-lg btn-light me-3"
+                                data-kt-element="complete-start">Create New Project
+                        </button>
+                        <a href="" class="btn btn-lg btn-primary" data-bs-toggle="tooltip"
+                           title="Coming Soon">View Project</a>
+                    </div>
+                    <!--end::Actions-->
+                    <!--begin::Illustration-->
+                    <div class="text-center px-4">
+                        <img src="assets/media/illustrations/presentation.png" alt=""
+                             class="mw-100 mh-300px"/>
+                    </div>
+                    <!--end::Illustration-->
+                </div>
+            </div>
+            <!--end::Complete-->
+        </form>
+        <!--end::Form-->
+    </div>
+    <!--begin::Container-->
+</div>
