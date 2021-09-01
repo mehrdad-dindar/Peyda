@@ -102,6 +102,17 @@ class PaymentController extends Controller
             $receipt = Payment::amount($amount)
                 ->transactionId($request->Authority)
                 ->verify();
+
+            $transaction->transaction_result = $receipt;
+            $transaction->status = Transaction::STATUS_SUCCESS;
+            $transaction->save();
+
+            return view('purchase_result')
+                ->with([
+                    'status' => 1,
+                    'reference_id' => $receipt->getRefrenceId(),
+                    'invoice_id' => $invoice_id
+                ]);
         }catch (Exception|InvalidPaymentException $e){
             if ($e->getCode() < 0){
                 $transaction->status = Transaction::STATUS_FAILED;
