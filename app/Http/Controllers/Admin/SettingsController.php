@@ -14,6 +14,11 @@ class SettingsController extends Controller
         $brands=Phone_brand::all();
         return view('dashboard.settings.mobile.index',['brands'=>$brands]);
     }
+    public function deletePhoneBrand($id)
+    {
+        $brands=Phone_brand::query()->find($id)->delete();
+        return $this->getPhoneBrands();
+    }
     public function storePhoneBrands(Request $request)
     {
         Phone_brand::query()->create(['name'=>$request->get('model_name')]);
@@ -27,4 +32,21 @@ class SettingsController extends Controller
 
         return view('dashboard.settings.mobile.model',['brand'=>$brand, 'models'=>$models ]);
     }
+
+    public function deletePhoneModel($id,$brand_id)
+    {
+        Phone_model::query()->find($id)->delete();
+
+        return $this->getPhoneModel($brand_id);
+    }
+
+    public function storePhoneModel(Request $request,$id)
+    {
+        Phone_model::query()->create([
+            'name'=>$request->get('model_name'),
+            'brand_id'=>$id]);
+
+        return $this->getPhoneModel($id);
+    }
+
 }
