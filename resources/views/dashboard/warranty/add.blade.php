@@ -23,11 +23,20 @@
 
                                 <form id="example-form" method="POST" >
                                 @csrf
-                                    <input type="hidden" name="owner_id" value="{{ $user->id }}">
 
                                     <div>
-                                        <h3>نوع گوشی</h3>
+                                        <h3>کاربری</h3>
                                         <section>
+                                            <h3>کاربر</h3>
+                                            <div class="form-group">
+                                                <label for="exampleSelectGender">نام و کدملی کاربر</label>
+                                                <select name="owner_id" class="form-control" id="owner_id">
+                                                    @foreach($users as $key=>$row)
+                                                        <option @if($key==0) selected @endif value="{{$row->id}}">{{$row->f_name. " ". $row->l_name." - ". $row->melli_code}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
                                             <h3>انتخاب تلفن همراه</h3>
                                             <div class="form-group">
                                                 <label for="exampleSelectGender">برند گوشی</label>
