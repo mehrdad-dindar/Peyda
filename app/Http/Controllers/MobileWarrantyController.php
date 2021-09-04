@@ -57,17 +57,20 @@ class MobileWarrantyController extends Controller
 
     public function save(Request $request)
     {
+        $phone_model_id = '';
         /*dd($request);*/
         if ($request['warranty_type'] == 2){
-            if ($request['new_phone_brand'] == null || $request['new_phone_model'] == null){
+            if ($request['new_phone_model'] == null){
 
-                $this->bimeh_add('new_phone_error');
+                $this->bimeh_add('لطفا فیلد مدل گوشی را انتخاب کنید.');
 
+            }else{
+                $phone_model_id = $request['new_phone_model'];
             }
         }
         if ($request['price_range'] == null){
 
-            $this->bimeh_add('price_range');
+            return $this->bimeh_add('لطفا فیلد بازه قیمت را انتخاب کنید.');
 
         }
         /*if ($request['imei1'] == null || strlen($request['imei1'])!=15){
@@ -99,8 +102,6 @@ class MobileWarrantyController extends Controller
         /*$expiry_date = date('Y-m-d H:i:s',strtotime('+1 years'));*/
 
 
-        $phone_brand_id = '';
-        $phone_model_id = '';
         if ($request['warranty_type'] == 1) {
             $phone_brand_id = $request['my_phone_brand'];
             $phone_model_id = $request['my_phone_model'];
@@ -108,20 +109,24 @@ class MobileWarrantyController extends Controller
             $phone_brand_id = $request['new_phone_brand'];
             $phone_model_id = $request['new_phone_model'];
         }
-        $data = Mobile_warranty::create([
-            'owner_id' => $request['owner_id'],
-            'phone_model_id' => $phone_model_id,
-            'expiry_date'=>null,
-            'activation_code' => $activation_code,
-            'activation_date' => null,
-            'transfer_code'=>null,
-            'price_range'=>$request['price_range'],
-            'fire_gift'=>true,
-            'status'=>false,
-            'addition_fire_commitment_id'=>$request['fire_addition_price'],
-        ]);
-        $data->save();
-        return $this->cart($request,$data->id);
+        if($request['warranty_type']!=null && $request['price_range']!=null && $request['new_phone_model']!=null) {
+            $data = Mobile_warranty::create([
+                'owner_id' => $request['owner_id'],
+                'phone_model_id' => $phone_model_id,
+                'expiry_date' => null,
+                'activation_code' => $activation_code,
+                'activation_date' => null,
+                'transfer_code' => null,
+                'price_range' => $request['price_range'],
+                'fire_gift' => true,
+                'status' => false,
+                'addition_fire_commitment_id' => $request['fire_addition_price'],
+            ]);
+            $data->save();
+            return $this->cart($request, $data->id);
+        }else{
+            $this->bimeh_add('لطفا همه فیلدها را با دقت پرکنید.');
+        }
     }
 
     public function cart(Request $request,$id)

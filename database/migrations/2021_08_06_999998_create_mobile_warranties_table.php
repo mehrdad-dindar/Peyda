@@ -16,12 +16,12 @@ class CreateMobileWarrantiesTable extends Migration
         Schema::create('mobile_warranties', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('owner_id');
-            $table->unsignedBigInteger('phone_model_id');
+            $table->unsignedBigInteger('phone_model_id')->nullable;
             $table->timeStamp('expiry_date')->nullable();
             $table->string('activation_code')->unique();
             $table->timeStamp('activation_date')->nullable();
             $table->string('transfer_code')->nullable();
-            $table->unsignedBigInteger('price_range');
+            $table->unsignedBigInteger('price_range')->nullable;
             $table->boolean('fire_gift')->default(false);
             $table->boolean('status')->default(false);
             $table->unsignedBigInteger('addition_fire_commitment_id')->nullable();
