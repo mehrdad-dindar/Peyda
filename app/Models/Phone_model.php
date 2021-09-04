@@ -19,6 +19,6 @@ class Phone_model extends Model
         return $this->hasMany(User::class);
     }
 
-    protected $fillable=['name'];
+    protected $fillable=['name','brand_id'];
 
 }
