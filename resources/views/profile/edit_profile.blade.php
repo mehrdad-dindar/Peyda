@@ -663,14 +663,34 @@
         persianDate().format('x');
     </script>
     <script>
-        $(document).ready(function () {
-            $('#phone_brand').change(function () {
-                let brand_id = this.value;
-                $.get('/get_model?brand=' + brand_id, function (data) {
-                    $('#phone_model').html(data);
-                })
+        $(document).ready(function(){
+
+            $('#phone_brand').on('change',function(){
+
+
+                var new_val = $("#phone_brand option:selected").val();
+                //alert(new_val);
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8000/panel/mobile_change",
+                    cache:false,
+                    data: {"_token": "{{ csrf_token() }}"
+                        ,"id" : new_val},
+                    error: function (xhr) {
+                        alert(xhr.responseText);
+                    },
+                    success: function(data) {
+                        // Check the output of ajax call on firebug console
+                        //console.log(data);
+                        //alert(data);
+                        $('#phone_model').html(data);
+                    }
+                });
+
             });
         });
+
+
     </script>
 
 @endsection

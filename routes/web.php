@@ -26,6 +26,7 @@ Route::prefix('panel')->group(function () {
     Route::get('/profile', 'Profile\ProfileController@profile')->name('profile');
     Route::get('/edit_profile', 'Profile\ProfileController@edit_profile')->name('edit_profile');
     Route::post('/save_profile_info', 'Profile\ProfileController@save_profile')->name('save_profile_info');
+    Route::post('/mobile_change', 'Profile\ProfileController@mobile_change');
     Route::prefix('warranty')->group(function () {
         Route::prefix('mobile')->group(function () {
             Route::get('/', 'MobileWarrantyController@bimeh_all')->name('bimeh_all');

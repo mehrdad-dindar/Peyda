@@ -34,10 +34,10 @@ class ProfileController extends Controller
         $phone_brands = Phone_brand::all();
         $phone_models = Phone_model::all();
         return view('profile.edit_profile')
-            ->with('user',auth()->user())
-            ->with('cities',$cities)
-            ->with('phone_brands',$phone_brands)
-            ->with('phone_models',$phone_models);
+            ->with(['user'=>auth()->user(),
+                    'cities'=>$cities,
+                    'phone_brands'=>$phone_brands,
+                    'phone_models'=>$phone_models]);
     }
 
     public function validator(Request $request)
@@ -86,4 +86,27 @@ class ProfileController extends Controller
         return back();
 
     }
+
+    public function mobile_change(Request $request)
+    {
+
+        $id=$request->get('id');
+        if(isset($id)){
+            // Capture selected country
+
+            $result=Phone_model::query()->where('brand_id','=',$id)->get();
+
+            foreach($result as $row) {
+
+                $model_id=$row->id;
+                $model_name=$row->name;
+
+                $html="<option value='".$model_id."'>
+                ".$model_name."</option>";
+
+                echo $html;
+            }
+        }
+    }
+
 }
