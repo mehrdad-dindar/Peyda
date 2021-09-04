@@ -19,18 +19,27 @@ class MobileWarrantyController extends Controller
         return $this->middleware('auth');
     }
 
-    public function bimeh_add()
+    public function bimeh_add($error='')
     {
-        $phone_brands = Phone_brand::all();
-        $phone_models = Phone_model::all();
+        $myPhone = Phone_model::join('phone_brands as pb','phone_models.brand_id','=','pb.id')
+                                ->join('users as u', 'phone_models.id', '=', 'u.phone_model_id')
+                                ->first(['pb.name as pb_name','phone_models.name as pm_name',
+                                    'phone_models.id as pm_id','pb.id as pb_id']);
+
+        $brands=Phone_brand::all();
+        $phone_brand_first = Phone_brand::query()->first();
+        $phone_model_first = Phone_model::query()->where('brand_id', '=', $phone_brand_first->id)->get();
         $commitment_ceilings = Commitment_ceiling::all();
         $fire_commitment_ceilings = Fire_commitment_ceiling::all();
         return view('profile.bimeh_add')
             ->with('user', auth()->user())
-            ->with('phone_brands', $phone_brands)
-            ->with('phone_models', $phone_models)
+            ->with('myPhone', $myPhone)
+            ->with('brands',$brands)
+            ->with('models_first',$phone_model_first)
             ->with('commitment_ceilings', $commitment_ceilings)
-            ->with('fire_commitment_ceilings', $fire_commitment_ceilings);
+            ->with('fire_commitment_ceilings', $fire_commitment_ceilings)
+            ->with('error',$error);
+        //return $phones;
     }
 
     public function bimeh_all()
@@ -51,33 +60,17 @@ class MobileWarrantyController extends Controller
         /*dd($request);*/
         if ($request['warranty_type'] == 2){
             if ($request['new_phone_brand'] == null || $request['new_phone_model'] == null){
-                $phone_brands = Phone_brand::all();
-                $phone_models = Phone_model::all();
-                $commitment_ceilings = Commitment_ceiling::all();
-                $fire_commitment_ceilings = Fire_commitment_ceiling::all();
-                return view('profile.bimeh_add')
-                    ->with('new_phone_error','new_phone_error')
-                    ->with('user', auth()->user())
-                    ->with('phone_brands', $phone_brands)
-                    ->with('phone_models', $phone_models)
-                    ->with('commitment_ceilings', $commitment_ceilings)
-                    ->with('fire_commitment_ceilings', $fire_commitment_ceilings);
+
+                $this->bimeh_add('new_phone_error');
+
             }
         }
         if ($request['price_range'] == null){
-            $phone_brands = Phone_brand::all();
-            $phone_models = Phone_model::all();
-            $commitment_ceilings = Commitment_ceiling::all();
-            $fire_commitment_ceilings = Fire_commitment_ceiling::all();
-            return view('profile.bimeh_add')
-                ->with('price_range_error','price_range')
-                ->with('user', auth()->user())
-                ->with('phone_brands', $phone_brands)
-                ->with('phone_models', $phone_models)
-                ->with('commitment_ceilings', $commitment_ceilings)
-                ->with('fire_commitment_ceilings', $fire_commitment_ceilings);
+
+            $this->bimeh_add('price_range');
+
         }
-        if ($request['imei1'] == null || strlen($request['imei1'])!=15){
+        /*if ($request['imei1'] == null || strlen($request['imei1'])!=15){
             $phone_brands = Phone_brand::all();
             $phone_models = Phone_model::all();
             $commitment_ceilings = Commitment_ceiling::all();
@@ -90,7 +83,7 @@ class MobileWarrantyController extends Controller
                 ->with('phone_models', $phone_models)
                 ->with('commitment_ceilings', $commitment_ceilings)
                 ->with('fire_commitment_ceilings', $fire_commitment_ceilings);
-        }
+        }*/
 
 
         function RandomString()
@@ -117,11 +110,8 @@ class MobileWarrantyController extends Controller
         }
         $data = Mobile_warranty::create([
             'owner_id' => $request['owner_id'],
-            'phone_brand_id' => $phone_brand_id,
             'phone_model_id' => $phone_model_id,
             'expiry_date'=>null,
-            'imei1' =>$request['imei1'],
-            'imei2' =>$request['imei2'],
             'activation_code' => $activation_code,
             'activation_date' => null,
             'transfer_code'=>null,
