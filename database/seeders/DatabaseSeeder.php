@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(Fire_commitment_ceilingsTableSeeder::class);
         $this->call(Phone_brandsTableSeeder::class);
         $this->call(Phone_modelsTableSeeder::class);
+        $this->call(StatusTableSeeder::class);
     }
 }

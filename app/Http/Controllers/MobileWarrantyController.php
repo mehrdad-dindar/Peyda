@@ -44,7 +44,13 @@ class MobileWarrantyController extends Controller
 
     public function bimeh_all()
     {
-        return view('profile.bimeh_all')->with('user', auth()->user());
+        $warranties=Mobile_warranty::join('commitment_ceilings as cc', 'mobile_warranties.price_range', '=', 'cc.id')
+                                    ->join('status as s','mobile_warranties.status','=','s.id')
+                                    ->where('owner_id','=',auth()->user()->id)
+                                    ->get(['cc.price as cc_price','mobile_warranties.*','s.id as s_id','s.text as s_name']);
+
+        return view('profile.bimeh_all')->with(['warranties'=> $warranties,
+                                                'user'=>auth()->user()]);
     }
     protected function validator(Request $request)
     {
@@ -109,7 +115,7 @@ class MobileWarrantyController extends Controller
             $phone_brand_id = $request['new_phone_brand'];
             $phone_model_id = $request['new_phone_model'];
         }
-        if($request['warranty_type']!=null && $request['price_range']!=null && $request['new_phone_model']!=null) {
+        if($request['warranty_type']!=null && $request['price_range']!=null) {
             $data = Mobile_warranty::create([
                 'owner_id' => $request['owner_id'],
                 'phone_model_id' => $phone_model_id,
@@ -119,7 +125,7 @@ class MobileWarrantyController extends Controller
                 'transfer_code' => null,
                 'price_range' => $request['price_range'],
                 'fire_gift' => true,
-                'status' => false,
+                'status' => 1,
                 'addition_fire_commitment_id' => $request['fire_addition_price'],
             ]);
             $data->save();
@@ -135,13 +141,13 @@ class MobileWarrantyController extends Controller
         $phone_brands = Phone_brand::all();
         $phone_models = Phone_model::all();
         $fire_addition_prices = Fire_commitment_ceiling::all();
-        $phone_brand = "";
-        $phone_model = "";
+        //$phone_model = "";
         $fire_addition_price = "0 تومان";
-        if ($invoice_details['warranty_type'] == 2) {
-            $phone_brand = Phone_brand::find($invoice_details['new_phone_brand'])->name;
-            $phone_model = Phone_model::find($invoice_details['new_phone_model'])->name;
-        }
+            //$phone_brand = Phone_brand::find($invoice_details['new_phone_brand'])->name;
+        $phone_model = Phone_model::join('phone_brands as pb', 'phone_models.brand_id', '=', 'pb.id')
+                                    ->where('pb.id','=',$invoice_details['new_phone_brand'])
+                                    ->first(['phone_models.name as pm_name','phone_models.id as pm_id', 'pb.name as pb_name', 'pb.id as pb_id']);
+
         if ($invoice_details['fire_addition_price'] != 0) {
             $fire_addition_price = Fire_commitment_ceiling::find($invoice_details['fire_addition_price'])->price;
         }
@@ -150,7 +156,6 @@ class MobileWarrantyController extends Controller
         return view('profile.cart')
             ->with('user', auth()->user())
             ->with('invoice_details', $invoice_details)
-            ->with('phone_brand', $phone_brand)
             ->with('phone_model', $phone_model)
             ->with('fire_addition_price', $fire_addition_price)
             ->with('price_range', $price_range)

@@ -107,11 +107,9 @@
                                                     <i class="fa fa-genderless text-info fs-2 me-2"></i>فراگارانتی پیدا
                                                     سرویس
                                                     <span class="badge badge-white fs-8">
-                                                        @if($invoice_details['warranty_type'] == 1)
-                                                            {{$user->phone_brand->name."/".$user->phone_model->name}}
-                                                        @else
-                                                            {{$phone_brand."/".$phone_model}}
-                                                        @endif
+
+                                                        {{$phone_model->pb_name."/".$phone_model->pm_name}}
+
                                                     </span>
                                                 </td>
                                                 <td class="pt-6 text-dark fw-boldest text-center">{{ number_format($price_range, 0, ',', ',') }}

@@ -23,7 +23,7 @@ class CreateMobileWarrantiesTable extends Migration
             $table->string('transfer_code')->nullable();
             $table->unsignedBigInteger('price_range')->nullable;
             $table->boolean('fire_gift')->default(false);
-            $table->boolean('status')->default(false);
+            $table->integer('status')->default(1);
             $table->unsignedBigInteger('addition_fire_commitment_id')->nullable();
             $table->timestamps();
         });
