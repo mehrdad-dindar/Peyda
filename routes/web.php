@@ -49,8 +49,11 @@ Route::prefix('dashboard')->group(function () {
     Route::post('/postajax', 'Admin\WarrantyController@store');
     Route::prefix('/settings')->group(function (){
         Route::get('/brand', 'Admin\SettingsController@getPhoneBrands');
+        Route::get('/brand/delete/{id}', 'Admin\SettingsController@deletePhoneBrand');
         Route::post('/brand/store', 'Admin\SettingsController@storePhoneBrands');
-        Route::post('/model/{id}', 'Admin\SettingsController@getPhoneModel');
+        Route::get('/model/{id}', 'Admin\SettingsController@getPhoneModel');
+        Route::get('/model/delete/{id}/{brand_id}', 'Admin\SettingsController@deletePhoneModel');
+        Route::post('/model/store/{id}', 'Admin\SettingsController@storePhoneModel');
     });
 
 });
