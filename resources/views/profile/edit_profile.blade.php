@@ -663,6 +663,7 @@
         persianDate().format('x');
     </script>
     <script>
+
         $(document).ready(function(){
 
             $('#phone_brand').on('change',function(){
@@ -689,7 +690,6 @@
 
             });
         });
-
 
     </script>
 

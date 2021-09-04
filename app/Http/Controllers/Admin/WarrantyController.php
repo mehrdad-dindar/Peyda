@@ -36,15 +36,17 @@ class WarrantyController extends Controller
     public function create()
     {
         $phone_brands = Phone_brand::all();
-        $phone_models = Phone_model::all();
+        $phone_brand_first = Phone_brand::query()->first();
+        $phone_model_first = Phone_model::query()->where('brand_id', '=', $phone_brand_first->id)->get();
         $commitment_ceilings = Commitment_ceiling::all();
         $fire_commitment_ceilings = Fire_commitment_ceiling::all();
         return view('dashboard.warranty.add')
-            ->with('user', auth()->user())
-            ->with('phone_brands', $phone_brands)
-            ->with('phone_models', $phone_models)
-            ->with('commitment_ceilings', $commitment_ceilings)
-            ->with('fire_commitment_ceilings', $fire_commitment_ceilings);
+            ->with(['user'=> auth()->user(),
+                    'phone_brands'=> $phone_brands,
+                    'phone_models'=> $phone_model_first,
+                    'commitment_ceilings'=> $commitment_ceilings,
+                    'fire_commitment_ceilings'=> $fire_commitment_ceilings]);
+        //return $phone_model_first;
     }
 
     public function store(Request $request)
