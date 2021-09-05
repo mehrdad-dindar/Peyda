@@ -41907,7 +41907,7 @@ code:not([class*=language-]) {
 }
 
 .form-check.form-check-custom .form-check-label {
-    margin-left: .55rem
+    margin-right: .55rem
 }
 
 .form-check:not(.form-switch) .form-check-input[type=checkbox] {
