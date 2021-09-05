@@ -202,7 +202,7 @@
                             <!--begin::Item-->
                             <div class="mb-6">
                                 <div class="fw-boldest text-gray-600 fs-4 text-hover-primary">زرین پال:</div>
-                                <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                                <div class="form-check form-switch form-check-custom form-check-solid mt-3 me-10">
                                     <input class="form-check-input h-20px w-30px" type="radio" name="pay_method" value="1" id="flexSwitch20x30" checked/>
                                     <label class="form-check-label" for="flexSwitch20x30">
                                         پرداخت امن زرین پال
@@ -214,7 +214,7 @@
                             <div class="mb-6">
                                 <div class="fw-boldest text-gray-600 fs-4 text-hover-primary">کیف پول:</div>
 
-                                <div class="form-check form-switch form-check-custom form-check-solid me-10">
+                                <div class="form-check form-switch form-check-custom form-check-solid mt-3 me-10">
                                     <input class="form-check-input h-20px w-30px" type="radio" name="pay_method" value="2" id="flexSwitch20x30"/>
                                     <label class="form-check-label" for="flexSwitch20x30">
                                         پرداخت از اعتبار کیف پول
