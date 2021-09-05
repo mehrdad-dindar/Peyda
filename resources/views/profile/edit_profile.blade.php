@@ -21,12 +21,11 @@
                 <div class="d-flex flex-wrap flex-sm-nowrap mb-3">
                     <!--begin: Pic-->
                     <div class="me-7 mb-4">
-                        <div class="symbol symbol-circle symbol-100px symbol-lg-160px symbol-fixed position-relative">
+                        <div class="symbol symbol-50px symbol-lg-100px symbol-fixed position-relative">
                             <img
                                 src="@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif"
                                 alt="image"/>
-                            <div
-                                class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
+                            <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
                         </div>
                     </div>
                     <!--end::Pic-->
@@ -128,6 +127,30 @@
                                 <!--end::Info-->
                             </div>
                             <!--end::User-->
+                            <!--begin::Stats-->
+                            <div class="d-flex flex-wrap flex-stack">
+                                <!--begin::Wrapper-->
+                                <div class="d-flex flex-column flex-grow-1 pe-8">
+                                    <!--begin::Stats-->
+                                    <div class="d-flex flex-wrap">
+                                        <!--begin::Stat-->
+                                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                            <!--begin::Number-->
+                                            <div class="d-flex align-items-center">
+                                                <div class="fs-2 fw-bolder counted" data-kt-countup="true" data-kt-countup-value="4500" data-kt-countup-prefix="$">2,350,000 تومان</div>
+                                            </div>
+                                            <!--end::Number-->
+                                            <!--begin::Label-->
+                                            <div class="fw-bold fs-6 text-gray-400">اعتبار کیف پول</div>
+                                            <!--end::Label-->
+                                        </div>
+                                        <!--end::Stat-->
+                                    </div>
+                                    <!--end::Stats-->
+                                </div>
+                                <!--end::Wrapper-->
+                            </div>
+                            <!--end::Stats-->
                         </div>
                         <!--end::Title-->
                     </div>
