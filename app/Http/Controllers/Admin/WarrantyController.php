@@ -21,7 +21,7 @@ class WarrantyController extends Controller
             ->join('users as u', 'mobile_warranties.owner_id', '=', 'u.id')
             ->join('commitment_ceilings as cc', 'mobile_warranties.price_range', '=', 'cc.id')
             ->join('phone_models as pm', 'mobile_warranties.phone_model_id', '=', 'pm.id')
-            ->get(['u.email','u.f_name','u.l_name','pb.name as pb_name','cc.price_range','fc.addition_price','activation_code']);
+            ->get(['u.email','u.f_name','u.l_name','pm.name as pm_name','cc.price_range','fc.addition_price','activation_code']);
 
         /*$warranties = Mobile_warranty::query()
             ->join('commitment_ceilings as cc', 'mobile_warranties.price_range', '=', 'cc.id')

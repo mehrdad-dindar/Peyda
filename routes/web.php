@@ -45,7 +45,7 @@ Route::prefix('panel')->group(function () {
 Route::prefix('dashboard')->group(function () {
     Route::get('/', 'Admin\HomeController@index')->name('dashboard');
     Route::resource('/users', 'Admin\UserController');
-    Route::post('/warranties', 'Admin\WarrantyController@index');
+    Route::get('/warranties', 'Admin\WarrantyController@index');
     Route::get('/warranties/create', 'Admin\WarrantyController@create');
     Route::post('/postajax', 'Admin\WarrantyController@store');
     Route::prefix('/settings')->group(function (){
