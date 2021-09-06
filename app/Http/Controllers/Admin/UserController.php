@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Notification;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -24,9 +26,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $user=User::find($id);
+
+        return view('dashboard.users.create', compact('user'));
     }
 
     /**
@@ -37,7 +41,28 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $status=$request->get('status');
+        $user_id=$request->get('user_id');
+        if($status==1){
+            $descriptions='احراز هویت شما تایید شده است.';
+            User::find($user_id)->update([
+                'status'=>1
+            ]);
+        }else{
+            $descriptions=$request->get('descriptions');
+        }
+        $admin_id=$request->get('admin_id');
+        $link='/panel/edit_profile';
+
+        Notification::create([
+           'receiver_id'=>$user_id,
+           'sender_id'=>$admin_id,
+            'link'=>$link,
+            'title'=>'احراز هویت',
+            'body'=>$descriptions
+        ]);
+
+        return redirect()->back()->with('error','تغییرات با موفقیت اعمال شد.');
     }
 
     /**

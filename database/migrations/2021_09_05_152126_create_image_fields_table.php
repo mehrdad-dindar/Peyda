@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStatusTable extends Migration
+class CreateImageFieldsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateStatusTable extends Migration
      */
     public function up()
     {
-        Schema::create('status', function (Blueprint $table) {
+        Schema::create('image_fields', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('text');
+            $table->string('name');
+            $table->string('html_id')->nullable();
+            $table->text('sample_URL')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateStatusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('statuses');
+        Schema::dropIfExists('image_fields');
     }
 }

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use DB;
 
 class SettingsTableSeeder extends Seeder
 {
@@ -17,6 +18,13 @@ class SettingsTableSeeder extends Seeder
             [
                 'title'                =>          'public_URL',
                 'value'                =>          'http://localhost/bdel/public_html/'
+            ]
+        );
+
+        DB::table('settings')->insert(
+            [
+                'title'                =>          'URL',
+                'value'                =>          'http://localhost:8000/'
             ]
         );
     }

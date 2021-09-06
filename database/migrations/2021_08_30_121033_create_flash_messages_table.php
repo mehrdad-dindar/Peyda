@@ -17,6 +17,7 @@ class CreateFlashMessagesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('value');
+            $table->timestamps();
         });
     }
 

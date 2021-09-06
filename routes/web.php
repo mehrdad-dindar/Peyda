@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\Admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +45,11 @@ Route::prefix('panel')->group(function () {
 /* Dashboard */
 Route::prefix('dashboard')->group(function () {
     Route::get('/', 'Admin\HomeController@index')->name('dashboard');
-    Route::resource('/users', 'Admin\UserController');
+    Route::prefix('/users')->group(function (){
+        Route::get('/', 'Admin\UserController@index');
+        Route::get('/edit/{id}', 'Admin\UserController@create');
+        Route::post('/auth', 'Admin\UserController@store');
+    });
     Route::get('/warranties', 'Admin\WarrantyController@index');
     Route::get('/warranties/create', 'Admin\WarrantyController@create');
     Route::post('/postajax', 'Admin\WarrantyController@store');

@@ -54,8 +54,8 @@
                                                 @endswitch
                                             </td>
                                             <td>0{{ $user->phone }}</td>
-                                            <td><a href="#" class="btn btn-outline-danger btn-sm">حذف</a>
-                                            <a href="#" class="btn btn-primary btn-sm">ویرایش</a>
+                                            <td>
+                                            <a href="{{ route('dashboard') }}/users/edit/{{$user->id}}" class="btn btn-primary btn-sm">احراز هویت</a>
                                             </td>
                                         </tr>
                                         @endforeach
