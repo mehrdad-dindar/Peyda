@@ -13,4 +13,10 @@ class Notification extends Model
             'link',
             'title',
             'body'];
+
+    public function notificationuser()
+    {
+        return $this->belongsTo(NotificationUser::class);
+    }
+
 }

@@ -230,6 +230,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Payment' => Shetabit\Payment\Facade\Payment::class,
+        'Helpers' => App\Helpers\Helpers::class
     ],
 
 ];

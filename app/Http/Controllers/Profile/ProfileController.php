@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Profile;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\city;
+use App\Models\NotificationUser;
 use App\Models\Phone_brand;
 use App\Models\Phone_model;
 use App\Models\User;
@@ -25,8 +27,9 @@ class ProfileController extends Controller
 
     public function profile()
     {
-        return view('profile.profile')
-            ->with('user',auth()->user());
+        $user=auth()->user();
+
+        return view('profile.profile')->with(['user'=>$user]);
     }
     public function edit_profile()
     {

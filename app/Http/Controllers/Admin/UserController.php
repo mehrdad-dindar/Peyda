@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
+use App\Models\NotificationUser;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -54,12 +55,16 @@ class UserController extends Controller
         $admin_id=$request->get('admin_id');
         $link='/panel/edit_profile';
 
-        Notification::create([
-           'receiver_id'=>$user_id,
+        $notification=Notification::create([
            'sender_id'=>$admin_id,
             'link'=>$link,
             'title'=>'احراز هویت',
             'body'=>$descriptions
+        ]);
+
+        NotificationUser::create([
+            'receiver_id'=>$user_id,
+            'notification_id'=>$notification->id
         ]);
 
         return redirect()->back()->with('error','تغییرات با موفقیت اعمال شد.');
