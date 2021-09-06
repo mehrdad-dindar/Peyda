@@ -45,7 +45,7 @@ class UserController extends Controller
         $user_id=$request->get('user_id');
         if($status==1){
             $descriptions='احراز هویت شما تایید شده است.';
-            User::find($user_id)->update([
+            User::query()->where('id','=',$user_id)->update([
                 'status'=>1
             ]);
         }else{
