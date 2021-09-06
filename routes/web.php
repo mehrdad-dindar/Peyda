@@ -28,6 +28,7 @@ Route::prefix('panel')->group(function () {
     Route::post('/save_profile_info', 'Profile\ProfileController@save_profile')->name('save_profile_info');
     Route::prefix('wallet')->group(function (){
         Route::get('/', 'WalletController@index')->name('wallet');
+        Route::post('/increase_inventory', 'WalletController@increase')->name('increase');
     });
     Route::prefix('warranty')->group(function () {
         Route::prefix('mobile')->group(function () {
