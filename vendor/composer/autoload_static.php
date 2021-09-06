@@ -704,6 +704,7 @@ class ComposerStaticInite767f0242b6a1fd50cadd6a4eccea279
         'App\\Models\\ImageField' => __DIR__ . '/../..' . '/app/Models/ImageField.php',
         'App\\Models\\MobileImage' => __DIR__ . '/../..' . '/app/Models/MobileImage.php',
         'App\\Models\\Mobile_warranty' => __DIR__ . '/../..' . '/app/Models/Mobile_warranty.php',
+        'App\\Models\\NotifactionType' => __DIR__ . '/../..' . '/app/Models/NotifactionType.php',
         'App\\Models\\Notification' => __DIR__ . '/../..' . '/app/Models/Notification.php',
         'App\\Models\\NotificationUser' => __DIR__ . '/../..' . '/app/Models/NotificationUser.php',
         'App\\Models\\Payment' => __DIR__ . '/../..' . '/app/Models/Payment.php',

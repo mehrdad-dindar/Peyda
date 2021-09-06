@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(StatusTableSeeder::class);
         $this->call(ImageFieldTableSeeder::class);
         $this->call(SettingsTableSeeder::class);
+        $this->call(NotificationTypeTableSeeder::class);
     }
 }

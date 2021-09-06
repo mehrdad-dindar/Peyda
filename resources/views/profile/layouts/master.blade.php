@@ -125,7 +125,7 @@
 											<!--end::Info-->
 											<!--begin::User-->
 											<div class="symbol symbol-circle symbol-25px" data-bs-toggle="tooltip" data-bs-boundary="window" data-bs-placement="top" title="Nina Nilson">
-												<img src="profile/media/avatars/150-11.jpg" alt="img" />
+												<img src="@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif" alt="img" />
 											</div>
 											<!--end::User-->
 										</div>
@@ -137,7 +137,7 @@
 										<!--begin::Record-->
 										<div class="d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5">
 											<!--begin::Title-->
-											<a href="#" class="fs-5 text-dark text-hover-primary fw-bold w-375px min-w-200px">Meeting with customer</a>
+											<a href="{{$row->link}}" class="fs-5 text-dark text-hover-primary fw-bold w-375px min-w-200px">Meeting with customer</a>
 											<!--end::Title-->
 											<!--begin::Label-->
 											<div class="min-w-175px pe-2">
@@ -166,40 +166,6 @@
 											<!--begin::Progress-->
 											<div class="min-w-125px pe-2">
 												<span class="badge badge-light-primary">In Progress</span>
-											</div>
-											<!--end::Progress-->
-											<!--begin::Action-->
-											<a href="#" class="btn btn-sm btn-light btn-active-light-primary">View</a>
-											<!--end::Action-->
-										</div>
-										<!--end::Record-->
-										<!--begin::Record-->
-										<div class="d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-0">
-											<!--begin::Title-->
-											<a href="#" class="fs-5 text-dark text-hover-primary fw-bold w-375px min-w-200px">Project Delivery Preparation</a>
-											<!--end::Title-->
-											<!--begin::Label-->
-											<div class="min-w-175px">
-												<span class="badge badge-light text-muted">CRM System Development</span>
-											</div>
-											<!--end::Label-->
-											<!--begin::Users-->
-											<div class="symbol-group symbol-hover flex-nowrap flex-grow-1 min-w-100px">
-												<!--begin::User-->
-												<div class="symbol symbol-circle symbol-25px">
-													<img src="profile/media/avatars/150-5.jpg" alt="img" />
-												</div>
-												<!--end::User-->
-												<!--begin::User-->
-												<div class="symbol symbol-circle symbol-25px">
-													<div class="symbol-label fs-8 fw-bold bg-success text-inverse-primary">B</div>
-												</div>
-												<!--end::User-->
-											</div>
-											<!--end::Users-->
-											<!--begin::Progress-->
-											<div class="min-w-125px">
-												<span class="badge badge-light-success">Completed</span>
 											</div>
 											<!--end::Progress-->
 											<!--begin::Action-->

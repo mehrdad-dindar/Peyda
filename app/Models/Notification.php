@@ -12,6 +12,7 @@ class Notification extends Model
             'sender_id',
             'link',
             'title',
+            'type',
             'body'];
 
     public function notificationuser()

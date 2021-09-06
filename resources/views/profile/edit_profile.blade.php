@@ -298,7 +298,7 @@
                                      style="background-image: url('{{ URL::asset('profile/media/mellicard/sample.jpg') }}')">
                                     <!--begin::Preview existing avatar-->
                                     <div class="image-input-wrapper w-225px h-150px"
-                                         style="background-image: url('@if($user->avatar!=null){{URL::asset('melli_cards').'/'.$user->melli_card}}@endif')"></div>
+                                         style="background-image: url('@if($user->melli_card!=null){{URL::asset('melli_cards').'/'.$user->melli_card}}@endif')"></div>
                                     <!--end::Preview existing avatar-->
                                     <!--begin::Label-->
                                     <label

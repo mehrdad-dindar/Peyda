@@ -47,6 +47,7 @@ return array(
     'App\\Models\\ImageField' => $baseDir . '/app/Models/ImageField.php',
     'App\\Models\\MobileImage' => $baseDir . '/app/Models/MobileImage.php',
     'App\\Models\\Mobile_warranty' => $baseDir . '/app/Models/Mobile_warranty.php',
+    'App\\Models\\NotifactionType' => $baseDir . '/app/Models/NotifactionType.php',
     'App\\Models\\Notification' => $baseDir . '/app/Models/Notification.php',
     'App\\Models\\NotificationUser' => $baseDir . '/app/Models/NotificationUser.php',
     'App\\Models\\Payment' => $baseDir . '/app/Models/Payment.php',
