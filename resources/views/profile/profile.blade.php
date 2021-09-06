@@ -115,6 +115,21 @@
 														</span>
                                         <!--end::Svg Icon-->{{ $user->email }}</a>
                                 </div>
+                                <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
+                                    <a href="#"
+                                       class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+                                        <!--begin::Svg Icon | path: icons/duotone/General/User.svg-->
+                                        @if($user->status==0)
+                                            <div class="col-lg-8 d-flex align-items-center">
+                                                <span class="badge badge-danger">احراز هویت تایید نشده</span>
+                                            </div>
+                                        @else
+                                            <div class="col-lg-8 d-flex align-items-center">
+                                                <span class="badge badge-success">احراز هویت تایید شده</span>
+                                            </div>
+                                        @endif
+                                        </a>
+                                </div>
                                 <!--end::Info-->
                             </div>
                             <!--end::User-->

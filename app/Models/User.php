@@ -79,4 +79,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Mobile_warranty::class,'owner_id');
     }
 
+    public function notificationusers()
+    {
+        return $this->hasMany(NotificationUser::class);
+    }
+
 }

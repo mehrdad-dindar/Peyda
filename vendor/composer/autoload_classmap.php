@@ -48,6 +48,7 @@ return array(
     'App\\Models\\MobileImage' => $baseDir . '/app/Models/MobileImage.php',
     'App\\Models\\Mobile_warranty' => $baseDir . '/app/Models/Mobile_warranty.php',
     'App\\Models\\Notification' => $baseDir . '/app/Models/Notification.php',
+    'App\\Models\\NotificationUser' => $baseDir . '/app/Models/NotificationUser.php',
     'App\\Models\\Payment' => $baseDir . '/app/Models/Payment.php',
     'App\\Models\\Phone_brand' => $baseDir . '/app/Models/Phone_brand.php',
     'App\\Models\\Phone_model' => $baseDir . '/app/Models/Phone_model.php',

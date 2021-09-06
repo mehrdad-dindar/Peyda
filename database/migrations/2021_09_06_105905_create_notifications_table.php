@@ -16,7 +16,6 @@ class CreateNotificationsTable extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedBigInteger('sender_id');
-            $table->string('receiver_id');
             $table->boolean('seen')->default(0);
             $table->string('title');
             $table->text('body');
