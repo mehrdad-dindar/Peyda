@@ -51,6 +51,7 @@ class MobileWarrantyController extends Controller
                                     ->where('owner_id','=',auth()->user()->id)
                                     ->get(['cc.price as cc_price','mobile_warranties.*','s.id as s_id','s.text as s_name']);
 
+        //dd($warranties);
         return view('profile.bimeh_all')->with(['warranties'=> $warranties,
                                                 'notification'=> self::getNotification(auth()->user()->id),
                                                 'user'=>auth()->user()]);
@@ -141,14 +142,21 @@ class MobileWarrantyController extends Controller
     public function cart(Request $request,$id)
     {
         $invoice_details = $request;
+        $phone_model='';
+        if($invoice_details['new_phone_model']==null){
+            $phone_model=$invoice_details['my_phone_model'];
+        }else{
+            $phone_model=$invoice_details['new_phone_model'];
+        }
         $phone_brands = Phone_brand::all();
         $phone_models = Phone_model::all();
         $fire_addition_prices = Fire_commitment_ceiling::all();
         //$phone_model = "";
         $fire_addition_price = "0 تومان";
+        //dd($invoice_details);
             //$phone_brand = Phone_brand::find($invoice_details['new_phone_brand'])->name;
         $phone_model = Phone_model::join('phone_brands as pb', 'phone_models.brand_id', '=', 'pb.id')
-                                    ->where('pb.id','=',$invoice_details['new_phone_brand'])
+                                    ->where('phone_models.id','=',$phone_model)
                                     ->first(['phone_models.name as pm_name','phone_models.id as pm_id', 'pb.name as pb_name', 'pb.id as pb_id']);
 
         if ($invoice_details['fire_addition_price'] != 0) {

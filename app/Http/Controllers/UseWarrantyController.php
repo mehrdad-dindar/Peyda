@@ -19,4 +19,13 @@ class UseWarrantyController extends Controller
         return $request->all();
 //        return view('profile.warranty.use',['user'=>auth()->user(),'notification'=>self::getNotification(auth()->user()->id)]);
     }
+
+    public function storeMedia(Request $request)
+    {
+        $ok=array();
+        foreach ($request->input('document', []) as $file) {
+            array_push($ok,'OK-');
+        }
+        return $ok;
+    }
 }
