@@ -88,96 +88,78 @@
 					<div id="kt_activities_scroll" class="position-relative scroll-y me-n5 pe-5" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-wrappers="#kt_activities_body" data-kt-scroll-dependencies="#kt_activities_header, #kt_activities_footer" data-kt-scroll-offset="5px">
 						<!--begin::Timeline items-->
 						<div class="timeline">
-                            <?php
-                                $notif=\App\Helpers\Helpers::getNotification(auth()->user()->id);
-                            ?>
 							<!--begin::Timeline item-->
-                            @foreach($notif as $row)
-                                <div class="timeline-item">
-								<!--begin::Timeline line-->
-								<div class="timeline-line w-40px"></div>
-								<!--end::Timeline line-->
-								<!--begin::Timeline icon-->
-								<div class="timeline-icon symbol symbol-circle symbol-40px me-4">
-									<div class="symbol-label bg-light">
-										<!--begin::Svg Icon | path: icons/duotone/Communication/Chat2.svg-->
-										<span class="svg-icon svg-icon-2 svg-icon-gray-500">
-											<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-												<polygon fill="#000000" opacity="0.3" points="5 15 3 21.5 9.5 19.5" />
-												<path d="M13.5,21 C8.25329488,21 4,16.7467051 4,11.5 C4,6.25329488 8.25329488,2 13.5,2 C18.7467051,2 23,6.25329488 23,11.5 C23,16.7467051 18.7467051,21 13.5,21 Z M9,8 C8.44771525,8 8,8.44771525 8,9 C8,9.55228475 8.44771525,10 9,10 L18,10 C18.5522847,10 19,9.55228475 19,9 C19,8.44771525 18.5522847,8 18,8 L9,8 Z M9,12 C8.44771525,12 8,12.4477153 8,13 C8,13.5522847 8.44771525,14 9,14 L14,14 C14.5522847,14 15,13.5522847 15,13 C15,12.4477153 14.5522847,12 14,12 L9,12 Z" fill="#000000" />
-											</svg>
-										</span>
-										<!--end::Svg Icon-->
-									</div>
-								</div>
-								<!--end::Timeline icon-->
-								<!--begin::Timeline content-->
-								<div class="timeline-content mb-10 mt-n1">
-									<!--begin::Timeline heading-->
-									<div class="pe-3 mb-5">
-										<!--begin::Title-->
-										<div class="fs-5 fw-bold mb-2">{{$row->title}}</div>
-										<!--end::Title-->
-										<!--begin::Description-->
-										<div class="d-flex align-items-center mt-1 fs-6">
-											<!--begin::Info-->
-											<div class="text-muted me-2 fs-7">{{\App\Helpers\Helpers::convertDateTimeToShamsi($row->created_at)}}</div>
-											<!--end::Info-->
-											<!--begin::User-->
-											<div class="symbol symbol-circle symbol-25px" data-bs-toggle="tooltip" data-bs-boundary="window" data-bs-placement="top" title="Nina Nilson">
-												<img src="@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif" alt="img" />
-											</div>
-											<!--end::User-->
-										</div>
-										<!--end::Description-->
-									</div>
-									<!--end::Timeline heading-->
-									<!--begin::Timeline details-->
-									<div class="overflow-auto pb-5">
-										<!--begin::Record-->
-										<div class="d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5">
-											<!--begin::Title-->
-											<a href="{{$row->link}}" class="fs-5 text-dark text-hover-primary fw-bold w-375px min-w-200px">Meeting with customer</a>
-											<!--end::Title-->
-											<!--begin::Label-->
-											<div class="min-w-175px pe-2">
-												<span class="badge badge-light text-muted">Application Design</span>
-											</div>
-											<!--end::Label-->
-											<!--begin::Users-->
-											<div class="symbol-group symbol-hover flex-nowrap flex-grow-1 min-w-100px pe-2">
-												<!--begin::User-->
-												<div class="symbol symbol-circle symbol-25px">
-													<img src="profile/media/avatars/150-3.jpg" alt="img" />
-												</div>
-												<!--end::User-->
-												<!--begin::User-->
-												<div class="symbol symbol-circle symbol-25px">
-													<img src="profile/media/avatars/150-11.jpg" alt="img" />
-												</div>
-												<!--end::User-->
-												<!--begin::User-->
-												<div class="symbol symbol-circle symbol-25px">
-													<div class="symbol-label fs-8 fw-bold bg-primary text-inverse-primary">A</div>
-												</div>
-												<!--end::User-->
-											</div>
-											<!--end::Users-->
-											<!--begin::Progress-->
-											<div class="min-w-125px pe-2">
-												<span class="badge badge-light-primary">In Progress</span>
-											</div>
-											<!--end::Progress-->
-											<!--begin::Action-->
-											<a href="#" class="btn btn-sm btn-light btn-active-light-primary">View</a>
-											<!--end::Action-->
-										</div>
-										<!--end::Record-->
-									</div>
-									<!--end::Timeline details-->
-								</div>
-								<!--end::Timeline content-->
-							</div>
+                            @foreach($notification as $row)
+                                @if($row->title!=null && $row->seen==0)
+                                    <div class="timeline-item">
+                                    <!--begin::Timeline line-->
+                                    <div class="timeline-line w-40px"></div>
+                                    <!--end::Timeline line-->
+                                    <!--begin::Timeline icon-->
+                                    <div class="timeline-icon symbol symbol-circle symbol-40px me-4">
+                                        <div class="symbol-label bg-light">
+                                            <!--begin::Svg Icon | path: icons/duotone/Communication/Chat2.svg-->
+                                            <span class="svg-icon svg-icon-2 svg-icon-gray-500">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <polygon fill="#000000" opacity="0.3" points="5 15 3 21.5 9.5 19.5" />
+                                                    <path d="M13.5,21 C8.25329488,21 4,16.7467051 4,11.5 C4,6.25329488 8.25329488,2 13.5,2 C18.7467051,2 23,6.25329488 23,11.5 C23,16.7467051 18.7467051,21 13.5,21 Z M9,8 C8.44771525,8 8,8.44771525 8,9 C8,9.55228475 8.44771525,10 9,10 L18,10 C18.5522847,10 19,9.55228475 19,9 C19,8.44771525 18.5522847,8 18,8 L9,8 Z M9,12 C8.44771525,12 8,12.4477153 8,13 C8,13.5522847 8.44771525,14 9,14 L14,14 C14.5522847,14 15,13.5522847 15,13 C15,12.4477153 14.5522847,12 14,12 L9,12 Z" fill="#000000" />
+                                                </svg>
+                                            </span>
+                                            <!--end::Svg Icon-->
+                                        </div>
+                                    </div>
+                                    <!--end::Timeline icon-->
+                                    <!--begin::Timeline content-->
+                                    <div class="timeline-content mb-10 mt-n1">
+                                        <!--begin::Timeline heading-->
+                                        <div class="pe-3 mb-5">
+                                            <!--begin::Title-->
+                                            <div class="fs-5 fw-bold mb-2">{{$row->title}}</div>
+                                            <!--end::Title-->
+                                            <!--begin::Description-->
+                                            <div class="d-flex align-items-center mt-1 fs-6">
+                                                <!--begin::Info-->
+
+                                                <div class="text-muted me-2 fs-7">{{ \App\Helpers\Helpers::toPersianNumOnly(
+                                                        \App\Helpers\Helpers::convertDateTimeToShamsi($row->created_at))}}</div>
+                                                <!--end::Info-->
+                                                <!--begin::User-->
+                                                <div class="symbol symbol-circle symbol-25px" data-bs-toggle="tooltip" data-bs-boundary="window" data-bs-placement="top" title="Nina Nilson">
+                                                    <img src="@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif" alt="img" />
+                                                </div>
+                                                <!--end::User-->
+                                            </div>
+                                            <!--end::Description-->
+                                        </div>
+                                        <!--end::Timeline heading-->
+                                        <!--begin::Timeline details-->
+                                        <div class="overflow-auto pb-5">
+                                            <!--begin::Record-->
+                                            <div class="d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5">
+                                                <!--begin::Title-->
+                                                <a href="{{$row->link}}" class="fs-5 text-dark text-hover-primary fw-bold w-375px min-w-200px">{{$row->body}}</a>
+                                                <!--end::Title-->
+                                                <!--begin::Label-->
+                                                <div class="min-w-175px pe-2">
+                                                    <span class="badge badge-light text-muted">{{$row->nt_name}}</span>
+                                                </div>
+                                                <!--end::Label-->
+                                                <!--begin::Progress-->
+                                                <div class="min-w-125px pe-2">
+                                                    <a href="{{ route('check_notif',['notifid'=>$row->id,'dismiss'=>0]) }}" class="btn btn-sm btn-primary btn-active-light-primary">مشاهده</a>
+                                                </div>
+                                                <!--end::Progress-->
+                                                <!--begin::Action-->
+                                                <a href="{{ route('check_notif',['notifid'=>$row->id,'dismiss'=>1]) }}" class="btn btn-sm btn-light btn-active-light-primary"><i class="fas fa-times"></i></a>
+                                                <!--end::Action-->
+                                            </div>
+                                            <!--end::Record-->
+                                        </div>
+                                        <!--end::Timeline details-->
+                                    </div>
+                                    <!--end::Timeline content-->
+                                </div>
+                                @endif
                             @endforeach
 							<!--end::Timeline item-->
 						</div>

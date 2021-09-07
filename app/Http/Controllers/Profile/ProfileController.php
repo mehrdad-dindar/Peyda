@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Profile;
 use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\city;
+use App\Models\Notification;
 use App\Models\NotificationUser;
 use App\Models\Phone_brand;
 use App\Models\Phone_model;
@@ -12,9 +13,20 @@ use App\Models\User;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Redirect;
 
 class ProfileController extends Controller
 {
+    public static function getNotification($id)
+    {
+        $notification=NotificationUser::query()->where('receiver_id','=',$id)
+            ->join('notifications as n', 'user_notifications.notification_id', '=', 'n.id')
+            ->join('notification_types as nt','n.type','=','nt.id')
+            ->get(['n.*','nt.name as nt_name']);
+
+        return $notification;
+    }
+
     public function __construct()
     {
         $this->middleware(['auth','verified']);
@@ -22,17 +34,23 @@ class ProfileController extends Controller
 
     public function index()
     {
-        return view('profile.index')->with('user',auth()->user());
+        $notif=self::getNotification(auth()->user()->id);
+        return view('profile.index')->with(['user'=>auth()->user(),
+                                                'notification'=>$notif]);
     }
 
     public function profile()
     {
         $user=auth()->user();
 
-        return view('profile.profile')->with(['user'=>$user]);
+        $notif=self::getNotification(auth()->user()->id);
+        return view('profile.profile')->with(['user'=>$user,
+                                                    'notification'=>$notif]);
     }
     public function edit_profile()
     {
+        $notif=self::getNotification(auth()->user()->id);
+
         $cities = city::all();
         $phone_brands = Phone_brand::all();
         $phone_models = Phone_model::all();
@@ -40,7 +58,8 @@ class ProfileController extends Controller
             ->with(['user'=>auth()->user(),
                     'cities'=>$cities,
                     'phone_brands'=>$phone_brands,
-                    'phone_models'=>$phone_models]);
+                    'phone_models'=>$phone_models,
+                    'notification'=>$notif]);
     }
 
     public function validator(Request $request)
@@ -111,5 +130,6 @@ class ProfileController extends Controller
             }
         }
     }
+
 
 }

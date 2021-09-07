@@ -13,6 +13,7 @@ class Notification extends Model
             'link',
             'title',
             'type',
+            'seen',
             'body'];
 
     public function notificationuser()

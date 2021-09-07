@@ -37,10 +37,13 @@ class UserController extends Controller
 
         if($notifUser<=0) {
 
+            $link = '/panel/edit_profile';
+
             $notif = Notification::create([
 
                 'sender_id' => auth()->user()->id,
-                'type' => 1
+                'type' => 1,
+                'link' => $link
             ]);
             NotificationUser::create([
                 'receiver_id' => $user->id,
@@ -73,18 +76,32 @@ class UserController extends Controller
         $admin_id = $request->get('admin_id');
         $link = '/panel/edit_profile';
 
-        $notification = Notification::create([
-            'sender_id' => $admin_id,
-            'link' => $link,
-            'type'=>1,
-            'title' => 'احراز هویت',
-            'body' => $descriptions
-        ]);
+        $notifUser=Notification::query()->join('user_notifications as un','un.notification_id','=','notifications.id')->where([['un.receiver_id','=',$user_id],['notifications.type','=',1]])->first(['notifications.id']);
 
-        NotificationUser::create([
-            'receiver_id' => $user_id,
-            'notification_id' => $notification->id
-        ]);
+        if($notifUser==null) {
+            $notification = Notification::create([
+                [
+                    'body' => $descriptions,
+                    'sender_id' => $admin_id,
+                    'link' => $link,
+                    'type' => 1,
+                    'title' => 'احراز هویت'
+                ]
+            ]);
+
+            NotificationUser::create([
+                ['notification_id' => $notification->id],
+                ['receiver_id' => $user_id]
+            ]);
+        }else{
+
+            $notification = Notification::query()->where('id','=',$notifUser->id)->update([
+
+                    'body' => $descriptions
+
+            ]);
+
+        }
 
         return redirect()->back()->with('error', 'تغییرات با موفقیت اعمال شد.');
     }
