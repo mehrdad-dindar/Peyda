@@ -17,17 +17,6 @@ use Redirect;
 
 class ProfileController extends Controller
 {
-    public static function getNotification($id)
-    {
-        $notification=NotificationUser::query()->where('receiver_id','=',$id)
-            ->join('notifications as n', 'user_notifications.notification_id', '=', 'n.id')
-            ->join('notification_types as nt','n.type','=','nt.id')
-            ->where('n.seen','=',0)
-            ->whereNotNull('n.title')
-            ->get(['n.*','nt.name as nt_name']);
-
-        return $notification;
-    }
 
     public function __construct()
     {

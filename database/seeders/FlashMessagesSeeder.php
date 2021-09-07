@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use DB;
 use Illuminate\Database\Seeder;
 
 class FlashMessagesSeeder extends Seeder
@@ -17,11 +18,11 @@ class FlashMessagesSeeder extends Seeder
             [
                 'title'                =>          'AdminWarranty_create_success',
                 'value'                =>          'فراگارانتی با موفقیت افزوده شد.'
-            ],
+            ]);
+        DB::table('flash_messages')->insert(
             [
                 'title'                =>          'AdminWarranty_create_fail',
                 'value'                =>          'خطا در افزودن فراگارانتی!'
-            ]
-        );
+            ]);
     }
 }

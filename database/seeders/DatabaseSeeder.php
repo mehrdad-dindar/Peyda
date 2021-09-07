@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(Commitment_CeilingsTableSeeder::class);
         $this->call(Fire_commitment_ceilingsTableSeeder::class);
         $this->call(Phone_brandsTableSeeder::class);
+        $this->call(FlashMessagesSeeder::class);
         $this->call(Phone_modelsTableSeeder::class);
         $this->call(StatusTableSeeder::class);
         $this->call(ImageFieldTableSeeder::class);

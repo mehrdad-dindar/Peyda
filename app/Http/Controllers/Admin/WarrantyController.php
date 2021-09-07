@@ -98,7 +98,7 @@ class WarrantyController extends Controller
             'transfer_code'=>null,
             'price_range'=>$request->get('price_range'),
             'fire_gift'=>true,
-            'status'=>false,
+            'status'=>1,
             'addition_fire_commitment_id'=>$request->get('fire_addition_price'),
         ]);
         $data->save();

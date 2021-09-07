@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Validator;
 
 class MobileWarrantyController extends Controller
 {
+
     public function __construct()
     {
         return $this->middleware('auth');
@@ -33,6 +34,7 @@ class MobileWarrantyController extends Controller
         $fire_commitment_ceilings = Fire_commitment_ceiling::all();
         return view('profile.bimeh_add')
             ->with('user', auth()->user())
+            ->with('notification', self::getNotification(auth()->user()->id))
             ->with('myPhone', $myPhone)
             ->with('brands',$brands)
             ->with('models_first',$phone_model_first)
@@ -50,6 +52,7 @@ class MobileWarrantyController extends Controller
                                     ->get(['cc.price as cc_price','mobile_warranties.*','s.id as s_id','s.text as s_name']);
 
         return view('profile.bimeh_all')->with(['warranties'=> $warranties,
+                                                'notification'=> self::getNotification(auth()->user()->id),
                                                 'user'=>auth()->user()]);
     }
     protected function validator(Request $request)
@@ -155,6 +158,7 @@ class MobileWarrantyController extends Controller
 
         return view('profile.cart')
             ->with('user', auth()->user())
+            ->with('notification', self::getNotification(auth()->user()->id))
             ->with('invoice_details', $invoice_details)
             ->with('phone_model', $phone_model)
             ->with('fire_addition_price', $fire_addition_price)
