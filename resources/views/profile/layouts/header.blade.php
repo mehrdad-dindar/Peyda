@@ -65,8 +65,32 @@
                 <div class="d-flex align-items-stretch flex-shrink-0">
                     <!--begin::Activities-->
                     <div class="d-flex align-items-center ms-1 ms-lg-3">
+                        <style>
+                            .fa-stack[data-count]:after{
+                                position:absolute;
+                                right: 80%;
+                                top: 39%;
+                                content: attr(data-count);
+                                font-size: 11%;
+                                padding:.6em;
+                                border-radius:999px;
+                                line-height:.75em;
+                                color: white;
+                                background:rgba(255,0,0,.85);
+                                text-align:center;
+                                min-width:1em;
+                                font-weight:bold;
+                            }
+                        </style>
                         <!--begin::Drawer toggle-->
-                        <div class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px" id="kt_activities_toggle">
+                        <div  class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px" id="kt_activities_toggle">
+
+                            @if(sizeof($notification)>0)
+                                <span class="fa-stack fa-5x has-badge" data-count="{{sizeof($notification)}}">
+                                  <i class="fa fa-circle fa-stack-2x"></i>
+                                  <i class="fa fa-bell fa-stack-1x fa-inverse"></i>
+                                </span>
+                            @endif
                             <i class="bi bi-bell fs-2"></i>
                         </div>
                         <!--end::Drawer toggle-->
