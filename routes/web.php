@@ -32,6 +32,8 @@ Route::prefix('panel')->group(function () {
     Route::prefix('warranty')->group(function () {
         Route::prefix('mobile')->group(function () {
             Route::get('/', 'MobileWarrantyController@bimeh_all')->name('bimeh_all');
+            Route::get('/use_faraguaranty/{id}', 'UseWarrantyController@index')->name('bimeh_use');
+            Route::post('/store_use/', 'UseWarrantyController@store');
             Route::get('/add', 'MobileWarrantyController@bimeh_add')->name('bimeh_add');
             Route::post('/save', 'MobileWarrantyController@save')->name('save');
             Route::get('/cart', 'MobileWarrantyController@cart')->name('cart');

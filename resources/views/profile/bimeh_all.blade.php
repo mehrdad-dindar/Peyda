@@ -57,7 +57,7 @@
                                 <td>
                                     <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">یک سال پس از تایید</a>
                                 </td>
-                                <td class="text-dark fw-bolder text-hover-primary fs-6">{{$row->cc_price}}</td>
+                                <td class="text-dark fw-bolder text-hover-primary fs-6">{{App\Helpers\Helpers::toPersianNum($row->cc_price)}}</td>
                                 <td>
                                     <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">Intertico</a>
                                     <span class="text-muted fw-bold text-muted d-block fs-7"></span>
@@ -379,8 +379,105 @@
                                                 <!--end::Close-->
                                             </div>
                                             <div class="modal-body">
-                                                <button type="button" class="btn btn-primary" style="font-family: IRANSans;">استفاده از فراگارانتی</button>
-                                                <button type="button" class="btn btn-primary" style="font-family: IRANSans;">انتقال فراگارانتی</button>
+
+                                                <div class="fv-row mb-15" data-kt-buttons="true">
+                                                    <!--begin::Option-->
+                                                    <label onclick="window.location.href='mobile/use_faraguaranty/{{$row->id}}'"
+                                                        class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6 active">
+                                                        <!--begin::Input-->
+                                                        <input class="btn-check" type="radio" checked
+                                                               name="warranty_type" value="1"/>
+                                                        <!--end::Input-->
+
+                                                        <!--begin::Label-->
+                                                        <span class="d-flex" id="first_select">
+																			<!--begin::Icon-->
+                                                            <!--begin::Svg Icon | path: icons/duotone/General/User.svg-->
+																			<span class="svg-icon svg-icon-3hx">
+																				<svg xmlns="http://www.w3.org/2000/svg"
+                                                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                     width="24px" height="24px"
+                                                                                     viewBox="0 0 24 24" version="1.1">
+																					<g stroke="none" stroke-width="1"
+                                                                                       fill="none" fill-rule="evenodd">
+																						<polygon
+                                                                                            points="0 0 24 0 24 24 0 24"/>
+																						<path
+                                                                                            d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+                                                                                            fill="#000000"
+                                                                                            fill-rule="nonzero"
+                                                                                            opacity="0.3"/>
+																						<path
+                                                                                            d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+                                                                                            fill="#000000"
+                                                                                            fill-rule="nonzero"/>
+																					</g>
+																				</svg>
+																			</span>
+                                                            <!--end::Svg Icon-->
+                                                            <!--end::Icon-->
+                                                            <!--begin::Info-->
+																			<span class="ms-4">
+																				<span
+                                                                                    class="fs-3 fw-bolder text-gray-900 mb-2 d-block">استفاده از فراگارانتی</span>
+																			</span>
+                                                            <!--end::Info-->
+																		</span>
+                                                        <!--end::Label-->
+                                                    </label>
+                                                    <!--end::Option-->
+                                                    <!--begin::Option-->
+                                                    <label
+                                                        class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6">
+                                                        <!--begin::Input-->
+                                                        <input class="btn-check" type="radio" name="warranty_type"
+                                                               value="2"/>
+                                                        <!--end::Input-->
+                                                        <!--begin::Label-->
+                                                        <span class="d-flex" id="new_mobile_select_btn">
+																			<!--begin::Icon-->
+                                                            <!--begin::Svg Icon-->
+																			<span class="svg-icon svg-icon-3hx">
+																				<svg xmlns="http://www.w3.org/2000/svg"
+                                                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                     width="24px" height="24px"
+                                                                                     viewBox="0 0 24 24" version="1.1">
+																					<g stroke="none" stroke-width="1"
+                                                                                       fill="none" fill-rule="evenodd">
+																						<rect x="5" y="5" width="5"
+                                                                                              height="5" rx="1"
+                                                                                              fill="#000000"/>
+																						<rect x="14" y="5" width="5"
+                                                                                              height="5" rx="1"
+                                                                                              fill="#000000"
+                                                                                              opacity="0.3"/>
+																						<rect x="5" y="14" width="5"
+                                                                                              height="5" rx="1"
+                                                                                              fill="#000000"
+                                                                                              opacity="0.3"/>
+																						<rect x="14" y="14" width="5"
+                                                                                              height="5" rx="1"
+                                                                                              fill="#000000"
+                                                                                              opacity="0.3"/>
+																					</g>
+																				</svg>
+																			</span>
+                                                            <!--end::Svg Icon-->
+                                                            <!--end::Icon-->
+                                                            <!--begin::Info-->
+																			<span class="ms-4">
+																				<span
+                                                                                    class="fs-3 fw-bolder text-gray-900 mb-2 d-block">انتقال فراگارانتی</span>
+																				{{--<span
+                                                                                    class="fw-bold fs-4 text-muted">{{ $user->phone_brand->name." / ".$user->phone_model->name }}</span>--}}
+																			</span>
+                                                            <!--end::Info-->
+																		</span>
+                                                        <!--end::Label-->
+                                                    </label>
+                                                    <!--end::Option-->
+                                                </div>
+
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
@@ -403,12 +500,4 @@
 @endsection
 @section('custom_js')
 
-    <script src="{{URL::asset('profile/plugins/global/plugins.bundle.js')}}"></script>
-    <script src="{{URL::asset('profile/js/scripts.bundle.js')}}"></script>
-    <!--end::Global Javascript Bundle-->
-    <!--begin::Page Vendors Javascript(used by this page)-->
-    <script src="{{URL::asset('profile/plugins/custom/prismjs/prismjs.bundle.js')}}"></script>
-    <!--end::Page Vendors Javascript-->
-    <!--begin::Page Custom Javascript(used by this page)-->
-    <script src="{{URL::asset('profile/js/custom/documentation/documentation.js')}}"></script>
 @endsection

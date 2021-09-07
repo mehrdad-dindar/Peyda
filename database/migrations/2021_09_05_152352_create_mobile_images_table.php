@@ -16,9 +16,9 @@ class CreateMobileImagesTable extends Migration
         Schema::create('mobile_images', function (Blueprint $table) {
             $table->increments('id');
             $table->text('URL');
-            $table->unsignedInteger('field');
-            $table->index('field');
-            $table->foreign('field')->references('id')->on('image_fields')->onDelete('cascade');
+            $table->unsignedInteger('type')->nullable();
+            $table->index('type');
+            $table->foreign('type')->references('id')->on('image_fields')->onDelete('cascade');
             $table->integer('status');
             $table->timestamps();
         });
