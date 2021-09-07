@@ -19,10 +19,10 @@ class UserController extends Controller
     public function index()
     {
         $users = User::query()->leftJoin('user_notifications as un', 'users.id','=','un.receiver_id')
-            ->leftJoin('notifications as n','n.id','=','un.notification_id')->where('n.type', '=', 1)
-            ->whereNotNull('n.sender_id')->get(['users.*','n.sender_id']);
+            ->leftJoin('notifications as n','n.id','=','un.notification_id')->get(['users.*','n.sender_id']);
 
         return view('dashboard.users.all', compact(['users']));
+        //return $usersAuth;
     }
 
     /**
@@ -33,14 +33,21 @@ class UserController extends Controller
     public function create($id)
     {
         $user = User::find($id);
-        $notif = Notification::create([
-            'sender_id' => auth()->user()->id,
-            'type' => 1
-        ]);
-        NotificationUser::create([
-            'receiver_id' => $user->id,
-            'notification_id' => $notif->id
-        ]);
+        $notifUser=Notification::query()->join('user_notifications as un','un.notification_id','notifications.id')->where('un.receiver_id','=',$id)->count();
+
+        if($notifUser<=0) {
+
+            $notif = Notification::create([
+
+                'sender_id' => auth()->user()->id,
+                'type' => 1
+            ]);
+            NotificationUser::create([
+                'receiver_id' => $user->id,
+                'notification_id' => $notif->id
+            ]);
+        }
+
 
         return view('dashboard.users.create', compact('user'));
     }
@@ -69,6 +76,7 @@ class UserController extends Controller
         $notification = Notification::create([
             'sender_id' => $admin_id,
             'link' => $link,
+            'type'=>1,
             'title' => 'احراز هویت',
             'body' => $descriptions
         ]);

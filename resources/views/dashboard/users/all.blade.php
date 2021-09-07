@@ -55,7 +55,8 @@
                                             </td>
                                             <td>0{{ $user->phone }}</td>
                                             <td>
-                                                @if($user->sender_id==null)
+                                                @if(($user->sender_id==null || $user->sender_id==auth()->user()->id)
+                                                    && $user->status==0)
                                             <a href="{{ route('dashboard') }}/users/edit/{{$user->id}}" class="btn btn-primary btn-sm">احراز هویت</a>
                                                     @else
                                                     <a style="color: white;" class="btn btn-secondary btn-sm">احراز هویت</a>
