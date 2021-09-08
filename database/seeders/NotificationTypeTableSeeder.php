@@ -24,5 +24,10 @@ class NotificationTypeTableSeeder extends Seeder
 
             'name'                =>          'بیمه نامه'
         ]);
+
+        DB::table('notification_types')->insert([
+
+            'name'                =>          'استفاده از بیمه نامه'
+        ]);
     }
 }

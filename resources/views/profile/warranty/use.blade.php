@@ -1,5 +1,5 @@
 @extends('profile.layouts.master')
-@section('title','همه فراگارانتی ها')
+@section('title','استفاده از فراگارانتی')
 @section('custom_head')
 @endsection
 @section('content')
