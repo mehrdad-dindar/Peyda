@@ -14,4 +14,5 @@ class MobileImage extends Model
     {
         return $this->belongsTo(ImageFields::class);
     }
+    protected $fillable=['URL','type','status'];
 }

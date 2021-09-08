@@ -162,9 +162,11 @@
                     </div>
             @endif
             <!--begin::Form-->
-                <form id="kt_account_profile_details_form" class="form" method="post"
-                      action="{{ route('save_profile_info') }}" enctype="multipart/form-data">
-                    @csrf
+                <form id="kt_account_profile_details_form" class="form"
+                      @if($flag==1) action="{{ route('save_profile_info') }}" method="post" @endif enctype="multipart/form-data">
+                    @if($flag==1)
+                        @csrf
+                    @endif
                     <input type="hidden" name="id" value="{{ $user->id }}">
                     <!--begin::Card body-->
                     <div class="card-body border-top p-9">
@@ -230,7 +232,7 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="text" name="f_name"
-                                       class="@error('f_name') is-invalid @enderror form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                       class="disabled-input @error('f_name') is-invalid @enderror form-control form-control-lg form-control-solid mb-3 mb-lg-0" @if($flag==1) disabled @endif
                                        placeholder="نام " value="{{ $user->f_name }}"/>
                             </div>
                             <!--end::Col-->
@@ -246,7 +248,7 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="text" name="l_name"
-                                       class="@error('l_name') is-invalid @enderror form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                       class="disabled-input @error('l_name') is-invalid @enderror form-control form-control-lg form-control-solid mb-3 mb-lg-0"  @if($flag==1) disabled @endif
                                        placeholder="نام خانوادگی " value="{{ $user->l_name }}"/>
                             </div>
                             <!--end::Col-->
@@ -263,8 +265,9 @@
                             <div class="col-lg-6 fv-row">
                                 {{--<input type="text" class="example1" />--}}
                                 <input type="hidden" value="{{$v = Verta::instance($user->birthday)}}">
-                                <input class="form-control form-control-solid" id="birthday"
+                                <input class="disabled-input form-control form-control-solid" id="birthday"
                                        value="@if($user->birthday != null){{ $v->format('Y-n-j') }}@endif"
+                                       @if($flag==1) disabled @endif
                                        placeholder="--/--/----"/>
                                 <input type="hidden" name="birthday_tmp" id="birthday_tmp"/>
                             </div>
@@ -280,7 +283,7 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="text" name="melli_code"
-                                       class="@error('melli_code') is-invalid @enderror form-control form-control-lg form-control-solid"
+                                       class="disabled-input @error('melli_code') is-invalid @enderror form-control form-control-lg form-control-solid"  @if($flag==1) disabled @endif
                                        value="@if($user->melli_code != null){{$user->melli_code}}@endif"/>
                             </div>
                             <!--end::Col-->
@@ -307,7 +310,7 @@
                                         title="Change avatar">
                                         <i class="bi bi-pencil-fill fs-7"></i>
                                         <!--begin::Inputs-->
-                                        <input type="file" name="melli_card" accept=".png, .jpg, .jpeg"/>
+                                        <input type="file"  @if($flag==1) disabled @endif class="disabled-input" name="melli_card" accept=".png, .jpg, .jpeg"/>
                                         <input type="hidden" name="melli_card_remove"/>
                                         <!--end::Inputs-->
                                     </label>
@@ -350,7 +353,8 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="tel" name="phone_num"
-                                       class="form-control form-control-lg form-control-solid"
+                                       class="disabled-input form-control form-control-lg form-control-solid"
+                                       @if($flag==1) disabled @endif
                                        placeholder="Phone number"
                                        value="{{$user->phone_num}}"/>
                             </div>
@@ -367,7 +371,8 @@
                                 <select name="city_id" id="city_id" aria-label="Select a city"
                                         data-control="select2"
                                         data-placeholder="استان محل سکونت خود را انتخاب کنید"
-                                        class="form-select form-select-solid form-select-lg fw-bold">
+                                        class="disabled-input form-select form-select-solid form-select-lg fw-bold"
+                                        @if($flag==1) disabled @endif>
                                     <option value="">انتخاب استان</option>
                                     @foreach($cities as $city)
                                         <option value="{{$city->id}}" @if($user->city_id == $city->id) selected @endif>{{$city->name}}</option>
@@ -385,7 +390,8 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="text" name="address"
-                                       class="form-control form-control-lg form-control-solid"
+                                       class="disabled-input form-control form-control-lg form-control-solid"
+                                       @if($flag==1) disabled @endif
                                        value="{{$user->address}}">
                             </div>
 
@@ -401,7 +407,8 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="text" name="postal_code"
-                                       class="form-control form-control-lg form-control-solid"
+                                       class="disabled-input form-control form-control-lg form-control-solid"
+                                       @if($flag==1) disabled @endif
                                        value="{{$user->postal_code}}">
                             </div>
                             <!--end::Col-->
@@ -419,7 +426,8 @@
                                 <select name="phone_brand_id" id="phone_brand" aria-label="Select a Country"
                                         data-control="select2"
                                         data-placeholder="برند گوشی خود را انتخاب کنید"
-                                        class="form-select form-select-solid form-select-lg fw-bold">
+                                        class="disabled-input form-select form-select-solid form-select-lg fw-bold"
+                                        @if($flag==1) disabled @endif>
                                     <option value="">انتخاب برند گوشی</option>
                                     @foreach($phone_brands as $brand)
                                         <option value="{{$brand->id}}" @if($user->phone_brand_id == $brand->id) selected @endif>{{$brand->name}}</option>
@@ -445,7 +453,8 @@
                                 <select name="phone_model_id" id="phone_model" aria-label="Select a Country"
                                         data-control="select2"
                                         data-placeholder="مدل گوشی خود را انتخاب کنید"
-                                        class="form-select form-select-solid form-select-lg fw-bold">
+                                        class="disabled-input form-select form-select-solid form-select-lg fw-bold"
+                                        @if($flag==1) disabled @endif>
                                     <option value="">انتخاب مدل گوشی</option>
                                     @foreach($phone_models as $model)
                                         <option value="{{$model->id}}"
@@ -456,57 +465,7 @@
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
-                        <!--begin::Input group-->
 
-                        <div class="row mb-6">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label  fw-bold fs-6">شماره شبا</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-6 fv-row">
-                                <div class="input-group ltr">
-                                    <span class="input-group-text" id="basic-addon1">IR</span>
-                                    <input type="text" name="bank_shaba"
-                                           class="@error('shaba') is-invalid @enderror form-control form-control-lg form-control-solid"
-                                           value="{{$user->bank_shaba}}"/>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end::Input group-->
-
-                        <!--begin::Input group-->
-                        <div class="row mb-6">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label  fw-bold fs-6">شماره کارت</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-6 fv-row">
-                                <input type="text" name="bank_card"
-                                       class="@error('bank_card') is-invalid @enderror form-control form-control-lg form-control-solid"
-                                       value="{{$user->bank_card}}"/>
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
-
-                        <!--begin::Input group-->
-                        <div class="row mb-6">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label  fw-bold fs-6">شماره حساب</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-6 fv-row">
-                                <input type="text" name="bank_id"
-                                       class="@error('bank_id') is-invalid @enderror form-control form-control-lg form-control-solid"
-                                       value="{{$user->bank_id}}"/>
-
-                                <div class="form-text">شماره حساب باید به نام شخص باشد
-                                </div>
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
-                    </div>
                     <!--end::Card body-->
                     <!--begin::Actions-->
                     <div class="card-footer d-flex justify-content-end py-6 px-9">
@@ -515,6 +474,7 @@
                         </button>
                     </div>
                     <!--end::Actions-->
+                    </div>
                 </form>
                 <!--end::Form-->
             </div>
@@ -640,16 +600,13 @@
         <!--end::Sign-in Method-->
     </div>
 @endsection
+
 @section('custom_js')
+
     <script src="{{ URL::asset('profile/js/custom/account/settings/signin-methods.js') }}"></script>
 
     <script src="{{ URL::asset('profile/js/custom/p_datepicker/persian-date.min.js')}}"></script>
     <script src="{{ URL::asset('profile/js/custom/p_datepicker/persian-datepicker.min.js')}}"></script>
-    <script>
-        $('#city_id').val('{{$user->city_id}}');
-        $('#phone_brand').val('{{$user->phone_brand_id}}');
-        $('#phone_model').val('{{$user->phone_model_id}}');
-    </script>
     <script type="text/javascript">
         $('#birthday').persianDatepicker({
             observer: true,
@@ -690,8 +647,8 @@
 
             });
         });
-
     </script>
+
 
 @endsection
 

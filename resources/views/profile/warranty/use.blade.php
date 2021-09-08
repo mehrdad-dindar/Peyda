@@ -11,6 +11,9 @@
                 <!--begin::Card Body-->
                 <div class="card-body fs-6 py-15 px-10 py-lg-15 px-lg-15 text-gray-700">
                     <!--begin::Section-->
+                    <form action="{{ route('store_use') }}" method="post">
+                        @csrf
+                        <input type="hidden" value="{{$warranty_id}}" name="warranty_id">
                         <div class="py-10">
                         <!--begin::Heading-->
                         <h1 class="anchor fw-bolder mb-5" id="custom-form-control">
@@ -36,21 +39,14 @@
 
                         <div class="py-5">
                             <div class="rounded border p-10">
-                                <form action="{{ route("projects.storeMedia") }}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-
                                     {{-- Name/Description fields, irrelevant for this article --}}
 
-                                    <div class="form-group">
-                                        <label for="document">Documents</label>
-                                        <div class="needsclick dropzone" id="document-dropzone">
+                                <div class="form-group">
+                                    <label for="document">Documents</label>
+                                    <div class="needsclick dropzone" id="document-dropzone">
 
-                                        </div>
                                     </div>
-                                    <div>
-                                        <input class="btn btn-danger" type="submit">
-                                    </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
 
@@ -62,6 +58,7 @@
 
                         <!--end::Block-->
                     </div>
+                    </form>
                     <!--end::Section-->
                 </div>
                 <!--end::Card Body-->
@@ -86,8 +83,9 @@
             headers: {
                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
             },
-            success: function (file, response) {
-                $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">')
+            success: function (file,response) {
+                alert(response.id);
+                $('form').append('<input type="hidden" name="document_id[]" value="' + response.id + '">')
                 uploadedDocumentMap[file.name] = response.name
             },
             removedfile: function (file) {

@@ -19,7 +19,7 @@ class CreateMobileImagesTable extends Migration
             $table->unsignedInteger('type')->nullable();
             $table->index('type');
             $table->foreign('type')->references('id')->on('image_fields')->onDelete('cascade');
-            $table->integer('status');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
 

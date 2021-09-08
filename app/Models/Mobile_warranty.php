@@ -23,6 +23,7 @@ class Mobile_warranty extends Model
         'fire_gift',
         'status',
         'addition_fire_commitment_id',
+        'usable_percentage'
     ];
     /**
      * @var mixed

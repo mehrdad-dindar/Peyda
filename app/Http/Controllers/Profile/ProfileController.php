@@ -42,12 +42,17 @@ class ProfileController extends Controller
     {
         $notif=self::getNotification(auth()->user()->id);
 
+        $flag=0;
         $cities = city::all();
         $phone_brands = Phone_brand::all();
         $phone_models = Phone_model::all();
+        if(auth()->user()->status==1){
+            $flag=1;
+        }
         return view('profile.edit_profile')
             ->with(['user'=>auth()->user(),
                     'cities'=>$cities,
+                    'flag'=>$flag,
                     'phone_brands'=>$phone_brands,
                     'phone_models'=>$phone_models,
                     'notification'=>$notif]);
@@ -73,7 +78,7 @@ class ProfileController extends Controller
         if ($request->file('avatar')) {
             $avatar = $request->file('avatar');
             $avatar_name = time() . $avatar->getClientOriginalName();
-            $avatar->move($_SERVER["DOCUMENT_ROOT"] . '/avatars/', $avatar_name);
+            $avatar->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/avatars/', $avatar_name);
             $user->avatar = $avatar_name;
         }
         if ($request->file('melli_card')) {
