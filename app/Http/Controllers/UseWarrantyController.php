@@ -23,13 +23,29 @@ class UseWarrantyController extends Controller
         $descriptions=$request->get('descriptions');
         $title=$request->get('title');
         $images=$request->input('document_id');
+
+        $imageList=$prefix='';
+        foreach ($images as $row){
+            $image=MobileImage::query()->where('URL','=',$row)->first();
+
+            $imageList .= $prefix  . $image->id ;
+            $prefix = ',';
+        }
         $warranty=$request->get('warranty_id');
 
+        $warrantyUse=WarrantyUse::create([
+            'descriptions' => $descriptions,
+            'images'=>$imageList,
+            'warranty_id'=>$warranty,
+            'title'=>$title
 
+        ]);
 
-        return ;
-
-
+        if($warrantyUse!=null){
+            return redirect()->back()->with('msg','درخواست شما با موفقیت ثبت شد!');
+        }else{
+            return redirect()->back()->with('msg','متاسفانه درخواست شما ثبت نشد!');
+        }
 
 //        return view('profile.warranty.use',['user'=>auth()->user(),'notification'=>self::getNotification(auth()->user()->id)]);
     }
@@ -41,7 +57,7 @@ class UseWarrantyController extends Controller
         $image_name = time() . $image->getClientOriginalName();
 
         $mobile_image=MobileImage::create([
-            'URL' => $image->getClientOriginalName()
+            'URL' => $image_name
         ]);
 
         $image->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/use_images/', $image_name);

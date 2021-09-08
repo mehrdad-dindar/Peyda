@@ -11,7 +11,7 @@
                 <!--begin::Card Body-->
                 <div class="card-body fs-6 py-15 px-10 py-lg-15 px-lg-15 text-gray-700">
                     <!--begin::Section-->
-                    <form action="{{ route('store_use') }}" method="post">
+                    <form action="{{ route('store_use') }}" method="post" id="useForm">
                         @csrf
                         <input type="hidden" value="{{$warranty_id}}" name="warranty_id">
                         <div class="py-10">
@@ -67,6 +67,8 @@
         </div>
         <!--end::Container-->
     </div>
+
+
 @endsection
 @section('custom_js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
@@ -84,8 +86,8 @@
                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
             },
             success: function (file,response) {
-                alert(response.id);
-                $('form').append('<input type="hidden" name="document_id[]" value="' + response.id + '">')
+                // alert(response.id);
+                $('form').append('<input type="hidden" name="document_id[]" value="' + response.name + '">')
                 uploadedDocumentMap[file.name] = response.name
             },
             removedfile: function (file) {
@@ -96,7 +98,7 @@
                 } else {
                     name = uploadedDocumentMap[file.name]
                 }
-                $('form').find('input[name="document[]"][value="' + name + '"]').remove()
+                $('form').find('input[name="document_id[]"][value="' + name + '"]').remove()
             },
             init: function () {
                         @if(isset($project) && $project->document)
@@ -106,7 +108,7 @@
                     var file = files[i]
                     this.options.addedfile.call(this, file)
                     file.previewElement.classList.add('dz-complete')
-                    $('form').append('<input type="hidden" name="document[]" value="' + file.file_name + '">')
+                    $('form').append('<input type="hidden" name="document_id[]" value="' + file.file_name + '">')
                 }
                 @endif
             }
