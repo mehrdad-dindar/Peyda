@@ -32,7 +32,13 @@
 									<span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
 									<!--end::Separator-->
 									<!--begin::Description-->
-									<small class="text-muted fs-7 fw-bold my-1 ms-1">#XRS-45670</small>
+									<small class="text-muted fs-7 fw-bold my-1 ms-1">
+                                        @if($user->status==0)
+                                            <div class="col-lg-8 d-flex align-items-center">
+                                                <span class="badge badge-danger">جهت استفاده از خدمات، پروفایل کاربری خود را تکمیل کنید.</span>
+
+                                            </div>
+                                        @endif</small>
 									<!--end::Description--></h1>
 									<!--end::Title-->
 								</div>
