@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Wallet;
-
+use App\Http\Controllers\WalletHistoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -11,8 +11,10 @@ class WalletController extends Controller
 {
     public function index()
     {
+        $history = (new WalletHistoryController())->history(1);
         return view('profile.wallet')->with([
             'user'      =>      auth()->user(),
+            'history'   =>      $history,
         ]);
     }
 
@@ -33,6 +35,5 @@ class WalletController extends Controller
             'value' => Crypt::encryptString($new_wallet_val),
             'title' => $request['title'],
         ]);
-
     }
 }
