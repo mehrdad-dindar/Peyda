@@ -18,10 +18,14 @@ class CreateWalletHistoriesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->string('value')->default("0");
+            $table->string('transaction_id');
+            $table->boolean('status');
             $table->timestamps();
         });
         Schema::table('wallet_histories', function (Blueprint $table){
-            $table->foreign('user_id');
+            $table->foreign('user_id')
+                ->on('users')
+                ->references('id');
         });
     }
 
