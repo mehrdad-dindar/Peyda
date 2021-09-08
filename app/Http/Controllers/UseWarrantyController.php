@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MobileImage;
 use App\Models\WarrantyUse;
 use Illuminate\Http\Request;
+use Redirect;
 
 class UseWarrantyController extends Controller
 {
@@ -25,10 +26,19 @@ class UseWarrantyController extends Controller
         $images=$request->input('document_id');
 
         $imageList=$prefix='';
-        foreach ($images as $row){
-            $image=MobileImage::query()->where('URL','=',$row)->first();
 
-            $imageList .= $prefix  . $image->id ;
+        if(is_array($images)) {
+            foreach ($images as $row) {
+                $image = MobileImage::query()->where('URL', '=', $row)->first();
+
+                $imageList .= $prefix . $image->id;
+                $prefix = ',';
+            }
+        }
+        else{
+            $images = MobileImage::query()->where('URL', '=', $images)->first();
+
+            $imageList .= $prefix . $images->id;
             $prefix = ',';
         }
         $warranty=$request->get('warranty_id');
@@ -40,11 +50,22 @@ class UseWarrantyController extends Controller
             'title'=>$title
 
         ]);
-
+        $msg=null;
         if($warrantyUse!=null){
-            return redirect()->back()->with('msg','درخواست شما با موفقیت ثبت شد!');
+//            return redirect()->back()->withErrors(['success'=>'درخواست شما با موفقیت ثبت شد!']);
+            return view('profile.warranty.use',['user'=>auth()->user(),
+                'success'=> 'your message,here',
+                'notification'=>self::getNotification(auth()->user()->id),
+                'warranty_id'=>$warranty]);
+
         }else{
-            return redirect()->back()->with('msg','متاسفانه درخواست شما ثبت نشد!');
+//            return redirect()->back()->withErrors(['error'=>'متاسفانه درخواست شما ثبت نشد!']);
+
+            return view('profile.warranty.use',['user'=>auth()->user(),
+                'error'=> 'no',
+                'notification'=>self::getNotification(auth()->user()->id),
+                'warranty_id'=>$warranty]);
+
         }
 
 //        return view('profile.warranty.use',['user'=>auth()->user(),'notification'=>self::getNotification(auth()->user()->id)]);

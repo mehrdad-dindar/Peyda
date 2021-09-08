@@ -69,8 +69,20 @@
     </div>
 
 
+
+
 @endsection
 @section('custom_js')
+
+    @if (isset($success))
+        <script>
+            toastr.success("پیام", 'درخواست شما با موفقیت ثبت شد!');
+        </script>
+    @elseif(isset($error))
+        <script>
+            toastr.error("پیام", 'متاسفانه درخواست شما ثبت نشد!');
+        </script>
+    @endif
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
 
     <script src="{{URL::asset('profile/js/custom/documentation/forms/dropzonejs.js')}}"></script>
