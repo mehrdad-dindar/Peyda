@@ -9,7 +9,7 @@
     <!--begin::Container-->
     <div id="kt_content_container" class="container">
         <!--begin::Layout-->
-        <form action="{{route('increase')}}" method="post" class="d-flex flex-column flex-lg-row">
+        <form action="{{route('increase',auth()->id())}}" method="get" class="d-flex flex-column flex-lg-row">
             @csrf
             <!--begin::Content-->
             <div class="flex-lg-row-fluid mb-10 mb-lg-0 me-lg-7 me-xl-10">

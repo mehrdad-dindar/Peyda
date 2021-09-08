@@ -28,7 +28,8 @@ Route::prefix('panel')->group(function () {
     Route::post('/save_profile_info', 'Profile\ProfileController@save_profile')->name('save_profile_info');
     Route::prefix('wallet')->group(function (){
         Route::get('/', 'WalletController@index')->name('wallet');
-        Route::post('/increase_inventory', 'WalletController@increase')->name('increase');
+        Route::get('/increase_inventory/{user_id}', 'WalletController@purchase')->name('increase');
+        Route::get('/increase_inventory/result/{user_id}', 'WalletController@result')->name('walletPurchase.result');
     });
     Route::prefix('warranty')->group(function () {
         Route::prefix('mobile')->group(function () {
@@ -38,7 +39,6 @@ Route::prefix('panel')->group(function () {
             Route::get('/cart', 'MobileWarrantyController@cart')->name('cart');
             Route::get('/{invoice_id}/purchase', 'PaymentController@purchase')->name('purchase');
             Route::get('/{invoice_id}/result', 'PaymentController@result')->name('purchase.result');
-            /*Route::get('/');*/
         });
     });
 });

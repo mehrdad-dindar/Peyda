@@ -19,6 +19,8 @@ class CreateWalletHistoriesTable extends Migration
             $table->string('title');
             $table->string('value')->default("0");
             $table->string('transaction_id');
+            $table->text('invoice_details')->nullable();
+            $table->char('peyment_id',32)->index();
             $table->boolean('status');
             $table->timestamps();
         });
