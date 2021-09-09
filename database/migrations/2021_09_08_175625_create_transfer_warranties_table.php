@@ -16,9 +16,8 @@ class CreateTransferWarrantiesTable extends Migration
         Schema::create('transfer_warranties', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedBigInteger('sender_id');
-            $table->unsignedBigInteger('receiver_id');
+            $table->unsignedBigInteger('receiver_id')->nullable();
             $table->unsignedBigInteger('warranty_id');
-            $table->timestamp('expire_date');
             $table->foreign('warranty_id')
                 ->references('id')
                 ->on('mobile_warranties')

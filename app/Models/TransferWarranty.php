@@ -9,4 +9,5 @@ class TransferWarranty extends Model
 {
     use HasFactory;
     protected $table='transfer_warranties';
+    protected $fillable=['sender_id', 'receiver_id', 'warranty_id'];
 }

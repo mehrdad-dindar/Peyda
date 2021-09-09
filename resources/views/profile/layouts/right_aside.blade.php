@@ -70,8 +70,17 @@
                                 <span class="menu-title">انواع بیمه نامه</span>
                             </a>
                         </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ route('receive_create') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">دریافت بیمه نامه</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
+
             </div>
             <!--end::Menu-->
         </div>

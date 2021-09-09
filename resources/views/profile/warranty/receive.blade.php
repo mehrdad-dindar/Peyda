@@ -1,5 +1,5 @@
 @extends('profile.layouts.master')
-@section('title','انتقال فراگارانتی')
+@section('title','دریافت فراگارانتی')
 @section('custom_head')
 @endsection
 @section('content')
@@ -11,9 +11,8 @@
                 <!--begin::Card Body-->
                 <div class="card-body fs-6 py-15 px-10 py-lg-15 px-lg-15 text-gray-700">
                     <!--begin::Section-->
-                    <form action="{{route('transfer_store')}}" method="post" id="transferForm">
+                    <form action="{{route('receive_store')}}" method="post" id="transferForm">
                         @csrf
-                        <input type="hidden" value="{{$warranty_id}}" name="warranty_id">
                         <div class="py-10">
                             <!--begin::Heading-->
                             <h1 class="anchor fw-bolder mb-5" id="custom-form-control">
@@ -23,19 +22,15 @@
                             <div class="py-5">
                                 <div class="rounded border p-10">
                                     <div class="mb-10">
-
-                                        @if(isset($transfer_code))
-                                            <h3 class="anchor fw-bolder mb-5">{{$transfer_code}}</h3>
-                                        @endif
+                                        <label for="transfer_code" class="required form-label">کد انتقال</label>
+                                        <input type="text" class="form-control form-control-solid" placeholder="مثال: T_I91..." name="transfer_code"/>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="py-5">
                                 <div class="mb-10">
-                                    @if(!isset($transfer_code))
-                                    <button style="font-family: IRANSans;" type="submit" class="btn btn-success">تولید کد</button>
-                                        @endif
+                                    <button style="font-family: IRANSans;" type="submit" class="btn btn-success">ثبت</button>
                                 </div>
                             </div>
 
@@ -59,7 +54,7 @@
 
     @if (isset($success))
         <script>
-            toastr.success("ثبت درخواست", 'برای انتقال فراگارانتی، این کد را در اختیار کاربر دوم قرار دهید.');
+            toastr.success("ثبت درخواست", 'فراگارانتی با موفقیت دریافت شد.');
         </script>
     @elseif(isset($error))
         <script>
