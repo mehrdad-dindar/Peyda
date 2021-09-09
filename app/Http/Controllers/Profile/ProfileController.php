@@ -42,11 +42,13 @@ class ProfileController extends Controller
     {
         $notif=self::getNotification(auth()->user()->id);
 
-        $flag=0;
+        $flag=1;
         $cities = city::all();
         $phone_brands = Phone_brand::all();
         $phone_models = Phone_model::all();
-        if(auth()->user()->status==1){
+        if(auth()->user()->status==0){
+            $flag=0;
+        }else{
             $flag=1;
         }
         return view('profile.edit_profile')
@@ -75,6 +77,7 @@ class ProfileController extends Controller
             ->timestamp($request['birthday_tmp']/1000)
             ->formatGregorian('Y-m-d 09:i:s');
         $user = User::findOrFail($request['id']);
+
         if ($request->file('avatar')) {
             $avatar = $request->file('avatar');
             $avatar_name = time() . $avatar->getClientOriginalName();
@@ -84,9 +87,11 @@ class ProfileController extends Controller
         if ($request->file('melli_card')) {
             $melli_card = $request->file('melli_card');
             $melli_card_name = time() . $melli_card->getClientOriginalName();
-            $melli_card->move($_SERVER["DOCUMENT_ROOT"] . '/melli_cards/', $melli_card_name);
+            $melli_card->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/melli_cards/', $melli_card_name);
             $user->melli_card = $melli_card_name;
         }
+
+        //dd($request->all());
         $user->f_name = $request['f_name'];
         $user->l_name = $request['l_name'];
         $user->birthday = $v;
@@ -95,11 +100,7 @@ class ProfileController extends Controller
         $user->city_id = $request['city_id'];
         $user->address = $request['address'];
         $user->postal_code = $request['postal_code'];
-        $user->phone_brand_id = $request['phone_brand_id'];
         $user->phone_model_id = $request['phone_model_id'];
-        $user->bank_shaba = $request['bank_shaba'];
-        $user->bank_card = $request['bank_card'];
-        $user->bank_id = $request['bank_id'];
         $user->save();
         return back();
 

@@ -162,9 +162,9 @@
                     </div>
             @endif
             <!--begin::Form-->
-                <form id="kt_account_profile_details_form" class="form"
-                      @if($flag==1) action="{{ route('save_profile_info') }}" method="post" @endif enctype="multipart/form-data">
-                    @if($flag==1)
+                <form id="kt_account_profile_details_form" class="form" method="post"
+                      @if($flag!=1) action="{{ route('save_profile_info') }}"  @endif enctype="multipart/form-data">
+                    @if($flag!=1)
                         @csrf
                     @endif
                     <input type="hidden" name="id" value="{{ $user->id }}">
@@ -265,9 +265,8 @@
                             <div class="col-lg-6 fv-row">
                                 {{--<input type="text" class="example1" />--}}
                                 <input type="hidden" value="{{$v = Verta::instance($user->birthday)}}">
-                                <input class="disabled-input form-control form-control-solid" id="birthday"
+                                <input class="form-control form-control-solid" id="birthday"
                                        value="@if($user->birthday != null){{ $v->format('Y-n-j') }}@endif"
-                                       @if($flag==1) disabled @endif
                                        placeholder="--/--/----"/>
                                 <input type="hidden" name="birthday_tmp" id="birthday_tmp"/>
                             </div>
