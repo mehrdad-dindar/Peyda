@@ -131,7 +131,7 @@
                                                 <!--end::Info-->
                                                 <!--begin::User-->
                                                 <div class="symbol symbol-circle symbol-25px" data-bs-toggle="tooltip" data-bs-boundary="window" data-bs-placement="top" title="Nina Nilson">
-                                                    <img src="@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif" alt="img" />
+                                                    <img src="@if($user->avatar){{URL::asset('uploads/avatars').'/'.$user->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif" alt="img" />
                                                 </div>
                                                 <!--end::User-->
                                             </div>
