@@ -86,7 +86,7 @@
                         <div  class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px" id="kt_activities_toggle">
 
                             @if(sizeof($notification)>0)
-                                <span class="fa-stack fa-5x has-badge" data-count="{{sizeof($notification)}}">
+                                <span class="fa-stack fa-5x has-badge" data-count="{{\App\Helpers\Helpers::toPersianNumOnly(sizeof($notification))}}">
                                   <i class="fa fa-circle fa-stack-2x"></i>
                                   <i class="fa fa-bell fa-stack-1x fa-inverse"></i>
                                 </span>
