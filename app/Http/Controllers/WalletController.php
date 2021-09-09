@@ -2,146 +2,179 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Wallet;
 use App\Http\Controllers\WalletHistoryController;
+use App\Models\Wallet;
 use App\Models\Wallet_history;
+use App\Models\WalletTransaction;
 use Auth;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Shetabit\Multipay\Exceptions\PurchaseFailedException;
 use Shetabit\Multipay\Exceptions\InvalidPaymentException;
 use Shetabit\Multipay\Invoice;
 use Shetabit\Payment\Facade\Payment;
-use SoapFault;
 
 class WalletController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
+
     public function index()
     {
-        $history = (new WalletHistoryController())->history(1);
+
+        $user_id = Auth::user()->id;
+        $history = (new WalletHistoryController())->history($user_id);
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         return view('profile.wallet')->with([
             'user' => auth()->user(),
             'history' => $history,
+            'wallet' => $wallet
         ]);
     }
 
-    public function increase(Request $request)
+    public function purchase(Request $request)
     {
-        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
-        $wallet_val = $wallet->value;
-        $new_wallet_val = 0;
-        if ($wallet_val != "0") {
-            $new_wallet_val = (int)Crypt::decryptString($wallet->value) + (int)$request['price'];
-        } else {
-            $new_wallet_val = (int)$request['price'];
-        }
-
-        $new_wallet_val = Crypt::encryptString($new_wallet_val);
-        /*$wallet->value = Crypt::encryptString($new_wallet_val);*/
-        Wallet::update([
-            'value' => Crypt::encryptString($new_wallet_val),
-            'title' => $request['title'],
-        ]);
-    }
-
-    public function purchase(Request $request, $user_id)
-    {
-        if ($user_id != Auth::id())
-            return redirect()->route('wallet');
         try {
+            $wallethistory = new Wallet_history();
+            $wallethistory->user_id = Auth::user()->id;
+            $wallethistory->value = Crypt::encryptString($request->price);
+            $wallethistory->title = $request['title'];
+            $wallethistory->save();
+
             $title = $request->title;
             $price = (int)$request->price;
             $user = Auth::user();
+            $history = (new WalletHistoryController())->history($user->id);
 
             $invoice = new Invoice();
             $invoice->amount($price);
 
             $paymentId = md5(uniqid());
-            $transaction = $user->wallet_history()->create([
+            $transaction = $user->wallettransactions()->create([
                 'user_id' => $user->id,
-                'title' => $title,
                 'paid' => $invoice->getAmount(),
                 'invoice_details' => $invoice,
                 'peyment_id' => $paymentId,
             ]);
 
-            $callbackUrl = route('walletPurchase.result', [$user_id, 'peyment_id' => $paymentId]);
-            $payment = Wallet_history::callbackUrl($callbackUrl);
+            $callbackUrl = route('walletPurchase.result', [$user->id, 'peyment_id' => $paymentId]);
+            $payment = Payment::callbackUrl($callbackUrl);
 
             $payment->purchase($invoice, function ($driver, $transactionid) use ($transaction) {
                 $transaction->transaction_id = $transactionid;
                 $transaction->save();
             });
+            /*dd($payment->pay()->render());*/
             return $payment->pay()->render();
-        } catch (PurchaseFailedException | Exception | SoapFault $e) {
+        } catch (PurchaseFailedException | Exception | \SoapFault $e) {
             $transaction->transaction_result = $e;
-            $transaction->status = Transaction::STATUS_FAILED;
+            $transaction->status = WalletTransaction::STATUS_FAILED;
             $transaction->save();
+
+
+            return view('profile.wallet')->with([
+                'user' => auth()->user(),
+                'history' => $history,
+                'status' => 'failed'
+            ]);
         }
     }
 
-    public function result(Request $request, $invoice_id)
+    public function status_failed()
     {
+        $user_id = Auth::user()->id;
+        $history = (new WalletHistoryController())->history($user_id);
+        return view('profile.wallet')->with([
+            'user' => auth()->user(),
+            'history' => $history,
+            'status' => 'failed'
+        ]);
+    }
+
+    public function result(Request $request)
+    {
+        $user = Auth::user();
+        $history = (new WalletHistoryController())->history($user->id);
+        $wallet_history = Wallet_history::where('user_id', '=', $user->id)->orderBy('updated_at', 'desc')->first();
+
+
         if ($request->missing('peyment_id')) {
-            return view('purchase_result')->with('status', 'failed');
+            $this->status_failed();
         }
 
-        $transaction = Transaction::where('peyment_id', $request->peyment_id)->first();
+        $transaction = WalletTransaction::where('peyment_id', $request->peyment_id)->first();
+
         if (empty($transaction)) {
-            return view('purchase_result')->with('status', 'failed');
+            $this->status_failed();
         }
 
         if ($transaction->user_id <> Auth::id()) {
-            return view('purchase_result')->with('status', 'failed');
+            $this->status_failed();
         }
 
-        if ($transaction->mobile_warranty_id <> $invoice_id) {
-            return view('purchase_result')->with('status', 'failed');
-        }
-        if ($transaction->status <> Transaction::STATUS_PENDING) {
-            return view('purchase_result')->with('status', 'failed');
+        if ($transaction->status <> WalletTransaction::STATUS_PENDING) {
+            $this->status_failed();
         }
 
         try {
-            $cart_detail = Mobile_warranty::find($invoice_id);
-            $price_range = Commitment_ceiling::find($cart_detail->price_range)->price;
-
-            $fire_addition_price = 0;
-            if ($cart_detail->addition_fire_commitment_id != 0) {
-                $fire_addition_price = Fire_commitment_ceiling::find($cart_detail->addition_fire_commitment_id)->price;
-            }
-            $amount = $fire_addition_price + $price_range;
-            $receipt = Payment::amount($amount)
+            $receipt = Payment::amount((int)Crypt::decryptString($wallet_history->value))
                 ->transactionId($request->Authority)
                 ->verify();
-
             $transaction->transaction_result = $receipt;
-            $transaction->status = Transaction::STATUS_SUCCESS;
+            $transaction->status = WalletTransaction::STATUS_SUCCESS;
             $transaction->save();
 
-            return view('purchase_result')
+            $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+            if ($wallet->value != "0") {
+                $new_wallet_val = (int)Crypt::decryptString($wallet->value) + (int)Crypt::decryptString($wallet_history->value);
+            } else {
+                $new_wallet_val = (int)Crypt::decryptString($wallet_history->value);
+            }
+
+            $new_wallet_val = Crypt::encryptString($new_wallet_val);
+            Wallet::update([
+                'value' => Crypt::encryptString($new_wallet_val),
+            ]);
+            Wallet_history::update([
+                'transaction_id' => $transaction->id,
+                'status' => true
+            ]);
+
+
+            return view('profile.wallet')
                 ->with([
-                    'status' => 1,
-                    'reference_id' => $receipt->getRefrenceId(),
-                    'invoice_id' => $invoice_id
+                    'message' => "عملیات پرداخت با موفقیت انجام شد.",
+                    'code' => 100,
+                    'user' => auth()->user(),
+                    'history' => $history,
+                    'wallet' => $wallet,
                 ]);
-        } catch (Exception | InvalidPaymentException $e) {
+        } catch (Exception | \SoapFault | InvalidPaymentException $e) {
+
             if ($e->getCode() < 0) {
-                $transaction->status = Transaction::STATUS_FAILED;
+                $transaction->status = WalletTransaction::STATUS_FAILED;
                 $transaction->transaction_result = [
                     'message' => $e->getMessage(),
                     'code' => $e->getCode()
                 ];
                 $transaction->save();
 
+                $wallet_history->transaction_id = $transaction->id;
+                $wallet_history->update();
+
                 /*
                  * For manage error use this code ****
                  * */
-                /*return view('purchase_result')
+                return view('profile.wallet')
                     ->with([
                         'message' => $e->getMessage(),
-                        'code' => $e->getCode()
-                    ]);*/
+                        'code' => $e->getCode(),
+                        'user' => auth()->user(),
+                        'history' => $history,
+                    ]);
             }
         }
 

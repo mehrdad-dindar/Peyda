@@ -16,12 +16,12 @@ class CreateWalletHistoriesTable extends Migration
         Schema::create('wallet_histories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('title');
-            $table->string('value')->default("0");
-            $table->string('transaction_id');
+            $table->string('title')->nullable();
+            $table->text('value')->default("0");
+            $table->string('transaction_id')->default("0");
             $table->text('invoice_details')->nullable();
-            $table->char('peyment_id',32)->index();
-            $table->boolean('status');
+            $table->char('peyment_id',32)->index()->nullable();
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
         Schema::table('wallet_histories', function (Blueprint $table){

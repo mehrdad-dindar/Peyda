@@ -79,6 +79,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Transaction::class,'user_id');
     }
+    public function wallettransactions()
+    {
+        return $this->hasMany(WalletTransaction::class,'user_id');
+    }
 
     public function mobile_warranties()
     {

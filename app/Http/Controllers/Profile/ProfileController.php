@@ -7,6 +7,7 @@ use App\Models\city;
 use App\Models\Phone_brand;
 use App\Models\Phone_model;
 use App\Models\User;
+use App\Models\Wallet;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -15,29 +16,40 @@ class ProfileController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth','verified']);
+        $this->middleware(['auth', 'verified']);
     }
 
     public function index()
     {
-        return view('profile.index')->with('user',auth()->user());
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        return view('profile.index')->with([
+            'user' => auth()->user(),
+            'wallet' => $wallet
+        ]);
     }
 
     public function profile()
     {
-        return view('profile.profile')
-            ->with('user',auth()->user());
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        return view('profile.profile')->with([
+            'user' => auth()->user(),
+            'wallet' => $wallet
+        ]);
+
     }
+
     public function edit_profile()
     {
         $cities = city::all();
         $phone_brands = Phone_brand::all();
         $phone_models = Phone_model::all();
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         return view('profile.edit_profile')
-            ->with('user',auth()->user())
-            ->with('cities',$cities)
-            ->with('phone_brands',$phone_brands)
-            ->with('phone_models',$phone_models);
+            ->with('user', auth()->user())
+            ->with('cities', $cities)
+            ->with('phone_brands', $phone_brands)
+            ->with('phone_models', $phone_models)
+            ->with('wallet' , $wallet);
     }
 
     public function validator(Request $request)
@@ -49,12 +61,13 @@ class ProfileController extends Controller
         ]);
 
     }
+
     protected function save_profile(Request $request)
     {
         /*$this->validator();*/
         /*dd($request['birthday_tmp']);*/
         $v = verta()
-            ->timestamp($request['birthday_tmp']/1000)
+            ->timestamp($request['birthday_tmp'] / 1000)
             ->formatGregorian('Y-m-d 09:i:s');
         $user = User::findOrFail($request['id']);
         if ($request->file('avatar')) {

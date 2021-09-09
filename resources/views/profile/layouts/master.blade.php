@@ -1861,6 +1861,10 @@
 		<!--begin::Global Javascript Bundle-->
 		<script src="{{ URL::asset('profile/plugins/global/plugins.bundle.js')}}"></script>
 		<script src="{{ URL::asset('profile/js/scripts.bundle.js')}}"></script>
+        <script src="{{ URL::asset('js/jquery.number.min.js')}}"></script>
+        <script>
+            $('.last-price').number(true,0);
+        </script>
 		<!--end::Global Javascript Bundle-->
         <!--begin::Page Custom Javascript(used by this page)-->
         @yield('custom_js')

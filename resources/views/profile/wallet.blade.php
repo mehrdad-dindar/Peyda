@@ -1,5 +1,5 @@
 @extends('profile.layouts.master')
-@section('title','پروفایل کاربری')
+@section('title','افزایش اعتبار کیف پول')
 @section('custom_head')
     <!--begin::Page Vendor Stylesheets(used by this page)-->
     <link href="{{ URL::asset('profile/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
@@ -9,7 +9,7 @@
     <!--begin::Container-->
     <div id="kt_content_container" class="container">
         <!--begin::Layout-->
-        <form action="{{route('increase',auth()->id())}}" method="get" class="d-flex flex-column flex-lg-row">
+        <form action="{{route('increase')}}" method="post" class="d-flex flex-column flex-lg-row">
             @csrf
             <!--begin::Content-->
             <div class="flex-lg-row-fluid mb-10 mb-lg-0 me-lg-7 me-xl-10">
@@ -30,7 +30,7 @@
                                  data-bs-original-title="نمایش مجموع موجودی کیف پول">
                                 <!--begin::Date-->
                                 <div class="fs-6 fw-bolder text-gray-700 text-nowrap">موجودی : <span
-                                        class="badge badge-light-info fs-6">0 تومان</span></div>
+                                        class="badge badge-light-info fs-6"><span class="last-price">{{Crypt::decryptString($wallet->value)}}</span> تومان</span></div>
                                 <!--end::Date-->
                             </div>
                         </div>
@@ -57,12 +57,12 @@
                                     <tr class="border-bottom border-bottom-dashed" data-kt-element="item">
                                         <td class="pe-7">
                                             <input type="text" class="form-control form-control-solid mb-2" name="title"
-                                                   placeholder="عنوان برای این پرداخت"/>
+                                                   placeholder="عنوان برای این پرداخت" required/>
                                         </td>
                                         <td>
                                             <input type="text" id="price"
                                                    class="form-control form-control-solid text-end" name="price"
-                                                   placeholder="0" value="0" data-kt-element="price"/>
+                                                   placeholder="0" required data-kt-element="price"/>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -106,8 +106,8 @@
                             <thead>
                             <!--begin::Table row-->
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                <th class="min-w-125px">عنوان</th>
                                 <th class="min-w-125px">شماره تراکنش</th>
+                                <th class="min-w-125px">عنوان</th>
                                 <th class="min-w-125px">مبلغ</th>
                                 <th class="min-w-125px">وضعیت</th>
                                 <th class="min-w-125px">زمان تراکنش</th>
@@ -119,18 +119,18 @@
                             <tbody class="fw-bold text-gray-600">
                             @foreach($history as $i)
                                 <tr>
-                                    <!--begin::Title=-->
-                                    <td>
-                                        <p class="text-gray-800 text-hover-primary mb-1">{{$i->title}}</p>
-                                    </td>
-                                    <!--end::Title=-->
                                     <!--begin::Transaction Id=-->
                                     <td>
                                         {{$i->transaction_id}}
                                     </td>
                                     <!--end::Transaction Id=-->
+                                    <!--begin::Title=-->
+                                    <td>
+                                        <p class="text-gray-800 text-hover-primary mb-1">{{$i->title}}</p>
+                                    </td>
+                                    <!--end::Title=-->
                                     <!--begin::Value=-->
-                                    <td class="@if($i->value < 0) text-danger @else text-success @endif">{{$i->value}} تومان</td>
+                                    <td class="@if($i->value < 0) text-danger @else text-success @endif"><span class="last-price">{{Crypt::decryptString($i->value)}}</span> تومان</td>
                                     <!--end::Value=-->
                                     <!--begin::Payment method=-->
                                     <td>
@@ -193,11 +193,53 @@
     <!--end::Container-->
 @endsection
 @section('custom_js')
-    <script src="{{ URL::asset('js/jquery.number.min.js')}}"></script>
     <script>
         $('#price').keyup(function () {
             var ccprice = $('#price').val();
             $('#total-price').text(ccprice).number(true, 0);
         });
     </script>
+    @if(isset($message) && $code != 100)
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        toastr.error("{{$message}}", "خطا");
+    </script>
+    @elseif(isset($message) && $code == 100)
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        toastr.success("{{$message}}", "پرداخت موفق");
+    </script>
+    @endif
 @endsection
