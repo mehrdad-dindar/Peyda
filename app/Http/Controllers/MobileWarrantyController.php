@@ -99,16 +99,7 @@ class MobileWarrantyController extends Controller
         }*/
 
 
-        function RandomString()
-        {
-            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            $randstring = '';
-            for ($i = 0; $i < 10; $i++) {
-                $randstring = $characters[rand(0, strlen($characters)-1)];
-            }
-            return $randstring;
-        }
-        $activation_code = "P_".RandomString().time();
+        $activation_code = "P_".self::RandomString().time();
         /*$expiry_date = date('Y-m-d H:i:s',strtotime('+1 years'));*/
 
 

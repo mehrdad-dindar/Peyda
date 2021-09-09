@@ -427,7 +427,7 @@
                                                     </label>
                                                     <!--end::Option-->
                                                     <!--begin::Option-->
-                                                    <label
+                                                    <label @if(sizeof($warranties)>0) onclick="window.location.href='mobile/transfer_faraguaranty/{{$row->id}}'" @endif
                                                         class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6">
                                                         <!--begin::Input-->
                                                         <input class="btn-check" type="radio" name="warranty_type"

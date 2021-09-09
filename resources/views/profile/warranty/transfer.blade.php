@@ -1,5 +1,5 @@
 @extends('profile.layouts.master')
-@section('title','استفاده از فراگارانتی')
+@section('title','انتقال فراگارانتی')
 @section('custom_head')
 @endsection
 @section('content')
@@ -11,53 +11,34 @@
                 <!--begin::Card Body-->
                 <div class="card-body fs-6 py-15 px-10 py-lg-15 px-lg-15 text-gray-700">
                     <!--begin::Section-->
-                    <form action="{{ route('store_use') }}" method="post" id="useForm">
+                    <form action="{{route('transfer_store')}}" method="post" id="transferForm">
                         @csrf
                         <input type="hidden" value="{{$warranty_id}}" name="warranty_id">
                         <div class="py-10">
-                        <!--begin::Heading-->
-                        <h1 class="anchor fw-bolder mb-5" id="custom-form-control">
-                            <a href="#custom-form-control"></a>استفاده از فراگارانتی</h1>
-                        <!--end::Heading-->
-                        <!--begin::Block-->
-                        <div class="py-5">
-                            <div class="rounded border p-10">
-                                <div class="mb-10">
-                                    <label class="form-label">عنوان*</label>
-                                    <input type="text" name="title" class="form-control" placeholder="شکستن صفحه" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="py-5">
-                            <div class="rounded border p-10">
-                                <div class="mb-10">
-                                    <label class="form-label">توضیحات</label>
-                                    <textarea name="descriptions" class="form-control" placeholder="شکستن اسکرین، خطوط کناره راست و..." ></textarea>
-                                </div>
-                            </div>
-                        </div>
+                            <!--begin::Heading-->
+                            <h1 class="anchor fw-bolder mb-5" id="custom-form-control">
+                                <a href="#custom-form-control"></a>کد انتقال</h1>
+                            <!--end::Heading-->
+                            <!--begin::Block-->
+                            <div class="py-5">
+                                <div class="rounded border p-10">
+                                    <div class="mb-10">
 
-                        <div class="py-5">
-                            <div class="rounded border p-10">
-                                    {{-- Name/Description fields, irrelevant for this article --}}
-
-                                <div class="form-group">
-                                    <label for="document">Documents</label>
-                                    <div class="needsclick dropzone" id="document-dropzone">
-
+                                        @if(isset($transfer_code))
+                                            <h3 class="anchor fw-bolder mb-5">{{$transfer_code}}</h3>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="py-5">
-                            <div class="mb-10">
-                                <button type="submit" class="btn btn-success">ثبت</button>
+                            <div class="py-5">
+                                <div class="mb-10">
+                                    <button style="font-family: IRANSans;" type="submit" class="btn btn-success">تولید کد</button>
+                                </div>
                             </div>
-                        </div>
 
-                        <!--end::Block-->
-                    </div>
+                            <!--end::Block-->
+                        </div>
                     </form>
                     <!--end::Section-->
                 </div>
@@ -76,11 +57,11 @@
 
     @if (isset($success))
         <script>
-            toastr.success("پیام", 'درخواست شما با موفقیت ثبت شد!');
+            toastr.success("ثبت درخواست", 'برای انتقال فراگارانتی، این کد را در اختیار کاربر دوم قرار دهید.');
         </script>
     @elseif(isset($error))
         <script>
-            toastr.error("پیام", 'متاسفانه درخواست شما ثبت نشد!');
+            toastr.error("خطا", 'متاسفانه درخواست شما ثبت نشد!');
         </script>
     @endif
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
@@ -113,9 +94,9 @@
                 $('form').find('input[name="document_id[]"][value="' + name + '"]').remove()
             },
             init: function () {
-                        @if(isset($project) && $project->document)
+                @if(isset($project) && $project->document)
                 var files =
-                {!! json_encode($project->document) !!}
+                    {!! json_encode($project->document) !!}
                     for (var i in files) {
                     var file = files[i]
                     this.options.addedfile.call(this, file)

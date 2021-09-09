@@ -33,6 +33,8 @@ Route::prefix('panel')->group(function () {
         Route::prefix('mobile')->group(function () {
             Route::get('/', 'MobileWarrantyController@bimeh_all')->name('bimeh_all');
             Route::get('/use_faraguaranty/{id}', 'UseWarrantyController@index')->name('bimeh_use');
+            Route::get('/transfer_faraguaranty/{id}', 'UseWarrantyController@transfer_create')->name('bimeh_transfer');
+            Route::post('/transfer_store', 'UseWarrantyController@transfer_store')->name('transfer_store');
             Route::post('/store_use', 'UseWarrantyController@store')->name('store_use');
             Route::post('projects/media', 'UseWarrantyController@storeMedia')
                 ->name('projects.storeMedia');

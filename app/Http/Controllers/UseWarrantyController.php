@@ -6,6 +6,7 @@ use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Mobile_warranty;
 use App\Models\MobileImage;
+use App\Models\TransferWarranty;
 use App\Models\WarrantyUse;
 use App\Models\Notification;
 use App\Models\NotificationUser;
@@ -29,6 +30,36 @@ class UseWarrantyController extends Controller
         }else{
             return redirect()->back();
         }
+    }
+
+    public function transfer_create($id)
+    {
+
+        return view('profile.warranty.transfer',
+                                                    ['user' => auth()->user(),                                                                                             'notification' => self::getNotification(auth()->user()->id),
+                                                     'warranty_id' => $id]);
+    }
+
+    public function transfer_store(Request $request)
+    {
+        $transfer_code = "T_".self::RandomString().time();
+
+        $warranty_id=$request->get('warranty_id');
+
+        $warranty_up=Mobile_warranty::query()->where('id','=',$warranty_id)->update([
+            'transfer_code'=>$transfer_code
+        ]);
+        if($warranty_up!=null){
+            $msg='success';
+        }else{
+            $msg='error';
+        }
+
+        return view('profile.warranty.transfer',
+                                                    ['user' => auth()->user(),
+                                                    $msg => 'done',
+                                                    'transfer_code'=>$transfer_code,                                                                                        'notification' => self::getNotification(auth()->user()->id),
+                                                    'warranty_id' => $warranty_id]);
     }
 
     public function store(Request $request)
