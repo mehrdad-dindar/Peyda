@@ -23,7 +23,7 @@
                                 <div class="rounded border p-10">
                                     <div class="mb-10">
                                         <label for="transfer_code" class="required form-label">کد انتقال</label>
-                                        <input type="text" class="form-control form-control-solid" placeholder="مثال: T_I91..." name="transfer_code"/>
+                                        <input type="text" class="form-control form-control-solid" name="transfer_code"/>
                                     </div>
                                 </div>
                             </div>
