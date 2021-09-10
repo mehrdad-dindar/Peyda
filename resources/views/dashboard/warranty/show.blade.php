@@ -16,8 +16,12 @@
                     display: none;
                 }
             </style>
-            <form action="{{ route('dashboard') }}/warranties/auth" method="post">
+            <form action="{{ route('dashboard') }}/warranties/admit" method="post">
                 @csrf
+
+                <input type="hidden" name="warranty_id" value="{{$warranty->id}}">
+                <input type="hidden" name="user_id" value="{{$warranty->u_id}}">
+
                 <div class="row">
                     <div class="col-12 box-margin">
                         <div class="card">

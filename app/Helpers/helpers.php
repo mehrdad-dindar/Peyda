@@ -9,7 +9,7 @@ class Helpers
 {
 
 
-    function imageInfo($id){
+    public static function imageInfo($id){
         $image=MobileImage::query()->find($id);
         return $image;
     }
@@ -22,7 +22,7 @@ class Helpers
         $items=array_filter($items);
         $all_items=[];
         foreach ($items as $item){
-            $imageInfo=$this->imageInfo($item);
+            $imageInfo=self::imageInfo($item);
             array_push($all_items,$imageInfo);
         }
 

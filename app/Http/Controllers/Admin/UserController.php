@@ -77,18 +77,18 @@ class UserController extends Controller
 
         if($notifUser==null) {
             $notification = Notification::create([
-                [
+
                     'body' => $descriptions,
                     'sender_id' => $admin_id,
                     'link' => $link,
                     'type' => 1,
                     'title' => 'احراز هویت'
-                ]
+
             ]);
 
             NotificationUser::create([
-                ['notification_id' => $notification->id],
-                ['receiver_id' => $user_id]
+                'notification_id' => $notification->id
+                ,'receiver_id' => $user_id
             ]);
         }else{
 

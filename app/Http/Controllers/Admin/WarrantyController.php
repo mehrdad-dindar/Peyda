@@ -8,6 +8,8 @@ use App\Models\Fire_commitment_ceiling;
 use App\Models\FlashMessage;
 use App\Models\Mobile_warranty;
 use App\Http\Controllers\Controller;
+use App\Models\Notification;
+use App\Models\NotificationUser;
 use App\Models\Phone_brand;
 use App\Models\Phone_model;
 use App\Models\User;
@@ -121,17 +123,57 @@ class WarrantyController extends Controller
             ->join('commitment_ceilings as cc','cc.id','=','mobile_warranties.price_range')
             ->join('fire_commitment_ceilings as fc','fc.id','=','mobile_warranties.addition_fire_commitment_id')
             ->where('mobile_warranties.id','=',$id)
-            ->first(['mobile_warranties.*','pm.name as pm_name','pb.name as pb_name','u.*','cc.price_range as cc_price','fc.addition_price as fc_price']);
+            ->first(['mobile_warranties.*','pm.name as pm_name','pb.name as pb_name',
+                'u.f_name','u.l_name','u.melli_code','u.id as u_id',
+                'cc.price_range as cc_price','fc.addition_price as fc_price']);
 
-
-        $images=Helpers::getImageFromDb($warranty->images);
 
         if($warranty!=null) {
 
+            $images=Helpers::getImageFromDb($warranty->images);
+
             return view('dashboard.warranty.show', ['warranty' => $warranty, 'images' => $images]);
         }else{
-            abort(404);
+            return abort(404);
         }
     }
 
+    public function admit(Request $request)
+    {
+        $status = $request->get('status');
+        $user_id = $request->get('user_id');
+        $warranty_id=$request->get('warranty_id');
+        if ($status == 1) {
+            $descriptions = 'بیمه نامه شما تایید شده است.';
+            Mobile_warranty::query()->where('id', '=', $warranty_id)->update([
+                'status' => 1
+            ]);
+        } else {
+            $descriptions = $request->get('descriptions');
+        }
+        $admin_id = auth()->user()->id;
+        $link = '/panel/warranty/mobile';
+
+
+        $notification = Notification::query()->create([
+
+                'body' => $descriptions,
+                'sender_id' => $admin_id,
+                'link' => $link,
+                'type' => 2,
+                'title' => 'بررسی بیمه نامه'
+
+        ]);
+
+        NotificationUser::query()->create([
+            'notification_id' => $notification->id,
+            'receiver_id' => $user_id
+        ]);
+
+
+
+        return redirect()->back()->with('error', 'تغییرات با موفقیت اعمال شد.');
     }
+
+
+}
