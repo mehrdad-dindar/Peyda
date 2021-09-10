@@ -63,7 +63,10 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/warranties', 'Admin\WarrantyController@index');
     Route::get('/warranties/create', 'Admin\WarrantyController@create');
     Route::get('/warranties/show/{id}', 'Admin\WarrantyController@show');
+    Route::get('/warranties/use', 'Admin\WarrantyController@useWarranty');
+    Route::get('/warranties/show/admit/{id}', 'Admin\WarrantyController@show_admit');
     Route::post('/warranties/admit', 'Admin\WarrantyController@admit');
+    Route::post('/warranties/admit/use', 'Admin\WarrantyController@admit_use');
     Route::post('/postajax', 'Admin\WarrantyController@store');
 
     Route::prefix('/settings')->group(function (){

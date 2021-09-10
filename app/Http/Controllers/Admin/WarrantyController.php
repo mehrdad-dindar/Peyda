@@ -13,6 +13,7 @@ use App\Models\NotificationUser;
 use App\Models\Phone_brand;
 use App\Models\Phone_model;
 use App\Models\User;
+use App\Models\WarrantyUse;
 use Illuminate\Http\Request;
 use Redirect;
 
@@ -175,5 +176,77 @@ class WarrantyController extends Controller
         return redirect()->back()->with('error', 'تغییرات با موفقیت اعمال شد.');
     }
 
+    public function useWarranty()
+    {
+        $uses=WarrantyUse::query()->join('mobile_warranties as mw','mw.id','=','warranty_uses.warranty_id')
+            ->join('phone_models as pm','pm.id','=','mw.phone_model_id')
+            ->join('commitment_ceilings as cc','cc.id','=','mw.price_range')
+            ->get(['warranty_uses.id as wu_id','mw.activation_code','pm.name as pm_name','cc.price_range','warranty_uses.title']);
+
+        return view('dashboard.warranty.uses',['uses'=>$uses]);
+    }
+
+    public function show_admit($id)
+    {
+        $warranty=WarrantyUse::query()->join('mobile_warranties as mw','mw.id','=','warranty_uses.warranty_id')
+            ->join('phone_models as pm','pm.id','=','mw.phone_model_id')
+            ->join('phone_brands as pb','pb.id','=','pm.brand_id')
+            ->join('users as u','u.id','=','mw.owner_id')
+            ->join('commitment_ceilings as cc','cc.id','=','mw.price_range')
+            ->join('fire_commitment_ceilings as fc','fc.id','=','mw.addition_fire_commitment_id')
+            ->where('mw.id','=',$id)
+            ->first(['warranty_uses.id as wu_id','warranty_uses.images as wu_images','warranty_uses.title as wu_title','warranty_uses.descriptions as wu_descriptions',
+                'warranty_uses.images as wu_images','warranty_uses.created_at as wu_date',
+                'mw.*','pm.name as pm_name','pb.name as pb_name',
+                'u.f_name','u.l_name','u.melli_code','u.id as u_id',
+                'cc.price_range as cc_price','fc.addition_price as fc_price']);
+
+
+        if($warranty!=null) {
+
+            $images=Helpers::getImageFromDb($warranty->wu_images);
+
+            return view('dashboard.warranty.show_use', ['use_warranty' => $warranty, 'images' => $images]);
+        }else{
+            return abort(404);
+        }
+    }
+
+    public function admit_use(Request $request)
+    {
+        $status = $request->get('status');
+        $user_id = $request->get('user_id');
+        $warranty_use_id=$request->get('warranty_use_id');
+        if ($status == 1) {
+            $percentage=$request->get('percentage');
+            $descriptions = 'استفاده از بیمه نامه شما تایید شده است.';
+            WarrantyUse::query()->where('id', '=', $warranty_use_id)->update([
+                'percentage' => $percentage
+            ]);
+        } else {
+            $descriptions = $request->get('descriptions');
+        }
+        $admin_id = auth()->user()->id;
+        $link = '/panel/warranty/mobile';
+
+        $notification = Notification::query()->create([
+
+            'body' => $descriptions,
+            'sender_id' => $admin_id,
+            'link' => $link,
+            'type' => 3,
+            'title' => 'بررسی استفاده از بیمه نامه'
+
+        ]);
+
+        NotificationUser::query()->create([
+            'notification_id' => $notification->id,
+            'receiver_id' => $user_id
+        ]);
+
+
+
+        return redirect()->back()->with('error', 'تغییرات با موفقیت اعمال شد.');
+    }
 
 }
