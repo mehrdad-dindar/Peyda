@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Helpers;
 use App\Models\Commitment_ceiling;
 use App\Models\Fire_commitment_ceiling;
 use App\Models\FlashMessage;
@@ -111,5 +112,26 @@ class WarrantyController extends Controller
         return $msg->value;
     }
 
+    public function show($id)
+    {
+
+        $warranty=Mobile_warranty::query()->join('phone_models as pm','pm.id','=','mobile_warranties.phone_model_id')
+            ->join('phone_brands as pb','pb.id','=','pm.brand_id')
+            ->join('users as u','u.id','=','mobile_warranties.owner_id')
+            ->join('commitment_ceilings as cc','cc.id','=','mobile_warranties.price_range')
+            ->join('fire_commitment_ceilings as fc','fc.id','=','mobile_warranties.addition_fire_commitment_id')
+            ->where('mobile_warranties.id','=',$id)
+            ->first(['mobile_warranties.*','pm.name as pm_name','pb.name as pb_name','u.*','cc.price_range as cc_price','fc.addition_price as fc_price']);
+
+
+        $images=Helpers::getImageFromDb($warranty->images);
+
+        if($warranty!=null) {
+
+            return view('dashboard.warranty.show', ['warranty' => $warranty, 'images' => $images]);
+        }else{
+            abort(404);
+        }
+    }
 
     }

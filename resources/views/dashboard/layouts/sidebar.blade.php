@@ -17,7 +17,7 @@
                         <a href="javascript:void(0)"><i class="zmdi zmdi-apps"></i> <span>بیمه نامه‌ها</span> <i class="fa fa-angle-left"></i></a>
                         <ul class="treeview-menu">
                             <li><a href="{{ route('dashboard') }}/warranties/create">ایجاد بیمه نامه جدید</a></li>
-                            <li><a href="{{ route('dashboard') }}/warranties">بیمه نامه‌های من</a></li>
+                            <li><a href="{{ route('dashboard') }}/warranties">بیمه نامه‌ها</a></li>
                             <li><a href="project-details.html">استفاده از بیمه نامه</a></li>
                             <li><a href="project-details.html">استعلام بیمه نامه</a></li>
                             <li><a href="calendar.html">انواع بیمه نامه‌ها</a></li>

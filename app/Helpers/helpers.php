@@ -1,11 +1,34 @@
 <?php
 namespace App\Helpers;
+use App\Models\MobileImage;
 use App\Models\NotificationUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Helpers
 {
+
+
+    function imageInfo($id){
+        $image=MobileImage::query()->find($id);
+        return $image;
+    }
+
+
+    public static function getImageFromDb($row)
+    {
+        $items=$row;
+        $items=explode(',',$items);
+        $items=array_filter($items);
+        $all_items=[];
+        foreach ($items as $item){
+            $imageInfo=$this->imageInfo($item);
+            array_push($all_items,$imageInfo);
+        }
+
+        return $all_items;
+    }
+
     public static function convertDateTimeToShamsi($created_at)
     {
 

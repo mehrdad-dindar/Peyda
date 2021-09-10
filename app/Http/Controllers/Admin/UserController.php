@@ -18,8 +18,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::query()->join('user_notifications as un', 'users.id','=','un.receiver_id')
-            ->join('notifications as n','n.id','=','un.notification_id')->groupBy('users.id')->get(['users.*','n.sender_id']);
+        $users = User::query()->leftJoin('user_notifications as un', 'users.id','=','un.receiver_id')
+            ->leftJoin('notifications as n','n.id','=','un.notification_id')->where([['users.id', '!=',auth()->user()->id],['users.user_type','!=','admin']])->groupBy('users.id')->get(['users.*','n.sender_id']);
 
         return view('dashboard.users.all', compact(['users']));
         //return $usersAuth;
