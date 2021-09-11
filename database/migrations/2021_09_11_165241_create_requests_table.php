@@ -13,12 +13,12 @@ class CreateRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('requests', function (Blueprint $table) {
+        Schema::create('user_requests', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('requestable_id');
             $table->string('requestable_type');
             $table->boolean('done')->default(0);
-            $table->integer('admin_id');
+            $table->unsignedBigInteger('admin_id')->nullable();
             $table->foreign('admin_id')
                 ->references('id')
                 ->on('users')

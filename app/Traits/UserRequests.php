@@ -1,13 +1,13 @@
 <?php
 namespace App\Traits;
-use App\Models\Request;
+use App\Models\UserRequest;
 
-trait Requests{
+trait UserRequests{
 
-    public function addRequest(Request $request)
+    public function addRequest(UserRequest $request)
     {
         $result=0;
-        $request=Request::query()->create([
+        $request=UserRequest::query()->create([
 
             'requestable_id'=>$request->getRequestableId(),
             'requestable_type'=>$request->getRequestableType(),

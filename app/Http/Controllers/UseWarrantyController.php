@@ -12,11 +12,14 @@ use App\Models\Notification;
 use App\Models\NotificationUser;
 use Illuminate\Http\Request;
 use Redirect;
+use App\Models\UserRequest;
 use App\Traits\UserMobileWarranties;
+use App\Traits\UserRequests;
 
 class UseWarrantyController extends Controller
 {
     use UserMobileWarranties;
+    use UserRequests;
 
     public function index($id)
     {
@@ -79,9 +82,22 @@ class UseWarrantyController extends Controller
                 'receiver_id'=> auth()->user()->id
             ]);
 
+            $requestable=new UserRequest();
+            $requestable->setRequestableId($warrantyUse->id);
+            $requestable->setRequestableType('App\Models\WarrantyUse');
+
+            $addReq=$this->addRequest($requestable);
+
+            if($addReq==1){
+                $msg='success';
+            }else{
+                $msg='error';
+            }
+
+
 //            return redirect()->back()->withErrors(['success'=>'درخواست شما با موفقیت ثبت شد!']);
             return view('profile.bimeh_all', [
-                'success' => 'your message,here',
+                $msg => 'msg',
                 'warranties' => $this->getWarranties()]);
 
         } else {

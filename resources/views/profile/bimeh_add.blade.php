@@ -187,7 +187,7 @@
                             <form class="form w-lg-500px mx-auto" novalidate="novalidate"
                                   id="kt_stepper_add_mobile_warranty_form" method="POST" action="{{route('save')}}">
                                 @csrf
-                                <input type="hidden" name="owner_id" value="{{ $user->id }}">
+                                <input type="hidden" name="owner_id" value="{{ auth()->user()->id }}">
                                 <!--begin::Group-->
                                 <div class="mb-5">
                                     <!--begin::Step 1-->
@@ -218,7 +218,7 @@
                                                         <!--end::Input-->
 
                                                         <input type="hidden" name="my_phone_model"
-                                                               value="{{$user->phone_model_id}}">
+                                                               value="{{auth()->user()->phone_model_id}}">
                                                         <!--begin::Label-->
                                                         <span class="d-flex" id="first_select">
 																			<!--begin::Icon-->
@@ -301,7 +301,7 @@
 																				<span
                                                                                     class="fs-3 fw-bolder text-gray-900 mb-2 d-block">فراگارانتی تلفن همراه جدید</span>
 																				{{--<span
-                                                                                    class="fw-bold fs-4 text-muted">{{ $user->phone_brand->name." / ".$user->phone_model->name }}</span>--}}
+                                                                                    class="fw-bold fs-4 text-muted">{{ auth()->user()->phone_brand->name." / ".auth()->user()->phone_model->name }}</span>--}}
 																			</span>
                                                             <!--end::Info-->
 																		</span>
@@ -451,7 +451,7 @@
                                                                  style="background-image: url('')">
                                                                 <!--begin::Preview existing avatar-->
                                                                 <div class="image-input-wrapper w-125px h-125px"
-                                                                     style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                                                     style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @endif')"></div>
                                                                 <!--end::Preview existing avatar-->
                                                                 <!--begin::Label-->
                                                                 <label
@@ -513,7 +513,7 @@
                                                                  style="background-image: url('')">
                                                                 <!--begin::Preview existing avatar-->
                                                                 <div class="image-input-wrapper w-125px h-125px"
-                                                                     style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                                                     style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @endif')"></div>
                                                                 <!--end::Preview existing avatar-->
                                                                 <!--begin::Label-->
                                                                 <label
@@ -575,7 +575,7 @@
                                                                  style="background-image: url('')">
                                                                 <!--begin::Preview existing avatar-->
                                                                 <div class="image-input-wrapper w-125px h-125px"
-                                                                     style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                                                     style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @endif')"></div>
                                                                 <!--end::Preview existing avatar-->
                                                                 <!--begin::Label-->
                                                                 <label
@@ -634,7 +634,7 @@
                                                                  style="background-image: url('')">
                                                                 <!--begin::Preview existing avatar-->
                                                                 <div class="image-input-wrapper w-125px h-125px"
-                                                                     style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                                                     style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @endif')"></div>
                                                                 <!--end::Preview existing avatar-->
                                                                 <!--begin::Label-->
                                                                 <label
@@ -695,7 +695,7 @@
                                                                  style="background-image: url('')">
                                                                 <!--begin::Preview existing avatar-->
                                                                 <div class="image-input-wrapper w-125px h-125px"
-                                                                     style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                                                     style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @endif')"></div>
                                                                 <!--end::Preview existing avatar-->
                                                                 <!--begin::Label-->
                                                                 <label
@@ -755,7 +755,7 @@
                                                                  style="background-image: url('')">
                                                                 <!--begin::Preview existing avatar-->
                                                                 <div class="image-input-wrapper w-125px h-125px"
-                                                                     style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                                                     style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @endif')"></div>
                                                                 <!--end::Preview existing avatar-->
                                                                 <!--begin::Label-->
                                                                 <label
@@ -815,7 +815,7 @@
                                                                  style="background-image: url('')">
                                                                 <!--begin::Preview existing avatar-->
                                                                 <div class="image-input-wrapper w-125px h-125px"
-                                                                     style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                                                     style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @endif')"></div>
                                                                 <!--end::Preview existing avatar-->
                                                                 <!--begin::Label-->
                                                                 <label
