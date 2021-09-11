@@ -21,4 +21,43 @@ class Notification extends Model
         return $this->belongsTo(NotificationUser::class);
     }
 
+
+    public function getSenderId(){
+
+        return "{$this->sender_id}";
+    }
+
+    public function getType(){
+
+        return "{$this->type}";
+    }
+
+    public function getTitle(){
+
+        return "{$this->title}";
+    }
+
+    public function getBody(){
+
+        return "{$this->body}";
+    }
+
+    public function setSenderId($value){
+
+        $this->attributes['sender_id'] = $value;
+    }
+
+    public function setType($value){
+        $this->attributes['type'] = $value;
+    }
+
+    public function setTitle($value){
+        $this->attributes['title'] = $value;
+    }
+
+    public function setBody($value){
+        $this->attributes['body'] = $value;
+
+    }
+
 }

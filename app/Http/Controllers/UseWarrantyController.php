@@ -15,11 +15,13 @@ use Redirect;
 use App\Models\UserRequest;
 use App\Traits\UserMobileWarranties;
 use App\Traits\UserRequests;
+use App\Traits\Notifications;
 
 class UseWarrantyController extends Controller
 {
     use UserMobileWarranties;
     use UserRequests;
+    use Notifications;
 
     public function index($id)
     {
@@ -71,16 +73,16 @@ class UseWarrantyController extends Controller
         $msg = null;
         if ($warrantyUse != null) {
 
-            $notif=Notification::create([
-                'sender_id' => auth()->user()->id,
-                'title' => 'ثبت درخواست',
-                'type'=>3,
-                'body' => 'درخواست استفاده از فراگارانتی شما با موفقیت ثبت شد.']);
+            $notif=new Notification();
+            $notif->setSenderId(auth()->user()->id);
+            $notif->setType(3);
+            $notif->setTitle('ثبت درخواست');
+            $notif->setBody('درخواست استفاده از فراگارانتی شما با موفقیت ثبت شد.');
 
-            NotificationUser::create([
-                'notification_id'=> $notif->id,
-                'receiver_id'=> auth()->user()->id
-            ]);
+            $userNotif=new NotificationUser();
+            $userNotif->setReceiverId(auth()->user()->id);
+
+            $this->addNotif($notif,$userNotif);
 
             $requestable=new UserRequest();
             $requestable->setRequestableId($warrantyUse->id);

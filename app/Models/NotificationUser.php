@@ -25,4 +25,26 @@ class NotificationUser extends Model
     {
         return $this->hasMany(Notification::class);
     }
+
+
+    public function getReceiverId(){
+
+        return "{$this->receiver_id}";
+    }
+
+    public function getNotificationId(){
+
+        return "{$this->notification_id}";
+    }
+
+    public function setReceiverId($value){
+
+        $this->attributes['receiver_id'] = $value;
+    }
+
+    public function setNotificationId($value){
+
+        $this->attributes['notification_id'] = $value;
+    }
+
 }
