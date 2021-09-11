@@ -26,7 +26,7 @@ Route::prefix('panel')->group(function () {
     Route::get('/', 'Profile\ProfileController@index')->name('panel');
     Route::get('/profile', 'Profile\ProfileController@profile')->name('profile');
     Route::get('/edit_profile', 'Profile\ProfileController@edit_profile')->name('edit_profile');
-    Route::get('/check_notif/{notifid}/{dismiss}', 'UserNotificationController@check_notif')->name('check_notif');
+    Route::post('/check_notif', 'UserNotificationController@check_notif')->name('check_notif');
     Route::post('/save_profile_info', 'Profile\ProfileController@save_profile')->name('save_profile_info');
     Route::post('/mobile_change', 'Profile\ProfileController@mobile_change');
     Route::prefix('warranty')->group(function () {

@@ -33,4 +33,5 @@ class Controller extends BaseController
 
         return $notification;
     }
+
 }

@@ -12,9 +12,12 @@ use App\Models\Notification;
 use App\Models\NotificationUser;
 use Illuminate\Http\Request;
 use Redirect;
+use App\Traits\UserMobileWarranties;
 
 class UseWarrantyController extends Controller
 {
+    use UserMobileWarranties;
+
     public function index($id)
     {
         $check_warranty=Mobile_warranty::where([['owner_id','=',auth()->user()->id],['id','=',$id]])->get();
@@ -23,8 +26,7 @@ class UseWarrantyController extends Controller
 
         if(sizeof($check_warranty)>0) {
 
-            return view('profile.warranty.use', ['user' => auth()->user(),
-                'notification' => self::getNotification(auth()->user()->id),
+            return view('profile.warranty.use', [
                 'warranty_id' => $id]);
 
         }else{
@@ -78,18 +80,16 @@ class UseWarrantyController extends Controller
             ]);
 
 //            return redirect()->back()->withErrors(['success'=>'درخواست شما با موفقیت ثبت شد!']);
-            return view('profile.warranty.use', ['user' => auth()->user(),
+            return view('profile.bimeh_all', [
                 'success' => 'your message,here',
-                'notification' => self::getNotification(auth()->user()->id),
-                'warranty_id' => $warranty]);
+                'warranties' => $this->getWarranties()]);
 
         } else {
 //            return redirect()->back()->withErrors(['error'=>'متاسفانه درخواست شما ثبت نشد!']);
 
-            return view('profile.warranty.use', ['user' => auth()->user(),
+            return view('profile.bimeh_all', [
                 'error' => 'no',
-                'notification' => self::getNotification(auth()->user()->id),
-                'warranty_id' => $warranty]);
+                'warranties' => $this->getWarranties()]);
 
         }
 

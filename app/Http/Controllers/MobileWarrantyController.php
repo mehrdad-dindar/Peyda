@@ -11,9 +11,12 @@ use App\Models\Phone_model;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Traits\UserMobileWarranties;
 
 class MobileWarrantyController extends Controller
 {
+
+    use UserMobileWarranties;
 
     public function __construct()
     {
@@ -33,8 +36,6 @@ class MobileWarrantyController extends Controller
         $commitment_ceilings = Commitment_ceiling::all();
         $fire_commitment_ceilings = Fire_commitment_ceiling::all();
         return view('profile.bimeh_add')
-            ->with('user', auth()->user())
-            ->with('notification', self::getNotification(auth()->user()->id))
             ->with('myPhone', $myPhone)
             ->with('brands',$brands)
             ->with('models_first',$phone_model_first)
@@ -46,15 +47,8 @@ class MobileWarrantyController extends Controller
 
     public function bimeh_all()
     {
-        $warranties=Mobile_warranty::join('commitment_ceilings as cc', 'mobile_warranties.price_range', '=', 'cc.id')
-                                    ->join('status as s','mobile_warranties.status','=','s.id')
-                                    ->where('owner_id','=',auth()->user()->id)
-                                    ->get(['cc.price as cc_price','mobile_warranties.*','s.id as s_id','s.text as s_name']);
-
         //dd($warranties);
-        return view('profile.bimeh_all')->with(['warranties'=> $warranties,
-                                                'notification'=> self::getNotification(auth()->user()->id),
-                                                'user'=>auth()->user()]);
+        return view('profile.bimeh_all')->with(['warranties'=> $this->getWarranties()]);
     }
     protected function validator(Request $request)
     {
@@ -156,8 +150,6 @@ class MobileWarrantyController extends Controller
         $price_range = Commitment_ceiling::find($invoice_details['price_range'])->price;
 
         return view('profile.cart')
-            ->with('user', auth()->user())
-            ->with('notification', self::getNotification(auth()->user()->id))
             ->with('invoice_details', $invoice_details)
             ->with('phone_model', $phone_model)
             ->with('fire_addition_price', $fire_addition_price)

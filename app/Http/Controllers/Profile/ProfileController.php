@@ -25,22 +25,16 @@ class ProfileController extends Controller
 
     public function index()
     {
-        $notif=self::getNotification(auth()->user()->id);
-        return view('profile.index')->with(['user'=>auth()->user(),
-                                                'notification'=>$notif]);
+        return view('profile.index');
     }
 
     public function profile()
     {
-        $user=auth()->user();
 
-        $notif=self::getNotification(auth()->user()->id);
-        return view('profile.profile')->with(['user'=>$user,
-                                                    'notification'=>$notif]);
+        return view('profile.profile');
     }
     public function edit_profile()
     {
-        $notif=self::getNotification(auth()->user()->id);
 
         $flag=1;
         $cities = city::all();
@@ -52,12 +46,10 @@ class ProfileController extends Controller
             $flag=1;
         }
         return view('profile.edit_profile')
-            ->with(['user'=>auth()->user(),
-                    'cities'=>$cities,
+            ->with(['cities'=>$cities,
                     'flag'=>$flag,
                     'phone_brands'=>$phone_brands,
-                    'phone_models'=>$phone_models,
-                    'notification'=>$notif]);
+                    'phone_models'=>$phone_models]);
     }
 
     public function validator(Request $request)

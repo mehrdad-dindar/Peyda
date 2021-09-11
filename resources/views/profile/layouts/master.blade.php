@@ -33,7 +33,7 @@
 									<!--end::Separator-->
 									<!--begin::Description-->
 									<small class="text-muted fs-7 fw-bold my-1 ms-1">
-                                        @if($user->status==0)
+                                        @if(auth()->user()->status==0)
                                             <div class="col-lg-8 d-flex align-items-center">
                                                 <span class="badge badge-danger">جهت استفاده از خدمات، پروفایل کاربری خود را تکمیل کنید.</span>
 
@@ -95,7 +95,7 @@
 						<!--begin::Timeline items-->
 						<div class="timeline">
 							<!--begin::Timeline item-->
-                            @foreach($notification as $row)
+                            @foreach(\App\Http\Controllers\Controller::getNotification(auth()->user()->id) as $row)
                                 @if($row->title!=null && $row->seen==0)
                                     <div class="timeline-item">
                                     <!--begin::Timeline line-->
@@ -131,7 +131,7 @@
                                                 <!--end::Info-->
                                                 <!--begin::User-->
                                                 <div class="symbol symbol-circle symbol-25px" data-bs-toggle="tooltip" data-bs-boundary="window" data-bs-placement="top" title="Nina Nilson">
-                                                    <img src="@if($user->avatar){{URL::asset('uploads/avatars').'/'.$user->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif" alt="img" />
+                                                    <img src="@if(auth()->user()->avatar){{URL::asset('uploads/avatars').'/'.auth()->user()->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif" alt="img" />
                                                 </div>
                                                 <!--end::User-->
                                             </div>
@@ -151,12 +151,23 @@
                                                 </div>
                                                 <!--end::Label-->
                                                 <!--begin::Progress-->
-                                                <div class="min-w-125px pe-2">
-                                                    <a href="{{ route('check_notif',['notifid'=>$row->id,'dismiss'=>0]) }}" class="btn btn-sm btn-primary btn-active-light-primary">مشاهده</a>
-                                                </div>
+                                                <form action="{{ route('check_notif') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" value="{{$row->id}}" name="notifid">
+                                                    <input type="hidden" value="0" name="dismiss">
+                                                    <div class="min-w-125px pe-2">
+                                                        <button type="submit" class="btn btn-sm btn-primary btn-active-light-primary">مشاهده</button>
+                                                    </div>
+                                                </form>
                                                 <!--end::Progress-->
                                                 <!--begin::Action-->
-                                                <a href="{{ route('check_notif',['notifid'=>$row->id,'dismiss'=>1]) }}" class="btn btn-sm btn-light btn-active-light-primary"><i class="fas fa-times"></i></a>
+                                                <form action="{{ route('check_notif') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" value="{{$row->id}}" name="notifid">
+                                                    <input type="hidden" value="1" name="dismiss">
+                                                    <div class="min-w-125px pe-2">
+                                                        <button type="submit" class="btn btn-sm btn-light btn-active-light-primary"><i class="fas fa-times"></i></button>
+                                                    </div>
                                                 <!--end::Action-->
                                             </div>
                                             <!--end::Record-->

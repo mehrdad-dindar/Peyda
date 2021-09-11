@@ -14,10 +14,13 @@ class UserNotificationController extends Controller
         $this->middleware(['auth','verified']);
     }
 
-    public function check_notif($notifid, $dismiss='')
+    public function check_notif(Request $request)
     {
 
         $redirect='';
+        $notifid=$request->get('notifid');
+        $dismiss=$request->get('dismiss');
+
         $notif=Notification::find($notifid);
         $notif->update([
             'seen'=>1

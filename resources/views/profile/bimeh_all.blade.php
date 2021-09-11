@@ -500,4 +500,14 @@
 @endsection
 @section('custom_js')
 
+    @if (isset($success))
+        <script>
+            toastr.success("پیام", 'درخواست شما با موفقیت ثبت شد!');
+        </script>
+    @elseif(isset($error))
+        <script>
+            toastr.error("پیام", 'متاسفانه درخواست شما ثبت نشد!');
+        </script>
+    @endif
+
 @endsection

@@ -21,8 +21,7 @@ class TransferWarrantyController extends Controller
         if(sizeof($check_warranty)>0) {
 
             return view('profile.warranty.transfer',
-                ['user' => auth()->user(),                                                                                             'notification' => self::getNotification(auth()->user()->id),
-                    'warranty_id' => $id]);
+                ['warranty_id' => $id]);
         }else{
             return redirect()->back();
         }
@@ -42,8 +41,8 @@ class TransferWarrantyController extends Controller
         if($transfer!=null){
             $transfer_code=Mobile_warranty::find($warranty_id)->first()->transfer_code;
             return view('profile.warranty.transfer',
-                ['user' => auth()->user(),
-                    'transfer_code'=>$transfer_code,                                                                                        'notification' => self::getNotification(auth()->user()->id),
+                [
+                    'transfer_code'=>$transfer_code,
                     'warranty_id' => $warranty_id]);
         }else{
 
@@ -64,9 +63,9 @@ class TransferWarrantyController extends Controller
                 $msg='error';
             }
             return view('profile.warranty.transfer',
-                ['user' => auth()->user(),
+                [
                     $msg => 'done',
-                    'transfer_code'=>$transfer_code,                                                                                        'notification' => self::getNotification(auth()->user()->id),
+                    'transfer_code'=>$transfer_code,
                     'warranty_id' => $warranty_id]);
         }
 
@@ -74,8 +73,7 @@ class TransferWarrantyController extends Controller
 
     public function receive_create()
     {
-        return view('profile.warranty.receive',
-            ['user' => auth()->user(),                                                                                       'notification' => self::getNotification(auth()->user()->id)]);
+        return view('profile.warranty.receive');
     }
 
     public function receive_store(Request $request)
@@ -116,9 +114,9 @@ class TransferWarrantyController extends Controller
             $msg='error';
         }
         return view('profile.warranty.receive',
-            ['user' => auth()->user(),
+            [
                 $msg => 'done',
-                'transfer_code'=>$transfer_code,                                                                                      'notification' => self::getNotification(auth()->user()->id)]);
+                'transfer_code'=>$transfer_code]);
     }
 
 }
