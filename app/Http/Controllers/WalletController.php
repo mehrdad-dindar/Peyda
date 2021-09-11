@@ -119,6 +119,7 @@ class WalletController extends Controller
             $this->status_failed();
         }
 
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         try {
             $receipt = Payment::amount((int)Crypt::decryptString($wallet_history->value))
                 ->transactionId($request->Authority)
@@ -127,7 +128,6 @@ class WalletController extends Controller
             $transaction->status = WalletTransaction::STATUS_SUCCESS;
             $transaction->save();
 
-            $wallet = Wallet::where('user_id', "=", auth()->id())->first();
             if ($wallet->value != "0") {
                 $new_wallet_val = (int)Crypt::decryptString($wallet->value) + (int)Crypt::decryptString($wallet_history->value);
             } else {
@@ -174,6 +174,7 @@ class WalletController extends Controller
                         'code' => $e->getCode(),
                         'user' => auth()->user(),
                         'history' => $history,
+                        'wallet' => $wallet,
                     ]);
             }
         }

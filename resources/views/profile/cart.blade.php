@@ -162,7 +162,7 @@
                                                 <div class="fw-bold pe-10 text-gray-600 fs-7">مالیات 0%</div>
                                                 <!--end::Accountname-->
                                                 <!--begin::Label-->
-                                                <div class="text-end fw-bolder fs-6 text-gray-800">0.00</div>
+                                                <div class="text-end fw-bolder fs-6 text-gray-800">0</div>
                                                 <!--end::Label-->
                                             </div>
                                             <!--end::Item-->
@@ -192,7 +192,7 @@
                     </div>
                     <!--end::Content-->
                     <!--begin::Sidebar-->
-                    <div class="m-0">
+                    <form method="get" action="{{route('purchase',$invoice_id)}}" class="m-0">
                         <!--begin::Invoice 2 sidebar-->
                         <div
                             class="d-print-none border border-dashed border-gray-300 card-rounded h-lg-100 min-w-md-350px p-9 bg-lighten">
@@ -202,24 +202,27 @@
                             <!--begin::Item-->
                             <div class="mb-6">
                                 <div class="fw-boldest text-gray-600 fs-4 text-hover-primary">زرین پال:</div>
-                                <div class="form-check form-switch form-check-custom form-check-solid mt-3 me-10">
-                                    <input class="form-check-input h-20px w-30px" type="radio" name="pay_method" value="1" id="flexSwitch20x30" checked/>
-                                    <label class="form-check-label" for="flexSwitch20x30">
-                                        پرداخت امن زرین پال
-                                    </label>
-                                </div>
+                                <label
+                                    class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack mb-5">
+                                    <span
+                                        class="form-check-label ms-0 fw-bolder fs-6 text-gray-700">پرداخت امن زرین پال</span>
+                                    <input class="form-check-input" type="radio" checked="checked" name="pay_methode" value="1">
+                                </label>
                             </div>
                             <!--end::Item-->
                             <!--begin::Item-->
                             <div class="mb-6">
                                 <div class="fw-boldest text-gray-600 fs-4 text-hover-primary">کیف پول:</div>
-
-                                <div class="form-check form-switch form-check-custom form-check-solid mt-3 me-10">
-                                    <input class="form-check-input h-20px w-30px" type="radio" name="pay_method" value="2" id="flexSwitch20x30"/>
-                                    <label class="form-check-label" for="flexSwitch20x30">
-                                        پرداخت از اعتبار کیف پول
-                                    </label>
-                                </div>
+                                <label
+                                    class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack mb-5">
+                                    <span class="form-check-label ms-0 fw-bolder fs-6 text-gray-700">پرداخت از اعتبار کیف پول<br>
+                                        <span class="fs-7 text-danger d-flex align-items-center">
+                                            <span id="wallet" class="me-2">{{Crypt::decryptString($wallet->value)}}</span>
+                                            تومان
+                                        </span>
+                                    </span>
+                                    <input class="form-check-input" type="radio" name="pay_methode" value="2">
+                                </label>
                             </div>
                             <!--end::Item-->
                             <!--begin::Item-->
@@ -239,19 +242,19 @@
                             <!--begin::Item-->
                             <div class="mb-6">
                                 <label class="form-check form-check-custom form-check-solid">
-                                    <input class="form-check-input" type="checkbox" value=""/>
+                                    <input class="form-check-input" type="checkbox" value="" required/>
                                     <span class="fw-bolder text-gray-800 fs-6 form-check-label">با سیاست حفظ حریم خصوصی موافقم !</span>
                                 </label>
                             </div>
                             <!--end::Item-->
                             <div class="mb-8">
                                 <!--begin::Action-->
-                                <a href="{{route('purchase',$invoice_id)}}" class="btn btn-sm btn-success">پرداخت</a>
+                                <button type="submit" name="submit" class="btn btn-sm btn-success">پرداخت</button>
                                 <!--end::Action-->
                             </div>
                         </div>
                         <!--end::Invoice 2 sidebar-->
-                    </div>
+                    </form>
                     <!--end::Sidebar-->
                 </div>
                 <!--end::Layout-->
@@ -261,4 +264,9 @@
         <!--end::Invoice 2 main-->
     </div>
     <!--end::Container-->
+@endsection
+@section('custom_js')
+    <script>
+        $('#wallet').number(true, 0);
+    </script>
 @endsection

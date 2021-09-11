@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Wallet;
+use Crypt;
 use Exception;
 use App\Models\Commitment_ceiling;
 use App\Models\Fire_commitment_ceiling;
@@ -24,26 +26,65 @@ class PaymentController extends Controller
         $this->middleware('auth');
     }
 
-    public function purchase($invoice_id)
+    public function purchase($invoice_id,Request $request)
     {
-        try {
-            $cart_detail = Mobile_warranty::find($invoice_id);
-            $price_range = Commitment_ceiling::find($cart_detail->price_range)->price;
-            $phone_brand = Phone_brand::find($cart_detail->phone_brand_id)->name;
-            $phone_model = Phone_model::find($cart_detail->phone_model_id)->name;
+        $user = Auth::user();
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        $cart_detail = Mobile_warranty::find($invoice_id);
+        $price_range = Commitment_ceiling::find($cart_detail->price_range)->price;
+        $fire_addition_price = 0;
+        if ($cart_detail->addition_fire_commitment_id != 0) {
+            $fire_addition_price = Fire_commitment_ceiling::find($cart_detail->addition_fire_commitment_id)->price;
+        }
+        $amount = $fire_addition_price + $price_range;
+        $invoice = new Invoice();
+        $invoice->amount($amount);
+        $paymentId = md5(uniqid());
+        if ($request->pay_methode == 1) {
+            try {
+                $phone_brand = Phone_brand::find($cart_detail->phone_brand_id)->name;
+                $phone_model = Phone_model::find($cart_detail->phone_model_id)->name;
 
+                /*dd($amount);*/
 
-            $fire_addition_price = 0;
-            if ($cart_detail->addition_fire_commitment_id != 0) {
-                $fire_addition_price = Fire_commitment_ceiling::find($cart_detail->addition_fire_commitment_id)->price;
+                $transaction = $user->transactions()->create([
+                    'user_id' => $user->id,
+                    'mobile_warranty_id' => $invoice_id,
+                    'paid' => $invoice->getAmount(),
+                    'invoice_details' => $invoice,
+                    'peyment_id' => $paymentId,
+                ]);
+
+                $callbackUrl = route('purchase.result', [$invoice_id, 'peyment_id' => $paymentId]);
+                $payment = Payment::callbackUrl($callbackUrl);
+                $payment->config('description', 'خرید فراگارانتی ' . $phone_brand . "/" . $phone_model);
+
+                $payment->purchase($invoice, function ($driver, $transactionid) use ($transaction) {
+                    $transaction->transaction_id = $transactionid;
+                    $transaction->save();
+                });
+                return $payment->pay()->render();
+            } catch (PurchaseFailedException | Exception | SoapFault $e) {
+                $transaction->transaction_result = $e;
+                $transaction->status = Transaction::STATUS_FAILED;
+                $transaction->save();
+
+                $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+                return view('profile.bimeh_all')->with([
+                    'user' => auth()->user(),
+                    'status' => 'failed',
+                    'wallet' => $wallet,
+                ]);
             }
-            $amount = $fire_addition_price + $price_range;
-            /*dd($amount);*/
-            $invoice = new Invoice();
-            $invoice->amount($amount);
+        }else{
+            $msg = "موجودی کیف پول کافی نیست";
 
-            $user = Auth::user();
-            $paymentId = md5(uniqid());
+            if ($invoice->getAmount() > Crypt::decryptString($wallet->value)){
+                /*return view()*/
+                // TODO
+            }else{
+                dd("خرید ثبت شد");
+            }
             $transaction = $user->transactions()->create([
                 'user_id' => $user->id,
                 'mobile_warranty_id' => $invoice_id,
@@ -51,45 +92,43 @@ class PaymentController extends Controller
                 'invoice_details' => $invoice,
                 'peyment_id' => $paymentId,
             ]);
-
-            $callbackUrl = route('purchase.result', [$invoice_id, 'peyment_id' => $paymentId]);
-            $payment = Payment::callbackUrl($callbackUrl);
-            $payment->config('description', 'خرید فراگارانتی '.$phone_brand."/".$phone_model);
-
-            $payment->purchase($invoice, function ($driver, $transactionid) use ($transaction) {
-                $transaction->transaction_id = $transactionid;
                 $transaction->save();
-            });
-            return $payment->pay()->render();
-        }catch (PurchaseFailedException|Exception|SoapFault $e){
-            $transaction->transaction_result = $e;
-            $transaction->status = Transaction::STATUS_FAILED;
-            $transaction->save();
         }
+    }
+
+    public function status_failed()
+    {
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        return view('profile.bimeh_all')->with([
+            'user' => auth()->user(),
+            'status' => 'failed',
+            'wallet' => $wallet
+        ]);
     }
 
     public function result(Request $request, $invoice_id)
     {
         if ($request->missing('peyment_id')){
-            return view('purchase_result')->with('status','failed');
+            $this->status_failed();
         }
 
         $transaction = Transaction::where('peyment_id' , $request->peyment_id)->first();
         if (empty($transaction)){
-            return view('purchase_result')->with('status','failed');
+            $this->status_failed();
         }
 
         if ($transaction->user_id <> Auth::id()){
-            return view('purchase_result')->with('status','failed');
+            $this->status_failed();
         }
 
         if ($transaction->mobile_warranty_id <> $invoice_id){
-            return view('purchase_result')->with('status','failed');
+            $this->status_failed();
         }
         if ($transaction->status <> Transaction::STATUS_PENDING){
-            return view('purchase_result')->with('status','failed');
+            $this->status_failed();
         }
 
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         try {
             $cart_detail = Mobile_warranty::find($invoice_id);
             $price_range = Commitment_ceiling::find($cart_detail->price_range)->price;
@@ -107,11 +146,12 @@ class PaymentController extends Controller
             $transaction->status = Transaction::STATUS_SUCCESS;
             $transaction->save();
 
-            return view('purchase_result')
+            return view('profile.bimeh_all')
                 ->with([
-                    'status' => 1,
-                    'reference_id' => $receipt->getRefrenceId(),
-                    'invoice_id' => $invoice_id
+                    'message' => "عملیات پرداخت با موفقیت انجام شد.",
+                    'code' => 100,
+                    'user' => auth()->user(),
+                    'wallet' => $wallet,
                 ]);
         }catch (Exception|InvalidPaymentException $e){
             if ($e->getCode() < 0){
@@ -125,11 +165,13 @@ class PaymentController extends Controller
                 /*
                  * For manage error use this code ****
                  * */
-                /*return view('purchase_result')
+                return view('profile.bimeh_all')
                     ->with([
                         'message' => $e->getMessage(),
-                        'code' => $e->getCode()
-                    ]);*/
+                        'code' => $e->getCode(),
+                        'user' => auth()->user(),
+                        'wallet' => $wallet,
+                    ]);
             }
         }
 

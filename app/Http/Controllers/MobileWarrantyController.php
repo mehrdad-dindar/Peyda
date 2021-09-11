@@ -8,6 +8,7 @@ use App\Models\Fire_commitment_ceiling;
 use App\Models\Mobile_warranty;
 use App\Models\Phone_brand;
 use App\Models\Phone_model;
+use App\Models\Wallet;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -25,17 +26,22 @@ class MobileWarrantyController extends Controller
         $phone_models = Phone_model::all();
         $commitment_ceilings = Commitment_ceiling::all();
         $fire_commitment_ceilings = Fire_commitment_ceiling::all();
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         return view('profile.bimeh_add')
             ->with('user', auth()->user())
             ->with('phone_brands', $phone_brands)
             ->with('phone_models', $phone_models)
             ->with('commitment_ceilings', $commitment_ceilings)
-            ->with('fire_commitment_ceilings', $fire_commitment_ceilings);
+            ->with('fire_commitment_ceilings', $fire_commitment_ceilings)
+            ->with('wallet' , $wallet);
     }
 
     public function bimeh_all()
     {
-        return view('profile.bimeh_all')->with('user', auth()->user());
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        return view('profile.bimeh_all')
+            ->with('user', auth()->user())
+            ->with('wallet' , $wallet);
     }
     protected function validator(Request $request)
     {
@@ -49,6 +55,7 @@ class MobileWarrantyController extends Controller
     public function save(Request $request)
     {
         /*dd($request);*/
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         if ($request['warranty_type'] == 2){
             if ($request['new_phone_brand'] == null || $request['new_phone_model'] == null){
                 $phone_brands = Phone_brand::all();
@@ -61,7 +68,8 @@ class MobileWarrantyController extends Controller
                     ->with('phone_brands', $phone_brands)
                     ->with('phone_models', $phone_models)
                     ->with('commitment_ceilings', $commitment_ceilings)
-                    ->with('fire_commitment_ceilings', $fire_commitment_ceilings);
+                    ->with('fire_commitment_ceilings', $fire_commitment_ceilings)
+                    ->with('wallet', $wallet);
             }
         }
         if ($request['price_range'] == null){
@@ -75,7 +83,8 @@ class MobileWarrantyController extends Controller
                 ->with('phone_brands', $phone_brands)
                 ->with('phone_models', $phone_models)
                 ->with('commitment_ceilings', $commitment_ceilings)
-                ->with('fire_commitment_ceilings', $fire_commitment_ceilings);
+                ->with('fire_commitment_ceilings', $fire_commitment_ceilings)
+                ->with('wallet', $wallet);
         }
         if ($request['imei1'] == null || strlen($request['imei1'])!=15){
             $phone_brands = Phone_brand::all();
@@ -89,7 +98,8 @@ class MobileWarrantyController extends Controller
                 ->with('phone_brands', $phone_brands)
                 ->with('phone_models', $phone_models)
                 ->with('commitment_ceilings', $commitment_ceilings)
-                ->with('fire_commitment_ceilings', $fire_commitment_ceilings);
+                ->with('fire_commitment_ceilings', $fire_commitment_ceilings)
+                ->with('wallet', $wallet);
         }
 
 
@@ -151,7 +161,7 @@ class MobileWarrantyController extends Controller
             $fire_addition_price = Fire_commitment_ceiling::find($invoice_details['fire_addition_price'])->price;
         }
         $price_range = Commitment_ceiling::find($invoice_details['price_range'])->price;
-
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         return view('profile.cart')
             ->with('user', auth()->user())
             ->with('invoice_details', $invoice_details)
@@ -159,6 +169,7 @@ class MobileWarrantyController extends Controller
             ->with('phone_model', $phone_model)
             ->with('fire_addition_price', $fire_addition_price)
             ->with('price_range', $price_range)
-            ->with('invoice_id',$id);
+            ->with('invoice_id',$id)
+            ->with('wallet', $wallet);
     }
 }
