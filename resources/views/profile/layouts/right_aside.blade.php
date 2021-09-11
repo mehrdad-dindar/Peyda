@@ -1,3 +1,8 @@
+<style>
+    .disabled-a:hover{
+        cursor: not-allowed;
+    }
+</style>
 <div id="kt_aside" class="aside pb-5 pt-5 pt-lg-0" data-kt-drawer="true" data-kt-drawer-name="aside"
      data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
      data-kt-drawer-width="{default:'80px', '300px': '100px'}" data-kt-drawer-direction="start"
@@ -45,8 +50,12 @@
                             </div>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link"
-                               href="{{ route('bimeh_add') }}">
+                            <a @if(auth()->user()->status==1) class="menu-link"
+                               href="{{ route('bimeh_add') }}"
+                               @else
+                               class="menu-link disabled-a"
+
+                                @endif >
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -54,8 +63,12 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link"
-                               href="{{ route('bimeh_all') }}">
+                            <a @if(auth()->user()->status==1) class="menu-link"
+                                   href="{{ route('bimeh_all') }}"
+                               @else
+                                class="menu-link disabled-a"
+
+                               @endif >
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -71,7 +84,12 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('receive_create') }}">
+                            <a @if(auth()->user()->status==1) class="menu-link"
+                               href="{{ route('receive_create') }}"
+                               @else
+                               class="menu-link disabled-a"
+
+                                @endif >
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
