@@ -43,13 +43,13 @@ class UseWarrantyController extends Controller
 
         if (is_array($images)) {
             foreach ($images as $row) {
-                $image = MobileImage::query()->where('URL', '=', $row)->first();
+                $image = MobileImage::query()->where('URL', '=', $row)->firstOrFail();
 
                 $imageList .= $prefix . $image->id;
                 $prefix = ',';
             }
         } else {
-            $images = MobileImage::query()->where('URL', '=', $images)->first();
+            $images = MobileImage::query()->where('URL', '=', $images)->firstOrFail();
 
             $imageList .= $prefix . $images->id;
             $prefix = ',';

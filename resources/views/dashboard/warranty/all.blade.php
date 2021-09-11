@@ -34,7 +34,7 @@
                                                 <td>{{$warranty -> activation_code}}</td>
 
                                                 <td><a href="#" class="btn btn-outline-danger btn-sm">حذف</a>
-                                                    <a href="{{ route('dashboard') }}/warranties/show/{{$warranty->id}}" class="btn btn-primary btn-sm">نمایش</a>
+                                                    <a href="{{ route('dashboard') }}/warranties/show/{{$warranty->mw_id}}" class="btn btn-primary btn-sm">نمایش</a>
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -100,8 +100,8 @@
                                                         <!-- Single Gallery Area -->
                                                         @foreach($images as $image)
                                                             <a class="single_gallery_item col-sm-6 col-xl-3 mb-30"
-                                                               href="{{URL::asset('uploads/warranty_images').'/'.$image->URL}}">
-                                                                <img src="{{URL::asset('uploads/warranty_images').'/'.$image->URL}}" alt=""></a>
+                                                               href="{{URL::asset('uploads/use_images').'/'.$image->URL}}">
+                                                                <img src="{{URL::asset('uploads/use_images').'/'.$image->URL}}" alt=""></a>
                                                     @endforeach
                                                     <!-- Single Gallery Area -->
                                                     </div>

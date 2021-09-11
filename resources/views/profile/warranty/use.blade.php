@@ -42,7 +42,7 @@
                                     {{-- Name/Description fields, irrelevant for this article --}}
 
                                 <div class="form-group">
-                                    <label for="document">Documents</label>
+                                    <label for="document">اسناد</label>
                                     <div class="needsclick dropzone" id="document-dropzone">
 
                                     </div>
