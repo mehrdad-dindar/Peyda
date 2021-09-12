@@ -28,11 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('melli_card')->nullable();
             $table->timestamp('melli_card_verified_at')->nullable();
             $table->timestamp('birthday')->nullable();
-            $table->string('bank_card')->nullable();
-            $table->string('bank_id')->nullable();
-            $table->string('bank_shaba')->nullable();
             $table->boolean('status')->default(0);
-            $table->unsignedBigInteger('phone_brand_id')->nullable();
             $table->unsignedBigInteger('phone_model_id')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -44,10 +40,6 @@ class CreateUsersTable extends Migration
             $table->foreign('city_id')
                 ->references('id')
                 ->on('cities')
-                ->onDelete('cascade');
-            $table->foreign('phone_brand_id')
-                ->references('id')
-                ->on('phone_brands')
                 ->onDelete('cascade');
             $table->foreign('phone_model_id')
                 ->references('id')

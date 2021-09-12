@@ -16,17 +16,16 @@ class CreateMobileWarrantiesTable extends Migration
         Schema::create('mobile_warranties', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('owner_id');
-            $table->unsignedBigInteger('phone_brand_id');
-            $table->unsignedBigInteger('phone_model_id');
+            $table->unsignedBigInteger('phone_model_id')->nullable;
             $table->timeStamp('expiry_date')->nullable();
-            $table->string('imei1');
-            $table->string('imei2')->nullable();
             $table->string('activation_code')->unique();
             $table->timeStamp('activation_date')->nullable();
             $table->string('transfer_code')->nullable();
-            $table->unsignedBigInteger('price_range');
+            $table->string('images')->nullable();
+            $table->unsignedBigInteger('price_range')->nullable;
             $table->boolean('fire_gift')->default(false);
-            $table->boolean('status')->default(false);
+            $table->integer('status')->default(0);
+            $table->integer('usable_percentage')->default(100);
             $table->unsignedBigInteger('addition_fire_commitment_id')->nullable();
             $table->timestamps();
         });
@@ -34,10 +33,6 @@ class CreateMobileWarrantiesTable extends Migration
             $table->foreign('owner_id')
                 ->references('id')
                 ->on('users')
-                ->onDelete('cascade');
-            $table->foreign('phone_brand_id')
-                ->references('id')
-                ->on('phone_brands')
                 ->onDelete('cascade');
             $table->foreign('phone_model_id')
                 ->references('id')

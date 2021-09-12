@@ -31,7 +31,7 @@
                                             </td>
                                             <td>{{ $user->email }}</td>
                                             <td>
-                                                @if($user->email_verified_at)
+                                                @if($user->status)
                                                     <span class="badge badge-success-lighten">احراز شده</span>
                                                 @else
                                                     <span class="badge badge-danger-lighten">عدم احراز</span>
@@ -54,8 +54,13 @@
                                                 @endswitch
                                             </td>
                                             <td>0{{ $user->phone }}</td>
-                                            <td><a href="#" class="btn btn-outline-danger btn-sm">حذف</a>
-                                            <a href="#" class="btn btn-primary btn-sm">ویرایش</a>
+                                            <td>
+                                                @if(($user->sender_id==null || $user->sender_id==auth()->user()->id)
+                                                    && $user->status==0)
+                                            <a href="{{ route('dashboard') }}/users/edit/{{$user->id}}" class="btn btn-primary btn-sm">احراز هویت</a>
+                                                    @else
+                                                    <a style="color: white;" class="btn btn-secondary btn-sm">احراز هویت</a>
+                                                    @endif
                                             </td>
                                         </tr>
                                         @endforeach

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\Admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,10 +26,22 @@ Route::prefix('panel')->group(function () {
     Route::get('/', 'Profile\ProfileController@index')->name('panel');
     Route::get('/profile', 'Profile\ProfileController@profile')->name('profile');
     Route::get('/edit_profile', 'Profile\ProfileController@edit_profile')->name('edit_profile');
+    Route::post('/check_notif', 'UserNotificationController@check_notif')->name('check_notif');
     Route::post('/save_profile_info', 'Profile\ProfileController@save_profile')->name('save_profile_info');
+    Route::post('/mobile_change', 'Profile\ProfileController@mobile_change');
     Route::prefix('warranty')->group(function () {
         Route::prefix('mobile')->group(function () {
             Route::get('/', 'MobileWarrantyController@bimeh_all')->name('bimeh_all');
+            Route::get('/uses', 'UseWarrantyController@useAll')->name('use_all');
+            Route::get('/use_faraguaranty/{id}', 'UseWarrantyController@index')->name('bimeh_use');
+            Route::get('/use/edit/{id}', 'UseWarrantyController@use_edit')->name('bimeh_use_edit');
+            Route::get('/transfer_faraguaranty/{id}', 'TransferWarrantyController@index')->name('bimeh_transfer');
+            Route::post('/transfer_store', 'TransferWarrantyController@transfer_store')->name('transfer_store');
+            Route::get('/receive_warranty', 'TransferWarrantyController@receive_create')->name('receive_create');
+            Route::post('/receive_warranty/store', 'TransferWarrantyController@receive_store')->name('receive_store');
+            Route::post('/store_use/{edit?}', 'UseWarrantyController@store')->name('store_use');
+            Route::post('projects/media', 'UseWarrantyController@storeMedia')
+                ->name('projects.storeMedia');
             Route::get('/add', 'MobileWarrantyController@bimeh_add')->name('bimeh_add');
             Route::post('/save', 'MobileWarrantyController@save')->name('save');
             Route::get('/cart', 'MobileWarrantyController@cart')->name('cart');
@@ -43,14 +56,28 @@ Route::prefix('panel')->group(function () {
 /* Dashboard */
 Route::prefix('dashboard')->group(function () {
     Route::get('/', 'Admin\HomeController@index')->name('dashboard');
-    Route::resource('/users', 'Admin\UserController');
-    Route::post('/warranties', 'Admin\WarrantyController@index');
+    Route::prefix('/users')->group(function (){
+        Route::get('/', 'Admin\UserController@index');
+        Route::get('/edit/{id}', 'Admin\UserController@create');
+        Route::post('/auth', 'Admin\UserController@store');
+    });
+
+    Route::get('/warranties', 'Admin\WarrantyController@index');
     Route::get('/warranties/create', 'Admin\WarrantyController@create');
+    Route::get('/warranties/show/{id}', 'Admin\WarrantyController@show');
+    Route::get('/warranties/use', 'Admin\WarrantyController@useWarranty');
+    Route::get('/warranties/show/admit/{id}', 'Admin\WarrantyController@show_admit');
+    Route::post('/warranties/admit', 'Admin\WarrantyController@admit');
+    Route::post('/warranties/admit/use', 'Admin\WarrantyController@admit_use');
     Route::post('/postajax', 'Admin\WarrantyController@store');
+
     Route::prefix('/settings')->group(function (){
         Route::get('/brand', 'Admin\SettingsController@getPhoneBrands');
+        Route::get('/brand/delete/{id}', 'Admin\SettingsController@deletePhoneBrand');
         Route::post('/brand/store', 'Admin\SettingsController@storePhoneBrands');
-        Route::post('/model/{id}', 'Admin\SettingsController@getPhoneModel');
+        Route::get('/model/{id}', 'Admin\SettingsController@getPhoneModel');
+        Route::get('/model/delete/{id}/{brand_id}', 'Admin\SettingsController@deletePhoneModel');
+        Route::post('/model/store/{id}', 'Admin\SettingsController@storePhoneModel');
     });
 
 });

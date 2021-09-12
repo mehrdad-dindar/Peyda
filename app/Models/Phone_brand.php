@@ -14,8 +14,4 @@ class Phone_brand extends Model
     {
         return $this->hasmany(Phone_model::class);
     }
-    public function users()
-    {
-        return $this->hasmany(User::class);
-    }
 }

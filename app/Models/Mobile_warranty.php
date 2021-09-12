@@ -14,11 +14,8 @@ class Mobile_warranty extends Model
      */
     protected $fillable = [
         'owner_id',
-        'phone_brand_id',
         'phone_model_id',
         'expiry_date',
-        'imei1',
-        'imei2',
         'activation_code',
         'activation_date',
         'transfer_code',
@@ -26,6 +23,7 @@ class Mobile_warranty extends Model
         'fire_gift',
         'status',
         'addition_fire_commitment_id',
+        'usable_percentage'
     ];
     /**
      * @var mixed
