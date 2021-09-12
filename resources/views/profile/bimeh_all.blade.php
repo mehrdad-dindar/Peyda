@@ -66,9 +66,9 @@
                                 </td>
 
                                 <td>
-                                    @if($row->s_id==1)
+                                    @if($row->s_id==2)
                                         <span class="badge badge-light-success">فعال</span>
-                                    @else
+                                    @elseif($row->s_id==1)
                                         <span class="badge badge-danger">غیر فعال</span>
                                     @endif
                                 </td>
