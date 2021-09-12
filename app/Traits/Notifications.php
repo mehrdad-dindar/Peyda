@@ -12,7 +12,8 @@ trait Notifications
             'sender_id' => $notification->getSenderId(),
             'title' => $notification->getTitle(),
             'type' => $notification->getType(),
-            'body' => $notification->getBody()]);
+            'body' => $notification->getBody(),
+            'link' => $notification->getLink()]);
 
         NotificationUser::create([
             'notification_id' => $notif->id,

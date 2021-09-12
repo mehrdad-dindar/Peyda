@@ -155,23 +155,16 @@ class WarrantyController extends Controller
         $admin_id = auth()->user()->id;
         $link = '/panel/warranty/mobile';
 
+        $notif=new Notification();
+        $notif->setSenderId($admin_id);
+        $notif->setType(2);
+        $notif->setTitle('بررسی بیمه نامه');
+        $notif->setBody($descriptions);
 
-        $notification = Notification::query()->create([
+        $userNotif=new NotificationUser();
+        $userNotif->setReceiverId($user_id);
 
-                'body' => $descriptions,
-                'sender_id' => $admin_id,
-                'link' => $link,
-                'type' => 2,
-                'title' => 'بررسی بیمه نامه'
-
-        ]);
-
-        NotificationUser::query()->create([
-            'notification_id' => $notification->id,
-            'receiver_id' => $user_id
-        ]);
-
-
+        $this->addNotif($notif,$userNotif);
 
         return redirect()->back()->with('error', 'تغییرات با موفقیت اعمال شد.');
     }
@@ -245,22 +238,17 @@ class WarrantyController extends Controller
         $admin_id = auth()->user()->id;
         $link = '/panel/warranty/mobile';
 
-        $notification = Notification::query()->create([
+        $notif=new Notification();
+        $notif->setSenderId($admin_id);
+        $notif->setType(3);
+        $notif->setTitle('بررسی استفاده از بیمه نامه');
+        $notif->setBody($descriptions);
+        $notif->setLink($link);
 
-            'body' => $descriptions,
-            'sender_id' => $admin_id,
-            'link' => $link,
-            'type' => 3,
-            'title' => 'بررسی استفاده از بیمه نامه'
+        $userNotif=new NotificationUser();
+        $userNotif->setReceiverId($user_id);
 
-        ]);
-
-        NotificationUser::query()->create([
-            'notification_id' => $notification->id,
-            'receiver_id' => $user_id
-        ]);
-
-
+        $this->addNotif($notif,$userNotif);
 
         return redirect()->back()->with('error', 'تغییرات با موفقیت اعمال شد.');
     }

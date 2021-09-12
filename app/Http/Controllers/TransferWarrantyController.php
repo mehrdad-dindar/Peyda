@@ -87,22 +87,29 @@ class TransferWarrantyController extends Controller
             if($transfer_up!=null){
                 $mobile_warranty=Mobile_warranty::query()->where('transfer_code','=',$transfer_code)->update(['owner_id'=>auth()->user()->id]);
                 if($mobile_warranty!=null){
-                    $notification1=Notification::query()->create(['sender_id'=>auth()->user()->id,
-                                                    'type'=>4,
-                                                    'title'=>'دریافت بیمه نامه',
-                                                    'body'=>'بیمه نامه مورد نظر با موفقیت دریافت شد.']);
-                    NotificationUser::query()->create([
-                        'notification_id' => $notification1->id,
-                        'receiver_id'=>auth()->user()->id
-                    ]);
-                    $notification2=Notification::query()->create(['sender_id'=>auth()->user()->id,
-                                                    'type'=>4,
-                                                    'title'=>'انتقال بیمه نامه',
-                                                    'body'=>'بیمه نامه مورد نظر با موفقیت انتقال داده شد.']);
-                    NotificationUser::query()->create([
-                        'notification_id' => $notification2->id,
-                        'receiver_id'=>$transfer->sender_id
-                    ]);
+
+                    $notif=new Notification();
+                    $notif->setSenderId(auth()->user()->id);
+                    $notif->setType(4);
+                    $notif->setTitle('دریافت بیمه نامه');
+                    $notif->setBody('بیمه نامه مورد نظر با موفقیت دریافت شد.');
+
+                    $userNotif=new NotificationUser();
+                    $userNotif->setReceiverId(auth()->user()->id);
+
+                    $this->addNotif($notif,$userNotif);
+
+                    $notif=new Notification();
+                    $notif->setSenderId(auth()->user()->id);
+                    $notif->setType(4);
+                    $notif->setTitle('انتقال بیمه نامه');
+                    $notif->setBody('بیمه نامه مورد نظر با موفقیت انتقال داده شد.');
+
+                    $userNotif=new NotificationUser();
+                    $userNotif->setReceiverId($transfer->sender_id);
+
+                    $this->addNotif($notif,$userNotif);
+
                     $msg='success';
                 }else{
                 $msg='error';

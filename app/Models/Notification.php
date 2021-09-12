@@ -42,6 +42,11 @@ class Notification extends Model
         return "{$this->body}";
     }
 
+    public function getLink(){
+
+        return "{$this->link}";
+    }
+
     public function setSenderId($value){
 
         $this->attributes['sender_id'] = $value;
@@ -57,6 +62,11 @@ class Notification extends Model
 
     public function setBody($value){
         $this->attributes['body'] = $value;
+
+    }
+
+    public function setLink($value){
+        $this->attributes['link'] = $value;
 
     }
 

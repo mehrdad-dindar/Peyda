@@ -37,16 +37,15 @@ class UserController extends Controller
 
         $link = '/panel/edit_profile';
 
-        $notif = Notification::create([
+        $notif=new Notification();
+        $notif->setSenderId(auth()->user()->id);
+        $notif->setType(1);
+        $notif->setLink($link);
 
-            'sender_id' => auth()->user()->id,
-            'type' => 1,
-            'link' => $link
-        ]);
-        NotificationUser::create([
-            'receiver_id' => $user->id,
-            'notification_id' => $notif->id
-        ]);
+        $userNotif=new NotificationUser();
+        $userNotif->setReceiverId($user->id);
+
+        $this->addNotif($notif,$userNotif);
 
 
         return view('dashboard.users.create', compact('user'));
@@ -76,20 +75,20 @@ class UserController extends Controller
         $notifUser=Notification::query()->join('user_notifications as un','un.notification_id','=','notifications.id')->where([['un.receiver_id','=',$user_id],['notifications.type','=',1]])->first(['notifications.id']);
 
         if($notifUser==null) {
-            $notification = Notification::create([
 
-                    'body' => $descriptions,
-                    'sender_id' => $admin_id,
-                    'link' => $link,
-                    'type' => 1,
-                    'title' => 'احراز هویت'
 
-            ]);
+            $notif=new Notification();
+            $notif->setSenderId($admin_id);
+            $notif->setType(1);
+            $notif->setTitle('احراز هویت');
+            $notif->setBody($descriptions);
+            $notif->setLink($link);
 
-            NotificationUser::create([
-                'notification_id' => $notification->id
-                ,'receiver_id' => $user_id
-            ]);
+            $userNotif=new NotificationUser();
+            $userNotif->setReceiverId($user_id);
+
+            $this->addNotif($notif,$userNotif);
+
         }else{
 
             $notification = Notification::query()->where('id','=',$notifUser->id)->update([
