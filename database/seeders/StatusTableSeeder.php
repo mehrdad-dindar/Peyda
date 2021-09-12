@@ -24,6 +24,30 @@ class StatusTableSeeder extends Seeder
 
             'text'                =>          'فعال'
         ]);
+        DB::table('status')->insert([
+
+            'text'                =>          'پرداخت نشده'
+        ]);
+
+        DB::table('status')->insert([
+
+            'text'                =>          'منقضی'
+        ]);
+
+        DB::table('status')->insert([
+
+            'text'                =>          'منتظر آپلود تصاویر'
+        ]);
+
+        DB::table('status')->insert([
+
+            'text'                =>          'منتظر تایید فراگارانتی'
+        ]);
+
+        DB::table('status')->insert([
+
+            'text'                =>          'نقص مدارک'
+        ]);
 
     }
 }
