@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Wallet;
+use App\Models\Wallet_history;
 use Crypt;
 use Exception;
 use App\Models\Commitment_ceiling;
@@ -26,10 +27,10 @@ class PaymentController extends Controller
         $this->middleware('auth');
     }
 
-    public function purchase($invoice_id,Request $request)
+    public function purchase($invoice_id, Request $request)
     {
         $user = Auth::user();
-        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        $wallet = Wallet::where('user_id', "=", auth()->user()->id)->first();
         $cart_detail = Mobile_warranty::find($invoice_id);
         $price_range = Commitment_ceiling::find($cart_detail->price_range)->price;
         $fire_addition_price = 0;
@@ -40,10 +41,12 @@ class PaymentController extends Controller
         $invoice = new Invoice();
         $invoice->amount($amount);
         $paymentId = md5(uniqid());
+        $phone_brand = Phone_brand::find($cart_detail->phone_brand_id)->name;
+        $phone_model = Phone_model::find($cart_detail->phone_model_id)->name;
+
         if ($request->pay_methode == 1) {
             try {
-                $phone_brand = Phone_brand::find($cart_detail->phone_brand_id)->name;
-                $phone_model = Phone_model::find($cart_detail->phone_model_id)->name;
+                $wallet_history = Wallet_history::where('user_id', '=', $user->id)->orderBy('created_at', 'desc')->first();
 
                 /*dd($amount);*/
 
@@ -63,6 +66,8 @@ class PaymentController extends Controller
                     $transaction->transaction_id = $transactionid;
                     $transaction->save();
                 });
+                $wallet_history->status = Transaction::STATUS_SUCCESS;
+                $wallet_history->update();
                 return $payment->pay()->render();
             } catch (PurchaseFailedException | Exception | SoapFault $e) {
                 $transaction->transaction_result = $e;
@@ -76,23 +81,47 @@ class PaymentController extends Controller
                     'wallet' => $wallet,
                 ]);
             }
-        }else{
+        } else {
             $msg = "موجودی کیف پول کافی نیست";
+            if ($invoice->getAmount() > Crypt::decryptString($wallet->value)) {
+                return view('profile.bimeh_all')->with([
+                    'user' => auth()->user(),
+                    'status' => 'failed',
+                    'wallet' => $wallet,
+                    'message' => $msg,
+                    'code' => -41
+                ]);
+            } else {
+                $transaction = $user->transactions()->create([
+                    'user_id' => $user->id,
+                    'mobile_warranty_id' => $invoice_id,
+                    'paid' => $invoice->getAmount(),
+                    'invoice_details' => $invoice,
+                    'peyment_id' => $paymentId,
+                ]);
 
-            if ($invoice->getAmount() > Crypt::decryptString($wallet->value)){
-                /*return view()*/
-                // TODO
-            }else{
-                dd("خرید ثبت شد");
+                $wallet_history = new Wallet_history();
+                $wallet_history->user_id = $user->id;
+                $wallet_history->transaction_id = $transaction->id;
+                $wallet_history->title = 'خرید فراگارانتی ' . $phone_brand . "/" . $phone_model;
+                $wallet_history->value = Crypt::encryptString(0 - $amount);
+                $wallet_history->status = Transaction::STATUS_SUCCESS;
+                $wallet_history->save();
+
+                $user->wallet()->update([
+                    'value'     =>      Crypt::encryptString((int)Crypt::decryptString($wallet->value) -  (int)$amount),
+                ]);
+
+                $wallet = Wallet::where('user_id', "=", auth()->user()->id)->first();
+                $msg = "سفارش شما با موفقیت ثبت شد.";
+                return view('profile.bimeh_all')->with([
+                    'user' => auth()->user(),
+                    'status' => 'success',
+                    'wallet' => $wallet,
+                    'message' => $msg,
+                    'code' => 100
+                ]);
             }
-            $transaction = $user->transactions()->create([
-                'user_id' => $user->id,
-                'mobile_warranty_id' => $invoice_id,
-                'paid' => $invoice->getAmount(),
-                'invoice_details' => $invoice,
-                'peyment_id' => $paymentId,
-            ]);
-                $transaction->save();
         }
     }
 
@@ -108,23 +137,23 @@ class PaymentController extends Controller
 
     public function result(Request $request, $invoice_id)
     {
-        if ($request->missing('peyment_id')){
+        if ($request->missing('peyment_id')) {
             $this->status_failed();
         }
 
-        $transaction = Transaction::where('peyment_id' , $request->peyment_id)->first();
-        if (empty($transaction)){
+        $transaction = Transaction::where('peyment_id', $request->peyment_id)->first();
+        if (empty($transaction)) {
             $this->status_failed();
         }
 
-        if ($transaction->user_id <> Auth::id()){
+        if ($transaction->user_id <> Auth::id()) {
             $this->status_failed();
         }
 
-        if ($transaction->mobile_warranty_id <> $invoice_id){
+        if ($transaction->mobile_warranty_id <> $invoice_id) {
             $this->status_failed();
         }
-        if ($transaction->status <> Transaction::STATUS_PENDING){
+        if ($transaction->status <> Transaction::STATUS_PENDING) {
             $this->status_failed();
         }
 
@@ -153,10 +182,10 @@ class PaymentController extends Controller
                     'user' => auth()->user(),
                     'wallet' => $wallet,
                 ]);
-        }catch (Exception|InvalidPaymentException $e){
-            if ($e->getCode() < 0){
+        } catch (Exception | InvalidPaymentException $e) {
+            if ($e->getCode() < 0) {
                 $transaction->status = Transaction::STATUS_FAILED;
-                $transaction->transaction_result =[
+                $transaction->transaction_result = [
                     'message' => $e->getMessage(),
                     'code' => $e->getCode()
                 ];

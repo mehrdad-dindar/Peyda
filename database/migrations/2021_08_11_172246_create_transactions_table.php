@@ -17,6 +17,7 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->char('peyment_id',32)->index();
             $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->on('users')->references('id');
             $table->unsignedBigInteger('mobile_warranty_id');
             $table->unsignedInteger('paid');
             $table->unsignedTinyInteger('status')->default(1);

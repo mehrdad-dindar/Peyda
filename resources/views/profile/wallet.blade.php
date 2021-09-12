@@ -130,7 +130,7 @@
                                     </td>
                                     <!--end::Title=-->
                                     <!--begin::Value=-->
-                                    <td class="@if($i->value < 0) text-danger @else text-success @endif"><span class="last-price">{{Crypt::decryptString($i->value)}}</span> تومان</td>
+                                    <td class="@if((int)Crypt::decryptString($i->value) < 0) text-danger @else text-success @endif"><span class="last-price">{{(int)Crypt::decryptString($i->value)}}</span> تومان</td>
                                     <!--end::Value=-->
                                     <!--begin::Payment method=-->
                                     <td>
