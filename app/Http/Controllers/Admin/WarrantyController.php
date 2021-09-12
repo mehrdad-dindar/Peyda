@@ -230,9 +230,13 @@ class WarrantyController extends Controller
             $percentage=$request->get('percentage');
             $descriptions = 'استفاده از بیمه نامه شما تایید شده است.';
             WarrantyUse::query()->where('id', '=', $warranty_use_id)->update([
-                'percentage' => $percentage
+                'percentage' => $percentage,
+                'status'=>true
             ]);
         } else {
+            WarrantyUse::query()->where('id', '=', $warranty_use_id)->update([
+                'status'=>false
+            ]);
             $descriptions = $request->get('descriptions');
         }
         $admin_id = auth()->user()->id;

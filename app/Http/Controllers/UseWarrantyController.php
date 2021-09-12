@@ -138,4 +138,9 @@ class UseWarrantyController extends Controller
         }
         return $ok;*/
     }
+
+    public function useAll()
+    {
+        return view('profile.warranty.use_all');
+    }
 }

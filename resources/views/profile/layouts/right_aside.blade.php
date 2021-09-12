@@ -96,6 +96,19 @@
                                 <span class="menu-title">دریافت بیمه نامه</span>
                             </a>
                         </div>
+                        <div class="menu-item">
+                            <a @if(auth()->user()->status==1) class="menu-link"
+                               href="{{ route('receive_create') }}"
+                               @else
+                               class="menu-link disabled-a"
+
+                                @endif >
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">استفاده از بیمه نامه</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
