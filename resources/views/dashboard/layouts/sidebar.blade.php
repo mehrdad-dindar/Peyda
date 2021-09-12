@@ -37,6 +37,7 @@
                             <li><a href="{{route('dashboard')}}/settings/brand">گوشی ها</a></li>
                         </ul>
                     </li>
+                    <li class="active"><a href="{{ route('dashboard') }}"><i class="zmdi zmdi-view-dashboard"></i><span>اعلانات</span></a></li>
                 </ul>
             </nav>
         </div>

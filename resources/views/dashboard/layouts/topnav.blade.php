@@ -99,7 +99,8 @@
                             <div class="heading-title">
                                 <h6>اطلاعیه</h6>
                             </div>
-                            <span>5 جدید</span>
+                            <span>{{\App\Http\Controllers\Controller::getAdminNotification(auth()->user()->id)}}
+                            </span>
                         </div>
 
                         <div class="notifications-box" id="notificationsBox">
