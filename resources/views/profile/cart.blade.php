@@ -20,9 +20,6 @@
                                     <img alt="Logo" src="{{ URL::asset('front/img/Logo.png')}}"/>
                                 </a>
                                 <!--end::Logo-->
-                                <!--begin::Action-->
-                                <a href="{{route('purchase',$invoice_id)}}" class="btn btn-sm btn-success">پرداخت</a>
-                                <!--end::Action-->
                             </div>
                             <!--end::Top-->
                             <!--begin::Wrapper-->
@@ -39,7 +36,9 @@
                                         <!--end::Label-->
                                         <!--end::Col-->
                                         <div
-                                            class="fw-bolder fs-6 text-gray-800 ltr text-start">{{--{{ verta()->format('Y/n/j H:i')}}--}}اعلام پس از تأیید</div>
+                                            class="fw-bolder fs-6 text-gray-800 ltr text-start">{{--{{ verta()->format('Y/n/j H:i')}}--}}
+                                            اعلام پس از تأیید
+                                        </div>
                                         <!--end::Col-->
                                     </div>
                                     <!--end::Col-->
@@ -148,7 +147,10 @@
                                                 <div class="fw-bold pe-10 text-gray-600 fs-7">جمع جزء</div>
                                                 <!--end::Accountname-->
                                                 <!--begin::Label-->
-                                                <div class="text-end fw-bolder fs-6 text-gray-800">{{number_format((int)$fire_addition_price+$price_range, 0, ',', ',')}} تومان</div>
+                                                <div
+                                                    class="text-end fw-bolder fs-6 text-gray-800">{{number_format((int)$fire_addition_price+$price_range, 0, ',', ',')}}
+                                                    تومان
+                                                </div>
                                                 <!--end::Label-->
                                             </div>
                                             <!--end::Item-->
@@ -158,7 +160,7 @@
                                                 <div class="fw-bold pe-10 text-gray-600 fs-7">مالیات 0%</div>
                                                 <!--end::Accountname-->
                                                 <!--begin::Label-->
-                                                <div class="text-end fw-bolder fs-6 text-gray-800">0.00</div>
+                                                <div class="text-end fw-bolder fs-6 text-gray-800">0</div>
                                                 <!--end::Label-->
                                             </div>
                                             <!--end::Item-->
@@ -168,7 +170,10 @@
                                                 <div class="fw-bold pe-10 text-gray-600 fs-7">جمع کل</div>
                                                 <!--end::Code-->
                                                 <!--begin::Label-->
-                                                <div class="text-end fw-bolder fs-6 text-gray-800">{{number_format((int)$fire_addition_price+$price_range, 0, ',', ',')}} تومان</div>
+                                                <div
+                                                    class="text-end fw-bolder fs-6 text-gray-800">{{number_format((int)$fire_addition_price+$price_range, 0, ',', ',')}}
+                                                    تومان
+                                                </div>
                                                 <!--end::Label-->
                                             </div>
                                             <!--end::Item-->
@@ -185,71 +190,69 @@
                     </div>
                     <!--end::Content-->
                     <!--begin::Sidebar-->
-                    <div class="m-0">
+                    <form method="get" action="{{route('purchase',$invoice_id)}}" class="m-0">
                         <!--begin::Invoice 2 sidebar-->
                         <div
                             class="d-print-none border border-dashed border-gray-300 card-rounded h-lg-100 min-w-md-350px p-9 bg-lighten">
-                            <!--begin::Labels-->
+                            <!--begin::Title-->
+                            <h6 class="mb-8 fw-boldest text-gray-600 fs-2 text-hover-primary">شیوه پرداخت</h6>
+                            <!--end::Title-->
+                            <!--begin::Item-->
+                            <div class="mb-6">
+                                <div class="fw-boldest text-gray-600 fs-4 text-hover-primary">زرین پال:</div>
+                                <label
+                                    class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack mb-5">
+                                    <span
+                                        class="form-check-label ms-0 fw-bolder fs-6 text-gray-700">پرداخت امن زرین پال</span>
+                                    <input class="form-check-input" type="radio" checked="checked" name="pay_methode" value="1">
+                                </label>
+                            </div>
+                            <!--end::Item-->
+                            <!--begin::Item-->
+                            <div class="mb-6">
+                                <div class="fw-boldest text-gray-600 fs-4 text-hover-primary">کیف پول:</div>
+                                <label
+                                    class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack mb-5">
+                                    <span class="form-check-label ms-0 fw-bolder fs-6 text-gray-700">پرداخت از اعتبار کیف پول<br>
+                                        <span class="fs-7 text-danger d-flex align-items-center">
+                                            <span id="wallet" class="me-2">{{Crypt::decryptString($wallet->value)}}</span>
+                                            تومان
+                                        </span>
+                                    </span>
+                                    <input class="form-check-input" type="radio" name="pay_methode" value="2">
+                                </label>
+                            </div>
+                            <!--end::Item-->
+                            <!--begin::Item-->
+                            <div class="mb-6">
+                                <div class="fw-bold text-gray-600 fs-7">سیاست حفظ حریم خصوصی</div>
+                                <div class="fw-bolder fs-7 text-gray-500">
+                                    <p>
+                                        اطلاعات شخصی شما برای پردازش سفارش شما<br>
+                                        و پشتیبانی از تجربه شما در این وبسایت<br>
+                                        و برای اهداف دیگری که در <a href="#" class="link-primary ps-1">سیاست حفظ حریم
+                                            خصوصی</a><br>
+                                        توضیح داده شده است استفاده می‌شود.
+                                    </p>
+                                </div>
+                            </div>
+                            <!--end::Item-->
+                            <!--begin::Item-->
+                            <div class="mb-6">
+                                <label class="form-check form-check-custom form-check-solid">
+                                    <input class="form-check-input" type="checkbox" value="" required/>
+                                    <span class="fw-bolder text-gray-800 fs-6 form-check-label">با سیاست حفظ حریم خصوصی موافقم !</span>
+                                </label>
+                            </div>
+                            <!--end::Item-->
                             <div class="mb-8">
-                                <span class="badge badge-light-success me-2">Approved</span>
-                                <span class="badge badge-light-warning">Pending Payment</span>
+                                <!--begin::Action-->
+                                <button type="submit" name="submit" class="btn btn-sm btn-success">پرداخت</button>
+                                <!--end::Action-->
                             </div>
-                            <!--end::Labels-->
-                            <!--begin::Title-->
-                            <h6 class="mb-8 fw-boldest text-gray-600 text-hover-primary">PAYMENT DETAILS</h6>
-                            <!--end::Title-->
-                            <!--begin::Item-->
-                            <div class="mb-6">
-                                <div class="fw-bold text-gray-600 fs-7">Paypal:</div>
-                                <div class="fw-bolder text-gray-800 fs-6">codelabpay@codelab.co</div>
-                            </div>
-                            <!--end::Item-->
-                            <!--begin::Item-->
-                            <div class="mb-6">
-                                <div class="fw-bold text-gray-600 fs-7">Account:</div>
-                                <div class="fw-bolder text-gray-800 fs-6">Nl24IBAN34553477847370033
-                                    <br/>AMB NLANBZTC
-                                </div>
-                            </div>
-                            <!--end::Item-->
-                            <!--begin::Item-->
-                            <div class="mb-15">
-                                <div class="fw-bold text-gray-600 fs-7">Payment Term:</div>
-                                <div class="fw-bolder fs-6 text-gray-800 d-flex align-items-center">14 days
-                                    <span class="fs-7 text-danger d-flex align-items-center">
-													<span class="bullet bullet-dot bg-danger mx-2"></span>Due in 7 days</span>
-                                </div>
-                            </div>
-                            <!--end::Item-->
-                            <!--begin::Title-->
-                            <h6 class="mb-8 fw-boldest text-gray-600 text-hover-primary">PROJECT OVERVIEW</h6>
-                            <!--end::Title-->
-                            <!--begin::Item-->
-                            <div class="mb-6">
-                                <div class="fw-bold text-gray-600 fs-7">Project Name</div>
-                                <div class="fw-bolder fs-6 text-gray-800">SaaS App Quickstarter
-                                    <a href="#" class="link-primary ps-1">View Project</a></div>
-                            </div>
-                            <!--end::Item-->
-                            <!--begin::Item-->
-                            <div class="mb-6">
-                                <div class="fw-bold text-gray-600 fs-7">Completed By:</div>
-                                <div class="fw-bolder text-gray-800 fs-6">Mr. Dewonte Paul</div>
-                            </div>
-                            <!--end::Item-->
-                            <!--begin::Item-->
-                            <div class="m-0">
-                                <div class="fw-bold text-gray-600 fs-7">Time Spent:</div>
-                                <div class="fw-bolder fs-6 text-gray-800 d-flex align-items-center">230 Hours
-                                    <span class="fs-7 text-success d-flex align-items-center">
-													<span
-                                                        class="bullet bullet-dot bg-success mx-2"></span>35$/h Rate</span>
-                                </div>
-                            </div>
-                            <!--end::Item-->
                         </div>
                         <!--end::Invoice 2 sidebar-->
-                    </div>
+                    </form>
                     <!--end::Sidebar-->
                 </div>
                 <!--end::Layout-->
@@ -259,4 +262,9 @@
         <!--end::Invoice 2 main-->
     </div>
     <!--end::Container-->
+@endsection
+@section('custom_js')
+    <script>
+        $('#wallet').number(true, 0);
+    </script>
 @endsection

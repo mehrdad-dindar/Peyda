@@ -8,6 +8,7 @@ use App\Models\Fire_commitment_ceiling;
 use App\Models\Mobile_warranty;
 use App\Models\Phone_brand;
 use App\Models\Phone_model;
+use App\Models\Wallet;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -35,20 +36,26 @@ class MobileWarrantyController extends Controller
         $phone_model_first = Phone_model::query()->where('brand_id', '=', $phone_brand_first->id)->get();
         $commitment_ceilings = Commitment_ceiling::all();
         $fire_commitment_ceilings = Fire_commitment_ceiling::all();
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         return view('profile.bimeh_add')
             ->with('myPhone', $myPhone)
             ->with('brands',$brands)
             ->with('models_first',$phone_model_first)
             ->with('commitment_ceilings', $commitment_ceilings)
             ->with('fire_commitment_ceilings', $fire_commitment_ceilings)
+            ->with('wallet' , $wallet);
             ->with('error',$error);
         //return $phones;
     }
 
     public function bimeh_all()
     {
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         //dd($warranties);
-        return view('profile.bimeh_all')->with(['warranties'=> $this->getWarranties()]);
+        return view('profile.bimeh_all')->with([
+          'warranties'=> $this->getWarranties(),
+          'wallet' => $wallet
+        ]);
     }
     protected function validator(Request $request)
     {
@@ -63,6 +70,7 @@ class MobileWarrantyController extends Controller
     {
         $phone_model_id = '';
         /*dd($request);*/
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         if ($request['warranty_type'] == 2){
             if ($request['new_phone_model'] == null){
 
@@ -77,20 +85,6 @@ class MobileWarrantyController extends Controller
             return $this->bimeh_add('لطفا فیلد بازه قیمت را انتخاب کنید.');
 
         }
-        /*if ($request['imei1'] == null || strlen($request['imei1'])!=15){
-            $phone_brands = Phone_brand::all();
-            $phone_models = Phone_model::all();
-            $commitment_ceilings = Commitment_ceiling::all();
-            $fire_commitment_ceilings = Fire_commitment_ceiling::all();
-
-            return view('profile.bimeh_add')
-                ->with('imei_error','imei')
-                ->with('user', auth()->user())
-                ->with('phone_brands', $phone_brands)
-                ->with('phone_models', $phone_models)
-                ->with('commitment_ceilings', $commitment_ceilings)
-                ->with('fire_commitment_ceilings', $fire_commitment_ceilings);
-        }*/
 
 
         $activation_code = "P_".self::RandomString().time();
@@ -148,12 +142,13 @@ class MobileWarrantyController extends Controller
             $fire_addition_price = Fire_commitment_ceiling::find($invoice_details['fire_addition_price'])->price;
         }
         $price_range = Commitment_ceiling::find($invoice_details['price_range'])->price;
-
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         return view('profile.cart')
             ->with('invoice_details', $invoice_details)
             ->with('phone_model', $phone_model)
             ->with('fire_addition_price', $fire_addition_price)
             ->with('price_range', $price_range)
-            ->with('invoice_id',$id);
+            ->with('invoice_id',$id)
+            ->with('wallet', $wallet);
     }
 }

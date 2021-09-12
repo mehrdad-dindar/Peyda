@@ -10,6 +10,7 @@ use App\Models\NotificationUser;
 use App\Models\Phone_brand;
 use App\Models\Phone_model;
 use App\Models\User;
+use App\Models\Wallet;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -20,19 +21,26 @@ class ProfileController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth','verified']);
+        $this->middleware(['auth', 'verified']);
     }
 
     public function index()
     {
-        return view('profile.index');
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        return view('profile.index')->with([
+            'wallet' => $wallet
+        ]);
     }
 
     public function profile()
     {
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        return view('profile.profile')->with([
+            'wallet' => $wallet
+        ]);
 
-        return view('profile.profile');
     }
+
     public function edit_profile()
     {
 
@@ -40,6 +48,8 @@ class ProfileController extends Controller
         $cities = city::all();
         $phone_brands = Phone_brand::all();
         $phone_models = Phone_model::all();
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+
         if(auth()->user()->status==0){
             $flag=0;
         }else{
@@ -49,7 +59,9 @@ class ProfileController extends Controller
             ->with(['cities'=>$cities,
                     'flag'=>$flag,
                     'phone_brands'=>$phone_brands,
-                    'phone_models'=>$phone_models]);
+                    'phone_models'=>$phone_models,
+                    'wallet' => $wallet
+                   ]);
     }
 
     public function validator(Request $request)
@@ -61,12 +73,13 @@ class ProfileController extends Controller
         ]);
 
     }
+
     protected function save_profile(Request $request)
     {
         /*$this->validator();*/
         /*dd($request['birthday_tmp']);*/
         $v = verta()
-            ->timestamp($request['birthday_tmp']/1000)
+            ->timestamp($request['birthday_tmp'] / 1000)
             ->formatGregorian('Y-m-d 09:i:s');
         $user = User::findOrFail($request['id']);
 

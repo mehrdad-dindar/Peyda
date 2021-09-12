@@ -499,6 +499,15 @@
     </div>
 @endsection
 @section('custom_js')
+    @if(isset($message) && $code != 100)
+        <script>
+            toastr.error("{{$message}}", "خطا");
+        </script>
+    @elseif(isset($message) && $code == 100)
+        <script>
+            toastr.success("{{$message}}", "پرداخت موفق");
+        </script>
+    @endif
 
     @if (isset($success))
         <script>
