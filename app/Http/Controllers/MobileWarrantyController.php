@@ -114,7 +114,7 @@ class MobileWarrantyController extends Controller
                 'transfer_code' => null,
                 'price_range' => $request['price_range'],
                 'fire_gift' => true,
-                'status' => 1,
+                'status' => 0,
                 'addition_fire_commitment_id' => $request['fire_addition_price'],
             ]);
             $data->save();

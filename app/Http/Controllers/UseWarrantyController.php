@@ -39,7 +39,7 @@ class UseWarrantyController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function store(Request $request,$edit=null)
     {
 
         $descriptions = $request->get('descriptions');
@@ -63,13 +63,30 @@ class UseWarrantyController extends Controller
         }
         $warranty = $request->get('warranty_id');
 
-        $warrantyUse = WarrantyUse::create([
-            'descriptions' => $descriptions,
-            'images' => $imageList,
-            'warranty_id' => $warranty,
-            'title' => $title
+        if($edit==null) {
+            $warrantyUse = WarrantyUse::create([
+                'descriptions' => $descriptions,
+                'images' => $imageList,
+                'warranty_id' => $warranty,
+                'title' => $title
 
-        ]);
+            ]);
+            $request_use_warranty_id=$warrantyUse->id;
+        }else{
+
+            $warranty_use = $request->get('use_warranty_id');
+
+            $warrantyUse = WarrantyUse::query()->where('id','=',$warranty_use)->update([
+                'descriptions' => $descriptions,
+                'images' => $imageList,
+                'warranty_id' => $warranty,
+                'title' => $title
+
+            ]);
+
+            $request_use_warranty_id=$warranty_use;
+
+        }
         $msg = null;
         if ($warrantyUse != null) {
 
@@ -85,7 +102,7 @@ class UseWarrantyController extends Controller
             $this->addNotif($notif,$userNotif);
 
             $requestable=new UserRequest();
-            $requestable->setRequestableId($warrantyUse->id);
+            $requestable->setRequestableId($request_use_warranty_id);
             $requestable->setRequestableType('App\Models\WarrantyUse');
 
             $addReq=$this->addRequest($requestable);
@@ -141,6 +158,22 @@ class UseWarrantyController extends Controller
 
     public function useAll()
     {
-        return view('profile.warranty.use_all');
+        $useWarranty=WarrantyUse::query()->join('mobile_warranties as mw','mw.id','=','warranty_uses.warranty_id')
+            ->join('phone_models as pm','pm.id','=','mw.phone_model_id')
+            ->join('users as u','u.id','=','mw.owner_id')
+            ->where('mw.owner_id','=',auth()->user()->id)
+            ->get(['mw.*','warranty_uses.id as wu_id','warranty_uses.title','warranty_uses.descriptions',
+                'warranty_uses.percentage','warranty_uses.status as wu_status','warranty_uses.warranty_id',
+                'pm.name as pm_name']);
+
+        return view('profile.warranty.use_all')->with(['useWarranty'=>$useWarranty]);
+    }
+
+    public function use_edit($id)
+    {
+        $useWarranty=WarrantyUse::find($id);
+        $images=Helpers::getImageFromDb($useWarranty->images);
+        return view('profile.warranty.use_edit', ['warrantyUse'=>$useWarranty,
+                                                        'images'=>$images]);
     }
 }

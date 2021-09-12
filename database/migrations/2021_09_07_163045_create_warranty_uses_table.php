@@ -21,6 +21,7 @@ class CreateWarrantyUsesTable extends Migration
             $table->integer('percentage')->default(0);
             $table->unsignedBigInteger('warranty_id');
             $table->boolean('status')->default(0);
+            $table->boolean('deleted_at')->default(0);
             $table->foreign('warranty_id')
                 ->references('id')
                 ->on('mobile_warranties')

@@ -64,7 +64,7 @@
                                 </td>
 
                                 <td>
-                                    @if($row->s_id==2)
+                                    @if($row->s_id==1)
                                         <span class="badge badge-light-success">فعال</span>
                                     @else
                                         <span class="badge badge-danger">غیر فعال</span>
@@ -480,7 +480,7 @@
 
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">بستن</button>
                                             </div>
                                         </div>
                                     </div>

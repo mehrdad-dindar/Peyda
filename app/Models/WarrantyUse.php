@@ -9,5 +9,5 @@ class WarrantyUse extends Model
 {
     use HasFactory;
     protected $table='warranty_uses';
-    protected $fillable=['title','descriptions','images','warranty_id','percentage'];
+    protected $fillable=['title','descriptions','images','warranty_id','percentage','status'];
 }

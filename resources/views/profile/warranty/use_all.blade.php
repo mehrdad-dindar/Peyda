@@ -29,10 +29,9 @@
                                 </div>
                             </th>
                             <th class="min-w-150px">شناسه</th>
-                            <th class="min-w-140px">تاریخ شروع</th>
-                            <th class="min-w-120px">تاریخ انقضا</th>
-                            <th class="min-w-120px">مبلغ تعهد</th>
-                            <th class="min-w-120px">هدیه همراه</th>
+                            <th class="min-w-120px">مدل گوشی</th>
+                            <th class="min-w-140px">موضوع</th>
+                            <th class="min-w-120px">درصد</th>
                             <th class="min-w-120px">وضعیت</th>
                             <th class="min-w-100px text-end">تغییرات</th>
                         </tr>
@@ -40,11 +39,11 @@
                         <!--end::Table head-->
                         <!--begin::Table body-->
                         <tbody>
-                        @foreach($warranties as $row)
+                        @foreach($useWarranty as $key => $row)
                             <tr>
                                 <td>
                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input widget-13-check" type="checkbox" value="1" />
+                                        <input class="form-check-input widget-13-check" type="checkbox" value="{{$row->wu_id}}" />
                                     </div>
                                 </td>
                                 <td>
@@ -52,19 +51,15 @@
                                 </td>
                                 <td>
                                     <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"></a>
-                                    <span class="text-muted fw-bold text-muted d-block fs-7">از زمان تایید</span>
+                                    <span class="text-muted fw-bold text-muted d-block fs-7">{{$row->pm_name}}</span>
                                 </td>
                                 <td>
-                                    <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">یک سال پس از تایید</a>
+                                    <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">{{$row->title}}</a>
                                 </td>
-                                <td class="text-dark fw-bolder text-hover-primary fs-6">{{App\Helpers\Helpers::toPersianNum($row->cc_price)}}</td>
-                                <td>
-                                    <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">Intertico</a>
-                                    <span class="text-muted fw-bold text-muted d-block fs-7"></span>
-                                </td>
+                                <td class="text-dark fw-bolder text-hover-primary fs-6">{{App\Helpers\Helpers::toPersianNum($row->percentage)}}</td>
 
                                 <td>
-                                    @if($row->s_id==2)
+                                    @if($row->wu_status==1)
                                         <span class="badge badge-light-success">فعال</span>
                                     @else
                                         <span class="badge badge-danger">غیر فعال</span>
@@ -382,7 +377,7 @@
 
                                             <div class="fv-row mb-15" data-kt-buttons="true">
                                                 <!--begin::Option-->
-                                                <label @if(sizeof($warranties)>0) onclick="window.location.href='mobile/use_faraguaranty/{{$row->id}}'" @endif
+                                                <label @if(sizeof($useWarranty)>0) onclick="window.location.href='{{route('bimeh_use_edit',[$row->wu_id])}}'" @endif
                                                 class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6 active">
                                                     <!--begin::Input-->
                                                     <input class="btn-check" type="radio" checked
@@ -419,7 +414,7 @@
                                                         <!--begin::Info-->
 																			<span class="ms-4">
 																				<span
-                                                                                    class="fs-3 fw-bolder text-gray-900 mb-2 d-block">استفاده از فراگارانتی</span>
+                                                                                    class="fs-3 fw-bolder text-gray-900 mb-2 d-block">ویرایش</span>
 																			</span>
                                                         <!--end::Info-->
 																		</span>
@@ -427,60 +422,12 @@
                                                 </label>
                                                 <!--end::Option-->
                                                 <!--begin::Option-->
-                                                <label @if(sizeof($warranties)>0) onclick="window.location.href='mobile/transfer_faraguaranty/{{$row->id}}'" @endif
-                                                class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6">
-                                                    <!--begin::Input-->
-                                                    <input class="btn-check" type="radio" name="warranty_type"
-                                                           value="2"/>
-                                                    <!--end::Input-->
-                                                    <!--begin::Label-->
-                                                    <span class="d-flex" id="new_mobile_select_btn">
-																			<!--begin::Icon-->
-                                                        <!--begin::Svg Icon-->
-																			<span class="svg-icon svg-icon-3hx">
-																				<svg xmlns="http://www.w3.org/2000/svg"
-                                                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                                     width="24px" height="24px"
-                                                                                     viewBox="0 0 24 24" version="1.1">
-																					<g stroke="none" stroke-width="1"
-                                                                                       fill="none" fill-rule="evenodd">
-																						<rect x="5" y="5" width="5"
-                                                                                              height="5" rx="1"
-                                                                                              fill="#000000"/>
-																						<rect x="14" y="5" width="5"
-                                                                                              height="5" rx="1"
-                                                                                              fill="#000000"
-                                                                                              opacity="0.3"/>
-																						<rect x="5" y="14" width="5"
-                                                                                              height="5" rx="1"
-                                                                                              fill="#000000"
-                                                                                              opacity="0.3"/>
-																						<rect x="14" y="14" width="5"
-                                                                                              height="5" rx="1"
-                                                                                              fill="#000000"
-                                                                                              opacity="0.3"/>
-																					</g>
-																				</svg>
-																			</span>
-                                                        <!--end::Svg Icon-->
-                                                        <!--end::Icon-->
-                                                        <!--begin::Info-->
-																			<span class="ms-4">
-																				<span
-                                                                                    class="fs-3 fw-bolder text-gray-900 mb-2 d-block">انتقال فراگارانتی</span>
-																				{{--<span
-                                                                                    class="fw-bold fs-4 text-muted">{{ $user->phone_brand->name." / ".$user->phone_model->name }}</span>--}}
-																			</span>
-                                                        <!--end::Info-->
-																		</span>
-                                                    <!--end::Label-->
-                                                </label>
                                                 <!--end::Option-->
                                             </div>
 
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">بستن</button>
                                         </div>
                                     </div>
                                 </div>

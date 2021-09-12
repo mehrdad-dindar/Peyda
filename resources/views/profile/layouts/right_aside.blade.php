@@ -98,7 +98,7 @@
                         </div>
                         <div class="menu-item">
                             <a @if(auth()->user()->status==1) class="menu-link"
-                               href="{{ route('receive_create') }}"
+                               href="{{ route('use_all') }}"
                                @else
                                class="menu-link disabled-a"
 
