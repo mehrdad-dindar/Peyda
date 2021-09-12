@@ -59,7 +59,7 @@ function addWarranty(){
     var fd = new FormData(myform );
 
     $.ajax({
-        url: 'http://localhost/bdel/public_html/dashboard/postajax',
+        url: 'http://localhost:8000/dashboard/postajax',
         type: 'POST',
         data: fd,
         cache: false,

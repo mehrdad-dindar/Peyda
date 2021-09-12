@@ -27,8 +27,8 @@
                                                 <tr>
                                                     <td>{{$key+1}}</td>
                                                     <td>{{ $row->name }}</td>
-                                                    <td><a href="" class="btn btn-outline-danger btn-sm">حذف</a>
-                                                        <a href="{{route('dashboard')}}/settings/model" class="btn btn-primary btn-sm">اضافه کردن مدل</a>
+                                                    <td><a onclick="javascript: return confirm('آیا اطمینان به حذف دارید؟');" href="{{route('dashboard')}}/settings/brand/delete/{{$row->id}}" class="btn btn-outline-danger btn-sm">حذف</a>
+                                                        <a href="{{ url('dashboard/settings/model/'.$row->id) }}" class="btn btn-primary btn-sm">اضافه کردن مدل</a>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -55,4 +55,6 @@
             </div>
         </div>
     </div>
+@endsection
+@section('custom_js')
 @endsection

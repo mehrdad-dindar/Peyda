@@ -12,7 +12,7 @@
                                 <h4 class="card-title">مدل های برند {{$brand->name}}</h4>
                                 <!-- Table with outer spacing -->
                                 <div class="table-responsive">
-                                    <form method="post" action="{{route('dashboard')}}/settings/brand/store">
+                                    <form method="post" action="{{route('dashboard')}}/settings/model/store/{{$brand->id}}">
                                         @csrf
                                         <table class="table">
                                             <thead>
@@ -27,8 +27,7 @@
                                                 <tr>
                                                     <td>{{$key+1}}</td>
                                                     <td>{{ $row->name }}</td>
-                                                    <td><a href="" class="btn btn-outline-danger btn-sm">حذف</a>
-                                                        <a href="" class="btn btn-primary btn-sm">اضافه کردن مدل</a>
+                                                    <td><a onclick="javascript: return confirm('آیا اطمینان به حذف دارید؟');" href="{{route('dashboard')}}/settings/model/delete/{{$row->id}}/{{$brand->id}}" class="btn btn-outline-danger btn-sm">حذف</a>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -38,7 +37,7 @@
 
                                             <tr>
 
-                                                <td>{{sizeof($brands)+1}}</td>
+                                                <td>@if(sizeof($models)==null || empty($models)) 1 @else {{sizeof($models)+1}} @endif</td>
                                                 <td><input type="text" id="model_name" name="model_name" placeholder="نام"></td>
                                                 <td>
                                                     <button type="submit" class="btn btn-primary btn-sm" style="background-color: green; border-color: greenyellow;">ثبت</button>

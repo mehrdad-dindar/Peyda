@@ -9,10 +9,12 @@
                 <div class="d-flex flex-wrap flex-sm-nowrap mb-3">
                     <!--begin: Pic-->
                     <div class="me-7 mb-4">
-                        <div class="symbol symbol-50px symbol-lg-100px symbol-fixed position-relative">
-                            <img
-                                src="@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif"
-                                alt="image"/>
+                        <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+                            <img src="@if(auth()->user()->avatar)
+                            {{auth()->user()->avatar}}
+                            @else
+                            {{ URL::asset('profile/media/avatars/user.jpg') }}
+                            @endif" alt="image"/>
                             <div
                                 class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
                         </div>
@@ -27,7 +29,7 @@
                                 <!--begin::Name-->
                                 <div class="d-flex align-items-center mb-2">
                                     <a href="{{ route('profile') }}"
-                                       class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">{{ $user->f_name." ".$user->l_name }}</a>
+                                       class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">{{ auth()->user()->f_name." ".auth()->user()->l_name }}</a>
                                     <a href="{{ route('profile') }}">
                                         <!--begin::Svg Icon | path: icons/duotone/Design/Verified.svg-->
                                         <span class="svg-icon svg-icon-1 svg-icon-primary">
@@ -67,7 +69,7 @@
 																</g>
 															</svg>
 														</span>
-                                        @switch($user->user_type)
+                                        @switch(auth()->user()->user_type)
                                             @case('admin')
                                             مدیر سیستم
                                             @break
@@ -82,7 +84,7 @@
                                         @break
                                     @endswitch
                                     <!--end::Svg Icon--></a>
-                                    @if($user->city)
+                                    @if(auth()->user()->city)
                                         <a href="#"
                                            class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                                             <!--begin::Svg Icon | path: icons/duotone/Map/Marker1.svg-->
@@ -99,7 +101,7 @@
 																</g>
 															</svg>
 														</span>
-                                            <!--end::Svg Icon-->{{ $user->city->name }}</a>
+                                            <!--end::Svg Icon-->{{ auth()->user()->city->name }}</a>
                                     @endif
                                     <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
                                         <!--begin::Svg Icon | path: icons/duotone/Communication/Mail-at.svg-->
@@ -111,7 +113,22 @@
                                                                     fill="#000000"/>
 															</svg>
 														</span>
-                                        <!--end::Svg Icon-->{{ $user->email }}</a>
+                                        <!--end::Svg Icon-->{{ auth()->user()->email }}</a>
+                                </div>
+                                <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
+                                    <a href="#"
+                                       class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+                                        <!--begin::Svg Icon | path: icons/duotone/General/User.svg-->
+                                        @if(auth()->user()->status==0)
+                                            <div class="col-lg-8 d-flex align-items-center">
+                                                <span class="badge badge-danger">احراز هویت تایید نشده</span>
+                                            </div>
+                                        @else
+                                            <div class="col-lg-8 d-flex align-items-center">
+                                                <span class="badge badge-success">احراز هویت تایید شده</span>
+                                            </div>
+                                        @endif
+                                        </a>
                                 </div>
                                 <!--end::Info-->
                             </div>
@@ -172,7 +189,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
-                        <span class="fw-bolder fs-6 text-gray-800">{{ $user->f_name." ".$user->l_name }}</span>
+                        <span class="fw-bolder fs-6 text-gray-800">{{ auth()->user()->f_name." ".auth()->user()->l_name }}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -185,7 +202,7 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         <span
-                            class="fw-bold text-gray-800 fs-6">{{ $user->city_id != null ? $user->city->name : "--------" }}</span>
+                            class="fw-bold text-gray-800 fs-6">{{ auth()->user()->city_id != null ? auth()->user()->city->name : "--------" }}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -198,7 +215,7 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         <span
-                            class="fw-bold text-gray-800 fs-6">{{ $user->address != null ? $user->address : "--------" }}</span>
+                            class="fw-bold text-gray-800 fs-6">{{ auth()->user()->address != null ? auth()->user()->address : "--------" }}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -213,9 +230,9 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 d-flex align-items-center">
                         <span
-                            class="fw-bolder fs-6 text-gray-800 me-2">{{ $user->phone_num != null ? $user->phone_num : "--------" }}</span>
-                        @if($user->phone_num)
-                            @if($user->phone_num_verified_at)
+                            class="fw-bolder fs-6 text-gray-800 me-2">{{ auth()->user()->phone_num != null ? auth()->user()->phone_num : "--------" }}</span>
+                        @if(auth()->user()->phone_num)
+                            @if(auth()->user()->phone_num_verified_at)
                                 <span class="badge badge-success">تایید شده</span>
                             @else
                                 <span class="badge badge-danger">تایید نشده</span>
@@ -234,7 +251,7 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         <span
-                            class="fw-bold text-gray-800 fs-6">{{ $user->melli_code != null ? $user->melli_code : "--------" }}</span>
+                            class="fw-bold text-gray-800 fs-6">{{ auth()->user()->melli_code != null ? auth()->user()->melli_code : "--------" }}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -249,9 +266,9 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 d-flex align-items-center">
-                        @if($user->melli_card)
+                        @if(auth()->user()->melli_card)
                             <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                                <img src="{{ $user->melli_card }}" alt="image"/>
+                                <img src="{{ auth()->user()->melli_card }}" alt="image"/>
                                 <div
                                     class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
                             </div>
@@ -275,46 +292,7 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         <span
-                            class="fw-bold text-gray-800 fs-6">{{ $user->birthday != null ? $user->birthday : "--/--/----" }}</span>
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="row mb-7">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">شماره حساب</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8 fv-row">
-                        <span
-                            class="fw-bold text-gray-800 fs-6">{{ $user->bank_id != null ? $user->bank_id : "--------" }}</span>
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="row mb-7">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">شماره شبا</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8 fv-row">
-                        <span
-                            class="fw-bold text-gray-800 fs-6">IR{{ $user->bank_shaba != null ? $user->bank_shaba : "xxxxxxxxxxxxxxxxxxxxxxxx" }}</span>
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                <div class="row mb-7">
-                    <!--begin::Label-->
-                    <label class="col-lg-4 fw-bold text-muted">شماره کارت</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-8 fv-row">
-                        <span
-                            class="fw-bold text-gray-800 fs-6">{{ $user->bank_card != null ? $user->bank_card : "----------------" }}</span>
+                            class="fw-bold text-gray-800 fs-6">{{ auth()->user()->birthday != null ? auth()->user()->birthday : "--/--/----" }}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -327,7 +305,7 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         <span
-                            class="fw-bold text-gray-800 fs-6">{{ $user->phone_brand_id != null ? $user->phone_brand->name : "----------------" }}</span>
+                            class="fw-bold text-gray-800 fs-6">{{ auth()->user()->phone_brand_id != null ? auth()->user()->phone_brand->name : "----------------" }}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -340,7 +318,7 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         <span
-                            class="fw-bold text-gray-800 fs-6">{{ $user->phone_model_id != null ? $user->phone_model->name : "----------------" }}</span>
+                            class="fw-bold text-gray-800 fs-6">{{ auth()->user()->phone_model_id != null ? auth()->user()->phone_model->name : "----------------" }}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -356,9 +334,9 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 d-flex align-items-center">
                         <span
-                            class="fw-bolder fs-6 text-gray-800 me-2">{{ $user->email != null ? $user->email : "xxxxxxx@xxxxx.xxx" }}</span>
-                        @if($user->email)
-                            @if($user->email_verified_at)
+                            class="fw-bolder fs-6 text-gray-800 me-2">{{ auth()->user()->email != null ? auth()->user()->email : "xxxxxxx@xxxxx.xxx" }}</span>
+                        @if(auth()->user()->email)
+                            @if(auth()->user()->email_verified_at)
                                 <span class="badge badge-success">تایید شده</span>
                             @else
                                 <span class="badge badge-danger">تایید نشده</span>
@@ -368,7 +346,7 @@
                     <!--end::Col-->
                 </div>
                 <!--end::Input group-->
-            @if(!$user->status)
+            @if(!auth()->user()->status)
                 <!--begin::Notice-->
                     <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
                         <!--begin::Icon-->

@@ -23,24 +23,36 @@
 
                                 <form id="example-form" method="POST" >
                                 @csrf
-                                    <input type="hidden" name="owner_id" value="{{ $user->id }}">
 
                                     <div>
-                                        <h3>ثبت IMEI</h3>
+                                        <h3>کاربری</h3>
                                         <section>
-                                            <h3>ثبت IMEI</h3>
+                                            <h3>کاربر</h3>
                                             <div class="form-group">
-                                                <label>IMEI1</label>
-                                                <input type="text" name="imei1" class="form-control" aria-describedby="emailHelp" placeholder="imei1">
-                                                <small id="emailHelp" class="form-text text-muted">
-                                                    با استفاده از کد دستوری #06#* کد های IMEI گوشی خود را
-                                                    بدست
-                                                    آورید.
-                                                </small>
+                                                <label for="exampleSelectGender">نام و کدملی کاربر</label>
+                                                <select name="owner_id" class="form-control" id="owner_id">
+                                                    @foreach($users as $key=>$row)
+                                                        <option @if($key==0) selected @endif value="{{$row->id}}">{{$row->f_name. " ". $row->l_name." - ". $row->melli_code}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <h3>انتخاب تلفن همراه</h3>
+                                            <div class="form-group">
+                                                <label for="exampleSelectGender">برند گوشی</label>
+                                                <select name="phone_brand" class="form-control" id="phone_brand">
+                                                    @foreach($phone_brands as $key=>$row)
+                                                        <option @if($key==0) selected @endif value="{{$row->id}}">{{$row->name}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             <div class="form-group">
-                                                <label>IMEI2</label>
-                                                <input type="text" name="imei2" class="form-control" placeholder="imei2">
+                                                <label for="exampleSelectGender">مدل گوشی</label>
+                                                <select name="phone_model" class="form-control" id="phone_model">
+                                                    @foreach($phone_models as $key=>$row)
+                                                        <option @if($key==0) selected @endif value="{{$row->id}}">{{$row->name}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </section>
                                         <h3>تعیین بازه قیمت</h3>
@@ -135,4 +147,36 @@
     <script src="{{URL::asset('admin/js/default-assets/basic-form.js')}}"></script>
     <script src="{{URL::asset('admin/js/default-assets/bootstrap-growl.js')}}"></script>
     <script src="{{URL::asset('admin/js/default-assets/notification-active.js')}}"></script>
+
+    <script>
+
+        $(document).ready(function(){
+
+            $('#phone_brand').on('change',function(){
+
+
+                var new_val = $("#phone_brand option:selected").val();
+                //alert(new_val);
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8000/panel/mobile_change",
+                    cache:false,
+                    data: {"_token": "{{ csrf_token() }}"
+                        ,"id" : new_val},
+                    error: function (xhr) {
+                        alert(xhr.responseText);
+                    },
+                    success: function(data) {
+                        // Check the output of ajax call on firebug console
+                        //console.log(data);
+                        //alert(data);
+                        $('#phone_model').html(data);
+                    }
+                });
+
+            });
+        });
+
+    </script>
+
 @endsection

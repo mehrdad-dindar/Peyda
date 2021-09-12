@@ -23,7 +23,7 @@
                     <div class="me-7 mb-4">
                         <div class="symbol symbol-50px symbol-lg-100px symbol-fixed position-relative">
                             <img
-                                src="@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif"
+                                src="@if(auth()->user()->avatar){{URL::asset('uploads/avatars').'/'.auth()->user()->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif"
                                 alt="image"/>
                             <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
                         </div>
@@ -38,7 +38,7 @@
                                 <!--begin::Name-->
                                 <div class="d-flex align-items-center mb-2">
                                     <a href="{{ route('profile') }}"
-                                       class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">{{ $user->f_name." ".$user->l_name }}</a>
+                                       class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">{{ auth()->user()->f_name." ".auth()->user()->l_name }}</a>
                                     <a href="{{ route('profile') }}">
                                         <!--begin::Svg Icon | path: icons/duotone/Design/Verified.svg-->
                                         <span class="svg-icon svg-icon-1 svg-icon-primary">
@@ -78,7 +78,7 @@
 																</g>
 															</svg>
 														</span>
-                                        @switch($user->user_type)
+                                        @switch(auth()->user()->user_type)
                                             @case('admin')
                                             مدیر سیستم
                                             @break
@@ -93,7 +93,7 @@
                                         @break
                                     @endswitch
                                     <!--end::Svg Icon--></a>
-                                    @if($user->city)
+                                    @if(auth()->user()->city)
                                         <a href="#"
                                            class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                                             <!--begin::Svg Icon | path: icons/duotone/Map/Marker1.svg-->
@@ -110,7 +110,7 @@
 																</g>
 															</svg>
 														</span>
-                                            <!--end::Svg Icon-->{{ $user->city->name }}</a>
+                                            <!--end::Svg Icon-->{{ auth()->user()->city->name }}</a>
                                     @endif
                                     <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
                                         <!--begin::Svg Icon | path: icons/duotone/Communication/Mail-at.svg-->
@@ -122,7 +122,7 @@
                                                                     fill="#000000"/>
 															</svg>
 														</span>
-                                        <!--end::Svg Icon-->{{ $user->email }}</a>
+                                        <!--end::Svg Icon-->{{ auth()->user()->email }}</a>
                                 </div>
                                 <!--end::Info-->
                             </div>
@@ -186,9 +186,11 @@
             @endif
             <!--begin::Form-->
                 <form id="kt_account_profile_details_form" class="form" method="post"
-                      action="{{ route('save_profile_info') }}" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="id" value="{{ $user->id }}">
+                      @if($flag!=1) action="{{ route('save_profile_info') }}"  @endif enctype="multipart/form-data">
+                    @if($flag!=1)
+                        @csrf
+                    @endif
+                    <input type="hidden" name="id" value="{{ auth()->user()->id }}">
                     <!--begin::Card body-->
                     <div class="card-body border-top p-9">
                         <!--begin::Input group-->
@@ -203,7 +205,7 @@
                                      style="background-image: url('{{ URL::asset('profile/media/avatars/user.jpg') }}')">
                                     <!--begin::Preview existing avatar-->
                                     <div class="image-input-wrapper w-125px h-125px"
-                                         style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif')"></div>
+                                         style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif')"></div>
                                     <!--end::Preview existing avatar-->
                                     <!--begin::Label-->
                                     <label
@@ -253,8 +255,8 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="text" name="f_name"
-                                       class="@error('f_name') is-invalid @enderror form-control form-control-lg form-control-solid mb-3 mb-lg-0"
-                                       placeholder="نام " value="{{ $user->f_name }}"/>
+                                       class="disabled-input @error('f_name') is-invalid @enderror form-control form-control-lg form-control-solid mb-3 mb-lg-0" @if($flag==1) disabled @endif
+                                       placeholder="نام " value="{{ auth()->user()->f_name }}"/>
                             </div>
                             <!--end::Col-->
 
@@ -269,8 +271,8 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="text" name="l_name"
-                                       class="@error('l_name') is-invalid @enderror form-control form-control-lg form-control-solid mb-3 mb-lg-0"
-                                       placeholder="نام خانوادگی " value="{{ $user->l_name }}"/>
+                                       class="disabled-input @error('l_name') is-invalid @enderror form-control form-control-lg form-control-solid mb-3 mb-lg-0"  @if($flag==1) disabled @endif
+                                       placeholder="نام خانوادگی " value="{{ auth()->user()->l_name }}"/>
                             </div>
                             <!--end::Col-->
 
@@ -285,9 +287,9 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 {{--<input type="text" class="example1" />--}}
-                                <input type="hidden" value="{{$v = Verta::instance($user->birthday)}}">
+                                <input type="hidden" value="{{$v = Verta::instance(auth()->user()->birthday)}}">
                                 <input class="form-control form-control-solid" id="birthday"
-                                       value="@if($user->birthday != null){{ $v->format('Y-n-j') }}@endif"
+                                       value="@if(auth()->user()->birthday != null){{ $v->format('Y-n-j') }}@endif"
                                        placeholder="--/--/----"/>
                                 <input type="hidden" name="birthday_tmp" id="birthday_tmp"/>
                             </div>
@@ -303,8 +305,8 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="text" name="melli_code"
-                                       class="@error('melli_code') is-invalid @enderror form-control form-control-lg form-control-solid"
-                                       value="@if($user->melli_code != null){{$user->melli_code}}@endif"/>
+                                       class="disabled-input @error('melli_code') is-invalid @enderror form-control form-control-lg form-control-solid"  @if($flag==1) disabled @endif
+                                       value="@if(auth()->user()->melli_code != null){{auth()->user()->melli_code}}@endif"/>
                             </div>
                             <!--end::Col-->
                         </div>
@@ -321,7 +323,7 @@
                                      style="background-image: url('{{ URL::asset('profile/media/mellicard/sample.jpg') }}')">
                                     <!--begin::Preview existing avatar-->
                                     <div class="image-input-wrapper w-225px h-150px"
-                                         style="background-image: url('@if($user->avatar!=null){{URL::asset('melli_cards').'/'.$user->melli_card}}@endif')"></div>
+                                         style="background-image: url('@if(auth()->user()->melli_card!=null){{URL::asset('melli_cards').'/'.auth()->user()->melli_card}}@endif')"></div>
                                     <!--end::Preview existing avatar-->
                                     <!--begin::Label-->
                                     <label
@@ -330,7 +332,7 @@
                                         title="Change avatar">
                                         <i class="bi bi-pencil-fill fs-7"></i>
                                         <!--begin::Inputs-->
-                                        <input type="file" name="melli_card" accept=".png, .jpg, .jpeg"/>
+                                        <input type="file"  @if($flag==1) disabled @endif class="disabled-input" name="melli_card" accept=".png, .jpg, .jpeg"/>
                                         <input type="hidden" name="melli_card_remove"/>
                                         <!--end::Inputs-->
                                     </label>
@@ -373,9 +375,10 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="tel" name="phone_num"
-                                       class="form-control form-control-lg form-control-solid"
+                                       class="disabled-input form-control form-control-lg form-control-solid"
+                                       @if($flag==1) disabled @endif
                                        placeholder="Phone number"
-                                       value="{{$user->phone_num}}"/>
+                                       value="{{auth()->user()->phone_num}}"/>
                             </div>
                             <!--end::Col-->
                         </div>
@@ -390,10 +393,11 @@
                                 <select name="city_id" id="city_id" aria-label="Select a city"
                                         data-control="select2"
                                         data-placeholder="استان محل سکونت خود را انتخاب کنید"
-                                        class="form-select form-select-solid form-select-lg fw-bold">
+                                        class="disabled-input form-select form-select-solid form-select-lg fw-bold"
+                                        @if($flag==1) disabled @endif>
                                     <option value="">انتخاب استان</option>
                                     @foreach($cities as $city)
-                                        <option value="{{$city->id}}" @if($user->city_id == $city->id) selected @endif>{{$city->name}}</option>
+                                        <option value="{{$city->id}}" @if(auth()->user()->city_id == $city->id) selected @endif>{{$city->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -408,8 +412,9 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="text" name="address"
-                                       class="form-control form-control-lg form-control-solid"
-                                       value="{{$user->address}}">
+                                       class="disabled-input form-control form-control-lg form-control-solid"
+                                       @if($flag==1) disabled @endif
+                                       value="{{auth()->user()->address}}">
                             </div>
 
                             <!--end::Col-->
@@ -424,8 +429,9 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="text" name="postal_code"
-                                       class="form-control form-control-lg form-control-solid"
-                                       value="{{$user->postal_code}}">
+                                       class="disabled-input form-control form-control-lg form-control-solid"
+                                       @if($flag==1) disabled @endif
+                                       value="{{auth()->user()->postal_code}}">
                             </div>
                             <!--end::Col-->
                         </div>
@@ -442,10 +448,11 @@
                                 <select name="phone_brand_id" id="phone_brand" aria-label="Select a Country"
                                         data-control="select2"
                                         data-placeholder="برند گوشی خود را انتخاب کنید"
-                                        class="form-select form-select-solid form-select-lg fw-bold">
+                                        class="disabled-input form-select form-select-solid form-select-lg fw-bold"
+                                        @if($flag==1) disabled @endif>
                                     <option value="">انتخاب برند گوشی</option>
                                     @foreach($phone_brands as $brand)
-                                        <option value="{{$brand->id}}" @if($user->phone_brand_id == $brand->id) selected @endif>{{$brand->name}}</option>
+                                        <option value="{{$brand->id}}" @if(auth()->user()->phone_brand_id == $brand->id) selected @endif>{{$brand->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -468,68 +475,19 @@
                                 <select name="phone_model_id" id="phone_model" aria-label="Select a Country"
                                         data-control="select2"
                                         data-placeholder="مدل گوشی خود را انتخاب کنید"
-                                        class="form-select form-select-solid form-select-lg fw-bold">
+                                        class="disabled-input form-select form-select-solid form-select-lg fw-bold"
+                                        @if($flag==1) disabled @endif>
                                     <option value="">انتخاب مدل گوشی</option>
                                     @foreach($phone_models as $model)
                                         <option value="{{$model->id}}"
-                                                @if($user->phone_model_id == $model->id) selected @endif>{{$model->name}}</option>
+                                                @if(auth()->user()->phone_model_id == $model->id) selected @endif>{{$model->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
-                        <!--begin::Input group-->
 
-                        <div class="row mb-6">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label  fw-bold fs-6">شماره شبا</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-6 fv-row">
-                                <div class="input-group ltr">
-                                    <span class="input-group-text" id="basic-addon1">IR</span>
-                                    <input type="text" name="bank_shaba"
-                                           class="@error('shaba') is-invalid @enderror form-control form-control-lg form-control-solid"
-                                           value="{{$user->bank_shaba}}"/>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end::Input group-->
-
-                        <!--begin::Input group-->
-                        <div class="row mb-6">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label  fw-bold fs-6">شماره کارت</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-6 fv-row">
-                                <input type="text" name="bank_card"
-                                       class="@error('bank_card') is-invalid @enderror form-control form-control-lg form-control-solid"
-                                       value="{{$user->bank_card}}"/>
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
-
-                        <!--begin::Input group-->
-                        <div class="row mb-6">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label  fw-bold fs-6">شماره حساب</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-6 fv-row">
-                                <input type="text" name="bank_id"
-                                       class="@error('bank_id') is-invalid @enderror form-control form-control-lg form-control-solid"
-                                       value="{{$user->bank_id}}"/>
-
-                                <div class="form-text">شماره حساب باید به نام شخص باشد
-                                </div>
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
-                    </div>
                     <!--end::Card body-->
                     <!--begin::Actions-->
                     <div class="card-footer d-flex justify-content-end py-6 px-9">
@@ -538,6 +496,7 @@
                         </button>
                     </div>
                     <!--end::Actions-->
+                    </div>
                 </form>
                 <!--end::Form-->
             </div>
@@ -663,16 +622,13 @@
         <!--end::Sign-in Method-->
     </div>
 @endsection
+
 @section('custom_js')
+
     <script src="{{ URL::asset('profile/js/custom/account/settings/signin-methods.js') }}"></script>
 
     <script src="{{ URL::asset('profile/js/custom/p_datepicker/persian-date.min.js')}}"></script>
     <script src="{{ URL::asset('profile/js/custom/p_datepicker/persian-datepicker.min.js')}}"></script>
-    <script>
-        $('#city_id').val('{{$user->city_id}}');
-        $('#phone_brand').val('{{$user->phone_brand_id}}');
-        $('#phone_model').val('{{$user->phone_model_id}}');
-    </script>
     <script type="text/javascript">
         $('#birthday').persianDatepicker({
             observer: true,
@@ -686,15 +642,35 @@
         persianDate().format('x');
     </script>
     <script>
-        $(document).ready(function () {
-            $('#phone_brand').change(function () {
-                let brand_id = this.value;
-                $.get('/get_model?brand=' + brand_id, function (data) {
-                    $('#phone_model').html(data);
-                })
+
+        $(document).ready(function(){
+
+            $('#phone_brand').on('change',function(){
+
+
+                var new_val = $("#phone_brand option:selected").val();
+                //alert(new_val);
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8000/panel/mobile_change",
+                    cache:false,
+                    data: {"_token": "{{ csrf_token() }}"
+                        ,"id" : new_val},
+                    error: function (xhr) {
+                        alert(xhr.responseText);
+                    },
+                    success: function(data) {
+                        // Check the output of ajax call on firebug console
+                        //console.log(data);
+                        //alert(data);
+                        $('#phone_model').html(data);
+                    }
+                });
+
             });
         });
     </script>
+
 
 @endsection
 

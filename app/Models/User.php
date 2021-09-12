@@ -28,7 +28,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'bank_card',
         'bank_id',
         'bank_shaba',
-        'phone_brand_id',
         'phone_model_id',
         'email',
         'password',
@@ -65,11 +64,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(city::class);
     }
 
-    public function Phone_brand()
-    {
-        return $this->belongsTo(Phone_brand::class,'phone_brand_id');
-    }
-
     public function phone_model()
     {
         return $this->belongsTo(Phone_model::class);
@@ -97,4 +91,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Wallet_history::class);
     }
+
+    public function notificationusers()
+    {
+        return $this->belongsToMany(NotificationUser::class);
+    }
+
 }

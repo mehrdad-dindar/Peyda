@@ -101,33 +101,6 @@
 
                                 <!--end::Step 1-->
 
-                                <!--begin::Step 2-->
-                                <div class="stepper-item mx-2 my-4" data-kt-stepper-element="nav">
-                                    <!--begin::Line-->
-                                    <div class="stepper-line w-40px"></div>
-                                    <!--end::Line-->
-
-                                    <!--begin::Icon-->
-                                    <div class="stepper-icon w-40px h-40px">
-                                        <i class="stepper-check fas fa-check"></i>
-                                        <span class="stepper-number">2</span>
-                                    </div>
-                                    <!--begin::Icon-->
-
-                                    <!--begin::Label-->
-                                    <div class="stepper-label">
-                                        <h3 class="stepper-title">
-                                            ثبت IMEI
-                                        </h3>
-
-                                        <div class="stepper-desc">
-                                            Description
-                                        </div>
-                                    </div>
-                                    <!--end::Label-->
-                                </div>
-                                <!--end::Step 2-->
-
                                 <!--begin::Step 3-->
                                 <div class="stepper-item mx-2 my-4" data-kt-stepper-element="nav">
                                     <!--begin::Line-->
@@ -214,7 +187,7 @@
                             <form class="form w-lg-500px mx-auto" novalidate="novalidate"
                                   id="kt_stepper_add_mobile_warranty_form" method="POST" action="{{route('save')}}">
                                 @csrf
-                                <input type="hidden" name="owner_id" value="{{ $user->id }}">
+                                <input type="hidden" name="owner_id" value="{{ auth()->user()->id }}">
                                 <!--begin::Group-->
                                 <div class="mb-5">
                                     <!--begin::Step 1-->
@@ -244,10 +217,8 @@
                                                                name="warranty_type" value="1"/>
                                                         <!--end::Input-->
 
-                                                        <input type="hidden" name="my_phone_brand"
-                                                               value="{{$user->phone_brand_id}}">
                                                         <input type="hidden" name="my_phone_model"
-                                                               value="{{$user->phone_model->id}}">
+                                                               value="{{auth()->user()->phone_model_id}}">
                                                         <!--begin::Label-->
                                                         <span class="d-flex" id="first_select">
 																			<!--begin::Icon-->
@@ -280,7 +251,7 @@
 																				<span
                                                                                     class="fs-3 fw-bolder text-gray-900 mb-2 d-block">فراگارانتی تلفن همراه خودم</span>
 																				<span
-                                                                                    class="fw-bold fs-4 text-muted">{{ $user->phone_brand->name." / ".$user->phone_model->name }}</span>
+                                                                                    class="fw-bold fs-4 text-muted">{{ $myPhone->pb_name." / ".$myPhone->pm_name }}</span>
 																			</span>
                                                             <!--end::Info-->
 																		</span>
@@ -330,7 +301,7 @@
 																				<span
                                                                                     class="fs-3 fw-bolder text-gray-900 mb-2 d-block">فراگارانتی تلفن همراه جدید</span>
 																				{{--<span
-                                                                                    class="fw-bold fs-4 text-muted">{{ $user->phone_brand->name." / ".$user->phone_model->name }}</span>--}}
+                                                                                    class="fw-bold fs-4 text-muted">{{ auth()->user()->phone_brand->name." / ".auth()->user()->phone_model->name }}</span>--}}
 																			</span>
                                                             <!--end::Info-->
 																		</span>
@@ -348,9 +319,9 @@
                                                                     data-placeholder="انتخاب برند"
                                                                     class="form-select form-select-solid form-select-lg fw-bold">
                                                                     <option></option>
-                                                                    @foreach($phone_brands as $brand)
+                                                                    @foreach($brands as $row)
                                                                         <option
-                                                                            value="{{$brand->id}}">{{$brand->name}}</option>
+                                                                            value="{{$row->id}}">{{$row->name}}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -365,7 +336,7 @@
                                                                     data-placeholder="انتخاب مدل"
                                                                     class="form-select form-select-solid form-select-lg fw-bold">
                                                                     <option></option>
-                                                                    @foreach($phone_models as $model)
+                                                                    @foreach($models_first as $model)
                                                                         <option
                                                                             value="{{$model->id}}">{{$model->name}}</option>
                                                                     @endforeach
@@ -381,87 +352,6 @@
                                         <!--end::Type-->
                                     </div>
                                     <!--begin::Step 1-->
-
-                                    <!--begin::Step 2-->
-                                    <div class="flex-column" data-kt-stepper-element="content">
-                                        <!--begin::Wrapper-->
-                                        <div class="w-100">
-                                            <!--begin::Heading-->
-                                            <div class="pb-10 pb-lg-12">
-                                                <!--begin::Title-->
-                                                <h1 class="fw-bolder text-dark">ثبت IMEI</h1>
-                                                <!--end::Title-->
-                                                {{--<!--begin::Description-->
-                                                <div class="text-muted fw-bold fs-4">If you need more info, please check
-                                                    <a href="#" class="link-primary">Project Guidelines</a></div>
-                                                <!--end::Description-->--}}
-                                            </div>
-                                            <!--end::Heading-->
-                                            <!--begin::Input group-->
-                                            <div class="fv-row mb-8">
-                                                <!--begin::Dialer-->
-                                                <div class="position-relative">
-
-                                                    <!--begin::Input group-->
-                                                    <div class="row mb-6 d-none">
-                                                        <!--begin::Label-->
-                                                        <label class="col-lg-4 col-form-label fw-bold fs-6">IMEI
-                                                            2</label>
-                                                        <!--end::Label-->
-                                                        <!--begin::Col-->
-                                                        <div class="col-lg-6 fv-row">
-                                                            <input type="number" minlength="15" maxlength="15"
-                                                                   name="imei2"
-                                                                   class="form-control form-control-lg form-control-solid"
-                                                                   value="">
-                                                        </div>
-
-                                                        <!--end::Col-->
-                                                    </div>
-
-                                                    <!--begin::Input group-->
-                                                    <div class="row mb-6">
-                                                        <!--begin::Label-->
-                                                        <label class="col-lg-4 col-form-label fw-bold fs-6">IMEI
-                                                            1</label>
-                                                        <!--end::Label-->
-                                                        <!--begin::Col-->
-                                                        <div class="col-lg-6 fv-row">
-                                                            <input type="text" name="imei1" minlength="15"
-                                                                   maxlength="15"
-                                                                   class="form-control form-control-lg form-control-solid"
-                                                                   value="" required>
-                                                        </div>
-
-                                                        <!--end::Col-->
-                                                    </div>
-                                                    <!--end::Input group-->
-
-                                                    <div class="row mb-6">
-                                                        <!--begin::Label-->
-                                                        <label class="col-lg-4 col-form-label fw-bold fs-6">IMEI
-                                                            2</label>
-                                                        <!--end::Label-->
-                                                        <!--begin::Col-->
-                                                        <div class="col-lg-6 fv-row">
-                                                            <input type="text" name="imei2" minlength="15"
-                                                                   maxlength="15"
-                                                                   class="form-control form-control-lg form-control-solid"
-                                                                   value="">
-                                                        </div>
-
-                                                        <!--end::Col-->
-                                                    </div>
-                                                    <!--end::Input group-->
-                                                </div>
-                                                <!--end::Dialer-->
-                                            </div>
-                                            <!--end::Input group-->
-                                        </div>
-                                        <!--end::Wrapper-->
-                                    </div>
-
-                                    <!--begin::Step 2-->
 
                                     <!--begin::Step 3-->
                                     <div class="flex-column" data-kt-stepper-element="content">
@@ -561,7 +451,7 @@
                                                                  style="background-image: url('')">
                                                                 <!--begin::Preview existing avatar-->
                                                                 <div class="image-input-wrapper w-125px h-125px"
-                                                                     style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                                                     style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @endif')"></div>
                                                                 <!--end::Preview existing avatar-->
                                                                 <!--begin::Label-->
                                                                 <label
@@ -623,7 +513,7 @@
                                                                  style="background-image: url('')">
                                                                 <!--begin::Preview existing avatar-->
                                                                 <div class="image-input-wrapper w-125px h-125px"
-                                                                     style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                                                     style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @endif')"></div>
                                                                 <!--end::Preview existing avatar-->
                                                                 <!--begin::Label-->
                                                                 <label
@@ -685,7 +575,7 @@
                                                                  style="background-image: url('')">
                                                                 <!--begin::Preview existing avatar-->
                                                                 <div class="image-input-wrapper w-125px h-125px"
-                                                                     style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                                                     style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @endif')"></div>
                                                                 <!--end::Preview existing avatar-->
                                                                 <!--begin::Label-->
                                                                 <label
@@ -744,7 +634,7 @@
                                                                  style="background-image: url('')">
                                                                 <!--begin::Preview existing avatar-->
                                                                 <div class="image-input-wrapper w-125px h-125px"
-                                                                     style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                                                     style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @endif')"></div>
                                                                 <!--end::Preview existing avatar-->
                                                                 <!--begin::Label-->
                                                                 <label
@@ -805,7 +695,7 @@
                                                                  style="background-image: url('')">
                                                                 <!--begin::Preview existing avatar-->
                                                                 <div class="image-input-wrapper w-125px h-125px"
-                                                                     style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                                                     style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @endif')"></div>
                                                                 <!--end::Preview existing avatar-->
                                                                 <!--begin::Label-->
                                                                 <label
@@ -865,7 +755,7 @@
                                                                  style="background-image: url('')">
                                                                 <!--begin::Preview existing avatar-->
                                                                 <div class="image-input-wrapper w-125px h-125px"
-                                                                     style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                                                     style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @endif')"></div>
                                                                 <!--end::Preview existing avatar-->
                                                                 <!--begin::Label-->
                                                                 <label
@@ -925,7 +815,7 @@
                                                                  style="background-image: url('')">
                                                                 <!--begin::Preview existing avatar-->
                                                                 <div class="image-input-wrapper w-125px h-125px"
-                                                                     style="background-image: url('@if($user->avatar){{URL::asset('avatars').'/'.$user->avatar}} @endif')"></div>
+                                                                     style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @endif')"></div>
                                                                 <!--end::Preview existing avatar-->
                                                                 <!--begin::Label-->
                                                                 <label
@@ -1150,7 +1040,35 @@
 @section('custom_js')
     <script src="{{ URL::asset('js/jquery.number.min.js')}}"></script>
     <script src="{{ URL::asset('js/bimeh_add.js')}}"></script>
-    @if(isset($imei_error))
+    <script>
+        $(document).ready(function(){
+
+            $('#new_phone_brand').on('change',function(){
+
+
+                var new_val = $("#new_phone_brand option:selected").val();
+                //alert(new_val);
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8000/panel/mobile_change",
+                    cache:false,
+                    data: {"_token": "{{ csrf_token() }}"
+                    ,"id" : new_val},
+                    error: function (xhr) {
+                        alert(xhr.responseText);
+                    },
+                    success: function(data) {
+                    // Check the output of ajax call on firebug console
+                    //console.log(data);
+                    //alert(data);
+                        $('#new_phone_model').html(data);
+                    }
+                });
+
+            });
+        });
+    </script>
+    @if(isset($error))
         <script>
             toastr.options = {
                 "closeButton": true,
@@ -1169,51 +1087,8 @@
                 "hideMethod": "fadeOut"
             };
 
-            toastr.error("مقدار IMEI صحیح نیست !", "خطا");
+            toastr.error($error);
         </script>
-    @endif
-    @if(isset($price_range_error))
-        <script>
-            toastr.options = {
-                "closeButton": true,
-                "debug": false,
-                "newestOnTop": true,
-                "progressBar": true,
-                "positionClass": "toast-top-center",
-                "preventDuplicates": false,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "5000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            };
 
-            toastr.error(" بازه قیمت دستگاه تلفن همراه الزامیست !", "خطا");
-        </script>
-    @endif
-    @if(isset($new_phone_error))
-        <script>
-            toastr.options = {
-                "closeButton": true,
-                "debug": false,
-                "newestOnTop": true,
-                "progressBar": true,
-                "positionClass": "toast-top-center",
-                "preventDuplicates": false,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "5000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            };
-
-            toastr.error(" برند و مدل دستگاه تلفن جدید الزامیست !", "خطا");
-        </script>
     @endif
 @endsection

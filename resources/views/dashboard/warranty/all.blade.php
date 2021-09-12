@@ -17,8 +17,9 @@
                                         <tr>
                                             <th>ایمیل</th>
                                             <th>بازه قیمت</th>
-                                            <th>برند</th>
+                                            <th>مدل گوشی</th>
                                             <th>کد فعالسازی</th>
+                                            <th>عملیات</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -33,7 +34,7 @@
                                                 <td>{{$warranty -> activation_code}}</td>
 
                                                 <td><a href="#" class="btn btn-outline-danger btn-sm">حذف</a>
-                                                    <a href="#" class="btn btn-primary btn-sm">ویرایش</a>
+                                                    <a href="{{ route('dashboard') }}/warranties/show/{{$warranty->mw_id}}" class="btn btn-primary btn-sm">نمایش</a>
                                                 </td>
                                             </tr>
                                         @endforeach

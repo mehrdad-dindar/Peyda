@@ -67,10 +67,10 @@
                                         <!--end::Label-->
                                         <!--end::Text-->
                                         <div
-                                            class="fw-bolder fs-6 text-gray-800">{{$user->f_name." ".$user->l_name}}</div>
+                                            class="fw-bolder fs-6 text-gray-800">{{auth()->user()->f_name." ".auth()->user()->l_name}}</div>
                                         <!--end::Text-->
                                         <!--end::Description-->
-                                        <div class="fw-bold fs-7 text-gray-600">{{$user->address}}</div>
+                                        <div class="fw-bold fs-7 text-gray-600">{{auth()->user()->address}}</div>
                                         <!--end::Description-->
                                     </div>
                                     <!--end::Col-->
@@ -106,11 +106,9 @@
                                                     <i class="fa fa-genderless text-info fs-2 me-2"></i>فراگارانتی پیدا
                                                     سرویس
                                                     <span class="badge badge-white fs-8">
-                                                        @if($invoice_details['warranty_type'] == 1)
-                                                            {{$user->phone_brand->name."/".$user->phone_model->name}}
-                                                        @else
-                                                            {{$phone_brand."/".$phone_model}}
-                                                        @endif
+
+                                                        {{$phone_model->pb_name."/".$phone_model->pm_name}}
+
                                                     </span>
                                                 </td>
                                                 <td class="pt-6 text-dark fw-boldest text-center">{{ number_format($price_range, 0, ',', ',') }}
