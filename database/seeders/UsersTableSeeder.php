@@ -26,11 +26,17 @@ class UsersTableSeeder extends Seeder
                 'phone_num'             =>          '09191903665',
                 'melli_code'            =>          '0016209400',
                 'birthday'              =>          '1993-10-04 00:11:22',
-                'phone_brand_id'        =>          1,
                 'phone_model_id'        =>          1,
                 'email'                 =>          'mehrdad.replay@gmail.com',
                 'password'              =>          Hash::make('mehrdad?3665'),
                 'email_verified_at'     =>          '2021-08-10 10:11:03',
+                'status'                =>          '1',
+            ]
+        );
+        DB::table('wallets')->insert(
+            [
+                'user_id' => 1,
+                'value' => "eyJpdiI6ImNGQ0tCZnpMRWhIUzA1N1ZKRVNiVlE9PSIsInZhbHVlIjoic2o5ZHBIMThneGw3NWFqTXplYTVvUT09IiwibWFjIjoiMTFiNDA1NmExMGMxNDZlMjk2NTdmYTIwNTJiMmM4Zjk3ZGE4ZWY4ZWJhZDI4NWE3ZjI3NjNkNmZhYjVhZjA2MyIsInRhZyI6IiJ9",
             ]
         );
         DB::table('users')->insert(

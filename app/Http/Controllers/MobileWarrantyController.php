@@ -43,7 +43,7 @@ class MobileWarrantyController extends Controller
             ->with('models_first',$phone_model_first)
             ->with('commitment_ceilings', $commitment_ceilings)
             ->with('fire_commitment_ceilings', $fire_commitment_ceilings)
-            ->with('wallet' , $wallet);
+            ->with('wallet' , $wallet)
             ->with('error',$error);
         //return $phones;
     }
@@ -51,7 +51,7 @@ class MobileWarrantyController extends Controller
     public function bimeh_all()
     {
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
-        //dd($warranties);
+
         return view('profile.bimeh_all')->with([
           'warranties'=> $this->getWarranties(),
           'wallet' => $wallet
@@ -92,10 +92,8 @@ class MobileWarrantyController extends Controller
 
 
         if ($request['warranty_type'] == 1) {
-            $phone_brand_id = $request['my_phone_brand'];
             $phone_model_id = $request['my_phone_model'];
         } else {
-            $phone_brand_id = $request['new_phone_brand'];
             $phone_model_id = $request['new_phone_model'];
         }
         if($request['warranty_type']!=null && $request['price_range']!=null) {

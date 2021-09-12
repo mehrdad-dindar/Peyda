@@ -11,6 +11,7 @@ use App\Models\Phone_brand;
 use App\Models\Phone_model;
 use App\Models\User;
 use App\Models\Wallet;
+use Crypt;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -26,6 +27,7 @@ class ProfileController extends Controller
 
     public function index()
     {
+        /*dd(Crypt::encryptString(50000000));*/
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         return view('profile.index')->with([
             'wallet' => $wallet

@@ -2,7 +2,8 @@
 @section('title','افزایش اعتبار کیف پول')
 @section('custom_head')
     <!--begin::Page Vendor Stylesheets(used by this page)-->
-    <link href="{{ URL::asset('profile/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('profile/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet"
+          type="text/css"/>
     <!--end::Page Vendor Stylesheets-->
 @endsection
 @section('content')
@@ -10,8 +11,8 @@
     <div id="kt_content_container" class="container">
         <!--begin::Layout-->
         <form action="{{route('increase')}}" method="post" class="d-flex flex-column flex-lg-row">
-            @csrf
-            <!--begin::Content-->
+        @csrf
+        <!--begin::Content-->
             <div class="flex-lg-row-fluid mb-10 mb-lg-0 me-lg-7 me-xl-10">
                 <!--begin::Card-->
                 <div class="card pt-4 mb-6 mb-xl-9">
@@ -30,7 +31,9 @@
                                  data-bs-original-title="نمایش مجموع موجودی کیف پول">
                                 <!--begin::Date-->
                                 <div class="fs-6 fw-bolder text-gray-700 text-nowrap">موجودی : <span
-                                        class="badge badge-light-info fs-6"><span class="last-price">{{Crypt::decryptString($wallet->value)}}</span> تومان</span></div>
+                                        class="badge badge-light-info fs-6"><span
+                                            class="last-price">{{Crypt::decryptString($wallet->value)}}</span> تومان</span>
+                                </div>
                                 <!--end::Date-->
                             </div>
                         </div>
@@ -117,11 +120,11 @@
                             <!--end::Table head-->
                             <!--begin::Table body-->
                             <tbody class="fw-bold text-gray-600">
-                            @foreach($history as $i)
+                            @foreach($history as $key=>$i)
                                 <tr>
                                     <!--begin::Transaction Id=-->
                                     <td>
-                                        {{$i->transaction_id}}
+                                        {{$key+1}}
                                     </td>
                                     <!--end::Transaction Id=-->
                                     <!--begin::Title=-->
@@ -130,11 +133,15 @@
                                     </td>
                                     <!--end::Title=-->
                                     <!--begin::Value=-->
-                                    <td class="@if((int)Crypt::decryptString($i->value) < 0) text-danger @else text-success @endif"><span class="last-price">{{(int)Crypt::decryptString($i->value)}}</span> تومان</td>
+                                    <td class="@if((int)Crypt::decryptString($i->value) < 0) text-danger @else text-success @endif">
+                                        <span class="last-price">{{(int)Crypt::decryptString($i->value)}}</span> تومان
+                                    </td>
                                     <!--end::Value=-->
                                     <!--begin::Payment method=-->
                                     <td>
-                                        <span class="badge @if($i->status == false) badge-light-danger @else badge-light-success @endif">@if($i->status == false) خطا در پرداخت @else پرداخت موفق @endif</span>
+                                        <span
+                                            class="badge @if($i->status == false) badge-light-danger @else badge-light-success @endif">@if($i->status == false)
+                                                خطا در پرداخت @else پرداخت موفق @endif</span>
                                     </td>
                                     <!--end::Payment method=-->
                                     <!--begin::Date=-->
@@ -200,46 +207,46 @@
         });
     </script>
     @if(isset($message) && $code != 100)
-    <script>
-        toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": true,
-            "positionClass": "toast-top-center",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        };
-        toastr.error("{{$message}}", "خطا");
-    </script>
+        <script>
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-center",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+            toastr.error("{{$message}}", "خطا");
+        </script>
     @elseif(isset($message) && $code == 100)
-    <script>
-        toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": true,
-            "positionClass": "toast-top-center",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        };
-        toastr.success("{{$message}}", "پرداخت موفق");
-    </script>
+        <script>
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-center",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+            toastr.success("{{$message}}", "پرداخت موفق");
+        </script>
     @endif
 @endsection

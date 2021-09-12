@@ -19,9 +19,12 @@ use Shetabit\Multipay\Exceptions\InvalidPaymentException;
 use Shetabit\Multipay\Invoice;
 use Shetabit\Payment\Facade\Payment;
 use SoapFault;
+use App\Traits\UserMobileWarranties;
 
 class PaymentController extends Controller
 {
+    use UserMobileWarranties;
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -41,12 +44,12 @@ class PaymentController extends Controller
         $invoice = new Invoice();
         $invoice->amount($amount);
         $paymentId = md5(uniqid());
-        $phone_brand = Phone_brand::find($cart_detail->phone_brand_id)->name;
+        /*$phone_brand = Phone_brand::find($cart_detail->phone_brand_id)->name;*/
         $phone_model = Phone_model::find($cart_detail->phone_model_id)->name;
+
 
         if ($request->pay_methode == 1) {
             try {
-                $wallet_history = Wallet_history::where('user_id', '=', $user->id)->orderBy('created_at', 'desc')->first();
 
                 /*dd($amount);*/
 
@@ -60,14 +63,20 @@ class PaymentController extends Controller
 
                 $callbackUrl = route('purchase.result', [$invoice_id, 'peyment_id' => $paymentId]);
                 $payment = Payment::callbackUrl($callbackUrl);
-                $payment->config('description', 'خرید فراگارانتی ' . $phone_brand . "/" . $phone_model);
+                $payment->config('description', 'خرید فراگارانتی ' . $phone_model);
 
                 $payment->purchase($invoice, function ($driver, $transactionid) use ($transaction) {
                     $transaction->transaction_id = $transactionid;
                     $transaction->save();
                 });
-                $wallet_history->status = Transaction::STATUS_SUCCESS;
-                $wallet_history->update();
+
+                $wallet_history = new Wallet_history();
+                $wallet_history->user_id = $user->id;
+                $wallet_history->transaction_id = $transaction->id;
+                $wallet_history->title = 'خرید فراگارانتی ' . $phone_model;
+                $wallet_history->value = Crypt::encryptString(0 - $amount);
+                $wallet_history->status = Transaction::STATUS_PENDING;
+                $wallet_history->save();
                 return $payment->pay()->render();
             } catch (PurchaseFailedException | Exception | SoapFault $e) {
                 $transaction->transaction_result = $e;
@@ -76,19 +85,19 @@ class PaymentController extends Controller
 
                 $wallet = Wallet::where('user_id', "=", auth()->id())->first();
                 return view('profile.bimeh_all')->with([
-                    'user' => auth()->user(),
                     'status' => 'failed',
                     'wallet' => $wallet,
+                    'warranties'=> $this->getWarranties(),
                 ]);
             }
         } else {
             $msg = "موجودی کیف پول کافی نیست";
             if ($invoice->getAmount() > Crypt::decryptString($wallet->value)) {
                 return view('profile.bimeh_all')->with([
-                    'user' => auth()->user(),
                     'status' => 'failed',
                     'wallet' => $wallet,
                     'message' => $msg,
+                    'warranties'=> $this->getWarranties(),
                     'code' => -41
                 ]);
             } else {
@@ -103,7 +112,7 @@ class PaymentController extends Controller
                 $wallet_history = new Wallet_history();
                 $wallet_history->user_id = $user->id;
                 $wallet_history->transaction_id = $transaction->id;
-                $wallet_history->title = 'خرید فراگارانتی ' . $phone_brand . "/" . $phone_model;
+                $wallet_history->title = 'خرید فراگارانتی ' . $phone_model;
                 $wallet_history->value = Crypt::encryptString(0 - $amount);
                 $wallet_history->status = Transaction::STATUS_SUCCESS;
                 $wallet_history->save();
@@ -115,10 +124,10 @@ class PaymentController extends Controller
                 $wallet = Wallet::where('user_id', "=", auth()->user()->id)->first();
                 $msg = "سفارش شما با موفقیت ثبت شد.";
                 return view('profile.bimeh_all')->with([
-                    'user' => auth()->user(),
                     'status' => 'success',
                     'wallet' => $wallet,
                     'message' => $msg,
+                    'warranties'=> $this->getWarranties(),
                     'code' => 100
                 ]);
             }
@@ -131,6 +140,7 @@ class PaymentController extends Controller
         return view('profile.bimeh_all')->with([
             'user' => auth()->user(),
             'status' => 'failed',
+            'warranties'=> $this->getWarranties(),
             'wallet' => $wallet
         ]);
     }
@@ -158,6 +168,7 @@ class PaymentController extends Controller
         }
 
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        $wallet_history = Wallet_history::where('user_id', '=', auth()->id())->orderBy('created_at', 'desc')->first();
         try {
             $cart_detail = Mobile_warranty::find($invoice_id);
             $price_range = Commitment_ceiling::find($cart_detail->price_range)->price;
@@ -181,6 +192,7 @@ class PaymentController extends Controller
                     'code' => 100,
                     'user' => auth()->user(),
                     'wallet' => $wallet,
+                    'warranties'=> $this->getWarranties(),
                 ]);
         } catch (Exception | InvalidPaymentException $e) {
             if ($e->getCode() < 0) {
@@ -194,12 +206,15 @@ class PaymentController extends Controller
                 /*
                  * For manage error use this code ****
                  * */
+                $wallet_history->status = Transaction::STATUS_FAILED;
+                $wallet_history->update();
                 return view('profile.bimeh_all')
                     ->with([
                         'message' => $e->getMessage(),
                         'code' => $e->getCode(),
                         'user' => auth()->user(),
                         'wallet' => $wallet,
+                        'warranties'=> $this->getWarranties(),
                     ]);
             }
         }
