@@ -99,7 +99,11 @@
                             <div class="heading-title">
                                 <h6>اطلاعیه</h6>
                             </div>
-                            <span>{{\App\Http\Controllers\Controller::getAdminNotification(auth()->user()->id)}}
+                            <span>@if(sizeof(\App\Http\Controllers\Controller::getAdminNotification(auth()->user()->id))>0)
+                                    {{\App\Helpers\Helpers::toPersianNumOnly(sizeof(\App\Http\Controllers\Controller::getAdminNotification(auth()->user()->id)))}}   جدید
+                                @else
+                                پیامی وجود ندارد
+                              @endif
                             </span>
                         </div>
 
