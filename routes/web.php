@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Admin;
-use \App\Http\Controllers\Admin\Shop\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
