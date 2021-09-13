@@ -26,14 +26,14 @@ class MobileWarrantyController extends Controller
 
     public function bimeh_add($error = '')
     {
-        $myPhone = Phone_model::join('phone_brands as pb', 'phone_models.brand_id', '=', 'pb.id')
+        $myPhone = Phone_model::join('phone_brands as pb', 'phone_models.phone_brand_id', '=', 'pb.id')
             ->join('users as u', 'phone_models.id', '=', 'u.phone_model_id')
             ->first(['pb.name as pb_name', 'phone_models.name as pm_name',
                 'phone_models.id as pm_id', 'pb.id as pb_id']);
 
         $brands = Phone_brand::all();
         $phone_brand_first = Phone_brand::query()->first();
-        $phone_model_first = Phone_model::query()->where('brand_id', '=', $phone_brand_first->id)->get();
+        $phone_model_first = Phone_model::query()->where('phone_brand_id', '=', $phone_brand_first->id)->get();
         $commitment_ceilings = Commitment_ceiling::all();
         $fire_commitment_ceilings = Fire_commitment_ceiling::all();
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
