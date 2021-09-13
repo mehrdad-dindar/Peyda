@@ -38,7 +38,6 @@ class Controller extends BaseController
         $notificationSeen=NotificationUser::query()->where('receiver_id','=',$id)
             ->rightJoin('notifications as n', 'user_notifications.notification_id', '=', 'n.id')
             ->rightJoin('notification_types as nt','n.type','=','nt.id')
-            ->where('n.seen','=',1)
             ->where('user_notifications.done','=',0);
 
         $notification=NotificationUser::query()
