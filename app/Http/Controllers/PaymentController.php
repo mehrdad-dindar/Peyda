@@ -34,6 +34,7 @@ class PaymentController extends Controller
     {
         $user = Auth::user();
         $wallet = Wallet::where('user_id', "=", auth()->user()->id)->first();
+        $mobilewarranty = Mobile_warranty::where('owner_id', "=", auth()->user()->id)->orderBy('updated_at', 'desc')->first();
         $cart_detail = Mobile_warranty::find($invoice_id);
         $price_range = Commitment_ceiling::find($cart_detail->price_range)->price;
         $fire_addition_price = 0;
@@ -77,11 +78,16 @@ class PaymentController extends Controller
                 $wallet_history->value = Crypt::encryptString(0 - $amount);
                 $wallet_history->status = Transaction::STATUS_PENDING;
                 $wallet_history->save();
+                $mobilewarranty->status = 5;
+                $mobilewarranty->save();
                 return $payment->pay()->render();
             } catch (PurchaseFailedException | Exception | SoapFault $e) {
                 $transaction->transaction_result = $e;
                 $transaction->status = Transaction::STATUS_FAILED;
                 $transaction->save();
+
+                $mobilewarranty->status = 8;
+                $mobilewarranty->save();
 
                 $wallet = Wallet::where('user_id', "=", auth()->id())->first();
                 return view('profile.bimeh_all')->with([
@@ -92,6 +98,9 @@ class PaymentController extends Controller
             }
         } else {
             $msg = "موجودی کیف پول کافی نیست";
+
+            $mobilewarranty->status = 3;
+            $mobilewarranty->save();
             if ($invoice->getAmount() > Crypt::decryptString($wallet->value)) {
                 return view('profile.bimeh_all')->with([
                     'status' => 'failed',
@@ -116,6 +125,9 @@ class PaymentController extends Controller
                 $wallet_history->value = Crypt::encryptString(0 - $amount);
                 $wallet_history->status = Transaction::STATUS_SUCCESS;
                 $wallet_history->save();
+
+                $mobilewarranty->status = 5;
+                $mobilewarranty->save();
 
                 $user->wallet()->update([
                     'value'     =>      Crypt::encryptString((int)Crypt::decryptString($wallet->value) -  (int)$amount),
@@ -147,11 +159,12 @@ class PaymentController extends Controller
 
     public function result(Request $request, $invoice_id)
     {
+        $transaction = Transaction::where('peyment_id', $request->peyment_id)->first();
+        $mobilewarranty = Mobile_warranty::where('owner_id', "=", auth()->user()->id)->orderBy('updated_at', 'desc')->first();
         if ($request->missing('peyment_id')) {
             $this->status_failed();
         }
 
-        $transaction = Transaction::where('peyment_id', $request->peyment_id)->first();
         if (empty($transaction)) {
             $this->status_failed();
         }
@@ -185,6 +198,10 @@ class PaymentController extends Controller
             $transaction->transaction_result = $receipt;
             $transaction->status = Transaction::STATUS_SUCCESS;
             $transaction->save();
+            $mobilewarranty->status = 5;
+            $mobilewarranty->save();
+
+
 
             return view('profile.bimeh_all')
                 ->with([
@@ -202,6 +219,8 @@ class PaymentController extends Controller
                     'code' => $e->getCode()
                 ];
                 $transaction->save();
+                $mobilewarranty->status = 8;
+                $mobilewarranty->save();
 
                 /*
                  * For manage error use this code ****
