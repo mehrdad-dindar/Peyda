@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App;
 use DB;
 use Hash;
 use Illuminate\Database\Seeder;
+use \App\Casts\EncryptCast;
 
 class UsersTableSeeder extends Seeder
 {
@@ -33,10 +35,17 @@ class UsersTableSeeder extends Seeder
                 'status'                =>          '1',
             ]
         );
+        $crypt = new EncryptCast();
         DB::table('wallets')->insert(
             [
                 'user_id' => 1,
-                'value' => "eyJpdiI6ImNGQ0tCZnpMRWhIUzA1N1ZKRVNiVlE9PSIsInZhbHVlIjoic2o5ZHBIMThneGw3NWFqTXplYTVvUT09IiwibWFjIjoiMTFiNDA1NmExMGMxNDZlMjk2NTdmYTIwNTJiMmM4Zjk3ZGE4ZWY4ZWJhZDI4NWE3ZjI3NjNkNmZhYjVhZjA2MyIsInRhZyI6IiJ9",
+                'value' => $crypt->set(null,$_ENV['APP_CRYPT'],'25000000',[])[$_ENV['APP_CRYPT']],
+            ]
+        );
+        DB::table('peyda_encrypts')->insert(
+            [
+                'id' => 1,
+                'value' => 'base64:5nYPhLUjXYSgCsUU7JRpdZM55bJlXsZhcOSJfvNdpQw=',
             ]
         );
         DB::table('users')->insert(
