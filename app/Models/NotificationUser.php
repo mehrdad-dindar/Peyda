@@ -23,7 +23,7 @@ class NotificationUser extends Model
 
     public function notifications()
     {
-        return $this->hasMany(Notification::class);
+        return $this->belongsTo(Notification::class);
     }
 
 
