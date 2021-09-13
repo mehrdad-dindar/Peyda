@@ -70,4 +70,9 @@ class Notification extends Model
 
     }
 
+    public function notification_types()
+    {
+        return $this->belongsTo( NotifactionType::class);
+    }
+
 }
