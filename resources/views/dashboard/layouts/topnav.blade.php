@@ -89,8 +89,8 @@
 
             <li class="nav-item dropdown">
                 <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false"><i class="zmdi zmdi-volume-up" aria-hidden="true"></i> <span
-                        class="active-status"></span></button>
+                        aria-expanded="false"><i class="zmdi zmdi-volume-up" aria-hidden="true"></i> @if(sizeof(\App\Http\Controllers\Controller::getAdminNotification(auth()->user()->id))>0) <span
+                        class="active-status"></span> @endif </button>
                 <div class="dropdown-menu dropdown-menu-right">
                     <!-- Top Notifications Area -->
                     <div class="top-notifications-area">
@@ -99,22 +99,19 @@
                             <div class="heading-title">
                                 <h6>اطلاعیه</h6>
                             </div>
-                            <span>5 جدید</span>
+                            <span>@if(sizeof(\App\Http\Controllers\Controller::getAdminNotification(auth()->user()->id))>0)
+                                    {{sizeof(\App\Http\Controllers\Controller::getAdminNotification(auth()->user()->id))}}   جدید
+                                @else
+                                پیامی وجود ندارد
+                              @endif
+                            </span>
                         </div>
 
                         <div class="notifications-box" id="notificationsBox">
-                            <a href="#" class="dropdown-item"><i class="ti-face-smile bg-success"></i><span>ما یک چیزی برای شما داریم!</span></a>
-                            <a href="#" class="dropdown-item"><i
-                                    class="zmdi zmdi-notifications-active bg-danger"></i><span>نام دامنه در روز سه شنبه منقضی می شود</span></a>
-                            <a href="#" class="dropdown-item"><i class="ti-check"></i><span>کمیسیون های شما ارسال شده است</span></a>
-                            <a href="#" class="dropdown-item"><i class="ti-heart bg-success"></i><span>شما یک مورد را فروختید!</span></a>
-
-                            <a href="#" class="dropdown-item"><i class="ti-face-smile bg-success"></i><span>ما یک چیزی برای شما داریم!</span></a>
-                            <a href="#" class="dropdown-item"><i
-                                    class="zmdi zmdi-notifications-active bg-danger"></i><span>نام دامنه در روز سه شنبه منقضی می شود</span></a>
-                            <a href="#" class="dropdown-item"><i class="ti-check"></i><span>کمیسیون های شما ارسال شده است</span></a>
-                            <a href="#" class="dropdown-item"><i class="ti-heart bg-success"></i><span>شما یک مورد را فروختید!</span></a>
-
+                            @foreach(\App\Http\Controllers\Controller::getAdminNotification(auth()->user()->id) as $row)
+                                <a href="{{$row->link}}" class="dropdown-item"><i
+                                        class="zmdi zmdi-notifications-active bg-danger"></i><span>{{$row->body}}</span></a>
+                            @endforeach
                         </div>
                     </div>
                 </div>

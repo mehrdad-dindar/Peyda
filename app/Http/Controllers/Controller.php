@@ -33,5 +33,22 @@ class Controller extends BaseController
 
         return $notification;
     }
+    public static function getAdminNotification($id)
+    {
+        $notificationSeen=NotificationUser::query()->where('receiver_id','=',$id)
+            ->rightJoin('notifications as n', 'user_notifications.notification_id', '=', 'n.id')
+            ->rightJoin('notification_types as nt','n.type','=','nt.id')
+            ->where('user_notifications.done','=',0);
+
+        $notification=NotificationUser::query()
+            ->rightJoin('notifications as n', 'user_notifications.notification_id', '=', 'n.id')
+            ->rightJoin('notification_types as nt','n.type','=','nt.id')
+            ->whereNull('receiver_id')
+            ->where('user_notifications.done','=',0)
+            ->union($notificationSeen)
+            ->get();
+
+        return $notification;
+    }
 
 }

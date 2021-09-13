@@ -18,7 +18,7 @@ class Notification extends Model
 
     public function notificationuser()
     {
-        return $this->belongsTo(NotificationUser::class);
+        return $this->hasMany(NotificationUser::class);
     }
 
 
@@ -68,6 +68,11 @@ class Notification extends Model
     public function setLink($value){
         $this->attributes['link'] = $value;
 
+    }
+
+    public function notification_types()
+    {
+        return $this->belongsTo( NotifactionType::class);
     }
 
 }
