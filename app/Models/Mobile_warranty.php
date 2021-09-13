@@ -19,7 +19,7 @@ class Mobile_warranty extends Model
         'activation_code',
         'activation_date',
         'transfer_code',
-        'price_range',
+        'commitment_ceiling_id',
         'fire_gift',
         'status',
         'addition_fire_commitment_id',
@@ -42,5 +42,10 @@ class Mobile_warranty extends Model
     public function User()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function phone_model()
+    {
+        return $this->belongsTo(Phone_model::class);
     }
 }

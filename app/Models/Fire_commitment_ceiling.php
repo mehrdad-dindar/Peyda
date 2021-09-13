@@ -11,6 +11,6 @@ class Fire_commitment_ceiling extends Model
 
     public function Mobile_warranty()
     {
-        $this->hasMany(Mobile_warranty::class);
+        return $this->hasMany(Mobile_warranty::class,'');
     }
 }

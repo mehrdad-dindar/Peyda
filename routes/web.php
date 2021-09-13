@@ -18,8 +18,9 @@ use \App\Casts\EncryptCast;
 /* front */
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('/test', function (){
-    $ttt = new EncryptCast();
-    dd($ttt->get('','','eyJpdiI6InhxcnpDRHNTRGp4OGlFZnJWUWlybFE9PSIsInZhbHVlIjoiOTMzZTE1VmhqWk5YOFFmNUxYWnpwZz09IiwibWFjIjoiNGM5MWYxOWE4MmJhY2JjZTdlNzk1ZGQ4Njc3YTQ0MDZlMDRhYWY1MzlmYzczYzE3MWY3ODVjNDIzZjMxYjY5NyIsInRhZyI6IiJ9',[]));
+    dd(auth()->user()->id);
+    /*$ttt = new EncryptCast();
+    dd($ttt->get('','','eyJpdiI6InhxcnpDRHNTRGp4OGlFZnJWUWlybFE9PSIsInZhbHVlIjoiOTMzZTE1VmhqWk5YOFFmNUxYWnpwZz09IiwibWFjIjoiNGM5MWYxOWE4MmJhY2JjZTdlNzk1ZGQ4Njc3YTQ0MDZlMDRhYWY1MzlmYzczYzE3MWY3ODVjNDIzZjMxYjY5NyIsInRhZyI6IiJ9',[]));*/
     /*config()->set('values.myval','Mehrdad');
     ddd(config()->get('values.myval'));*/
 });

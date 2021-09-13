@@ -127,7 +127,7 @@
                                     <!--end::Label-->
                                 </div>
                                 <!--end::Step 3-->
-
+{{--
                                 <!--begin::Step 4-->
                                 <div class="stepper-item mx-2 my-4" data-kt-stepper-element="nav">
                                     <!--begin::Line-->
@@ -153,8 +153,8 @@
                                     </div>
                                     <!--end::Label-->
                                 </div>
-                                <!--end::Step 4-->
-                                <!--begin::Step 5-->
+                                <!--end::Step 4-->--}}
+                                <!--begin::Step 4-->
                                 <div class="stepper-item mx-2 my-4" data-kt-stepper-element="nav">
                                     <!--begin::Line-->
                                     <div class="stepper-line w-40px"></div>
@@ -163,23 +163,23 @@
                                     <!--begin::Icon-->
                                     <div class="stepper-icon w-40px h-40px">
                                         <i class="stepper-check fas fa-check"></i>
-                                        <span class="stepper-number">5</span>
+                                        <span class="stepper-number">4</span>
                                     </div>
                                     <!--begin::Icon-->
 
                                     <!--begin::Label-->
                                     <div class="stepper-label">
                                         <h3 class="stepper-title">
-                                            هدیه بیمه آتش سوزی فراگارانتی
+                                            هدیه همراه فراگارانتی
                                         </h3>
 
                                         <div class="stepper-desc">
-                                            Description
+                                            بیمه آتش سوزی منزل مسکونی
                                         </div>
                                     </div>
                                     <!--end::Label-->
                                 </div>
-                                <!--end::Step 5-->
+                                <!--end::Step 4-->
                             </div>
                             <!--end::Nav-->
 
@@ -417,7 +417,7 @@
 
                                     <!--begin::Step 3-->
 
-                                    <!--begin::Step 4-->
+                                    {{--<!--begin::Step 4-->
                                     <div class="flex-column" data-kt-stepper-element="content">
                                         <!--begin::Wrapper-->
                                         <div class="w-100">
@@ -426,10 +426,10 @@
                                                 <!--begin::Title-->
                                                 <h1 class="fw-bolder text-dark">آپلود عکس موبایل</h1>
                                                 <!--end::Title-->
-                                                {{--<!--begin::Title-->
+                                                --}}{{--<!--begin::Title-->
                                                 <div class="text-muted fw-bold fs-4">If you need more info, please check
                                                     <a href="#" class="link-primary">Project Guidelines</a></div>
-                                                <!--end::Title-->--}}
+                                                <!--end::Title-->--}}{{--
                                             </div>
                                             <!--end::Heading-->
 
@@ -869,16 +869,16 @@
                                         </div>
                                         <!--end::Wrapper-->
                                     </div>
-                                    <!--begin::Step 4-->
+                                    <!--begin::Step 4-->--}}
 
-                                    <!--begin::Step 5-->
+                                    <!--begin::Step 4-->
                                     <div class="flex-column" data-kt-stepper-element="content">
                                         <!--begin::Wrapper-->
                                         <div class="w-100">
                                             <!--begin::Heading-->
                                             <div class="pb-12">
                                                 <!--begin::Title-->
-                                                <h1 class="fw-bolder text-dark">هدیه بیمه آتش سوزی فراگارانتی</h1>
+                                                <h1 class="fw-bolder text-dark">هدیه بیمه آتش سوزی پیدا سرویس</h1>
                                                 <!--end::Title-->
                                                 {{--<!--begin::Description-->
                                                 <div class="text-muted fw-bold fs-4">If you need more info, please check
@@ -913,7 +913,7 @@
                                                 <div class="d-flex flex-stack flex-grow-1">
                                                     <!--begin::Content-->
                                                     <div class="fw-bold">
-                                                        <h4 class="text-primary fw-bolder">هدیه پوشش بیمه آتش سوزی</h4>
+                                                        <h4 class="text-primary fw-bolder">بیمه آتش سوزی منزل مسکونی</h4>
                                                         <div class="fs-6 text-primary">تا سقف 50 میلیون تومان</div>
                                                     </div>
                                                     <!--end::Content-->
@@ -986,7 +986,7 @@
                                         </div>
                                         <!--end::Wrapper-->
                                     </div>
-                                    <!--begin::Step 5-->
+                                    <!--begin::Step 4-->
                                 </div>
                                 <!--end::Group-->
 

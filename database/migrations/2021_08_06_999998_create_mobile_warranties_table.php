@@ -22,7 +22,7 @@ class CreateMobileWarrantiesTable extends Migration
             $table->timeStamp('activation_date')->nullable();
             $table->string('transfer_code')->nullable();
             $table->string('images')->nullable();
-            $table->unsignedBigInteger('price_range')->nullable;
+            $table->unsignedBigInteger('commitment_ceiling_id')->nullable;
             $table->boolean('fire_gift')->default(false);
             $table->unsignedBigInteger('status');
             $table->integer('usable_percentage')->default(100);
@@ -38,7 +38,7 @@ class CreateMobileWarrantiesTable extends Migration
                 ->references('id')
                 ->on('phone_models')
                 ->onDelete('cascade');
-            $table->foreign('price_range')
+            $table->foreign('commitment_ceiling_id')
                 ->references('id')
                 ->on('commitment_ceilings')
                 ->onDelete('cascade');

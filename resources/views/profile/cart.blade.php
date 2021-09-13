@@ -25,7 +25,7 @@
                             <!--begin::Wrapper-->
                             <div class="m-0">
                                 <!--begin::Label-->
-                                <div class="fw-bolder fs-3 text-gray-800 mb-8">شماره فاکتور : #{{$invoice_id}}</div>
+                                <div class="fw-bolder fs-3 text-gray-800 mb-8">شماره فاکتور : #{{$invoice->id}}</div>
                                 <!--end::Label-->
                                 <!--begin::Row-->
                                 <div class="row g-5 mb-11">
@@ -107,28 +107,28 @@
                                                     سرویس
                                                     <span class="badge badge-white fs-8">
 
-                                                        {{$phone_model->pb_name."/".$phone_model->pm_name}}
+                                                        {{--{{dd(50+((int)$invoice->Fire_commitment_ceiling->addition_price))}}--}}
 
                                                     </span>
                                                 </td>
-                                                <td class="pt-6 text-dark fw-boldest text-center">{{ number_format($price_range, 0, ',', ',') }}
+                                                <td class="pt-6 text-dark fw-boldest text-center">{{ number_format($invoice->Commitment_ceiling->price, 0, ',', ',') }}
                                                     تومان
                                                 </td>
                                             </tr>
                                             <tr class="fw-bolder text-gray-700 fs-5 text-end">
                                                 <td class="d-flex align-items-center">
                                                     <i class="fa fa-genderless text-success fs-2 me-2"></i>بیمه آتش سوزی
-                                                    @if($invoice_details['fire_addition_price'] != null)
+                                                    @if($invoice->addition_fire_commitment_id != null)
                                                         <span class="badge badge-white fs-8">
-                                                            سقف تعهد {{ 50+($invoice_details['fire_addition_price']*10)}} میلیون تومان
+                                                            سقف تعهد {{ 50+((int)$invoice->Fire_commitment_ceiling->addition_price)}} میلیون تومان
                                                         </span>
                                                     @endif
                                                 </td>
                                                 <td class="fs-5 text-dark fw-boldest text-center">
-                                                    @if($invoice_details['fire_addition_price'] == 0)
+                                                    @if($invoice->addition_fire_commitment_id == 0)
                                                         0 تومان
                                                     @else
-                                                        {{ number_format($fire_addition_price, 0, ',', ',') }}
+                                                        {{ number_format($invoice->Fire_commitment_ceiling->price, 0, ',', ',') }}
                                                         تومان
                                                     @endif
                                                 </td>
@@ -148,7 +148,7 @@
                                                 <!--end::Accountname-->
                                                 <!--begin::Label-->
                                                 <div
-                                                    class="text-end fw-bolder fs-6 text-gray-800">{{number_format((int)$fire_addition_price+$price_range, 0, ',', ',')}}
+                                                    class="text-end fw-bolder fs-6 text-gray-800">{{number_format($invoice->Fire_commitment_ceiling->price+$invoice->Commitment_ceiling->price, 0, ',', ',')}}
                                                     تومان
                                                 </div>
                                                 <!--end::Label-->
@@ -171,7 +171,7 @@
                                                 <!--end::Code-->
                                                 <!--begin::Label-->
                                                 <div
-                                                    class="text-end fw-bolder fs-6 text-gray-800">{{number_format((int)$fire_addition_price+$price_range, 0, ',', ',')}}
+                                                    class="text-end fw-bolder fs-6 text-gray-800">{{number_format($invoice->Fire_commitment_ceiling->price+$invoice->Commitment_ceiling->price, 0, ',', ',')}}
                                                     تومان
                                                 </div>
                                                 <!--end::Label-->
@@ -190,7 +190,7 @@
                     </div>
                     <!--end::Content-->
                     <!--begin::Sidebar-->
-                    <form method="get" action="{{route('purchase',$invoice_id)}}" class="m-0">
+                    <form method="get" action="{{route('purchase',$invoice->id)}}" class="m-0">
                         <!--begin::Invoice 2 sidebar-->
                         <div
                             class="d-print-none border border-dashed border-gray-300 card-rounded h-lg-100 min-w-md-350px p-9 bg-lighten">
