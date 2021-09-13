@@ -61,15 +61,15 @@
                                 </td>
                                 <td class="text-dark fw-bolder text-hover-primary fs-6">{{--{{App\Helpers\Helpers::toPersianNum($row->cc_price)}}--}}</td>
                                 <td>
-                                    <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">Intertico</a>
+                                    <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">@if($row->fire_gift==1)بیمه آتش سوزی@endif</a>
                                     <span class="text-muted fw-bold text-muted d-block fs-7"></span>
                                 </td>
 
                                 <td>
                                     @if($row->s_id==2)
-                                        <span class="badge badge-light-success">فعال</span>
-                                    @elseif($row->s_id==1)
-                                        <span class="badge badge-danger">غیر فعال</span>
+                                        <span class="badge badge-light-success">{{$row->s_name}}</span>
+                                    @else
+                                        <span class="badge badge-danger">{{$row->s_name}}</span>
                                     @endif
                                 </td>
                                 <td class="text-end">
