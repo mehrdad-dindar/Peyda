@@ -122,16 +122,20 @@ class MobileWarrantyController extends Controller
         }
     }
 
-    public function cart()
+    public function cart($id = null)
     {
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
-        $invoice = Mobile_warranty::where('owner_id', "=", auth()->user()->id)->orderBy('updated_at', 'desc')->first();
+        if ($id == null) {
+            $invoice = Mobile_warranty::where('owner_id', auth()->user()->id)->orderBy('updated_at', 'desc')->first();
+        }else{
+            $invoice = Mobile_warranty::find($id);
+        }
         $crypt = new EncryptCast();
         return view('profile.cart')
             ->with([
                 'invoice' => $invoice,
                 'wallet' => $wallet,
-                'crypt' =>$crypt
+                'crypt' => $crypt
             ]);
     }
 }

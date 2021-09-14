@@ -56,7 +56,7 @@ Route::prefix('panel')->group(function () {
                 ->name('projects.storeMedia');
             Route::get('/add', 'MobileWarrantyController@bimeh_add')->name('bimeh_add');
             Route::post('/save', 'MobileWarrantyController@save')->name('save');
-            Route::get('/cart', 'MobileWarrantyController@cart')->name('cart');
+            Route::get('/cart/{id}', 'MobileWarrantyController@cart')->name('cart');
             Route::get('/{invoice_id}/purchase', 'PaymentController@purchase')->name('purchase');
             Route::get('/{invoice_id}/result', 'PaymentController@result')->name('purchase.result');
         });
