@@ -50,7 +50,7 @@ return array(
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Http\\Requests\\MobileWarrantyRequest' => $baseDir . '/app/Http/Requests/MobileWarrantyRequest.php',
     'App\\Http\\Requests\\Request' => $baseDir . '/app/Http/Requests/Request.php',
-    'App\\Models\\Brand' => $baseDir . '/app/Models/Brand.php',
+    'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
     'App\\Models\\Commitment_ceiling' => $baseDir . '/app/Models/Commitment_ceiling.php',
     'App\\Models\\Fire_commitment_ceiling' => $baseDir . '/app/Models/Fire_commitment_ceiling.php',
     'App\\Models\\FlashMessage' => $baseDir . '/app/Models/FlashMessage.php',

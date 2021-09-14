@@ -72,6 +72,11 @@ Route::prefix('dashboard')->group(function () {
         Route::get('/edit/{id}', 'Admin\UserController@create');
         Route::post('/auth', 'Admin\UserController@store');
     });
+    Route::get('/categories',[Admin\Shop\CategoryController::class,'index'])->name('categories');
+    Route::get('/categories/{category}/edit',[Admin\Shop\CategoryController::class,'edit'])->name('category-edit');
+    Route::post('/categories/store',[Admin\Shop\CategoryController::class,'store'])->name('category-store');
+    Route::patch('/categories/{category}',[Admin\Shop\CategoryController::class,'update'])->name('category-update');
+    Route::get('/categories/delete/{category}',[Admin\Shop\CategoryController::class,'destroy'])->name('category-delete');
 
     Route::post('verify/brand_image', 'Admin\Shop\BrandController@verifyBrand')->name('verify.brand.image');
     Route::resource('brands','Admin\Shop\BrandController');

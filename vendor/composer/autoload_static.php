@@ -707,7 +707,7 @@ class ComposerStaticInite767f0242b6a1fd50cadd6a4eccea279
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\MobileWarrantyRequest' => __DIR__ . '/../..' . '/app/Http/Requests/MobileWarrantyRequest.php',
         'App\\Http\\Requests\\Request' => __DIR__ . '/../..' . '/app/Http/Requests/Request.php',
-        'App\\Models\\Brand' => __DIR__ . '/../..' . '/app/Models/Brand.php',
+        'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\Commitment_ceiling' => __DIR__ . '/../..' . '/app/Models/Commitment_ceiling.php',
         'App\\Models\\Fire_commitment_ceiling' => __DIR__ . '/../..' . '/app/Models/Fire_commitment_ceiling.php',
         'App\\Models\\FlashMessage' => __DIR__ . '/../..' . '/app/Models/FlashMessage.php',
