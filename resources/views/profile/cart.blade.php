@@ -107,7 +107,7 @@
                                                     سرویس
                                                     <span class="badge badge-white fs-8">
 
-                                                        {{--{{dd(50+((int)$invoice->Fire_commitment_ceiling->addition_price))}}--}}
+                                                        {{$invoice->phone_model->phone_brand->name . " / ".$invoice->phone_model->name}}
 
                                                     </span>
                                                 </td>
@@ -117,15 +117,20 @@
                                             </tr>
                                             <tr class="fw-bolder text-gray-700 fs-5 text-end">
                                                 <td class="d-flex align-items-center">
-                                                    <i class="fa fa-genderless text-success fs-2 me-2"></i>بیمه آتش سوزی
+                                                    <i class="fa fa-genderless text-success fs-2 me-2"></i>
+                                                    @if($invoice->addition_fire_commitment_id == null)هدیه @endifبیمه آتش سوزی
                                                     @if($invoice->addition_fire_commitment_id != null)
                                                         <span class="badge badge-white fs-8">
                                                             سقف تعهد {{ 50+((int)$invoice->Fire_commitment_ceiling->addition_price)}} میلیون تومان
                                                         </span>
+                                                    @else
+                                                        <span class="badge badge-white fs-8">
+                                                            سقف تعهد 50 میلیون تومان
+                                                        </span>
                                                     @endif
                                                 </td>
                                                 <td class="fs-5 text-dark fw-boldest text-center">
-                                                    @if($invoice->addition_fire_commitment_id == 0)
+                                                    @if($invoice->addition_fire_commitment_id == null)
                                                         0 تومان
                                                     @else
                                                         {{ number_format($invoice->Fire_commitment_ceiling->price, 0, ',', ',') }}
@@ -148,7 +153,8 @@
                                                 <!--end::Accountname-->
                                                 <!--begin::Label-->
                                                 <div
-                                                    class="text-end fw-bolder fs-6 text-gray-800">{{number_format($invoice->Fire_commitment_ceiling->price+$invoice->Commitment_ceiling->price, 0, ',', ',')}}
+                                                    class="text-end fw-bolder fs-6 text-gray-800">
+                                                    {{$invoice->addition_fire_commitment_id!=null ? number_format($invoice->Fire_commitment_ceiling->price+$invoice->Commitment_ceiling->price, 0, ',', ',') : number_format($invoice->Commitment_ceiling->price, 0, ',', ',')  }}
                                                     تومان
                                                 </div>
                                                 <!--end::Label-->
@@ -171,7 +177,8 @@
                                                 <!--end::Code-->
                                                 <!--begin::Label-->
                                                 <div
-                                                    class="text-end fw-bolder fs-6 text-gray-800">{{number_format($invoice->Fire_commitment_ceiling->price+$invoice->Commitment_ceiling->price, 0, ',', ',')}}
+                                                    class="text-end fw-bolder fs-6 text-gray-800">
+                                                    {{$invoice->addition_fire_commitment_id!=null ? number_format($invoice->Fire_commitment_ceiling->price+$invoice->Commitment_ceiling->price, 0, ',', ',') : number_format($invoice->Commitment_ceiling->price, 0, ',', ',')  }}
                                                     تومان
                                                 </div>
                                                 <!--end::Label-->
@@ -204,7 +211,8 @@
                                     class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack mb-5">
                                     <span
                                         class="form-check-label ms-0 fw-bolder fs-6 text-gray-700">پرداخت امن زرین پال</span>
-                                    <input class="form-check-input" type="radio" checked="checked" name="pay_methode" value="1">
+                                    <input class="form-check-input" type="radio" checked="checked" name="pay_methode"
+                                           value="1">
                                 </label>
                             </div>
                             <!--end::Item-->
@@ -215,7 +223,8 @@
                                     class="form-check form-switch form-switch-sm form-check-custom form-check-solid flex-stack mb-5">
                                     <span class="form-check-label ms-0 fw-bolder fs-6 text-gray-700">پرداخت از اعتبار کیف پول<br>
                                         <span class="fs-7 text-danger d-flex align-items-center">
-                                            <span id="wallet" class="me-2">{{Crypt::decryptString($wallet->value)}}</span>
+                                            <span id="wallet"
+                                                  class="me-2">{{$crypt->get(null,"",$wallet->value,[])}}</span>
                                             تومان
                                         </span>
                                     </span>

@@ -302,7 +302,7 @@
                                     <span class="menu-text">کیف پول</span>
                                     <span class="menu-badge">
                                         <span class="badge badge-light-danger fw-bolder fs-7">
-                                            <span class="last-price">{{Crypt::decryptString($wallet->value)}}</span> تومان
+                                            <span class="last-price">{{$crypt->get(null,"",$wallet->value,[])}}</span> تومان
                                         </span>
                                     </span>
                                 </a>

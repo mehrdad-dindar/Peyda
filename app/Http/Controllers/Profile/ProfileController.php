@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Profile;
 
+use App\Casts\EncryptCast;
 use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\city;
@@ -27,18 +28,21 @@ class ProfileController extends Controller
 
     public function index()
     {
-        /*dd(Crypt::encryptString(50000000));*/
+        $crypt = new EncryptCast();
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         return view('profile.index')->with([
-            'wallet' => $wallet
+            'wallet' => $wallet,
+            'crypt' => $crypt,
         ]);
     }
 
     public function profile()
     {
+        $crypt = new EncryptCast();
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         return view('profile.profile')->with([
-            'wallet' => $wallet
+            'wallet' => $wallet,
+            'crypt' => $crypt,
         ]);
 
     }
@@ -46,24 +50,26 @@ class ProfileController extends Controller
     public function edit_profile()
     {
 
-        $flag=1;
+        $flag = 1;
         $cities = city::all();
         $phone_brands = Phone_brand::all();
         $phone_models = Phone_model::all();
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        $crypt = new EncryptCast();
 
-        if(auth()->user()->status==0){
-            $flag=0;
-        }else{
-            $flag=1;
+        if (auth()->user()->status == 0) {
+            $flag = 0;
+        } else {
+            $flag = 1;
         }
         return view('profile.edit_profile')
-            ->with(['cities'=>$cities,
-                    'flag'=>$flag,
-                    'phone_brands'=>$phone_brands,
-                    'phone_models'=>$phone_models,
-                    'wallet' => $wallet
-                   ]);
+            ->with(['cities' => $cities,
+                'flag' => $flag,
+                'phone_brands' => $phone_brands,
+                'phone_models' => $phone_models,
+                'wallet' => $wallet,
+                'crypt'=>$crypt,
+            ]);
     }
 
     public function validator(Request $request)
@@ -78,8 +84,7 @@ class ProfileController extends Controller
 
     protected function save_profile(Request $request)
     {
-        /*$this->validator();*/
-        /*dd($request['birthday_tmp']);*/
+
         $v = verta()
             ->timestamp($request['birthday_tmp'] / 1000)
             ->formatGregorian('Y-m-d 09:i:s');
@@ -116,19 +121,19 @@ class ProfileController extends Controller
     public function mobile_change(Request $request)
     {
 
-        $id=$request->get('id');
-        if(isset($id)){
+        $id = $request->get('id');
+        if (isset($id)) {
             // Capture selected country
 
-            $result=Phone_model::query()->where('brand_id','=',$id)->get();
+            $result = Phone_model::query()->where('phone_brand_id', '=', $id)->get();
 
-            foreach($result as $row) {
+            foreach ($result as $row) {
 
-                $model_id=$row->id;
-                $model_name=$row->name;
+                $model_id = $row->id;
+                $model_name = $row->name;
 
-                $html="<option value='".$model_id."'>
-                ".$model_name."</option>";
+                $html = "<option value='" . $model_id . "'>
+                " . $model_name . "</option>";
 
                 echo $html;
             }

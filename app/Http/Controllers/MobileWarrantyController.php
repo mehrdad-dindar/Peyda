@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Casts\EncryptCast;
 use App\Http\Requests\MobileWarrantyRequest;
 use App\Models\Commitment_ceiling;
 use App\Models\Fire_commitment_ceiling;
@@ -30,7 +31,7 @@ class MobileWarrantyController extends Controller
             ->join('users as u', 'phone_models.id', '=', 'u.phone_model_id')
             ->first(['pb.name as pb_name', 'phone_models.name as pm_name',
                 'phone_models.id as pm_id', 'pb.id as pb_id']);
-
+        $crypt = new EncryptCast();
         $brands = Phone_brand::all();
         $phone_brand_first = Phone_brand::query()->first();
         $phone_model_first = Phone_model::query()->where('phone_brand_id', '=', $phone_brand_first->id)->get();
@@ -44,17 +45,20 @@ class MobileWarrantyController extends Controller
             ->with('commitment_ceilings', $commitment_ceilings)
             ->with('fire_commitment_ceilings', $fire_commitment_ceilings)
             ->with('wallet', $wallet)
-            ->with('error', $error);
+            ->with('error', $error)
+            ->with('crypt', $crypt);
         //return $phones;
     }
 
     public function bimeh_all()
     {
-        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
-
+        $wallet = Wallet::where('user_id', auth()->id())->first();
+        $warranties = Mobile_warranty::where('owner_id', auth()->id())->orderBy('updated_at', 'desc')->get();
+        $crypt = new EncryptCast();
         return view('profile.bimeh_all')->with([
-            'warranties' => $this->getWarranties(),
-            'wallet' => $wallet
+            'warranties' => $warranties,
+            'wallet' => $wallet,
+            'crypt' => $crypt
         ]);
     }
 
@@ -108,11 +112,11 @@ class MobileWarrantyController extends Controller
                 'transfer_code' => null,
                 'commitment_ceiling_id' => $request['price_range'],
                 'fire_gift' => true,
-                'status' => 3,
+                'status_id' => 3,
                 'addition_fire_commitment_id' => $request['fire_addition_price'],
             ]);
             $data->save();
-            return $this->cart($request, $data->id);
+            return $this->cart();
         } else {
             $this->bimeh_add('لطفا همه فیلدها را با دقت پرکنید.');
         }
@@ -122,10 +126,12 @@ class MobileWarrantyController extends Controller
     {
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         $invoice = Mobile_warranty::where('owner_id', "=", auth()->user()->id)->orderBy('updated_at', 'desc')->first();
+        $crypt = new EncryptCast();
         return view('profile.cart')
             ->with([
-                'invoice'       =>      $invoice,
-                'wallet'        =>      $wallet
+                'invoice' => $invoice,
+                'wallet' => $wallet,
+                'crypt' =>$crypt
             ]);
     }
 }

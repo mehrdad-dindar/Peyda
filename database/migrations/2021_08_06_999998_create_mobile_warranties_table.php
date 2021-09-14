@@ -24,7 +24,7 @@ class CreateMobileWarrantiesTable extends Migration
             $table->string('images')->nullable();
             $table->unsignedBigInteger('commitment_ceiling_id')->nullable;
             $table->boolean('fire_gift')->default(false);
-            $table->unsignedBigInteger('status');
+            $table->unsignedBigInteger('status_id');
             $table->integer('usable_percentage')->default(100);
             $table->unsignedBigInteger('addition_fire_commitment_id')->nullable();
             $table->timestamps();
@@ -46,9 +46,9 @@ class CreateMobileWarrantiesTable extends Migration
                 ->references('id')
                 ->on('fire_commitment_ceilings')
                 ->onDelete('cascade');
-            $table->foreign('status')
+            $table->foreign('status_id')
                 ->references('id')
-                ->on('status');
+                ->on('statuses');
         });
     }
 
