@@ -8,5 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Status extends Model
 {
     use HasFactory;
-    protected $table='status';
+    protected $table='statuses';
+
+    public function mobile_warranty()
+    {
+        return $this->hasMany(Status::class);
+    }
 }
