@@ -12,6 +12,6 @@ class Phone_brand extends Model
 
     public function phone_models()
     {
-        return $this->hasmany(Phone_model::class);
+        return $this->hasmany(Phone_model::class,'brand_id');
     }
 }

@@ -17,43 +17,43 @@ class Fire_commitment_ceilingsTableSeeder extends Seeder
         DB::table('fire_commitment_ceilings')->insert(
 
             [
-                'addition_price'                =>          '10 میلیون تومان',
-                'price'                =>          '150000',
-            ],
-        );
-        DB::table('fire_commitment_ceilings')->insert(
-
-            [
-                'addition_price'                =>          '20 میلیون تومان',
-                'price'                =>          '300000',
-            ],
-        );
-        DB::table('fire_commitment_ceilings')->insert(
-
-            [
-                'addition_price'                =>          '30 میلیون تومان',
-                'price'                =>          '450000',
-            ],
-        );
-        DB::table('fire_commitment_ceilings')->insert(
-
-            [
-                'addition_price'                =>          '40 میلیون تومان',
-                'price'                =>          '600000',
-            ],
-        );
-        DB::table('fire_commitment_ceilings')->insert(
-
-            [
                 'addition_price'                =>          '50 میلیون تومان',
-                'price'                =>          '750000',
+                'price'                =>          '100000',
             ],
         );
         DB::table('fire_commitment_ceilings')->insert(
 
             [
-                'addition_price'                =>          '60 میلیون تومان',
-                'price'                =>          '900000',
+                'addition_price'                =>          '100 میلیون تومان',
+                'price'                =>          '160000',
+            ],
+        );
+        DB::table('fire_commitment_ceilings')->insert(
+
+            [
+                'addition_price'                =>          '150 میلیون تومان',
+                'price'                =>          '230000',
+            ],
+        );
+        DB::table('fire_commitment_ceilings')->insert(
+
+            [
+                'addition_price'                =>          '250 میلیون تومان',
+                'price'                =>          '350000',
+            ],
+        );
+        DB::table('fire_commitment_ceilings')->insert(
+
+            [
+                'addition_price'                =>          '350 میلیون تومان',
+                'price'                =>          '420000',
+            ],
+        );
+        DB::table('fire_commitment_ceilings')->insert(
+
+            [
+                'addition_price'                =>          '450 میلیون تومان',
+                'price'                =>          '445000',
             ],
         );
     }

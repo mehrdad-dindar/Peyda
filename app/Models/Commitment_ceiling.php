@@ -9,8 +9,8 @@ class Commitment_ceiling extends Model
 {
     use HasFactory;
 
-    /*public function Mobile_warranty()
+    public function Mobile_warranty()
     {
-        return $this->hasMany(Mobile_warranty::class,'price_range');
-    }*/
+        return $this->hasMany(Mobile_warranty::class);
+    }
 }

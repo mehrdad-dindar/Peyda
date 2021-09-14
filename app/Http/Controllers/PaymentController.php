@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Casts\EncryptCast;
 use App\Models\Wallet;
 use App\Models\Wallet_history;
 use Crypt;
@@ -33,27 +34,22 @@ class PaymentController extends Controller
     public function purchase($invoice_id, Request $request)
     {
         $user = Auth::user();
-        $wallet = Wallet::where('user_id', "=", auth()->user()->id)->first();
-        $mobilewarranty = Mobile_warranty::where('owner_id', "=", auth()->user()->id)->orderBy('updated_at', 'desc')->first();
-        $cart_detail = Mobile_warranty::find($invoice_id);
-        $price_range = Commitment_ceiling::find($cart_detail->price_range)->price;
+        $crypt = new EncryptCast();
+        $mobilewarranty = Mobile_warranty::find($invoice_id);
+        $phone_model = $mobilewarranty->phone_model->name;
+        $wallet = Wallet::where('user_id', auth()->id())->first();
+        $warranties = Mobile_warranty::where('owner_id',auth()->id())->orderBy('updated_at', 'desc')->get();
         $fire_addition_price = 0;
-        if ($cart_detail->addition_fire_commitment_id != 0) {
-            $fire_addition_price = Fire_commitment_ceiling::find($cart_detail->addition_fire_commitment_id)->price;
+        if ($mobilewarranty->addition_fire_commitment_id != null) {
+            $fire_addition_price = $mobilewarranty->Fire_commitment_ceiling->price;
         }
-        $amount = $fire_addition_price + $price_range;
+        $amount = (int)$fire_addition_price + (int)$mobilewarranty->Commitment_ceiling->price;
         $invoice = new Invoice();
         $invoice->amount($amount);
         $paymentId = md5(uniqid());
-        /*$phone_brand = Phone_brand::find($cart_detail->phone_brand_id)->name;*/
-        $phone_model = Phone_model::find($cart_detail->phone_model_id)->name;
-
 
         if ($request->pay_methode == 1) {
             try {
-
-                /*dd($amount);*/
-
                 $transaction = $user->transactions()->create([
                     'user_id' => $user->id,
                     'mobile_warranty_id' => $invoice_id,
@@ -78,7 +74,7 @@ class PaymentController extends Controller
                 $wallet_history->value = Crypt::encryptString(0 - $amount);
                 $wallet_history->status = Transaction::STATUS_PENDING;
                 $wallet_history->save();
-                $mobilewarranty->status = 5;
+                $mobilewarranty->status_id = 5;
                 $mobilewarranty->save();
                 return $payment->pay()->render();
             } catch (PurchaseFailedException | Exception | SoapFault $e) {
@@ -86,28 +82,29 @@ class PaymentController extends Controller
                 $transaction->status = Transaction::STATUS_FAILED;
                 $transaction->save();
 
-                $mobilewarranty->status = 8;
+                $mobilewarranty->status_id = 8;
                 $mobilewarranty->save();
 
-                $wallet = Wallet::where('user_id', "=", auth()->id())->first();
                 return view('profile.bimeh_all')->with([
                     'status' => 'failed',
                     'wallet' => $wallet,
-                    'warranties'=> $this->getWarranties(),
+                    'warranties' => $warranties,
+                    'crypt' =>  $crypt
                 ]);
             }
         } else {
+            $crypt = new EncryptCast();
             $msg = "موجودی کیف پول کافی نیست";
-
-            $mobilewarranty->status = 3;
+            $mobilewarranty->status_id = 3;
             $mobilewarranty->save();
             if ($invoice->getAmount() > Crypt::decryptString($wallet->value)) {
                 return view('profile.bimeh_all')->with([
                     'status' => 'failed',
                     'wallet' => $wallet,
                     'message' => $msg,
-                    'warranties'=> $this->getWarranties(),
-                    'code' => -41
+                    'warranties' => $warranties,
+                    'code' => -41,
+                    'crypt'=>$crypt,
                 ]);
             } else {
                 $transaction = $user->transactions()->create([
@@ -118,6 +115,9 @@ class PaymentController extends Controller
                     'peyment_id' => $paymentId,
                 ]);
 
+                $mobilewarranty->status_id = 5;
+                $mobilewarranty->save();
+
                 $wallet_history = new Wallet_history();
                 $wallet_history->user_id = $user->id;
                 $wallet_history->transaction_id = $transaction->id;
@@ -126,21 +126,20 @@ class PaymentController extends Controller
                 $wallet_history->status = Transaction::STATUS_SUCCESS;
                 $wallet_history->save();
 
-                $mobilewarranty->status = 5;
-                $mobilewarranty->save();
-
+                $new_wallet_val = (int)$crypt->get(null,"",$wallet->value,[])-$amount;
                 $user->wallet()->update([
-                    'value'     =>      Crypt::encryptString((int)Crypt::decryptString($wallet->value) -  (int)$amount),
+                    'value' => $crypt->set(null,$_ENV['APP_CRYPT'],$new_wallet_val,[])[$_ENV['APP_CRYPT']],
+                /*Crypt::encryptString((int)Crypt::decryptString($wallet->value) - (int)$amount),*/
                 ]);
 
-                $wallet = Wallet::where('user_id', "=", auth()->user()->id)->first();
                 $msg = "سفارش شما با موفقیت ثبت شد.";
                 return view('profile.bimeh_all')->with([
                     'status' => 'success',
                     'wallet' => $wallet,
                     'message' => $msg,
-                    'warranties'=> $this->getWarranties(),
-                    'code' => 100
+                    'warranties' => $this->getWarranties(),
+                    'code' => 100,
+                    'crypt'=>$crypt,
                 ]);
             }
         }
@@ -149,18 +148,25 @@ class PaymentController extends Controller
     public function status_failed()
     {
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        $crypt = new EncryptCast();
+        $warranties = Mobile_warranty::where('owner_id',auth()->id())->orderBy('updated_at', 'desc')->get();
         return view('profile.bimeh_all')->with([
-            'user' => auth()->user(),
             'status' => 'failed',
-            'warranties'=> $this->getWarranties(),
-            'wallet' => $wallet
+            'warranties' => $warranties,
+            'wallet' => $wallet,
+            'crypt' => $crypt,
         ]);
     }
 
     public function result(Request $request, $invoice_id)
     {
+        $crypt = new EncryptCast();
         $transaction = Transaction::where('peyment_id', $request->peyment_id)->first();
-        $mobilewarranty = Mobile_warranty::where('owner_id', "=", auth()->user()->id)->orderBy('updated_at', 'desc')->first();
+        $mobilewarranty = Mobile_warranty::find($invoice_id);
+        $warranties = Mobile_warranty::where('owner_id',auth()->id())->orderBy('updated_at', 'desc')->get();
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        $wallet_history = Wallet_history::where('user_id', '=', auth()->id())->orderBy('created_at', 'desc')->first();
+
         if ($request->missing('peyment_id')) {
             $this->status_failed();
         }
@@ -173,22 +179,19 @@ class PaymentController extends Controller
             $this->status_failed();
         }
 
-        if ($transaction->mobile_warranty_id <> $invoice_id) {
+        if ($transaction->mobile_warranty_id <> $mobilewarranty->id) {
             $this->status_failed();
         }
         if ($transaction->status <> Transaction::STATUS_PENDING) {
             $this->status_failed();
         }
 
-        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
-        $wallet_history = Wallet_history::where('user_id', '=', auth()->id())->orderBy('created_at', 'desc')->first();
         try {
-            $cart_detail = Mobile_warranty::find($invoice_id);
-            $price_range = Commitment_ceiling::find($cart_detail->price_range)->price;
+            $price_range = Commitment_ceiling::find($mobilewarranty->commitment_ceiling_id)->price;
 
             $fire_addition_price = 0;
-            if ($cart_detail->addition_fire_commitment_id != 0) {
-                $fire_addition_price = Fire_commitment_ceiling::find($cart_detail->addition_fire_commitment_id)->price;
+            if ($mobilewarranty->addition_fire_commitment_id != 0) {
+                $fire_addition_price = Fire_commitment_ceiling::find($mobilewarranty->addition_fire_commitment_id)->price;
             }
             $amount = $fire_addition_price + $price_range;
             $receipt = Payment::amount($amount)
@@ -198,9 +201,8 @@ class PaymentController extends Controller
             $transaction->transaction_result = $receipt;
             $transaction->status = Transaction::STATUS_SUCCESS;
             $transaction->save();
-            $mobilewarranty->status = 5;
+            $mobilewarranty->status_id = 5;
             $mobilewarranty->save();
-
 
 
             return view('profile.bimeh_all')
@@ -209,7 +211,8 @@ class PaymentController extends Controller
                     'code' => 100,
                     'user' => auth()->user(),
                     'wallet' => $wallet,
-                    'warranties'=> $this->getWarranties(),
+                    'warranties' => $warranties,
+                    'crypt'=>$crypt,
                 ]);
         } catch (Exception | InvalidPaymentException $e) {
             if ($e->getCode() < 0) {
@@ -219,7 +222,7 @@ class PaymentController extends Controller
                     'code' => $e->getCode()
                 ];
                 $transaction->save();
-                $mobilewarranty->status = 8;
+                $mobilewarranty->status_id = 8;
                 $mobilewarranty->save();
 
                 /*
@@ -233,7 +236,8 @@ class PaymentController extends Controller
                         'code' => $e->getCode(),
                         'user' => auth()->user(),
                         'wallet' => $wallet,
-                        'warranties'=> $this->getWarranties(),
+                        'warranties' => $warranties,
+                        'crypt' => $crypt,
                     ]);
             }
         }

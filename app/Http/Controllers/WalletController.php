@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Casts\EncryptCast;
 use App\Http\Controllers\WalletHistoryController;
 use App\Models\Wallet;
 use App\Models\Wallet_history;
@@ -24,14 +25,15 @@ class WalletController extends Controller
 
     public function index()
     {
-
+        $crypt = new EncryptCast();
         $user_id = Auth::user()->id;
         $history = (new WalletHistoryController())->history($user_id);
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         return view('profile.wallet')->with([
             'user' => auth()->user(),
             'history' => $history,
-            'wallet' => $wallet
+            'wallet' => $wallet,
+            'crypt'=>$crypt
         ]);
     }
 

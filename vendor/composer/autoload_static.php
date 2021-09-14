@@ -663,6 +663,7 @@ class ComposerStaticInite767f0242b6a1fd50cadd6a4eccea279
     );
 
     public static $classMap = array (
+        'App\\Casts\\EncryptCast' => __DIR__ . '/../..' . '/app/Casts/EncryptCast.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Admin\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/HomeController.php',
@@ -714,6 +715,7 @@ class ComposerStaticInite767f0242b6a1fd50cadd6a4eccea279
         'App\\Models\\Notification' => __DIR__ . '/../..' . '/app/Models/Notification.php',
         'App\\Models\\NotificationUser' => __DIR__ . '/../..' . '/app/Models/NotificationUser.php',
         'App\\Models\\Payment' => __DIR__ . '/../..' . '/app/Models/Payment.php',
+        'App\\Models\\PeydaEncrypt' => __DIR__ . '/../..' . '/app/Models/PeydaEncrypt.php',
         'App\\Models\\Phone_brand' => __DIR__ . '/../..' . '/app/Models/Phone_brand.php',
         'App\\Models\\Phone_model' => __DIR__ . '/../..' . '/app/Models/Phone_model.php',
         'App\\Models\\Setting' => __DIR__ . '/../..' . '/app/Models/Setting.php',
@@ -2201,6 +2203,7 @@ class ComposerStaticInite767f0242b6a1fd50cadd6a4eccea279
         'Faker\\Provider\\nl_BE\\Payment' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_BE/Payment.php',
         'Faker\\Provider\\nl_BE\\Person' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_BE/Person.php',
         'Faker\\Provider\\nl_BE\\PhoneNumber' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_BE/PhoneNumber.php',
+        'Faker\\Provider\\nl_BE\\Text' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_BE/Text.php',
         'Faker\\Provider\\nl_NL\\Address' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_NL/Address.php',
         'Faker\\Provider\\nl_NL\\Color' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_NL/Color.php',
         'Faker\\Provider\\nl_NL\\Company' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_NL/Company.php',

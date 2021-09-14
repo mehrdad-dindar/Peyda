@@ -9,6 +9,8 @@ class Phone_model extends Model
 {
     use HasFactory;
 
+    protected $fillable=['name','brand_id'];
+
     public function phone_brand()
     {
         return $this->belongsTo(Phone_brand::class);
@@ -19,6 +21,8 @@ class Phone_model extends Model
         return $this->hasMany(User::class);
     }
 
-    protected $fillable=['name','brand_id'];
-
+    public function mobile_warranty()
+    {
+        return $this->hasMany(Mobile_warranty::class);
+    }
 }

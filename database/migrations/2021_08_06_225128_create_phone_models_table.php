@@ -15,12 +15,12 @@ class CreatePhoneModelsTable extends Migration
     {
         Schema::create('phone_models', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('brand_id');
+            $table->unsignedBigInteger('phone_brand_id');
             $table->string('name');
             $table->timestamps();
         });
         Schema::table('phone_models',function (Blueprint $table) {
-            $table->foreign('brand_id')
+            $table->foreign('phone_brand_id')
                 ->references('id')
                 ->on('phone_brands')
                 ->onDelete('cascade');

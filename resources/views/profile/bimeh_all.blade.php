@@ -23,16 +23,10 @@
                         <!--begin::Table head-->
                         <thead>
                         <tr class="fw-bolder text-muted">
-                            <th class="w-25px">
-                                <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                    <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
-                                           data-kt-check-target=".widget-13-check"/>
-                                </div>
-                            </th>
                             <th class="min-w-150px">شناسه</th>
                             <th class="min-w-140px">تاریخ شروع</th>
                             <th class="min-w-120px">تاریخ انقضا</th>
-                            <th class="min-w-120px">مبلغ تعهد</th>
+                            <th class="min-w-120px">مبلغ</th>
                             <th class="min-w-120px">هدیه همراه</th>
                             <th class="min-w-120px">وضعیت</th>
                             <th class="min-w-100px text-end">تغییرات</th>
@@ -41,15 +35,12 @@
                         <!--end::Table head-->
                         <!--begin::Table body-->
                         <tbody>
+
                         @foreach($warranties as $row)
                             <tr>
                                 <td>
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input widget-13-check" type="checkbox" value="1"/>
-                                    </div>
-                                </td>
-                                <td>
                                     <a class="text-dark fw-bolder text-hover-primary fs-6">{{$row->activation_code}}</a>
+                                    <span class="text-muted fw-bold text-muted d-block fs-7">{{$row->phone_model->phone_brand->name. " / " . $row->phone_model->name}}</span>
                                 </td>
                                 <td>
                                     <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"></a>
@@ -59,17 +50,17 @@
                                     <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">یک سال پس از
                                         تایید</a>
                                 </td>
-                                <td class="text-dark fw-bolder text-hover-primary fs-6">{{--{{App\Helpers\Helpers::toPersianNum($row->cc_price)}}--}}</td>
+                                <td class="text-dark fw-bolder text-hover-primary fs-6"><span class="last-price">{{$row->addition_fire_commitment_id != null ? $row->Commitment_ceiling->price+$row->Fire_commitment_ceiling->price : $row->Commitment_ceiling->price}}</span> تومان</td>
                                 <td>
                                     <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">@if($row->fire_gift==1)بیمه آتش سوزی@endif</a>
                                     <span class="text-muted fw-bold text-muted d-block fs-7"></span>
                                 </td>
 
                                 <td>
-                                    @if($row->s_id==2)
-                                        <span class="badge badge-light-success">{{$row->s_name}}</span>
+                                    @if($row->status->id==2)
+                                        <span class="badge badge-light-success">{{$row->status->text}}</span>
                                     @else
-                                        <span class="badge badge-danger">{{$row->s_name}}</span>
+                                        <span class="badge badge-danger">{{$row->status->text}}</span>
                                     @endif
                                 </td>
                                 <td class="text-end">
@@ -399,13 +390,59 @@
                                             <!--end::Close-->
                                         </div>
                                         <div class="modal-body">
-
                                             <div class="fv-row mb-15" data-kt-buttons="true">
                                                 <!--begin::Option-->
                                                 <label
                                                     @if(sizeof($warranties)>0) onclick="window.location.href='mobile/use_faraguaranty/{{$row->id}}'"
                                                     @endif
-                                                    class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6 active">
+                                                    class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6">
+                                                    <!--begin::Input-->
+                                                    <input class="btn-check" type="radio" checked
+                                                           name="warranty_type" value="1"/>
+                                                    <!--end::Input-->
+
+                                                    <!--begin::Label-->
+                                                    <span class="d-flex" id="first_select">
+																			<!--begin::Icon-->
+                                                        <!--begin::Svg Icon | path: icons/duotone/General/User.svg-->
+																			<span class="svg-icon svg-icon-3hx">
+																				<svg xmlns="http://www.w3.org/2000/svg"
+                                                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                     width="24px" height="24px"
+                                                                                     viewBox="0 0 24 24" version="1.1">
+																					<g stroke="none" stroke-width="1"
+                                                                                       fill="none" fill-rule="evenodd">
+																						<polygon
+                                                                                            points="0 0 24 0 24 24 0 24"/>
+																						<path
+                                                                                            d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+                                                                                            fill="#000000"
+                                                                                            fill-rule="nonzero"
+                                                                                            opacity="0.3"/>
+																						<path
+                                                                                            d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+                                                                                            fill="#000000"
+                                                                                            fill-rule="nonzero"/>
+																					</g>
+																				</svg>
+																			</span>
+                                                        <!--end::Svg Icon-->
+                                                        <!--end::Icon-->
+                                                        <!--begin::Info-->
+																			<span class="ms-4">
+																				<span
+                                                                                    class="fs-3 fw-bolder text-gray-900 mb-2 d-block">استفاده از فراگارانتی</span>
+																			</span>
+                                                        <!--end::Info-->
+																		</span>
+                                                    <!--end::Label-->
+                                                </label>
+                                                <!--end::Option-->
+                                                <!--begin::Option-->
+                                                <label
+                                                    @if(sizeof($warranties)>0) onclick="window.location.href='{{route('bimeh_use',$row->id)}}'"
+                                                    @endif
+                                                    class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6">
                                                     <!--begin::Input-->
                                                     <input class="btn-check" type="radio" checked
                                                            name="warranty_type" value="1"/>
@@ -501,7 +538,6 @@
                                                 </label>
                                                 <!--end::Option-->
                                             </div>
-
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">بستن
