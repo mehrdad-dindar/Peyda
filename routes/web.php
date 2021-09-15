@@ -68,6 +68,7 @@ Route::prefix('dashboard')->group(function () {
     });
 
     Route::resource('categories','Admin\Shop\CategoryController');
+    Route::get('/delete/{category}',[Admin\Shop\CategoryController::class,'destroy'])->name('category-delete');
     /*Route::get('/',[Admin\Shop\CategoryController::class,'index'])->name('categories');
     Route::get('/{category}/edit',[Admin\Shop\CategoryController::class,'edit'])->name('category-edit');
     Route::post('/store',[Admin\Shop\CategoryController::class,'store'])->name('category-store');
