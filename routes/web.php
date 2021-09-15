@@ -67,7 +67,7 @@ Route::prefix('dashboard')->group(function () {
     });
 
     Route::resource('categories','Admin\Shop\CategoryController');
-    Route::get('/delete/{category}',[Admin\Shop\CategoryController::class,'destroy'])->name('category-delete');
+    Route::get('/delete/{category}',[\App\Http\Controllers\Admin\Shop\CategoryController::class,'destroy'])->name('category-delete');
     /*Route::get('/',[Admin\Shop\CategoryController::class,'index'])->name('categories');
     Route::get('/{category}/edit',[Admin\Shop\CategoryController::class,'edit'])->name('category-edit');
     Route::post('/store',[Admin\Shop\CategoryController::class,'store'])->name('category-store');
@@ -77,7 +77,7 @@ Route::prefix('dashboard')->group(function () {
 
     Route::post('verify/brand_image', 'Admin\Shop\BrandController@verifyBrand')->name('verify.brand.image');
     Route::resource('brands','Admin\Shop\BrandController');
-    Route::get('/delete/{brand}',[Admin\Shop\BrandController::class,'destroy'])->name('brand-delete');
+    Route::get('/delete/{brand}',[\App\Http\Controllers\Admin\Shop\CategoryController::class,'destroy'])->name('brand-delete');
 
     Route::resource('products','Admin\Shop\ProductController');
 
