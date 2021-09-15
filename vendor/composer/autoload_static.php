@@ -720,6 +720,7 @@ class ComposerStaticInite767f0242b6a1fd50cadd6a4eccea279
         'App\\Models\\Phone_model' => __DIR__ . '/../..' . '/app/Models/Phone_model.php',
         'App\\Models\\Setting' => __DIR__ . '/../..' . '/app/Models/Setting.php',
         'App\\Models\\Status' => __DIR__ . '/../..' . '/app/Models/Status.php',
+        'App\\Models\\Token' => __DIR__ . '/../..' . '/app/Models/Token.php',
         'App\\Models\\Transaction' => __DIR__ . '/../..' . '/app/Models/Transaction.php',
         'App\\Models\\TransferWarranty' => __DIR__ . '/../..' . '/app/Models/TransferWarranty.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',

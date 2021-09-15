@@ -63,6 +63,7 @@ return array(
     'App\\Models\\Phone_model' => $baseDir . '/app/Models/Phone_model.php',
     'App\\Models\\Setting' => $baseDir . '/app/Models/Setting.php',
     'App\\Models\\Status' => $baseDir . '/app/Models/Status.php',
+    'App\\Models\\Token' => $baseDir . '/app/Models/Token.php',
     'App\\Models\\Transaction' => $baseDir . '/app/Models/Transaction.php',
     'App\\Models\\TransferWarranty' => $baseDir . '/app/Models/TransferWarranty.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
