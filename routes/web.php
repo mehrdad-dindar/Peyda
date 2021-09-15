@@ -73,6 +73,7 @@ Route::prefix('dashboard')->group(function () {
         Route::post('/auth', 'Admin\UserController@store');
     });
 
+    Route::post('verify/brand_image', 'Admin\Shop\BrandController@verifyBrand')->name('verify.brand.image');
     Route::resource('brands','Admin\Shop\BrandController');
     Route::get('/delete/{brand}',[Admin\Shop\BrandController::class,'destroy'])->name('brand-delete');
 

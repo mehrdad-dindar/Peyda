@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\BrandRequest;
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use function React\Promise\all;
 
 class BrandController extends Controller
 {
@@ -91,7 +92,27 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand)
     {
-        //
+        //dd($request->all());
+        if($request->file('image')){
+            //dd('not null');
+            $file = $request->file('image');
+            //die();
+            $image_name = time() . $file->getClientOriginalName();
+
+            $file->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/brands/', $image_name);
+
+            $image=$image_name;
+
+        }else{
+            //dd('null');
+            $image=$brand->image;
+        }
+        $brand->update([
+            'name'=>$request->get('name'),
+            'image'=>$image
+        ]);
+
+        return redirect(route('brands.index'));
     }
 
     /**
@@ -104,5 +125,31 @@ class BrandController extends Controller
     {
         $brand->delete();
         return redirect(route('brands.index'));
+    }
+
+    public function verifyBrand(Request $request)
+    {
+
+        dd($request);
+        if($request->file('file')!=null) {
+            $image = $request->file('file');
+            $image_name = time() . $image->getClientOriginalName();
+
+            $image->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/brands/', $image_name);
+
+            return response()->json([
+                'name' => $image_name,
+                'original_name' => $image->getClientOriginalName(),
+            ]);
+        }else{
+            return response()->json([
+                'name' => 'hiii'
+            ]);
+        }
+        /*$ok=array();
+        foreach ($request->input('document', []) as $file) {
+            array_push($ok,'OK-');
+        }
+        return $ok;*/
     }
 }

@@ -15,14 +15,18 @@
                 <div class="col-12 box-margin">
                     <div class="card">
                         <div class="card-body">
-                            <form action="#" class="dropzone dz-clickable">
+                            <form action="{{ route('brands.update',[$brand->id]) }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                @method('PATCH')
                                 <label for="name">نام برند</label>
-                                <input type="text" name="name" value="" placeholder="نام برند" class="form-control">
+                                <input type="text" name="name" value="{{$brand->name}}" placeholder="نام برند" class="form-control mb-10">
 
-                                <div class="dz-preview dz-processing dz-image-preview dz-error dz-complete"><div class="dz-image"><img data-dz-thumbnail="" alt="{{$brand->name}}" src="{{URL::asset('uploads/brands').'/'.$brand->image}}"></div></div>
+                                <label>عکس قبلی برند</label>
+                                <div class="dz-preview dz-processing dz-image-preview dz-error dz-complete" id="document-dropzone"><div class="dz-image"><img data-dz-thumbnail="" width="100px" alt="{{$brand->name}}" src="{{URL::asset('uploads/brands').'/'.$brand->image}}"></div></div>
 
 
-                                <div class="dz-default dz-message"><span>فایل را اینجا رها کنید تا آپلود شود</span></div>
+                                <label for="image">عکس برند جدید</label>
+                                <input type="file" name="image" class="form-control mb-20">
 
                                 <input type="submit" class="form-control btn btn-primary" value="ثبت">
 
@@ -42,14 +46,4 @@
     <script src="{{URL::asset('admin/js/default-assets/dropzone-custom.js')}}"></script>
     {{--<script src="{{URL::asset('admin/js/default-assets/dropzone-and-module.min.js')}}"></script>
 --}}
-    <script>
-        $(".dropzone.dz-clickable").dropzone({
-            url: '/cart?upload-engraving=true',
-            maxFiles: 1,
-            maxfilesexceeded: function(file) {
-                this.removeAllFiles();
-                this.addFile(file);
-            }
-        })
-    </script>
 @endsection
