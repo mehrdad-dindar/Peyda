@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BrandRequest;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,8 @@ class BrandController extends Controller
      */
     public function index()
     {
+        /*$cc = Brand::all();
+        dd($cc[0]->image);*/
         return view('dashboard.brands.index',[
            'brands'=>Brand::all()
         ]);
@@ -34,11 +37,24 @@ class BrandController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(BrandRequest $request)
     {
-        //
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $image_name = time() . $image->getClientOriginalName();
+            $image->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/brands/', $image_name);
+        }
+
+        //$path=$request->file('image')->store('public/images/brands');
+
+        Brand::query()->create([
+            'name'=>$request->get('name'),
+            'image'=>$image_name
+        ]);
+
+        return redirect(route('brands.index'));
     }
 
     /**
