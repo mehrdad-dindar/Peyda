@@ -39,7 +39,7 @@
                                                     <td><img width="70px" src="{{URL::asset('uploads/brands').'/'.$row->image}}" alt="{{$row->name}}" title="{{$row->name}}"></td>
                                                     <td>
                                                         <a href="{{ route('brands.edit',$row->id) }}" class="btn btn-warning mb-2 mr-2">ویرایش</a>
-                                                        <a onclick="javascript: return confirm('آیا اطمینان به حذف دارید؟');" href="{{route('brands.destroy',$row->id)}}" class="btn btn-outline-danger  mb-2 mr-2">حذف</a>
+                                                        <a onclick="javascript: return confirm('آیا اطمینان به حذف دارید؟');" href="{{route('brand-delete',$row->id)}}" class="btn btn-outline-danger  mb-2 mr-2">حذف</a>
                                                     </td>
                                                 </tr>
                                             @endforeach
