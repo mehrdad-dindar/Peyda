@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use \App\Casts\EncryptCast;
+use \App\Http\Controllers\Admin;
+use \App\Http\Controllers\Admin\Shop\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +18,6 @@ use \App\Casts\EncryptCast;
 
 /* front */
 Route::get('/', 'HomeController@index')->name('index');
-Route::get('/test', function (){
-    dd(auth()->user()->id);
-    /*$ttt = new EncryptCast();
-    dd($ttt->get('','','eyJpdiI6InhxcnpDRHNTRGp4OGlFZnJWUWlybFE9PSIsInZhbHVlIjoiOTMzZTE1VmhqWk5YOFFmNUxYWnpwZz09IiwibWFjIjoiNGM5MWYxOWE4MmJhY2JjZTdlNzk1ZGQ4Njc3YTQ0MDZlMDRhYWY1MzlmYzczYzE3MWY3ODVjNDIzZjMxYjY5NyIsInRhZyI6IiJ9',[]));*/
-    /*config()->set('values.myval','Mehrdad');
-    ddd(config()->get('values.myval'));*/
-});
 
 Route::get('/single', function () {
     return view('single');
@@ -72,11 +66,14 @@ Route::prefix('dashboard')->group(function () {
         Route::get('/edit/{id}', 'Admin\UserController@create');
         Route::post('/auth', 'Admin\UserController@store');
     });
-    Route::get('/categories',[Admin\Shop\CategoryController::class,'index'])->name('categories');
-    Route::get('/categories/{category}/edit',[Admin\Shop\CategoryController::class,'edit'])->name('category-edit');
-    Route::post('/categories/store',[Admin\Shop\CategoryController::class,'store'])->name('category-store');
-    Route::patch('/categories/{category}',[Admin\Shop\CategoryController::class,'update'])->name('category-update');
-    Route::get('/categories/delete/{category}',[Admin\Shop\CategoryController::class,'destroy'])->name('category-delete');
+
+    Route::resource('categories','Admin\Shop\CategoryController');
+    /*Route::get('/',[Admin\Shop\CategoryController::class,'index'])->name('categories');
+    Route::get('/{category}/edit',[Admin\Shop\CategoryController::class,'edit'])->name('category-edit');
+    Route::post('/store',[Admin\Shop\CategoryController::class,'store'])->name('category-store');
+    Route::patch('/{category}',[Admin\Shop\CategoryController::class,'update'])->name('category-update');
+    Route::get('/delete/{category}',[Admin\Shop\CategoryController::class,'destroy'])->name('category-delete');*/
+
 
     Route::post('verify/brand_image', 'Admin\Shop\BrandController@verifyBrand')->name('verify.brand.image');
     Route::resource('brands','Admin\Shop\BrandController');

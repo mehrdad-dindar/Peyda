@@ -84,7 +84,7 @@ class CategoryController extends Controller
            'title'=>$request->get('title')
         ]);
 
-        return redirect(route('categories'));
+        return redirect(route('categories.index'));
     }
 
     /**
@@ -96,6 +96,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect(route('categories'));
+        return redirect(route('categories.index'));
     }
 }

@@ -12,7 +12,7 @@
                             <div class="stacked-form-area">
                                 <h4 class="card-title mb-1">ویرایش دسته بندی</h4>
 
-                                <form action="{{route('category-update', $category)}}" method="post">
+                                <form action="{{route('categories.update', $category)}}" method="post">
                                     @csrf
                                     @method('PATCH')
                                     <div class="container" style="background-color:white">
