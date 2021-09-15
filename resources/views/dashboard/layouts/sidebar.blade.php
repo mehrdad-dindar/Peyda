@@ -24,6 +24,13 @@
                         </ul>
                     </li>
                     <li class="treeview">
+                        <a href="javascript:void(0)"><i class="zmdi zmdi-apps"></i> <span>محصولات</span> <i class="fa fa-angle-left"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ route('products.create') }}">ایجاد</a></li>
+                            <li><a href="{{ route('products.index') }}">همه</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
                         <a href="javascript:void(0)"><i class="zmdi zmdi-apps"></i> <span>کاربران</span> <i class="fa fa-angle-left"></i></a>
                         <ul class="treeview-menu">
                             <li><a href="{{ route('dashboard') }}/users">همه کاربران</a></li>
