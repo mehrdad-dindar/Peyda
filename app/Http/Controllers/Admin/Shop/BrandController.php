@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Shop;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BrandRequest;
@@ -72,11 +72,14 @@ class BrandController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Brand  $brand
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(Brand $brand)
     {
-        //
+        return view('dashboard.brands.edit',[
+            'brand'=>$brand,
+            'brands'=>Brand::all()
+        ]);
     }
 
     /**

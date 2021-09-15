@@ -73,8 +73,8 @@ Route::prefix('dashboard')->group(function () {
         Route::post('/auth', 'Admin\UserController@store');
     });
 
-    Route::resource('brands','Admin\BrandController');
-    Route::get('/delete/{brand}',[Admin\BrandController::class,'destroy'])->name('brand-delete');
+    Route::resource('brands','Admin\Shop\BrandController');
+    Route::get('/delete/{brand}',[Admin\Shop\BrandController::class,'destroy'])->name('brand-delete');
 
     Route::get('/warranties', 'Admin\WarrantyController@index');
     Route::get('/warranties/create', 'Admin\WarrantyController@create');
