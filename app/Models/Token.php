@@ -2,9 +2,15 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use IPPanel\Client;
+use IPPanel\Errors\Error;
+use IPPanel\Errors\HttpException;
+use IPPanel\Errors\ResponseCodes;
+
 
 class Token extends Model
 {
@@ -83,6 +89,7 @@ class Token extends Model
 
     public function sendCode()
     {
+        $client = new Client("ZVglndyt2dqwXygCGLxtuFg48qRl2emwbJajIBgOFJo=");
         if (!$this->user) {
             throw new Exception("No user attached to this token.");
         }
@@ -92,9 +99,15 @@ class Token extends Model
         }
 
         try {
-
-        } catch (Exception $ex) {
-            return false; //enable to send SMS
+            $pattern = $client->sendPattern("vfgvcevsu5", "983000505", "09191903665", ['code' => $this->code]);
+            return $pattern;
+        } catch (Exception|Error|HttpException $e) {
+            /*return $e->unwrap() ;
+            echo $e->getCode();*/
+            // TODO Sms Error
+            /*if ($e->code() == ResponseCodes::ErrUnprocessableEntity) {
+                echo "Unprocessable entity";
+            }*/
         }
 
         return true;
