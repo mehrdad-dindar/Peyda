@@ -6,8 +6,7 @@ use App\Http\Requests\ProductRequest;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Request;
 
 class ProductController extends Controller
 {
@@ -44,7 +43,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-            //dd('not null');
+        //dd('not null');
         $file = $request->file('image');
         //die();
         $image_name = time() . $file->getClientOriginalName();
@@ -54,14 +53,13 @@ class ProductController extends Controller
         //$image=$image_name;
 
 
-
         Product::query()->create([
-            'name'=>$request->get('name'),
-            'slug'=>$request->get('slug'),
-            'brand_id'=>$request->get('brand_id'),
-            'category_id'=>$request->get('category_id'),
-            'cost'=>$request->get('cost'),
-            'image'=>$image_name,
+            'name' => $request->get('name'),
+            'slug' => $request->get('slug'),
+            'brand_id' => $request->get('brand_id'),
+            'category_id' => $request->get('category_id'),
+            'cost' => $request->get('cost'),
+            'image' => $image_name,
         ]);
 
         return redirect(route('products.index'));
