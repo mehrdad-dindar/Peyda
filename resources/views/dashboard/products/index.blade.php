@@ -44,14 +44,14 @@
                                                 <tr>
                                                     <td>{{$key+1}}</td>
                                                     <td>{{ $row->name }}</td>
-                                                    <td>{{ $row->cost }}</td>
+                                                    <td>{{ number_format($row->cost) }}</td>
                                                     <td>{{ $row->brand->name }}</td>
                                                     <td>{{ $row->category->title }}</td>
                                                     <td><img width="70px" src="{{URL::asset('uploads/products').'/'.$row->image}}" alt="{{$row->name}}" title="{{$row->name}}"></td>
                                                     <td></td>
                                                     <td>
                                                         <a href="{{ route('products.edit',[$row->id]) }}" class="btn btn-warning mb-2 mr-2">ویرایش</a>
-                                                        <a onclick="javascript: return confirm('آیا اطمینان به حذف دارید؟');" href="{{route('product-delete',$row->id)}}" class="btn btn-outline-danger  mb-2 mr-2">حذف</a>
+                                                        <a onclick="javascript: return confirm('آیا اطمینان به حذف دارید؟');" href="{{route('product-delete',[$row->id])}}" class="btn btn-outline-danger  mb-2 mr-2">حذف</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

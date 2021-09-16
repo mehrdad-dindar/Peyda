@@ -80,6 +80,7 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/delete/{brand}',[\App\Http\Controllers\Admin\Shop\CategoryController::class,'destroy'])->name('brand-delete');
 
     Route::resource('products','Admin\Shop\ProductController');
+    Route::get('/delete/{product}',[\App\Http\Controllers\Admin\Shop\ProductController::class,'destroy'])->name('product-delete');
 
     Route::get('/warranties', 'Admin\WarrantyController@index');
     Route::get('/warranties/create', 'Admin\WarrantyController@create');

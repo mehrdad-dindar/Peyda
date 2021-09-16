@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin\Shop;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
@@ -59,6 +61,7 @@ class ProductController extends Controller
             'brand_id' => $request->get('brand_id'),
             'category_id' => $request->get('category_id'),
             'cost' => $request->get('cost'),
+            'description'=>$request->get('description'),
             'image' => $image_name,
         ]);
 
@@ -84,7 +87,11 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('dashboard.products.edit',[
+            'product'=>$product,
+            'categories'=> Category::all(),
+            'brands'=>Brand::all()
+        ]);
     }
 
     /**
@@ -94,9 +101,39 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductUpdateRequest $request, Product $product)
     {
-        //
+        $slugIsUnique=Product::query()->where('slug',$request->get('slug'))
+            ->where('id','!=',$product->id)
+            ->exists();
+        if($slugIsUnique){
+            return back()->withErrors(['slug'=>'slug already been taken']);
+        }
+
+        $image_name=$product->image;
+
+        if($request->hasFile('image')){
+
+            $file = $request->file('image');
+            //die();
+            $image_name = time() . $file->getClientOriginalName();
+
+            $file->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/products/', $image_name);
+
+        }
+
+        $product->update([
+            'name'=>$request->get('name',$product->name),
+            'slug' => $request->get('slug',$product->slug),
+            'brand_id' => $request->get('brand_id',$product->brand_id),
+            'category_id' => $request->get('category_id',$product->category_id),
+            'cost' => $request->get('cost',$product->cost),
+            'description'=>$request->get('description',$product->description),
+            'image' => $image_name,
+        ]);
+
+        return redirect(route('products.index'));
+
     }
 
     /**
@@ -107,6 +144,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return redirect(route('products.index'));
     }
 }

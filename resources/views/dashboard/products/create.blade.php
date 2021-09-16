@@ -21,13 +21,16 @@
                 <div class="contact-form-area">
                     <div class="card">
                         <div class="card-body">
-                            <form method="post" action="{{route('products.store')}}">
+                            <form method="post" action="{{route('products.store')}}" enctype="multipart/form-data">
                                 @csrf
                                 <h4 class="card-title">فرم محصول</h4>
                                 <div class="container">
 
+                                        <label for="slug">نام</label>
+                                        <input type="text" id="name" name="name"  class="form-control" placeholder="نام">
+
                                         <label for="slug">اسلاگ</label>
-                                        <input type="text" id="slug" name="slug"  class="form-control" placeholder="نام">
+                                        <input type="text" id="slug" name="slug"  class="form-control" placeholder="اسلاگ">
 
                                         <label for="cost">قیمت</label>
                                         <input type="number" id="cost" name="cost"  class="form-control mb-20" placeholder="قیمت">
@@ -48,14 +51,17 @@
                                             @endforeach
                                         </select>
 
-                                    <div class="form-group">
+                                    <div class="form-group mb-10">
 
                                         <label for="description">توضیحات</label>
                                         <textarea name="description" id="description" class="form-control"></textarea>
 
                                     </div>
 
-                                        <input class="btn btn-primary btn-block mt-15" type="submit" value="ارسال">
+                                    <label for="image">عکس</label>
+                                    <input type="file" name="image" id="image" class="form-control">
+
+                                    <input class="btn btn-primary btn-block mt-15" type="submit" value="ارسال">
 
                                 </div>
                             </form>
