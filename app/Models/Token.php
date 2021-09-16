@@ -99,9 +99,13 @@ class Token extends Model
         }
 
         try {
-            $pattern = $client->sendPattern("vfgvcevsu5", "983000505", "09191903665", ['code' => $this->code]);
+            $phone_num = '98'.(int)$this->user->phone_num;
+            /*dd($phone_num);*/
+            $pattern = $client->sendPattern("9phjbgorri", "+983000505", $phone_num, ['code' => strval($this->code)]);
+
             return $pattern;
         } catch (Exception|Error|HttpException $e) {
+            /*dd($e->unwrap());*/
             /*return $e->unwrap() ;
             echo $e->getCode();*/
             // TODO Sms Error

@@ -82,7 +82,7 @@ class AuthController extends Controller
 
     public function verify()
     {
-        return view('auth.verify');
+        return view('auth.mobile_verify');
     }
 
     public function doVerify(Request $request)

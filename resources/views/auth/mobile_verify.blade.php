@@ -14,19 +14,19 @@
                     <!-- Logo -->
                     <h4 class="font-18 mb-30">ورود به پنل کاربری</h4>
 
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('doVerify') }}">
                         @csrf
                         <div class="form-group">
-                            <label class="float-left" for="phone">شماره همراه</label>
-                            <input class="form-control  @error('phone') is-invalid @enderror" type="text" id="phone"  name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="0912XXXXXXX" autofocus>
-                            @error('email')
+                            <label class="float-left" for="code">کد تأیید</label>
+                            <input class="form-control  @error('code') is-invalid @enderror" type="text" id="code"  name="code" required autocomplete="code" autofocus>
+                            @error('code')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                             @enderror
                         </div>
                         <div class="form-group mb-0">
-                            <button class="btn btn-primary btn-block" type="submit">ارسال کد یکبار مصرف</button>
+                            <button class="btn btn-primary btn-block" type="submit">بررسی و ادامه</button>
                         </div>
                         <div class="form-group d-flex justify-content-between align-items-center mb-3">
                             <div class="checkbox d-inline mb-0">
