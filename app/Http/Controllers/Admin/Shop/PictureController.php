@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Admin\Shop;
 
+use App\Http\Requests\ProductPictureRequest;
 use App\Models\Picture;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use URL;
 
 class PictureController extends Controller
 {
@@ -16,7 +20,11 @@ class PictureController extends Controller
      */
     public function index(Product $product)
     {
-        //
+
+        return view('dashboard.pictures.index',[
+            'product'=>$product
+        ]);
+
     }
 
     /**
@@ -35,9 +43,11 @@ class PictureController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,Product $product)
+    public function store(ProductPictureRequest $request,Product $product)
     {
-        //
+        $product->addPicture($request);
+
+        return redirect()->back();
     }
 
     /**
@@ -80,8 +90,10 @@ class PictureController extends Controller
      * @param  \App\Models\Picture  $picture
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Picture $picture)
+    public function destroy(Product $product, Picture $picture)
     {
-        //
+
+        $product->deletePicture($picture);
+        return redirect()->back();
     }
 }
