@@ -48,10 +48,13 @@
                                                     <td>{{ $row->brand->name }}</td>
                                                     <td>{{ $row->category->title }}</td>
                                                     <td><img width="70px" src="{{URL::asset('uploads/products').'/'.$row->image}}" alt="{{$row->name}}" title="{{$row->name}}"></td>
-                                                    <td></td>
                                                     <td>
-                                                        <a href="{{ route('products.edit',[$row->id]) }}" class="btn btn-warning mb-2 mr-2">ویرایش</a>
-                                                        <a onclick="javascript: return confirm('آیا اطمینان به حذف دارید؟');" href="{{route('product-delete',[$row->id])}}" class="btn btn-outline-danger  mb-2 mr-2">حذف</a>
+                                                        <a href="{{route('products.pictures.index',$row)}}"
+                                                           class="btn btn-warning">گالری</a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ route('products.edit',[$row->id]) }}" class="btn btn-outline-info mb-2 mr-2">ویرایش</a>
+                                                        <a onclick="javascript: return confirm('آیا اطمینان به حذف دارید؟');" href="{{route('product-delete',[$row])}}" class="btn btn-outline-danger  mb-2 mr-2">حذف</a>
                                                     </td>
                                                 </tr>
                                             @endforeach
