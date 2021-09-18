@@ -6,6 +6,7 @@ use \App\Casts\EncryptCast;
 use \App\Http\Controllers\Admin\Shop\CategoryController;
 use \App\Http\Controllers\Admin\Shop\ProductController;
 use \App\Http\Controllers\Admin\Shop\DiscountController;
+use \App\Http\Controllers\Admin\Shop\BrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,7 +81,7 @@ Route::prefix('dashboard')->group(function () {
 
     Route::post('verify/brand_image', 'Admin\Shop\BrandController@verifyBrand')->name('verify.brand.image');
     Route::resource('brands','Admin\Shop\BrandController');
-    Route::get('/delete/brand/{brand}',[CategoryController::class,'destroy'])->name('brand-delete');
+    Route::get('/delete/brand/{brand}',[BrandController::class,'destroy'])->name('brand-delete');
 
     Route::resource('products.pictures','Admin\Shop\PictureController');
 
