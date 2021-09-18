@@ -20,4 +20,10 @@ class Role extends Model
     {
         return $this->permissions()->where('title',$permission)->exists();
     }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+    
 }

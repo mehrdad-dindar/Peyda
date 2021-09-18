@@ -20,13 +20,13 @@ class DatabaseSeeder extends Seeder
                     Phone_brandsTableSeeder::class,
                     FlashMessagesSeeder::class,
                     Phone_modelsTableSeeder::class,
-                    UsersTableSeeder::class,
                     StatusTableSeeder::class,
                     ImageFieldTableSeeder::class,
                     SettingsTableSeeder::class,
                     NotificationTypeTableSeeder::class,
                     PersmissionSeeder::class,
                     RoleSeeder::class,
+                    UsersTableSeeder::class,
                     CategoriesSeeder::class,
                     BrandsSeeder::class
         ]);

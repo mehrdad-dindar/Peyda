@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App;
+use App\Models\Role;
 use DB;
 use Hash;
 use Illuminate\Database\Seeder;
@@ -21,7 +22,7 @@ class UsersTableSeeder extends Seeder
             [
                 'f_name'                =>          'مهرداد',
                 'l_name'                =>          'دیندار',
-                'role_id'             =>          1,
+                'role_id'             =>            Role::query()->where('title','admin')->first()->id,
                 'city_id'               =>          1,
                 'address'               =>          'نواب - خ زمزم - ک اسلامی',
                 'postal_code'           =>          '1234567890',
@@ -53,7 +54,7 @@ class UsersTableSeeder extends Seeder
             [
                 'f_name'                =>          'الناز',
                 'l_name'                =>          'جباری',
-                'user_type'             =>          2,
+                'role_id'             =>          2,
                 'email'                 =>          'jabbary.elnaz76@gmail.com',
                 'password'              =>          Hash::make('12345678'),
                 'email_verified_at'     =>          '2021-08-10 10:11:03',

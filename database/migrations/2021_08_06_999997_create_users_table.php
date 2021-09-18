@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('f_name');
             $table->string('l_name');
-            $table->unsignedBigInteger('role_id')->default(2)->nullable();
+            $table->foreignId('role_id')->constrained();
             $table->string('avatar')->nullable();
             $table->unsignedBigInteger('city_id')->nullable();
             $table->text('address')->nullable();
