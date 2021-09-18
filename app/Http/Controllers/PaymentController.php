@@ -71,7 +71,7 @@ class PaymentController extends Controller
                 $wallet_history->user_id = $user->id;
                 $wallet_history->transaction_id = $transaction->id;
                 $wallet_history->title = 'خرید فراگارانتی ' . $phone_model;
-                $wallet_history->value = Crypt::encryptString(0 - $amount);
+                $wallet_history->value = $crypt->set(null,env('APP_CRYPT'),0 - $amount,[]);
                 $wallet_history->status = Transaction::STATUS_PENDING;
                 $wallet_history->save();
                 $mobilewarranty->status_id = 5;
