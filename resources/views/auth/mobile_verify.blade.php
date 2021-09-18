@@ -16,6 +16,17 @@
 
                     <form method="POST" action="{{ route('doVerify') }}">
                         @csrf
+                        @if($errors->any())
+                            <div class="col-md12">
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach($errors->all() as $error)
+                                            <li>{{$error}}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        @endif
                         <div class="form-group">
                             <label class="float-left" for="code">کد تأیید</label>
                             <input class="form-control  @error('code') is-invalid @enderror" type="text" id="code"  name="code" required autocomplete="code" autofocus>

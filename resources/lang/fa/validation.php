@@ -167,6 +167,6 @@ return [
         'year'                  => 'سال',
         'fullname'                  => 'نام و نام خانوادگی',
         'melli_code'                  => 'کد ملی',
-        'g-recaptcha-response'   =>  'کد امنیتی'
+        'g-recaptcha-response'   =>  'کد امنیتی',
     ],
 ];

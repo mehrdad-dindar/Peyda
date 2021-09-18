@@ -38,11 +38,12 @@
                         </span>
                             @enderror
                         </div>
-                        <div class="row mt-20 justify-content-md-center">
+                        {{-- //TODO فعال سازی ریکپچا --}}
+                        {{--<div class="row mt-20 justify-content-md-center">
                             <div class="col-md-6">
                                 <div class="g-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_SITE_KEY') }}"></div>
                             </div>
-                        </div>
+                        </div>--}}
                         <div class="form-group mt-20 mb-0">
                             <button class="btn btn-primary btn-block" type="submit">ارسال کد یکبار مصرف</button>
                         </div>

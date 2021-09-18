@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
+
     public function register()
     {
         return view('auth.register');
@@ -60,7 +65,8 @@ class AuthController extends Controller
         $data = $request->all();
         $this->validate($request, [
             'phone_num' => 'required|exists:users',
-            'g-recaptcha-response' => ['required',new Recaptcha()],
+            //TODO فعال سازی ریکپچا
+            /*'g-recaptcha-response' => ['required',new Recaptcha()],*/
         ]);
         $user = User::where('phone_num', $request->phone_num)->first();
 
@@ -94,18 +100,18 @@ class AuthController extends Controller
         ]);
 
         if (!session()->has('code_id') || !session()->has('user_id'))
-            redirect()->route('loginPhone');
+            return redirect()->route('login');
 
         $token = Token::where('user_id', session()->get('user_id'))->find(session()->get('code_id'));
 
         if (!$token || empty($token->id))
-            redirect()->route('loginPhone');
+            return redirect()->route('login');
 
         if (!$token->isValid())
-            redirect()->back()->withErrors('The code is either expired or used.');
+            return redirect()->back()->withErrors(['کد تأیید منقضی شده است.']);
 
-        if ($token->code !== $request->input('code'))
-            redirect()->back()->withErrors('The code is wrong.');
+        if ($token->code !== $request->get('code'))
+            return redirect()->back()->withErrors(['کد تأیید اشتباه است.']);
 
         $token->update([
             'used' => true
@@ -117,7 +123,7 @@ class AuthController extends Controller
 
         auth()->login($user, $rememberMe);
 
-        return redirect()->route('index');
+        return redirect()->route('dashboard');
 
     }
 
