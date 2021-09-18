@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\RoleRequest;
+use App\Models\Permission;
 use App\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -15,7 +17,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $roles=Role::all();
+        return view('dashboard.roles.index',['roles'=>$roles]);
     }
 
     /**
@@ -25,7 +28,9 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.roles.create',[
+            'permissions'=>Permission::all()
+        ]);
     }
 
     /**
@@ -34,9 +39,16 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        //
+        $role=Role::query()->create([
+            'title'=>$request->get('title')
+        ]);
+
+        $role->permissions()->attach($request->get('permissions'));
+
+        return redirect(route('roles.index'));
+
     }
 
     /**

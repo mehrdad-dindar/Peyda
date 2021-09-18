@@ -7,6 +7,7 @@ use \App\Http\Controllers\Admin\Shop\CategoryController;
 use \App\Http\Controllers\Admin\Shop\ProductController;
 use \App\Http\Controllers\Admin\Shop\DiscountController;
 use \App\Http\Controllers\Admin\Shop\BrandController;
+use \App\Http\Controllers\Admin\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +90,9 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/delete/product/{product}',[ProductController::class,'destroy'])->name('product-delete');
 
     Route::resource('products.discounts','Admin\Shop\DiscountController');
+
+    Route::resource('roles','Admin\RoleController');
+    Route::get('/delete/role/{role}',[RoleController::class.'destroy'])->name('role-delete');
 
     Route::get('/warranties', 'Admin\WarrantyController@index');
     Route::get('/warranties/create', 'Admin\WarrantyController@create');

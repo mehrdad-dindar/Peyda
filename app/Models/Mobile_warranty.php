@@ -53,9 +53,4 @@ class Mobile_warranty extends Model
     {
         return $this->belongsTo(Status::class);
     }
-
-    public function phone_model()
-    {
-        return $this->belongsTo(Phone_model::class);
-    }
 }

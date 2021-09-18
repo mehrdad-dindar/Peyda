@@ -42,6 +42,7 @@
                         <a href="javascript:void(0)"><i class="zmdi zmdi-settings"></i> <span>تنظیمات</span> <i class="fa fa-angle-left"></i></a>
                         <ul class="treeview-menu">
                             <li><a href="{{route('dashboard')}}/settings/brand">گوشی ها</a></li>
+                            <li><a href="{{ route('roles.index') }}">نقش ها</a></li>
                         </ul>
                     </li>
                     <li><a href="{{ route('dashboard') }}"><i class="zmdi zmdi-view-dashboard"></i><span>اعلانات</span></a></li>

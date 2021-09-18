@@ -42,16 +42,16 @@
                                             <tr>
 
                                                 <td>{{sizeof($categories)+1}}</td>
-                                                <td><input type="text" id="title" name="title" placeholder="نام"></td>
+                                                <td><input type="text" class="form-control" id="title" name="title" placeholder="نام"></td>
                                                 <td>
-                                                    <select id="parent" name="parent">
+                                                    <select id="parent" class="form-control" name="parent">
                                                         <option value="" selected>دسته والد را انتخاب کنید</option>
                                                         @foreach($categories as $category)
                                                             <option value="{{$category->id}}">{{$category->title}}</option>
                                                         @endforeach
                                                     </select></td>
                                                 <td>
-                                                    <button type="submit" class="btn btn-primary btn-sm" style="background-color: green; border-color: greenyellow;">ثبت</button>
+                                                    <button type="submit" class="btn btn-primary btn-sm form-control" style="background-color: green; border-color: greenyellow;">ثبت</button>
                                                 </td>
                                             </tr>
                                             </tfoot>

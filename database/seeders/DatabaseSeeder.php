@@ -26,7 +26,9 @@ class DatabaseSeeder extends Seeder
                     SettingsTableSeeder::class,
                     NotificationTypeTableSeeder::class,
                     PersmissionSeeder::class,
-                    RoleSeeder::class
+                    RoleSeeder::class,
+                    CategoriesSeeder::class,
+                    BrandsSeeder::class
         ]);
     }
 }
