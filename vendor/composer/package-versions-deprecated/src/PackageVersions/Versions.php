@@ -48,6 +48,7 @@ final class Versions
   'guzzlehttp/psr7' => '2.0.0@1dc8d9cba3897165e16d12bb13d813afb1eb3fe7',
   'hekmatinasser/notowo' => 'v1.0.1@c51ad5dcedac966dd93ce558ac7e6a84e0020d6d',
   'hekmatinasser/verta' => 'v1.12.4@75a9713ed2f5723b34318744614cd8b55cfb09f2',
+  'ippanel/php-rest-sdk' => 'v1.0.1@ef0375c46502ebdcf5cf2aec955492d0b7f384f9',
   'laravel/framework' => 'v8.57.0@6de01746680d7bc7e239b20ec5cdfe70ce586235',
   'laravel/tinker' => 'v2.6.1@04ad32c1a3328081097a181875733fa51f402083',
   'laravel/ui' => 'v3.3.0@07d725813350c695c779382cbd6dac0ab8665537',

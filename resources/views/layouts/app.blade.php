@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="UTF-8">
@@ -79,7 +79,7 @@
 
 <!-- Active JS -->
 <script src="{{ URL::asset('admin/js/default-assets/active.js') }}"></script>
-
+@yield('custom_js')
 </body>
 
 </html>
