@@ -12,7 +12,7 @@
 
                 <div class="col-md-6">
                     <!-- Logo -->
-                    <h4 class="font-18 mb-30">ورود به پنل کاربری</h4>
+                    <h4 class="font-18 mb-30">ورود / عضویت</h4>
 
                     <form method="POST" action="{{ route('doLoginPhone') }}">
                         @csrf
@@ -31,7 +31,7 @@
                             <label class="float-left" for="phone_num">شماره همراه</label>
                             <input class="form-control  @error('phone_num') is-invalid @enderror" type="text"
                                    id="phone_num" name="phone_num" value="{{ old('phone_num') }}" required
-                                   autocomplete="phone_num" placeholder="0912XXXXXXX" autofocus>
+                                   autocomplete="phone_num" placeholder="0912XXXXXXX" autofocus minlength="11" maxlength="11">
                             @error('phone_num')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -53,22 +53,22 @@
                                        id="checkbox-8" {{ old('remember_me') ? 'checked' : '' }}>
                                 <label for="checkbox-8" class="cr mb-0">مرا به یاد آور</label>
                             </div>
-                            <span class="font-13 text-primary">
+                            {{--<span class="font-13 text-primary">
                             @if (Route::has('password.request'))
                                     <a href="{{ route('password.request') }}">رمز عبور خود را فراموش کرده اید؟</a>
                                 @endif
-                            </span>
+                            </span>--}}
                         </div>
-                        <div class="row mt-20 justify-content-md-center">
+                        {{--<div class="row mt-20 justify-content-md-center">
                             <div class="col-6">
                                 <a href="#" class="btn btn-googleplus waves-effect waves-light mb-2 btn-block"><i
                                         class="fa fa-envelope-o  mr-2"></i><span
                                         class="text-center">ورود با ایمیل</span></a>
                             </div>
-                        </div>
+                        </div>--}}
 
-                        <div class="text-center mt-15"><span class="mr-2 font-13 font-weight-bold">اگر ثبت نام نکرده اید؟ </span><a
-                                class="font-13 font-weight-bold" href="{{ route('register') }}">ثبت نام کنید</a></div>
+                        {{--<div class="text-center mt-15"><span class="mr-2 font-13 font-weight-bold">اگر ثبت نام نکرده اید؟ </span><a
+                                class="font-13 font-weight-bold" href="{{ route('register') }}">ثبت نام کنید</a></div>--}}
                         <div class="row justify-content-center mt-15">
                             <a class="font-13 font-weight-bold" href="{{ route('index') }}">بازگشت به صفحه اصلی</a>
                         </div>

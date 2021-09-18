@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Token;
 use App\Models\User;
+use App\Models\Wallet;
 use App\Rules\Recaptcha;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -37,6 +39,7 @@ class AuthController extends Controller
 
     public function loginPhone()
     {
+        /*dd(Carbon::now()->toDateTimeString());*/
         return view('auth.mobile_login');
     }
 
@@ -64,11 +67,21 @@ class AuthController extends Controller
     {
         $data = $request->all();
         $this->validate($request, [
-            'phone_num' => 'required|exists:users',
+            'phone_num' => 'required|numeric|digits:11||digits:11',
             //TODO فعال سازی ریکپچا
             /*'g-recaptcha-response' => ['required',new Recaptcha()],*/
         ]);
-        $user = User::where('phone_num', $request->phone_num)->first();
+        $newUser=null;
+        $user = User::where('phone_num', $request->phone_num)->firstOr(function () use ($request,&$newUser) {
+            $newUser = User::create(['phone_num' => $request->phone_num]);
+            Wallet::create([
+                'user_id' => $newUser->id,
+                'value' => "0",
+            ]);
+        });
+        if($newUser!=null){
+            $user=$newUser;
+        }
 
         $token = Token::create([
             'user_id' => $user->id
@@ -96,7 +109,7 @@ class AuthController extends Controller
     public function doVerify(Request $request)
     {
         $this->validate($request, [
-            'code' => 'required|numeric'
+            'code' => 'required|numeric|digits:4'
         ]);
 
         if (!session()->has('code_id') || !session()->has('user_id'))
@@ -118,7 +131,7 @@ class AuthController extends Controller
         ]);
 
         $user = User::find(session()->get('user_id'));
-
+        $user->update(['phone_num_verified_at' => Carbon::now()->toDateTimeString()]);
         $rememberMe = session()->get('remember');
 
         auth()->login($user, $rememberMe);
