@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Casts\EncryptCast;
 use App\Http\Controllers\Controller;
 use App\Models\Token;
 use App\Models\User;
@@ -39,7 +40,6 @@ class AuthController extends Controller
 
     public function loginPhone()
     {
-        /*dd(Carbon::now()->toDateTimeString());*/
         return view('auth.mobile_login');
     }
 
@@ -73,10 +73,11 @@ class AuthController extends Controller
         ]);
         $newUser=null;
         $user = User::where('phone_num', $request->phone_num)->firstOr(function () use ($request,&$newUser) {
+            $crypt = new EncryptCast();
             $newUser = User::create(['phone_num' => $request->phone_num]);
             Wallet::create([
                 'user_id' => $newUser->id,
-                'value' => "0",
+                'value'=>$crypt->set(null,$_ENV['APP_CRYPT'],'0',[])[$_ENV['APP_CRYPT']]
             ]);
         });
         if($newUser!=null){

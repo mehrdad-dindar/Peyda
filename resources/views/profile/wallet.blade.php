@@ -32,7 +32,7 @@
                                 <!--begin::Date-->
                                 <div class="fs-6 fw-bolder text-gray-700 text-nowrap">موجودی : <span
                                         class="badge badge-light-info fs-6"><span
-                                            class="last-price">{{Crypt::decryptString($wallet->value)}}</span> تومان</span>
+                                            class="last-price">{{$crypt->get(null,"",$wallet->value,[])}}</span> تومان</span>
                                 </div>
                                 <!--end::Date-->
                             </div>
