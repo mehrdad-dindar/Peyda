@@ -148,6 +148,7 @@ return [
         'last_name'             => 'نام خانوادگی',
         'minute'                => 'دقیقه',
         'mobile'                => 'شماره همراه',
+        'phone_num'             => 'شماره همراه',
         'month'                 => 'ماه',
         'name'                  => 'نام',
         'national_code'         => 'کد ملی',
@@ -166,5 +167,6 @@ return [
         'year'                  => 'سال',
         'fullname'                  => 'نام و نام خانوادگی',
         'melli_code'                  => 'کد ملی',
+        'g-recaptcha-response'   =>  'کد امنیتی',
     ],
 ];

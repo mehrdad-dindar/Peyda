@@ -94,4 +94,12 @@ Route::prefix('dashboard')->group(function () {
 });
 Route::get('/get_model', 'PhoneBrandController@get_model');
 
-Auth::routes(['verify' => true]);
+Route::get('/login', 'Auth\AuthController@loginPhone')->name('login');
+Route::get('/login-email', 'Auth\AuthController@loginEmail')->name('loginEmail');
+Route::get('/register', 'Auth\AuthController@register')->name('register');
+Route::post('/register', 'Auth\AuthController@doRegister')->name('doRegister');
+Route::post('/login-phone', 'Auth\AuthController@doLoginPhone')->name('doLoginPhone');
+Route::post('/login-email', 'Auth\AuthController@doLoginEmail')->name('doLoginEmail');
+Route::get('/verify', 'Auth\AuthController@verify')->name('verify');
+Route::post('/doVerify', 'Auth\AuthController@doVerify')->name('doVerify');
+Route::get('/logout', 'Auth\AuthController@logout')->name('logout');

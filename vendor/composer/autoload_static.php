@@ -148,6 +148,7 @@ class ComposerStaticInite767f0242b6a1fd50cadd6a4eccea279
             'Illuminate\\Support\\' => 19,
             'Illuminate\\Foundation\\Auth\\' => 27,
             'Illuminate\\' => 11,
+            'IPPanel\\' => 8,
         ),
         'H' => 
         array (
@@ -487,6 +488,10 @@ class ComposerStaticInite767f0242b6a1fd50cadd6a4eccea279
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
         ),
+        'IPPanel\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ippanel/php-rest-sdk/src/IPPanel',
+        ),
         'Hekmatinasser\\Verta\\' => 
         array (
             0 => __DIR__ . '/..' . '/hekmatinasser/verta/src',
@@ -670,6 +675,7 @@ class ComposerStaticInite767f0242b6a1fd50cadd6a4eccea279
         'App\\Http\\Controllers\\Admin\\SettingsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/SettingsController.php',
         'App\\Http\\Controllers\\Admin\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/UserController.php',
         'App\\Http\\Controllers\\Admin\\WarrantyController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/WarrantyController.php',
+        'App\\Http\\Controllers\\Auth\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
@@ -720,6 +726,7 @@ class ComposerStaticInite767f0242b6a1fd50cadd6a4eccea279
         'App\\Models\\Phone_model' => __DIR__ . '/../..' . '/app/Models/Phone_model.php',
         'App\\Models\\Setting' => __DIR__ . '/../..' . '/app/Models/Setting.php',
         'App\\Models\\Status' => __DIR__ . '/../..' . '/app/Models/Status.php',
+        'App\\Models\\Token' => __DIR__ . '/../..' . '/app/Models/Token.php',
         'App\\Models\\Transaction' => __DIR__ . '/../..' . '/app/Models/Transaction.php',
         'App\\Models\\TransferWarranty' => __DIR__ . '/../..' . '/app/Models/TransferWarranty.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
@@ -2203,7 +2210,6 @@ class ComposerStaticInite767f0242b6a1fd50cadd6a4eccea279
         'Faker\\Provider\\nl_BE\\Payment' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_BE/Payment.php',
         'Faker\\Provider\\nl_BE\\Person' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_BE/Person.php',
         'Faker\\Provider\\nl_BE\\PhoneNumber' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_BE/PhoneNumber.php',
-        'Faker\\Provider\\nl_BE\\Text' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_BE/Text.php',
         'Faker\\Provider\\nl_NL\\Address' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_NL/Address.php',
         'Faker\\Provider\\nl_NL\\Color' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_NL/Color.php',
         'Faker\\Provider\\nl_NL\\Company' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_NL/Company.php',
@@ -2500,6 +2506,17 @@ class ComposerStaticInite767f0242b6a1fd50cadd6a4eccea279
         'Hekmatinasser\\Verta\\Traits\\Translator' => __DIR__ . '/..' . '/hekmatinasser/verta/src/Traits/Translator.php',
         'Hekmatinasser\\Verta\\Verta' => __DIR__ . '/..' . '/hekmatinasser/verta/src/Verta.php',
         'Hekmatinasser\\Verta\\VertaInterface' => __DIR__ . '/..' . '/hekmatinasser/verta/src/VertaInterface.php',
+        'IPPanel\\Client' => __DIR__ . '/..' . '/ippanel/php-rest-sdk/src/IPPanel/Client.php',
+        'IPPanel\\Errors\\Error' => __DIR__ . '/..' . '/ippanel/php-rest-sdk/src/IPPanel/Errors/Error.php',
+        'IPPanel\\Errors\\HttpException' => __DIR__ . '/..' . '/ippanel/php-rest-sdk/src/IPPanel/Errors/HttpException.php',
+        'IPPanel\\Errors\\ResponseCodes' => __DIR__ . '/..' . '/ippanel/php-rest-sdk/src/IPPanel/Errors/ResponseCodes.php',
+        'IPPanel\\HTTPClient' => __DIR__ . '/..' . '/ippanel/php-rest-sdk/src/IPPanel/HTTPClient.php',
+        'IPPanel\\Models\\Base' => __DIR__ . '/..' . '/ippanel/php-rest-sdk/src/IPPanel/Models/Base.php',
+        'IPPanel\\Models\\InboxMessage' => __DIR__ . '/..' . '/ippanel/php-rest-sdk/src/IPPanel/Models/InboxMessage.php',
+        'IPPanel\\Models\\Message' => __DIR__ . '/..' . '/ippanel/php-rest-sdk/src/IPPanel/Models/Message.php',
+        'IPPanel\\Models\\Pattern' => __DIR__ . '/..' . '/ippanel/php-rest-sdk/src/IPPanel/Models/Pattern.php',
+        'IPPanel\\Models\\Recipient' => __DIR__ . '/..' . '/ippanel/php-rest-sdk/src/IPPanel/Models/Recipient.php',
+        'IPPanel\\Models\\Response' => __DIR__ . '/..' . '/ippanel/php-rest-sdk/src/IPPanel/Models/Response.php',
         'Illuminate\\Auth\\Access\\AuthorizationException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/AuthorizationException.php',
         'Illuminate\\Auth\\Access\\Events\\GateEvaluated' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/Events/GateEvaluated.php',
         'Illuminate\\Auth\\Access\\Gate' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/Gate.php',

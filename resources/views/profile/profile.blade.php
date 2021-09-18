@@ -143,7 +143,7 @@
                                         <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                             <!--begin::Number-->
                                             <div class="d-flex align-items-center">
-                                                <div class="fs-2 fw-bolder counted" data-kt-countup="true" data-kt-countup-value="4500" data-kt-countup-prefix="$">2,350,000 تومان</div>
+                                                <div class="fs-2 fw-bolder counted" data-kt-countup="true" data-kt-countup-value="4500" data-kt-countup-prefix="$"><span id="wallet-val">{{$crypt->get(null,"",$wallet->value,[])}}</span> تومان</div>
                                             </div>
                                             <!--end::Number-->
                                             <!--begin::Label-->
@@ -383,4 +383,9 @@
         </div>
         <!--end::details View-->
     </div>
+@endsection
+@section('custom_js')
+    <script>
+        $('#wallet-val').number(true, 0);
+    </script>
 @endsection

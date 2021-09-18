@@ -7,15 +7,17 @@
     "require": {
         "php": "^8.0",
         "ext-gd": "*",
+        "ext-soap": "*",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "hekmatinasser/verta": "^1.12",
+        "ippanel/php-rest-sdk": "^1.0",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
         "shetabit/payment": "^4.0",
-      "ext-soap": "*"
+      "ext-http": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

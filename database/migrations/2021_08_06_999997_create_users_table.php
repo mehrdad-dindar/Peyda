@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('city_id')->nullable();
             $table->text('address')->nullable();
             $table->string('postal_code',10)->nullable();
-            $table->string('phone_num')->nullable();
+            $table->string('phone_num')->unique();
             $table->timestamp('phone_num_verified_at')->nullable();
             $table->string('melli_code')->nullable();
             $table->string('melli_card')->nullable();
@@ -30,7 +30,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('birthday')->nullable();
             $table->boolean('status')->default(0);
             $table->unsignedBigInteger('phone_model_id')->nullable();
-            $table->string('email')->unique();
+            $table->string('email')->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
