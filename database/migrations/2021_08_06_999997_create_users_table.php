@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('f_name');
             $table->string('l_name');
-            $table->string('user_type')->default('customer')->nullable();
+            $table->unsignedBigInteger('role_id')->default(2)->nullable();
             $table->string('avatar')->nullable();
             $table->unsignedBigInteger('city_id')->nullable();
             $table->text('address')->nullable();

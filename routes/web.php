@@ -63,7 +63,8 @@ Route::prefix('panel')->group(function () {
 
 
 /* Dashboard */
-Route::prefix('dashboard')->group(function () {
+Route::prefix('dashboard')->middleware(\App\Http\Middleware\CheckPermission::class. ':view-dashboard')
+            ->group(function () {
     Route::get('/', 'Admin\HomeController@index')->name('dashboard');
     Route::prefix('/users')->group(function (){
         Route::get('/', 'Admin\UserController@index');

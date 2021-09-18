@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
             [
                 'f_name'                =>          'مهرداد',
                 'l_name'                =>          'دیندار',
-                'user_type'             =>          'admin',
+                'role_id'             =>          1,
                 'city_id'               =>          1,
                 'address'               =>          'نواب - خ زمزم - ک اسلامی',
                 'postal_code'           =>          '1234567890',
@@ -53,7 +53,7 @@ class UsersTableSeeder extends Seeder
             [
                 'f_name'                =>          'الناز',
                 'l_name'                =>          'جباری',
-                'user_type'             =>          'admin',
+                'user_type'             =>          2,
                 'email'                 =>          'jabbary.elnaz76@gmail.com',
                 'password'              =>          Hash::make('12345678'),
                 'email_verified_at'     =>          '2021-08-10 10:11:03',
