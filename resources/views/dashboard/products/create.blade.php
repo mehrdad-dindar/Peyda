@@ -26,11 +26,11 @@
                                 <h4 class="card-title">فرم محصول</h4>
                                 <div class="container">
 
-                                        <label for="slug">نام</label>
-                                        <input type="text" id="name" name="name"  class="form-control" placeholder="نام">
+                                        <label for="slug">عنوان</label>
+                                        <input type="text" id="name" name="name"  class="form-control" placeholder="عنوان">
 
-                                        <label for="slug">اسلاگ</label>
-                                        <input type="text" id="slug" name="slug"  class="form-control" placeholder="اسلاگ">
+                                        <label for="slug">نامک</label>
+                                        <input type="text" id="slug" name="slug"  class="form-control" placeholder="نامک">
 
                                         <label for="cost">قیمت</label>
                                         <input type="number" id="cost" name="cost"  class="form-control mb-20" placeholder="قیمت">

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Requests\DiscountRequest;
 use App\Http\Requests\ProductPictureRequest;
 use App\Http\Requests\Request;
 use File;
@@ -52,4 +53,28 @@ class Product extends Model
         File::delete('uploads/products/pictures/'.$picture->path);
         $picture->delete();
     }
+
+    public function discount()
+    {
+        return $this->hasOne(Discount::class);
+    }
+
+    public function addDiscount(DiscountRequest $request)
+    {
+        if(!$this->discount()->exists()){
+            $this->discount()->create([
+                'value'=>$request->get('value')
+            ]);
+        }else{
+            $this->discount->update([
+               'value'=>$request->get('value')
+            ]);
+        }
+    }
+
+    public function deleteDiscount()
+    {
+        $this->discount()->delete();
+    }
+
 }

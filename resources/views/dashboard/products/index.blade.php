@@ -24,47 +24,64 @@
                                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="جستجو ...">
                                 <!-- Table with outer spacing -->
                                 <div class="table-responsive">
-                                    <form action="{{route('products.store')}}" method="post" enctype="multipart/form-data">
-                                        @csrf
-                                        <table class="table" id="myTable">
-                                            <thead>
+                                    @csrf
+                                    <table class="table" id="myTable">
+                                        <thead>
+                                        <tr>
+                                            <th>ردیف</th>
+                                            <th>نام</th>
+                                            <th>قیمت</th>
+                                            <th>برند</th>
+                                            <th>دسته بندی</th>
+                                            <th>تصویر</th>
+                                            <th>گالری</th>
+                                            <th>تخفیف</th>
+                                            <th>عملیات</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($products as $key=>$row)
                                             <tr>
-                                                <th>ردیف</th>
-                                                <th>نام</th>
-                                                <th>قیمت</th>
-                                                <th>برند</th>
-                                                <th>دسته بندی</th>
-                                                <th>تصویر</th>
-                                                <th>تاریخ ایجاد</th>
-                                                <th>عملیات</th>
+                                                <td>{{$key+1}}</td>
+                                                <td>{{ $row->name }}</td>
+                                                <td>{{ number_format($row->cost) }}</td>
+                                                <td>{{ $row->brand->name }}</td>
+                                                <td>{{ $row->category->title }}</td>
+                                                <td><img width="70px" src="{{URL::asset('uploads/products').'/'.$row->image}}" alt="{{$row->name}}" title="{{$row->name}}"></td>
+                                                <td>
+                                                    <a href="{{route('products.pictures.index',$row)}}"
+                                                       class="btn btn-warning">گالری</a>
+                                                </td>
+                                                <td>
+                                                    @if(!$row->discount()->exists())
+
+                                                        <a href="{{route('products.discounts.create',$row)}}"
+                                                           class="btn btn-success">ایجاد تخفیف</a>
+
+                                                    @else
+
+                                                        <p>{{$row->discount->value}}</p>
+
+                                                        <form action="{{route('products.discounts.destroy',['product'=>$row, 'discount'=>$row->discount])}}" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <input type="submit" class="btn btn-sm btn-danger" value="حذف">
+                                                        </form>
+                                                    @endif
+
+                                                </td>
+                                                <td>
+                                                    <a href="{{ route('products.edit',[$row->id]) }}" class="btn btn-outline-info mb-2 mr-2">ویرایش</a>
+                                                    <a onclick="javascript: return confirm('آیا اطمینان به حذف دارید؟');" href="{{route('product-delete',[$row])}}" class="btn btn-outline-danger  mb-2 mr-2">حذف</a>
+                                                </td>
                                             </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($products as $key=>$row)
-                                                <tr>
-                                                    <td>{{$key+1}}</td>
-                                                    <td>{{ $row->name }}</td>
-                                                    <td>{{ number_format($row->cost) }}</td>
-                                                    <td>{{ $row->brand->name }}</td>
-                                                    <td>{{ $row->category->title }}</td>
-                                                    <td><img width="70px" src="{{URL::asset('uploads/products').'/'.$row->image}}" alt="{{$row->name}}" title="{{$row->name}}"></td>
-                                                    <td>
-                                                        <a href="{{route('products.pictures.index',$row)}}"
-                                                           class="btn btn-warning">گالری</a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="{{ route('products.edit',[$row->id]) }}" class="btn btn-outline-info mb-2 mr-2">ویرایش</a>
-                                                        <a onclick="javascript: return confirm('آیا اطمینان به حذف دارید؟');" href="{{route('product-delete',[$row])}}" class="btn btn-outline-danger  mb-2 mr-2">حذف</a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
+                                        @endforeach
+                                        </tbody>
 
-                                            <tfoot>
+                                        <tfoot>
 
-                                            </tfoot>
-                                        </table>
-                                    </form>
+                                        </tfoot>
+                                    </table>
                                 </div>
                             </div>
                         </div>

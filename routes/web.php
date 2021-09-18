@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use \App\Casts\EncryptCast;
+use \App\Http\Controllers\Admin\Shop\CategoryController;
+use \App\Http\Controllers\Admin\Shop\ProductController;
+use \App\Http\Controllers\Admin\Shop\DiscountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,7 +70,7 @@ Route::prefix('dashboard')->group(function () {
     });
 
     Route::resource('categories','Admin\Shop\CategoryController');
-    Route::get('/delete/category/{category}',[\App\Http\Controllers\Admin\Shop\CategoryController::class,'destroy'])->name('category-delete');
+    Route::get('/delete/category/{category}',[CategoryController::class,'destroy'])->name('category-delete');
     /*Route::get('/',[Admin\Shop\CategoryController::class,'index'])->name('categories');
     Route::get('/{category}/edit',[Admin\Shop\CategoryController::class,'edit'])->name('category-edit');
     Route::post('/store',[Admin\Shop\CategoryController::class,'store'])->name('category-store');
@@ -77,12 +80,14 @@ Route::prefix('dashboard')->group(function () {
 
     Route::post('verify/brand_image', 'Admin\Shop\BrandController@verifyBrand')->name('verify.brand.image');
     Route::resource('brands','Admin\Shop\BrandController');
-    Route::get('/delete/brand/{brand}',[\App\Http\Controllers\Admin\Shop\CategoryController::class,'destroy'])->name('brand-delete');
+    Route::get('/delete/brand/{brand}',[CategoryController::class,'destroy'])->name('brand-delete');
 
     Route::resource('products.pictures','Admin\Shop\PictureController');
 
     Route::resource('products','Admin\Shop\ProductController');
-    Route::get('/delete/product/{product}',[\App\Http\Controllers\Admin\Shop\ProductController::class,'destroy'])->name('product-delete');
+    Route::get('/delete/product/{product}',[ProductController::class,'destroy'])->name('product-delete');
+
+    Route::resource('products.discounts','Admin\Shop\DiscountController');
 
     Route::get('/warranties', 'Admin\WarrantyController@index');
     Route::get('/warranties/create', 'Admin\WarrantyController@create');
