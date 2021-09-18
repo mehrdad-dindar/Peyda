@@ -92,7 +92,7 @@ Route::prefix('dashboard')->group(function () {
     Route::resource('products.discounts','Admin\Shop\DiscountController');
 
     Route::resource('roles','Admin\RoleController');
-    Route::get('/delete/role/{role}',[RoleController::class.'destroy'])->name('role-delete');
+    Route::get('/delete/role/{role}',[RoleController::class,'destroy'])->name('role-delete');
 
     Route::get('/warranties', 'Admin\WarrantyController@index');
     Route::get('/warranties/create', 'Admin\WarrantyController@create');

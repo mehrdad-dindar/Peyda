@@ -32,7 +32,7 @@
                                                     <td>{{$key+1}}</td>
                                                     <td>{{ $row->title }}</td>
                                                     <td>
-                                                        <a href="{{ route('categories.edit',$row->id) }}" class="btn btn-warning mb-2 mr-2">ویرایش</a>
+                                                        <a href="{{ route('roles.edit',$row->id) }}" class="btn btn-warning mb-2 mr-2">ویرایش</a>
                                                         <a onclick="javascript: return confirm('آیا اطمینان به حذف دارید؟');" href="{{route('role-delete',[$row->id])}}" class="btn btn-outline-danger  mb-2 mr-2">حذف</a>
                                                     </td>
                                                 </tr>

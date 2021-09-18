@@ -70,7 +70,17 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        $arr=[];
+        foreach ($role->permissions as $permission){
+            array_push($arr,$permission->pivot->permission_id);
+        }
+        //dd($arr);
+        return view('dashboard.roles.edit',[
+            'role'=>$role,
+            'role_title'=>$role->title,
+            'permission_ids'=>$arr,
+            'permissions'=>Permission::all()
+        ]);
     }
 
     /**
@@ -80,9 +90,15 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(RoleRequest $request, Role $role)
     {
-        //
+        $role->update([
+           'title'=>$request->get('title',$role->title)
+        ]);
+
+        $role->permissions()->sync($request->get('permissions'));
+
+        return redirect(route('roles.index'));
     }
 
     /**
@@ -93,6 +109,9 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        $role->permissions()->detach();
+        $role->delete();
+
+        return redirect(route('roles.index'));
     }
 }
