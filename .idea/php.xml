@@ -133,6 +133,8 @@
       <path value="$PROJECT_DIR$/vendor/hekmatinasser/verta" />
       <path value="$PROJECT_DIR$/vendor/composer" />
       <path value="$PROJECT_DIR$/vendor/ippanel/php-rest-sdk" />
+      <path value="$PROJECT_DIR$/vendor/josiasmontag/laravel-recaptchav3" />
+      <path value="$PROJECT_DIR$/vendor/albertcht/invisible-recaptcha" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />

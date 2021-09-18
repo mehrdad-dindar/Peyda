@@ -79,7 +79,7 @@
 
 <!-- Active JS -->
 <script src="{{ URL::asset('admin/js/default-assets/active.js') }}"></script>
-
+@yield('custom_js')
 </body>
 
 </html>

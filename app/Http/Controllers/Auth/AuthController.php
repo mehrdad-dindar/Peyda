@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Token;
 use App\Models\User;
+use App\Rules\Recaptcha;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -59,6 +60,7 @@ class AuthController extends Controller
         $data = $request->all();
         $this->validate($request, [
             'phone_num' => 'required|exists:users',
+            'g-recaptcha-response' => ['required',new Recaptcha()],
         ]);
         $user = User::where('phone_num', $request->phone_num)->first();
 
