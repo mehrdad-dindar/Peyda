@@ -24,6 +24,7 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
         'phone_num',
         'melli_code',
         'melli_card',
+        'phone_num_verified_at',
         'birthday',
         'bank_card',
         'bank_id',
