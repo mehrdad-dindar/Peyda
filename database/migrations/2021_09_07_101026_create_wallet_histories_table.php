@@ -18,7 +18,7 @@ class CreateWalletHistoriesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('title')->nullable();
-            $table->text('value')->default("0");
+            $table->text('value');
             $table->string('transaction_id');
             /*$table->foreign('transaction_id')->on('wallet_histor');*/
             $table->text('invoice_details')->nullable();
