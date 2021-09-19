@@ -104,6 +104,16 @@ Route::get('/verify', 'Auth\AuthController@verify')->name('verify');
 Route::post('/doVerify', 'Auth\AuthController@doVerify')->name('doVerify');
 Route::get('/logout', 'Auth\AuthController@logout')->name('logout');
 
+/* Shop & Archive & Search Result */
 Route::get('/shop',function (){
     return view('shop.archive');
+});
+
+/* Category */
+Route::get('/گوشی-موبایل',function (){
+    return view('shop.archive');
+});
+
+Route::get('/گوشی-موبایل/Samsung-galaxy-note-9',function (){
+    return view('shop.product');
 });

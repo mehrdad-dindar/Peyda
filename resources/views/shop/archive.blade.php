@@ -221,5 +221,4 @@
         </div>
     </div>
     <div class="white-space"></div>
-    <div class="white-space"></div>
 @endsection
