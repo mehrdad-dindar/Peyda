@@ -35,7 +35,6 @@
                         <!--end::Table head-->
                         <!--begin::Table body-->
                         <tbody>
-
                         @foreach($warranties as $row)
                             <tr>
                                 <td>

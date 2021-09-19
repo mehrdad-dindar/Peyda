@@ -98,6 +98,10 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
         return $this->belongsToMany(NotificationUser::class);
     }
 
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
     /**
      * User tokens relation
      *

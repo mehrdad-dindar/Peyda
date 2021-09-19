@@ -10,8 +10,9 @@
     <link rel="icon" href="{{ URL::asset('admin/img/core-img/favicon.png') }}">
 
     <!-- These plugins only need for the run this page -->
-    <link rel="stylesheet" href="{{ URL::asset('admin/style.css') }}">
     @yield('custom_head')
+
+    <link rel="stylesheet" href="{{ URL::asset('admin/style.css') }}">
 
 
 

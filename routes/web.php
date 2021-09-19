@@ -3,6 +3,15 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use \App\Casts\EncryptCast;
+use \App\Http\Controllers\Admin\Shop\CategoryController;
+use \App\Http\Controllers\Admin\Shop\ProductController;
+use \App\Http\Controllers\Admin\Shop\DiscountController;
+use \App\Http\Controllers\Admin\Shop\BrandController;
+use \App\Http\Controllers\Admin\RoleController;
+use \App\Http\Middleware\CheckPermission;
+use App\Http\Controllers\Admin\Shop\PropertyGroupController;
+use App\Http\Controllers\Admin\Shop\PropertyController;
+use \App\Http\Controllers\Admin\Shop\ProductPropertyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +26,6 @@ use \App\Casts\EncryptCast;
 
 /* front */
 Route::get('/', 'HomeController@index')->name('index');
-Route::get('/test', function (){
-    dd(auth()->user()->id);
-    /*$ttt = new EncryptCast();
-    dd($ttt->get('','','eyJpdiI6InhxcnpDRHNTRGp4OGlFZnJWUWlybFE9PSIsInZhbHVlIjoiOTMzZTE1VmhqWk5YOFFmNUxYWnpwZz09IiwibWFjIjoiNGM5MWYxOWE4MmJhY2JjZTdlNzk1ZGQ4Njc3YTQ0MDZlMDRhYWY1MzlmYzczYzE3MWY3ODVjNDIzZjMxYjY5NyIsInRhZyI6IiJ9',[]));*/
-    /*config()->set('values.myval','Mehrdad');
-    ddd(config()->get('values.myval'));*/
-});
 
 Route::get('/single', function () {
     return view('single');
@@ -65,13 +67,47 @@ Route::prefix('panel')->group(function () {
 
 
 /* Dashboard */
-Route::prefix('dashboard')->group(function () {
+Route::prefix('dashboard')->middleware([CheckPermission::class. ':view-dashboard','auth'])
+            ->group(function () {
     Route::get('/', 'Admin\HomeController@index')->name('dashboard');
     Route::prefix('/users')->group(function (){
         Route::get('/', 'Admin\UserController@index');
         Route::get('/edit/{id}', 'Admin\UserController@create');
         Route::post('/auth', 'Admin\UserController@store');
     });
+
+    Route::resource('categories','Admin\Shop\CategoryController');
+    Route::get('/delete/category/{category}',[CategoryController::class,'destroy'])->name('category-delete');
+    /*Route::get('/',[Admin\Shop\CategoryController::class,'index'])->name('categories');
+    Route::get('/{category}/edit',[Admin\Shop\CategoryController::class,'edit'])->name('category-edit');
+    Route::post('/store',[Admin\Shop\CategoryController::class,'store'])->name('category-store');
+    Route::patch('/{category}',[Admin\Shop\CategoryController::class,'update'])->name('category-update');
+    Route::get('/delete/{category}',[Admin\Shop\CategoryController::class,'destroy'])->name('category-delete');*/
+
+
+    Route::post('verify/brand_image', 'Admin\Shop\BrandController@verifyBrand')->name('verify.brand.image');
+    Route::resource('brands','Admin\Shop\BrandController');
+    Route::get('/delete/brand/{brand}',[BrandController::class,'destroy'])->name('brand-delete');
+
+    Route::resource('products.pictures','Admin\Shop\PictureController');
+
+    Route::resource('products','Admin\Shop\ProductController');
+    Route::get('/delete/product/{product}',[ProductController::class,'destroy'])->name('product-delete');
+
+    Route::resource('propertyGroups','Admin\Shop\PropertyGroupController');
+    Route::get('/delete/group-property/{id}',[PropertyGroupController::class,'destroy'])->name('group-property-delete');
+
+    Route::resource('properties','Admin\Shop\PropertyController');
+    Route::get('/delete/property/{id}',[PropertyController::class,'destroy'])->name('property-delete');
+
+    Route::resource('products.discounts','Admin\Shop\DiscountController');
+
+    Route::get('/products/{product}/properties',[ProductPropertyController::class,'index'])->name('products.properties.index');
+    Route::post('/products/{product}/properties',[ProductPropertyController::class,'store'])->name('products.properties.store');
+    Route::get('/products/{product}/properties/create',[ProductPropertyController::class,'create'])->name('products.properties.create');
+
+    Route::resource('roles','Admin\RoleController');
+    Route::get('/delete/role/{role}',[RoleController::class,'destroy'])->name('role-delete');
 
     Route::get('/warranties', 'Admin\WarrantyController@index');
     Route::get('/warranties/create', 'Admin\WarrantyController@create');
