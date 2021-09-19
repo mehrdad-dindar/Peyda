@@ -28,6 +28,8 @@
                         <ul class="treeview-menu">
                             <li><a href="{{ route('products.create') }}">ایجاد</a></li>
                             <li><a href="{{ route('products.index') }}">همه</a></li>
+                            <li><a href="{{ route('propertyGroups.create') }}">ایجاد ویژگی</a></li>
+                            <li><a href="{{ route('propertyGroups.index') }}">لیست ویژگی</a></li>
                         </ul>
                     </li>
                     <li class="treeview">

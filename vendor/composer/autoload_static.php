@@ -738,6 +738,7 @@ class ComposerStaticInite767f0242b6a1fd50cadd6a4eccea279
         'App\\Models\\Phone_model' => __DIR__ . '/../..' . '/app/Models/Phone_model.php',
         'App\\Models\\Picture' => __DIR__ . '/../..' . '/app/Models/Picture.php',
         'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',
+        'App\\Models\\PropertyGroup' => __DIR__ . '/../..' . '/app/Models/PropertyGroup.php',
         'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
         'App\\Models\\Setting' => __DIR__ . '/../..' . '/app/Models/Setting.php',
         'App\\Models\\Status' => __DIR__ . '/../..' . '/app/Models/Status.php',

@@ -81,6 +81,7 @@ return array(
     'App\\Models\\Phone_model' => $baseDir . '/app/Models/Phone_model.php',
     'App\\Models\\Picture' => $baseDir . '/app/Models/Picture.php',
     'App\\Models\\Product' => $baseDir . '/app/Models/Product.php',
+    'App\\Models\\PropertyGroup' => $baseDir . '/app/Models/PropertyGroup.php',
     'App\\Models\\Role' => $baseDir . '/app/Models/Role.php',
     'App\\Models\\Setting' => $baseDir . '/app/Models/Setting.php',
     'App\\Models\\Status' => $baseDir . '/app/Models/Status.php',

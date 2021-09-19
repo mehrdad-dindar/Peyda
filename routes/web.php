@@ -8,6 +8,8 @@ use \App\Http\Controllers\Admin\Shop\ProductController;
 use \App\Http\Controllers\Admin\Shop\DiscountController;
 use \App\Http\Controllers\Admin\Shop\BrandController;
 use \App\Http\Controllers\Admin\RoleController;
+use \App\Http\Middleware\CheckPermission;
+use App\Http\Controllers\Admin\Shop\PropertyGroupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,7 +65,7 @@ Route::prefix('panel')->group(function () {
 
 
 /* Dashboard */
-Route::prefix('dashboard')->middleware(\App\Http\Middleware\CheckPermission::class. ':view-dashboard')
+Route::prefix('dashboard')->middleware([CheckPermission::class. ':view-dashboard','auth'])
             ->group(function () {
     Route::get('/', 'Admin\HomeController@index')->name('dashboard');
     Route::prefix('/users')->group(function (){
@@ -89,6 +91,9 @@ Route::prefix('dashboard')->middleware(\App\Http\Middleware\CheckPermission::cla
 
     Route::resource('products','Admin\Shop\ProductController');
     Route::get('/delete/product/{product}',[ProductController::class,'destroy'])->name('product-delete');
+
+    Route::resource('propertyGroups','Admin\Shop\PropertyGroupController');
+    Route::get('/delete/property/{id}',[PropertyGroupController::class,'destroy'])->name('property-delete');
 
     Route::resource('products.discounts','Admin\Shop\DiscountController');
 
