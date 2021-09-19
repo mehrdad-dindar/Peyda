@@ -28,8 +28,6 @@
                         <ul class="treeview-menu">
                             <li><a href="{{ route('products.create') }}">ایجاد</a></li>
                             <li><a href="{{ route('products.index') }}">همه</a></li>
-                            <li><a href="{{ route('propertyGroups.create') }}">ایجاد ویژگی</a></li>
-                            <li><a href="{{ route('propertyGroups.index') }}">لیست ویژگی</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -41,6 +39,15 @@
                         </ul>
                     </li>
                     <li class="treeview">
+                        <a href="javascript:void(0)"><i class="zmdi zmdi-apps"></i> <span>مشخصات</span> <i class="fa fa-angle-left"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{ route('propertyGroups.index') }}">گروه مشخصات</a></li>
+                            <li><a href="{{ route('properties.index') }}">لیست مشخصات</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{{ route('categories.index') }}"><i class="zmdi zmdi-view-dashboard"></i><span>دسته بندی ها</span></a></li>
+                    <li><a href="{{ route('brands.index') }}"><i class="zmdi zmdi-view-dashboard"></i><span>برندها</span></a></li>
+                    <li class="treeview">
                         <a href="javascript:void(0)"><i class="zmdi zmdi-settings"></i> <span>تنظیمات</span> <i class="fa fa-angle-left"></i></a>
                         <ul class="treeview-menu">
                             <li><a href="{{route('dashboard')}}/settings/brand">گوشی ها</a></li>
@@ -48,8 +55,6 @@
                         </ul>
                     </li>
                     <li><a href="{{ route('dashboard') }}"><i class="zmdi zmdi-view-dashboard"></i><span>اعلانات</span></a></li>
-                    <li><a href="{{ route('categories.index') }}"><i class="zmdi zmdi-view-dashboard"></i><span>دسته بندی ها</span></a></li>
-                    <li><a href="{{ route('brands.index') }}"><i class="zmdi zmdi-view-dashboard"></i><span>برندها</span></a></li>
                 </ul>
             </nav>
         </div>

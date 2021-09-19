@@ -10,6 +10,8 @@ use \App\Http\Controllers\Admin\Shop\BrandController;
 use \App\Http\Controllers\Admin\RoleController;
 use \App\Http\Middleware\CheckPermission;
 use App\Http\Controllers\Admin\Shop\PropertyGroupController;
+use App\Http\Controllers\Admin\Shop\PropertyController;
+use \App\Http\Controllers\Admin\Shop\ProductPropertyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,9 +95,16 @@ Route::prefix('dashboard')->middleware([CheckPermission::class. ':view-dashboard
     Route::get('/delete/product/{product}',[ProductController::class,'destroy'])->name('product-delete');
 
     Route::resource('propertyGroups','Admin\Shop\PropertyGroupController');
-    Route::get('/delete/property/{id}',[PropertyGroupController::class,'destroy'])->name('property-delete');
+    Route::get('/delete/group-property/{id}',[PropertyGroupController::class,'destroy'])->name('group-property-delete');
+
+    Route::resource('properties','Admin\Shop\PropertyController');
+    Route::get('/delete/property/{id}',[PropertyController::class,'destroy'])->name('property-delete');
 
     Route::resource('products.discounts','Admin\Shop\DiscountController');
+
+    Route::get('/products/{product}/properties',[ProductPropertyController::class,'index'])->name('products.properties.index');
+    Route::post('/products/{product}/properties',[ProductPropertyController::class,'store'])->name('products.properties.store');
+    Route::get('/products/{product}/properties/create',[ProductPropertyController::class,'create'])->name('products.properties.create');
 
     Route::resource('roles','Admin\RoleController');
     Route::get('/delete/role/{role}',[RoleController::class,'destroy'])->name('role-delete');

@@ -36,6 +36,7 @@
                                             <th>تصویر</th>
                                             <th>گالری</th>
                                             <th>تخفیف</th>
+                                            <th>ویژگی ها</th>
                                             <th>عملیات</th>
                                         </tr>
                                         </thead>
@@ -69,6 +70,10 @@
                                                         </form>
                                                     @endif
 
+                                                </td>
+                                                <td>
+                                                    <a href="{{route('products.properties.index',$row)}}"
+                                                       class="btn btn-dark">ویژگی ها</a>
                                                 </td>
                                                 <td>
                                                     <a href="{{ route('products.edit',[$row->id]) }}" class="btn btn-outline-info mb-2 mr-2">ویرایش</a>

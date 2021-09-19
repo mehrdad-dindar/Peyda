@@ -77,4 +77,10 @@ class Product extends Model
         $this->discount()->delete();
     }
 
+    public function properties()
+    {
+        return $this->belongsToMany(Property::class)
+            ->withPivot(['value'])
+            ->withTimestamps();
+    }
 }

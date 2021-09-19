@@ -15,4 +15,16 @@ class Category extends Model
     {
         return $this->belongsTo(Category::class,'category_id');
     }
+
+    public function propertyGroups()
+    {
+        return $this->belongsToMany(PropertyGroup::class);
+    }
+
+    public function hasPropertyGroup(PropertyGroup $propertyGroup)
+    {
+        return $this->propertyGroups()
+            ->where('property_group_id',$propertyGroup->id)
+            ->exists();
+    }
 }

@@ -7,9 +7,12 @@
             <div class="row" id="basic-table">
                 <div class="col-12 box-margin">
                     <div class="card">
-                        <div class="card-content">
-                            <div class="card-body">
+                        <div class="card-content bg-white">
+                            <div class="card-header d-flex justify-content-between align-items-center">
                                 <h4 class="card-title">دسته بندی محصولات</h4>
+                                <a href="{{route('categories.create')}}" role="button" class="btn btn-primary d-flex align-items-center"><i class="zmdi zmdi-hc-2x zmdi-plus"></i></a>
+                            </div>
+                            <div class="card-body">
                                 <!-- Table with outer spacing -->
                                 <div class="table-responsive">
                                     <form action="{{route('categories.store')}}" method="post" >
@@ -36,25 +39,6 @@
                                                 </tr>
                                             @endforeach
                                             </tbody>
-
-                                            <tfoot>
-
-                                            <tr>
-
-                                                <td>{{sizeof($categories)+1}}</td>
-                                                <td><input type="text" class="form-control" id="title" name="title" placeholder="نام"></td>
-                                                <td>
-                                                    <select id="parent" class="form-control" name="parent">
-                                                        <option value="" selected>دسته والد را انتخاب کنید</option>
-                                                        @foreach($categories as $category)
-                                                            <option value="{{$category->id}}">{{$category->title}}</option>
-                                                        @endforeach
-                                                    </select></td>
-                                                <td>
-                                                    <button type="submit" class="btn btn-primary btn-sm form-control" style="background-color: green; border-color: greenyellow;">ثبت</button>
-                                                </td>
-                                            </tr>
-                                            </tfoot>
                                         </table>
                                     </form>
                                 </div>
