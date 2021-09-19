@@ -41,7 +41,6 @@ h1 {
 }
 
 
-
 .ltr {
 
     direction: ltr;
@@ -1036,5 +1035,47 @@ blockquote {
 }
 
 .btn-1 a:hover {
+    color: white;
+}
+.shop-item .price{
+font-weight: bold;
+    margin-left: 8px;
+}
+.shop-item .currency{
+    font-size: 12px;
+}
+.shop-item .card{
+    border: 1px solid rgba(52, 37, 136, 0.125);
+    border-radius: 30px;
+}
+
+.shop-item .card-img-top {
+    border-top-right-radius: calc(30px - 1px);
+    border-top-left-radius: calc(30px - 1px);
+}
+
+.shop-item .card > .list-group {
+    border-top: unset;
+    border-bottom: unset;
+}
+.shop-item .card > .list-group:last-child{
+    border-bottom-left-radius: calc(30px - 1px);
+    border-bottom-right-radius: calc(30px - 1px);
+}
+.shop-item .list-group-item{
+    background-color: unset;
+}
+.shop-item .card-body,.shop-item .list-group{
+    background-color: #342588;
+}
+.shop-item .bg-orange{
+    background-color: #FEC28F;
+}
+.shop-pagination .page-link{
+    border: unset;
+    border-radius: 8px !important;
+}
+.sorting .btn-light.active{
+    background-color: #f6a55f;
     color: white;
 }

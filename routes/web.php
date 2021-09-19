@@ -103,3 +103,7 @@ Route::post('/login-email', 'Auth\AuthController@doLoginEmail')->name('doLoginEm
 Route::get('/verify', 'Auth\AuthController@verify')->name('verify');
 Route::post('/doVerify', 'Auth\AuthController@doVerify')->name('doVerify');
 Route::get('/logout', 'Auth\AuthController@logout')->name('logout');
+
+Route::get('/shop',function (){
+    return view('shop.archive');
+});
