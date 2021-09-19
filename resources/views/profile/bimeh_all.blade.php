@@ -538,7 +538,7 @@
                                                 @if($row->status->id == 5)
                                                     <!--begin::Option-->
                                                         <label
-                                                            @if(sizeof($warranties)>0) onclick="window.location.href='{{route('cart',$row->id)}}'"
+                                                            @if(sizeof($warranties)>0) onclick="window.location.href='{{route('uploadPhoto',$row->id)}}'"
                                                             @endif
                                                             class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6">
                                                             <!--begin::Input-->
