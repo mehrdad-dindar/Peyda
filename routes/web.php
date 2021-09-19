@@ -62,7 +62,7 @@ Route::prefix('panel')->group(function () {
             Route::get('/cart/{id}', 'MobileWarrantyController@cart')->name('cart');
             Route::get('/{invoice_id}/purchase', 'PaymentController@purchase')->name('purchase');
             Route::get('/{invoice_id}/result', 'PaymentController@result')->name('purchase.result');
-            Route::get('/upload-photo/{id}',[MobileWarrantyController::class , 'uploadPhoto']);
+            Route::get('/upload-photo/{id}',[MobileWarrantyController::class , 'uploadPhoto'])->name('uploadPhoto');
         });
     });
 });

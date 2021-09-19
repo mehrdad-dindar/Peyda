@@ -6,6 +6,7 @@ use App\Casts\EncryptCast;
 use App\Http\Requests\MobileWarrantyRequest;
 use App\Models\Commitment_ceiling;
 use App\Models\Fire_commitment_ceiling;
+use App\Models\ImageField;
 use App\Models\Mobile_warranty;
 use App\Models\Phone_brand;
 use App\Models\Phone_model;
@@ -144,10 +145,12 @@ class MobileWarrantyController extends Controller
     {
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         $crypt = Crypt::decryptString($wallet->value);
+        $imgs = ImageField::all();
         return view('profile.warranty.photo_upload',[
             'id' => $id,
             'wallet' => $wallet,
-            'crypt' => $crypt
+            'crypt' => $crypt,
+            'imgs'=>$imgs
         ]);
     }
 }
