@@ -17,9 +17,7 @@
         </div>
         <div class="col-6 d-flex align-items-center justify-content-end">
             @guest
-                @if (Route::has('login') && Route::has('register'))
                     <a href="{{ route('login') }}" class="nav-link">ورود | عضویت</a>
-                @endif
             @else
                 <a id="navbarDropdown" class="nav-link" href="{{route('panel')}}" role="button" v-pre>
                     سلام {{ Auth::user()->name }}
@@ -30,7 +28,7 @@
                                                      document.getElementById('logout-form').submit();">
                     خروج
                 </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                <form id="logout-form" action="{{ route('logout') }}" method="get" class="d-none">
                     @csrf
                 </form>
             @endguest
