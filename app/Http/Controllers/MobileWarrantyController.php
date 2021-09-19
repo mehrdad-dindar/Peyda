@@ -10,6 +10,7 @@ use App\Models\Mobile_warranty;
 use App\Models\Phone_brand;
 use App\Models\Phone_model;
 use App\Models\Wallet;
+use Crypt;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -137,5 +138,16 @@ class MobileWarrantyController extends Controller
                 'wallet' => $wallet,
                 'crypt' => $crypt
             ]);
+    }
+
+    public function uploadPhoto($id)
+    {
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        $crypt = Crypt::decryptString($wallet->value);
+        return view('profile.warranty.photo_upload',[
+            'id' => $id,
+            'wallet' => $wallet,
+            'crypt' => $crypt
+        ]);
     }
 }
