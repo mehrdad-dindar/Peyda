@@ -18,7 +18,7 @@ class CheckPermission
     {
 
         if(!auth()->user()->role->hasPermission($permission)){
-            abort(403);
+            return redirect(route('panel'));
         }
 
         return $next($request);

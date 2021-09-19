@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Casts\EncryptCast;
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\Token;
 use App\Models\User;
 use App\Models\Wallet;
@@ -18,12 +19,12 @@ class AuthController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function register()
+    /*public function register()
     {
         return view('auth.register');
-    }
+    }*/
 
-    public function doRegister(Request $request)
+    /*public function doRegister(Request $request)
     {
         $data = $request->all();
         $this->validate($request, [
@@ -36,19 +37,19 @@ class AuthController extends Controller
         $user = User::create($data);
         auth()->login($user);
         return redirect()->route('index');
-    }
+    }*/
 
     public function loginPhone()
     {
         return view('auth.mobile_login');
     }
 
-    public function loginEmail()
+    /*public function loginEmail()
     {
         return view('auth.login-email');
-    }
+    }*/
 
-    public function doLoginEmail(Request $request)
+/*    public function doLoginEmail(Request $request)
     {
         $this->validate($request, [
             'email' => 'required',
@@ -61,10 +62,11 @@ class AuthController extends Controller
             return redirect()->route('index');
         else
             return redirect()->back()->withErrors('Either email or password is wrong.');
-    }
+    }*/
 
     public function doLoginPhone(Request $request)
     {
+        //dd(Role::query()->where('title','user')->first()->id);
         $data = $request->all();
         $this->validate($request, [
             'phone_num' => 'required|numeric|digits:11||digits:11',
@@ -73,11 +75,14 @@ class AuthController extends Controller
         ]);
         $newUser=null;
         $user = User::where('phone_num', $request->phone_num)->firstOr(function () use ($request,&$newUser) {
-            $crypt = new EncryptCast();
-            $newUser = User::create(['phone_num' => $request->phone_num]);
+
+            $newUser = User::create([
+                'role_id'   => Role::query()->where('title','user')->first()->id,
+                'phone_num' => $request->phone_num,
+                ]);
             Wallet::create([
                 'user_id' => $newUser->id,
-                'value'=>$crypt->set(null,$_ENV['APP_CRYPT'],'0',[])[$_ENV['APP_CRYPT']]
+                'value'=>\Crypt::encryptString('0')
             ]);
         });
         if($newUser!=null){

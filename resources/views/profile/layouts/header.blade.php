@@ -302,7 +302,7 @@
                                     <span class="menu-text">کیف پول</span>
                                     <span class="menu-badge">
                                         <span class="badge badge-light-danger fw-bolder fs-7">
-                                            <span class="last-price">{{$crypt->get(null,"",$wallet->value,[])}}</span> تومان
+                                            <span class="last-price">{{Crypt::decryptString($wallet->value)}}</span> تومان
                                         </span>
                                     </span>
                                 </a>
@@ -428,14 +428,9 @@
                             <!--end::Menu item-->
                             <!--begin::Menu item-->
                             <div class="menu-item px-5">
-                                <a href="{{ route('logout') }}" class="menu-link px-5"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                <a href="{{ route('logout') }}" class="menu-link px-5">
                                     خروج از سیستم
                                 </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
                             </div>
                             <!--end::Menu item-->
                         </div>

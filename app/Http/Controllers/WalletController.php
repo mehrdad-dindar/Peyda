@@ -25,7 +25,8 @@ class WalletController extends Controller
 
     public function index()
     {
-        $crypt = new EncryptCast();
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        $crypt=Crypt::encryptString($wallet->price);
         $user_id = Auth::user()->id;
         $history = (new WalletHistoryController())->history($user_id);
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
@@ -62,7 +63,7 @@ class WalletController extends Controller
                 'peyment_id' => $paymentId,
             ]);
 
-            $callbackUrl = route('walletPurchase.result', [$user->id, 'peyment_id' => $paymentId]);
+            $callbackUrl = route('walletPurchase.result', [$user->id, 'peyment_id' => $paymentId,]);
             $payment = Payment::callbackUrl($callbackUrl);
 
             $payment->purchase($invoice, function ($driver, $transactionid) use ($transaction) {
