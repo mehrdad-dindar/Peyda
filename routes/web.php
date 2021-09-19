@@ -27,10 +27,11 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 /* front */
 Route::get('/', 'HomeController@index')->name('index');
-Route::get('/test', function (){
+Route::get('/test/{id}', function ($id){
 
-    \App\Models\Mobile_warranty::query()-
-    $qrcode=QrCode::size(100)->generate(Request::url());
+    //dd($id);
+    $warranty=\App\Models\Mobile_warranty::find($id)->first();
+    $qrcode=QrCode::size(100)->generate(md5($warranty->id.' __ '.$warranty->created_at));
     return view('test',['qrcode'=>$qrcode]);
 });
 
