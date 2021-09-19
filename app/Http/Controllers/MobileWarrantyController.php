@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Casts\EncryptCast;
+use App\Helpers\Helpers;
 use App\Http\Requests\MobileWarrantyRequest;
 use App\Models\Commitment_ceiling;
 use App\Models\Fire_commitment_ceiling;
 use App\Models\ImageField;
 use App\Models\Mobile_warranty;
+use App\Models\MobileImage;
 use App\Models\Phone_brand;
 use App\Models\Phone_model;
 use App\Models\Wallet;
@@ -145,6 +147,8 @@ class MobileWarrantyController extends Controller
     {
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         $crypt = Crypt::decryptString($wallet->value);
+        $warranty=Mobile_warranty::find($id)->first();
+        /*$qrcode=QrCode::size(100)->generate(md5($warranty->id.' __ '.$warranty->created_at),$_SERVER["DOCUMENT_ROOT"] . '/uploads/qrcodes/qr_'.$warranty->id);*/
         $imgs = ImageField::all();
         return view('profile.warranty.photo_upload',[
             'id' => $id,
@@ -152,5 +156,80 @@ class MobileWarrantyController extends Controller
             'crypt' => $crypt,
             'imgs'=>$imgs
         ]);
+    }
+
+    public function insertPhotos(Request $request,$id)
+    {
+        //dd($request->all(),$id);
+        $prefix = $imageList = $subAttList='';
+
+        if ($request->file('IMEI_pic')) {
+            $imei = $request->file('IMEI_pic');
+            $imei_name = time() . $imei->getClientOriginalName();
+            $imei->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/warranty_images/', $imei_name);
+            $IMEI_pic=MobileImage::create(['URL'=>$imei_name, 'type'=>1]);
+
+            $imageList .= $prefix . $IMEI_pic->id;
+            $prefix = ',';
+
+        }
+
+        if ($request->file('back_pic')) {
+            $back = $request->file('back_pic');
+            $back_name = time() . $back->getClientOriginalName();
+            $back->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/warranty_images/', $back_name);
+            $back_pic=MobileImage::create(['URL'=>$back_name, 'type'=>1]);
+
+            $imageList .= $prefix . $back_pic->id;
+            $prefix = ',';
+        }
+
+        if ($request->file('front_pic')) {
+            $front = $request->file('front_pic');
+            $front_name = time() . $front->getClientOriginalName();
+            $front->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/warranty_images/', $front_name);
+            $front_pic=MobileImage::create(['URL'=>$front_name, 'type'=>1]);
+
+            $imageList .= $prefix . $front_pic->id;
+            $prefix = ',';
+        }
+
+        if ($request->file('right_pic')) {
+            $right = $request->file('right_pic');
+            $right_name = time() . $right->getClientOriginalName();
+            $right->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/warranty_images/', $right_name);
+            $right_pic=MobileImage::create(['URL'=>$right_name, 'type'=>1]);
+
+            $imageList .= $prefix . $right_pic->id;
+            $prefix = ',';
+        }
+
+        if ($request->file('front_box_pic')) {
+            $front_box = $request->file('front_box_pic');
+            $front_box_name = time() . $front_box->getClientOriginalName();
+            $front_box->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/warranty_images/', $front_box_name);
+            $front_box_pic=MobileImage::create(['URL'=>$front_box_name, 'type'=>1]);
+
+            $imageList .= $prefix . $front_box_pic->id;
+            $prefix = ',';
+        }
+
+        if ($request->file('back_box_pic')) {
+            $back_box = $request->file('back_box_pic');
+            $back_box_name = time() . $back_box->getClientOriginalName();
+            $back_box->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/warranty_images/', $back_box_name);
+            $back_box_pic=MobileImage::create(['URL'=>$back_box_name, 'type'=>1]);
+
+            $imageList .= $prefix . $back_box_pic->id;
+            $prefix = ',';
+        }
+
+        Mobile_warranty::query()->where('id','=',$id)->update([
+            'images'=>$imageList,
+            'status_id'=>6
+        ]);
+
+
+        return redirect(route('bimeh_all'));
     }
 }

@@ -63,6 +63,7 @@ Route::prefix('panel')->group(function () {
             Route::get('/{invoice_id}/purchase', 'PaymentController@purchase')->name('purchase');
             Route::get('/{invoice_id}/result', 'PaymentController@result')->name('purchase.result');
             Route::get('/upload-photo/{id}',[MobileWarrantyController::class , 'uploadPhoto'])->name('uploadPhoto');
+            Route::post('/insert-photo/{mobile_warranty}',[MobileWarrantyController::class , 'insertPhotos'])->name('insertPhoto');
         });
     });
 });
