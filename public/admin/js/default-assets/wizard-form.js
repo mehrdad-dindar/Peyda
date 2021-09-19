@@ -57,9 +57,10 @@
 function addWarranty(){
     var myform = document.getElementById("example-form");
     var fd = new FormData(myform );
+    var getUrl = window.location;
 
     $.ajax({
-        url: 'http://localhost:8000/dashboard/postajax',
+        url: getUrl .protocol + "//" + getUrl.host+'/dashboard/postajax',
         type: 'POST',
         data: fd,
         cache: false,

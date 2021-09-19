@@ -135,6 +135,9 @@
       <path value="$PROJECT_DIR$/vendor/ippanel/php-rest-sdk" />
       <path value="$PROJECT_DIR$/vendor/josiasmontag/laravel-recaptchav3" />
       <path value="$PROJECT_DIR$/vendor/albertcht/invisible-recaptcha" />
+      <path value="$PROJECT_DIR$/vendor/bacon/bacon-qr-code" />
+      <path value="$PROJECT_DIR$/vendor/simplesoftwareio/simple-qrcode" />
+      <path value="$PROJECT_DIR$/vendor/dasprid/enum" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />

@@ -12,6 +12,7 @@ use \App\Http\Middleware\CheckPermission;
 use App\Http\Controllers\Admin\Shop\PropertyGroupController;
 use App\Http\Controllers\Admin\Shop\PropertyController;
 use \App\Http\Controllers\Admin\Shop\ProductPropertyController;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,12 @@ use \App\Http\Controllers\Admin\Shop\ProductPropertyController;
 
 /* front */
 Route::get('/', 'HomeController@index')->name('index');
+Route::get('/test', function (){
+
+    \App\Models\Mobile_warranty::query()-
+    $qrcode=QrCode::size(100)->generate(Request::url());
+    return view('test',['qrcode'=>$qrcode]);
+});
 
 Route::get('/single', function () {
     return view('single');

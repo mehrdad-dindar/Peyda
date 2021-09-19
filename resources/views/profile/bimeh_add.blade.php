@@ -1050,7 +1050,7 @@
                 //alert(new_val);
                 $.ajax({
                     type: "POST",
-                    url: "http://localhost:8000/panel/mobile_change",
+                    url: "http://{{$_SERVER['HTTP_HOST']}}/panel/mobile_change",
                     cache:false,
                     data: {"_token": "{{ csrf_token() }}"
                     ,"id" : new_val},

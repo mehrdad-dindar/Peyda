@@ -42,7 +42,7 @@ class WarrantyController extends Controller
     {
         $phone_brands = Phone_brand::all();
         $phone_brand_first = Phone_brand::query()->first();
-        $phone_model_first = Phone_model::query()->where('brand_id', '=', $phone_brand_first->id)->get();
+        $phone_model_first = Phone_model::query()->where('phone_brand_id', '=', $phone_brand_first->id)->get();
         $commitment_ceilings = Commitment_ceiling::all();
         $fire_commitment_ceilings = Fire_commitment_ceiling::all();
         $users=User::all();
@@ -71,7 +71,7 @@ class WarrantyController extends Controller
         if ($request->get('price_range') == null) {
             $phone_brands = Phone_brand::all();
             $phone_brand_first = Phone_brand::query()->first();
-            $phone_model_first = Phone_model::query()->where('brand_id', '=', $phone_brand_first->id)->get();
+            $phone_model_first = Phone_model::query()->where('phone_brand_id', '=', $phone_brand_first->id)->get();
             $commitment_ceilings = Commitment_ceiling::all();
             $fire_commitment_ceilings = Fire_commitment_ceiling::all();
             return view('dashboard.add')
@@ -94,16 +94,16 @@ class WarrantyController extends Controller
         $activation_code = "P_".RandomString().time();
 
         $data = Mobile_warranty::create([
-            'owner_id' => $request->get('owner_id'),
+            'owner_id' => $request->owner_id,
             'phone_model_id' => $phone_model,
             'expiry_date'=>null,
             'activation_code' => $activation_code,
             'activation_date' => null,
             'transfer_code'=>null,
-            'price_range'=>$request->get('price_range'),
+            'commitment_ceiling_id'=>$request->price_range,
             'fire_gift'=>true,
             'status'=>1,
-            'addition_fire_commitment_id'=>$request->get('fire_addition_price'),
+            'addition_fire_commitment_id'=>$request->fire_addition_price,
         ]);
         $data->save();
 
@@ -119,7 +119,7 @@ class WarrantyController extends Controller
     {
 
         $warranty=Mobile_warranty::query()->join('phone_models as pm','pm.id','=','mobile_warranties.phone_model_id')
-            ->join('phone_brands as pb','pb.id','=','pm.brand_id')
+            ->join('phone_brands as pb','pb.id','=','pm.phone_brand_id')
             ->join('users as u','u.id','=','mobile_warranties.owner_id')
             ->join('commitment_ceilings as cc','cc.id','=','mobile_warranties.price_range')
             ->join('fire_commitment_ceilings as fc','fc.id','=','mobile_warranties.addition_fire_commitment_id')
@@ -183,7 +183,7 @@ class WarrantyController extends Controller
     {
         $warranty=WarrantyUse::query()->join('mobile_warranties as mw','mw.id','=','warranty_uses.warranty_id')
             ->join('phone_models as pm','pm.id','=','mw.phone_model_id')
-            ->join('phone_brands as pb','pb.id','=','pm.brand_id')
+            ->join('phone_brands as pb','pb.id','=','pm.phone_brand_id')
             ->join('users as u','u.id','=','mw.owner_id')
             ->join('commitment_ceilings as cc','cc.id','=','mw.price_range')
             ->join('fire_commitment_ceilings as fc','fc.id','=','mw.addition_fire_commitment_id')
