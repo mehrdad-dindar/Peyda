@@ -26,8 +26,8 @@
                     <div class="card-body">
                         <h2 class="card-title h6 text-center">محصول نمونه</h2>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-end text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
+                    <ul class="list-group list-group-flush d-flex justify-content-center">
+                        <li class="list-group-item text-center text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
                     </ul>
                 </a>
             </div>
@@ -37,8 +37,8 @@
                     <div class="card-body">
                         <h2 class="card-title h6 text-center">محصول نمونه</h2>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-end text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
+                    <ul class="list-group list-group-flush d-flex justify-content-center">
+                        <li class="list-group-item text-center text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
                     </ul>
                 </a>
             </div>
@@ -48,8 +48,8 @@
                     <div class="card-body">
                         <h2 class="card-title h6 text-center">محصول نمونه</h2>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-end text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
+                    <ul class="list-group list-group-flush d-flex justify-content-center">
+                        <li class="list-group-item text-center text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
                     </ul>
                 </a>
             </div>
@@ -59,8 +59,8 @@
                     <div class="card-body">
                         <h2 class="card-title h6 text-center">محصول نمونه</h2>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-end text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
+                    <ul class="list-group list-group-flush d-flex justify-content-center">
+                        <li class="list-group-item text-center text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
                     </ul>
                 </a>
             </div>
@@ -70,8 +70,8 @@
                     <div class="card-body">
                         <h2 class="card-title h6 text-center">محصول نمونه</h2>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-end text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
+                    <ul class="list-group list-group-flush d-flex align-items-center justify-content-center">
+                        <li class="list-group-item text-center text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
                     </ul>
                 </a>
             </div>
@@ -81,9 +81,9 @@
                     <div class="card-body">
                         <h2 class="card-title h6 text-center">محصول نمونه</h2>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-end"><span class="price text-white-50"><del>2,999,000</del></span><span class="badge rounded-pill bg-orange text-dark">50%</span></li>
-                        <li class="list-group-item text-end text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
+                    <ul class="list-group list-group-flush d-flex justify-content-center">
+                        <li class="list-group-item text-center"><span class="price text-white-50"><del>2,999,000</del></span><span class="badge rounded-pill bg-orange text-dark">50%</span></li>
+                        <li class="list-group-item text-center text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
                     </ul>
                 </a>
             </div>
@@ -93,8 +93,8 @@
                     <div class="card-body">
                         <h2 class="card-title h6 text-center">محصول نمونه</h2>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-end text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
+                    <ul class="list-group list-group-flush d-flex justify-content-center">
+                        <li class="list-group-item text-center text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
                     </ul>
                 </a>
             </div>
@@ -104,8 +104,8 @@
                     <div class="card-body">
                         <h2 class="card-title h6 text-center">محصول نمونه</h2>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-end text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
+                    <ul class="list-group list-group-flush d-flex justify-content-center">
+                        <li class="list-group-item text-center text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
                     </ul>
                 </a>
             </div>
@@ -115,8 +115,8 @@
                     <div class="card-body">
                         <h2 class="card-title h6 text-center">محصول نمونه</h2>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-end text-light">رایگان</li>
+                    <ul class="list-group list-group-flush d-flex justify-content-center">
+                        <li class="list-group-item text-center text-light">رایگان</li>
                     </ul>
                 </a>
             </div>
@@ -126,8 +126,8 @@
                     <div class="card-body">
                         <h2 class="card-title h6 text-center">محصول نمونه</h2>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-end text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
+                    <ul class="list-group list-group-flush d-flex justify-content-center">
+                        <li class="list-group-item text-center text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
                     </ul>
                 </a>
             </div>
@@ -137,8 +137,8 @@
                     <div class="card-body">
                         <h2 class="card-title h6 text-center">محصول نمونه</h2>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-end text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
+                    <ul class="list-group list-group-flush d-flex justify-content-center">
+                        <li class="list-group-item text-center text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
                     </ul>
                 </a>
             </div>
@@ -148,8 +148,8 @@
                     <div class="card-body">
                         <h2 class="card-title h6 text-center">محصول نمونه</h2>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-end text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
+                    <ul class="list-group list-group-flush d-flex justify-content-center">
+                        <li class="list-group-item text-center text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
                     </ul>
                 </a>
             </div>
@@ -159,8 +159,8 @@
                     <div class="card-body">
                         <h2 class="card-title h6 text-center">محصول نمونه</h2>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-end text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
+                    <ul class="list-group list-group-flush d-flex justify-content-center">
+                        <li class="list-group-item text-center text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
                     </ul>
                 </a>
             </div>
@@ -170,8 +170,8 @@
                     <div class="card-body">
                         <h2 class="card-title h6 text-center">محصول نمونه</h2>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-end text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
+                    <ul class="list-group list-group-flush d-flex justify-content-center">
+                        <li class="list-group-item text-center text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
                     </ul>
                 </a>
             </div>
@@ -181,8 +181,8 @@
                     <div class="card-body">
                         <h2 class="card-title h6 text-center">محصول نمونه</h2>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-end text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
+                    <ul class="list-group list-group-flush d-flex justify-content-center">
+                        <li class="list-group-item text-center text-light"><span class="price">2,999,000</span><span class="currency">تومان</span></li>
                     </ul>
                 </a>
             </div>
@@ -192,8 +192,8 @@
                     <div class="card-body">
                         <h2 class="card-title h6 text-center">محصول نمونه</h2>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-end text-light">ناموجود</li>
+                    <ul class="list-group list-group-flush d-flex justify-content-center">
+                        <li class="list-group-item text-center text-light">ناموجود</li>
                     </ul>
                 </a>
             </div>

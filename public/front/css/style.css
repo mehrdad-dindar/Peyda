@@ -1050,6 +1050,7 @@ font-weight: bold;
 .shop-item .card{
     border: 1px solid rgba(52, 37, 136, 0.125);
     border-radius: 30px;
+    height: 100%;
 }
 
 .shop-item .card-img-top {
@@ -1060,6 +1061,7 @@ font-weight: bold;
 .shop-item .card > .list-group {
     border-top: unset;
     border-bottom: unset;
+    height: inherit;
 }
 .shop-item .card > .list-group:last-child{
     border-bottom-left-radius: calc(30px - 1px);
