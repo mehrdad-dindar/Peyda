@@ -47,7 +47,7 @@ class ImageFieldTableSeeder extends Seeder
         DB::table('image_fields')->insert([
 
             'name' => 'عکس از کناره سمت چپ گوشی',
-            'html_id' => 'back_pic'
+            'html_id' => 'left_pic'
         ]);
 
         DB::table('image_fields')->insert([

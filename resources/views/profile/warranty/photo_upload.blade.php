@@ -31,10 +31,10 @@
                                 <div class="col-md-6">
                                     <!--begin::Image input-->
                                     <div class="image-input " data-kt-image-input="true"
-                                         style="background-image: url('{{ URL::asset('profile/media/avatars/user.jpg') }}')">
+                                         style="background-image: url('{{ URL::asset('uploads/reserved/reserved_image_upload.png') }}'); opacity: 0.7; background-size: 50%; background-position: center">
                                         <!--begin::Preview existing avatar-->
                                         <div class="image-input-wrapper w-225px h-150px"
-                                             style="background-image: url('{{ URL::asset('profile/media/avatars/user.jpg') }}')"></div>
+                                             style="background-image: url('{{ URL::asset('uploads/reserved/reserved_image_upload.png') }}'); opacity: 0.7; background-size: 50%; background-position: center"></div>
                                         <!--end::Preview existing avatar-->
                                         <!--begin::Label-->
                                         <label
