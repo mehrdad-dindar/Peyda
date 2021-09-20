@@ -16,42 +16,50 @@ class StatusTableSeeder extends Seeder
     {
         DB::table('statuses')->insert(
             [
-                'text'                =>          'غیر فعال'
+                'text'                =>          'غیر فعال',
+                'color'                =>          'danger'
             ]
         );
 
         DB::table('statuses')->insert([
 
-            'text'                =>          'فعال'
+            'text'                =>          'فعال',
+            'color'                =>          'success'
         ]);
         DB::table('statuses')->insert([
 
-            'text'                =>          'پرداخت نشده'
-        ]);
-
-        DB::table('statuses')->insert([
-
-            'text'                =>          'منقضی'
+            'text'                =>          'پرداخت نشده',
+            'color'                =>          'secondary'
         ]);
 
         DB::table('statuses')->insert([
 
-            'text'                =>          'منتظر آپلود تصاویر'
+            'text'                =>          'منقضی',
+            'color'                =>          'danger'
         ]);
 
         DB::table('statuses')->insert([
 
-            'text'                =>          'منتظر تایید فراگارانتی'
+            'text'                =>          'منتظر آپلود تصاویر',
+            'color'                =>          'warning text-dark'
         ]);
 
         DB::table('statuses')->insert([
 
-            'text'                =>          'نقص مدارک'
+            'text'                =>          'منتظر تایید فراگارانتی',
+            'color'                =>          'primary'
         ]);
 
         DB::table('statuses')->insert([
 
-            'text'                =>          'پرداخت ناموفق'
+            'text'                =>          'نقص مدارک',
+            'color'                =>          'warning text-dark'
+        ]);
+
+        DB::table('statuses')->insert([
+
+            'text'                =>          'پرداخت ناموفق',
+            'color'                =>          'secondary'
         ]);
 
     }

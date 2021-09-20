@@ -60,11 +60,7 @@
                                 </td>
 
                                 <td>
-                                    @if($row->status->id==2)
-                                        <span class="badge badge-light-success">{{$row->status->text}}</span>
-                                    @else
-                                        <span class="badge badge-danger">{{$row->status->text}}</span>
-                                    @endif
+                                    <span class="badge badge-{{$row->status->color}}">{{$row->status->text}}</span>
                                 </td>
                                 <td class="text-end">
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_{{$row->id}}"
