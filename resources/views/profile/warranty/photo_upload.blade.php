@@ -14,11 +14,14 @@
             <!--end::Header-->
             <img src="" >
             <!--begin::Body-->
-            <div class="card-body py-3">
-                <img src="{{URL::asset('/uploads/qrcodes').'/qr_'.$id}}" alt="QR Code" class="img-fluid">
-                <p>لطفا تصویر فوق را در موبایل خود نمایش دهید و از صفحه دستگاه با دوربین دیگری عکاسی نمایید و در مراحل
-                    بعد </p>
-                <div class="container mt-5">
+            <div class="card-body py-3 ">
+                <div class="container mt-10">
+                    <h6>کد QR</h6>
+                    <div class="d-flex justify-content-center">{!! $qrcode !!}</div>
+                    <div class="d-flex justify-content-center mt-5"><p>لطفا تصویر فوق را در موبایل خود نمایش دهید و از صفحه دستگاه با دوربین دیگری عکاسی نمایید و در مراحل
+                            بعد: </p></div>
+                </div>
+                    <div class="container mt-10">
                     <form method="post" action="{{route('insertPhoto',$id)}}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
@@ -80,4 +83,10 @@
         </div>
         <!--end::Tables Widget 13-->
     </div>
+    @if(isset($error))
+        <script>
+            toastr.error("پیام", 'لطفا همه عکس ها رو آپلود کنید!');
+        </script>
+    @endif
+
 @endsection

@@ -18,6 +18,7 @@ class CreateImageFieldsTable extends Migration
             $table->string('name');
             $table->string('html_id')->nullable();
             $table->text('sample_URL')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
