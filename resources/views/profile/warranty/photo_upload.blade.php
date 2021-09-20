@@ -12,16 +12,17 @@
                 </h3>
             </div>
             <!--end::Header-->
-            <img src="" >
+            <img src="">
             <!--begin::Body-->
             <div class="card-body py-3 ">
                 <div class="container mt-10">
                     <h6>کد QR</h6>
                     <div class="d-flex justify-content-center">{!! $qrcode !!}</div>
-                    <div class="d-flex justify-content-center mt-5"><p>لطفا تصویر فوق را در موبایل خود نمایش دهید و از صفحه دستگاه با دوربین دیگری عکاسی نمایید و در مراحل
+                    <div class="d-flex justify-content-center mt-5"><p>لطفا تصویر فوق را در موبایل خود نمایش دهید و از
+                            صفحه دستگاه با دوربین دیگری عکاسی نمایید و در مراحل
                             بعد: </p></div>
                 </div>
-                    <div class="container mt-10">
+                <div class="container mt-10">
                     <form method="post" action="{{route('insertPhoto',$id)}}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
@@ -42,7 +43,8 @@
                                             title="Change avatar">
                                             <i class="bi bi-pencil-fill fs-7"></i>
                                             <!--begin::Inputs-->
-                                            <input type="file" class="disabled-input" name="{{$img->html_id}}" accept=".png, .jpg, .jpeg"/>
+                                            <input type="file" class="disabled-input" name="{{$img->html_id}}"
+                                                   accept=".png, .jpg, .jpeg"/>
                                             <input type="hidden" name="{{$img->html_id}}_remove"/>
                                             <!--end::Inputs-->
                                         </label>
@@ -83,10 +85,11 @@
         </div>
         <!--end::Tables Widget 13-->
     </div>
+@endsection
+@section('custom_js')
     @if(isset($error))
         <script>
-            toastr.error("پیام", 'لطفا همه عکس ها رو آپلود کنید!');
+            toastr.error('{{$error}}', "خطا !");
         </script>
     @endif
-
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Casts\EncryptCast;
+use App\Models\User;
 use App\Models\Wallet;
 use App\Models\Wallet_history;
 use Crypt;
@@ -34,11 +35,9 @@ class PaymentController extends Controller
     public function purchase($invoice_id, Request $request)
     {
         $user = Auth::user();
-        $crypt = new EncryptCast();
         $mobilewarranty = Mobile_warranty::find($invoice_id);
         $phone_model = $mobilewarranty->phone_model->name;
         $wallet = Wallet::where('user_id', auth()->id())->first();
-        $warranties = Mobile_warranty::where('owner_id',auth()->id())->orderBy('updated_at', 'desc')->get();
         $fire_addition_price = 0;
         if ($mobilewarranty->addition_fire_commitment_id != null) {
             $fire_addition_price = $mobilewarranty->Fire_commitment_ceiling->price;
@@ -67,15 +66,9 @@ class PaymentController extends Controller
                     $transaction->save();
                 });
 
-                $wallet_history = new Wallet_history();
-                $wallet_history->user_id = $user->id;
-                $wallet_history->transaction_id = $transaction->id;
-                $wallet_history->title = 'خرید فراگارانتی ' . $phone_model;
-                $wallet_history->value = $crypt->set(null,env('APP_CRYPT'),0 - $amount,[]);
-                $wallet_history->status = Transaction::STATUS_PENDING;
-                $wallet_history->save();
-                $mobilewarranty->status_id = 5;
-                $mobilewarranty->save();
+                $this->updateWalletHistory($user,$transaction,$phone_model,$amount,$mobilewarranty);
+                $warranties = Mobile_warranty::where('owner_id',auth()->id())->orderBy('created_at', 'desc')->get();
+
                 return $payment->pay()->render();
             } catch (PurchaseFailedException | Exception | SoapFault $e) {
                 $transaction->transaction_result = $e;
@@ -89,22 +82,22 @@ class PaymentController extends Controller
                     'status' => 'failed',
                     'wallet' => $wallet,
                     'warranties' => $warranties,
-                    'crypt' =>  $crypt
                 ]);
             }
         } else {
-            $crypt = new EncryptCast();
             $msg = "موجودی کیف پول کافی نیست";
             $mobilewarranty->status_id = 3;
             $mobilewarranty->save();
+
             if ($invoice->getAmount() > Crypt::decryptString($wallet->value)) {
+                $warranties = Mobile_warranty::where('owner_id',auth()->id())->orderBy('created_at', 'desc')->get();
+
                 return view('profile.bimeh_all')->with([
                     'status' => 'failed',
                     'wallet' => $wallet,
                     'message' => $msg,
                     'warranties' => $warranties,
                     'code' => -41,
-                    'crypt'=>$crypt,
                 ]);
             } else {
                 $transaction = $user->transactions()->create([
@@ -118,17 +111,12 @@ class PaymentController extends Controller
                 $mobilewarranty->status_id = 5;
                 $mobilewarranty->save();
 
-                $wallet_history = new Wallet_history();
-                $wallet_history->user_id = $user->id;
-                $wallet_history->transaction_id = $transaction->id;
-                $wallet_history->title = 'خرید فراگارانتی ' . $phone_model;
-                $wallet_history->value = Crypt::encryptString(0 - $amount);
-                $wallet_history->status = Transaction::STATUS_SUCCESS;
-                $wallet_history->save();
+                $this->updateWalletHistory($user,$transaction,$phone_model,$amount,$mobilewarranty);
+                $warranties = Mobile_warranty::where('owner_id',auth()->id())->orderBy('created_at', 'desc')->get();
 
-                $new_wallet_val = (int)$crypt->get(null,"",$wallet->value,[])-$amount;
+                $new_wallet_val = Crypt::decryptString($wallet->value)-$amount;
                 $user->wallet()->update([
-                    'value' => $crypt->set(null,$_ENV['APP_CRYPT'],$new_wallet_val,[])[$_ENV['APP_CRYPT']],
+                    'value' => Crypt::encryptString($new_wallet_val),
                 /*Crypt::encryptString((int)Crypt::decryptString($wallet->value) - (int)$amount),*/
                 ]);
 
@@ -137,35 +125,45 @@ class PaymentController extends Controller
                     'status' => 'success',
                     'wallet' => $wallet,
                     'message' => $msg,
-                    'warranties' => $this->getWarranties(),
+                    'warranties' => $warranties,
                     'code' => 100,
-                    'crypt'=>$crypt,
                 ]);
             }
         }
     }
 
+    public function updateWalletHistory(User $user,Transaction $transaction,$phone_model,$amount,Mobile_warranty $mobilewarranty)
+    {
+
+        $wallet_history = new Wallet_history();
+        $wallet_history->user_id = $user->id;
+        $wallet_history->transaction_id = $transaction->id;
+        $wallet_history->title = 'خرید فراگارانتی ' . $phone_model;
+        $wallet_history->value = Crypt::encryptString(0-$amount);
+        $wallet_history->status = Transaction::STATUS_PENDING;
+        $wallet_history->save();
+        $mobilewarranty->status_id = 5;
+        $mobilewarranty->save();
+    }
+
     public function status_failed()
     {
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
-        $crypt = new EncryptCast();
         $warranties = Mobile_warranty::where('owner_id',auth()->id())->orderBy('updated_at', 'desc')->get();
         return view('profile.bimeh_all')->with([
             'status' => 'failed',
             'warranties' => $warranties,
             'wallet' => $wallet,
-            'crypt' => $crypt,
         ]);
     }
 
     public function result(Request $request, $invoice_id)
     {
-        $crypt = new EncryptCast();
         $transaction = Transaction::where('peyment_id', $request->peyment_id)->first();
         $mobilewarranty = Mobile_warranty::find($invoice_id);
-        $warranties = Mobile_warranty::where('owner_id',auth()->id())->orderBy('updated_at', 'desc')->get();
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         $wallet_history = Wallet_history::where('user_id', '=', auth()->id())->orderBy('created_at', 'desc')->first();
+        $warranties = Mobile_warranty::where('owner_id',auth()->id())->orderBy('created_at', 'desc')->get();
 
         if ($request->missing('peyment_id')) {
             $this->status_failed();
@@ -205,14 +203,12 @@ class PaymentController extends Controller
             $mobilewarranty->save();
 
 
-            return view('profile.bimeh_all')
-                ->with([
+            return redirect()->route('bimeh_all')->with([
                     'message' => "عملیات پرداخت با موفقیت انجام شد.",
                     'code' => 100,
                     'user' => auth()->user(),
                     'wallet' => $wallet,
                     'warranties' => $warranties,
-                    'crypt'=>$crypt,
                 ]);
         } catch (Exception | InvalidPaymentException $e) {
             if ($e->getCode() < 0) {
@@ -237,7 +233,6 @@ class PaymentController extends Controller
                         'user' => auth()->user(),
                         'wallet' => $wallet,
                         'warranties' => $warranties,
-                        'crypt' => $crypt,
                     ]);
             }
         }

@@ -8,6 +8,7 @@ use DB;
 use Hash;
 use Illuminate\Database\Seeder;
 use \App\Casts\EncryptCast;
+use Crypt;
 
 class UsersTableSeeder extends Seeder
 {
@@ -40,7 +41,7 @@ class UsersTableSeeder extends Seeder
         DB::table('wallets')->insert(
             [
                 'user_id' => 1,
-                'value' => $crypt->set(null,$_ENV['APP_CRYPT'],'25000000',[])[$_ENV['APP_CRYPT']],
+                'value' =>Crypt::encryptString("50050000"),
             ]
         );
         DB::table('peyda_encrypts')->insert(

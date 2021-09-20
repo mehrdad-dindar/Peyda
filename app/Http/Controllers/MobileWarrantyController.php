@@ -134,12 +134,11 @@ class MobileWarrantyController extends Controller
         }else{
             $invoice = Mobile_warranty::find($id);
         }
-        $crypt = Crypt::encryptString($wallet->value);
+
         return view('profile.cart')
             ->with([
                 'invoice' => $invoice,
                 'wallet' => $wallet,
-                'crypt' => $crypt
             ]);
     }
 
@@ -150,7 +149,7 @@ class MobileWarrantyController extends Controller
         $crypt = Crypt::decryptString($wallet->value);
         $warranty=Mobile_warranty::find($id)->first();
         $imgs = ImageField::all();
-        $qrcode=QrCode::size(100)->generate(md5($id.' __ '.$warranty->created_at));
+        $qrcode=QrCode::size(250)->generate(md5($id.' __ '.$warranty->created_at));
         if($err!=''){
             $msg='error';
         }
@@ -167,35 +166,37 @@ class MobileWarrantyController extends Controller
     public function insertPhotos(Request $request,$id)
     {
         //dd($request->all(),$id);
-        $prefix = $imageList = $subAttList='';
+        $prefix = $imageList = '';
         $imageFields=ImageField::all();
         $key=0;
 
-        foreach ($imageFields as $row){
+        if(sizeof($request->toArray())-7==6) {
+            foreach ($imageFields as $row) {
 
-            if ($request->file($row->html_id)) {
-                $file = $request->file($row->html_id);
-                $file_name = time() . $file->getClientOriginalName();
-                $file->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/warranty_images/', $file_name);
-                $file_pic=MobileImage::create(['URL'=>$file_name, 'type'=>1]);
+                if ($request->file($row->html_id)) {
+                    $file = $request->file($row->html_id);
+                    $file_name = time() . $file->getClientOriginalName();
+                    $file->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/warranty_images/', $file_name);
+                    $file_pic = MobileImage::create(['URL' => $file_name, 'type' => 1]);
 
-                $imageList .= $prefix . $file_pic->id;
-                $prefix = ',';
+                    $imageList .= $prefix . $file_pic->id;
+                    $prefix = ',';
 
-                $key++;
+                    $key++;
+                }
             }
         }
 
         if($key==6){
 
-            Mobile_warranty::query()->where('id','=',$id)->update([
+            Mobile_warranty::query()->where('id',$id)->update([
                 'images'=>$imageList,
                 'status_id'=>6
             ]);
 
             return redirect(route('bimeh_all'))->with(['success'=>'عکس های موبایل با موفقیت آپلود شد.']);
-        }
-        else{
+
+        }else{
             return $this->uploadPhoto($id,'لطفا همه عکس ها رو آپلود کنید!');
         }
 
