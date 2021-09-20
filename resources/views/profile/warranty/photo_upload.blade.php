@@ -12,13 +12,17 @@
                 </h3>
             </div>
             <!--end::Header-->
-            <img src="" >
+            <img src="">
             <!--begin::Body-->
-            <div class="card-body py-3">
-                <img src="{{URL::asset('/uploads/qrcodes').'/qr_'.$id}}" alt="QR Code" class="img-fluid">
-                <p>لطفا تصویر فوق را در موبایل خود نمایش دهید و از صفحه دستگاه با دوربین دیگری عکاسی نمایید و در مراحل
-                    بعد </p>
-                <div class="container mt-5">
+            <div class="card-body py-3 ">
+                <div class="container mt-10">
+                    <h6>کد QR</h6>
+                    <div class="d-flex justify-content-center">{!! $qrcode !!}</div>
+                    <div class="d-flex justify-content-center mt-5"><p>لطفا تصویر فوق را در موبایل خود نمایش دهید و از
+                            صفحه دستگاه با دوربین دیگری عکاسی نمایید و در مراحل
+                            بعد: </p></div>
+                </div>
+                <div class="container mt-10">
                     <form method="post" action="{{route('insertPhoto',$id)}}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
@@ -27,10 +31,10 @@
                                 <div class="col-md-6">
                                     <!--begin::Image input-->
                                     <div class="image-input " data-kt-image-input="true"
-                                         style="background-image: url('{{ URL::asset('profile/media/avatars/user.jpg') }}')">
+                                         style="background-image: url('{{ URL::asset('uploads/reserved/reserved_image_upload.png') }}'); opacity: 0.7; background-size: 50%; background-position: center">
                                         <!--begin::Preview existing avatar-->
                                         <div class="image-input-wrapper w-225px h-150px"
-                                             style="background-image: url('{{ URL::asset('profile/media/avatars/user.jpg') }}')"></div>
+                                             style="background-image: url('{{ URL::asset('uploads/reserved/reserved_image_upload.png') }}'); opacity: 0.7; background-size: 50%; background-position: center"></div>
                                         <!--end::Preview existing avatar-->
                                         <!--begin::Label-->
                                         <label
@@ -39,7 +43,8 @@
                                             title="Change avatar">
                                             <i class="bi bi-pencil-fill fs-7"></i>
                                             <!--begin::Inputs-->
-                                            <input type="file" class="disabled-input" name="{{$img->html_id}}" accept=".png, .jpg, .jpeg"/>
+                                            <input type="file" class="disabled-input" name="{{$img->html_id}}"
+                                                   accept=".png, .jpg, .jpeg"/>
                                             <input type="hidden" name="{{$img->html_id}}_remove"/>
                                             <!--end::Inputs-->
                                         </label>
@@ -64,7 +69,7 @@
 
                                     <!--end::Image input-->
                                     <!--begin::Hint-->
-                                    <div class="form-text">{{$img->name}}</div>
+                                    <div class="form-text">{{$img->discription}}</div>
                                     <!--end::Hint-->
                                 </div>
                                 <div class="separator dashed-h my-5"></div>
@@ -80,4 +85,11 @@
         </div>
         <!--end::Tables Widget 13-->
     </div>
+@endsection
+@section('custom_js')
+    @if(isset($error))
+        <script>
+            toastr.error('{{$error}}', "خطا !");
+        </script>
+    @endif
 @endsection

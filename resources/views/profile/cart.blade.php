@@ -224,7 +224,7 @@
                                     <span class="form-check-label ms-0 fw-bolder fs-6 text-gray-700">پرداخت از اعتبار کیف پول<br>
                                         <span class="fs-7 text-danger d-flex align-items-center">
                                             <span id="wallet"
-                                                  class="me-2">{{$crypt->get(null,"",$wallet->value,[])}}</span>
+                                                  class="me-2">{{Crypt::decryptString($wallet->value)}}</span>
                                             تومان
                                         </span>
                                     </span>

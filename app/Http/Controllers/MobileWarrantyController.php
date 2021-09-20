@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Casts\EncryptCast;
 use App\Helpers\Helpers;
 use App\Http\Requests\MobileWarrantyRequest;
 use App\Models\Commitment_ceiling;
@@ -18,6 +17,7 @@ use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Traits\UserMobileWarranties;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class MobileWarrantyController extends Controller
 {
@@ -35,13 +35,13 @@ class MobileWarrantyController extends Controller
             ->join('users as u', 'phone_models.id', '=', 'u.phone_model_id')
             ->first(['pb.name as pb_name', 'phone_models.name as pm_name',
                 'phone_models.id as pm_id', 'pb.id as pb_id']);
-        $crypt = new EncryptCast();
         $brands = Phone_brand::all();
         $phone_brand_first = Phone_brand::query()->first();
         $phone_model_first = Phone_model::query()->where('phone_brand_id', '=', $phone_brand_first->id)->get();
         $commitment_ceilings = Commitment_ceiling::all();
         $fire_commitment_ceilings = Fire_commitment_ceiling::all();
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        $crypt = Crypt::encryptString($wallet->value);
         return view('profile.bimeh_add')
             ->with('myPhone', $myPhone)
             ->with('brands', $brands)
@@ -58,7 +58,7 @@ class MobileWarrantyController extends Controller
     {
         $wallet = Wallet::where('user_id', auth()->id())->first();
         $warranties = Mobile_warranty::where('owner_id', auth()->id())->orderBy('updated_at', 'desc')->get();
-        $crypt = new EncryptCast();
+        $crypt = Crypt::encryptString($wallet->value);
         return view('profile.bimeh_all')->with([
             'warranties' => $warranties,
             'wallet' => $wallet,
@@ -134,102 +134,70 @@ class MobileWarrantyController extends Controller
         }else{
             $invoice = Mobile_warranty::find($id);
         }
-        $crypt = new EncryptCast();
+
         return view('profile.cart')
             ->with([
                 'invoice' => $invoice,
                 'wallet' => $wallet,
-                'crypt' => $crypt
             ]);
     }
 
-    public function uploadPhoto($id)
+    public function uploadPhoto($id,$err='')
     {
+        $msg='';
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         $crypt = Crypt::decryptString($wallet->value);
         $warranty=Mobile_warranty::find($id)->first();
-        /*$qrcode=QrCode::size(100)->generate(md5($warranty->id.' __ '.$warranty->created_at),$_SERVER["DOCUMENT_ROOT"] . '/uploads/qrcodes/qr_'.$warranty->id);*/
         $imgs = ImageField::all();
+        $qrcode=QrCode::size(250)->generate(md5($id.' __ '.$warranty->created_at));
+        if($err!=''){
+            $msg='error';
+        }
         return view('profile.warranty.photo_upload',[
             'id' => $id,
             'wallet' => $wallet,
-            'crypt' => $crypt,
-            'imgs'=>$imgs
+            'imgs'=>$imgs,
+            'qrcode'=>$qrcode,
+            $msg=>$err
         ]);
     }
 
     public function insertPhotos(Request $request,$id)
     {
         //dd($request->all(),$id);
-        $prefix = $imageList = $subAttList='';
+        $prefix = $imageList = '';
+        $imageFields=ImageField::all();
+        $key=0;
 
-        if ($request->file('IMEI_pic')) {
-            $imei = $request->file('IMEI_pic');
-            $imei_name = time() . $imei->getClientOriginalName();
-            $imei->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/warranty_images/', $imei_name);
-            $IMEI_pic=MobileImage::create(['URL'=>$imei_name, 'type'=>1]);
+        if(sizeof($request->toArray())-7==6) {
+            foreach ($imageFields as $row) {
 
-            $imageList .= $prefix . $IMEI_pic->id;
-            $prefix = ',';
+                if ($request->file($row->html_id)) {
+                    $file = $request->file($row->html_id);
+                    $file_name = time() . $file->getClientOriginalName();
+                    $file->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/warranty_images/', $file_name);
+                    $file_pic = MobileImage::create(['URL' => $file_name, 'type' => 1]);
 
+                    $imageList .= $prefix . $file_pic->id;
+                    $prefix = ',';
+
+                    $key++;
+                }
+            }
         }
 
-        if ($request->file('back_pic')) {
-            $back = $request->file('back_pic');
-            $back_name = time() . $back->getClientOriginalName();
-            $back->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/warranty_images/', $back_name);
-            $back_pic=MobileImage::create(['URL'=>$back_name, 'type'=>1]);
+        if($key==6){
 
-            $imageList .= $prefix . $back_pic->id;
-            $prefix = ',';
+            Mobile_warranty::query()->where('id',$id)->update([
+                'images'=>$imageList,
+                'status_id'=>6
+            ]);
+
+            return redirect(route('bimeh_all'))->with(['success'=>'عکس های موبایل با موفقیت آپلود شد.']);
+
+        }else{
+            return $this->uploadPhoto($id,'لطفا همه عکس ها رو آپلود کنید!');
         }
 
-        if ($request->file('front_pic')) {
-            $front = $request->file('front_pic');
-            $front_name = time() . $front->getClientOriginalName();
-            $front->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/warranty_images/', $front_name);
-            $front_pic=MobileImage::create(['URL'=>$front_name, 'type'=>1]);
-
-            $imageList .= $prefix . $front_pic->id;
-            $prefix = ',';
-        }
-
-        if ($request->file('right_pic')) {
-            $right = $request->file('right_pic');
-            $right_name = time() . $right->getClientOriginalName();
-            $right->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/warranty_images/', $right_name);
-            $right_pic=MobileImage::create(['URL'=>$right_name, 'type'=>1]);
-
-            $imageList .= $prefix . $right_pic->id;
-            $prefix = ',';
-        }
-
-        if ($request->file('front_box_pic')) {
-            $front_box = $request->file('front_box_pic');
-            $front_box_name = time() . $front_box->getClientOriginalName();
-            $front_box->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/warranty_images/', $front_box_name);
-            $front_box_pic=MobileImage::create(['URL'=>$front_box_name, 'type'=>1]);
-
-            $imageList .= $prefix . $front_box_pic->id;
-            $prefix = ',';
-        }
-
-        if ($request->file('back_box_pic')) {
-            $back_box = $request->file('back_box_pic');
-            $back_box_name = time() . $back_box->getClientOriginalName();
-            $back_box->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/warranty_images/', $back_box_name);
-            $back_box_pic=MobileImage::create(['URL'=>$back_box_name, 'type'=>1]);
-
-            $imageList .= $prefix . $back_box_pic->id;
-            $prefix = ',';
-        }
-
-        Mobile_warranty::query()->where('id','=',$id)->update([
-            'images'=>$imageList,
-            'status_id'=>6
-        ]);
-
-
-        return redirect(route('bimeh_all'));
     }
 }
