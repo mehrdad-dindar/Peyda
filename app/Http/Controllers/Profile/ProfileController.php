@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Profile;
 
-use App\Casts\EncryptCast;
 use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\city;
@@ -28,21 +27,17 @@ class ProfileController extends Controller
 
     public function index()
     {
-        $crypt = new EncryptCast();
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         return view('profile.index')->with([
             'wallet' => $wallet,
-            'crypt' => $crypt,
         ]);
     }
 
     public function profile()
     {
-        $crypt = new EncryptCast();
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         return view('profile.profile')->with([
             'wallet' => $wallet,
-            'crypt' => $crypt,
         ]);
 
     }
@@ -55,7 +50,6 @@ class ProfileController extends Controller
         $phone_brands = Phone_brand::all();
         $phone_models = Phone_model::all();
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
-        $crypt = new EncryptCast();
 
         if (auth()->user()->status == 0) {
             $flag = 0;

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Casts\EncryptCast;
 use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Mobile_warranty;
@@ -28,7 +27,6 @@ class UseWarrantyController extends Controller
     public function index($id)
     {
         $check_warranty = Mobile_warranty::where([['owner_id', '=', auth()->user()->id], ['id', '=', $id]])->get();
-        $crypt = new EncryptCast();
         $wallet = Wallet::where('user_id', auth()->id())->first();
 
         //dd($check_warranty->toArray());
@@ -37,7 +35,6 @@ class UseWarrantyController extends Controller
 
             return view('profile.warranty.use', [
                 'warranty_id' => $id,
-                'crypt' => $crypt,
                 'wallet' => $wallet,
             ]);
 
@@ -52,7 +49,6 @@ class UseWarrantyController extends Controller
         $descriptions = $request->get('descriptions');
         $title = $request->get('title');
         $images = $request->input('document_id');
-        $crypt = new EncryptCast();
         $wallet = Wallet::where('user_id', auth()->id())->first();
 
         $imageList = $prefix = '';
@@ -127,7 +123,6 @@ class UseWarrantyController extends Controller
             return view('profile.bimeh_all', [
                 $msg => 'msg',
                 'warranties' => $this->getWarranties(),
-                'crypt' => $crypt,
                 $wallet => $wallet,
             ]);
 
@@ -137,7 +132,6 @@ class UseWarrantyController extends Controller
             return view('profile.bimeh_all', [
                 'error' => 'no',
                 'warranties' => $this->getWarranties(),
-                'crypt' => $crypt,
                 'wallet' => $wallet,
             ]);
 
@@ -173,7 +167,6 @@ class UseWarrantyController extends Controller
 
     public function useAll()
     {
-        $crypt = new EncryptCast();
         $wallet = Wallet::where('user_id', auth()->id())->first();
         $useWarranty = WarrantyUse::query()->join('mobile_warranties as mw', 'mw.id', '=', 'warranty_uses.warranty_id')
             ->join('phone_models as pm', 'pm.id', '=', 'mw.phone_model_id')
@@ -186,21 +179,18 @@ class UseWarrantyController extends Controller
         return view('profile.warranty.use_all')
             ->with([
                 'useWarranty' => $useWarranty,
-                'crypt' => $crypt,
                 'wallet' => $wallet,
             ]);
     }
 
     public function use_edit($id)
     {
-        $crypt = new EncryptCast();
         $wallet = Wallet::where('user_id', auth()->id())->first();
         $useWarranty = WarrantyUse::find($id);
         $images = Helpers::getImageFromDb($useWarranty->images);
         return view('profile.warranty.use_edit', [
             'warrantyUse' => $useWarranty,
             'images' => $images,
-            'crypt' => $crypt,
             'wallet' => $wallet,
         ]);
     }

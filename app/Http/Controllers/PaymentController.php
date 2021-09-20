@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Casts\EncryptCast;
 use App\Models\User;
 use App\Models\Wallet;
 use App\Models\Wallet_history;

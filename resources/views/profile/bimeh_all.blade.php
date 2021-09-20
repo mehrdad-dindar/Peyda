@@ -50,7 +50,7 @@
                                     <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">{{$row->id}}</a>
                                 </td>
                                 <td class="text-dark fw-bolder text-hover-primary fs-6"><span
-                                        class="last-price">{{$row->addition_fire_commitment_id != null ? $row->Commitment_ceiling->price+$row->Fire_commitment_ceiling->price : $row->Commitment_ceiling->price}}</span>
+                                        class="peyda_price">{{$row->addition_fire_commitment_id != null ? $row->Commitment_ceiling->price+$row->Fire_commitment_ceiling->price : $row->Commitment_ceiling->price}}</span>
                                     تومان
                                 </td>
                                 <td>
@@ -63,10 +63,13 @@
                                     <span class="badge badge-{{$row->status->color}}">{{$row->status->text}}</span>
                                 </td>
                                 <td class="text-end">
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_{{$row->id}}"
-                                       class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                        <!--begin::Svg Icon | path: icons/duotone/General/Settings-1.svg-->
-                                        <span class="svg-icon svg-icon-3">
+                                    @if($row->status->id==4 || $row->status->id==6)
+
+                                    @else
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_{{$row->id}}"
+                                           class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                            <!--begin::Svg Icon | path: icons/duotone/General/Settings-1.svg-->
+                                            <span class="svg-icon svg-icon-3">
                                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                                          xmlns:xlink="http://www.w3.org/1999/xlink"
                                                                          width="24px" height="24px" viewBox="0 0 24 24"
@@ -83,8 +86,9 @@
                                                                         </g>
                                                                     </svg>
                                                                 </span>
-                                        <!--end::Svg Icon-->
-                                    </a>
+                                            <!--end::Svg Icon-->
+                                        </a>
+                                    @endif
                                     {{-- <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                                          <!--begin::Svg Icon | path: icons/duotone/General/Trash.svg-->
                                          <span class="svg-icon svg-icon-3">

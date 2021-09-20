@@ -138,7 +138,7 @@
                                             <!--begin::Number-->
                                             <div class="d-flex align-items-center">
                                                 <div class="fs-2 fw-bolder counted" data-kt-countup="true"
-                                                     data-kt-countup-value="4500" data-kt-countup-prefix="$"><span id="wallet-val">{{$crypt->get(null,"",$wallet->value,[])}}</span>
+                                                     data-kt-countup-value="4500" data-kt-countup-prefix="$"><span id="wallet-val">{{Crypt::decryptString($wallet->value)}}</span>
                                                     تومان
                                                 </div>
                                             </div>

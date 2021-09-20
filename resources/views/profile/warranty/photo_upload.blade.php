@@ -69,7 +69,7 @@
 
                                     <!--end::Image input-->
                                     <!--begin::Hint-->
-                                    <div class="form-text">{{$img->name}}</div>
+                                    <div class="form-text">{{$img->discription}}</div>
                                     <!--end::Hint-->
                                 </div>
                                 <div class="separator dashed-h my-5"></div>

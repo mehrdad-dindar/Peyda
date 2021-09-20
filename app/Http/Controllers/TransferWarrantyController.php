@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Casts\EncryptCast;
 use App\Http\Controllers\Controller;
 use App\Models\Mobile_warranty;
 use App\Models\Notification;
@@ -18,7 +17,6 @@ class TransferWarrantyController extends Controller
     public function index($id)
     {
         $check_warranty = Mobile_warranty::where([['owner_id', '=', auth()->user()->id], ['id', '=', $id]])->get();
-        $crypt = new EncryptCast();
         $wallet = Wallet::where('user_id', auth()->id())->first();
 
         if (sizeof($check_warranty) > 0) {
@@ -26,7 +24,6 @@ class TransferWarrantyController extends Controller
             return view('profile.warranty.transfer',
                 [
                     'warranty_id' => $id,
-                    'crypt' => $crypt,
                     'wallet'=>$wallet,
                 ]);
         } else {
@@ -36,7 +33,6 @@ class TransferWarrantyController extends Controller
 
     public function transfer_store(Request $request)
     {
-        $crypt = new EncryptCast();
         $wallet = Wallet::where('user_id', auth()->id())->first();
         $warranty_id = $request->get('warranty_id');
         /*$transfer=TransferWarranty::query()->where([['warranty_id','=',$warranty_id],['sender_id','=',auth()->user()->id]])->get();
@@ -79,7 +75,6 @@ class TransferWarrantyController extends Controller
                     $msg => 'done',
                     'transfer_code' => $transfer_code,
                     'warranty_id' => $warranty_id,
-                    'crypt' => $crypt,
                     'wallet'=>$wallet,
                 ]);
         }
@@ -88,10 +83,8 @@ class TransferWarrantyController extends Controller
 
     public function receive_create()
     {
-        $crypt = new EncryptCast();
         $wallet = Wallet::where('user_id', auth()->id())->first();
         return view('profile.warranty.receive',[
-            'crypt' => $crypt,
             'wallet' =>$wallet,
         ]);
     }

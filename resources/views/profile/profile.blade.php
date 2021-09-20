@@ -143,7 +143,7 @@
                                         <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                             <!--begin::Number-->
                                             <div class="d-flex align-items-center">
-                                                <div class="fs-2 fw-bolder counted" data-kt-countup="true" data-kt-countup-value="4500" data-kt-countup-prefix="$"><span id="wallet-val">{{$crypt->get(null,"",$wallet->value,[])}}</span> تومان</div>
+                                                <div class="fs-2 fw-bolder counted" data-kt-countup="true" data-kt-countup-value="4500" data-kt-countup-prefix="$"><span id="wallet-val">{{\App\Helpers\Helpers::toPersianNum(Crypt::decryptString($wallet->value))}}</span> تومان</div>
                                             </div>
                                             <!--end::Number-->
                                             <!--begin::Label-->
@@ -251,7 +251,7 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         <span
-                            class="fw-bold text-gray-800 fs-6">{{ auth()->user()->melli_code != null ? auth()->user()->melli_code : "--------" }}</span>
+                            class="fw-bold text-gray-800 fs-6">{{ auth()->user()->melli_code != null ? \App\Helpers\Helpers::toPersianNumOnly(auth()->user()->melli_code) : "--------" }}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -292,7 +292,7 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         <span
-                            class="fw-bold text-gray-800 fs-6">{{ auth()->user()->birthday != null ? auth()->user()->birthday : "--/--/----" }}</span>
+                            class="fw-bold text-gray-800 fs-6">{{ auth()->user()->birthday != null ? \App\Helpers\Helpers::toPersianNumOnly(Verta(auth()->user()->birthday)->format('Y/m/d')) : "--/--/----" }}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -305,7 +305,7 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         <span
-                            class="fw-bold text-gray-800 fs-6">{{ auth()->user()->phone_brand_id != null ? auth()->user()->phone_brand->name : "----------------" }}</span>
+                            class="fw-bold text-gray-800 fs-6">{{ auth()->user()->phone_model_id != null ? auth()->user()->phone_model->phone_brand->name : "----------------" }}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -385,7 +385,4 @@
     </div>
 @endsection
 @section('custom_js')
-    <script>
-        $('#wallet-val').number(true, 0);
-    </script>
 @endsection

@@ -156,7 +156,6 @@ class MobileWarrantyController extends Controller
         return view('profile.warranty.photo_upload',[
             'id' => $id,
             'wallet' => $wallet,
-            'crypt' => $crypt,
             'imgs'=>$imgs,
             'qrcode'=>$qrcode,
             $msg=>$err

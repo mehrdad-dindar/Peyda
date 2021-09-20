@@ -32,7 +32,7 @@
                                 <!--begin::Date-->
                                 <div class="fs-6 fw-bolder text-gray-700 text-nowrap">موجودی : <span
                                         class="badge badge-light-info fs-6"><span
-                                            class="last-price">{{Crypt::decryptString($wallet->value)}}</span> تومان</span>
+                                            class="peyda_price">{{Crypt::decryptString($wallet->value)}}</span> تومان</span>
                                 </div>
                                 <!--end::Date-->
                             </div>
@@ -134,7 +134,7 @@
                                     <!--end::Title=-->
                                     <!--begin::Value=-->
                                     <td class="@if((int)Crypt::decryptString($i->value) < 0) text-danger @else text-success @endif">
-                                        <span class="last-price">{{(int)Crypt::decryptString($i->value)}}</span> تومان
+                                        <span class="peyda_price">{{(int)Crypt::decryptString($i->value)}}</span> تومان
                                     </td>
                                     <!--end::Value=-->
                                     <!--begin::Payment method=-->

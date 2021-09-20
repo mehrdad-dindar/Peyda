@@ -37,7 +37,6 @@ class UsersTableSeeder extends Seeder
                 'status'                =>          '1',
             ]
         );
-        $crypt = new EncryptCast();
         DB::table('wallets')->insert(
             [
                 'user_id' => 1,
