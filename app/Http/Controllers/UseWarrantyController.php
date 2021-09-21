@@ -106,13 +106,11 @@ class UseWarrantyController extends Controller
 
             $this->addNotif($notif, $userNotif);
 
-            $requestable = new UserRequest();
-            $requestable->setRequestableId($request_use_warranty_id);
-            $requestable->setRequestableType('App\Models\WarrantyUse');
+            $userrequest= new UserRequest();
 
-            $addReq = $this->addRequest($requestable);
+            $addReq = $warrantyUse->userrequests()->save($userrequest);
 
-            if ($addReq == 1) {
+            if ($addReq != null) {
                 $msg = 'success';
             } else {
                 $msg = 'error';
@@ -123,7 +121,7 @@ class UseWarrantyController extends Controller
             return view('profile.bimeh_all', [
                 $msg => 'msg',
                 'warranties' => $this->getWarranties(),
-                $wallet => $wallet,
+                'wallet' => $wallet,
             ]);
 
         } else {

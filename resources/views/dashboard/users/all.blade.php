@@ -12,10 +12,10 @@
                                 <h4 class="card-title">کاربران پیدا سرویس</h4>
                                 <!-- Table with outer spacing -->
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table class="table text-center">
                                         <thead>
                                         <tr>
-                                            <th>نام کاربر</th>
+                                            <th>کاربر</th>
                                             <th>ایمیل</th>
                                             <th>وضعیت</th>
                                             <th>نقش کاربری</th>
@@ -26,8 +26,10 @@
                                         <tbody>
                                         @foreach($users as $user)
                                         <tr>
-                                            <td><img class="chat-img mr-2 border-radius-50"
-                                                                           src="{{ URL::asset('admin/img/member-img/1.png') }}" alt="">{{ $user->name }}
+                                            <td>
+                                                <img class="chat-img ml-2 border-radius-50"
+                                                                           src="{{ $user->avatar ? URL::asset('uploads/avatars/'.$user->avatar) : URL::asset('admin/img/member-img/1.png') }}" alt="{{ $user->getFullNameAttribute($user) }}">
+                                                {{ $user->getFullNameAttribute($user) }}
                                             </td>
                                             <td>{{ $user->email }}</td>
                                             <td>
@@ -37,23 +39,8 @@
                                                     <span class="badge badge-danger-lighten">عدم احراز</span>
                                                 @endif
                                             </td>
-                                            <td>
-                                                @switch($user->user_type)
-                                                    @case('admin')
-                                                    مدیر سیستم
-                                                    @break
-                                                    @case('author')
-                                                    نویسنده
-                                                    @break
-                                                    @case('employee')
-                                                    کاربر سیستم
-                                                    @break
-                                                    @case('customer')
-                                                    مشتری
-                                                    @break
-                                                @endswitch
-                                            </td>
-                                            <td>0{{ $user->phone }}</td>
+                                            <td>{{$user->role->title_fa}}</td>
+                                            <td>{{ $user->phone_num }}</td>
                                             <td>
                                                 @if(($user->sender_id==null || $user->sender_id==auth()->user()->id)
                                                     && $user->status==0)

@@ -53,4 +53,10 @@ class Mobile_warranty extends Model
     {
         return $this->belongsTo(Status::class);
     }
+
+    public function userrequests()
+    {
+        return $this->morphMany(UserRequest::class,'user_requestable');
+    }
+
 }

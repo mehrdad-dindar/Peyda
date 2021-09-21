@@ -16,13 +16,15 @@ class RoleSeeder extends Seeder
     public function run()
     {
         $admin=Role::query()->create([
-           'title'=>'admin'
+           'title'=>'admin',
+           'title_fa'=>'ادمین'
         ]);
 
         $admin->permissions()->attach(Permission::all());
 
         Role::query()->insert([
-           'title'=>'user'
+           'title'=>'user',
+           'title_fa'=>'کاربر'
         ]);
 
     }

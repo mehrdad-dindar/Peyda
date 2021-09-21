@@ -31,9 +31,13 @@ Route::get('/', 'HomeController@index')->name('index');
 Route::get('/test/{id}', function ($id){
 
     //dd($id);
-    $warranty=\App\Models\Mobile_warranty::find($id)->first();
+    /*$warranty=\App\Models\Mobile_warranty::find($id)->first();
     $qrcode=QrCode::size(100)->generate(md5($warranty->id.' __ '.$warranty->created_at));
-    return view('test',['qrcode'=>$qrcode]);
+    return view('test',['qrcode'=>$qrcode]);*/
+
+    $user=\App\Models\User::find($id);
+    return $user->notificationuser->notification_id;
+
 });
 
 Route::get('/single', function () {
