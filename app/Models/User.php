@@ -72,22 +72,24 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
 
     public function transactions()
     {
-        return $this->hasMany(Transaction::class,'user_id');
+        return $this->hasMany(Transaction::class, 'user_id');
     }
+
     public function wallettransactions()
     {
-        return $this->hasMany(WalletTransaction::class,'user_id');
+        return $this->hasMany(WalletTransaction::class, 'user_id');
     }
 
     public function mobile_warranties()
     {
-        return $this->hasMany(Mobile_warranty::class,'owner_id');
+        return $this->hasMany(Mobile_warranty::class, 'owner_id');
     }
 
     public function wallet()
     {
         return $this->hasOne(Wallet::class);
     }
+
     public function wallet_history()
     {
         return $this->hasMany(Wallet_history::class);
@@ -102,6 +104,7 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
     {
         return $this->belongsTo(Role::class);
     }
+
     /**
      * User tokens relation
      *
@@ -112,4 +115,9 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
         return $this->hasMany(Token::class);
     }
 
+    public function getFullNameAttribute()
+    {
+        $full_name = ucfirst($this->f_name) . ' ' . ucfirst($this->l_name);
+        return $full_name != ' ' ? $full_name : null;
+    }
 }
