@@ -135,7 +135,7 @@ class WarrantyController extends Controller
 
             return view('dashboard.warranty.show', ['warranty' => $warranty, 'images' => $images]);
         }else{
-            return abort(404);
+            abort(404);
         }
     }
 
