@@ -662,17 +662,11 @@ blockquote {
 
 
 .user-profile-avatar img {
-
     max-width: 80px;
-
     border-radius: 100%;
-
     border: 2px solid #707070;
-
     z-index: 1;
-
     position: relative;
-
 }
 
 
@@ -1126,4 +1120,30 @@ font-weight: bold;
     border-radius: 16px;
     background: #342588;
     box-shadow: 9px 9px 18px #2c1f74, -9px -9px 18px #3c2b9c;
+}
+
+.mobile-logo{
+    height: 70px;
+}
+
+#menu {
+    background: #342588;
+    position: fixed;
+    top: 86px;
+    left: 0;
+    bottom: 0;
+    width: 70% !important;
+    height: 100% !important;
+    right: -100%;
+    transition: right 500ms ease-in-out;
+}
+#menu.active{
+right: 0;
+}
+
+.customer-profile-avatar .main-img{
+    width: 80px;
+}
+#menu .nav-item{
+    margin-right: 20px;
 }
