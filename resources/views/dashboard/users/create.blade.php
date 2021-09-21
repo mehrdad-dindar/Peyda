@@ -16,8 +16,6 @@
                     display: none;
                 }
             </style>
-                    <form action="{{ route('dashboard') }}/users/auth" method="post">
-                        @csrf
                         <div class="row">
                             <div class="col-12 box-margin">
                                 <div class="card">
@@ -60,7 +58,7 @@
                                             <div class="form-group">
                                                 <div class="checkbox d-inline">
                                                     <h3 name="h3_user_name" class="card-title">شهر</h3>
-                                                    <label for="h3_user_name" >{{$user->city->name}}</label>
+                                                    <label for="h3_user_name" >{{optional($user->city)->name}}</label>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -89,7 +87,7 @@
                                             <div class="form-group">
                                                 <div class="checkbox d-inline">
                                                     <h3 name="h3_user_name" class="card-title">مدل گوشی</h3>
-                                                    <label for="h3_user_name" >{{$user->phone_model->name}}</label>
+                                                    <label for="h3_user_name" >{{optional($user->phone_model)->name}}</label>
                                                 </div>
                                             </div>
 
@@ -116,31 +114,35 @@
                             <input type="hidden" name="user_id" value="{{$user->id}}">
                             <input type="hidden" name="admin_id" value="{{auth()->user()->id}}">
 
-                                    <div class="col-12 box-margin">
-                                        <div class="contact-form-area">
-                                            <div class="card">
-                                            <div class="card-body">
-                                                    <div class="stacked-form-area">
+                            @if(!isset($auth))
+                                <form action="{{ route('dashboard') }}/users/auth" method="post">
+                                    @csrf
+                                        <div class="col-12 box-margin">
+                                            <div class="contact-form-area">
+                                                <div class="card">
+                                                <div class="card-body">
+                                                        <div class="stacked-form-area">
 
-                                                            <label for="status">وضعیت</label>
-                                                            <select name="status" onchange="showDiv(this)">
-                                                                <option value="1" selected>تایید</option>
-                                                                <option value="0">نقص مدارک</option>
-                                                            </select>
-                                                        </div>
-                                                        <div id="hidden_div" class="col-12 mb-30">
-                                                            <h4 class="card-title mb-2">توضیحات</h4>
-                                                            <textarea class="form-control"
-                                                                      name="descriptions" id="simpleMdeExample" rows="10"></textarea>
+                                                                <label for="status">وضعیت</label>
+                                                                <select name="status" onchange="showDiv(this)">
+                                                                    <option value="1" selected>تایید</option>
+                                                                    <option value="0">نقص مدارک</option>
+                                                                </select>
+                                                            </div>
+                                                            <div id="hidden_div" class="col-12 mb-30">
+                                                                <h4 class="card-title mb-2">توضیحات</h4>
+                                                                <textarea class="form-control"
+                                                                          name="descriptions" id="simpleMdeExample" rows="10"></textarea>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                        </div>
-                                    </div>
-                                            <input class="btn btn-primary btn-block mt-15 mb-20" type="submit" value="تایید">
-
                                             </div>
-                    </form>
+                                        </div>
+                                                <input class="btn btn-primary btn-block mt-15 mb-20" type="submit" value="تایید">
+
+                                    </form>
+                                @endif
+                                    </div>
                                 </div>
                             </div>
 

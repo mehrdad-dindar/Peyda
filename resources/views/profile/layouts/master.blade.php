@@ -126,8 +126,8 @@
                                             <div class="d-flex align-items-center mt-1 fs-6">
                                                 <!--begin::Info-->
 
-                                                <div class="text-muted me-2 fs-7">{{ \App\Helpers\Helpers::toPersianNumOnly(
-                                                        \App\Helpers\Helpers::convertDateTimeToShamsi($row->created_at))}}</div>
+                                                <div class="text-muted me-2 fs-7">{{
+                                                        \App\Helpers\Helpers::convertDateTimeToShamsi($row->created_at)}}</div>
                                                 <!--end::Info-->
                                                 <!--begin::User-->
                                                 <div class="symbol symbol-circle symbol-25px" data-bs-toggle="tooltip" data-bs-boundary="window" data-bs-placement="top" title="Nina Nilson">

@@ -99,7 +99,7 @@
                         <div  class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px" id="kt_activities_toggle">
 
                             @if(sizeof(\App\Http\Controllers\Controller::getNotification(auth()->user()->id))>0)
-                                <span class="fa-stack fa-5x has-badge" data-count="{{\App\Helpers\Helpers::toPersianNumOnly(sizeof(\App\Http\Controllers\Controller::getNotification(auth()->user()->id)))}}">
+                                <span class="fa-stack fa-5x has-badge" data-count="{{sizeof(\App\Http\Controllers\Controller::getNotification(auth()->user()->id))}}">
                                   <i class="fa fa-circle fa-stack-2x"></i>
                                   <i class="fa fa-bell fa-stack-1x fa-inverse"></i>
                                 </span>
@@ -302,7 +302,7 @@
                                     <span class="menu-text">کیف پول</span>
                                     <span class="menu-badge">
                                         <span class="badge badge-light-danger fw-bolder fs-7">
-                                            <span class="peyda_price">{{\App\Helpers\Helpers::toPersianNum(Crypt::decryptString($wallet->value))}}</span> تومان
+                                            <span class="peyda_price">{{number_format(Crypt::decryptString($wallet->value))}}</span> تومان
                                         </span>
                                     </span>
                                 </a>
