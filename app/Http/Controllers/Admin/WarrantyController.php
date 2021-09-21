@@ -21,11 +21,7 @@ class WarrantyController extends Controller
 {
     public function index()
     {
-        $warranties=Mobile_warranty::join('fire_commitment_ceilings as fc', 'mobile_warranties.addition_fire_commitment_id', '=','fc.id')
-            ->join('users as u', 'mobile_warranties.owner_id', '=', 'u.id')
-            ->join('commitment_ceilings as cc', 'mobile_warranties.price_range', '=', 'cc.id')
-            ->join('phone_models as pm', 'mobile_warranties.phone_model_id', '=', 'pm.id')
-            ->get(['u.email','u.f_name','u.l_name','pm.name as pm_name','cc.price_range','fc.addition_price','activation_code','mobile_warranties.id as mw_id']);
+        $warranties=Mobile_warranty::all();
 
         /*$warranties = Mobile_warranty::query()
             ->join('commitment_ceilings as cc', 'mobile_warranties.price_range', '=', 'cc.id')
@@ -118,16 +114,7 @@ class WarrantyController extends Controller
     public function show($id)
     {
 
-        $warranty=Mobile_warranty::query()->join('phone_models as pm','pm.id','=','mobile_warranties.phone_model_id')
-            ->join('phone_brands as pb','pb.id','=','pm.phone_brand_id')
-            ->join('users as u','u.id','=','mobile_warranties.owner_id')
-            ->join('commitment_ceilings as cc','cc.id','=','mobile_warranties.price_range')
-            ->join('fire_commitment_ceilings as fc','fc.id','=','mobile_warranties.addition_fire_commitment_id')
-            ->where('mobile_warranties.id','=',$id)
-            ->first(['mobile_warranties.*','pm.name as pm_name','pb.name as pb_name',
-                'u.f_name','u.l_name','u.melli_code','u.id as u_id',
-                'cc.price_range as cc_price','fc.addition_price as fc_price']);
-
+        $warranty=Mobile_warranty::find($id);
 
         if($warranty!=null) {
 
