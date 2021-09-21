@@ -20,6 +20,9 @@ class CreateUserRequestsTable extends Migration
             $table->boolean('done')->default(0);
             $table->unsignedBigInteger('admin_id')->nullable();
             $table->timestamps();
+            $table->foreign('admin_id')
+                ->references('id')
+                ->on('users');
         });
     }
 

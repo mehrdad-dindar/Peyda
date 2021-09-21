@@ -10,7 +10,9 @@ use App\Models\NotificationUser;
 use App\Models\Phone_brand;
 use App\Models\Phone_model;
 use App\Models\User;
+use App\Models\UserRequest;
 use App\Models\Wallet;
+use Carbon\Carbon;
 use Crypt;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
@@ -96,6 +98,7 @@ class ProfileController extends Controller
             $user->melli_card = $melli_card_name;
         }
 
+
         //dd($request->all());
         $user->f_name = $request['f_name'];
         $user->l_name = $request['l_name'];
@@ -107,6 +110,18 @@ class ProfileController extends Controller
         $user->postal_code = $request['postal_code'];
         $user->phone_model_id = $request['phone_model_id'];
         $user->save();
+
+        $userrequest=UserRequest::query()
+            ->where([['user_requestable_type','=','App\Models\User'],
+                ['user_requestable_id','=',$user->id]])->first();
+
+        if($userrequest!=null){
+            $user->userrequests()->update(['updated_at'=>Carbon::now()->toDateTimeString()]);
+        }else{
+            $user->userrequests()->save();
+        }
+
+
         return back();
 
     }

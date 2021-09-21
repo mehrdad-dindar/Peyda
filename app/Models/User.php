@@ -124,4 +124,10 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
         $full_name = ucfirst($user->f_name) . ' ' . ucfirst($user->l_name);
         return $full_name != ' ' ? $full_name : null;
     }
+
+    public function userrequests()
+    {
+        return $this->morphMany(UserRequest::class,'user_requestable');
+    }
+
 }
