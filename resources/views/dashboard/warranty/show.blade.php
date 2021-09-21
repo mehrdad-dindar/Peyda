@@ -81,7 +81,7 @@
                                         <div class="form-group">
                                             <div class="checkbox d-inline">
                                                 <h3 name="h3_user_name" class="card-title">هزینه بیمه آتش سوزی</h3>
-                                                <label for="h3_user_name" >{{optional($warranty->Fire_commitment_ceiling)->price}}</label>
+                                                <label for="h3_user_name" >{{optional($warranty->Fire_commitment_ceiling)->price ? optional($warranty->Fire_commitment_ceiling)->addition_price.' + ۵۰ میلیون هدیه':'۵۰ میلیون هدیه'}}</label>
                                             </div>
                                         </div>
 
