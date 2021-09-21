@@ -49,7 +49,6 @@ class TransferWarrantyController extends Controller
                 [
                     'transfer_code' => $transfer_code,
                     'warranty_id' => $warranty_id,
-                    'crypt'=>$crypt,
                     'wallet'=>$wallet,
                 ]);
         } else {

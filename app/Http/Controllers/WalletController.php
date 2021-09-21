@@ -25,7 +25,6 @@ class WalletController extends Controller
     public function index()
     {
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
-        $crypt=Crypt::encryptString($wallet->price);
         $user_id = Auth::user()->id;
         $history = (new WalletHistoryController())->history($user_id);
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
@@ -33,7 +32,6 @@ class WalletController extends Controller
             'user' => auth()->user(),
             'history' => $history,
             'wallet' => $wallet,
-            'crypt'=>$crypt
         ]);
     }
 

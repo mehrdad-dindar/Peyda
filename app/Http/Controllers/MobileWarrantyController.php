@@ -41,7 +41,7 @@ class MobileWarrantyController extends Controller
         $commitment_ceilings = Commitment_ceiling::all();
         $fire_commitment_ceilings = Fire_commitment_ceiling::all();
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
-        $crypt = Crypt::encryptString($wallet->value);
+
         return view('profile.bimeh_add')
             ->with('myPhone', $myPhone)
             ->with('brands', $brands)
@@ -49,8 +49,7 @@ class MobileWarrantyController extends Controller
             ->with('commitment_ceilings', $commitment_ceilings)
             ->with('fire_commitment_ceilings', $fire_commitment_ceilings)
             ->with('wallet', $wallet)
-            ->with('error', $error)
-            ->with('crypt', $crypt);
+            ->with('error', $error);
         //return $phones;
     }
 
@@ -58,11 +57,10 @@ class MobileWarrantyController extends Controller
     {
         $wallet = Wallet::where('user_id', auth()->id())->first();
         $warranties = Mobile_warranty::where('owner_id', auth()->id())->orderBy('updated_at', 'desc')->get();
-        $crypt = Crypt::encryptString($wallet->value);
+
         return view('profile.bimeh_all')->with([
             'warranties' => $warranties,
             'wallet' => $wallet,
-            'crypt' => $crypt
         ]);
     }
 
@@ -146,7 +144,6 @@ class MobileWarrantyController extends Controller
     {
         $msg='';
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
-        $crypt = Crypt::decryptString($wallet->value);
         $warranty=Mobile_warranty::find($id)->first();
         $imgs = ImageField::all();
         $qrcode=QrCode::size(250)->generate(md5($id.' __ '.$warranty->created_at));
