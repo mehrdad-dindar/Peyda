@@ -585,10 +585,8 @@ blockquote {
 }
 
 
-#topNav, #MobTopNav {
-
-    background-color: #000;
-
+#topNav {
+    background-color: #342588;
 }
 
 
@@ -1114,4 +1112,18 @@ font-weight: bold;
 }
 #comment-form textarea{
     height: 200px;
+}
+
+.nav-link.separator {
+    padding: unset;
+}
+
+.nav-toggle {
+    width: 55px;
+    height: 55px;
+    color: #fff;
+    margin-right: 10px;
+    border-radius: 16px;
+    background: #342588;
+    box-shadow: 9px 9px 18px #2c1f74, -9px -9px 18px #3c2b9c;
 }
