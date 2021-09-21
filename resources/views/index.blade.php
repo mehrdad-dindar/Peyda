@@ -74,55 +74,65 @@
                 <h3> نظر مشتریان </h3>
             </div>
         </div>
-        <div class="row justify-content-end">
-
-            <div class="col-md-6">
-                <div class="admin-base-info">
-                    <div class="admin-profile-avatar">
-
-                        <img src="{{ URL::asset('front/img/user-avatar.jpg') }}" class="img-fluid main-img titles"
-                             alt="">
-
+        <div class="container">
+            <div class="row d-flex justify-content-md-end">
+                <div class="col-md-6 text-center">
+                    <div class="admin-base-info">
+                        <div class="customer-profile-avatar">
+                            <img src="{{ URL::asset('front/img/user-avatar.jpg') }}"
+                                 class="img-thumbnail rounded-circle main-img titles"
+                                 alt="">
+                        </div>
+                        <div class="admin-profile-name">
+                            <h4>سارا احدی</h4>
+                        </div>
                     </div>
-                    <div class="admin-profile-name">
-                        <h4>سارا احدی</h4>
+                    <div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad distinctio illo nihil nisi
+                            officiis? Aliquam animi consequuntur ducimus earum facilis harum, impedit ipsa ipsam iusto
+                            maiores quis quod voluptate, voluptates?</p>
                     </div>
                 </div>
-
-                <div class="form-group">
-
-                    <textarea class="form-control form-input" name="comment-text" id="comment-text" rows="3"></textarea>
+            </div>
+            <div class="row d-flex justify-content-md-start">
+                <div class="col-md-6 text-center">
+                    <div class="admin-base-info">
+                        <div class="customer-profile-avatar">
+                            <img src="{{ URL::asset('front/img/user-avatar.jpg') }}"
+                                 class="img-thumbnail rounded-circle main-img titles"
+                                 alt="">
+                        </div>
+                        <div class="admin-profile-name">
+                            <h4>سارا احدی</h4>
+                        </div>
+                    </div>
+                    <div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad distinctio illo nihil nisi
+                            officiis? Aliquam animi consequuntur ducimus earum facilis harum, impedit ipsa ipsam iusto
+                            maiores quis quod voluptate, voluptates?</p>
+                    </div>
                 </div>
-
+            </div>
+            <div class="row d-flex justify-content-md-end">
+                <div class="col-md-6 text-center">
+                    <div class="admin-base-info">
+                        <div class="customer-profile-avatar">
+                            <img src="{{ URL::asset('front/img/user-avatar.jpg') }}"
+                                 class="img-thumbnail rounded-circle main-img titles"
+                                 alt="">
+                        </div>
+                        <div class="admin-profile-name">
+                            <h4>سارا احدی</h4>
+                        </div>
+                    </div>
+                    <div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad distinctio illo nihil nisi
+                            officiis? Aliquam animi consequuntur ducimus earum facilis harum, impedit ipsa ipsam iusto
+                            maiores quis quod voluptate, voluptates?</p>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="row justify-content-start">
-
-            <div class="col-md-6">
-                <div class="user-base-info">
-                    <div class="user-profile-avatar">
-
-                        <img src="{{ URL::asset('front/img/user-avatar.jpg') }}" class="img-fluid main-img titles"
-                             alt="">
-
-                    </div>
-                    <div class="user-profile-name">
-                        <h4>سارا احدی</h4>
-                    </div>
-                </div>
-
-                <form>
-                    <div class="form-group">
-
-                        <textarea class="form-control form-input" name="comment-text" id="comment-text"
-                                  rows="3"></textarea>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-        <div class="white-space"></div>
         <div class="white-space"></div>
     </div>
 @endsection
