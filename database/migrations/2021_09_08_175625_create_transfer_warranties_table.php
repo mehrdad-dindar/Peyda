@@ -14,7 +14,7 @@ class CreateTransferWarrantiesTable extends Migration
     public function up()
     {
         Schema::create('transfer_warranties', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->unsignedBigInteger('sender_id');
             $table->unsignedBigInteger('receiver_id')->nullable();
             $table->unsignedBigInteger('warranty_id');

@@ -14,7 +14,7 @@ class CreateFlashMessagesTable extends Migration
     public function up()
     {
         Schema::create('flash_messages', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('title');
             $table->text('value');
             $table->timestamps();

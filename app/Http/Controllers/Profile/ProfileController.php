@@ -62,7 +62,6 @@ class ProfileController extends Controller
                 'phone_brands' => $phone_brands,
                 'phone_models' => $phone_models,
                 'wallet' => $wallet,
-                'crypt'=>$crypt,
             ]);
     }
 

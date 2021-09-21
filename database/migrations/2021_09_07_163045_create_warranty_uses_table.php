@@ -14,7 +14,7 @@ class CreateWarrantyUsesTable extends Migration
     public function up()
     {
         Schema::create('warranty_uses', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('title');
             $table->text('descriptions');
             $table->string('images');
