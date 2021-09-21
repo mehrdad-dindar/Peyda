@@ -15,7 +15,7 @@
                                     <table class="table">
                                         <thead>
                                         <tr>
-                                            <th>ایمیل</th>
+                                            <th>کاربر</th>
                                             <th>بازه قیمت</th>
                                             <th>مدل گوشی</th>
                                             <th>کد فعالسازی</th>
@@ -25,16 +25,16 @@
                                         <tbody>
                                         @foreach($warranties as $warranty)
                                             <tr>
-                                                <td>{{ $warranty-> email}}</td>
+                                                <td>{{ $warranty-> user->getFullName()}}</td>
 
-                                                <td>{{$warranty -> price_range}}</td>
+                                                <td>{{$warranty ->Commitment_ceiling-> price_range}}</td>
 
-                                                <td>{{$warranty -> pb_name}}</td>
+                                                <td>{{$warranty -> phone_model->phone_brand->name}}</td>
 
                                                 <td>{{$warranty -> activation_code}}</td>
 
                                                 <td><a href="#" class="btn btn-outline-danger btn-sm">حذف</a>
-                                                    <a href="{{ route('dashboard') }}/warranties/show/{{$warranty->mw_id}}" class="btn btn-primary btn-sm">نمایش</a>
+                                                    <a href="{{ route('dashboard') }}/warranties/show/{{$warranty->id}}" class="btn btn-primary btn-sm">نمایش</a>
                                                 </td>
                                             </tr>
                                         @endforeach
