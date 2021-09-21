@@ -17,6 +17,7 @@
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
+        "pusher/pusher-php-server": "^7.0",
         "shetabit/payment": "^4.0",
         "simplesoftwareio/simple-qrcode": "^4.2"
     },

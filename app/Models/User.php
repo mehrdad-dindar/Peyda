@@ -95,9 +95,9 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
         return $this->hasMany(Wallet_history::class);
     }
 
-    public function notificationusers()
+    public function notificationuser()
     {
-        return $this->belongsToMany(NotificationUser::class);
+        return $this->hasMany(NotificationUser::class,'receiver_id','id');
     }
 
     public function role()
@@ -115,9 +115,13 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
         return $this->hasMany(Token::class);
     }
 
-    public function getFullNameAttribute()
+    public function getFullName()
     {
-        $full_name = ucfirst($this->f_name) . ' ' . ucfirst($this->l_name);
+        return ucfirst($this->f_name) . ' ' . ucfirst($this->l_name);
+    }
+    public static function getFullNameAttribute(User $user)
+    {
+        $full_name = ucfirst($user->f_name) . ' ' . ucfirst($user->l_name);
         return $full_name != ' ' ? $full_name : null;
     }
 }

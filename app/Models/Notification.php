@@ -16,9 +16,9 @@ class Notification extends Model
             'seen',
             'body'];
 
-    public function notificationuser()
+    public function notificationusers()
     {
-        return $this->hasMany(NotificationUser::class);
+        return $this->hasMany(NotificationUser::class,'notification_id','id');
     }
 
 
