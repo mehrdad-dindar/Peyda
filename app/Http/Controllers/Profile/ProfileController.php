@@ -46,7 +46,7 @@ class ProfileController extends Controller
 
     public function edit_profile()
     {
-
+        //$id=auth()->user()->phone_model->phone_brand->id;
         $flag = 1;
         $cities = city::all();
         $phone_brands = Phone_brand::all();

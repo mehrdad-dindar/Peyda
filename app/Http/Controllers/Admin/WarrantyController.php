@@ -12,6 +12,7 @@ use App\Models\Notification;
 use App\Models\NotificationUser;
 use App\Models\Phone_brand;
 use App\Models\Phone_model;
+use App\Models\Status;
 use App\Models\User;
 use App\Models\WarrantyUse;
 use Illuminate\Http\Request;
@@ -137,7 +138,7 @@ class WarrantyController extends Controller
         if ($status == 1) {
             $descriptions = 'بیمه نامه شما تایید شده است.';
             Mobile_warranty::query()->where('id', '=', $warranty_id)->update([
-                'status' => 1
+                'status_id' => Status::query()->where()
             ]);
         } else {
             $descriptions = $request->get('descriptions');
