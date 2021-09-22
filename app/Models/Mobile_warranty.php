@@ -59,4 +59,8 @@ class Mobile_warranty extends Model
         return $this->morphMany(UserRequest::class,'user_requestable');
     }
 
+    public function warrantyuses()
+    {
+        return $this->hasMany(WarrantyUse::class,'warranty_id','id');
+    }
 }

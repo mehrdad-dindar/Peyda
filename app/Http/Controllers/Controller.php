@@ -29,6 +29,7 @@ class Controller extends BaseController
             ->join('notification_types as nt','n.type','=','nt.id')
             ->where([['n.seen','=',0],['n.title','!=','']])
             ->whereNotNull('n.title')
+            ->orderBy('id','desc')
             ->get(['n.*','nt.name as nt_name']);
 
         return $notification;

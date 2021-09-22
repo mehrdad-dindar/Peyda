@@ -11,6 +11,7 @@ use App\Models\Wallet;
 use App\Models\WarrantyUse;
 use App\Models\Notification;
 use App\Models\NotificationUser;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Redirect;
 use App\Models\UserRequest;
@@ -26,6 +27,7 @@ class UseWarrantyController extends Controller
 
     public function index($id)
     {
+
         $check_warranty = Mobile_warranty::where([['owner_id', '=', auth()->user()->id], ['id', '=', $id]])->get();
         $wallet = Wallet::where('user_id', auth()->id())->first();
 
@@ -77,6 +79,11 @@ class UseWarrantyController extends Controller
 
             ]);
             $request_use_warranty_id = $warrantyUse->id;
+
+            $userrequest = new UserRequest();
+
+            $addReq = $warrantyUse->userrequests()->save($userrequest);
+
         } else {
 
             $warranty_use = $request->get('use_warranty_id');
@@ -91,6 +98,14 @@ class UseWarrantyController extends Controller
 
             $request_use_warranty_id = $warranty_use;
 
+            $userrequest=UserRequest::query()
+                ->where([['user_requestable_type','=','App\Models\WarrantyUse'],
+                    ['user_requestable_id','=',$warranty_use],
+                    ['done','=',0]])->first();
+
+            if($userrequest!=null){
+                $addReq = WarrantyUse::find($warranty_use)->userrequests()->update(['updated_at'=>Carbon::now()->toDateTimeString()]);
+            }
         }
         $msg = null;
         if ($warrantyUse != null) {
@@ -106,10 +121,6 @@ class UseWarrantyController extends Controller
 
             $this->addNotif($notif, $userNotif);
 
-            $userrequest= new UserRequest();
-
-            $addReq = $warrantyUse->userrequests()->save($userrequest);
-
             if ($addReq != null) {
                 $msg = 'success';
             } else {
@@ -118,11 +129,11 @@ class UseWarrantyController extends Controller
 
 
 //            return redirect()->back()->withErrors(['success'=>'درخواست شما با موفقیت ثبت شد!']);
-            return redirect(route('bimeh_all'))->with($msg , 'msg');
+            return redirect(route('use_all'))->with([$msg , 'msg']);
 
         } else {
 //            return redirect()->back()->withErrors(['error'=>'متاسفانه درخواست شما ثبت نشد!']);
-            return redirect(route('bimeh_all'))->with('error' , 'no');
+            return redirect(route('use_all'))->with(['error' , 'متاسفانه درخواست شما ثبت نشد!']);
 
         }
 
@@ -157,13 +168,16 @@ class UseWarrantyController extends Controller
     public function useAll()
     {
         $wallet = Wallet::where('user_id', auth()->id())->first();
+
         $useWarranty = WarrantyUse::query()->join('mobile_warranties as mw', 'mw.id', '=', 'warranty_uses.warranty_id')
-            ->join('phone_models as pm', 'pm.id', '=', 'mw.phone_model_id')
-            ->join('users as u', 'u.id', '=', 'mw.owner_id')
             ->where('mw.owner_id', '=', auth()->user()->id)
-            ->get(['mw.*', 'warranty_uses.id as wu_id', 'warranty_uses.title', 'warranty_uses.descriptions',
-                'warranty_uses.percentage', 'warranty_uses.status as wu_status', 'warranty_uses.warranty_id',
-                'pm.name as pm_name']);
+            ->get(['warranty_uses.*']);
+
+        /*foreach ($useWarranty as $item){
+            echo $item->id;
+        }
+        die();
+        dd($useWarranty->toArray());*/
 
         return view('profile.warranty.use_all')
             ->with([

@@ -108,7 +108,7 @@
                         </div>
                     </div>
 
-                    <input type="hidden" name="user_id" value="{{$warranty->id}}">
+                    <input type="hidden" name="user_id" value="{{$warranty->owner_id}}">
                     <input type="hidden" name="admin_id" value="{{auth()->user()->id}}">
 
                     <div class="col-12 box-margin">

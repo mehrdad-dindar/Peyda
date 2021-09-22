@@ -23,20 +23,25 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($uses as $row)
-                                            <tr>
-                                                <td>{{ $row-> title}}</td>
+                                        @foreach($uses as $use)
+                                            @if($use->userrequests()->exists())
+                                                @if($use->userrequests->toArray()[0]['done']==0)
+                                                    <tr>
+                                                        <td>{{ $use-> title}}</td>
 
-                                                <td>{{$row -> price_range}}</td>
+                                                        <td>{{$use->Mobile_warranty->Commitment_ceiling-> price_range}}</td>
 
-                                                <td>{{$row -> pm_name}}</td>
+                                                        <td>{{$use -> Mobile_warranty->phone_model->name}}</td>
 
-                                                <td>{{$row -> activation_code}}</td>
+                                                        <td>{{$use -> Mobile_warranty->activation_code}}</td>
 
-                                                <td><a href="#" class="btn btn-outline-danger btn-sm">حذف</a>
-                                                    <a href="{{ route('dashboard') }}/warranties/show/admit/{{$row->wu_id}}" class="btn btn-primary btn-sm">نمایش</a>
-                                                </td>
-                                            </tr>
+                                                        <td><a href="#" class="btn btn-outline-danger btn-sm">حذف</a>
+                                                            <a href="{{ route('dashboard') }}/warranties/show/admit/{{$use->id}}"
+                                                               class="btn btn-primary btn-sm">نمایش</a>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endif
                                         @endforeach
                                         </tbody>
                                     </table>
@@ -48,4 +53,17 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('custom_js')
+    @if (isset($success))
+        <script>
+            toastr.success("پیام", 'درخواست شما با موفقیت ثبت شد!');
+        </script>
+    @elseif(isset($error))
+        <script>
+            toastr.error("خطا!", 'متاسفانه درخواست شما ثبت نشد!');
+        </script>
+    @endif
+
 @endsection
