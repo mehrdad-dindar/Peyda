@@ -129,11 +129,11 @@ class UseWarrantyController extends Controller
 
 
 //            return redirect()->back()->withErrors(['success'=>'درخواست شما با موفقیت ثبت شد!']);
-            return redirect(route('use_all'))->with([$msg , 'msg']);
+            return redirect(route('use_all',$msg));
 
         } else {
 //            return redirect()->back()->withErrors(['error'=>'متاسفانه درخواست شما ثبت نشد!']);
-            return redirect(route('use_all'))->with(['error' , 'متاسفانه درخواست شما ثبت نشد!']);
+            return redirect(route('use_all','error'));
 
         }
 
@@ -165,8 +165,9 @@ class UseWarrantyController extends Controller
         return $ok;*/
     }
 
-    public function useAll()
+    public function useAll($msg='')
     {
+        //dd($msg);
         $wallet = Wallet::where('user_id', auth()->id())->first();
 
         $useWarranty = WarrantyUse::query()->join('mobile_warranties as mw', 'mw.id', '=', 'warranty_uses.warranty_id')
@@ -179,6 +180,15 @@ class UseWarrantyController extends Controller
         die();
         dd($useWarranty->toArray());*/
 
+        if ($msg!='')
+            return view('profile.warranty.use_all')
+                ->with([
+                    'useWarranty' => $useWarranty,
+                    'wallet' => $wallet,
+                    $msg=>'msg'
+                ]);
+
+        else
         return view('profile.warranty.use_all')
             ->with([
                 'useWarranty' => $useWarranty,

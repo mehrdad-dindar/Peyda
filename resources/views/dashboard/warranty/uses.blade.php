@@ -1,6 +1,7 @@
 @extends('dashboard.layouts.master')
 @section('title','استفاده از بیمه نامه ها')
 @section('content')
+    {{dd($success)}}
     <div class="main-content">
         <!-- Table area Start -->
         <div class="container-fluid">
@@ -65,5 +66,4 @@
             toastr.error("خطا!", 'متاسفانه درخواست شما ثبت نشد!');
         </script>
     @endif
-
 @endsection
