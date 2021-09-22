@@ -138,7 +138,7 @@ class WarrantyController extends Controller
         if ($status == 1) {
             $descriptions = 'بیمه نامه شما تایید شده است.';
             Mobile_warranty::query()->where('id', '=', $warranty_id)->update([
-                'status_id' => Status::query()->where()
+                'status_id' => Status::query()->where('text','فعال')->first()->id
             ]);
         } else {
             $descriptions = $request->get('descriptions');
