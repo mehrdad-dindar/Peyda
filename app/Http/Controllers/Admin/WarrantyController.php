@@ -12,20 +12,22 @@ use App\Models\Notification;
 use App\Models\NotificationUser;
 use App\Models\Phone_brand;
 use App\Models\Phone_model;
+use App\Models\Status;
 use App\Models\User;
+use App\Models\UserRequest;
 use App\Models\WarrantyUse;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Redirect;
+use App\Traits\Notifications;
 
 class WarrantyController extends Controller
 {
+    use Notifications;
+
     public function index()
     {
-        $warranties=Mobile_warranty::join('fire_commitment_ceilings as fc', 'mobile_warranties.addition_fire_commitment_id', '=','fc.id')
-            ->join('users as u', 'mobile_warranties.owner_id', '=', 'u.id')
-            ->join('commitment_ceilings as cc', 'mobile_warranties.price_range', '=', 'cc.id')
-            ->join('phone_models as pm', 'mobile_warranties.phone_model_id', '=', 'pm.id')
-            ->get(['u.email','u.f_name','u.l_name','pm.name as pm_name','cc.price_range','fc.addition_price','activation_code','mobile_warranties.id as mw_id']);
+        $warranties=Mobile_warranty::all();
 
         /*$warranties = Mobile_warranty::query()
             ->join('commitment_ceilings as cc', 'mobile_warranties.price_range', '=', 'cc.id')
@@ -118,16 +120,7 @@ class WarrantyController extends Controller
     public function show($id)
     {
 
-        $warranty=Mobile_warranty::query()->join('phone_models as pm','pm.id','=','mobile_warranties.phone_model_id')
-            ->join('phone_brands as pb','pb.id','=','pm.phone_brand_id')
-            ->join('users as u','u.id','=','mobile_warranties.owner_id')
-            ->join('commitment_ceilings as cc','cc.id','=','mobile_warranties.price_range')
-            ->join('fire_commitment_ceilings as fc','fc.id','=','mobile_warranties.addition_fire_commitment_id')
-            ->where('mobile_warranties.id','=',$id)
-            ->first(['mobile_warranties.*','pm.name as pm_name','pb.name as pb_name',
-                'u.f_name','u.l_name','u.melli_code','u.id as u_id',
-                'cc.price_range as cc_price','fc.addition_price as fc_price']);
-
+        $warranty=Mobile_warranty::find($id);
 
         if($warranty!=null) {
 
@@ -147,7 +140,7 @@ class WarrantyController extends Controller
         if ($status == 1) {
             $descriptions = 'بیمه نامه شما تایید شده است.';
             Mobile_warranty::query()->where('id', '=', $warranty_id)->update([
-                'status' => 1
+                'status_id' => Status::query()->where('text','فعال')->first()->id
             ]);
         } else {
             $descriptions = $request->get('descriptions');
@@ -166,22 +159,31 @@ class WarrantyController extends Controller
 
         $this->addNotif($notif,$userNotif);
 
-        return redirect()->back()->with('error', 'تغییرات با موفقیت اعمال شد.');
+        return redirect()->back()->with('success', 'تغییرات با موفقیت اعمال شد.');
     }
 
     public function useWarranty()
     {
+        $uses=WarrantyUse::all();
+
+        /*foreach ($uses as $use){
+
+            dd($use->userrequests()->exists());
+        }*/
+        //die();
+/*
         $uses=WarrantyUse::query()->join('mobile_warranties as mw','mw.id','=','warranty_uses.warranty_id')
             ->join('phone_models as pm','pm.id','=','mw.phone_model_id')
             ->join('commitment_ceilings as cc','cc.id','=','mw.price_range')
-            ->get(['warranty_uses.id as wu_id','mw.activation_code','pm.name as pm_name','cc.price_range','warranty_uses.title']);
+            ->get(['warranty_uses.id as wu_id','mw.activation_code','pm.name as pm_name','cc.price_range','warranty_uses.title']);*/
 
         return view('dashboard.warranty.uses',['uses'=>$uses]);
     }
 
     public function show_admit($id)
     {
-        $warranty=WarrantyUse::query()->join('mobile_warranties as mw','mw.id','=','warranty_uses.warranty_id')
+        $warranty=WarrantyUse::find($id);
+        /*$warranty=WarrantyUse::query()->join('mobile_warranties as mw','mw.id','=','warranty_uses.warranty_id')
             ->join('phone_models as pm','pm.id','=','mw.phone_model_id')
             ->join('phone_brands as pb','pb.id','=','pm.phone_brand_id')
             ->join('users as u','u.id','=','mw.owner_id')
@@ -192,7 +194,9 @@ class WarrantyController extends Controller
                 'warranty_uses.images as wu_images','warranty_uses.created_at as wu_date',
                 'mw.*','pm.name as pm_name','pb.name as pb_name',
                 'u.f_name','u.l_name','u.melli_code','u.id as u_id',
-                'cc.price_range as cc_price','fc.addition_price as fc_price']);
+                'cc.price_range as cc_price','fc.addition_price as fc_price']);*/
+
+        //////////////
 
         /*$warranty=WarrantyUse::query()->join('mobile_warranties as mw','mw.id','=','warranty_uses.warranty_id')
             ->join('phone_models as pm','pm.id','=','mw.phone_model_id')
@@ -217,7 +221,7 @@ class WarrantyController extends Controller
             return view('dashboard.warranty.show_use', ['use_warranty' => $warranty, 'images' => $images]);
         }else{
             //dd('else');
-            return abort(404);
+            abort(404);
         }
     }
 
@@ -229,19 +233,28 @@ class WarrantyController extends Controller
         if ($status == 1) {
             $percentage=$request->get('percentage');
             $descriptions = 'استفاده از بیمه نامه شما تایید شده است.';
-            WarrantyUse::query()->where('id', '=', $warranty_use_id)->update([
+            $warranty_use=WarrantyUse::query()->where('id', '=', $warranty_use_id)->update([
                 'percentage' => $percentage,
                 'status'=>true
             ]);
+            $done=1;
         } else {
-            WarrantyUse::query()->where('id', '=', $warranty_use_id)->update([
+            $warranty_use=WarrantyUse::query()->where('id', '=', $warranty_use_id)->update([
                 'status'=>false
             ]);
             $descriptions = $request->get('descriptions');
+            $done=0;
         }
         $admin_id = auth()->user()->id;
-        $link = '/panel/warranty/mobile';
+        $link = '/panel/warranty/mobile/uses';
 
+        $userrequest=UserRequest::query()
+            ->where([['user_requestable_type','=','App\Models\WarrantyUse'],
+                ['user_requestable_id','=',$warranty_use_id]])->first();
+
+        if($userrequest!=null){
+            $warranty_use->userrequests()->update(['updated_at'=>Carbon::now()->toDateTimeString(),'admin_id'=>$admin_id,'done'=>$done]);
+        }
         $notif=new Notification();
         $notif->setSenderId($admin_id);
         $notif->setType(3);
@@ -254,7 +267,7 @@ class WarrantyController extends Controller
 
         $this->addNotif($notif,$userNotif);
 
-        return redirect()->back()->with('error', 'تغییرات با موفقیت اعمال شد.');
+        return redirect()->back()->with('success', 'تغییرات با موفقیت اعمال شد.');
     }
 
 }

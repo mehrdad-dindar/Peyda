@@ -19,8 +19,8 @@
             <form action="{{ route('dashboard') }}/warranties/admit/use" method="post">
                 @csrf
 
-                <input type="hidden" name="warranty_use_id" value="{{$use_warranty->wu_id}}">
-                <input type="hidden" name="user_id" value="{{$use_warranty->u_id}}">
+                <input type="hidden" name="warranty_use_id" value="{{$use_warranty->id}}">
+                <input type="hidden" name="user_id" value="{{$use_warranty->Mobile_warranty->owner_id}}">
 
                 <div class="row">
                     <div class="col-12 box-margin">
@@ -35,19 +35,19 @@
                                         <div class="form-group">
                                             <div class="checkbox d-inline">
                                                 <h3 name="h3_user_name" class="card-title">نام</h3>
-                                                <label for="h3_user_name" >{{$use_warranty->f_name}}</label>
+                                                <label for="h3_user_name" >{{$use_warranty->Mobile_warranty->User->f_name}}</label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="checkbox d-inline">
                                                 <h3 name="h3_user_name" class="card-title">نام خانوادگی</h3>
-                                                <label for="h3_user_name" >{{$use_warranty->l_name}}</label>
+                                                <label for="h3_user_name" >{{$use_warranty->Mobile_warranty->User->l_name}}</label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="checkbox d-inline">
                                                 <h3 name="h3_user_name" class="card-title">کد ملی</h3>
-                                                <label for="h3_user_name" >{{$use_warranty->melli_code}}</label>
+                                                <label for="h3_user_name" >{{$use_warranty->Mobile_warranty->User->melli_code}}</label>
                                             </div>
                                         </div>
                                     </div>
@@ -58,19 +58,19 @@
                                         <div class="form-group">
                                             <div class="checkbox d-inline">
                                                 <h3 name="h3_user_name" class="card-title">برند</h3>
-                                                <label for="h3_user_name" >{{$use_warranty->pb_name}}</label>
+                                                <label for="h3_user_name" >{{$use_warranty->Mobile_warranty->phone_model->phone_brand->name}}</label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="checkbox d-inline">
                                                 <h3 name="h3_user_name" class="card-title">مدل</h3>
-                                                <label for="h3_user_name" >{{$use_warranty->pm_name}}</label>
+                                                <label for="h3_user_name" >{{$use_warranty->Mobile_warranty->phone_model->name}}</label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="checkbox d-inline">
                                                 <h3 name="h3_user_name" class="card-title">بازه قیمت</h3>
-                                                <label for="h3_user_name" >{{$use_warranty->cc_price}}</label>
+                                                <label for="h3_user_name" >{{$use_warranty->Mobile_warranty->Commitment_ceiling->price_range}}</label>
                                             </div>
                                         </div>
                                     </div>
@@ -81,14 +81,14 @@
                                         <div class="form-group">
                                             <div class="checkbox d-inline">
                                                 <h3 name="h3_user_name" class="card-title">موضوع</h3>
-                                                <label for="h3_user_name" >{{$use_warranty->wu_title}}</label>
+                                                <label for="h3_user_name" >{{$use_warranty->title}}</label>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="checkbox d-inline">
                                                 <h3 name="h3_user_name" class="card-title">توضیحات</h3>
-                                                <label for="h3_user_name" >{{$use_warranty->wu_descriptions}}</label>
+                                                <label for="h3_user_name" >{{$use_warranty->descriptions}}</label>
                                             </div>
                                         </div>
 

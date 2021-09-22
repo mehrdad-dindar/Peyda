@@ -49,16 +49,5 @@ class UsersTableSeeder extends Seeder
                 'value' => 'base64:5nYPhLUjXYSgCsUU7JRpdZM55bJlXsZhcOSJfvNdpQw=',
             ]
         );
-        DB::table('users')->insert(
-
-            [
-                'f_name'                =>          'الناز',
-                'l_name'                =>          'جباری',
-                'role_id'             =>          2,
-                'email'                 =>          'jabbary.elnaz76@gmail.com',
-                'password'              =>          Hash::make('12345678'),
-                'email_verified_at'     =>          '2021-08-10 10:11:03',
-            ],
-        );
     }
 }

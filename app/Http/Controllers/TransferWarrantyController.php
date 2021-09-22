@@ -35,6 +35,7 @@ class TransferWarrantyController extends Controller
     {
         $wallet = Wallet::where('user_id', auth()->id())->first();
         $warranty_id = $request->get('warranty_id');
+        //dd($warranty_id);
         /*$transfer=TransferWarranty::query()->where([['warranty_id','=',$warranty_id],['sender_id','=',auth()->user()->id]])->get();
 
         return $transfer;*/
@@ -44,14 +45,17 @@ class TransferWarrantyController extends Controller
 
 
         if ($transfer != null) {
-            $transfer_code = Mobile_warranty::find($warranty_id)->first()->transfer_code;
+            //dd('null nist');
+            $transfer_code = Mobile_warranty::query()->find($warranty_id);
+            //dd($warranty_id,$transfer_code->toArray());
             return view('profile.warranty.transfer',
                 [
-                    'transfer_code' => $transfer_code,
+                    'transfer_code' => $transfer_code->transfer_code,
                     'warranty_id' => $warranty_id,
                     'wallet'=>$wallet,
                 ]);
         } else {
+            //dd('null hast');
 
             $transfer_code = "T_" . self::RandomString() . time();
 

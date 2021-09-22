@@ -20,7 +20,7 @@
                 @csrf
 
                 <input type="hidden" name="warranty_id" value="{{$warranty->id}}">
-                <input type="hidden" name="user_id" value="{{$warranty->u_id}}">
+                <input type="hidden" name="user_id" value="{{$warranty->User->id}}">
 
                 <div class="row">
                     <div class="col-12 box-margin">
@@ -35,19 +35,19 @@
                                         <div class="form-group">
                                             <div class="checkbox d-inline">
                                                 <h3 name="h3_user_name" class="card-title">نام</h3>
-                                                <label for="h3_user_name" >{{$warranty->f_name}}</label>
+                                                <label for="h3_user_name" >{{$warranty->User->f_name}}</label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="checkbox d-inline">
                                                 <h3 name="h3_user_name" class="card-title">نام خانوادگی</h3>
-                                                <label for="h3_user_name" >{{$warranty->l_name}}</label>
+                                                <label for="h3_user_name" >{{$warranty->User->l_name}}</label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="checkbox d-inline">
                                                 <h3 name="h3_user_name" class="card-title">کد ملی</h3>
-                                                <label for="h3_user_name" >{{$warranty->melli_code}}</label>
+                                                <label for="h3_user_name" >{{$warranty->User->melli_code}}</label>
                                             </div>
                                         </div>
                                     </div>
@@ -58,19 +58,19 @@
                                         <div class="form-group">
                                             <div class="checkbox d-inline">
                                                 <h3 name="h3_user_name" class="card-title">برند</h3>
-                                                <label for="h3_user_name" >{{$warranty->pb_name}}</label>
+                                                <label for="h3_user_name" >{{$warranty->phone_model->phone_brand->name}}</label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="checkbox d-inline">
                                                 <h3 name="h3_user_name" class="card-title">مدل</h3>
-                                                <label for="h3_user_name" >{{$warranty->pm_name}}</label>
+                                                <label for="h3_user_name" >{{$warranty->phone_model->name}}</label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="checkbox d-inline">
                                                 <h3 name="h3_user_name" class="card-title">بازه قیمت</h3>
-                                                <label for="h3_user_name" >{{$warranty->cc_price}}</label>
+                                                <label for="h3_user_name" >{{$warranty->Commitment_ceiling-> price_range}}</label>
                                             </div>
                                         </div>
                                     </div>
@@ -81,7 +81,7 @@
                                         <div class="form-group">
                                             <div class="checkbox d-inline">
                                                 <h3 name="h3_user_name" class="card-title">هزینه بیمه آتش سوزی</h3>
-                                                <label for="h3_user_name" >{{$warranty->fc_price}}</label>
+                                                <label for="h3_user_name" >{{optional($warranty->Fire_commitment_ceiling)->price ? optional($warranty->Fire_commitment_ceiling)->addition_price.' + ۵۰ میلیون هدیه':'۵۰ میلیون هدیه'}}</label>
                                             </div>
                                         </div>
 
@@ -108,7 +108,7 @@
                         </div>
                     </div>
 
-                    <input type="hidden" name="user_id" value="{{$warranty->id}}">
+                    <input type="hidden" name="user_id" value="{{$warranty->owner_id}}">
                     <input type="hidden" name="admin_id" value="{{auth()->user()->id}}">
 
                     <div class="col-12 box-margin">

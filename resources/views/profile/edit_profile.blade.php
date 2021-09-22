@@ -204,42 +204,46 @@
                             <!--begin::Col-->
                             <div class="col-lg-8">
                                 <!--begin::Image input-->
-                                <div class="image-input image-input-circle" data-kt-image-input="true"
-                                     style="background-image: url('{{ URL::asset('profile/media/avatars/user.jpg') }}')">
-                                    <!--begin::Preview existing avatar-->
-                                    <div class="image-input-wrapper w-125px h-125px"
-                                         style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif')"></div>
-                                    <!--end::Preview existing avatar-->
-                                    <!--begin::Label-->
-                                    <label
-                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                        data-kt-image-input-action="change" data-bs-toggle="tooltip"
-                                        title="Change avatar">
+                                <div class="image-input image-input-circle" data-kt-image-input="true" style="background-image: url({{ URL::asset('profile/media/avatars/user.jpg') }})">
+                                    <!--begin::Image preview wrapper-->
+                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url(@if(auth()->user()->avatar){{URL::asset('uploads/avatars').'/'.auth()->user()->avatar}} @endif )"></div>
+                                    <!--end::Image preview wrapper-->
+
+                                    <!--begin::Edit button-->
+                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                                           data-kt-image-input-action="change"
+                                           data-bs-toggle="tooltip"
+                                           data-bs-dismiss="click"
+                                           title="Change avatar">
                                         <i class="bi bi-pencil-fill fs-7"></i>
+
                                         <!--begin::Inputs-->
-                                        <input type="file" name="avatar" accept=".png, .jpg, .jpeg"/>
-                                        <input type="hidden" name="avatar_remove"/>
+                                        <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                                        <input type="hidden" name="avatar_remove" />
                                         <!--end::Inputs-->
                                     </label>
-                                    <!--end::Label-->
-                                    <!--begin::Cancel-->
-                                    <span
-                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
-                                        title="Cancel avatar">
-															<i class="bi bi-x fs-2"></i>
-														</span>
-                                    <!--end::Cancel-->
-                                    <!--begin::Remove-->
-                                    <span
-                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                        data-kt-image-input-action="remove" data-bs-toggle="tooltip"
-                                        title="Remove avatar">
-															<i class="bi bi-x fs-2"></i>
-														</span>
-                                    <!--end::Remove-->
-                                </div>
+                                    <!--end::Edit button-->
 
+                                    <!--begin::Cancel button-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                                          data-kt-image-input-action="cancel"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-dismiss="click"
+                                          title="Cancel avatar">
+         <i class="bi bi-x fs-2"></i>
+     </span>
+                                    <!--end::Cancel button-->
+
+                                    <!--begin::Remove button-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                                          data-kt-image-input-action="remove"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-dismiss="click"
+                                          title="Remove avatar">
+         <i class="bi bi-x fs-2"></i>
+     </span>
+                                    <!--end::Remove button-->
+                                </div>
                                 <!--end::Image input-->
                                 <!--begin::Hint-->
                                 <div class="form-text">تصویر 3*4 خود را آپلود نمایید فرمت های(png, jpg, jpeg.) مجاز می
@@ -326,7 +330,7 @@
                                      style="background-image: url('{{ URL::asset('profile/media/mellicard/sample.jpg') }}')">
                                     <!--begin::Preview existing avatar-->
                                     <div class="image-input-wrapper w-225px h-150px"
-                                         style="background-image: url('@if(auth()->user()->melli_card!=null){{URL::asset('melli_cards').'/'.auth()->user()->melli_card}}@endif')"></div>
+                                         style="background-image: url('@if(auth()->user()->melli_card!=null){{URL::asset('uploads/melli_cards').'/'.auth()->user()->melli_card}}@endif')"></div>
                                     <!--end::Preview existing avatar-->
                                     <!--begin::Label-->
                                     <label
@@ -455,7 +459,7 @@
                                         @if($flag==1) disabled @endif>
                                     <option value="">انتخاب برند گوشی</option>
                                     @foreach($phone_brands as $brand)
-                                        <option value="{{$brand->id}}" @if(auth()->user()->phone_brand_id == $brand->id) selected @endif>{{$brand->name}}</option>
+                                        <option value="{{$brand->id}}" @if(auth()->user()->phone_model->phone_brand->id == $brand->id) selected @endif>{{$brand->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -482,8 +486,10 @@
                                         @if($flag==1) disabled @endif>
                                     <option value="">انتخاب مدل گوشی</option>
                                     @foreach($phone_models as $model)
+                                        @if(auth()->user()->phone_model->phone_brand->id==$model->phone_brand_id)
                                         <option value="{{$model->id}}"
                                                 @if(auth()->user()->phone_model_id == $model->id) selected @endif>{{$model->name}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -494,9 +500,13 @@
                     <!--end::Card body-->
                     <!--begin::Actions-->
                     <div class="card-footer d-flex justify-content-end py-6 px-9">
-                        <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">ذخیره
-                            اطلاعات
-                        </button>
+                        @if($flag==1)
+
+                        @else
+                            <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">ذخیره
+                                اطلاعات
+                            </button>
+                        @endif
                     </div>
                     <!--end::Actions-->
                     </div>
@@ -652,13 +662,13 @@
         $(document).ready(function(){
 
             $('#phone_brand').on('change',function(){
-
+                var getUrl = window.location;
 
                 var new_val = $("#phone_brand option:selected").val();
                 //alert(new_val);
                 $.ajax({
                     type: "POST",
-                    url: "http://{{$_SERVER['HTTP_HOST']}}/panel/mobile_change",
+                    url: getUrl .protocol + "//" + getUrl.host+"/panel/mobile_change",
                     cache:false,
                     data: {"_token": "{{ csrf_token() }}"
                         ,"id" : new_val},

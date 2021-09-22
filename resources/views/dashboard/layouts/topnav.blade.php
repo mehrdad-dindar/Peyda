@@ -144,12 +144,10 @@
                                                              aria-hidden="true"></i> وظایف من</a>
                         <a href="#" class="dropdown-item"><i class="zmdi zmdi-wifi-alt profile-icon bg-purple"
                                                              aria-hidden="true"></i> پشتیبانی</a>
-                        <form action="{{ route('logout') }}" method="post">
                             @csrf
-                            <button type="submit" class="dropdown-item"><i class="ti-unlink profile-icon bg-warning"
+                            <a href="{{route('logout')}}" class="dropdown-item"><i class="ti-unlink profile-icon bg-warning"
                                                                            aria-hidden="true"></i> خروج از سیستم
-                            </button>
-                        </form>
+                            </a>
                     </div>
                 </div>
             </li>

@@ -59,7 +59,7 @@ Route::prefix('panel')->group(function () {
     Route::prefix('warranty')->group(function () {
         Route::prefix('mobile')->group(function () {
             Route::get('/', 'MobileWarrantyController@bimeh_all')->name('bimeh_all');
-            Route::get('/uses', 'UseWarrantyController@useAll')->name('use_all');
+            Route::get('/uses/{msg?}', 'UseWarrantyController@useAll')->name('use_all');
             Route::get('/use_faraguaranty/{id}', 'UseWarrantyController@index')->name('bimeh_use');
             Route::get('/use/edit/{id}', 'UseWarrantyController@use_edit')->name('bimeh_use_edit');
             Route::get('/transfer_faraguaranty/{id}', 'TransferWarrantyController@index')->name('bimeh_transfer');
@@ -87,7 +87,7 @@ Route::prefix('dashboard')->middleware([CheckPermission::class. ':view-dashboard
     Route::get('/', 'Admin\HomeController@index')->name('dashboard');
     Route::prefix('/users')->group(function (){
         Route::get('/', 'Admin\UserController@index');
-        Route::get('/edit/{id}', 'Admin\UserController@create');
+        Route::get('/edit/{id}/{auth?}', 'Admin\UserController@create');
         Route::post('/auth', 'Admin\UserController@store');
     });
 
