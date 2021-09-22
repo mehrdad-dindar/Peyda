@@ -69,20 +69,7 @@
 																</g>
 															</svg>
 														</span>
-                                        @switch(auth()->user()->user_type)
-                                            @case('admin')
-                                            مدیر سیستم
-                                            @break
-                                            @case('author')
-                                            نویسنده
-                                            @break
-                                            @case('employee')
-                                            کاربر سیستم
-                                            @break
-                                            @case('customer')
-                                            مشتری
-                                        @break
-                                    @endswitch
+                                                {{auth()->user()->role->title_fa}}
                                     <!--end::Svg Icon--></a>
                                     @if(auth()->user()->city)
                                         <a href="#"
@@ -268,7 +255,7 @@
                     <div class="col-lg-8 d-flex align-items-center">
                         @if(auth()->user()->melli_card)
                             <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                                <img src="{{ auth()->user()->melli_card }}" alt="image"/>
+                                <img src="{{ URL::asset('uploads/melli_cards/'.auth()->user()->melli_card) }}" alt="image"/>
                                 <div
                                     class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
                             </div>

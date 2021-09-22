@@ -118,20 +118,11 @@ class UseWarrantyController extends Controller
 
 
 //            return redirect()->back()->withErrors(['success'=>'درخواست شما با موفقیت ثبت شد!']);
-            return view('profile.bimeh_all', [
-                $msg => 'msg',
-                'warranties' => $this->getWarranties(),
-                'wallet' => $wallet,
-            ]);
+            return redirect(route('bimeh_all'))->with($msg , 'msg');
 
         } else {
 //            return redirect()->back()->withErrors(['error'=>'متاسفانه درخواست شما ثبت نشد!']);
-
-            return view('profile.bimeh_all', [
-                'error' => 'no',
-                'warranties' => $this->getWarranties(),
-                'wallet' => $wallet,
-            ]);
+            return redirect(route('bimeh_all'))->with('error' , 'no');
 
         }
 

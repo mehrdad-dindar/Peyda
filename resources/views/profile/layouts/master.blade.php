@@ -168,6 +168,7 @@
                                                     <div class="min-w-125px pe-2">
                                                         <button type="submit" class="btn btn-sm btn-light btn-active-light-primary"><i class="fas fa-times"></i></button>
                                                     </div>
+                                                </form>
                                                 <!--end::Action-->
                                             </div>
                                             <!--end::Record-->
