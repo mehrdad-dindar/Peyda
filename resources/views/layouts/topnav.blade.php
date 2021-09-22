@@ -19,8 +19,8 @@
             @guest
                 <a href="{{ route('login') }}" class="nav-link">ورود | عضویت</a>
             @else
-                <a id="navbarDropdown" class="nav-link" href="{{route('panel')}}" role="button" v-pre>
-                    سلام {{ Auth::user()->getFullNameAttribute() ?? 'کاربر عزیز'  }}
+                <a id="navbarDropdown" class="nav-link" href="{{route('panel')}}" role="button">
+                    سلام {{ Auth::user()->getFullNameAttribute(Auth::user()) ?? 'کاربر عزیز'  }}
                 </a>
                 <span class="nav-link separator">|</span>
                 <a href="{{ route('logout') }}" class="nav-link"
@@ -36,33 +36,51 @@
         </div>
     </div>
     <div class="row d-md-none py-2">
-        <div class="col-4 d-flex align-items-center">
-            <a href="#menu" class="nav-toggle d-flex justify-content-center align-items-center text-decoration-none">
+        <div class="col-3 d-flex align-items-center">
+            <a href="#menu" class="text-white nav-toggle d-flex justify-content-center align-items-center text-decoration-none">
                 <i class="fas fa-bars fa-lg"></i>
             </a>
         </div>
-        <div class="col-4 text-center">
+        <div class="col-6 text-center">
             <div class="mobile-logo">
                 <a href="{{ route('index') }}" class="d-inline-block h-100">
                     <img src="{{ URL::asset('front/img/Logo.png')}}" class="img-fluid h-100" alt="">
                 </a>
             </div>
         </div>
-        <div class="col-4 d-flex align-items-center justify-content-end">
-            <div class="menu-search me-4">
-                <span class="text-white">
-                    <i class="fas fa-search fa-lg"></i>
-                </span>
-            </div>
-            <div class="my-account me-4">
-                <a href="{{route('login')}}" class="text-white">
-                    <i class="fas fa-user fa-lg"></i>
-                </a>
+        <div class="col-3 d-flex align-items-center justify-content-end">
+            <div class="my-account w-100 d-flex justify-content-between">
+                @guest
+                    <a href="{{route('login')}}" class="text-white">
+                        <i class="fas fa-user fa-lg"></i>
+                    </a>
+                @else
+                    <a id="navbarDropdown" href="{{route('dashboard')}}" role="button" class="text-white">
+                        <i class="fas fa-user fa-lg"></i>
+                    </a>
+                    <span class="separator text-white">|</span>
+                    <a href="{{ route('logout') }}" class="text-white">
+                        <i class="fas fa-sign-out-alt fa-lg"></i>
+                    </a>
+                @endguest
             </div>
         </div>
     </div>
-    <div id="menu" class="row d-md-none position-fixed">
+    <div id="menu" class="row d-md-none position-fixed overflow-scroll">
         <ul class="nav flex-column p-0">
+        @guest
+            <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">ورود | عضویت</a></li>
+        @else
+            <li class="nav-item d-flex justify-content-between">
+                <a id="navbarDropdown" class="nav-link" href="{{route('panel')}}" role="button">
+                    سلام {{ Auth::user()->getFullNameAttribute(Auth::user()) ?? 'کاربر عزیز'  }}
+                </a>
+                <span class="nav-link separator d-flex align-items-center">|</span>
+                <a href="{{ route('logout') }}" class="nav-link">
+                    خروج
+                </a>
+            </li>
+        @endguest
             <li class="nav-item"><a class="nav-link" href="{{ route('index') }}">خانه</a></li>
             <li class="nav-item"><a class="nav-link" href="#">مقالات</a></li>
             <li class="nav-item"><a class="nav-link" href="#">تماس باما</a></li>

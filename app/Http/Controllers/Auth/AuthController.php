@@ -67,17 +67,20 @@ class AuthController extends Controller
     {
         //dd(Role::query()->where('title','user')->first()->id);
         $data = $request->all();
+        if (!session()->has('phone_num')) {
+            session()->put("phone_num", $request->phone_num);
+        }
         $this->validate($request, [
             'phone_num' => 'required|numeric|digits:11||digits:11',
             //TODO فعال سازی ریکپچا
             /*'g-recaptcha-response' => ['required',new Recaptcha()],*/
         ]);
         $newUser=null;
-        $user = User::where('phone_num', $request->phone_num)->firstOr(function () use ($request,&$newUser) {
+        $user = User::where('phone_num', session()->get('phone_num'))->firstOr(function () use ($request,&$newUser) {
 
             $newUser = User::create([
                 'role_id'   => Role::query()->where('title','user')->first()->id,
-                'phone_num' => $request->phone_num,
+                'phone_num' => session()->get('phone_num'),
                 ]);
             Wallet::create([
                 'user_id' => $newUser->id,
