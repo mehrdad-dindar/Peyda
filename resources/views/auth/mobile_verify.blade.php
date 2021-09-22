@@ -36,24 +36,15 @@
                         </span>
                             @enderror
                         </div>
-                        <div class="form-group mb-0">
-                            <button class="btn btn-primary btn-block" type="submit">بررسی و ادامه</button>
-                        </div>
-                        <div class="form-group d-flex justify-content-between align-items-center mb-3">
-                            <span class="font-13 text-primary">
-                            @if (Route::has('password.request'))
-                                    <a href="{{ route('password.request') }}">رمز عبور خود را فراموش کرده اید؟</a>
-                                @endif
-                        </span>
+
+                        <div class="form-group mb-4">
+                            <a type="button" class="btn btn-light btn-block fadeIn resend-code disabled" href="{{ route('login') }}"><span class="c" id="60"></span></a>
                         </div>
 
-                        <div class="row mt-20 justify-content-md-center">
-                            <div class="col-6">
-                                <a href="#" class="btn btn-googleplus waves-effect waves-light mb-2 btn-block"><i class="fa fa-envelope-o  mr-2"></i><span class="text-center">ورود با ایمیل</span></a>
-                            </div>
+                        <div class="verify-code form-group mb-0">
+                            <button class="btn btn-primary fadeOut btn-block" type="submit">بررسی و ادامه</button>
                         </div>
 
-                        <div class="text-center mt-15"><span class="mr-2 font-13 font-weight-bold">اگر ثبت نام نکرده اید؟ </span><a class="font-13 font-weight-bold" href="{{ route('register') }}">ثبت نام کنید</a></div>
                         <div class="row justify-content-center mt-15">
                             <a class="font-13 font-weight-bold" href="{{ route('index') }}">بازگشت به صفحه اصلی</a>
                         </div>
@@ -63,4 +54,29 @@
             <!-- end card -->
         </div>
     </div>
+@endsection
+@section('custom_js')
+    <script>
+        function startdeadlinefunc() {
+            const n = $('.c').attr('id');
+            let c = n;
+            $('.c').text(c);
+            var myVar = setInterval(function () {
+                c--;
+                if (c >= 0) {
+                    $('.c').html("ارسال مجدد کد "+c + " ثانیه ");
+                }
+                if (c === 0) {
+                    $('.resend-code').removeClass('disabled');
+                    $('.resend-code').removeClass(`btn-light`);
+                    $('.resend-code').addClass('btn-outline-success');
+                    $('.verify-code').addClass('d-none');
+                    $('.c').text("ارسال مجدد کد تأیید");
+                }
+            }, 1000);
+        }
+        $(document).ready(function () {
+            startdeadlinefunc();
+        });
+    </script>
 @endsection
