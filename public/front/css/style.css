@@ -779,7 +779,7 @@ blockquote {
 
 .abilities {
 
-    margin-top: -300px;
+    margin-top: -500px;
 
     min-height: 450px;
 
@@ -1117,9 +1117,10 @@ font-weight: bold;
     height: 55px;
     color: #fff;
     margin-right: 10px;
-    border-radius: 16px;
-    background: #342588;
-    box-shadow: 9px 9px 18px #2c1f74, -9px -9px 18px #3c2b9c;
+    border-radius: 18px;
+    background: linear-gradient(145deg, #2f217a, #382892);
+    box-shadow:  7px 7px 24px #23195b,
+    -7px -7px 24px #4531b5;
 }
 
 .mobile-logo{
