@@ -45,10 +45,10 @@
                                             @if(sizeof($user->userrequests->toArray())>0)
 
                                                 @if($user->userrequests->toArray()[0]['admin_id']==null && $user->status==0)
-                                                    <a href="{{ route('dashboard') }}/users/edit/{{$user->id}}" class="btn btn-success btn-sm">احراز هویت</a>
+                                                    <a href="{{ route('dashboard') }}/users/edit/{{$user->id}}/1" class="btn btn-success btn-sm">احراز هویت</a>
                                                 @elseif($user->userrequests->toArray()[0]['admin_id']!=null && $user->status==0)
                                                     @if($user->userrequests->toArray()[0]['admin_id']==auth()->user()->id)
-                                                        <a href="{{ route('dashboard') }}/users/edit/{{$user->id}}" class="btn btn-success btn-sm">احراز هویت</a>
+                                                        <a href="{{ route('dashboard') }}/users/edit/{{$user->id}}/1" class="btn btn-success btn-sm">احراز هویت</a>
                                                     @else
 
                                                         <a style="color: white;" class="btn btn-secondary btn-sm">احراز هویت</a>

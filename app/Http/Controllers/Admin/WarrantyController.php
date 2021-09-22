@@ -16,9 +16,12 @@ use App\Models\User;
 use App\Models\WarrantyUse;
 use Illuminate\Http\Request;
 use Redirect;
+use App\Traits\Notifications;
 
 class WarrantyController extends Controller
 {
+    use Notifications;
+
     public function index()
     {
         $warranties=Mobile_warranty::all();
@@ -153,7 +156,7 @@ class WarrantyController extends Controller
 
         $this->addNotif($notif,$userNotif);
 
-        return redirect()->back()->with('error', 'تغییرات با موفقیت اعمال شد.');
+        return redirect()->back()->with('success', 'تغییرات با موفقیت اعمال شد.');
     }
 
     public function useWarranty()
@@ -204,7 +207,7 @@ class WarrantyController extends Controller
             return view('dashboard.warranty.show_use', ['use_warranty' => $warranty, 'images' => $images]);
         }else{
             //dd('else');
-            return abort(404);
+            abort(404);
         }
     }
 
@@ -241,7 +244,7 @@ class WarrantyController extends Controller
 
         $this->addNotif($notif,$userNotif);
 
-        return redirect()->back()->with('error', 'تغییرات با موفقیت اعمال شد.');
+        return redirect()->back()->with('success', 'تغییرات با موفقیت اعمال شد.');
     }
 
 }

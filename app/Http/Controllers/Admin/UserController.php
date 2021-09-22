@@ -45,22 +45,22 @@ class UserController extends Controller
             ->where([['user_requestable_type','=','App\Models\User'],
                 ['user_requestable_id','=',$id]])->first();
 
-        if($userrequest!=null){
+        if($userrequest->admin_id==null){
             $user->userrequests()->update(['admin_id'=>auth()->user()->id]);
+
+            $link = '/panel/edit_profile';
+
+            $notif=new Notification();
+            $notif->setSenderId(auth()->user()->id);
+            $notif->setType(1);
+            $notif->setLink($link);
+
+            $userNotif=new NotificationUser();
+            $userNotif->setReceiverId($user->id);
+
+            $this->addNotif($notif,$userNotif);
+
         }
-
-        $link = '/panel/edit_profile';
-
-        $notif=new Notification();
-        $notif->setSenderId(auth()->user()->id);
-        $notif->setType(1);
-        $notif->setLink($link);
-
-        $userNotif=new NotificationUser();
-        $userNotif->setReceiverId($user->id);
-
-        $this->addNotif($notif,$userNotif);
-
 
         return view('dashboard.users.create', ['user'=>$user,'auth'=>$auth]);
     }
@@ -89,8 +89,9 @@ class UserController extends Controller
 
         $notifUser=Notification::query()->join('user_notifications as un','un.notification_id','=','notifications.id')->where([['un.receiver_id','=',$user_id],['notifications.type','=',1]])->first(['notifications.id']);
 
-        if($notifUser==null) {
+        if(sizeof($notifUser->toArray())==0) {
 
+            //dd('if');
 
             $notif=new Notification();
             $notif->setSenderId($admin_id);
@@ -106,15 +107,16 @@ class UserController extends Controller
 
         }else{
 
-            $notification = Notification::query()->where('id','=',$notifUser->id)->update([
+            $notification = Notification::find($notifUser->id)->update([
 
-                    'body' => $descriptions
+                'body' => $descriptions,
+                'title'=>'احراز هویت'
 
             ]);
-
+            //dd($notification);
         }
 
-        return redirect()->back()->with('error', 'تغییرات با موفقیت اعمال شد.');
+        return redirect()->back()->with('success', 'تغییرات با موفقیت اعمال شد.');
     }
 
     /**

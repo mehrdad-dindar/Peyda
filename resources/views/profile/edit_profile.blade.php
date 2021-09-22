@@ -652,13 +652,13 @@
         $(document).ready(function(){
 
             $('#phone_brand').on('change',function(){
-
+                var getUrl = window.location;
 
                 var new_val = $("#phone_brand option:selected").val();
                 //alert(new_val);
                 $.ajax({
                     type: "POST",
-                    url: "http://{{$_SERVER['HTTP_HOST']}}/panel/mobile_change",
+                    url: getUrl .protocol + "//" + getUrl.host+"/panel/mobile_change",
                     cache:false,
                     data: {"_token": "{{ csrf_token() }}"
                         ,"id" : new_val},

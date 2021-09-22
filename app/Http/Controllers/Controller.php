@@ -27,7 +27,7 @@ class Controller extends BaseController
         $notification=NotificationUser::query()->where('receiver_id','=',$id)
             ->join('notifications as n', 'user_notifications.notification_id', '=', 'n.id')
             ->join('notification_types as nt','n.type','=','nt.id')
-            ->where('n.seen','=',0)
+            ->where([['n.seen','=',0],['n.title','!=','']])
             ->whereNotNull('n.title')
             ->get(['n.*','nt.name as nt_name']);
 
