@@ -17,18 +17,18 @@ class SettingsController extends Controller
     public function deletePhoneBrand($id)
     {
         $brands=Phone_brand::query()->find($id)->delete();
-        return $this->getPhoneBrands();
+        return redirect(route('getPhoneBrand'));
     }
     public function storePhoneBrands(Request $request)
     {
-        Phone_brand::query()->create(['name'=>$request->get('model_name')]);
-        return $this->getPhoneBrands();
+        Phone_brand::query()->create(['name'=>$request->get('brand_name')]);
+        return redirect(route('getPhoneBrand'));
     }
 
     public function getPhoneModel($id)
     {
-        $brand=Phone_brand::query()->find($id)->first();
-        $models=Phone_model::query()->where('brand_id','=',$id)->get();
+        $brand=Phone_brand::query()->find($id);
+        $models=Phone_model::query()->where('phone_brand_id','=',$id)->get();
 
         return view('dashboard.settings.mobile.model',['brand'=>$brand, 'models'=>$models ]);
     }
@@ -37,16 +37,17 @@ class SettingsController extends Controller
     {
         Phone_model::query()->find($id)->delete();
 
-        return $this->getPhoneModel($brand_id);
+        return redirect(route('getPhoneModel',$brand_id));
     }
 
     public function storePhoneModel(Request $request,$id)
     {
-        Phone_model::query()->create([
-            'name'=>$request->get('model_name'),
-            'brand_id'=>$id]);
+        $phoneModel=new Phone_model();
+        $phoneModel->phone_brand_id=$id;
+        $phoneModel->name=$request->get('model_name');
+        $phoneModel->save();
 
-        return $this->getPhoneModel($id);
+        return redirect(route('getPhoneModel',$id));
     }
 
 }
