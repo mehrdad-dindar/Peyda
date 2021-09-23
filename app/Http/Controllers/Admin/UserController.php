@@ -80,7 +80,9 @@ class UserController extends Controller
             $user=User::query()->where('id', '=', $user_id)->update([
                 'status' => 1
             ]);
-            $user->userrequests()->update(['done'=>1]);
+
+
+            User::find($user_id)->userrequests()->update(['done'=>1]);
         } else {
             $descriptions = $request->get('descriptions');
         }

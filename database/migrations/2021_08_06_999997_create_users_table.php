@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('phone_num_verified_at')->nullable();
             $table->string('melli_code')->nullable();
             $table->string('melli_card')->nullable();
+            $table->string('melli_card_back')->nullable();
             $table->timestamp('melli_card_verified_at')->nullable();
             $table->timestamp('birthday')->nullable();
             $table->boolean('status')->default(0);

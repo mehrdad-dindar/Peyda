@@ -11,7 +11,7 @@
                     <div class="me-7 mb-4">
                         <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
                             <img src="@if(auth()->user()->avatar)
-                            {{auth()->user()->avatar}}
+                            {{URL::asset('uploads/avatars').'/'.auth()->user()->avatar}}
                             @else
                             {{ URL::asset('profile/media/avatars/user.jpg') }}
                             @endif" alt="image"/>
@@ -355,7 +355,7 @@
                             <div class="fw-bold">
                                 <h4 class="text-gray-900 fw-bolder">پروفایل کاربری خود را تکمیل نمایید !</h4>
                                 <div class="fs-6 text-gray-700">جهت استفاده از تمام امکانات سایت لطفا
-                                    <a class="fw-bolder" href="../../demo6/dist/account/billing.html">پروفایل کاربری</a>
+                                    <a class="fw-bolder" href="{{route('edit_profile')}}">پروفایل کاربری</a>
                                     خود را تکمیل نمایید.
                                 </div>
                             </div>

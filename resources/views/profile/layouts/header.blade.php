@@ -278,7 +278,7 @@
                                 <div class="menu-content d-flex align-items-center px-3">
                                     <!--begin::Avatar-->
                                     <div class="symbol symbol-circle symbol-50px me-5">
-                                        <img alt="Logo" src="@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif" />
+                                        <img alt="Logo" src="@if(auth()->user()->avatar){{URL::asset('uploads/avatars').'/'.auth()->user()->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif" />
                                     </div>
                                     <!--end::Avatar-->
                                     <!--begin::Username-->
