@@ -61,6 +61,13 @@ class ProfileController extends Controller
         } else {
             $flag = 1;
         }
+
+        $verta=auth()->user()->birthday;
+        //$carbon=new Carbon();
+        $birthday_timestamp=Carbon::createFromFormat('Y-m-d H:i:s', $verta, 'UTC')->getTimestamp();
+
+        //dd($birthday_timestamp);
+
         return view('profile.edit_profile')
             ->with(['cities' => $cities,
                 'flag' => $flag,
@@ -111,10 +118,13 @@ class ProfileController extends Controller
         //dd($request->all());
         $user->f_name = $request['f_name'];
         $user->l_name = $request['l_name'];
-        $user->birthday = $v;
+        if ($request['birthday_tmp']!=null) {
+            $user->birthday = $v;
+        }
+
         $user->melli_code = $request['melli_code'];
         $user->phone_num = $request['phone_num'];
-        $user->city_id = $request['city'];
+        $user->city_id = $request['city_id'];
         $user->address = $request['address'];
         $user->email = $request['email'];
         $user->postal_code = $request['postal_code'];
@@ -134,7 +144,7 @@ class ProfileController extends Controller
             $user->userrequests()->save($userrequest1);
         }
 
-
+        //dd($birthday_timestamp);
         return back();
 
     }

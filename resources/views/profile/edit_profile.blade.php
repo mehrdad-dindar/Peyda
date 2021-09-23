@@ -259,7 +259,7 @@
                                 {{--<input type="text" class="example1" />--}}
                                 <input type="hidden" value="{{$v = Verta::instance(auth()->user()->birthday)}}">
                                 <input class="form-control form-control-solid" id="birthday"
-                                       value="@if(auth()->user()->birthday != null){{ $v->format('Y-n-j') }}@endif"
+                                       value="@if(auth()->user()->birthday != null){{ \App\Helpers\Helpers::toPersianNumOnly($v->format('Y/n/j')) }}@endif"
                                        placeholder="--/--/----"/>
                                 <input type="hidden" name="birthday_tmp" id="birthday_tmp"/>
                             </div>
@@ -390,7 +390,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row ">
-                                <select name="city" id="city" aria-label="Select a city"
+                                <select name="city_id" id="city_id" aria-label="Select a city"
                                         data-control="select2"
                                         data-placeholder="استان محل سکونت خود را انتخاب کنید"
                                         class="disabled-input form-select form-select-solid form-select-lg fw-bold"
