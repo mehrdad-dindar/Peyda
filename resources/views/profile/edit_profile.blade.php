@@ -5,15 +5,6 @@
 @endsection
 @section('content')
     <div id="kt_content_container" class="container">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-    @endif
     <!--begin::Navbar-->
         <div class="card mb-5 mb-xl-10">
             <div class="card-body pt-9 pb-0">
@@ -78,20 +69,7 @@
 																</g>
 															</svg>
 														</span>
-                                        @switch(auth()->user()->user_type)
-                                            @case('admin')
-                                            مدیر سیستم
-                                            @break
-                                            @case('author')
-                                            نویسنده
-                                            @break
-                                            @case('employee')
-                                            کاربر سیستم
-                                            @break
-                                            @case('customer')
-                                            مشتری
-                                        @break
-                                    @endswitch
+                                    {{auth()->user()->role->title_fa}}
                                     <!--end::Svg Icon--></a>
                                     @if(auth()->user()->city)
                                         <a href="#"
@@ -200,46 +178,32 @@
                         <div class="row mb-6">
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label fw-bold fs-6">تصویر کاربر</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-8">
+                            <!--end::Label--><div class="col-lg-8">
                                 <!--begin::Image input-->
-                                <div class="image-input image-input-circle" data-kt-image-input="true" style="background-image: url({{ URL::asset('profile/media/avatars/user.jpg') }})">
+                                <div class="image-input image-input-circle" data-kt-image-input="true" style="background-image: url({{URL::asset('profile')}}/media/avatars/user.jpg)">
                                     <!--begin::Image preview wrapper-->
-                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url(@if(auth()->user()->avatar){{URL::asset('uploads/avatars').'/'.auth()->user()->avatar}} @endif )"></div>
+                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: @if(auth()->user()->avatar!=null) url({{URL::asset('uploads')}}/avatars/{{auth()->user()->avatar}}) @else url({{URL::asset('profile')}}/media/avatars/user.jpg) @endif"></div>
                                     <!--end::Image preview wrapper-->
 
                                     <!--begin::Edit button-->
-                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                                           data-kt-image-input-action="change"
-                                           data-bs-toggle="tooltip"
-                                           data-bs-dismiss="click"
-                                           title="Change avatar">
+                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" data-bs-dismiss="click" title="" data-bs-original-title="Change avatar">
                                         <i class="bi bi-pencil-fill fs-7"></i>
 
                                         <!--begin::Inputs-->
-                                        <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
-                                        <input type="hidden" name="avatar_remove" />
+                                        <input type="file" name="avatar" accept=".png, .jpg, .jpeg">
+                                        <input type="hidden" name="avatar_remove">
                                         <!--end::Inputs-->
                                     </label>
                                     <!--end::Edit button-->
 
                                     <!--begin::Cancel button-->
-                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                                          data-kt-image-input-action="cancel"
-                                          data-bs-toggle="tooltip"
-                                          data-bs-dismiss="click"
-                                          title="Cancel avatar">
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" data-bs-dismiss="click" title="" data-bs-original-title="Cancel avatar">
          <i class="bi bi-x fs-2"></i>
      </span>
                                     <!--end::Cancel button-->
 
                                     <!--begin::Remove button-->
-                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                                          data-kt-image-input-action="remove"
-                                          data-bs-toggle="tooltip"
-                                          data-bs-dismiss="click"
-                                          title="Remove avatar">
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" data-bs-dismiss="click" title="" data-bs-original-title="Remove avatar">
          <i class="bi bi-x fs-2"></i>
      </span>
                                     <!--end::Remove button-->
@@ -251,7 +215,6 @@
                                 </div>
                                 <!--end::Hint-->
                             </div>
-                            <!--end::Col-->
                         </div>
                         <!--end::Input group-->
                         <!--begin::Input group-->
@@ -320,54 +283,84 @@
                         <!--end::Input group-->
                         <!--begin::Input group-->
                         <div class="row mb-6">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-bold fs-6">عکس کارت ملی</label>
+                                <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label fw-bold fs-6">عکس روی کارت ملی</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-6">
                                 <!--begin::Image input-->
-                                <div class="image-input " data-kt-image-input="true"
-                                     style="background-image: url('{{ URL::asset('profile/media/mellicard/sample.jpg') }}')">
+                                <div class="image-input " data-kt-image-input="true" style="background-image: url('http://localhost:8000/profile/media/mellicard/sample.jpg')">
                                     <!--begin::Preview existing avatar-->
-                                    <div class="image-input-wrapper w-225px h-150px"
-                                         style="background-image: url('@if(auth()->user()->melli_card!=null){{URL::asset('uploads/melli_cards').'/'.auth()->user()->melli_card}}@endif')"></div>
+                                    <div class="image-input-wrapper w-225px h-150px" style="background-image: @if(auth()->user()->melli_card!=null) url({{URL::asset('uploads')}}/melli_cards/{{auth()->user()->melli_card}})  @else url({{URL::asset('profile')}}/media/mellicard/sample.jpg) @endif"></div>
                                     <!--end::Preview existing avatar-->
                                     <!--begin::Label-->
-                                    <label
-                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                        data-kt-image-input-action="change" data-bs-toggle="tooltip"
-                                        title="Change avatar">
+                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar">
                                         <i class="bi bi-pencil-fill fs-7"></i>
                                         <!--begin::Inputs-->
-                                        <input type="file"  @if($flag==1) disabled @endif class="disabled-input" name="melli_card" accept=".png, .jpg, .jpeg"/>
-                                        <input type="hidden" name="melli_card_remove"/>
+                                        <input type="file" value="{{auth()->user()->melli_card}}" name="melli_card" accept=".png, .jpg, .jpeg">
+                                        <input type="hidden" name="melli_card_remove">
                                         <!--end::Inputs-->
                                     </label>
                                     <!--end::Label-->
                                     <!--begin::Cancel-->
-                                    <span
-                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
-                                        title="Cancel avatar">
-															<i class="bi bi-x fs-2"></i>
-														</span>
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="Cancel avatar">
+                                                        <i class="bi bi-x fs-2"></i>
+                                                    </span>
                                     <!--end::Cancel-->
                                     <!--begin::Remove-->
-                                    <span
-                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                        data-kt-image-input-action="remove" data-bs-toggle="tooltip"
-                                        title="Remove avatar">
-															<i class="bi bi-x fs-2"></i>
-														</span>
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="Remove avatar">
+                                                        <i class="bi bi-x fs-2"></i>
+                                                    </span>
                                     <!--end::Remove-->
                                 </div>
 
                                 <!--end::Image input-->
                                 <!--begin::Hint-->
-                                <div class="form-text">عکس کارت ملی خود را آپلود کنید</div>
+                                <div class="form-text">عکس روی کارت ملی خود را آپلود کنید</div>
                                 <!--end::Hint-->
                             </div>
-                            <!--end::Col-->
+                                <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                                <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label fw-bold fs-6">عکس پشت کارت ملی</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-6">
+                                <!--begin::Image input-->
+                                <div class="image-input " data-kt-image-input="true" style="background-image: url({{URL::asset('profile')}}/media/mellicard/melli_card_back.jpg)">
+                                    <!--begin::Preview existing avatar-->
+                                    <div class="image-input-wrapper w-225px h-150px" style="background-image: @if(auth()->user()->melli_card_back!=null) url({{URL::asset('uploads')}}/melli_cards/{{auth()->user()->melli_card_back}})  @else url({{URL::asset('profile')}}/media/mellicard/melli_card_back.jpg) @endif"></div>
+                                    <!--end::Preview existing avatar-->
+                                    <!--begin::Label-->
+                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar">
+                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                        <!--begin::Inputs-->
+                                        <input type="file" name="melli_card_back" accept=".png, .jpg, .jpeg">
+                                        <input type="hidden" name="melli_card_back_remove">
+                                        <!--end::Inputs-->
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Cancel-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="Cancel avatar">
+                                                        <i class="bi bi-x fs-2"></i>
+                                                    </span>
+                                    <!--end::Cancel-->
+                                    <!--begin::Remove-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="Remove avatar">
+                                                        <i class="bi bi-x fs-2"></i>
+                                                    </span>
+                                    <!--end::Remove-->
+                                </div>
+
+                                <!--end::Image input-->
+                                <!--begin::Hint-->
+                                <div class="form-text">عکس پشت کارت ملی خود را آپلود کنید</div>
+                                <!--end::Hint-->
+                            </div>
+                                <!--end::Col-->
                         </div>
                         <!--end::Input group-->
                         <!--begin::Input group-->
@@ -397,7 +390,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row ">
-                                <select name="city_id" id="city_id" aria-label="Select a city"
+                                <select name="city" id="city" aria-label="Select a city"
                                         data-control="select2"
                                         data-placeholder="استان محل سکونت خود را انتخاب کنید"
                                         class="disabled-input form-select form-select-solid form-select-lg fw-bold"
@@ -443,6 +436,24 @@
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label fw-bold fs-6">ایمیل</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-6 fv-row">
+                                <input type="text" name="email"
+                                       class="disabled-input form-control form-control-lg form-control-solid" placeholder="ایمیل"
+                                       @if($flag==1) disabled @endif
+                                       value="{{auth()->user()->email}}">
+                            </div>
+
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
                         <!--begin::Input group-->
                         <div class="row mb-6 ">
                             <!--begin::Label-->

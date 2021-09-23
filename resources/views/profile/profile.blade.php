@@ -11,7 +11,7 @@
                     <div class="me-7 mb-4">
                         <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
                             <img src="@if(auth()->user()->avatar)
-                            {{auth()->user()->avatar}}
+                            {{URL::asset('uploads/avatars').'/'.auth()->user()->avatar}}
                             @else
                             {{ URL::asset('profile/media/avatars/user.jpg') }}
                             @endif" alt="image"/>

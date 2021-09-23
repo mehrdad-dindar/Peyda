@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Profile;
 
 use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EditProfileRequest;
 use App\Models\city;
 use App\Models\Notification;
 use App\Models\NotificationUser;
@@ -79,7 +80,7 @@ class ProfileController extends Controller
 
     }
 
-    protected function save_profile(Request $request)
+    protected function save_profile(EditProfileRequest $request)
     {
 
         $v = verta()
@@ -99,6 +100,12 @@ class ProfileController extends Controller
             $melli_card->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/melli_cards/', $melli_card_name);
             $user->melli_card = $melli_card_name;
         }
+        if ($request->file('melli_card_back')) {
+            $melli_card_back = $request->file('melli_card_back');
+            $melli_card_back_name = time() . $melli_card_back->getClientOriginalName();
+            $melli_card_back->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/melli_cards/', $melli_card_back_name);
+            $user->melli_card_back = $melli_card_back_name;
+        }
 
 
         //dd($request->all());
@@ -107,8 +114,9 @@ class ProfileController extends Controller
         $user->birthday = $v;
         $user->melli_code = $request['melli_code'];
         $user->phone_num = $request['phone_num'];
-        $user->city_id = $request['city_id'];
+        $user->city_id = $request['city'];
         $user->address = $request['address'];
+        $user->email = $request['email'];
         $user->postal_code = $request['postal_code'];
         $user->phone_model_id = $request['phone_model_id'];
         $user->save();

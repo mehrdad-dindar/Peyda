@@ -24,14 +24,11 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
         'phone_num',
         'melli_code',
         'melli_card',
+        'melli_card_back',
         'phone_num_verified_at',
         'birthday',
-        'bank_card',
-        'bank_id',
-        'bank_shaba',
         'phone_model_id',
         'email',
-        'password',
     ];
 
     use HasFactory, Notifiable;
