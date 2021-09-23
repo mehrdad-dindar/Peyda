@@ -62,10 +62,6 @@ class ProfileController extends Controller
             $flag = 1;
         }
 
-        $verta=auth()->user()->birthday;
-        //$carbon=new Carbon();
-        $birthday_timestamp=Carbon::createFromFormat('Y-m-d H:i:s', $verta, 'UTC')->getTimestamp();
-
         //dd($birthday_timestamp);
 
         return view('profile.edit_profile')

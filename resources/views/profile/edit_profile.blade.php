@@ -258,7 +258,7 @@
                             <div class="col-lg-6 fv-row">
                                 {{--<input type="text" class="example1" />--}}
                                 <input type="hidden" value="{{$v = Verta::instance(auth()->user()->birthday)}}">
-                                <input class="form-control form-control-solid" id="birthday"
+                                <input class="form-control @error('birthday') is-invalid @enderror form-control-solid" id="birthday"
                                        value="@if(auth()->user()->birthday != null){{ \App\Helpers\Helpers::toPersianNumOnly($v->format('Y/n/j')) }}@endif"
                                        placeholder="--/--/----"/>
                                 <input type="hidden" name="birthday_tmp" id="birthday_tmp"/>
@@ -297,7 +297,7 @@
                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar">
                                         <i class="bi bi-pencil-fill fs-7"></i>
                                         <!--begin::Inputs-->
-                                        <input type="file" value="{{auth()->user()->melli_card}}" name="melli_card" accept=".png, .jpg, .jpeg">
+                                        <input type="file" class="@error('melli_card') is-invalid @enderror" value="{{auth()->user()->melli_card}}" name="melli_card" accept=".png, .jpg, .jpeg">
                                         <input type="hidden" name="melli_card_remove">
                                         <!--end::Inputs-->
                                     </label>
@@ -338,7 +338,7 @@
                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar">
                                         <i class="bi bi-pencil-fill fs-7"></i>
                                         <!--begin::Inputs-->
-                                        <input type="file" name="melli_card_back" accept=".png, .jpg, .jpeg">
+                                        <input type="file" name="melli_card_back" class="@error('melli_card_back') is-invalid @enderror" accept=".png, .jpg, .jpeg">
                                         <input type="hidden" name="melli_card_back_remove">
                                         <!--end::Inputs-->
                                     </label>
@@ -375,7 +375,7 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="tel" name="phone_num"
-                                       class="disabled-input form-control form-control-lg form-control-solid"
+                                       class="disabled-input @error('phone_num') is-invalid @enderror form-control form-control-lg form-control-solid"
                                        @if($flag==1) disabled @endif
                                        placeholder="Phone number"
                                        value="{{auth()->user()->phone_num}}"/>
@@ -393,7 +393,7 @@
                                 <select name="city_id" id="city_id" aria-label="Select a city"
                                         data-control="select2"
                                         data-placeholder="استان محل سکونت خود را انتخاب کنید"
-                                        class="disabled-input form-select form-select-solid form-select-lg fw-bold"
+                                        class="disabled-input @error('city_id') is-invalid @enderror form-select form-select-solid form-select-lg fw-bold"
                                         @if($flag==1) disabled @endif>
                                     <option value="">انتخاب استان</option>
                                     @foreach($cities as $city)
@@ -412,7 +412,7 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="text" name="address"
-                                       class="disabled-input form-control form-control-lg form-control-solid"
+                                       class="disabled-input @error('address') is-invalid @enderror form-control form-control-lg form-control-solid"
                                        @if($flag==1) disabled @endif
                                        value="{{auth()->user()->address}}">
                             </div>
@@ -429,7 +429,7 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="text" name="postal_code"
-                                       class="disabled-input form-control form-control-lg form-control-solid"
+                                       class="disabled-input @error('postal_code') is-invalid @enderror form-control form-control-lg form-control-solid"
                                        @if($flag==1) disabled @endif
                                        value="{{auth()->user()->postal_code}}">
                             </div>
@@ -445,7 +445,7 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="text" name="email"
-                                       class="disabled-input form-control form-control-lg form-control-solid" placeholder="ایمیل"
+                                       class="disabled-input @error('email') is-invalid @enderror form-control form-control-lg form-control-solid" placeholder="ایمیل"
                                        @if($flag==1) disabled @endif
                                        value="{{auth()->user()->email}}">
                             </div>
@@ -466,7 +466,7 @@
                                 <select name="phone_brand_id" id="phone_brand" aria-label="Select a Country"
                                         data-control="select2"
                                         data-placeholder="برند گوشی خود را انتخاب کنید"
-                                        class="disabled-input form-select form-select-solid form-select-lg fw-bold"
+                                        class="disabled-input @error('phone_brand_id') is-invalid @enderror form-select form-select-solid form-select-lg fw-bold"
                                         @if($flag==1) disabled @endif>
                                     <option value="">انتخاب برند گوشی</option>
                                     @foreach($phone_brands as $brand)
@@ -494,7 +494,7 @@
                                 <select name="phone_model_id" id="phone_model" aria-label="Select a Country"
                                         data-control="select2"
                                         data-placeholder="مدل گوشی خود را انتخاب کنید"
-                                        class="disabled-input form-select form-select-solid form-select-lg fw-bold"
+                                        class="disabled-input @error('phone_model_id') is-invalid @enderror form-select form-select-solid form-select-lg fw-bold"
                                         @if($flag==1) disabled @endif>
                                     <option value="">انتخاب مدل گوشی</option>
                                     @foreach($phone_models as $model)
