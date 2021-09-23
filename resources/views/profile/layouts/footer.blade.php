@@ -4,8 +4,8 @@
         <!--begin::Copyright-->
         <div class="text-dark order-2 order-md-1">
             <span class="text-muted fw-bold me-1">{{ '1392 - '.Verta()->year }}©</span>
-            با افتخار قدرت گرفته از
-            <a href="https://nokarto.com" target="_blank" class="text-gray-800 text-hover-primary">نوکارتو</a>
+            طراحی، توسعه و دیجیتال مارکتینگ تخصصی
+            <a href="https://nokarto.com" target="_blank" class="text-gray-800 text-hover-primary">شرکت انفورماتیک نوکارتو</a>
         </div>
         <!--end::Copyright-->
         <!--begin::Menu-->
