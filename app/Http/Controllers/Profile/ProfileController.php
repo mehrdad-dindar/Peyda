@@ -53,6 +53,8 @@ class ProfileController extends Controller
         $phone_models = Phone_model::all();
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
 
+        //dd($phone_brands->toArray());
+
         if (auth()->user()->status == 0) {
             $flag = 0;
         } else {
@@ -117,8 +119,11 @@ class ProfileController extends Controller
 
         if($userrequest!=null){
             $user->userrequests()->update(['updated_at'=>Carbon::now()->toDateTimeString()]);
+            //dd('if');
         }else{
-            $user->userrequests()->save();
+
+            $userrequest1= new UserRequest();
+            $user->userrequests()->save($userrequest1);
         }
 
 

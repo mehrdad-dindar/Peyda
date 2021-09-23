@@ -459,7 +459,8 @@
                                         @if($flag==1) disabled @endif>
                                     <option value="">انتخاب برند گوشی</option>
                                     @foreach($phone_brands as $brand)
-                                        <option value="{{$brand->id}}" @if(auth()->user()->phone_model->phone_brand->id == $brand->id) selected @endif>{{$brand->name}}</option>
+                                        <option value="{{$brand->id}}"
+                                                @if(auth()->user()->phone_model!=null) @if(auth()->user()->phone_model->phone_brand->id == $brand->id) selected @endif @endif >{{$brand->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -486,9 +487,11 @@
                                         @if($flag==1) disabled @endif>
                                     <option value="">انتخاب مدل گوشی</option>
                                     @foreach($phone_models as $model)
-                                        @if(auth()->user()->phone_model->phone_brand->id==$model->phone_brand_id)
-                                        <option value="{{$model->id}}"
-                                                @if(auth()->user()->phone_model_id == $model->id) selected @endif>{{$model->name}}</option>
+                                        @if(auth()->user()->phone_model!=null)
+                                            @if(auth()->user()->phone_model->phone_brand->id==$model->phone_brand_id)
+                                            <option value="{{$model->id}}"
+                                                    @if(auth()->user()->phone_model_id == $model->id) selected @endif>{{$model->name}}</option>
+                                            @endif
                                         @endif
                                     @endforeach
                                 </select>
@@ -516,123 +519,6 @@
             <!--end::Content-->
         </div>
         <!--end::Basic info-->
-        <!--begin::Sign-in Method-->
-        <div class="card mb-5 mb-xl-10">
-            <!--begin::Card header-->
-            <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse"
-                 data-bs-target="#kt_account_signin_method">
-                <div class="card-title m-0">
-                    <h3 class="fw-bolder m-0">تغییر رمز عبور</h3>
-                </div>
-            </div>
-            <!--end::Card header-->
-            <!--begin::Content-->
-            <div id="kt_account_signin_method" class="collapse show">
-                <!--begin::Card body-->
-                <div class="card-body border-top p-9">
-                    <div id="kt_signin_email_button" class="d-none ms-auto">
-                        <input id="kt_signin_cancel">
-                        <button class="btn btn-light btn-active-light-primary"></button>
-                    </div>
-                    <!--begin::Password-->
-                    <div class="d-flex flex-wrap align-items-center mb-10">
-                        <!--begin::Label-->
-                        <div id="kt_signin_password">
-                            <div class="fs-6 fw-bolder mb-1">رمز عبور</div>
-                            <div class="fw-bold text-gray-600">************</div>
-                        </div>
-                        <!--end::Label-->
-                        <!--begin::Edit-->
-                        <div id="kt_signin_password_edit" class="flex-row-fluid d-none">
-                            <!--begin::Form-->
-                            <form id="kt_signin_change_password" class="form" novalidate="novalidate">
-                                <div class="row mb-1">
-                                    <div class="col-lg-4">
-                                        <div class="fv-row mb-0">
-                                            <label for="currentpassword" class="form-label fs-6 fw-bolder mb-3">رمز عبور فعلی</label>
-                                            <input type="password"
-                                                   class="form-control form-control-lg form-control-solid"
-                                                   name="currentpassword" id="currentpassword"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="fv-row mb-0">
-                                            <label for="newpassword" class="form-label fs-6 fw-bolder mb-3">رمز عبور جدید</label>
-                                            <input type="password"
-                                                   class="form-control form-control-lg form-control-solid"
-                                                   name="newpassword" id="newpassword"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="fv-row mb-0">
-                                            <label for="confirmpassword" class="form-label fs-6 fw-bolder mb-3">تکرار رمز عبور جدید</label>
-                                            <input type="password"
-                                                   class="form-control form-control-lg form-control-solid"
-                                                   name="confirmpassword" id="confirmpassword"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-text mb-5">رمز عبور باید شامل حداقل 8 کاراکتر باشد.
-                                </div>
-                                <div class="d-flex">
-                                    <button id="kt_password_submit" type="button" class="btn btn-primary me-2 px-6">
-                                        بروزرسانی رمز عبور
-                                    </button>
-                                    <button id="kt_password_cancel" type="button"
-                                            class="btn btn-color-gray-400 btn-active-light-primary px-6">لغو
-                                    </button>
-                                </div>
-                            </form>
-                            <!--end::Form-->
-                        </div>
-                        <!--end::Edit-->
-                        <!--begin::Action-->
-                        <div id="kt_signin_password_button" class="ms-auto">
-                            <button class="btn btn-light btn-active-light-primary">تغییر رمز عبور</button>
-                        </div>
-                        <!--end::Action-->
-                    </div>
-                    <!--end::Password-->
-                    <!--begin::Notice-->
-                    <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed p-6">
-                        <!--begin::Icon-->
-                        <!--begin::Svg Icon | path: icons/duotone/General/Shield-check.svg-->
-                        <span class="svg-icon svg-icon-2tx svg-icon-primary me-4">
-												<svg xmlns="http://www.w3.org/2000/svg"
-                                                     xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                                     height="24px" viewBox="0 0 24 24" version="1.1">
-													<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-														<rect x="0" y="0" width="24" height="24"/>
-														<path
-                                                            d="M4,4 L11.6314229,2.5691082 C11.8750185,2.52343403 12.1249815,2.52343403 12.3685771,2.5691082 L20,4 L20,13.2830094 C20,16.2173861 18.4883464,18.9447835 16,20.5 L12.5299989,22.6687507 C12.2057287,22.8714196 11.7942713,22.8714196 11.4700011,22.6687507 L8,20.5 C5.51165358,18.9447835 4,16.2173861 4,13.2830094 L4,4 Z"
-                                                            fill="#000000" opacity="0.3"/>
-														<path
-                                                            d="M11.1750002,14.75 C10.9354169,14.75 10.6958335,14.6541667 10.5041669,14.4625 L8.58750019,12.5458333 C8.20416686,12.1625 8.20416686,11.5875 8.58750019,11.2041667 C8.97083352,10.8208333 9.59375019,10.8208333 9.92916686,11.2041667 L11.1750002,12.45 L14.3375002,9.2875 C14.7208335,8.90416667 15.2958335,8.90416667 15.6791669,9.2875 C16.0625002,9.67083333 16.0625002,10.2458333 15.6791669,10.6291667 L11.8458335,14.4625 C11.6541669,14.6541667 11.4145835,14.75 11.1750002,14.75 Z"
-                                                            fill="#000000"/>
-													</g>
-												</svg>
-											</span>
-                        <!--end::Svg Icon-->
-                        <!--end::Icon-->
-                        <!--begin::Wrapper-->
-                        <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
-                            <!--begin::Content-->
-                            <div class="mb-3 mb-md-0 fw-bold">
-                                <h4 class="text-gray-900 fw-bolder">توجه !</h4>
-                                <div class="fs-6 text-gray-700 pe-7">جهت افزایش امنیت حساب کاربری هنگام تغییر رمز از علائم و حروف کوچک و بزرگ و اعداد استفاده کنید.
-                                </div>
-                            </div>
-                            <!--end::Content-->
-                        </div>
-                        <!--end::Wrapper-->
-                    </div>
-                    <!--end::Notice-->
-                </div>
-                <!--end::Card body-->
-            </div>
-            <!--end::Content-->
-        </div>
-        <!--end::Sign-in Method-->
     </div>
 @endsection
 

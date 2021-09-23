@@ -148,6 +148,8 @@ class AuthController extends Controller
     public function logout()
     {
         auth()->logout();
+        session()->forget('user_id');
+        session()->forget('phone_num');
         return redirect()->back();
     }
 
