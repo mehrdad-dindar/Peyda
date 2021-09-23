@@ -511,6 +511,20 @@
                         </div>
                         <!--end::Input group-->
 
+                        <!--begin::Input group-->
+                        <div class="my_other_model row mb-6 d-none">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label fw-bold fs-6">مدل گوشی من</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-6 fv-row">
+                                <input type="text" name="other_phone_model"
+                                       class="disabled-input form-control form-control-lg form-control-solid">
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
                     <!--end::Card body-->
                     <!--begin::Actions-->
                     <div class="card-footer d-flex justify-content-end py-6 px-9">
@@ -582,6 +596,18 @@
 
             });
         });
+    </script>
+    <script>
+        $('#phone_model').on('change', function() {
+            var other_model = $('#phone_model').find(':selected').val();
+
+            if (other_model === 'others') {
+                $('.my_other_model').removeClass('d-none');
+            }else {
+                $('.my_other_model').addClass('d-none');
+            }
+        });
+
     </script>
 
 
