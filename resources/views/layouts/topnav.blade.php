@@ -20,7 +20,7 @@
                 <a href="{{ route('login') }}" class="nav-link">ورود | عضویت</a>
             @else
                 <a id="navbarDropdown" class="nav-link" href="{{route('panel')}}" role="button">
-                    سلام {{ Auth::user()->getFullNameAttribute(Auth::user()) ?? 'کاربر عزیز'  }}
+                    سلام {{ Auth::user()->getFullNameAttribute(Auth::user())}}
                 </a>
                 <span class="nav-link separator">|</span>
                 <a href="{{ route('logout') }}" class="nav-link"

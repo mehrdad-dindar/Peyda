@@ -157,14 +157,34 @@ Route::get('/logout', 'Auth\AuthController@logout')->name('logout');
 
 /* Shop & Archive & Search Result */
 Route::get('/shop',function (){
-    return view('shop.archive');
-});
+    return view('shop.index');
+})->name('shop');
 
 /* Category */
 Route::get('/گوشی-موبایل',function (){
     return view('shop.archive');
 });
 
+/* Single product */
 Route::get('/گوشی-موبایل/Samsung-galaxy-note-9',function (){
     return view('shop.product');
 });
+
+/* Cart */
+Route::get('/cart', function (){
+    return view('shop.cart');
+})->name('shop_cart');
+
+/* Checkout */
+Route::get('/checkout', function (){
+    return view('shop.checkout');
+})->name('shop_checkout');
+
+/* Front Page */
+Route::get('/home',function (){
+    return view('front');
+});
+
+/* Blog Archive */
+
+/* Single Blog */
