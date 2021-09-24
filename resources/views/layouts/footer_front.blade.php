@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-4 col-12 mb-0 mb-md-4 pb-0 pb-md-2" data-aos="fade-up" data-aos-duration="1000">
                 <a href="#" class="logo-footer">
-                    <img src="{{ URL::asset('main/images/logo-light.png')}}" height="24" alt="">
+                    <img src="{{ URL::asset('front/img/logo-white-1.png')}}" height="90" alt="">
                 </a>
                 <p class="mt-4">کار با لنـدریــک را شروع کنید که می تواند همه چیزهایی را که برای ایجاد آگاهی ، ایجاد
                     ترافیک ، اتصال به آن نیاز دارید فراهم کند.</p>

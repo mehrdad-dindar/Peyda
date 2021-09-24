@@ -36,7 +36,145 @@
 
     <!-- Communiaction Priority Start -->
     <section class="section">
-        <div class="container">
+        <div class="container ">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <div class="section-title mb-4 pb-2">
+                        <h4 class="title mb-4" data-aos="fade-up" data-aos-duration="1000">نیاز به پشتیبانی CRM</h4>
+                        <p class="text-muted para-desc mb-0 mx-auto" data-aos="fade-up" data-aos-duration="1400">شروع به کار
+                            با <span class="text-primary fw-bold">لنـدریـک </span> که می تواند هر آنچه را که شما برای ایجاد
+                            آگاهی ، ایجاد ترافیک ، اتصال به آن نیاز دارید فراهم کند.</p>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-12 mt-4 pt-2 text-center">
+                    <ul class="nav nav-pills nav-justified flex-column flex-sm-row rounded" data-aos="fade-up"
+                        data-aos-duration="1200" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link rounded active" id="community-tab" data-bs-toggle="pill"
+                               href="#pills-community" role="tab" aria-controls="pills-community" aria-selected="false">
+                                <div class="text-center py-2">
+                                    <h6 class="mb-0">انجمن </h6>
+                                </div>
+                            </a><!--end nav link-->
+                        </li><!--end nav item-->
+
+                        <li class="nav-item">
+                            <a class="nav-link rounded" id="selfservice-tab" data-bs-toggle="pill" href="#pills-self"
+                               role="tab" aria-controls="pills-self" aria-selected="false">
+                                <div class="text-center py-2">
+                                    <h6 class="mb-0">خدمات شخصی </h6>
+                                </div>
+                            </a><!--end nav link-->
+                        </li><!--end nav item-->
+
+                        <li class="nav-item">
+                            <a class="nav-link rounded" id="teamwork-tab" data-bs-toggle="pill" href="#pills-teamwork"
+                               role="tab" aria-controls="pills-teamwork" aria-selected="false">
+                                <div class="text-center py-2">
+                                    <h6 class="mb-0">تیم کاری </h6>
+                                </div>
+                            </a><!--end nav link-->
+                        </li><!--end nav item-->
+                    </ul><!--end nav pills-->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 mt-4 pt-2">
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-community" role="tabpanel"
+                             aria-labelledby="community-tab">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <img src="{{ URL::asset('main/images/saas/classic04.png')}}" data-aos="fade-up"
+                                         data-aos-duration="1400"
+                                         class="img-fluid mx-auto d-block shadow rounded" alt="">
+                                </div><!--end col-->
+
+                                <div class="col-md-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                                    <div class="section-title ms-md-4">
+                                        <h4 class="title mb-4" data-aos="fade-up" data-aos-duration="1000">انجمن کاربر</h4>
+                                        <p class="text-muted" data-aos="fade-up" data-aos-duration="1400">سیستم های CRM با
+                                            جمع آوری وب سایت مشتری ، ایمیل ، تلفن ، داده های رسانه های اجتماعی و موارد دیگر
+                                            ، در چندین منبع و کانال شروع می شوند. همچنین ممکن است به طور خودکار سایر اطلاعات
+                                            ، مانند اخبار اخیر در مورد فعالیت شرکت را به خود اختصاص دهد و می تواند اطلاعات
+                                            شخصی مانند تنظیمات شخصی مشتری در ارتباطات را ذخیره کند..</p>
+                                        <div class="mt-4" data-aos="fade-up" data-aos-duration="1800">
+                                            <a href="#" class="text-primary p-1 px-2 shadow rounded me-3">ادامه
+                                                مطلب <i class="uil uil-angle-left-b"></i></a>
+                                            <a href="#" class="text-warning p-1 px-2 shadow rounded">وبلاگ
+                                                ها </a>
+                                        </div>
+                                    </div>
+                                </div><!--end col-->
+                            </div><!--end row-->
+                        </div><!--end teb pane-->
+
+                        <div class="tab-pane fade" id="pills-self" role="tabpanel" aria-labelledby="selfservice-tab">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 order-2 order-md-1 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                                    <div class="section-title me-md-4">
+                                        <h4 class="title mb-4" data-aos="fade-up" data-aos-duration="1000">پورتال سلف
+                                            سرویس</h4>
+                                        <p class="text-muted" data-aos="fade-up" data-aos-duration="1400">سیستم های CRM با
+                                            جمع آوری وب سایت مشتری ، ایمیل ، تلفن ، داده های رسانه های اجتماعی و موارد دیگر
+                                            ، در چندین منبع و کانال شروع می شوند. همچنین ممکن است به طور خودکار سایر اطلاعات
+                                            ، مانند اخبار اخیر در مورد فعالیت شرکت را به خود اختصاص دهد و می تواند اطلاعات
+                                            شخصی مانند تنظیمات شخصی مشتری در ارتباطات را ذخیره کند..</p>
+                                        <div class="mt-4" data-aos="fade-up" data-aos-duration="1800">
+                                            <a href="#" class="text-primary p-1 px-2 shadow rounded me-3">ادامه
+                                                مطلب <i class="uil uil-angle-left-b"></i></a>
+                                            <a href="#" class="text-warning p-1 px-2 shadow rounded">وبلاگ
+                                                ها </a>
+                                        </div>
+                                    </div>
+                                </div>  <!--end col-->
+
+                                <div class="col-md-6 order-1 order-md-2">
+                                    <img src="{{ URL::asset('main/images/saas/classic02.png')}}" data-aos="fade-up"
+                                         data-aos-duration="1400"
+                                         class="img-fluid mx-auto d-block shadow rounded" alt="">
+                                </div><!--end col-->
+                            </div>    <!--end row-->
+                        </div><!--end teb pane-->
+
+                        <div class="tab-pane fade" id="pills-teamwork" role="tabpanel" aria-labelledby="teamwork-tab">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <img src="{{ URL::asset('main/images/saas/classic03.png')}}" data-aos="fade-up"
+                                         data-aos-duration="1400"
+                                         class="img-fluid mx-auto d-block shadow rounded" alt="">
+                                </div><!--end col-->
+
+                                <div class="col-md-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                                    <div class="section-title ms-md-4">
+                                        <h4 class="title mb-4" data-aos="fade-up" data-aos-duration="1000">کار تیمی
+                                            مناسب</h4>
+                                        <p class="text-muted" data-aos="fade-up" data-aos-duration="1400">سیستم های CRM با
+                                            جمع آوری وب سایت مشتری ، ایمیل ، تلفن ، داده های رسانه های اجتماعی و موارد دیگر
+                                            ، در چندین منبع و کانال شروع می شوند. همچنین ممکن است به طور خودکار سایر اطلاعات
+                                            ، مانند اخبار اخیر در مورد فعالیت شرکت را به خود اختصاص دهد و می تواند اطلاعات
+                                            شخصی مانند تنظیمات شخصی مشتری در ارتباطات را ذخیره کند..</p>
+                                        <div class="mt-4" data-aos="fade-up" data-aos-duration="1800">
+                                            <a href="#" class="text-primary p-1 px-2 shadow rounded me-3">ادامه
+                                                مطلب <i class="uil uil-angle-left-b"></i></a>
+                                            <a href="#" class="text-warning p-1 px-2 shadow rounded">وبلاگ
+                                                ها </a>
+                                        </div>
+                                    </div>
+                                </div>  <!--end col-->
+                            </div>    <!--end row-->
+                        </div><!--end teb pane-->
+                    </div><!--end tab content-->
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end container-->
+    </section>
+    <section class="section bg-light">
+        <div class="container mt-100 mt-60">
             <div class="row justify-content-center">
                 <div class="col-12 text-center">
                     <div class="section-title mb-4 pb-2">
@@ -120,7 +258,9 @@
                 </div><!--end col-->
             </div><!--end row-->
         </div><!--end container-->
+    </section>
         <!--start shop section-->
+    <section class="section">
         <div class="container mt-100 mt-60">
             <div class="row">
                 <div class="col-6">
@@ -263,145 +403,11 @@
                 </div><!--end col-->
             </div><!--end row-->
         </div>
+    </section>
         <!--end shop section-->
 
-        <div class="container mt-100 mt-60">
-            <div class="row justify-content-center">
-                <div class="col-12 text-center">
-                    <div class="section-title mb-4 pb-2">
-                        <h4 class="title mb-4" data-aos="fade-up" data-aos-duration="1000">نیاز به پشتیبانی CRM</h4>
-                        <p class="text-muted para-desc mb-0 mx-auto" data-aos="fade-up" data-aos-duration="1400">شروع به کار
-                            با <span class="text-primary fw-bold">لنـدریـک </span> که می تواند هر آنچه را که شما برای ایجاد
-                            آگاهی ، ایجاد ترافیک ، اتصال به آن نیاز دارید فراهم کند.</p>
-                    </div>
-                </div><!--end col-->
-            </div><!--end row-->
 
-            <div class="row justify-content-center">
-                <div class="col-lg-8 col-md-12 mt-4 pt-2 text-center">
-                    <ul class="nav nav-pills nav-justified flex-column flex-sm-row rounded" data-aos="fade-up"
-                        data-aos-duration="1200" id="pills-tab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link rounded active" id="community-tab" data-bs-toggle="pill"
-                               href="#pills-community" role="tab" aria-controls="pills-community" aria-selected="false">
-                                <div class="text-center py-2">
-                                    <h6 class="mb-0">انجمن </h6>
-                                </div>
-                            </a><!--end nav link-->
-                        </li><!--end nav item-->
-
-                        <li class="nav-item">
-                            <a class="nav-link rounded" id="selfservice-tab" data-bs-toggle="pill" href="#pills-self"
-                               role="tab" aria-controls="pills-self" aria-selected="false">
-                                <div class="text-center py-2">
-                                    <h6 class="mb-0">خدمات شخصی </h6>
-                                </div>
-                            </a><!--end nav link-->
-                        </li><!--end nav item-->
-
-                        <li class="nav-item">
-                            <a class="nav-link rounded" id="teamwork-tab" data-bs-toggle="pill" href="#pills-teamwork"
-                               role="tab" aria-controls="pills-teamwork" aria-selected="false">
-                                <div class="text-center py-2">
-                                    <h6 class="mb-0">تیم کاری </h6>
-                                </div>
-                            </a><!--end nav link-->
-                        </li><!--end nav item-->
-                    </ul><!--end nav pills-->
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12 mt-4 pt-2">
-                    <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-community" role="tabpanel"
-                             aria-labelledby="community-tab">
-                            <div class="row align-items-center">
-                                <div class="col-md-6">
-                                    <img src="{{ URL::asset('main/images/saas/classic04.png')}}" data-aos="fade-up"
-                                         data-aos-duration="1400"
-                                         class="img-fluid mx-auto d-block shadow rounded" alt="">
-                                </div><!--end col-->
-
-                                <div class="col-md-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                                    <div class="section-title ms-md-4">
-                                        <h4 class="title mb-4" data-aos="fade-up" data-aos-duration="1000">انجمن کاربر</h4>
-                                        <p class="text-muted" data-aos="fade-up" data-aos-duration="1400">سیستم های CRM با
-                                            جمع آوری وب سایت مشتری ، ایمیل ، تلفن ، داده های رسانه های اجتماعی و موارد دیگر
-                                            ، در چندین منبع و کانال شروع می شوند. همچنین ممکن است به طور خودکار سایر اطلاعات
-                                            ، مانند اخبار اخیر در مورد فعالیت شرکت را به خود اختصاص دهد و می تواند اطلاعات
-                                            شخصی مانند تنظیمات شخصی مشتری در ارتباطات را ذخیره کند..</p>
-                                        <div class="mt-4" data-aos="fade-up" data-aos-duration="1800">
-                                            <a href="#" class="text-primary p-1 px-2 shadow rounded me-3">ادامه
-                                                مطلب <i class="uil uil-angle-left-b"></i></a>
-                                            <a href="#" class="text-warning p-1 px-2 shadow rounded">وبلاگ
-                                                ها </a>
-                                        </div>
-                                    </div>
-                                </div><!--end col-->
-                            </div><!--end row-->
-                        </div><!--end teb pane-->
-
-                        <div class="tab-pane fade" id="pills-self" role="tabpanel" aria-labelledby="selfservice-tab">
-                            <div class="row align-items-center">
-                                <div class="col-md-6 order-2 order-md-1 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                                    <div class="section-title me-md-4">
-                                        <h4 class="title mb-4" data-aos="fade-up" data-aos-duration="1000">پورتال سلف
-                                            سرویس</h4>
-                                        <p class="text-muted" data-aos="fade-up" data-aos-duration="1400">سیستم های CRM با
-                                            جمع آوری وب سایت مشتری ، ایمیل ، تلفن ، داده های رسانه های اجتماعی و موارد دیگر
-                                            ، در چندین منبع و کانال شروع می شوند. همچنین ممکن است به طور خودکار سایر اطلاعات
-                                            ، مانند اخبار اخیر در مورد فعالیت شرکت را به خود اختصاص دهد و می تواند اطلاعات
-                                            شخصی مانند تنظیمات شخصی مشتری در ارتباطات را ذخیره کند..</p>
-                                        <div class="mt-4" data-aos="fade-up" data-aos-duration="1800">
-                                            <a href="#" class="text-primary p-1 px-2 shadow rounded me-3">ادامه
-                                                مطلب <i class="uil uil-angle-left-b"></i></a>
-                                            <a href="#" class="text-warning p-1 px-2 shadow rounded">وبلاگ
-                                                ها </a>
-                                        </div>
-                                    </div>
-                                </div>  <!--end col-->
-
-                                <div class="col-md-6 order-1 order-md-2">
-                                    <img src="{{ URL::asset('main/images/saas/classic02.png')}}" data-aos="fade-up"
-                                         data-aos-duration="1400"
-                                         class="img-fluid mx-auto d-block shadow rounded" alt="">
-                                </div><!--end col-->
-                            </div>    <!--end row-->
-                        </div><!--end teb pane-->
-
-                        <div class="tab-pane fade" id="pills-teamwork" role="tabpanel" aria-labelledby="teamwork-tab">
-                            <div class="row align-items-center">
-                                <div class="col-md-6">
-                                    <img src="{{ URL::asset('main/images/saas/classic03.png')}}" data-aos="fade-up"
-                                         data-aos-duration="1400"
-                                         class="img-fluid mx-auto d-block shadow rounded" alt="">
-                                </div><!--end col-->
-
-                                <div class="col-md-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                                    <div class="section-title ms-md-4">
-                                        <h4 class="title mb-4" data-aos="fade-up" data-aos-duration="1000">کار تیمی
-                                            مناسب</h4>
-                                        <p class="text-muted" data-aos="fade-up" data-aos-duration="1400">سیستم های CRM با
-                                            جمع آوری وب سایت مشتری ، ایمیل ، تلفن ، داده های رسانه های اجتماعی و موارد دیگر
-                                            ، در چندین منبع و کانال شروع می شوند. همچنین ممکن است به طور خودکار سایر اطلاعات
-                                            ، مانند اخبار اخیر در مورد فعالیت شرکت را به خود اختصاص دهد و می تواند اطلاعات
-                                            شخصی مانند تنظیمات شخصی مشتری در ارتباطات را ذخیره کند..</p>
-                                        <div class="mt-4" data-aos="fade-up" data-aos-duration="1800">
-                                            <a href="#" class="text-primary p-1 px-2 shadow rounded me-3">ادامه
-                                                مطلب <i class="uil uil-angle-left-b"></i></a>
-                                            <a href="#" class="text-warning p-1 px-2 shadow rounded">وبلاگ
-                                                ها </a>
-                                        </div>
-                                    </div>
-                                </div>  <!--end col-->
-                            </div>    <!--end row-->
-                        </div><!--end teb pane-->
-                    </div><!--end tab content-->
-                </div><!--end col-->
-            </div><!--end row-->
-        </div><!--end container-->
-
+    <section class="section bg-light">
         <!-- Testi Start -->
         <div class="container mt-100 mt-60">
             <div class="row justify-content-center">
@@ -546,7 +552,7 @@
     </section><!--end section-->
     <!-- Communiaction Priority End -->
     <!--start blog section-->
-    <section class="section bg-light">
+    <section class="section">
         <div class="container">
             <div class="row align-items-center mb-4 pb-2">
                 <div class="col-lg-6">

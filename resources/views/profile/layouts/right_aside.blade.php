@@ -11,7 +11,7 @@
     <div class="aside-logo py-8" id="kt_aside_logo">
         <!--begin::Logo-->
         <a href="{{ route('index') }}" class="d-flex align-items-center">
-            <img alt="Logo" src="{{ URL::asset('front/img/Logo.png')}}" class="h-45px logo"/>
+            <img alt="Logo" src="{{ URL::asset('front/img/logo-white.png')}}" class="h-90px logo"/>
         </a>
         <!--end::Logo-->
     </div>

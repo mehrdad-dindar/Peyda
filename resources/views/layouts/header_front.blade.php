@@ -15,7 +15,7 @@
         <!-- Logo container-->
         <div>
             <a class="logo" href="{{ route('index') }}">
-                <img src="{{ URL::asset('main/images/Logo_light.png')}}" height="45" alt="">
+                <img src="{{ URL::asset('front/img/logo-colored-1.png')}}" height="60" alt="">
             </a>
         </div>
         <ul class="buy-button list-inline mb-0">

@@ -3,7 +3,7 @@
     <div class="left-side-content-area d-flex align-items-center">
         <!-- Mobile Logo -->
         <div class="mobile-logo mr-3 mr-sm-4">
-            <a href="master.blade.php"><img src="{{ URL::asset('admin/img/core-img/peydaSmallLogo.png')}}" alt="آرم موبایل"></a>
+            <a href="{{ route('index') }}"><img src="{{ URL::asset('front/img/faveicon.png')}}"></a>
         </div>
 
         <!-- Triggers -->
