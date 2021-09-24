@@ -119,7 +119,7 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
     public static function getFullNameAttribute(User $user)
     {
         $full_name = ucfirst($user->f_name) . ' ' . ucfirst($user->l_name);
-        return $full_name != ' ' ? $full_name : null;
+        return $full_name != ' ' ? $full_name : 'کاربر عزیز';
     }
 
     public function userrequests()

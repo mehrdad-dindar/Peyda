@@ -3,10 +3,10 @@
 namespace App\Providers;
 
 
-use App\Models\FlashMessage;
 use App\Models\Mobile_warranty;
 use App\Observers\AdminWarrantyObserver;
 use Illuminate\Support\ServiceProvider;
+use Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \Schema::defaultStringLength(191);
+        Schema::defaultStringLength(191);
         Mobile_warranty::observe(AdminWarrantyObserver::class);
     }
 }
