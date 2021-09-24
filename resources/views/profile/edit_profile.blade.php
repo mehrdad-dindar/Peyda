@@ -258,8 +258,8 @@
                             <div class="col-lg-6 fv-row">
                                 {{--<input type="text" class="example1" />--}}
                                 <input type="hidden" value="{{$v = Verta::instance(auth()->user()->birthday)}}">
-                                <input class="form-control form-control-solid" id="birthday"
-                                       value="@if(auth()->user()->birthday != null){{ $v->format('Y-n-j') }}@endif"
+                                <input class="form-control @error('birthday') is-invalid @enderror form-control-solid" id="birthday"
+                                       value="@if(auth()->user()->birthday != null){{ \App\Helpers\Helpers::toPersianNumOnly($v->format('Y/n/j')) }}@endif"
                                        placeholder="--/--/----"/>
                                 <input type="hidden" name="birthday_tmp" id="birthday_tmp"/>
                             </div>
@@ -297,7 +297,7 @@
                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar">
                                         <i class="bi bi-pencil-fill fs-7"></i>
                                         <!--begin::Inputs-->
-                                        <input type="file" value="{{auth()->user()->melli_card}}" name="melli_card" accept=".png, .jpg, .jpeg">
+                                        <input type="file" class="@error('melli_card') is-invalid @enderror" value="{{auth()->user()->melli_card}}" name="melli_card" accept=".png, .jpg, .jpeg">
                                         <input type="hidden" name="melli_card_remove">
                                         <!--end::Inputs-->
                                     </label>
@@ -338,7 +338,7 @@
                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar">
                                         <i class="bi bi-pencil-fill fs-7"></i>
                                         <!--begin::Inputs-->
-                                        <input type="file" name="melli_card_back" accept=".png, .jpg, .jpeg">
+                                        <input type="file" name="melli_card_back" class="@error('melli_card_back') is-invalid @enderror" accept=".png, .jpg, .jpeg">
                                         <input type="hidden" name="melli_card_back_remove">
                                         <!--end::Inputs-->
                                     </label>
@@ -375,7 +375,7 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="tel" name="phone_num"
-                                       class="disabled-input form-control form-control-lg form-control-solid"
+                                       class="disabled-input @error('phone_num') is-invalid @enderror form-control form-control-lg form-control-solid"
                                        @if($flag==1) disabled @endif
                                        placeholder="Phone number"
                                        value="{{auth()->user()->phone_num}}"/>
@@ -390,10 +390,10 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row ">
-                                <select name="city" id="city" aria-label="Select a city"
+                                <select name="city_id" id="city_id" aria-label="Select a city"
                                         data-control="select2"
                                         data-placeholder="استان محل سکونت خود را انتخاب کنید"
-                                        class="disabled-input form-select form-select-solid form-select-lg fw-bold"
+                                        class="disabled-input @error('city_id') is-invalid @enderror form-select form-select-solid form-select-lg fw-bold"
                                         @if($flag==1) disabled @endif>
                                     <option value="">انتخاب استان</option>
                                     @foreach($cities as $city)
@@ -412,7 +412,7 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="text" name="address"
-                                       class="disabled-input form-control form-control-lg form-control-solid"
+                                       class="disabled-input @error('address') is-invalid @enderror form-control form-control-lg form-control-solid"
                                        @if($flag==1) disabled @endif
                                        value="{{auth()->user()->address}}">
                             </div>
@@ -429,7 +429,7 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="text" name="postal_code"
-                                       class="disabled-input form-control form-control-lg form-control-solid"
+                                       class="disabled-input @error('postal_code') is-invalid @enderror form-control form-control-lg form-control-solid"
                                        @if($flag==1) disabled @endif
                                        value="{{auth()->user()->postal_code}}">
                             </div>
@@ -445,7 +445,7 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="text" name="email"
-                                       class="disabled-input form-control form-control-lg form-control-solid" placeholder="ایمیل"
+                                       class="disabled-input @error('email') is-invalid @enderror form-control form-control-lg form-control-solid" placeholder="ایمیل"
                                        @if($flag==1) disabled @endif
                                        value="{{auth()->user()->email}}">
                             </div>
@@ -466,7 +466,7 @@
                                 <select name="phone_brand_id" id="phone_brand" aria-label="Select a Country"
                                         data-control="select2"
                                         data-placeholder="برند گوشی خود را انتخاب کنید"
-                                        class="disabled-input form-select form-select-solid form-select-lg fw-bold"
+                                        class="disabled-input @error('phone_brand_id') is-invalid @enderror form-select form-select-solid form-select-lg fw-bold"
                                         @if($flag==1) disabled @endif>
                                     <option value="">انتخاب برند گوشی</option>
                                     @foreach($phone_brands as $brand)
@@ -494,18 +494,37 @@
                                 <select name="phone_model_id" id="phone_model" aria-label="Select a Country"
                                         data-control="select2"
                                         data-placeholder="مدل گوشی خود را انتخاب کنید"
-                                        class="disabled-input form-select form-select-solid form-select-lg fw-bold"
+                                        class="disabled-input @error('phone_model_id') is-invalid @enderror form-select form-select-solid form-select-lg fw-bold"
                                         @if($flag==1) disabled @endif>
                                     <option value="">انتخاب مدل گوشی</option>
                                     @foreach($phone_models as $model)
                                         @if(auth()->user()->phone_model!=null)
                                             @if(auth()->user()->phone_model->phone_brand->id==$model->phone_brand_id)
                                             <option value="{{$model->id}}"
-                                                    @if(auth()->user()->phone_model_id == $model->id) selected @endif>{{$model->name}}</option>
+                                                    @if(auth()->user()->phone_model_other==null)
+                                                        @if(auth()->user()->phone_model_id == $model->id) selected @endif @endif>{{$model->name}}</option>
+
                                             @endif
                                         @endif
                                     @endforeach
+                                    <option value="others" @if(auth()->user()->phone_model_other!=null) selected @endif >سایر</option>
                                 </select>
+                                <input type='hidden' @if(auth()->user()->phone_model_other==null) value="{{auth()->user()->phone_model_id}}" @endif name='other_model' id='other_model'>
+
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="my_other_model row mb-6 @if(auth()->user()->phone_model_other==null) d-none @endif">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label fw-bold fs-6">مدل گوشی من</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-6 fv-row">
+                                <input type="text" name="other_phone_model" @if(auth()->user()->phone_model_other!=null) value="{{auth()->user()->phone_model_other}}" @endif
+                                       class="disabled-input form-control form-control-lg form-control-solid">
                             </div>
                             <!--end::Col-->
                         </div>
@@ -576,12 +595,28 @@
                         // Check the output of ajax call on firebug console
                         //console.log(data);
                         //alert(data);
-                        $('#phone_model').html(data);
+                        var obj = jQuery.parseJSON(data);
+                        $('#phone_model').html(obj[0]);
+                        //alert(data);
+                        $('#other_model').val(obj[1]);
+                        //alert($('#other_model').val())
                     }
                 });
 
             });
         });
+    </script>
+    <script>
+        $('#phone_model').on('change', function() {
+            var other_model = $('#phone_model').find(':selected').val();
+
+            if (other_model === 'others') {
+                $('.my_other_model').removeClass('d-none');
+            }else {
+                $('.my_other_model').addClass('d-none');
+            }
+        });
+
     </script>
 
 

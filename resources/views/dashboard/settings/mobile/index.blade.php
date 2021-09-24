@@ -39,9 +39,9 @@
                                                     <tr>
 
                                                         <td>{{sizeof($brands)+1}}</td>
-                                                        <td><input type="text" id="model_name" name="model_name" placeholder="نام"></td>
+                                                        <td><input type="text" id="brand_name" name="brand_name" class="form-control" placeholder="نام"></td>
                                                         <td>
-                                                            <button type="submit" class="btn btn-primary btn-sm" style="background-color: green; border-color: greenyellow;">ثبت</button>
+                                                            <button type="submit" class="btn btn-primary form-control btn-sm" style="background-color: green; border-color: greenyellow;">ثبت</button>
                                                         </td>
                                                     </tr>
                                             </tfoot>

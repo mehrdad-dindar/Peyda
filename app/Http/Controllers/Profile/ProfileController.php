@@ -61,6 +61,9 @@ class ProfileController extends Controller
         } else {
             $flag = 1;
         }
+
+        //dd($birthday_timestamp);
+
         return view('profile.edit_profile')
             ->with(['cities' => $cities,
                 'flag' => $flag,
@@ -106,19 +109,30 @@ class ProfileController extends Controller
             $melli_card_back->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/melli_cards/', $melli_card_back_name);
             $user->melli_card_back = $melli_card_back_name;
         }
+        if($request->get('phone_model_id')=='others'){
+            $phone_model=$request['other_model'];
+            $other_model=$request['other_phone_model'];
+        }else{
+            $phone_model=$request['phone_model_id'];
+            $other_model=null;
+        }
 
 
         //dd($request->all());
         $user->f_name = $request['f_name'];
         $user->l_name = $request['l_name'];
-        $user->birthday = $v;
+        if ($request['birthday_tmp']!=null) {
+            $user->birthday = $v;
+        }
+
         $user->melli_code = $request['melli_code'];
         $user->phone_num = $request['phone_num'];
-        $user->city_id = $request['city'];
+        $user->city_id = $request['city_id'];
         $user->address = $request['address'];
         $user->email = $request['email'];
         $user->postal_code = $request['postal_code'];
-        $user->phone_model_id = $request['phone_model_id'];
+        $user->phone_model_id = $phone_model;
+        $user->phone_model_other = $other_model;
         $user->save();
 
         $userrequest=UserRequest::query()
@@ -134,14 +148,17 @@ class ProfileController extends Controller
             $user->userrequests()->save($userrequest1);
         }
 
-
-        return back();
+        //dd($birthday_timestamp);
+        return back()->with('success' , 'اطلاعات با موفقیت تغییر یافت.');
 
     }
 
     public function mobile_change(Request $request)
     {
 
+        $options=[];
+        $array=array();
+        $html='';
         $id = $request->get('id');
         if (isset($id)) {
             // Capture selected country
@@ -153,13 +170,22 @@ class ProfileController extends Controller
                 $model_id = $row->id;
                 $model_name = $row->name;
 
-                $html = "<option value='" . $model_id . "'>
+                $html .= "<option value='" . $model_id . "'>
                 " . $model_name . "</option>";
 
-                echo $html;
             }
+            $html .= "<option value='others'>سایر</option>";
+            array_push($options,$html);
+
+            $array = array(
+                'options' => $options,
+                'other_model' => $result[0]['id']
+        );
         }
-    }
+        $out = array_values($array);
+        return json_encode($out);
+
+      }
 
 
 }
