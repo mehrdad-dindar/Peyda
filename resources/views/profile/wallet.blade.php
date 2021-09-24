@@ -32,7 +32,7 @@
                                 <!--begin::Date-->
                                 <div class="fs-6 fw-bolder text-gray-700 text-nowrap">موجودی : <span
                                         class="badge badge-light-info fs-6"><span
-                                            class="peyda_price">{{Crypt::decryptString($wallet->value)}}</span> تومان</span>
+                                            class="peyda_price">{{\App\Helpers\Helpers::toPersianNum(Crypt::decryptString($wallet->value))}}</span> تومان</span>
                                 </div>
                                 <!--end::Date-->
                             </div>
@@ -43,7 +43,50 @@
                         <!--end::Separator-->
                         <!--begin::Wrapper-->
                         <div class="mb-0">
-                            <!--begin::Table wrapper-->
+                            @if ($errors->any())
+                                <div
+                                    class="alert alert-dismissible bg-light-danger border border-danger border-dashed d-flex flex-column flex-sm-row p-3 mb-10">
+                                    <!--begin::Icon-->
+                                    <span
+                                        class="svg-icon svg-icon-2hx svg-icon-danger me-4 mb-5 mb-sm-0"><svg
+                                            width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Stockholm-icons-/-General-/-Notifications1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path
+            d="M17,12 L18.5,12 C19.3284271,12 20,12.6715729 20,13.5 C20,14.3284271 19.3284271,15 18.5,15 L5.5,15 C4.67157288,15 4,14.3284271 4,13.5 C4,12.6715729 4.67157288,12 5.5,12 L7,12 L7.5582739,6.97553494 C7.80974924,4.71225688 9.72279394,3 12,3 C14.2772061,3 16.1902508,4.71225688 16.4417261,6.97553494 L17,12 Z"
+            id="Combined-Shape" fill="#000000"></path>
+        <rect id="Rectangle-23" fill="#000000" opacity="0.3" x="10" y="16" width="4" height="4" rx="2"></rect>
+    </g>
+</svg>
+</span>
+                                    <!--end::Icon-->
+
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex flex-column pe-0 ps-sm-10">
+                                        <!--begin::Title-->
+                                        <h5 class="mb-1">لطفا موارد زیر را بررسی فرمایید !</h5>
+                                        <!--end::Title-->
+                                        <ul class="mt-5 text-danger">
+                                        @foreach ($errors->all() as $error)
+                                            <!--begin::Content-->
+                                                <li>{{$error}}</li>
+                                                <!--end::Content-->
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    <!--end::Wrapper-->
+
+                                    <!--begin::Close-->
+                                    <button type="button"
+                                            class="position-absolute position-sm-relative m-2 m-sm-0 top-0 start-0 btn btn-icon me-sm-auto"
+                                            data-bs-dismiss="alert">
+                                        <i class="bi bi-x fs-1 text-danger"></i>
+                                    </button>
+                                    <!--end::Close-->
+                                </div>
+                        @endif
+                        <!--begin::Table wrapper-->
                             <div class="table-responsive mb-10">
                                 <!--begin::Table-->
                                 <table class="table g-5 gs-0 mb-0 fw-bolder text-gray-700" data-kt-element="items">
@@ -134,7 +177,7 @@
                                     <!--end::Title=-->
                                     <!--begin::Value=-->
                                     <td class="@if((int)Crypt::decryptString($i->value) < 0) text-danger @else text-success @endif">
-                                        <span class="peyda_price">{{(int)Crypt::decryptString($i->value)}}</span> تومان
+                                        <span class="peyda_price">{{\App\Helpers\Helpers::toPersianNum((int)Crypt::decryptString($i->value))}}</span> تومان
                                     </td>
                                     <!--end::Value=-->
                                     <!--begin::Payment method=-->
@@ -201,9 +244,26 @@
 @endsection
 @section('custom_js')
     <script>
-        $('#price').keyup(function () {
-            var ccprice = $('#price').val();
+        $('#price').on('keyup' ,function () {
+            var ccprice = $(this).val();
             $('#total-price').text(ccprice).number(true, 0);
+            ccprice = ccprice // Replace the ".00" that we automatically add
+                .toString()
+                .replace(/\D/g,'') // Replace all that is not a number by nothing
+                .replace(/,/g, "") // Replace privous comma by nothing
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ","); // And here the magic i don't really understand, but comes from a link that i send you ^^.
+
+            // Set the new val
+            $(this).val(ccprice);
+
+            // Now we want the cursor to be before the ".00", so we get the length minus the length of ".00", so 3
+            var strLength = ccprice.length;
+
+            // Be sure to focus the input
+            $(this).focus();
+
+            // Set the focus before the ".00"
+            $(this)[0].setSelectionRange(strLength, strLength);
         });
     </script>
     @if(isset($message) && $code != 100)

@@ -5,7 +5,7 @@
 <meta name="description" content="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"/>
 <meta name="keywords" content="yyyyyyyyyyyyyyyyyyyyyyy"/>
 <!-- favicon -->
-<link rel="shortcut icon" href="{{ URL::asset('main/images/favicon.ico')}}">
+<link rel="shortcut icon" href="{{ URL::asset('front/img/faveicon.png')}}">
 <!-- Bootstrap -->
 <link href="{{ URL::asset('main/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
 <!-- Icons -->

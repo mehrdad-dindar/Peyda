@@ -178,5 +178,6 @@ return [
         'fullname' => 'نام و نام خانوادگی',
         'melli_code' => 'کد ملی',
         'g-recaptcha-response' => 'کد امنیتی',
+        'price' => 'مبلغ',
     ],
 ];

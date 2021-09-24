@@ -2,7 +2,10 @@
 <div class="ecaps-sidemenu-area">
     <!-- Desktop Logo -->
     <div class="ecaps-logo">
-        <a href="{{ route('index') }}"><img class="desktop-logo" src="{{ URL::asset('admin/img/core-img/peydaAdminLogo.png')}}" alt="لوگوی دسک تاپ"> <img class="small-logo" src="admin/img/core-img/peydaSmallLogo.png" alt="آرم موبایل"></a>
+        <a href="{{ route('index') }}">
+            <img class="desktop-logo" src="{{ URL::asset('front/img/logo-white-1.png')}}" height="50">
+            <img class="small-logo" src="{{ URL::asset('front/img/faveicon.png')}}">
+        </a>
     </div>
 
     <!-- Side Nav -->

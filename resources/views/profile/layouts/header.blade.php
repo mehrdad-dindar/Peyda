@@ -24,9 +24,9 @@
         </div>
         <!--end::Aside mobile toggle-->
         <!--begin::Mobile logo-->
-        <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
+        <div class="d-flex align-items-center justify-content-center flex-grow-1 flex-lg-grow-0">
             <a href="{{ route('index') }}" class="d-lg-none">
-                <img alt="Logo" src="{{ URL::asset('front/img/Logo.png')}}" class="h-30px"/>
+                <img alt="Logo" src="{{ URL::asset('front/img/logo-colored-1.png')}}" class="h-30px"/>
             </a>
         </div>
         <!--end::Mobile logo-->

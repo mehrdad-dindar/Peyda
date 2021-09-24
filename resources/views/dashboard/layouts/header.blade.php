@@ -7,7 +7,7 @@
     <title>پنل مدیریت | @yield('title','page-title')</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="{{ URL::asset('admin/img/core-img/favicon.png') }}">
+    <link rel="icon" href="{{ URL::asset('front/img/faveicon.png')}}">
 
     <!-- These plugins only need for the run this page -->
     @yield('custom_head')

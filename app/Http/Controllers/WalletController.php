@@ -14,6 +14,7 @@ use Shetabit\Multipay\Exceptions\PurchaseFailedException;
 use Shetabit\Multipay\Exceptions\InvalidPaymentException;
 use Shetabit\Multipay\Invoice;
 use Shetabit\Payment\Facade\Payment;
+use SoapFault;
 
 class WalletController extends Controller
 {
@@ -24,10 +25,9 @@ class WalletController extends Controller
 
     public function index()
     {
-        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         $user_id = Auth::user()->id;
         $history = (new WalletHistoryController())->history($user_id);
-        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        $wallet = Wallet::where('user_id', auth()->id())->first();
         return view('profile.wallet')->with([
             'user' => auth()->user(),
             'history' => $history,
@@ -37,20 +37,28 @@ class WalletController extends Controller
 
     public function purchase(Request $request)
     {
+
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'price' => 'required|',
+        ]);
+        $user = Auth::user();
+        $wallet = Wallet::where('user_id','=', $user->id)->first();
+        $wallet_history = Wallet_history::where('user_id', $user->id)->orderBy('updated_at', 'desc')->first();
         try {
+            $price = str_replace(',','',$request->price);
+
             $wallethistory = new Wallet_history();
             $wallethistory->user_id = Auth::user()->id;
-            $wallethistory->value = Crypt::encryptString($request->price);
-            $wallethistory->title = $request['title'];
+            $wallethistory->value = Crypt::encryptString($price);
+            $wallethistory->title = $request->title;
             $wallethistory->save();
 
-            $title = $request->title;
-            $price = (int)$request->price;
             $user = Auth::user();
             $history = (new WalletHistoryController())->history($user->id);
 
             $invoice = new Invoice();
-            $invoice->amount($price);
+            $invoice->amount((int)$price);
 
             $paymentId = md5(uniqid());
             $transaction = $user->wallettransactions()->create([
@@ -60,36 +68,38 @@ class WalletController extends Controller
                 'peyment_id' => $paymentId,
             ]);
 
+
             $callbackUrl = route('walletPurchase.result', [$user->id, 'peyment_id' => $paymentId,]);
             $payment = Payment::callbackUrl($callbackUrl);
-
+            $payment->config('description', 'افزایش اعتبار کیف پول ' . $request->price .' تومان');
             $payment->purchase($invoice, function ($driver, $transactionid) use ($transaction) {
                 $transaction->transaction_id = $transactionid;
                 $transaction->save();
             });
-            /*dd($payment->pay()->render());*/
+
             return $payment->pay()->render();
-        } catch (PurchaseFailedException | Exception | \SoapFault $e) {
+        } catch (PurchaseFailedException | Exception | SoapFault $e) {
             $transaction->transaction_result = $e;
             $transaction->status = WalletTransaction::STATUS_FAILED;
             $transaction->save();
-
-
-            return view('profile.wallet')->with([
+            return redirect()->route('wallet')->with([
                 'user' => auth()->user(),
                 'history' => $history,
-                'status' => 'failed'
+                'status' => 'failed',
+                'wallet' => $wallet
             ]);
         }
     }
 
     public function status_failed()
     {
+        $wallet = Wallet::where('user_id', auth()->id())->first();
         $user_id = Auth::user()->id;
         $history = (new WalletHistoryController())->history($user_id);
-        return view('profile.wallet')->with([
+        return redirect()->route('wallet')->with([
             'user' => auth()->user(),
             'history' => $history,
+            'wallet' => $wallet,
             'status' => 'failed'
         ]);
     }
@@ -98,7 +108,7 @@ class WalletController extends Controller
     {
         $user = Auth::user();
         $history = (new WalletHistoryController())->history($user->id);
-        $wallet_history = Wallet_history::where('user_id', '=', $user->id)->orderBy('updated_at', 'desc')->first();
+        $wallet_history = Wallet_history::where('user_id', $user->id)->orderBy('updated_at', 'desc')->first();
 
 
         if ($request->missing('peyment_id')) {
@@ -106,7 +116,7 @@ class WalletController extends Controller
         }
 
         $transaction = WalletTransaction::where('peyment_id', $request->peyment_id)->first();
-
+        /*dd($transaction->user_id <> Auth::id());*/
         if (empty($transaction)) {
             $this->status_failed();
         }
@@ -118,33 +128,31 @@ class WalletController extends Controller
         if ($transaction->status <> WalletTransaction::STATUS_PENDING) {
             $this->status_failed();
         }
-
-        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        $wallet = Wallet::where('user_id', auth()->id())->first();
         try {
             $receipt = Payment::amount((int)Crypt::decryptString($wallet_history->value))
                 ->transactionId($request->Authority)
                 ->verify();
+
             $transaction->transaction_result = $receipt;
             $transaction->status = WalletTransaction::STATUS_SUCCESS;
             $transaction->save();
+            $wallet_history->transaction_id =$transaction->id;
+            $wallet_history->status = WalletTransaction::STATUS_SUCCESS;
+            $wallet_history->save();
 
+
+            $new_wallet_val = '';
             if ($wallet->value != "0") {
                 $new_wallet_val = (int)Crypt::decryptString($wallet->value) + (int)Crypt::decryptString($wallet_history->value);
             } else {
                 $new_wallet_val = (int)Crypt::decryptString($wallet_history->value);
             }
 
-            $new_wallet_val = Crypt::encryptString($new_wallet_val);
-            Wallet::update([
-                'value' => Crypt::encryptString($new_wallet_val),
-            ]);
-            Wallet_history::update([
-                'transaction_id' => $transaction->id,
-                'status' => true
-            ]);
+            $wallet->value = Crypt::encryptString($new_wallet_val);
+            $wallet->save();
 
-
-            return view('profile.wallet')
+            return redirect()->route('wallet')
                 ->with([
                     'message' => "عملیات پرداخت با موفقیت انجام شد.",
                     'code' => 100,
@@ -153,7 +161,6 @@ class WalletController extends Controller
                     'wallet' => $wallet,
                 ]);
         } catch (Exception | \SoapFault | InvalidPaymentException $e) {
-
             if ($e->getCode() < 0) {
                 $transaction->status = WalletTransaction::STATUS_FAILED;
                 $transaction->transaction_result = [
@@ -168,7 +175,7 @@ class WalletController extends Controller
                 /*
                  * For manage error use this code ****
                  * */
-                return view('profile.wallet')
+                return redirect()->route('wallet')
                     ->with([
                         'message' => $e->getMessage(),
                         'code' => $e->getCode(),

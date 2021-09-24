@@ -77,7 +77,7 @@ class PaymentController extends Controller
                 $mobilewarranty->status_id = 8;
                 $mobilewarranty->save();
 
-                return view('profile.bimeh_all')->with([
+                return redirect()->route('bimeh_all')->with([
                     'status' => 'failed',
                     'wallet' => $wallet,
                     'warranties' => $warranties,
@@ -91,7 +91,7 @@ class PaymentController extends Controller
             if ($invoice->getAmount() > Crypt::decryptString($wallet->value)) {
                 $warranties = Mobile_warranty::where('owner_id',auth()->id())->orderBy('created_at', 'desc')->get();
 
-                return view('profile.bimeh_all')->with([
+                return redirect()->route('bimeh_all')->with([
                     'status' => 'failed',
                     'wallet' => $wallet,
                     'message' => $msg,
@@ -120,7 +120,7 @@ class PaymentController extends Controller
                 ]);
 
                 $msg = "سفارش شما با موفقیت ثبت شد.";
-                return view('profile.bimeh_all')->with([
+                return redirect()->route('bimeh_all')->with([
                     'status' => 'success',
                     'wallet' => $wallet,
                     'message' => $msg,
@@ -139,9 +139,11 @@ class PaymentController extends Controller
         $wallet_history->transaction_id = $transaction->id;
         $wallet_history->title = 'خرید فراگارانتی ' . $phone_model;
         $wallet_history->value = Crypt::encryptString(0-$amount);
-        $wallet_history->status = Transaction::STATUS_PENDING;
-        $wallet_history->save();
+        $wallet_history->status = Transaction::STATUS_SUCCESS;
+        $transaction->status = Transaction::STATUS_SUCCESS;
         $mobilewarranty->status_id = 5;
+        $transaction->save();
+        $wallet_history->save();
         $mobilewarranty->save();
     }
 
@@ -225,7 +227,7 @@ class PaymentController extends Controller
                  * */
                 $wallet_history->status = Transaction::STATUS_FAILED;
                 $wallet_history->update();
-                return view('profile.bimeh_all')
+                return redirect()->route('bimeh_all')
                     ->with([
                         'message' => $e->getMessage(),
                         'code' => $e->getCode(),
