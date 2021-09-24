@@ -77,10 +77,15 @@ class PaymentController extends Controller
                 $mobilewarranty->status_id = 8;
                 $mobilewarranty->save();
 
-                return redirect()->route('bimeh_all')->with([
+                /*return redirect()->route('bimeh_all')->with([
                     'status' => 'failed',
                     'wallet' => $wallet,
                     'warranties' => $warranties,
+                ]);*/
+                return view('')->with([
+                    'wallet' => $wallet,
+                    'status' => 'failed',
+
                 ]);
             }
         } else {
@@ -227,14 +232,19 @@ class PaymentController extends Controller
                  * */
                 $wallet_history->status = Transaction::STATUS_FAILED;
                 $wallet_history->update();
-                return redirect()->route('bimeh_all')
+                /*return redirect()->route('bimeh_all')
                     ->with([
                         'message' => $e->getMessage(),
                         'code' => $e->getCode(),
                         'user' => auth()->user(),
                         'wallet' => $wallet,
                         'warranties' => $warranties,
-                    ]);
+                    ]);*/
+                return view('profile.warranty.peyment_result')->with([
+                    'wallet' => $wallet,
+                    'status' => 'failed',
+                    'error'  => $e
+                ]);
             }
         }
 
