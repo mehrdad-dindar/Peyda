@@ -121,6 +121,15 @@ class WarrantyController extends Controller
     {
 
         $warranty=Mobile_warranty::find($id);
+        $warranty['phoneBrand']=$warranty->phone_model->phone_brand->name;
+
+        if($warranty->phone_model_other!=null){
+            $phoneModel=$warranty->phone_model_other;
+        }else{
+            $phoneModel=$warranty->phone_model->name;
+        }
+
+        $warranty['phoneModel']=$phoneModel;
 
         if($warranty!=null) {
 

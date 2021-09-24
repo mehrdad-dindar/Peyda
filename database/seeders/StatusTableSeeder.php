@@ -40,13 +40,13 @@ class StatusTableSeeder extends Seeder
 
         DB::table('statuses')->insert([
 
-            'text'                =>          'منتظر آپلود تصاویر',
+            'text'                =>          'در انتظار آپلود مدارک',
             'color'                =>          'warning text-dark'
         ]);
 
         DB::table('statuses')->insert([
 
-            'text'                =>          'منتظر تایید فراگارانتی',
+            'text'                =>          'در حال بررسی مدارک',
             'color'                =>          'primary'
         ]);
 

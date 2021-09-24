@@ -58,13 +58,13 @@
                                         <div class="form-group">
                                             <div class="checkbox d-inline">
                                                 <h3 name="h3_user_name" class="card-title">برند</h3>
-                                                <label for="h3_user_name" >{{$warranty->phone_model->phone_brand->name}}</label>
+                                                <label for="h3_user_name" >{{$warranty['phoneBrand']}}</label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="checkbox d-inline">
                                                 <h3 name="h3_user_name" class="card-title">مدل</h3>
-                                                <label for="h3_user_name" >{{$warranty->phone_model->name}}</label>
+                                                <label for="h3_user_name" >{{$warranty['phoneModel']}}</label>
                                             </div>
                                         </div>
                                         <div class="form-group">
