@@ -118,7 +118,8 @@
         <!--end::Aside Menu-->
     </div>
     <!--end::Aside menu-->
-    <!--begin::Footer-->
+    {{-- <!--begin::Footer-->
+
     <div class="aside-footer flex-column-auto" id="kt_aside_footer">
         <!--begin::Menu-->
         <div class="d-flex justify-content-center">
@@ -214,5 +215,7 @@
         </div>
         <!--end::Menu-->
     </div>
+
     <!--end::Footer-->
+    --}}
 </div>

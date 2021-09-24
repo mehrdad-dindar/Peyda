@@ -141,7 +141,7 @@
             <ul class="navigation-menu">
                 <li><a href="{{ route('index') }}" class="sub-menu-item">صفحه اصلی </a></li>
                 <li class="has-submenu parent-parent-menu-item">
-                    <a href="{{ route('shop') }}">محصولات </a><span class="menu-arrow"></span>
+                    <a href="javascript:void(0)">محصولات </a><span class="menu-arrow"></span>
                     <ul class="submenu megamenu">
                         <li>
                             <ul>
