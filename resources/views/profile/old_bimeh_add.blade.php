@@ -1,10 +1,10 @@
 @extends('layouts.profile_master')
-@section('title','افزودن بیمه نامه')
+@section('title','افزودن فراگارانتی')
 @section('content')
     <div class="contact-form2 justify-content-center p-4 Specifications">
         <form class="container mt-3" action="#">
 <div class="row">
-    <h1 class="fs-4 mb-4">فرم صدور بیمه نامه جدید</h1>
+    <h1 class="fs-4 mb-4">فرم صدور فراگارانتی جدید</h1>
 </div>
             {{--برند--}}
             <div class="row">

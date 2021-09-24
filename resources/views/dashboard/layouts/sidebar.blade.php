@@ -14,13 +14,13 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="active"><a href="{{ route('dashboard') }}"><i class="zmdi zmdi-view-dashboard"></i><span>داشبورد</span></a></li>
                     <li class="treeview">
-                        <a href="javascript:void(0)"><i class="zmdi zmdi-apps"></i> <span>بیمه نامه‌ها</span> <i class="fa fa-angle-left"></i></a>
+                        <a href="javascript:void(0)"><i class="zmdi zmdi-apps"></i> <span>فراگارانتی‌ها</span> <i class="fa fa-angle-left"></i></a>
                         <ul class="treeview-menu">
-                            <li><a href="{{ route('dashboard') }}/warranties/create">ایجاد بیمه نامه جدید</a></li>
-                            <li><a href="{{ route('dashboard') }}/warranties">بیمه نامه‌ها</a></li>
-                            <li><a href="{{ route('dashboard') }}/warranties/use">استفاده از بیمه نامه</a></li>
-                            <li><a href="project-details.html">استعلام بیمه نامه</a></li>
-                            <li><a href="calendar.html">انواع بیمه نامه‌ها</a></li>
+                            <li><a href="{{ route('dashboard') }}/warranties/create">ایجاد فراگارانتی جدید</a></li>
+                            <li><a href="{{ route('dashboard') }}/warranties">فراگارانتی‌ها</a></li>
+                            <li><a href="{{ route('dashboard') }}/warranties/use">استفاده از فراگارانتی</a></li>
+                            <li><a href="project-details.html">استعلام فراگارانتی</a></li>
+                            <li><a href="calendar.html">انواع فراگارانتی‌ها</a></li>
                         </ul>
                     </li>
                     <li class="treeview">

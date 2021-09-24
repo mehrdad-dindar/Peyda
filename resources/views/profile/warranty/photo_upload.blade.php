@@ -45,6 +45,8 @@
                                             <!--begin::Inputs-->
                                             <input type="file" class="disabled-input" name="{{$img->html_id}}"
                                                    accept=".png, .jpg, .jpeg"/>
+                                            <input type="hidden" class="disabled-input" name="type_{{$img->html_id}}" value="{{$img->id}}"
+                                                   accept=".png, .jpg, .jpeg"/>
                                             <input type="hidden" name="{{$img->html_id}}_remove"/>
                                             <!--end::Inputs-->
                                         </label>

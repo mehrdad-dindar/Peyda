@@ -17,6 +17,7 @@ class CreateMobileWarrantiesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('owner_id');
             $table->unsignedBigInteger('phone_model_id')->nullable;
+            $table->string('phone_model_other')->nullable();
             $table->timeStamp('expiry_date')->nullable();
             $table->string('activation_code')->unique();
             $table->timeStamp('activation_date')->nullable();

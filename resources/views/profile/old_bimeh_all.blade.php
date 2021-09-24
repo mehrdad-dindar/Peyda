@@ -1,5 +1,5 @@
 @extends('layouts.profile_master')
-@section('title','افزودن بیمه نامه')
+@section('title','افزودن فراگارانتی')
 @section('content')
     <div class="container">
         <div class="row">
@@ -11,7 +11,7 @@
                         <thead>
                         <tr>
                             <th scope="col">ردیف</th>
-                            <th scope="col">کد بیمه نامه</th>
+                            <th scope="col">کد فراگارانتی</th>
                             <th scope="col">برند</th>
                             <th scope="col">مدل</th>
                             <th scope="col">تاریخ انقضا</th>
@@ -43,8 +43,8 @@
                                             </div>
                                             <div class="modal-body">
                                                <a href="#"  class="btn btn-1" data-bs-dismiss="modal">استفاده از بیمنامه</a>
-                                                <a href="#"  class="btn btn-1" data-bs-dismiss="modal">انتقال بیمه نامه</a>
-                                                <a href="#"  class="btn btn-1" data-bs-dismiss="modal">تمدید بیمه نامه</a>
+                                                <a href="#"  class="btn btn-1" data-bs-dismiss="modal">انتقال فراگارانتی</a>
+                                                <a href="#"  class="btn btn-1" data-bs-dismiss="modal">تمدید فراگارانتی</a>
                                                 <a href="#"  class="btn btn-1" data-bs-dismiss="modal">چاپ</a>
                                             </div>
                                             <div class="modal-footer">
@@ -78,12 +78,12 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 <div class="modal-body">
                                                     <a href="#"  class="btn btn-1" data-bs-dismiss="modal">استفاده از بیمنامه</a>
-                                                    <a href="#"  class="btn btn-1" data-bs-dismiss="modal">انتقال بیمه نامه</a>
-                                                    <a href="#"  class="btn btn-1" data-bs-dismiss="modal">تمدید بیمه نامه</a>
+                                                    <a href="#"  class="btn btn-1" data-bs-dismiss="modal">انتقال فراگارانتی</a>
+                                                    <a href="#"  class="btn btn-1" data-bs-dismiss="modal">تمدید فراگارانتی</a>
                                                 </div>
                                             </div>
                                             <div class="modal-body">
-                                                انتقال بیمه نامه
+                                                انتقال فراگارانتی
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
@@ -116,12 +116,12 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 <div class="modal-body">
                                                     <a href="#"  class="btn btn-1" data-bs-dismiss="modal">استفاده از بیمنامه</a>
-                                                    <a href="#"  class="btn btn-1" data-bs-dismiss="modal">انتقال بیمه نامه</a>
-                                                    <a href="#"  class="btn btn-1" data-bs-dismiss="modal">تمدید بیمه نامه</a>
+                                                    <a href="#"  class="btn btn-1" data-bs-dismiss="modal">انتقال فراگارانتی</a>
+                                                    <a href="#"  class="btn btn-1" data-bs-dismiss="modal">تمدید فراگارانتی</a>
                                                 </div>
                                             </div>
                                             <div class="modal-body">
-                                              تمدید بیمه نامه
+                                              تمدید فراگارانتی
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
@@ -154,12 +154,12 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 <div class="modal-body">
                                                     <a href="#"  class="btn btn-1" data-bs-dismiss="modal">استفاده از بیمنامه</a>
-                                                    <a href="#"  class="btn btn-1" data-bs-dismiss="modal">انتقال بیمه نامه</a>
-                                                    <a href="#"  class="btn btn-1" data-bs-dismiss="modal">تمدید بیمه نامه</a>
+                                                    <a href="#"  class="btn btn-1" data-bs-dismiss="modal">انتقال فراگارانتی</a>
+                                                    <a href="#"  class="btn btn-1" data-bs-dismiss="modal">تمدید فراگارانتی</a>
                                                 </div>
                                             </div>
                                             <div class="modal-body">
-                                                تمدید بیمه نامه
+                                                تمدید فراگارانتی
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>

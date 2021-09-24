@@ -10,9 +10,12 @@ use App\Models\TransferWarranty;
 use App\Models\Wallet;
 use DateTime;
 use Illuminate\Http\Request;
+use App\Traits\Notifications;
 
 class TransferWarrantyController extends Controller
 {
+
+    use Notifications;
 
     public function index($id)
     {
@@ -94,6 +97,7 @@ class TransferWarrantyController extends Controller
 
     public function receive_store(Request $request)
     {
+        //dd('inja');
         $transfer_code = $request->get('transfer_code');
 
         $transfer = Mobile_warranty::query()->join('transfer_warranties as tw', 'tw.warranty_id', '=', 'mobile_warranties.id')->where([['tw.receiver_id', '=', null], ['mobile_warranties.transfer_code', '=', $transfer_code]])->whereRaw('DATEDIFF(Now(),tw.created_at)<1')->first(['mobile_warranties.*', 'tw.sender_id as sender_id']);
@@ -107,8 +111,9 @@ class TransferWarrantyController extends Controller
                     $notif = new Notification();
                     $notif->setSenderId(auth()->user()->id);
                     $notif->setType(4);
-                    $notif->setTitle('دریافت بیمه نامه');
-                    $notif->setBody('بیمه نامه مورد نظر با موفقیت دریافت شد.');
+                    $notif->setTitle('دریافت فراگارانتی');
+                    $notif->setBody('فراگارانتی مورد نظر با موفقیت دریافت شد.');
+                    $notif->setLink('/panel/warranty/mobile/');
 
                     $userNotif = new NotificationUser();
                     $userNotif->setReceiverId(auth()->user()->id);
@@ -118,8 +123,9 @@ class TransferWarrantyController extends Controller
                     $notif = new Notification();
                     $notif->setSenderId(auth()->user()->id);
                     $notif->setType(4);
-                    $notif->setTitle('انتقال بیمه نامه');
-                    $notif->setBody('بیمه نامه مورد نظر با موفقیت انتقال داده شد.');
+                    $notif->setTitle('انتقال فراگارانتی');
+                    $notif->setBody('فراگارانتی مورد نظر با موفقیت انتقال داده شد.');
+                    $notif->setLink('/panel/warranty/mobile/');
 
                     $userNotif = new NotificationUser();
                     $userNotif->setReceiverId($transfer->sender_id);
@@ -136,10 +142,12 @@ class TransferWarrantyController extends Controller
         } else {
             $msg = 'error';
         }
-        return view('profile.warranty.receive',
+        $wallet = Wallet::where('user_id', auth()->id())->first();
+        return redirect()->back()->with(
             [
                 $msg => 'done',
-                'transfer_code' => $transfer_code]);
+                'transfer_code' => $transfer_code,
+                'wallet'=>$wallet]);
     }
 
 }

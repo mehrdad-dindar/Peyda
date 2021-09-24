@@ -1,5 +1,5 @@
 @extends('profile.layouts.master')
-@section('title','افزودن بیمه نامه')
+@section('title','افزودن فراگارانتی')
 @section('content')
     <div id="kt_content_container" class="container">
         <!--begin::Card-->
@@ -251,7 +251,7 @@
 																				<span
                                                                                     class="fs-3 fw-bolder text-gray-900 mb-2 d-block">فراگارانتی تلفن همراه خودم</span>
 																				<span
-                                                                                    class="fw-bold fs-4 text-muted">{{ $myPhone->pb_name." / ".$myPhone->pm_name }}</span>
+                                                                                    class="fw-bold fs-4 text-muted">{{ $myPhoneName }}</span>
 																			</span>
                                                             <!--end::Info-->
 																		</span>
@@ -341,8 +341,21 @@
                                                                             value="{{$model->id}}">{{$model->name}}</option>
                                                                     @endforeach
                                                                 </select>
+                                                                <input type='hidden' name='other_model' id='other_model'>
+
                                                             </div>
                                                         </div>
+                                                    </div>
+
+                                                    <div class="my_other_model row mb-6 d-none">
+                                                        <!--begin::Label-->
+                                                        <label class="col-lg-4 col-form-label fw-bold fs-6">مدل گوشی جدید</label>
+                                                        <!--end::Label-->
+                                                        <!--begin::Col-->
+                                                        <div class="col-lg-6 fv-row">
+                                                            <input type="text" name="other_phone_model" class="disabled-input form-control form-control-lg form-control-solid">
+                                                        </div>
+                                                        <!--end::Col-->
                                                     </div>
                                                 </div>
                                                 <!--end::Input group-->
@@ -417,461 +430,6 @@
 
                                     <!--begin::Step 3-->
 
-                                    {{--<!--begin::Step 4-->
-                                    <div class="flex-column" data-kt-stepper-element="content">
-                                        <!--begin::Wrapper-->
-                                        <div class="w-100">
-                                            <!--begin::Heading-->
-                                            <div class="pb-12">
-                                                <!--begin::Title-->
-                                                <h1 class="fw-bolder text-dark">آپلود عکس موبایل</h1>
-                                                <!--end::Title-->
-                                                --}}{{--<!--begin::Title-->
-                                                <div class="text-muted fw-bold fs-4">If you need more info, please check
-                                                    <a href="#" class="link-primary">Project Guidelines</a></div>
-                                                <!--end::Title-->--}}{{--
-                                            </div>
-                                            <!--end::Heading-->
-
-
-                                            <div class="row justify-content-center">
-
-                                                <div class="col-md-6">
-                                                    <!--begin::عکس از پشت جعبه-->
-                                                    <div class="row  mb-6">
-                                                        <!--begin::Label-->
-                                                        <label class="col-lg-4 col-form-label fw-bold fs-6">عکس از پشت
-                                                            جعبه</label>
-                                                        <!--end::Label-->
-                                                        <!--begin::Col-->
-                                                        <div class="col-lg-8">
-                                                            <!--begin::Image input-->
-                                                            <div class="image-input image-input-outline"
-                                                                 data-kt-image-input="true"
-                                                                 style="background-image: url('')">
-                                                                <!--begin::Preview existing avatar-->
-                                                                <div class="image-input-wrapper w-125px h-125px"
-                                                                     style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @endif')"></div>
-                                                                <!--end::Preview existing avatar-->
-                                                                <!--begin::Label-->
-                                                                <label
-                                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                    data-kt-image-input-action="change"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="Change avatar">
-                                                                    <i class="bi bi-pencil-fill fs-7"></i>
-                                                                    <!--begin::Inputs-->
-                                                                    <input type="file" name="phone_b_photo"
-                                                                           accept=".png, .jpg, .jpeg"/>
-                                                                    <input type="hidden" name="phone_b_photo_remove"/>
-                                                                    <!--end::Inputs-->
-                                                                </label>
-                                                                <!--end::Label-->
-                                                                <!--begin::Cancel-->
-                                                                <span
-                                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                    data-kt-image-input-action="cancel"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="Cancel avatar">
-															<i class="bi bi-x fs-2"></i>
-														</span>
-                                                                <!--end::Cancel-->
-                                                                <!--begin::Remove-->
-                                                                <span
-                                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                    data-kt-image-input-action="remove"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="Remove avatar">
-															<i class="bi bi-x fs-2"></i>
-														</span>
-                                                                <!--end::Remove-->
-                                                            </div>
-
-                                                            <!--end::Image input-->
-                                                            <!--begin::Hint-->
-                                                            <div class="form-text">
-                                                                کد های IMEI باید قابل مشاهده باشند.
-                                                            </div>
-                                                            <!--end::Hint-->
-                                                        </div>
-                                                        <!--end::Col-->
-                                                    </div>
-                                                    <!--end::عکس از پشت جعبه-->
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <!--begin::عکس از روی جعبه-->
-                                                    <div class="row mb-6">
-                                                        <!--begin::Label-->
-                                                        <label class="col-lg-4 col-form-label fw-bold fs-6">عکس از روی
-                                                            جعبه</label>
-                                                        <!--end::Label-->
-                                                        <!--begin::Col-->
-                                                        <div class="col-lg-8">
-                                                            <!--begin::Image input-->
-                                                            <div class="image-input image-input-outline"
-                                                                 data-kt-image-input="true"
-                                                                 style="background-image: url('')">
-                                                                <!--begin::Preview existing avatar-->
-                                                                <div class="image-input-wrapper w-125px h-125px"
-                                                                     style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @endif')"></div>
-                                                                <!--end::Preview existing avatar-->
-                                                                <!--begin::Label-->
-                                                                <label
-                                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                    data-kt-image-input-action="change"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="Change avatar">
-                                                                    <i class="bi bi-pencil-fill fs-7"></i>
-                                                                    <!--begin::Inputs-->
-                                                                    <input type="file" name="phone_f_photo"
-                                                                           accept=".png, .jpg, .jpeg"/>
-                                                                    <input type="hidden" name="phone_f_photo_remove"/>
-                                                                    <!--end::Inputs-->
-                                                                </label>
-                                                                <!--end::Label-->
-                                                                <!--begin::Cancel-->
-                                                                <span
-                                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                    data-kt-image-input-action="cancel"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="Cancel avatar">
-															<i class="bi bi-x fs-2"></i>
-														</span>
-                                                                <!--end::Cancel-->
-                                                                <!--begin::Remove-->
-                                                                <span
-                                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                    data-kt-image-input-action="remove"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="Remove avatar">
-															<i class="bi bi-x fs-2"></i>
-														</span>
-                                                                <!--end::Remove-->
-                                                            </div>
-
-                                                            <!--end::Image input-->
-                                                            <!--begin::Hint-->
-                                                            <div class="form-text">
-                                                                کد های IMEI باید قابل مشاهده باشند.
-                                                            </div>
-                                                            <!--end::Hint-->
-                                                        </div>
-                                                        <!--end::Col-->
-                                                    </div>
-                                                    <!--end::عکس از روی جعبه-->
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <!--begin::  عکس از صفحه-->
-                                                    <div class="row mb-6">
-                                                        <!--begin::Label-->
-                                                        <label class="col-lg-4 col-form-label fw-bold fs-6">عکس از روی
-                                                            صفحه</label>
-                                                        <!--end::Label-->
-                                                        <!--begin::Col-->
-                                                        <div class="col-lg-8">
-                                                            <!--begin::Image input-->
-                                                            <div class="image-input image-input-outline"
-                                                                 data-kt-image-input="true"
-                                                                 style="background-image: url('')">
-                                                                <!--begin::Preview existing avatar-->
-                                                                <div class="image-input-wrapper w-125px h-125px"
-                                                                     style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @endif')"></div>
-                                                                <!--end::Preview existing avatar-->
-                                                                <!--begin::Label-->
-                                                                <label
-                                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                    data-kt-image-input-action="change"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="Change avatar">
-                                                                    <i class="bi bi-pencil-fill fs-7"></i>
-                                                                    <!--begin::Inputs-->
-                                                                    <input type="file" name="phone_screen_photo"
-                                                                           accept=".png, .jpg, .jpeg"/>
-                                                                    <input type="hidden"
-                                                                           name="phone_screen_photo_remove"/>
-                                                                    <!--end::Inputs-->
-                                                                </label>
-                                                                <!--end::Label-->
-                                                                <!--begin::Cancel-->
-                                                                <span
-                                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                    data-kt-image-input-action="cancel"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="Cancel avatar">
-															<i class="bi bi-x fs-2"></i>
-														</span>
-                                                                <!--end::Cancel-->
-                                                                <!--begin::Remove-->
-                                                                <span
-                                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                    data-kt-image-input-action="remove"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="Remove avatar">
-															<i class="bi bi-x fs-2"></i>
-														</span>
-                                                                <!--end::Remove-->
-                                                            </div>
-
-                                                            <!--end::Image input-->
-
-                                                        </div>
-                                                        <!--end::Col-->
-                                                    </div>
-                                                    <!--end::عکس از صفحه-->
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <!--begin::  عکس از پشت گوشی-->
-                                                    <div class="row mb-6">
-                                                        <!--begin::Label-->
-                                                        <label class="col-lg-4 col-form-label fw-bold fs-6">عکس از پشت
-                                                            گوشی</label>
-                                                        <!--end::Label-->
-                                                        <!--begin::Col-->
-                                                        <div class="col-lg-8">
-                                                            <!--begin::Image input-->
-                                                            <div class="image-input image-input-outline"
-                                                                 data-kt-image-input="true"
-                                                                 style="background-image: url('')">
-                                                                <!--begin::Preview existing avatar-->
-                                                                <div class="image-input-wrapper w-125px h-125px"
-                                                                     style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @endif')"></div>
-                                                                <!--end::Preview existing avatar-->
-                                                                <!--begin::Label-->
-                                                                <label
-                                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                    data-kt-image-input-action="change"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="Change avatar">
-                                                                    <i class="bi bi-pencil-fill fs-7"></i>
-                                                                    <!--begin::Inputs-->
-                                                                    <input type="file" name="phone_back_photo"
-                                                                           accept=".png, .jpg, .jpeg"/>
-                                                                    <input type="hidden"
-                                                                           name="phone_back_photo_remove"/>
-                                                                    <!--end::Inputs-->
-                                                                </label>
-                                                                <!--end::Label-->
-                                                                <!--begin::Cancel-->
-                                                                <span
-                                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                    data-kt-image-input-action="cancel"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="Cancel avatar">
-															<i class="bi bi-x fs-2"></i>
-														</span>
-                                                                <!--end::Cancel-->
-                                                                <!--begin::Remove-->
-                                                                <span
-                                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                    data-kt-image-input-action="remove"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="Remove avatar">
-															<i class="bi bi-x fs-2"></i>
-														</span>
-                                                                <!--end::Remove-->
-                                                            </div>
-
-                                                            <!--end::Image input-->
-
-                                                        </div>
-                                                        <!--end::Col-->
-                                                    </div>
-                                                    <!--end::عکس از پشت گوشی-->
-
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <!--begin::  عکس از کناره سمت راست گوشی -->
-                                                    <div class="row mb-6">
-                                                        <!--begin::Label-->
-                                                        <label class="col-lg-4 col-form-label fw-bold fs-6">عکس از کناره
-                                                            سمت راست
-                                                            گوشی</label>
-                                                        <!--end::Label-->
-                                                        <!--begin::Col-->
-                                                        <div class="col-lg-8">
-                                                            <!--begin::Image input-->
-                                                            <div class="image-input image-input-outline"
-                                                                 data-kt-image-input="true"
-                                                                 style="background-image: url('')">
-                                                                <!--begin::Preview existing avatar-->
-                                                                <div class="image-input-wrapper w-125px h-125px"
-                                                                     style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @endif')"></div>
-                                                                <!--end::Preview existing avatar-->
-                                                                <!--begin::Label-->
-                                                                <label
-                                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                    data-kt-image-input-action="change"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="Change avatar">
-                                                                    <i class="bi bi-pencil-fill fs-7"></i>
-                                                                    <!--begin::Inputs-->
-                                                                    <input type="file" name="phone_right_photo"
-                                                                           accept=".png, .jpg, .jpeg"/>
-                                                                    <input type="hidden"
-                                                                           name="phone_right_photo_remove"/>
-                                                                    <!--end::Inputs-->
-                                                                </label>
-                                                                <!--end::Label-->
-                                                                <!--begin::Cancel-->
-                                                                <span
-                                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                    data-kt-image-input-action="cancel"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="Cancel avatar">
-															<i class="bi bi-x fs-2"></i>
-														</span>
-                                                                <!--end::Cancel-->
-                                                                <!--begin::Remove-->
-                                                                <span
-                                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                    data-kt-image-input-action="remove"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="Remove avatar">
-															<i class="bi bi-x fs-2"></i>
-														</span>
-                                                                <!--end::Remove-->
-                                                            </div>
-
-                                                            <!--end::Image input-->
-
-                                                        </div>
-                                                        <!--end::Col-->
-                                                    </div>
-                                                    <!--end::عکس از کناره سمت راست گوشی-->
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <!--begin::  عکس از کناره سمت چپ گوشی -->
-                                                    <div class="row mb-6">
-                                                        <!--begin::Label-->
-                                                        <label class="col-lg-4 col-form-label fw-bold fs-6">عکس از کناره
-                                                            سمت چپ
-                                                            گوشی</label>
-                                                        <!--end::Label-->
-                                                        <!--begin::Col-->
-                                                        <div class="col-lg-8">
-                                                            <!--begin::Image input-->
-                                                            <div class="image-input image-input-outline"
-                                                                 data-kt-image-input="true"
-                                                                 style="background-image: url('')">
-                                                                <!--begin::Preview existing avatar-->
-                                                                <div class="image-input-wrapper w-125px h-125px"
-                                                                     style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @endif')"></div>
-                                                                <!--end::Preview existing avatar-->
-                                                                <!--begin::Label-->
-                                                                <label
-                                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                    data-kt-image-input-action="change"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="Change avatar">
-                                                                    <i class="bi bi-pencil-fill fs-7"></i>
-                                                                    <!--begin::Inputs-->
-                                                                    <input type="file" name="phone_left_photo"
-                                                                           accept=".png, .jpg, .jpeg"/>
-                                                                    <input type="hidden"
-                                                                           name="phone_left_photo_remove"/>
-                                                                    <!--end::Inputs-->
-                                                                </label>
-                                                                <!--end::Label-->
-                                                                <!--begin::Cancel-->
-                                                                <span
-                                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                    data-kt-image-input-action="cancel"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="Cancel avatar">
-															<i class="bi bi-x fs-2"></i>
-														</span>
-                                                                <!--end::Cancel-->
-                                                                <!--begin::Remove-->
-                                                                <span
-                                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                    data-kt-image-input-action="remove"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="Remove avatar">
-															<i class="bi bi-x fs-2"></i>
-														</span>
-                                                                <!--end::Remove-->
-                                                            </div>
-
-                                                            <!--end::Image input-->
-
-                                                        </div>
-                                                        <!--end::Col-->
-                                                    </div>
-                                                    <!--end::عکس از کناره سمت چپ گوشی-->
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <!--begin::  عکس از imei گوشی -->
-                                                    <div class="row mb-6">
-                                                        <!--begin::Label-->
-                                                        <label class="col-lg-4 col-form-label fw-bold fs-6">عکس از
-                                                            IMEI</label>
-                                                        <!--end::Label-->
-                                                        <!--begin::Col-->
-                                                        <div class="col-lg-8">
-                                                            <!--begin::Image input-->
-                                                            <div class="image-input image-input-outline"
-                                                                 data-kt-image-input="true"
-                                                                 style="background-image: url('')">
-                                                                <!--begin::Preview existing avatar-->
-                                                                <div class="image-input-wrapper w-125px h-125px"
-                                                                     style="background-image: url('@if(auth()->user()->avatar){{URL::asset('avatars').'/'.auth()->user()->avatar}} @endif')"></div>
-                                                                <!--end::Preview existing avatar-->
-                                                                <!--begin::Label-->
-                                                                <label
-                                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                    data-kt-image-input-action="change"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="Change avatar">
-                                                                    <i class="bi bi-pencil-fill fs-7"></i>
-                                                                    <!--begin::Inputs-->
-                                                                    <input type="file" name="imei_photo"
-                                                                           accept=".png, .jpg, .jpeg"/>
-                                                                    <input type="hidden" name="imei_photo_remove"/>
-                                                                    <!--end::Inputs-->
-                                                                </label>
-                                                                <!--end::Label-->
-                                                                <!--begin::Cancel-->
-                                                                <span
-                                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                    data-kt-image-input-action="cancel"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="Cancel avatar">
-															<i class="bi bi-x fs-2"></i>
-														</span>
-                                                                <!--end::Cancel-->
-                                                                <!--begin::Remove-->
-                                                                <span
-                                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                                    data-kt-image-input-action="remove"
-                                                                    data-bs-toggle="tooltip"
-                                                                    title="Remove avatar">
-															<i class="bi bi-x fs-2"></i>
-														</span>
-                                                                <!--end::Remove-->
-                                                            </div>
-
-                                                            <!--end::Image input-->
-                                                            <!--begin::Hint-->
-                                                            <div class="form-text">
-                                                                با استفاده از کد دستوری #06#* کد های IMEI گوشی خود را
-                                                                بدست
-                                                                آورید.
-                                                            </div>
-                                                            <!--end::Hint-->
-
-                                                        </div>
-                                                        <!--end::Col-->
-                                                    </div>
-                                                    <!--end::عکس از imei گوشی-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--end::Wrapper-->
-                                    </div>
-                                    <!--begin::Step 4-->--}}
-
-                                    <!--begin::Step 4-->
                                     <div class="flex-column" data-kt-stepper-element="content">
                                         <!--begin::Wrapper-->
                                         <div class="w-100">
@@ -1062,11 +620,23 @@
                     // Check the output of ajax call on firebug console
                     //console.log(data);
                     //alert(data);
-                        $('#new_phone_model').html(data);
+                    var obj = jQuery.parseJSON(data);
+                    $('#new_phone_model').html(obj[0]);
+                    //alert(data);
+                    $('#other_model').val(obj[1]);
                     }
                 });
 
             });
+        });
+        $('#new_phone_model').on('change', function() {
+            var other_model = $('#new_phone_model').find(':selected').val();
+
+            if (other_model === 'others') {
+                $('.my_other_model').removeClass('d-none');
+            }else {
+                $('.my_other_model').addClass('d-none');
+            }
         });
     </script>
     @if(isset($error))

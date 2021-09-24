@@ -55,7 +55,9 @@ Route::prefix('panel')->group(function () {
         Route::post('/increase_inventory', 'WalletController@purchase')->name('increase');
         Route::get('/increase_inventory/result', 'WalletController@result')->name('walletPurchase.result');
     });
+
     Route::post('/mobile_change', 'Profile\ProfileController@mobile_change');
+
     Route::prefix('warranty')->group(function () {
         Route::prefix('mobile')->group(function () {
             Route::get('/', 'MobileWarrantyController@bimeh_all')->name('bimeh_all');

@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.master')
-@section('title','استفاده از بیمه نامه ها')
+@section('title','استفاده از فراگارانتی ها')
 @section('content')
     {{dd($success)}}
     <div class="main-content">

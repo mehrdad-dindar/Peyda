@@ -40,14 +40,14 @@
                                 <td>
                                     <a class="text-dark fw-bolder text-hover-primary fs-6">{{$row->activation_code}}</a>
                                     <span
-                                        class="text-muted fw-bold text-muted d-block fs-7">{{$row->phone_model->phone_brand->name. " / " . $row->phone_model->name}}</span>
+                                        class="text-muted fw-bold text-muted d-block fs-7">{{$row->phone_name}}</span>
                                 </td>
                                 <td>
                                     <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"></a>
                                     <span class="text-muted fw-bold text-muted d-block fs-7">از زمان تایید</span>
                                 </td>
                                 <td>
-                                    <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">{{$row->id}}</a>
+                                    <span class="text-muted fw-bold text-muted d-block fs-7">یک سال پس از تایید</span>
                                 </td>
                                 <td class="text-dark fw-bolder text-hover-primary fs-6"><span
                                         class="peyda_price">{{$row->addition_fire_commitment_id != null ? number_format($row->Commitment_ceiling->price+$row->Fire_commitment_ceiling->price) : number_format($row->Commitment_ceiling->price)}}</span>

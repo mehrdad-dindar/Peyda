@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.master')
-@section('title','بیمه نامه ها')
+@section('title','فراگارانتی ها')
 @section('content')
     <div class="main-content">
         <!-- Table area Start -->
@@ -9,7 +9,7 @@
                     <div class="card">
                         <div class="card-content">
                             <div class="card-body">
-                                <h4 class="card-title">بیمه نامه های پیدا سرویس</h4>
+                                <h4 class="card-title">فراگارانتی های پیدا سرویس</h4>
                                 <!-- Table with outer spacing -->
                                 <div class="table-responsive">
                                     <table class="table">

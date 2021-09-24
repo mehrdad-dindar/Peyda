@@ -41,12 +41,12 @@
                         <span class="menu-icon me-0">
                             <i class="bi bi-file-earmark-lock fs-2"></i>
                         </span>
-                        <span class="menu-title">بیمه نامه</span>
+                        <span class="menu-title">فراگارانتی</span>
                     </span>
                     <div class="menu-sub menu-sub-dropdown w-225px px-1 py-4">
                         <div class="menu-item">
                             <div class="menu-content">
-                                <span class="menu-section fs-5 fw-bolder ps-1 py-1">بیمه نامه ها</span>
+                                <span class="menu-section fs-5 fw-bolder ps-1 py-1">فراگارانتی ها</span>
                             </div>
                         </div>
                         <div class="menu-item">
@@ -80,7 +80,7 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">انواع بیمه نامه</span>
+                                <span class="menu-title">انواع فراگارانتی</span>
                             </a>
                         </div>
                         <div class="menu-item">
@@ -93,7 +93,7 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">دریافت بیمه نامه</span>
+                                <span class="menu-title">دریافت فراگارانتی</span>
                             </a>
                         </div>
                         <div class="menu-item">
@@ -106,7 +106,7 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">استفاده از بیمه نامه</span>
+                                <span class="menu-title">استفاده از فراگارانتی</span>
                             </a>
                         </div>
                     </div>

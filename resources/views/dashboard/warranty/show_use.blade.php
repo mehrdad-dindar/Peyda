@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{URL::asset('admin/css/default-assets/notification.css')}}">
     <link rel="stylesheet" href="{{URL::asset('admin/css/default-assets/simplemde.min.css')}}">
 @endsection
-@section('title','استفاده از بیمه نامه')
+@section('title','استفاده از فراگارانتی')
 @section('content')
     <div class="main-content">
         <!-- Basic Form area Start -->
@@ -26,7 +26,7 @@
                     <div class="col-12 box-margin">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title mb-6">اطلاعات بیمه نامه</h5>
+                                <h5 class="card-title mb-6">اطلاعات فراگارانتی</h5>
                                 <span class="d-block mb-20"> </span>
                                 <div class="row">
                                     <div class="col-xl-4 col-md-6 ">
