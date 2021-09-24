@@ -55,7 +55,7 @@
                     <div class="card categories text-center rounded border-0" data-aos="fade-up" data-aos-duration="1000">
                         <div class="card-body">
                             <img src="{{ URL::asset('main/images/icon/chat.svg')}}" class="avatar avatar-small mb-3" alt="">
-                            <h5><a href="javascript:void(0)" class="text-dark">چت آنلاین </a></h5>
+                            <h5><a href="#" class="text-dark">چت آنلاین </a></h5>
                             <p class="text-muted mb-0 mt-3">اگر توزیع حروف و کلمات تصادفی باشد ، خواننده حواس او را پرت نمی
                                 کند از ساختن</p>
                         </div>
@@ -67,7 +67,7 @@
                         <div class="card-body">
                             <img src="{{ URL::asset('main/images/icon/customer-service.svg')}}"
                                  class="avatar avatar-small mb-3" alt="">
-                            <h5><a href="javascript:void(0)" class="text-dark">سوشیال </a></h5>
+                            <h5><a href="#" class="text-dark">سوشیال </a></h5>
                             <p class="text-muted mb-0 mt-3">اگر توزیع حروف و کلمات تصادفی باشد ، خواننده حواس او را پرت نمی
                                 کند از ساختن</p>
                         </div>
@@ -78,7 +78,7 @@
                     <div class="card categories text-center rounded border-0" data-aos="fade-up" data-aos-duration="1600">
                         <div class="card-body">
                             <img src="{{ URL::asset('main/images/icon/user.svg')}}" class="avatar avatar-small mb-3" alt="">
-                            <h5><a href="javascript:void(0)" class="text-dark">پورتال پشتیبانی</a></h5>
+                            <h5><a href="#" class="text-dark">پورتال پشتیبانی</a></h5>
                             <p class="text-muted mb-0 mt-3">اگر توزیع حروف و کلمات تصادفی باشد ، خواننده حواس او را پرت نمی
                                 کند از ساختن</p>
                         </div>
@@ -89,7 +89,7 @@
                     <div class="card categories text-center rounded border-0" data-aos="fade-up" data-aos-duration="1900">
                         <div class="card-body">
                             <img src="{{ URL::asset('main/images/icon/call.svg')}}" class="avatar avatar-small mb-3" alt="">
-                            <h5><a href="javascript:void(0)" class="text-dark">تلفن پشتیبانی </a></h5>
+                            <h5><a href="#" class="text-dark">تلفن پشتیبانی </a></h5>
                             <p class="text-muted mb-0 mt-3">اگر توزیع حروف و کلمات تصادفی باشد ، خواننده حواس او را پرت نمی
                                 کند از ساختن</p>
                         </div>
@@ -101,7 +101,7 @@
                         <div class="card-body">
                             <img src="{{ URL::asset('main/images/icon/writing.svg')}}" class="avatar avatar-small mb-3"
                                  alt="">
-                            <h5><a href="javascript:void(0)" class="text-dark">تیکت ها</a></h5>
+                            <h5><a href="#" class="text-dark">تیکت ها</a></h5>
                             <p class="text-muted mb-0 mt-3">اگر توزیع حروف و کلمات تصادفی باشد ، خواننده حواس او را پرت نمی
                                 کند از ساختن</p>
                         </div>
@@ -112,7 +112,7 @@
                     <div class="card categories text-center rounded border-0" data-aos="fade-up" data-aos-duration="2500">
                         <div class="card-body">
                             <img src="{{ URL::asset('main/images/icon/mail.svg')}}" class="avatar avatar-small mb-3" alt="">
-                            <h5><a href="javascript:void(0)" class="text-dark">نقل و قل</a></h5>
+                            <h5><a href="#" class="text-dark">نقل و قل</a></h5>
                             <p class="text-muted mb-0 mt-3">اگر توزیع حروف و کلمات تصادفی باشد ، خواننده حواس او را پرت نمی
                                 کند از ساختن</p>
                         </div>
@@ -120,6 +120,150 @@
                 </div><!--end col-->
             </div><!--end row-->
         </div><!--end container-->
+        <!--start shop section-->
+        <div class="container mt-100 mt-60">
+            <div class="row">
+                <div class="col-6">
+                    <h5 class="mb-0">محصولات اخیر </h5>
+                </div><!--end col-->
+                <div class="col-6 text-end">
+                    <a href="#" class="text-warning p-1 px-2 shadow rounded me-3">نمایش همه<i class="uil uil-angle-left-b"></i></a>
+                </div><!--end col-->
+            </div><!--end row-->
+
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-12 mt-4 pt-2">
+                    <div class="card shop-list border-0 position-relative">
+                        <ul class="label list-unstyled mb-0">
+                            <li><a href="#" class="badge badge-link rounded-pill bg-primary">جدید </a></li>
+                        </ul>
+                        <div class="shop-image position-relative overflow-hidden rounded shadow">
+                            <a href="shop-product-detail.html"><img src="{{ URL::asset('main/images/shop/product/s13.jpg')}}" class="img-fluid" alt=""></a>
+                            <a href="shop-product-detail.html" class="overlay-work">
+                                <img src="{{ URL::asset('main/images/shop/product/s-13.jpg')}}" class="img-fluid" alt="">
+                            </a>
+                            <ul class="list-unstyled shop-icons">
+                                <li><a href="#" class="btn btn-icon btn-pills btn-soft-danger"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart icons"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></a></li>
+                                <li class="mt-2"><a href="#" data-bs-toggle="modal" data-bs-target="#productview" class="btn btn-icon btn-pills btn-soft-primary"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye icons"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></a></li>
+                                <li class="mt-2"><a href="shop-cart.html" class="btn btn-icon btn-pills btn-soft-warning"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart icons"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></a></li>
+                            </ul>
+                        </div>
+                        <div class="card-body content pt-4 p-2">
+                            <a href="shop-product-detail.html" class="text-dark product-name h6">صندلی استراحت </a>
+                            <div class="d-flex justify-content-between mt-1">
+                                <h6 class="text-muted small fst-italic mb-0 mt-1 d-flex flex-column">16000 تومان<del class="text-danger ms-2">21000 تومان</del> </h6>
+                                <ul class="list-unstyled text-warning mb-0">
+                                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--end col-->
+
+                <div class="col-lg-3 col-md-6 col-12 mt-4 pt-2">
+                    <div class="card shop-list border-0 position-relative">
+                        <ul class="label list-unstyled mb-0">
+                            <li><a href="#" class="badge badge-link rounded-pill bg-primary">جدید </a></li>
+                        </ul>
+                        <div class="shop-image position-relative overflow-hidden rounded shadow">
+                            <a href="shop-product-detail.html"><img src="{{ URL::asset('main/images/shop/product/s14.jpg')}}" class="img-fluid" alt=""></a>
+                            <div class="overlay-work">
+                                <div class="py-2 bg-soft-dark rounded-bottom out-stock">
+                                    <h6 class="mb-0 text-center">تمام شده</h6>
+                                </div>
+                            </div>
+                            <ul class="list-unstyled shop-icons">
+                                <li class="mt-2"><a href="#" data-bs-toggle="modal" data-bs-target="#productview" class="btn btn-icon btn-pills btn-soft-primary"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye icons"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></a></li>
+                            </ul>
+                        </div>
+                        <div class="card-body content pt-4 p-2">
+                            <a href="shop-product-detail.html" class="text-dark product-name h6">کفش پاشنه بلند</a>
+                            <div class="d-flex justify-content-between mt-1">
+                                <h6 class="text-muted small fst-italic mb-0 mt-1 d-flex flex-column">21000 تومان <del class="text-danger ms-2">25000 تومان</del> </h6>
+                                <ul class="list-unstyled text-warning mb-0">
+                                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--end col-->
+
+                <div class="col-lg-3 col-md-6 col-12 mt-4 pt-2">
+                    <div class="card shop-list border-0 position-relative">
+                        <ul class="label list-unstyled mb-0">
+                            <li><a href="#" class="badge badge-link rounded-pill bg-primary">جدید </a></li>
+                        </ul>
+                        <div class="shop-image position-relative overflow-hidden rounded shadow">
+                            <a href="shop-product-detail.html"><img src="{{ URL::asset('main/images/shop/product/s15.jpg')}}" class="img-fluid" alt=""></a>
+                            <a href="shop-product-detail.html" class="overlay-work">
+                                <img src="{{ URL::asset('main/images/shop/product/s-15.jpg')}}" class="img-fluid" alt="">
+                            </a>
+                            <ul class="list-unstyled shop-icons">
+                                <li><a href="#" class="btn btn-icon btn-pills btn-soft-danger"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart icons"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></a></li>
+                                <li class="mt-2"><a href="#" data-bs-toggle="modal" data-bs-target="#productview" class="btn btn-icon btn-pills btn-soft-primary"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye icons"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></a></li>
+                                <li class="mt-2"><a href="shop-cart.html" class="btn btn-icon btn-pills btn-soft-warning"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart icons"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></a></li>
+                            </ul>
+                        </div>
+                        <div class="card-body content pt-4 p-2">
+                            <a href="shop-product-detail.html" class="text-dark product-name h6">تی شرت نایس </a>
+                            <div class="d-flex justify-content-between mt-1">
+                                <h6 class="text-muted small fst-italic mb-0 mt-1 d-flex flex-column">50000 تومان <span class="text-success ms-1">30% تخفیف</span> </h6>
+                                <ul class="list-unstyled text-warning mb-0">
+                                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--end col-->
+
+                <div class="col-lg-3 col-md-6 col-12 mt-4 pt-2">
+                    <div class="card shop-list border-0 position-relative">
+                        <ul class="label list-unstyled mb-0">
+                            <li><a href="#" class="badge badge-link rounded-pill bg-primary">جدید </a></li>
+                            <li><a href="#" class="badge badge-link rounded-pill bg-success">ویژه ها </a></li>
+                            <li><a href="#" class="badge badge-link rounded-pill bg-warning">ویژه </a></li>
+                        </ul>
+                        <div class="shop-image position-relative overflow-hidden rounded shadow">
+                            <a href="shop-product-detail.html"><img src="{{ URL::asset('main/images/shop/product/s16.jpg')}}" class="img-fluid" alt=""></a>
+                            <a href="shop-product-detail.html" class="overlay-work">
+                                <img src="{{ URL::asset('main/images/shop/product/s-16.jpg')}}" class="img-fluid" alt="">
+                            </a>
+                            <ul class="list-unstyled shop-icons">
+                                <li><a href="#" class="btn btn-icon btn-pills btn-soft-danger"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart icons"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></a></li>
+                                <li class="mt-2"><a href="#" data-bs-toggle="modal" data-bs-target="#productview" class="btn btn-icon btn-pills btn-soft-primary"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye icons"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></a></li>
+                                <li class="mt-2"><a href="shop-cart.html" class="btn btn-icon btn-pills btn-soft-warning"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart icons"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></a></li>
+                            </ul>
+                        </div>
+                        <div class="card-body content pt-4 p-2">
+                            <a href="shop-product-detail.html" class="text-dark product-name h6">ساعت</a>
+                            <div class="d-flex justify-content-between mt-1">
+                                <h6 class="text-muted small fst-italic mb-0 mt-1 d-flex flex-column">18000 تومان <del class="text-danger ms-2">22000 تومان</del> </h6>
+                                <ul class="list-unstyled text-warning mb-0">
+                                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                    <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div>
+        <!--end shop section-->
 
         <div class="container mt-100 mt-60">
             <div class="row justify-content-center">
@@ -188,9 +332,9 @@
                                             ، مانند اخبار اخیر در مورد فعالیت شرکت را به خود اختصاص دهد و می تواند اطلاعات
                                             شخصی مانند تنظیمات شخصی مشتری در ارتباطات را ذخیره کند..</p>
                                         <div class="mt-4" data-aos="fade-up" data-aos-duration="1800">
-                                            <a href="javascript:void(0)" class="text-primary p-1 px-2 shadow rounded me-3">ادامه
+                                            <a href="#" class="text-primary p-1 px-2 shadow rounded me-3">ادامه
                                                 مطلب <i class="uil uil-angle-left-b"></i></a>
-                                            <a href="javascript:void(0)" class="text-warning p-1 px-2 shadow rounded">وبلاگ
+                                            <a href="#" class="text-warning p-1 px-2 shadow rounded">وبلاگ
                                                 ها </a>
                                         </div>
                                     </div>
@@ -210,9 +354,9 @@
                                             ، مانند اخبار اخیر در مورد فعالیت شرکت را به خود اختصاص دهد و می تواند اطلاعات
                                             شخصی مانند تنظیمات شخصی مشتری در ارتباطات را ذخیره کند..</p>
                                         <div class="mt-4" data-aos="fade-up" data-aos-duration="1800">
-                                            <a href="javascript:void(0)" class="text-primary p-1 px-2 shadow rounded me-3">ادامه
+                                            <a href="#" class="text-primary p-1 px-2 shadow rounded me-3">ادامه
                                                 مطلب <i class="uil uil-angle-left-b"></i></a>
-                                            <a href="javascript:void(0)" class="text-warning p-1 px-2 shadow rounded">وبلاگ
+                                            <a href="#" class="text-warning p-1 px-2 shadow rounded">وبلاگ
                                                 ها </a>
                                         </div>
                                     </div>
@@ -244,9 +388,9 @@
                                             ، مانند اخبار اخیر در مورد فعالیت شرکت را به خود اختصاص دهد و می تواند اطلاعات
                                             شخصی مانند تنظیمات شخصی مشتری در ارتباطات را ذخیره کند..</p>
                                         <div class="mt-4" data-aos="fade-up" data-aos-duration="1800">
-                                            <a href="javascript:void(0)" class="text-primary p-1 px-2 shadow rounded me-3">ادامه
+                                            <a href="#" class="text-primary p-1 px-2 shadow rounded me-3">ادامه
                                                 مطلب <i class="uil uil-angle-left-b"></i></a>
-                                            <a href="javascript:void(0)" class="text-warning p-1 px-2 shadow rounded">وبلاگ
+                                            <a href="#" class="text-warning p-1 px-2 shadow rounded">وبلاگ
                                                 ها </a>
                                         </div>
                                     </div>
@@ -399,122 +543,99 @@
         </div><!--end container-->
         <!-- Testi end -->
 
-        <!-- Submit Ticket Start -->
-        <div class="container mt-100 mt-60">
-            <div class="row justify-content-center">
-                <div class="col-12 text-center">
-                    <div class="section-title mb-4 pb-2">
-                        <h4 class="title mb-4" data-aos="fade-up" data-aos-duration="1000">ارسال تیکت</h4>
-                        <p class="text-muted para-desc mb-0 mx-auto" data-aos="fade-up" data-aos-duration="1400">شروع به کار
-                            با <span class="text-primary fw-bold">لنـدریـک </span> که می تواند هر آنچه را که شما برای ایجاد
-                            آگاهی ، ایجاد ترافیک ، اتصال به آن نیاز دارید فراهم کند.</p>
-                    </div>
-                </div>
-            </div><!--end row-->
-
-            <div class="row align-items-center">
-                <div class="col-lg-6 col-md-5 col-12 mt-4 pt-2">
-                    <img src="{{ URL::asset('main/images/customer/customer.svg')}}" data-aos="fade-up"
-                         data-aos-duration="1400" class="img-fluid"
-                         alt="">
-                </div>
-
-                <div class="col-lg-6 col-md-7 col-12 mt-4 pt-2">
-                    <div class="card rounded shadow border-0 ms-lg-4" data-aos="fade-up" data-aos-duration="1400">
-                        <div class="card-body p-4">
-                            <form>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">نام شما: </label>
-                                            <div class="form-icon position-relative">
-                                                <i data-feather="user" class="fea icon-sm icons"></i>
-                                                <input name="name" id="name" type="text" class="form-control ps-5"
-                                                       placeholder="نام اول :">
-                                            </div>
-                                        </div>
-                                    </div><!--end col-->
-
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">ایمیل شما :</label>
-                                            <div class="form-icon position-relative">
-                                                <i data-feather="mail" class="fea icon-sm icons"></i>
-                                                <input name="email" id="email" type="email" class="form-control ps-5"
-                                                       placeholder="ایمیل شما :">
-                                            </div>
-                                        </div>
-                                    </div><!--end col-->
-
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">دلایل / دسته ها :</label>
-                                            <select class="form-control custom-select" id="Sortbylist-Shop">
-                                                <option>دسته بندی ها</option>
-                                                <option>سوالات عمومی</option>
-                                                <option>اشکالات</option>
-                                                <option>از راه دور</option>
-                                            </select>
-                                        </div>
-                                    </div><!--end col-->
-
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">موضوع : </label>
-                                            <div class="form-icon position-relative">
-                                                <i data-feather="book" class="fea icon-sm icons"></i>
-                                                <input name="subject" id="subject" class="form-control ps-5"
-                                                       placeholder="موضوع شما :">
-                                            </div>
-                                        </div>
-                                    </div><!--end col-->
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">آدرس : </label>
-                                            <div class="form-icon position-relative">
-                                                <i data-feather="globe" class="fea icon-sm icons"></i>
-                                                <input name="url" id="url" type="url" class="form-control ps-5"
-                                                       placeholder="آدرس: ">
-                                            </div>
-                                        </div>
-                                    </div><!--end col-->
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">توضیحات : </label>
-                                            <div class="form-icon position-relative">
-                                                <i data-feather="message-circle" class="fea icon-sm icons"></i>
-                                                <textarea name="comments" id="comments" rows="4" class="form-control ps-5"
-                                                          placeholder="مشکل خود را شرح دهید :"></textarea>
-                                            </div>
-                                        </div>
-                                    </div><!--end col-->
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="flexCheckDefault">
-                                                <label class="form-check-label" for="flexCheckDefault">تایید میکنم <a
-                                                        href="#" class="text-primary">قوانین سایت لنـدریـک را و تیکت را فعال
-                                                        میکنم</a></label>
-                                            </div>
-                                        </div>
-                                    </div><!--end col-->
-                                </div><!--end row-->
-
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <input type="submit" id="submit" name="send" class="btn btn-primary" value="ارسال ">
-                                    </div><!--end col-->
-                                </div><!--end row-->
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div><!--end container-->
-        <!-- Submit Ticket End -->
     </section><!--end section-->
     <!-- Communiaction Priority End -->
+    <!--start blog section-->
+    <section class="section bg-light">
+        <div class="container">
+            <div class="row align-items-center mb-4 pb-2">
+                <div class="col-lg-6">
+                    <div class="section-title text-center text-lg-start">
+                        <h6 class="text-primary">وبلاگ </h6>
+                        <h4 class="title mb-4 mb-lg-0">آخرین اخبار سایت <br> و بروز رسانی ها را دنبال کنید</h4>
+                    </div>
+                </div><!--end col-->
+
+                <div class="col-lg-6">
+                    <div class="section-title text-center text-lg-start">
+                        <p class="text-muted mb-0 mx-auto para-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus, aliquam amet atque autem consequuntur cumque cupiditate, dolorum ea iste laborum magnam nemo quae quas quibusdam quo sint voluptatem voluptatum.</p>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
+
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mt-4 pt-2">
+                    <div class="card blog rounded border-0 shadow">
+                        <div class="position-relative">
+                            <img src="{{ URL::asset('main/images/blog/01.jpg')}}" class="card-img-top rounded-top" alt="...">
+                            <div class="overlay rounded-top bg-dark"></div>
+                        </div>
+                        <div class="card-body content">
+                            <h5><a href="#" class="card-title title text-dark">برنامه های خود را به روش خود طراحی کنید</a></h5>
+                            <div class="post-meta d-flex justify-content-between mt-3">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="uil uil-heart me-1"></i>33</a></li>
+                                    <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="uil uil-comment me-1"></i>08</a></li>
+                                </ul>
+                                <a href="#" class="text-muted readmore">ادامه مطلب  <i class="uil uil-angle-left-b align-middle"></i></a>
+                            </div>
+                        </div>
+                        <div class="author">
+                            <small class="text-light user d-block"><i class="uil uil-user"></i> کالوین لورس</small>
+                            <small class="text-light date"><i class="uil uil-calendar-alt"></i> اردیبهشت 1400</small>
+                        </div>
+                    </div>
+                </div><!--end col-->
+
+                <div class="col-lg-4 col-md-6 tiny-slide mt-4 pt-2">
+                    <div class="card blog rounded border-0 shadow">
+                        <div class="position-relative">
+                            <img src="{{ URL::asset('main/images/blog/02.jpg')}}" class="card-img-top rounded-top" alt="...">
+                            <div class="overlay rounded-top bg-dark"></div>
+                        </div>
+                        <div class="card-body content">
+                            <h5><a href="#" class="card-title title text-dark">برنامه ها چگونه دنیای اطلاعات را تغییر می دهند</a></h5>
+                            <div class="post-meta d-flex justify-content-between mt-3">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="uil uil-heart me-1"></i>33</a></li>
+                                    <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="uil uil-comment me-1"></i>08</a></li>
+                                </ul>
+                                <a href="#" class="text-muted readmore">ادامه مطلب  <i class="uil uil-angle-left-b align-middle"></i></a>
+                            </div>
+                        </div>
+                        <div class="author">
+                            <small class="text-light user d-block"><i class="uil uil-user"></i> کالوین لورس</small>
+                            <small class="text-light date"><i class="uil uil-calendar-alt"></i> اردیبهشت 1400</small>
+                        </div>
+                    </div>
+                </div><!--end col-->
+
+                <div class="col-lg-4 col-md-6 tiny-slide mt-4 pt-2">
+                    <div class="card blog rounded border-0 shadow">
+                        <div class="position-relative">
+                            <img src="{{ URL::asset('main/images/blog/03.jpg')}}" class="card-img-top rounded-top" alt="...">
+                            <div class="overlay rounded-top bg-dark"></div>
+                        </div>
+                        <div class="card-body content">
+                            <h5><a href="#" class="card-title title text-dark">هوشمندترین برنامه ها برای تجارت و کار </a></h5>
+                            <div class="post-meta d-flex justify-content-between mt-3">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="uil uil-heart me-1"></i>33</a></li>
+                                    <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="uil uil-comment me-1"></i>08</a></li>
+                                </ul>
+                                <a href="#" class="text-muted readmore">ادامه مطلب  <i class="uil uil-angle-left-b align-middle"></i></a>
+                            </div>
+                        </div>
+                        <div class="author">
+                            <small class="text-light user d-block"><i class="uil uil-user"></i> کالوین لورس</small>
+                            <small class="text-light date"><i class="uil uil-calendar-alt"></i> اردیبهشت 1400</small>
+                        </div>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end container-->
+    </section>
+    <!--end blog section-->
 @endsection
 @section('custom_js')
 @endsection
