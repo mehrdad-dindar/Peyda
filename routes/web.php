@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\MobileWarrantyController;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use \App\Casts\EncryptCast;
 use \App\Http\Controllers\Admin\Shop\CategoryController;
 use \App\Http\Controllers\Admin\Shop\ProductController;
 use \App\Http\Controllers\Admin\Shop\DiscountController;
@@ -35,7 +35,7 @@ Route::get('/test/{id}', function ($id){
     $qrcode=QrCode::size(100)->generate(md5($warranty->id.' __ '.$warranty->created_at));
     return view('test',['qrcode'=>$qrcode]);*/
 
-    $user=\App\Models\User::find($id);
+    $user= User::find($id);
     return $user->notificationuser->notification_id;
 
 });
