@@ -138,7 +138,6 @@ return [
         'phone_model_id' => 'برند گوشی',
         'melli_card_back' => 'پشت کارت ملی',
         'birthday_tmp' => 'تاریخ تولد',
-        'birthday' => 'تاریخ تولد',
         'avatar' => 'آواتار',
         'address' => 'نشانی',
         'age' => 'سن',

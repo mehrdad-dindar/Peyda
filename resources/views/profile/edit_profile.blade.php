@@ -501,24 +501,29 @@
                                         @if(auth()->user()->phone_model!=null)
                                             @if(auth()->user()->phone_model->phone_brand->id==$model->phone_brand_id)
                                             <option value="{{$model->id}}"
-                                                    @if(auth()->user()->phone_model_id == $model->id) selected @endif>{{$model->name}}</option>
+                                                    @if(auth()->user()->phone_model_other==null)
+                                                        @if(auth()->user()->phone_model_id == $model->id) selected @endif @endif>{{$model->name}}</option>
+
                                             @endif
                                         @endif
                                     @endforeach
+                                    <option value="others" @if(auth()->user()->phone_model_other!=null) selected @endif >سایر</option>
                                 </select>
+                                <input type='hidden' @if(auth()->user()->phone_model_other==null) value="{{auth()->user()->phone_model_id}}" @endif name='other_model' id='other_model'>
+
                             </div>
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
 
                         <!--begin::Input group-->
-                        <div class="my_other_model row mb-6 d-none">
+                        <div class="my_other_model row mb-6 @if(auth()->user()->phone_model_other==null) d-none @endif">
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label fw-bold fs-6">مدل گوشی من</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
-                                <input type="text" name="other_phone_model"
+                                <input type="text" name="other_phone_model" @if(auth()->user()->phone_model_other!=null) value="{{auth()->user()->phone_model_other}}" @endif
                                        class="disabled-input form-control form-control-lg form-control-solid">
                             </div>
                             <!--end::Col-->
@@ -590,7 +595,11 @@
                         // Check the output of ajax call on firebug console
                         //console.log(data);
                         //alert(data);
-                        $('#phone_model').html(data);
+                        var obj = jQuery.parseJSON(data);
+                        $('#phone_model').html(obj[0]);
+                        //alert(data);
+                        $('#other_model').val(obj[1]);
+                        //alert($('#other_model').val())
                     }
                 });
 

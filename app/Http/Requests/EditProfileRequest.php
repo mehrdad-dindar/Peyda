@@ -46,7 +46,7 @@ class EditProfileRequest extends FormRequest
             $rules['melli_card_back']=['required','mimes:jpg,jpeg,png,mpeg','max:4096','min:5'];
         }
         if(User::find(auth()->user()->id)->birthday==null){
-            $rules['birthday']=['required'];
+            $rules['birthday_tmp']=['required'];
         }
         return $rules;
     }
