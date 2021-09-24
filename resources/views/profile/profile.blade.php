@@ -90,7 +90,8 @@
 														</span>
                                             <!--end::Svg Icon-->{{ auth()->user()->city->name }}</a>
                                     @endif
-                                    <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
+                                    @if(auth()->user()->email)
+                                    <a class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
                                         <!--begin::Svg Icon | path: icons/duotone/Communication/Mail-at.svg-->
                                         <span class="svg-icon svg-icon-4 me-1">
 															<svg xmlns="http://www.w3.org/2000/svg" width="24px"
@@ -101,6 +102,7 @@
 															</svg>
 														</span>
                                         <!--end::Svg Icon-->{{ auth()->user()->email }}</a>
+                                    @endif
                                 </div>
                                 <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
                                     <a href="#"
