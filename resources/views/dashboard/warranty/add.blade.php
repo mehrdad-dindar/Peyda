@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.master')
-@section('title','بیمه نامه جدید')
+@section('title','فراگارانتی جدید')
 @section('custom_head')
     <link rel="stylesheet" href="{{ URL::asset('admin/css/default-assets/notification.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('admin/js/dropify.min.css')}}">

@@ -121,11 +121,21 @@ class WarrantyController extends Controller
     {
 
         $warranty=Mobile_warranty::find($id);
+        $warranty['phoneBrand']=$warranty->phone_model->phone_brand->name;
+
+        if($warranty->phone_model_other!=null){
+            $phoneModel=$warranty->phone_model_other;
+        }else{
+            $phoneModel=$warranty->phone_model->name;
+        }
+
+        $warranty['phoneModel']=$phoneModel;
 
         if($warranty!=null) {
 
             $images=Helpers::getImageFromDb($warranty->images);
 
+            //dd($images);
             return view('dashboard.warranty.show', ['warranty' => $warranty, 'images' => $images]);
         }else{
             abort(404);
@@ -138,12 +148,17 @@ class WarrantyController extends Controller
         $user_id = $request->get('user_id');
         $warranty_id=$request->get('warranty_id');
         if ($status == 1) {
-            $descriptions = 'بیمه نامه شما تایید شده است.';
+            $descriptions = 'فراگارانتی شما تایید شده است.';
             Mobile_warranty::query()->where('id', '=', $warranty_id)->update([
                 'status_id' => Status::query()->where('text','فعال')->first()->id
             ]);
+            $done=1;
         } else {
             $descriptions = $request->get('descriptions');
+            Mobile_warranty::query()->where('id', '=', $warranty_id)->update([
+                'status_id' => 7
+            ]);
+            $done=0;
         }
         $admin_id = auth()->user()->id;
         $link = '/panel/warranty/mobile';
@@ -151,13 +166,23 @@ class WarrantyController extends Controller
         $notif=new Notification();
         $notif->setSenderId($admin_id);
         $notif->setType(2);
-        $notif->setTitle('بررسی بیمه نامه');
+        $notif->setTitle('بررسی فراگارانتی');
         $notif->setBody($descriptions);
 
         $userNotif=new NotificationUser();
         $userNotif->setReceiverId($user_id);
 
         $this->addNotif($notif,$userNotif);
+
+        $warranty=Mobile_warranty::find($warranty_id);
+
+        $userrequest=UserRequest::query()
+            ->where([['user_requestable_type','=','App\Models\Mobile_warranty'],
+                ['user_requestable_id','=',$warranty_id]])->first();
+
+        if($userrequest!=null){
+            $warranty->userrequests()->update(['updated_at'=>Carbon::now()->toDateTimeString(),'admin_id'=>$admin_id,'done'=>$done]);
+        }
 
         return redirect()->back()->with('success', 'تغییرات با موفقیت اعمال شد.');
     }
@@ -215,7 +240,7 @@ class WarrantyController extends Controller
         if($warranty!=null) {
 
             //dd('if');
-            $images=Helpers::getImageFromDb($warranty->wu_images);
+            $images=Helpers::getImageFromDb($warranty->images);
 
             //dd(print_r($images));
             return view('dashboard.warranty.show_use', ['use_warranty' => $warranty, 'images' => $images]);
@@ -232,7 +257,7 @@ class WarrantyController extends Controller
         $warranty_use_id=$request->get('warranty_use_id');
         if ($status == 1) {
             $percentage=$request->get('percentage');
-            $descriptions = 'استفاده از بیمه نامه شما تایید شده است.';
+            $descriptions = 'استفاده از فراگارانتی شما تایید شده است.';
             $warranty_use=WarrantyUse::query()->where('id', '=', $warranty_use_id)->update([
                 'percentage' => $percentage,
                 'status'=>true
@@ -252,13 +277,15 @@ class WarrantyController extends Controller
             ->where([['user_requestable_type','=','App\Models\WarrantyUse'],
                 ['user_requestable_id','=',$warranty_use_id]])->first();
 
+        $warranty_use=WarrantyUse::find($warranty_use_id);
         if($userrequest!=null){
             $warranty_use->userrequests()->update(['updated_at'=>Carbon::now()->toDateTimeString(),'admin_id'=>$admin_id,'done'=>$done]);
         }
+
         $notif=new Notification();
         $notif->setSenderId($admin_id);
         $notif->setType(3);
-        $notif->setTitle('بررسی استفاده از بیمه نامه');
+        $notif->setTitle('بررسی استفاده از فراگارانتی');
         $notif->setBody($descriptions);
         $notif->setLink($link);
 
@@ -268,6 +295,12 @@ class WarrantyController extends Controller
         $this->addNotif($notif,$userNotif);
 
         return redirect()->back()->with('success', 'تغییرات با موفقیت اعمال شد.');
+    }
+
+    public function waitingIndex()
+    {
+        return view('dashboard.warranty.waiting',
+            ['waitings'=>self::getWaitingWarranties()]);
     }
 
 }

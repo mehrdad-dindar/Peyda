@@ -1,5 +1,5 @@
 @extends('profile.layouts.master')
-@section('title','افزودن بیمه نامه')
+@section('title','افزودن فراگارانتی')
 @section('content')
     <!--begin::Container-->
     <div id="kt_content_container" class="container">
@@ -107,7 +107,7 @@
                                                     سرویس
                                                     <span class="badge badge-white fs-8">
 
-                                                        {{$invoice->phone_model->phone_brand->name . " / ".$invoice->phone_model->name}}
+                                                        {{$invoice->phone_name}}
 
                                                     </span>
                                                 </td>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\WarrantyController;
 use App\Http\Controllers\MobileWarrantyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -55,7 +56,9 @@ Route::prefix('panel')->group(function () {
         Route::post('/increase_inventory', 'WalletController@purchase')->name('increase');
         Route::get('/increase_inventory/result', 'WalletController@result')->name('walletPurchase.result');
     });
+
     Route::post('/mobile_change', 'Profile\ProfileController@mobile_change');
+
     Route::prefix('warranty')->group(function () {
         Route::prefix('mobile')->group(function () {
             Route::get('/', 'MobileWarrantyController@bimeh_all')->name('bimeh_all');
@@ -76,6 +79,10 @@ Route::prefix('panel')->group(function () {
             Route::get('/{invoice_id}/result', 'PaymentController@result')->name('purchase.result');
             Route::get('/upload-photo/{id}',[MobileWarrantyController::class , 'uploadPhoto'])->name('uploadPhoto');
             Route::post('/insert-photo/{mobile_warranty}',[MobileWarrantyController::class , 'insertPhotos'])->name('insertPhoto');
+            Route::get('/print',function (){
+                $wallet = \App\Models\Wallet::where('user_id',\auth()->user()->id)->first();
+                return view('profile.print',compact('wallet'));
+            });
         });
     });
 });
@@ -125,6 +132,7 @@ Route::prefix('dashboard')->middleware([CheckPermission::class. ':view-dashboard
     Route::get('/delete/role/{role}',[RoleController::class,'destroy'])->name('role-delete');
 
     Route::get('/warranties', 'Admin\WarrantyController@index');
+    Route::get('/warranties/waiting', [WarrantyController::class,'waitingIndex'])->name('waitingIndex');
     Route::get('/warranties/create', 'Admin\WarrantyController@create');
     Route::get('/warranties/show/{id}', 'Admin\WarrantyController@show');
     Route::get('/warranties/use', 'Admin\WarrantyController@useWarranty');

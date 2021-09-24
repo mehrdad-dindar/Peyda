@@ -31,9 +31,9 @@
                             <th class="min-w-150px">شناسه</th>
                             <th class="min-w-120px">مدل گوشی</th>
                             <th class="min-w-140px">موضوع</th>
-                            <th class="min-w-120px">درصد</th>
+                            <th class="min-w-120px">درصد استفاده</th>
                             <th class="min-w-120px">وضعیت</th>
-                            <th class="min-w-100px text-end">تغییرات</th>
+                            <th class="min-w-100px text-end">اعمال تغییرات</th>
                         </tr>
                         </thead>
                         <!--end::Table head-->
@@ -60,13 +60,16 @@
 
                                 <td>
                                     @if($use->status==1)
-                                        <span class="badge badge-light-success">فعال</span>
+                                        <span class="badge badge-light-success">تایید شده</span>
+                                    @elseif($use->status=='')
+                                        <span class="badge badge-warning text-dark">در حال بررسی جهت استفاده از خدمات</span>
                                     @else
-                                        <span class="badge badge-danger">غیر فعال</span>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_{{$use->id}}" class="badge badge-danger">رد شده</a>
+
                                     @endif
                                 </td>
                                 <td class="text-end">
-                                    @if($use->status==0)
+                                    @if($use->status!='' && $use->status!=1)
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_{{$use->id}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                             <!--begin::Svg Icon | path: icons/duotone/General/Settings-1.svg-->
                                             <span class="svg-icon svg-icon-3">

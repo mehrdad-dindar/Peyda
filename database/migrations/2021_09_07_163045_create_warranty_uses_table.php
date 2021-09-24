@@ -20,7 +20,7 @@ class CreateWarrantyUsesTable extends Migration
             $table->string('images');
             $table->integer('percentage')->default(0);
             $table->unsignedBigInteger('warranty_id');
-            $table->boolean('status')->default(0);
+            $table->boolean('status')->nullable();
             $table->boolean('deleted_at')->default(0);
             $table->foreign('warranty_id')
                 ->references('id')

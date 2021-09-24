@@ -22,16 +22,16 @@ class NotificationTypeTableSeeder extends Seeder
 
         DB::table('notification_types')->insert([
 
-            'name'                =>          'بیمه نامه'
+            'name'                =>          'فراگارانتی'
         ]);
 
         DB::table('notification_types')->insert([
 
-            'name'                =>          'استفاده از بیمه نامه'
+            'name'                =>          'استفاده از فراگارانتی'
         ]);
         DB::table('notification_types')->insert([
 
-            'name'                =>          'انتقال بیمه نامه'
+            'name'                =>          'انتقال فراگارانتی'
         ]);
     }
 }

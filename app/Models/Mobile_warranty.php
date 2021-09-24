@@ -18,6 +18,7 @@ class Mobile_warranty extends Model
         'expiry_date',
         'activation_code',
         'activation_date',
+        'phone_model_other',
         'transfer_code',
         'commitment_ceiling_id',
         'fire_gift',

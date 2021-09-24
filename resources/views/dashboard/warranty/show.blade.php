@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{URL::asset('admin/css/default-assets/notification.css')}}">
     <link rel="stylesheet" href="{{URL::asset('admin/css/default-assets/simplemde.min.css')}}">
 @endsection
-@section('title','بیمه نامه')
+@section('title','فراگارانتی')
 @section('content')
     <div class="main-content">
         <!-- Basic Form area Start -->
@@ -26,7 +26,7 @@
                     <div class="col-12 box-margin">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title mb-6">اطلاعات بیمه نامه</h5>
+                                <h5 class="card-title mb-6">اطلاعات فراگارانتی</h5>
                                 <span class="d-block mb-20"> </span>
                                 <div class="row">
                                     <div class="col-xl-4 col-md-6 ">
@@ -58,13 +58,13 @@
                                         <div class="form-group">
                                             <div class="checkbox d-inline">
                                                 <h3 name="h3_user_name" class="card-title">برند</h3>
-                                                <label for="h3_user_name" >{{$warranty->phone_model->phone_brand->name}}</label>
+                                                <label for="h3_user_name" >{{$warranty['phoneBrand']}}</label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="checkbox d-inline">
                                                 <h3 name="h3_user_name" class="card-title">مدل</h3>
-                                                <label for="h3_user_name" >{{$warranty->phone_model->name}}</label>
+                                                <label for="h3_user_name" >{{$warranty['phoneModel']}}</label>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -91,11 +91,13 @@
                                                     <h4 class="card-title mb-1">عکس ها </h4>
                                                     <div class="row lightgallery">
                                                         <!-- Single Gallery Area -->
-                                                        @foreach($images as $image)
-                                                            <a class="single_gallery_item col-sm-6 col-xl-3 mb-30"
+                                                        @if(sizeof($images)>0)
+                                                            @foreach($images as $image)
+                                                                <a class="single_gallery_item col-sm-6 col-xl-3 mb-30"
                                                                href="{{URL::asset('uploads/warranty_images').'/'.$image->URL}}">
                                                                 <img src="{{URL::asset('uploads/warranty_images').'/'.$image->URL}}" alt=""></a>
                                                         @endforeach
+                                                    @endif
                                                         <!-- Single Gallery Area -->
                                                     </div>
                                                 </div>
