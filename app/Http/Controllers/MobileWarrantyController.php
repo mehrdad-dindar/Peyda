@@ -11,7 +11,9 @@ use App\Models\Mobile_warranty;
 use App\Models\MobileImage;
 use App\Models\Phone_brand;
 use App\Models\Phone_model;
+use App\Models\UserRequest;
 use App\Models\Wallet;
+use Carbon\Carbon;
 use Crypt;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
@@ -221,10 +223,25 @@ class MobileWarrantyController extends Controller
 
         if ($key == 6) {
 
+            $mobileWarranty=Mobile_warranty::find($id);
+
             Mobile_warranty::query()->where('id', $id)->update([
                 'images' => $imageList,
                 'status_id' => 6
             ]);
+
+            $userrequest=UserRequest::query()
+                ->where([['user_requestable_type','=','App\Models\Mobile_warranty'],
+                    ['user_requestable_id','=',$id]])->first();
+
+            if($userrequest!=null){
+                $mobileWarranty->userrequests()->update(['updated_at'=>Carbon::now()->toDateTimeString()]);
+                //dd('if');
+            }else{
+
+                $userrequest1= new UserRequest();
+                $mobileWarranty->userrequests()->save($userrequest1);
+            }
 
             return redirect(route('bimeh_all'))->with(['success' => 'عکس های موبایل با موفقیت آپلود شد.']);
 

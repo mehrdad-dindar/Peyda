@@ -17,8 +17,9 @@
                         <a href="javascript:void(0)"><i class="zmdi zmdi-apps"></i> <span>فراگارانتی‌ها</span> <i class="fa fa-angle-left"></i></a>
                         <ul class="treeview-menu">
                             <li><a href="{{ route('dashboard') }}/warranties/create">ایجاد فراگارانتی جدید</a></li>
-                            <li><a href="{{ route('dashboard') }}/warranties">فراگارانتی‌ها</a></li>
-                            <li><a href="{{ route('dashboard') }}/warranties/use">استفاده از فراگارانتی</a></li>
+                            <li><a href="{{ route('dashboard') }}/warranties">همه فراگارانتی‌ها</a></li>
+                            <li><a href="{{ route('waitingIndex') }}"><span>در انتظار تایید</span><span class="badge badge-pill badge-danger" style="display: inline;width: max-content;flex: unset;">{{sizeof(\App\Http\Controllers\Controller::getWaitingWarranties())}}</span></a></li>
+                            <li><a href="{{ route('dashboard') }}/warranties/use"><span>استفاده از فراگارانتی</span><span class="badge badge-pill badge-danger" style="display: inline;width: max-content;flex: unset;">{{sizeof(\App\Http\Controllers\Controller::getUsesWarraties())}}</span></a></li>
                             <li><a href="project-details.html">استعلام فراگارانتی</a></li>
                             <li><a href="calendar.html">انواع فراگارانتی‌ها</a></li>
                         </ul>

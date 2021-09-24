@@ -91,11 +91,13 @@
                                                     <h4 class="card-title mb-1">عکس ها </h4>
                                                     <div class="row lightgallery">
                                                         <!-- Single Gallery Area -->
-                                                        @foreach($images as $image)
-                                                            <a class="single_gallery_item col-sm-6 col-xl-3 mb-30"
+                                                        @if(sizeof($images)>0)
+                                                            @foreach($images as $image)
+                                                                <a class="single_gallery_item col-sm-6 col-xl-3 mb-30"
                                                                href="{{URL::asset('uploads/warranty_images').'/'.$image->URL}}">
                                                                 <img src="{{URL::asset('uploads/warranty_images').'/'.$image->URL}}" alt=""></a>
                                                         @endforeach
+                                                    @endif
                                                         <!-- Single Gallery Area -->
                                                     </div>
                                                 </div>

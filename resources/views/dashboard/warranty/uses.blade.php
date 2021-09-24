@@ -1,7 +1,6 @@
 @extends('dashboard.layouts.master')
 @section('title','استفاده از فراگارانتی ها')
 @section('content')
-    {{dd($success)}}
     <div class="main-content">
         <!-- Table area Start -->
         <div class="container-fluid">
@@ -16,6 +15,7 @@
                                     <table class="table">
                                         <thead>
                                         <tr>
+                                            <th>ردیف</th>
                                             <th>موضوع</th>
                                             <th>بازه قیمت</th>
                                             <th>مدل گوشی</th>
@@ -24,10 +24,11 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($uses as $use)
+                                        @foreach($uses as $key=>$use)
                                             @if($use->userrequests()->exists())
                                                 @if($use->userrequests->toArray()[0]['done']==0)
                                                     <tr>
+                                                        <td>{{ $key+1}}</td>
                                                         <td>{{ $use-> title}}</td>
 
                                                         <td>{{$use->Mobile_warranty->Commitment_ceiling-> price_range}}</td>

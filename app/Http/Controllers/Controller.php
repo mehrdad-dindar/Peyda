@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mobile_warranty;
 use App\Models\NotificationUser;
+use App\Models\Status;
+use App\Models\WarrantyUse;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -50,6 +53,20 @@ class Controller extends BaseController
             ->get();
 
         return $notification;
+    }
+
+    public static function getWaitingWarranties()
+    {
+        $waitings=Mobile_warranty::query()->where('status_id','=',6)->get();
+
+        return $waitings;
+    }
+
+    public static function getUsesWarraties()
+    {
+        $uses=WarrantyUse::query()->where('status','=',1)->get();
+
+        return $uses;
     }
 
 }

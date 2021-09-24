@@ -185,7 +185,7 @@ class UseWarrantyController extends Controller
                 ->with([
                     'useWarranty' => $useWarranty,
                     'wallet' => $wallet,
-                    $msg=>'msg'
+                    $msg=>'msg',
                 ]);
 
         else
