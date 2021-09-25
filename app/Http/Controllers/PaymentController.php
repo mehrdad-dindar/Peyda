@@ -77,10 +77,15 @@ class PaymentController extends Controller
                 $mobilewarranty->status_id = 8;
                 $mobilewarranty->save();
 
-                return redirect()->route('bimeh_all')->with([
+                /*return redirect()->route('bimeh_all')->with([
                     'status' => 'failed',
                     'wallet' => $wallet,
                     'warranties' => $warranties,
+                ]);*/
+                return view('')->with([
+                    'wallet' => $wallet,
+                    'status' => 'failed',
+
                 ]);
             }
         } else {
@@ -204,13 +209,20 @@ class PaymentController extends Controller
             $mobilewarranty->save();
 
 
-            return redirect()->route('bimeh_all')->with([
+            /*return redirect()->route('bimeh_all')->with([
                     'message' => "عملیات پرداخت با موفقیت انجام شد.",
                     'code' => 100,
                     'user' => auth()->user(),
                     'wallet' => $wallet,
                     'warranties' => $warranties,
-                ]);
+                ]);*/
+            /*dd($transaction->toArray());*/
+            return view('profile.warranty.peyment_result')->with([
+                'wallet' => $wallet,
+                'status' => 'success',
+                'transaction'=>$transaction,
+
+            ]);
         } catch (Exception | InvalidPaymentException $e) {
             if ($e->getCode() < 0) {
                 $transaction->status = Transaction::STATUS_FAILED;
@@ -227,14 +239,11 @@ class PaymentController extends Controller
                  * */
                 $wallet_history->status = Transaction::STATUS_FAILED;
                 $wallet_history->update();
-                return redirect()->route('bimeh_all')
-                    ->with([
-                        'message' => $e->getMessage(),
-                        'code' => $e->getCode(),
-                        'user' => auth()->user(),
-                        'wallet' => $wallet,
-                        'warranties' => $warranties,
-                    ]);
+                return view('profile.warranty.peyment_result')->with([
+                    'wallet' => $wallet,
+                    'status' => 'failed',
+                    'error'  => $e
+                ]);
             }
         }
 

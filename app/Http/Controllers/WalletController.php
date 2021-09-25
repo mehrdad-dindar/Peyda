@@ -152,14 +152,19 @@ class WalletController extends Controller
             $wallet->value = Crypt::encryptString($new_wallet_val);
             $wallet->save();
 
-            return redirect()->route('wallet')
+            /*return redirect()->route('wallet')
                 ->with([
                     'message' => "عملیات پرداخت با موفقیت انجام شد.",
                     'code' => 100,
                     'user' => auth()->user(),
                     'history' => $history,
                     'wallet' => $wallet,
-                ]);
+                ]);*/
+            return view('profile.peyment_result')->with([
+                'wallet' => $wallet,
+                'status' => 'success',
+                'transaction'=>$transaction,
+            ]);
         } catch (Exception | \SoapFault | InvalidPaymentException $e) {
             if ($e->getCode() < 0) {
                 $transaction->status = WalletTransaction::STATUS_FAILED;
@@ -175,14 +180,19 @@ class WalletController extends Controller
                 /*
                  * For manage error use this code ****
                  * */
-                return redirect()->route('wallet')
+                /*return redirect()->route('wallet')
                     ->with([
                         'message' => $e->getMessage(),
                         'code' => $e->getCode(),
                         'user' => auth()->user(),
                         'history' => $history,
                         'wallet' => $wallet,
-                    ]);
+                    ]);*/
+                return view('profile.peyment_result')->with([
+                    'wallet' => $wallet,
+                    'status' => 'failed',
+                    'error'  => $e,
+                ]);
             }
         }
 
