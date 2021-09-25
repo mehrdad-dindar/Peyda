@@ -92,7 +92,7 @@ class HTMLPDFController extends Controller
         $pdf->Ln();
 
 // Persian and English content
-        $tbl_header = '<table style="width: 638px;text-align: right;" cellspacing="0">';
+        $tbl_header = '<table style="width: 638px;text-align: right; padding: 10px;" cellspacing="0">';
         $tbl_footer = '</table>';
         $tbl = '';
 
@@ -104,21 +104,22 @@ class HTMLPDFController extends Controller
         <td>'.$warranty->activation_code.'<span style="color: purple;">شناسه: </span></td>
     </tr>
     <tr>
-        <td>
-
-        </td>
-    </tr>
-    <tr>
         <td>'.Helpers::toPersianNumOnly($warranty->remained_days).'<span style="color: purple;">تعداد روزهای باقیمانده: </span></td>
         <td>'.Helpers::toPersianNumOnly($warranty->usable_percentage).'%<span style="color: purple;">درصد باقیمانده: </span> </td>
     </tr>
     <tr>
-        <td>
-
-        </td>
+        <td>'.Helpers::toPersianNumOnly($warranty->User->phone_num).'<span style="color: purple;">شماره همراه: </span></td>
+        <td>'.$warranty->User->getFullNameAttribute(auth()->user()).'<span style="color: purple;">نام کاربر:  </span></td>
+    </tr>
+    <tr>
+        <td>'.Helpers::toPersianNumOnly($warranty->User->postal_code).'<span style="color: purple;">کد پستی: </span></td>
+        <td>'.Helpers::toPersianNumOnly($warranty->User->melli_code).'<span style="color: purple;">کد ملی:  </span></td>
     </tr>
     <tr>
         <td colspan="2" style="text-align: center"> '.$warranty->phoneName.'<span style="color: purple;">برند و مدل گوشی: </span></td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align: center"> '.$warranty->User->city->name.' - '.$warranty->User->address.'<span style="color: purple;">آدرس: </span></td>
     </tr>
 
 ';
