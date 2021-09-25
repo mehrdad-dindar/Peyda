@@ -20,10 +20,10 @@
                             شوید.</p>
                     </div>
                     <div class="subcribe-form mt-4 pt-2" data-aos="fade-up" data-aos-duration="2200">
-                        <form>
+                        <form action="{{ route('validation') }}" method="post">
+                            @csrf
                             <div class="mb-0">
-                                <input type="text" id="help" name="name" class="form-control bg-white rounded-pill"
-                                       required="" placeholder="مرکز کمک را جستجو کنید">
+                                <input type="text" id="validation_id" name="validation_id" class="form-control bg-white rounded-pill" required placeholder="استعلام فراگارانتی پیداسرویس">
                                 <button type="submit" class="btn btn-pills btn-primary">جستجو</button>
                             </div>
                         </form>

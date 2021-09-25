@@ -110,7 +110,7 @@
                                     <!--begin::Icon-->
                                     <div class="stepper-icon w-40px h-40px">
                                         <i class="stepper-check fas fa-check"></i>
-                                        <span class="stepper-number">3</span>
+                                        <span class="stepper-number">2</span>
                                     </div>
                                     <!--begin::Icon-->
 
@@ -163,7 +163,7 @@
                                     <!--begin::Icon-->
                                     <div class="stepper-icon w-40px h-40px">
                                         <i class="stepper-check fas fa-check"></i>
-                                        <span class="stepper-number">4</span>
+                                        <span class="stepper-number">3</span>
                                     </div>
                                     <!--begin::Icon-->
 

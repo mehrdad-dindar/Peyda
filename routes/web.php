@@ -29,6 +29,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 /* front */
 Route::get('/', 'HomeController@index')->name('index');
+Route::post('/validation', 'HomeController@validation')->name('validation');
 Route::get('/test/{id}', function ($id){
 
     //dd($id);
