@@ -10,7 +10,7 @@
             text-align: center;
         }
          body {
-             font-family: 'examplefont', Tahoma;
+             font-family: 'examplefont', Arial;
          }
     </style>
 </head>

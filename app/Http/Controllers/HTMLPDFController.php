@@ -6,6 +6,7 @@ use App\Helpers\Helpers;
 use App\Models\Mobile_warranty;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
+use App\Helpers\MyCustomPDFWithWatermark;
 use TCPDF;
 use TCPDF_FONTS;
 use URL;
@@ -18,6 +19,33 @@ class HTMLPDFController extends Controller
     {
         $this->middleware(['auth']);
     }*/
+//    public function htmlPdf($id)
+//    {
+//        $warranty=self::getPrintWarranty($id)['warranty'];
+//        $uses=self::getPrintWarranty($id)['uses'];
+//
+//        $view = \View::make('profile.warranty.printWarranty',compact(['warranty','uses']));
+//        $html = $view->render();
+//
+//        $pdf = new TCPDF();
+//
+//        $fontname=TCPDF_FONTS::addTTFfont($_SERVER["DOCUMENT_ROOT"]."front/ttf/HiwebNazanin.ttf", '', '', 32);
+//
+//        $pdf->SetFont($fontname);
+//        $lg = Array();
+//        $lg['a_meta_charset'] = 'UTF-8';
+//        $lg['a_meta_dir'] = 'rtl';
+//        $lg['a_meta_language'] = 'fa';
+//        $lg['w_page'] = 'page';
+//        $pdf->setRTL(true);
+//
+//        $pdf->SetTitle('Hello World');
+//        $pdf->AddPage();
+//// set some language-dependent strings (optional)
+//        $pdf->setLanguageArray($lg);
+//        $pdf->writeHTML($html, true, false, true, false, '');
+//        $pdf->Output('hello_world.pdf');
+//    }
 
     public function htmlPdf($id)
     {
@@ -27,7 +55,7 @@ class HTMLPDFController extends Controller
         $uses=self::getPrintWarranty($id)['uses'];
         if($warranty->owner_id==auth()->user()->id) {
 
-        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+            $pdf = new MyCustomPDFWithWatermark(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // set document information
         $pdf->SetCreator(PDF_CREATOR);
@@ -69,7 +97,7 @@ class HTMLPDFController extends Controller
 // ---------------------------------------------------------
 
 // set font
-        $pdf->SetFont('dejavusans', '', 12);
+        $pdf->SetFont('HiwebNazanin', '', 12);
 
 // add a page
         $pdf->AddPage();
@@ -105,7 +133,7 @@ class HTMLPDFController extends Controller
     </tr>
     <tr>
         <td>'.Helpers::toPersianNumOnly($warranty->remained_days).'<span style="color: purple;">تعداد روزهای باقیمانده: </span></td>
-        <td>'.Helpers::toPersianNumOnly($warranty->usable_percentage).'%<span style="color: purple;">درصد باقیمانده: </span> </td>
+        <td>%'.Helpers::toPersianNumOnly($warranty->usable_percentage).'<span style="color: purple;">درصد باقیمانده: </span> </td>
     </tr>
     <tr>
         <td>'.Helpers::toPersianNumOnly($warranty->User->phone_num).'<span style="color: purple;">شماره همراه: </span></td>
@@ -116,10 +144,10 @@ class HTMLPDFController extends Controller
         <td>'.Helpers::toPersianNumOnly($warranty->User->melli_code).'<span style="color: purple;">کد ملی:  </span></td>
     </tr>
     <tr>
-        <td colspan="2" style="text-align: center"> '.$warranty->phoneName.'<span style="color: purple;">برند و مدل گوشی: </span></td>
+        <td colspan="2" style="text-align: right"> '.$warranty->phoneName.'<span style="color: purple;">برند و مدل گوشی: </span></td>
     </tr>
     <tr>
-        <td colspan="2" style="text-align: center"> '.$warranty->User->city->name.' - '.$warranty->User->address.'<span style="color: purple;">آدرس: </span></td>
+        <td colspan="2" style="text-align: right"> '.$warranty->User->city->name.' - '.$warranty->User->address.'<span style="color: purple;">آدرس: </span></td>
     </tr>
 
 ';
