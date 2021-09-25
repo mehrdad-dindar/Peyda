@@ -11,7 +11,7 @@
                 <div class="card-header">
                     <h3 class="card-title text-danger">خطا در پرداخت</h3>
                     <div class="card-toolbar">
-                        <a href="{{route('bimeh_all')}}" type="button"
+                        <a href="{{route('wallet')}}" type="button"
                            class="btn btn-sm btn-light-danger border border-danger">
                             بازگشت و ادامه
                         </a>
@@ -19,14 +19,14 @@
                 </div>
                 <div class="card-body p-0">
                     <div class="row">
-                        <div class="card-p d-flex align-items-center text-center col-md-3">
-                    <span class="svg-icon w-100 svg-icon-danger me-4 mb-5 mb-sm-0">
-                        <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                        <div class="card-p align-items-center text-center col-md-3">
+                            <span class="svg-icon svg-icon-5x svg-icon-danger me-4 mb-5 mb-sm-0">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <circle id="Oval-5" fill="#000000" opacity="0.3" cx="12" cy="12" r="10"></circle>
         <rect id="Rectangle-9" fill="#000000" x="11" y="7" width="2" height="8" rx="1"></rect>
         <rect id="Rectangle-9-Copy" fill="#000000" x="11" y="16" width="2" height="2" rx="1"></rect>
 </svg>
-                    </span>
+                            </span>
                         </div>
                         <div class="card-p col-md-9">
                             <p>
@@ -38,7 +38,7 @@
                                 <strong dir="ltr">{{$error->getCode()}}</strong>
                             </p>
                             <p>
-                                شما میتوانید با مراجعه به صفحه <a href="{{route('bimeh_all')}}">همه فراگارانتی ها</a>
+                                شما میتوانید با مراجعه به صفحه <a href="{{route('wallet')}}">کیف پول</a>
                                 مجدد اقدام به پرداخت نمایید.
                             </p>
                         </div>
@@ -53,9 +53,9 @@
                 <div class="card-header">
                     <h3 class="card-title text-success">پرداخت موفق</h3>
                     <div class="card-toolbar">
-                        <a href="{{route('bimeh_all')}}" type="button"
+                        <a href="{{route('wallet')}}" type="button"
                            class="btn btn-sm btn-light-success border border-success">
-                            تکمیل مدارک
+                            بازگشت به کیف پول
                         </a>
                     </div>
                 </div>
@@ -87,8 +87,8 @@
                                 تومان
                             </p>
                             <p>
-                                شما میتوانید با مراجعه به صفحه <a href="{{route('bimeh_all')}}">همه فراگارانتی ها</a>
-                                مدارک مورد نیاز جهت تکمیل فراگارانتی را بارگذاری نمایید.
+                                شما میتوانید با مراجعه به صفحه <a href="{{route('wallet')}}">کیف پول</a>
+                                گزارش تراکنش ها را مشاهده فرمایید.
                             </p>
                         </div>
                     </div>
