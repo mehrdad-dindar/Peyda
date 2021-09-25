@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helpers;
 use App\Models\Mobile_warranty;
 use App\Models\NotificationUser;
 use App\Models\Status;
 use App\Models\UserRequest;
 use App\Models\WarrantyUse;
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -79,6 +81,28 @@ class Controller extends BaseController
         }
 
         return $key;
+    }
+
+    public function getPrintWarranty($warrantyId)
+    {
+        $warranty=Mobile_warranty::find($warrantyId);
+        $activation_date=explode(' ',Helpers::convertDateTimeToShamsi($warranty->activation_date))[0];
+        //dd($activation_date);
+        $warranty['start_date']=$activation_date;
+        //$year=explode('/',$activation_date)[0];
+        $startDateVerta=new Verta($warranty->activation_date);
+        $endDateVerta=$startDateVerta->addYear(1);
+        $warranty['remained_days']=abs($endDateVerta->diffDays());
+        $warranty['phoneName']=$warranty->getPhoneName($warranty);
+
+        $uses=$warranty->warrantyuses->toArray();
+
+        foreach($uses as $key=>$use){
+            $uses[$key]['created_at_shamsi']=explode(' ',Helpers::convertDateTimeToShamsi($use['created_at']))[0];
+            //dd($use['created_at_shamsi']);
+        }
+        $data=['warranty'=>$warranty,'uses'=>$uses];
+        return $data;
     }
 
 }

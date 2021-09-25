@@ -21,7 +21,7 @@
                                 </a>
                                 <!--end::Logo-->
                                 <!--begin::Action-->
-                                <a href="{{route('htmlPdf')}}" class="btn btn-sm btn-success fw-bold">چاپ</a>
+                                <a href="{{route('htmlPdf',$warranty->id)}}" class="btn btn-sm btn-success fw-bolder fs-6">چاپ</a>
                                 <!--end::Action-->
                             </div>
                             <!--end::Top-->
