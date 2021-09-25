@@ -161,7 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
+        Elibyy\TCPDF\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -234,7 +234,6 @@ return [
         'Payment' => Shetabit\Payment\Facade\Payment::class,
         'Helpers' => App\Helpers\Helpers::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 
