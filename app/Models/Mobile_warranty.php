@@ -64,4 +64,16 @@ class Mobile_warranty extends Model
     {
         return $this->hasMany(WarrantyUse::class,'warranty_id','id');
     }
+
+    public function getPhoneName(Mobile_warranty $mobile_warranty)
+    {
+        $phone_brand=$mobile_warranty->phone_model->phone_brand->name;
+        if($mobile_warranty->phone_model_other!=null){
+            $phone_model=$mobile_warranty->phone_model_other;
+        }else{
+            $phone_model=$mobile_warranty->phone_model->name;
+        }
+
+        return $phone_brand.' / '.$phone_model;
+    }
 }

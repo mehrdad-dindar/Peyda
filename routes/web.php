@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\Shop\PropertyGroupController;
 use App\Http\Controllers\Admin\Shop\PropertyController;
 use \App\Http\Controllers\Admin\Shop\ProductPropertyController;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use \App\Http\Controllers\HTMLPDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,10 +80,8 @@ Route::prefix('panel')->group(function () {
             Route::get('/{invoice_id}/result', 'PaymentController@result')->name('purchase.result');
             Route::get('/upload-photo/{id}',[MobileWarrantyController::class , 'uploadPhoto'])->name('uploadPhoto');
             Route::post('/insert-photo/{mobile_warranty}',[MobileWarrantyController::class , 'insertPhotos'])->name('insertPhoto');
-            Route::get('/print',function (){
-                $wallet = \App\Models\Wallet::where('user_id',\auth()->user()->id)->first();
-                return view('profile.print',compact('wallet'));
-            });
+            Route::get('/print/{id}',[MobileWarrantyController::class,'print'])->name('print');
+            Route::get('/html-pdf/{id}', [HTMLPDFController::class,'htmlPdf'])->name('htmlPdf');
         });
     });
 });

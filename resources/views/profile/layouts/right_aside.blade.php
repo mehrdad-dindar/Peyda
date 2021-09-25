@@ -93,7 +93,7 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">دریافت فراگارانتی</span>
+                                <span class="menu-title">دریافت فراگارانتی از شخص دیگر</span>
                             </a>
                         </div>
                         <div class="menu-item">

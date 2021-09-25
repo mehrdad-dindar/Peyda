@@ -15,6 +15,7 @@ use App\Models\UserRequest;
 use App\Models\Wallet;
 use Carbon\Carbon;
 use Crypt;
+use DateTime;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -29,6 +30,20 @@ class MobileWarrantyController extends Controller
     public function __construct()
     {
         return $this->middleware('auth');
+    }
+
+    public function print($id)
+    {
+
+        $warranty=self::getPrintWarranty($id)['warranty'];
+        $uses=self::getPrintWarranty($id)['uses'];
+
+        if($warranty->owner_id==auth()->user()->id) {
+            $wallet = Wallet::where('user_id', \auth()->user()->id)->first();
+            return view('profile.print', compact(['wallet','warranty','uses']));
+        }else{
+            abort(404);
+        }
     }
 
     public function bimeh_add($error = '')
