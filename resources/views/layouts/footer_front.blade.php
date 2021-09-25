@@ -6,8 +6,7 @@
                 <a href="#" class="logo-footer">
                     <img src="{{ URL::asset('front/img/logo-white-1.png')}}" height="90" alt="">
                 </a>
-                <p class="mt-4">کار با لنـدریــک را شروع کنید که می تواند همه چیزهایی را که برای ایجاد آگاهی ، ایجاد
-                    ترافیک ، اتصال به آن نیاز دارید فراهم کند.</p>
+                <p class="mt-4" style="text-align: justify">پیدا سرویس ماندگار، بزرگترین و تخصصی ترین مرکز خصوصی ارائه دهنده خدمات فراگارانتی گوشی های تلفن همراه در ایران !</p>
                 <ul class="list-unstyled social-icon foot-social-icon mb-0 mt-4">
                     <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="facebook"
                                                                                                  class="fea icon-sm fea-social"></i></a>
@@ -51,7 +50,7 @@
 
             <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0" data-aos="fade-up" data-aos-duration="2200">
                 <h5 class="text-light footer-head">خبرنامه </h5>
-                <p class="mt-4">ثبت نام کنید و آخرین نکات را از طریق ایمیل دریافت کنید.</p>
+                <p class="mt-4">ثبت نام کنید و آخرین اخبار و تخفیفات را از طریق ایمیل دریافت کنید.</p>
                 <form>
                     <div class="row">
                         <div class="col-lg-12">
@@ -82,38 +81,20 @@
         <div class="row align-items-center">
             <div class="col-sm-8">
                 <div class="text-sm-start">
-                    <p class="mb-0">©
-                        {{ '1392 - '.Verta()->year }}©
+                    <p class="mb-0">© 2021 Copyright ©
                         طراحی، توسعه و دیجیتال مارکتینگ تخصصی
-                        <a href="https://nokarto.com" target="_blank" class="text-gray-800 text-hover-primary">شرکت
-                            انفورماتیک نوکارتو</a>
+                        <a href="https://nokarto.com" target="_blank" class="text-success">شرکت
+                            انفورماتیک صنعتی نوکارتو</a>
                     </p>
                 </div>
             </div><!--end col-->
 
             <div class="col-sm-4 mt-4 mt-sm-0 pt-2 pt-sm-0">
                 <ul class="list-unstyled text-sm-end mb-0">
-                    <li class="list-inline-item"><a href="javascript:void(0)"><img
-                                src="{{ URL::asset('main/images/payments/american-ex.png')}}"
-                                class="avatar avatar-ex-sm"
-                                title="American Express" alt=""></a>
-                    </li>
-                    <li class="list-inline-item"><a href="javascript:void(0)"><img
-                                src="{{ URL::asset('main/images/payments/discover.png')}}"
-                                class="avatar avatar-ex-sm"
-                                title="Discover" alt=""></a></li>
-                    <li class="list-inline-item"><a href="javascript:void(0)"><img
-                                src="{{ URL::asset('main/images/payments/master-card.png')}}"
-                                class="avatar avatar-ex-sm"
-                                title="Master Card" alt=""></a></li>
-                    <li class="list-inline-item"><a href="javascript:void(0)"><img
-                                src="{{ URL::asset('main/images/payments/paypal.png')}}"
-                                class="avatar avatar-ex-sm"
-                                title="Paypal" alt=""></a></li>
-                    <li class="list-inline-item"><a href="javascript:void(0)"><img
-                                src="{{ URL::asset('main/images/payments/visa.png')}}"
-                                class="avatar avatar-ex-sm"
-                                title="Visa" alt=""></a></li>
+                    <li class="list-inline-item"><a href="https://nokarto.com" target="_blank"><img
+                                src="{{ URL::asset('main/images/nokarto-logo-white.png')}}"
+                                class="avatar avatar-ex-sm nokarto"
+                                title="شرکت انفورماتیک صنعتی نوکارتو" alt=""></a></li>
                 </ul>
             </div><!--end col-->
         </div><!--end row-->

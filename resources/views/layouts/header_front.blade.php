@@ -15,7 +15,7 @@
         <!-- Logo container-->
         <div>
             <a class="logo" href="{{ route('index') }}">
-                <img src="{{ URL::asset('front/img/logo-colored-1.png')}}" height="60" alt="">
+                <img id="img_logo" src="{{ URL::asset('front/img/logo-white-1.png') }}" height="60" alt="فرا گارانتی پیدا سرویس">
             </a>
         </div>
         <ul class="buy-button list-inline mb-0">
@@ -69,7 +69,7 @@
             @endguest
             <li class="list-inline-item mb-0">
                 <div class="dropdown">
-                    <button type="button" class="btn btn-icon btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                    <button type="button" class="mycustombtn btn btn-icon btn-primary dropdown-toggle" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false"><i
                             class="uil uil-shopping-cart align-middle icons"></i></button>
                     <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow rounded border-0 mt-3 p-4"

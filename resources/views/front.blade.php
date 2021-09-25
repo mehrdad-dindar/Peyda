@@ -4,20 +4,17 @@
 @endsection
 @section('content')
     <!-- Hero Start -->
-    <section class="bg-half-170 bg-light d-table w-100">
+    <section class="bg-half-170 bg-custom-gray d-table w-100">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="title-heading text-center mt-5 pt-3">
                         <div class="alert alert-light alert-pills" role="alert" data-aos="fade-up" data-aos-duration="1000">
                             <span class="badge rounded-pill bg-success me-1">پشتیبانی</span>
-                            <span class="content"> پشتیبانی قدرتمند 24/7</span>
+                            <span class="content">پشتیبانی شبانه روزی 24/7</span>
                         </div>
-                        <h1 class="heading mb-3" data-aos="fade-up" data-aos-duration="1400">چگونه ما میتوانیم به شما کمک
-                            کنیم ؟</h1>
-                        <p class="para-desc mx-auto text-muted" data-aos="fade-up" data-aos-duration="1800">کمپین خود را راه
-                            اندازی کنید و از تخصص ما در زمینه طراحی و مدیریت صفحه بوت استرپ v5 html تبدیل محور بهره مند
-                            شوید.</p>
+                        <h1 class="mb-3 h2 text-white" data-aos="fade-up" data-aos-duration="1400">پیدا سرویس ماندگار، آن‌سوی مرزهای گارانتی تلفن همراه !</h1>
+                        <p class="para-desc mx-auto text-white" data-aos="fade-up" data-aos-duration="1800">فراگارانتی پیدا سرویس بهترین ارائه‌دهنده خدمات گوشی همراه، تبلت و لپ‌تاپ</p>
                     </div>
                     <div class="subcribe-form mt-4 pt-2" data-aos="fade-up" data-aos-duration="2200">
                         <form action="{{ route('validation') }}" method="post">
@@ -40,10 +37,10 @@
             <div class="row justify-content-center">
                 <div class="col-12 text-center">
                     <div class="section-title mb-4 pb-2">
-                        <h4 class="title mb-4" data-aos="fade-up" data-aos-duration="1000">نیاز به پشتیبانی CRM</h4>
-                        <p class="text-muted para-desc mb-0 mx-auto" data-aos="fade-up" data-aos-duration="1400">شروع به کار
-                            با <span class="text-primary fw-bold">لنـدریـک </span> که می تواند هر آنچه را که شما برای ایجاد
-                            آگاهی ، ایجاد ترافیک ، اتصال به آن نیاز دارید فراهم کند.</p>
+                        <h4 class="title mb-4" data-aos="fade-up" data-aos-duration="1000">پیدا سرویس ماندگار</h4>
+                        <p class="text-muted para-desc mb-0 mx-auto" data-aos="fade-up" data-aos-duration="1400">
+                            شرکت <span class="text-primary fw-bold">پیدا سرویس ماندگار</span> از امروز  <span class="text-warning">#تاهمیشه</span> کنارتان خواهد بود. همراه با ما، به آن‌سوی مرزهای فراگارانتی گوشی تلفن همراه سفر کنید!
+                        </p>
                     </div>
                 </div><!--end col-->
             </div><!--end row-->
@@ -56,7 +53,7 @@
                             <a class="nav-link rounded active" id="community-tab" data-bs-toggle="pill"
                                href="#pills-community" role="tab" aria-controls="pills-community" aria-selected="false">
                                 <div class="text-center py-2">
-                                    <h6 class="mb-0">انجمن </h6>
+                                    <h3 class="h6 mb-0">از ما بیشتر بدانید !</h3>
                                 </div>
                             </a><!--end nav link-->
                         </li><!--end nav item-->
@@ -65,7 +62,7 @@
                             <a class="nav-link rounded" id="selfservice-tab" data-bs-toggle="pill" href="#pills-self"
                                role="tab" aria-controls="pills-self" aria-selected="false">
                                 <div class="text-center py-2">
-                                    <h6 class="mb-0">خدمات شخصی </h6>
+                                    <h3 class="h6 mb-0">فراگارانتی پیدا سرویس چیست؟</h3>
                                 </div>
                             </a><!--end nav link-->
                         </li><!--end nav item-->
@@ -74,7 +71,7 @@
                             <a class="nav-link rounded" id="teamwork-tab" data-bs-toggle="pill" href="#pills-teamwork"
                                role="tab" aria-controls="pills-teamwork" aria-selected="false">
                                 <div class="text-center py-2">
-                                    <h6 class="mb-0">تیم کاری </h6>
+                                    <h3 class="h6 mb-0">هدیه ویژه ما به شما !</h3>
                                 </div>
                             </a><!--end nav link-->
                         </li><!--end nav item-->
@@ -96,12 +93,10 @@
 
                                 <div class="col-md-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
                                     <div class="section-title ms-md-4">
-                                        <h4 class="title mb-4" data-aos="fade-up" data-aos-duration="1000">انجمن کاربر</h4>
-                                        <p class="text-muted" data-aos="fade-up" data-aos-duration="1400">سیستم های CRM با
-                                            جمع آوری وب سایت مشتری ، ایمیل ، تلفن ، داده های رسانه های اجتماعی و موارد دیگر
-                                            ، در چندین منبع و کانال شروع می شوند. همچنین ممکن است به طور خودکار سایر اطلاعات
-                                            ، مانند اخبار اخیر در مورد فعالیت شرکت را به خود اختصاص دهد و می تواند اطلاعات
-                                            شخصی مانند تنظیمات شخصی مشتری در ارتباطات را ذخیره کند..</p>
+                                        <h3 class="h5 mb-4" data-aos="fade-up" data-aos-duration="1000">پیدا سرویس ماندگار ...</h3>
+                                        {{-- TODO صفحه درباره ما--}}
+                                        <p class="text-muted" style="text-align: justify" data-aos="fade-up" data-aos-duration="1400">کارشناسان مجرب شرکت پیدا سرویس ماندگار پس از سال‌ها تجربه و کار با تعهد به این نتیجه رسیدند که گارانتی‌های موجود باعث ایجاد رضایت لازم و کافی در مشتریان نخواهند شد و نیازهای اساسی ایشان را برآورده نمی‌کنند. پس از تحقیق و بررسی‌های بسیار در زمینه گارانتی محصولات الکترونیکی، شرکت پیدا سرویس ماندگار تصمیم بر ارائه خدمات فراگارانتی در حوزه گوشی‌های همراه و بعضی لوازم الکترونیک گرفت.
+                                            شرکت پیدا سرویس ماندگار در تاریخ 02/04/1399 با شماره ثبت 560070 و شناسه ملی 14009225883 تأسیس شد. هدف از تأسیس، ارائه‌ی خدمات به مشتریانِ دارای گوشی‌های آکبند و دست دو است. پیدا سرویس ماندگار باور دارد که همه‌ی افراد و اقشار جامعه شایسته دریافت فراگارانتی برای محصولات الکترونیک خود اعم از تلفن همراه، تبلت و لپ‌تاپ هستند...</p>
                                         <div class="mt-4" data-aos="fade-up" data-aos-duration="1800">
                                             <a href="#" class="text-primary p-1 px-2 shadow rounded me-3">ادامه
                                                 مطلب <i class="uil uil-angle-left-b"></i></a>
@@ -117,13 +112,20 @@
                             <div class="row align-items-center">
                                 <div class="col-md-6 order-2 order-md-1 mt-4 mt-sm-0 pt-2 pt-sm-0">
                                     <div class="section-title me-md-4">
-                                        <h4 class="title mb-4" data-aos="fade-up" data-aos-duration="1000">پورتال سلف
-                                            سرویس</h4>
-                                        <p class="text-muted" data-aos="fade-up" data-aos-duration="1400">سیستم های CRM با
-                                            جمع آوری وب سایت مشتری ، ایمیل ، تلفن ، داده های رسانه های اجتماعی و موارد دیگر
-                                            ، در چندین منبع و کانال شروع می شوند. همچنین ممکن است به طور خودکار سایر اطلاعات
-                                            ، مانند اخبار اخیر در مورد فعالیت شرکت را به خود اختصاص دهد و می تواند اطلاعات
-                                            شخصی مانند تنظیمات شخصی مشتری در ارتباطات را ذخیره کند..</p>
+                                        <h3 class="mb-4 h5" data-aos="fade-up" data-aos-duration="1000">خدمات فراگارانتی پیدا سرویس ماندگار</h3>
+                                        {{-- TODO صفحه معرفی فراگارانتی --}}
+                                        <p class="text-muted" data-aos="fade-up" data-aos-duration="1400" style="text-align: justify">شرکت پیدا سرویس ماندگار برای حمایت از مشتریان عزیز به ارائه‌ی خدمات فراگارانتی می‌پردازد. جالب است بدانید که این خدمات بدون واسطه و در خود شرکت انجام می‌شود بنابراین شما می‌توانید در کوتاه‌ترین زمان بدون اتلاف وقت و با خیال راحت در امنیت کامل خدمت مورد نیاز خود را دریافت نمایید.
+                                            فراگارانتی تجهیزات الکترونیک (گوشی همراه، تبلت و لپ‌تاپ) شرکت  پیدا سرویس
+                                            پوشش‌های خدمات عبارتند از:
+                                            <ol>
+                                            <li>شکستگی بر اثر ضربه</li>
+                                            <li>آب‌خوردگی و نفوذ مایعات</li>
+                                            <li>نوسانات ولتاژ برق</li>
+                                            <li>الکل و نفوذ مواد شیمیایی</li>
+                                            <li>حوادث طبیعی و غیرمترقبه</li>
+                                            <li>مشکلات سخت‌افزاری</li>
+                                        </ol>
+                                        </p>
                                         <div class="mt-4" data-aos="fade-up" data-aos-duration="1800">
                                             <a href="#" class="text-primary p-1 px-2 shadow rounded me-3">ادامه
                                                 مطلب <i class="uil uil-angle-left-b"></i></a>
@@ -151,13 +153,9 @@
 
                                 <div class="col-md-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
                                     <div class="section-title ms-md-4">
-                                        <h4 class="title mb-4" data-aos="fade-up" data-aos-duration="1000">کار تیمی
-                                            مناسب</h4>
-                                        <p class="text-muted" data-aos="fade-up" data-aos-duration="1400">سیستم های CRM با
-                                            جمع آوری وب سایت مشتری ، ایمیل ، تلفن ، داده های رسانه های اجتماعی و موارد دیگر
-                                            ، در چندین منبع و کانال شروع می شوند. همچنین ممکن است به طور خودکار سایر اطلاعات
-                                            ، مانند اخبار اخیر در مورد فعالیت شرکت را به خود اختصاص دهد و می تواند اطلاعات
-                                            شخصی مانند تنظیمات شخصی مشتری در ارتباطات را ذخیره کند..</p>
+                                        <h3 class="h5 mb-4" data-aos="fade-up" data-aos-duration="1000">۵۰ میلیون تومان بیمه آتش سوزی رایگان !</h3>
+                                        {{-- TODO صفحه بیمه آتش سوزی --}}
+                                        <p class="text-muted" style="text-align: justify" data-aos="fade-up" data-aos-duration="1400">شرکت پیدا سرویس ماندگار در جهت ارائه خدمات نوین و بی‌رقیب خود با تقدیم این هدیه‌ی ویژه و خاص به شما مشتریان گران‌قدر ثابت می‌کند تا چه اندازه به فکر رفاه و امنیت شما عزیزان است. خدماتی که شامل بیمه هستند می‌توانند در دسته‌ی جذاب‌ترین سرویس‌ها در نظر گرفته شوند. مدیران و کارشناسان مجرب شرکت پیدا سرویس ماندگار تصمیم گرفتند برای احترام هر چه بیشتر به مشتریان خود خدمات بیمه آتش‌سوزی منزل تا سقف 500،000،000 ریال را به صورت رایگان برای ایشان در نظر بگیرند. چنانچه تمایل داشته باشید مقدار ارزش بیمه را بیشتر نمائید می‌توانید با پرداخت هزینه‌ای جزئی اعتبارتان را افزایش دهید...</p>
                                         <div class="mt-4" data-aos="fade-up" data-aos-duration="1800">
                                             <a href="#" class="text-primary p-1 px-2 shadow rounded me-3">ادامه
                                                 مطلب <i class="uil uil-angle-left-b"></i></a>
@@ -180,79 +178,71 @@
                     <div class="section-title mb-4 pb-2">
                     <span class="badge rounded-pill bg-success" data-aos="fade-up"
                           data-aos-duration="1000">ویژگی ها </span>
-                        <h4 class="title my-4" data-aos="fade-up" data-aos-duration="1400">منابع ارتباطی</h4>
-                        <p class="text-muted para-desc mx-auto mb-0" data-aos="fade-up" data-aos-duration="1800">شروع به کار
-                            با <span class="text-primary fw-bold">لنـدریـک </span> که می تواند هر آنچه را که شما برای ایجاد
-                            آگاهی ، ایجاد ترافیک ، اتصال به آن نیاز دارید فراهم کند.</p>
+                        <h4 class="title my-4" data-aos="fade-up" data-aos-duration="1400">خدمات فراگارانتی پیدا سرویس</h4>
+                        <p class="text-muted para-desc mx-auto mb-0" data-aos="fade-up" data-aos-duration="1800"><span class="text-primary fw-bold">پیدا سرویس ماندگار</span> مفتخر به ارائه خدماتی است که به صورت انحصاری تنها در این مرکز در حوزه فراگارانتی گوشی تلفن همراه عرضه می‌شود !</p>
                     </div>
                 </div><!--end col-->
             </div><!--end row-->
 
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
-                    <div class="card categories text-center rounded border-0" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="card categories h-100 text-center rounded border-0" style="min-height: 303px" data-aos="fade-up" data-aos-duration="1000">
                         <div class="card-body">
                             <img src="{{ URL::asset('main/images/icon/chat.svg')}}" class="avatar avatar-small mb-3" alt="">
-                            <h5><a href="#" class="text-dark">چت آنلاین </a></h5>
-                            <p class="text-muted mb-0 mt-3">اگر توزیع حروف و کلمات تصادفی باشد ، خواننده حواس او را پرت نمی
-                                کند از ساختن</p>
+                            <h5><a href="#" class="text-dark">شکستگی بر اثر ضربه</a></h5>
+                            <p class="text-muted mb-0 mt-3" style="text-align: justify">چنانچه گوشی همراه، تبلت و لپ‌تاپ‌تان دچار شکستگی و ضرب‌دیدگی شد، طبق تعهدات شرکت خسارت وارده در اسرع وقت جبران خواهدشد.</p>
                         </div>
                     </div>
                 </div><!--end col-->
 
                 <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
-                    <div class="card categories text-center rounded border-0" data-aos="fade-up" data-aos-duration="1300">
+                    <div class="card categories h-100 text-center rounded border-0" style="min-height: 303px" data-aos="fade-up" data-aos-duration="1300">
                         <div class="card-body">
                             <img src="{{ URL::asset('main/images/icon/customer-service.svg')}}"
                                  class="avatar avatar-small mb-3" alt="">
-                            <h5><a href="#" class="text-dark">سوشیال </a></h5>
-                            <p class="text-muted mb-0 mt-3">اگر توزیع حروف و کلمات تصادفی باشد ، خواننده حواس او را پرت نمی
-                                کند از ساختن</p>
+                            <h5><a href="#" class="text-dark">آب‌خوردگی و نفوذ مایعات</a></h5>
+                            <p class="text-muted mb-0 mt-3" style="text-align: justify">برای همه ما یک بار پیش آمده که گوشی‌مان داخل آب افتاده یا بر اثر رطوبت آسیب دیده باشد. با پیدا سرویس ماندگار دیگر نگرانی در زمینه این مسائل معنایی ندارد.</p>
                         </div>
                     </div>
                 </div><!--end col-->
 
                 <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
-                    <div class="card categories text-center rounded border-0" data-aos="fade-up" data-aos-duration="1600">
+                    <div class="card categories h-100 text-center rounded border-0" style="min-height: 303px" data-aos="fade-up" data-aos-duration="1600">
                         <div class="card-body">
                             <img src="{{ URL::asset('main/images/icon/user.svg')}}" class="avatar avatar-small mb-3" alt="">
-                            <h5><a href="#" class="text-dark">پورتال پشتیبانی</a></h5>
-                            <p class="text-muted mb-0 mt-3">اگر توزیع حروف و کلمات تصادفی باشد ، خواننده حواس او را پرت نمی
-                                کند از ساختن</p>
+                            <h5><a href="#" class="text-dark">نوسانات ولتاژ برق</a></h5>
+                            <p class="text-muted mb-0 mt-3" style="text-align: justify">نوسان و اتصالی برق از مسائل پر تکراری است که می‌تواند زیان‌های فراوانی را برای وسایل الکترونیکی ایجاد کند. کارشناسان پیدا سرویس خسارت‌های ناشی از نوسان برق را پشتیبانی می‌کنند.</p>
                         </div>
                     </div>
                 </div><!--end col-->
 
                 <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
-                    <div class="card categories text-center rounded border-0" data-aos="fade-up" data-aos-duration="1900">
+                    <div class="card categories h-100 text-center rounded border-0" style="min-height: 303px" data-aos="fade-up" data-aos-duration="1900">
                         <div class="card-body">
                             <img src="{{ URL::asset('main/images/icon/call.svg')}}" class="avatar avatar-small mb-3" alt="">
-                            <h5><a href="#" class="text-dark">تلفن پشتیبانی </a></h5>
-                            <p class="text-muted mb-0 mt-3">اگر توزیع حروف و کلمات تصادفی باشد ، خواننده حواس او را پرت نمی
-                                کند از ساختن</p>
+                            <h5><a href="#" class="text-dark">الکل و نفوذ مواد شیمیایی</a></h5>
+                            <p class="text-muted mb-0 mt-3" style="text-align: justify">محصولات الکترونیکی در اثر تماس با الکل و مواد شیمیایی آسیب می‌بینند و جایگزینی آن‌ها هزینه بالایی دارد اما پیدا سرویس <span class="text-warning">#تاهمیشه</span> نمی‌گذارد شما زیان ببینید.</p>
                         </div>
                     </div>
                 </div><!--end col-->
 
                 <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
-                    <div class="card categories text-center rounded border-0" data-aos="fade-up" data-aos-duration="2200">
+                    <div class="card categories h-100 text-center rounded border-0" style="min-height: 303px" data-aos="fade-up" data-aos-duration="2200">
                         <div class="card-body">
                             <img src="{{ URL::asset('main/images/icon/writing.svg')}}" class="avatar avatar-small mb-3"
                                  alt="">
-                            <h5><a href="#" class="text-dark">تیکت ها</a></h5>
-                            <p class="text-muted mb-0 mt-3">اگر توزیع حروف و کلمات تصادفی باشد ، خواننده حواس او را پرت نمی
-                                کند از ساختن</p>
+                            <h5><a href="#" class="text-dark">حوادث طبیعی و غیرمترقبه</a></h5>
+                            <p class="text-muted mb-0 mt-3" style="text-align: justify">زلزله، سیل و آتش‌سوزی به وسایل الکترونیکی هم صدمه می‌زند. با خرید فراگارانتی پیدا سرویس می‌توانید گوشی، لپ‌تاپ و تبلت‌هایتان را در امان نگه‌دارید.</p>
                         </div>
                     </div>
                 </div><!--end col-->
 
                 <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
-                    <div class="card categories text-center rounded border-0" data-aos="fade-up" data-aos-duration="2500">
+                    <div class="card categories h-100 text-center rounded border-0" style="min-height: 303px" data-aos="fade-up" data-aos-duration="2500">
                         <div class="card-body">
                             <img src="{{ URL::asset('main/images/icon/mail.svg')}}" class="avatar avatar-small mb-3" alt="">
-                            <h5><a href="#" class="text-dark">نقل و قل</a></h5>
-                            <p class="text-muted mb-0 mt-3">اگر توزیع حروف و کلمات تصادفی باشد ، خواننده حواس او را پرت نمی
-                                کند از ساختن</p>
+                            <h5><a href="#" class="text-dark">مشکلات سخت‌افزاری</a></h5>
+                            <p class="text-muted mb-0 mt-3" style="text-align: justify">به وجود آمدن مشکلات سخت‌افزاری برای وسایلی همچون تلفن همراه و لپ‌تاپ ... امری عادی است، اما داشتن فراگارانتی پیدا سرویس برای جبران خسارات امری خارق‌العاده است.</p>
                         </div>
                     </div>
                 </div><!--end col-->
@@ -414,19 +404,17 @@
                 <div class="col-12 text-center">
                     <div class="section-title mb-4 pb-2">
                         <h4 class="title mb-4" data-aos="fade-up" data-aos-duration="1000">نظرات مشتریان </h4>
-                        <p class="text-muted para-desc mb-0 mx-auto" data-aos="fade-up" data-aos-duration="1400">شروع به کار
-                            با <span class="text-primary fw-bold">لنـدریـک </span> که می تواند هر آنچه را که شما برای ایجاد
-                            آگاهی ، ایجاد ترافیک ، اتصال به آن نیاز دارید فراهم کند.</p>
+                        <p class="text-muted para-desc mb-0 mx-auto" data-aos="fade-up" data-aos-duration="1400" style="text-align: justify">یکی از افتخارات <span class="text-primary fw-bold">پیدا سرویس ماندگار</span> ارتباط مؤثر با مشتریان است، ما  کاملا به حرف‌ها و خواسته‌هایتان گوش می‌دهیم و هرآنچه در توان داریم را برای حل مساله شما به کار می‌بریم !</p>
                     </div>
                 </div>
             </div><!--end row-->
 
             <div class="row justify-content-center">
                 <div class="col-lg-12 mt-4 pt-2">
-                    <div class="tiny-three-item">
+                    <div class="tiny-three-item d-flex align-items-stretch">
                         <div class="tiny-slide">
-                            <div class="d-flex client-testi m-2" data-aos="fade-up" data-aos-duration="1000">
-                                <img src="{{ URL::asset('main/images/client/01.jpg')}}"
+                            <div class="d-flex client-testi m-2 h-100" data-aos="fade-up" data-aos-duration="1000">
+                                <img src="{{ URL::asset('main/images/user/1.jpg')}}"
                                      class="avatar avatar-small client-image rounded shadow"
                                      alt="">
                                 <div class="flex-1 content p-3 shadow rounded bg-white position-relative">
@@ -437,16 +425,14 @@
                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
                                     </ul>
-                                    <p class="text-muted mt-2">" به نظر می رسد که تنها تکه هایی از متن اصلی در متن لورم
-                                        اپیسوم که امروزه استفاده می شود باقی مانده است. "</p>
-                                    <h6 class="text-primary">- توماس لوری <small class="text-muted">سئو</small></h6>
+                                    <p class="text-muted mt-2" style="text-align: justify">"گارانتی وقتی ارزش دارد و معنا پیدا می‌کند که شامل همه چیز باشد یعنی به نوعی محصول در قبال تمام حوادث بیمه شود و مدلی نباشد که یک بخش خراب شد شامل گارانتی نشود حتی اگر دستگاه را خودمان شکستیم باید جوری باشد که درصدی پرداخت کنند و درصدی را خودمان بپردازیم و دوباره بتوانیم از محصول استفاده کنیم. من واقعا تا قبل از این‌که با شرکت پیدا سرویس ماندگار آشنا بشوم چنین خدماتی را ندیده بودم خیلی خوشحالم که با یک سرچ ساده در گوگل این شرکت را در اولین گزینه‌ها دیدم و فراگارانتی را با هزینه‌ی اندک خریدم. بعد از چند ماه تبلتم را که در یک اتفاق شکست برای تعمیر به شرکت فرستادم و بهترین خدمات را دریافت کردم."</p>
+                                    <h6 class="text-primary">- اشکان مرادی</h6>
                                 </div>
                             </div>
                         </div>
-
                         <div class="tiny-slide">
-                            <div class="d-flex client-testi m-2" data-aos="fade-up" data-aos-duration="1400">
-                                <img src="{{ URL::asset('main/images/client/02.jpg')}}"
+                            <div class="d-flex client-testi m-2 h-100" data-aos="fade-up" data-aos-duration="1000">
+                                <img src="{{ URL::asset('main/images/user/5.jpg')}}"
                                      class="avatar avatar-small client-image rounded shadow"
                                      alt="">
                                 <div class="flex-1 content p-3 shadow rounded bg-white position-relative">
@@ -455,18 +441,16 @@
                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
-                                        <li class="list-inline-item"><i class="mdi mdi-star-half text-warning"></i></li>
+                                        <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
                                     </ul>
-                                    <p class="text-muted mt-2">" به نظر می رسد که تنها تکه هایی از متن اصلی در متن لورم
-                                        اپیسوم که امروزه استفاده می شود باقی مانده است. "</p>
-                                    <h6 class="text-primary">- باباکارما <small class="text-muted">مترجم </small></h6>
+                                    <p class="text-muted mt-2" style="text-align: justify">"من کلا تجربه خوبی از گارانتی ندارم. چندین مرتبه محصولات الکترونیکی‌ام سوخت یا خراب شد و از سمت شرکت گارانتی کننده نه تنها رفتار مناسبی ندیدم بلکه هیچ تعهدی هم نسبت به تعمیر یا تعویض نداشتند. زمانی که فراگارانتی شرکت پیدا سرویس را برای یک‌سال تهیه کردم باور نمی‌کردم که برای گوشی یا لپ‌تاپم بهترین فراگارانتی را در نظر گرفته‌ام. تا این که با یک مشکل سخت‌افزاری تلفن همراهم روبه‌رو شدم و با شرکت تماس گرفتم و کارشناسان بعد از بررسی گوشی را تحویل گرفتند و بعد از چند روز تعمیر شده و بهتر از قبل برایم فرستادند."</p>
+                                    <h6 class="text-primary">- سحر بابایی</h6>
                                 </div>
                             </div>
                         </div>
-
                         <div class="tiny-slide">
-                            <div class="d-flex client-testi m-2" data-aos="fade-up" data-aos-duration="1800">
-                                <img src="{{ URL::asset('main/images/client/03.jpg')}}"
+                            <div class="d-flex client-testi m-2 h-100" data-aos="fade-up" data-aos-duration="1000">
+                                <img src="{{ URL::asset('main/images/user/2.jpg')}}"
                                      class="avatar avatar-small client-image rounded shadow"
                                      alt="">
                                 <div class="flex-1 content p-3 shadow rounded bg-white position-relative">
@@ -477,16 +461,14 @@
                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
                                     </ul>
-                                    <p class="text-muted mt-2">" به نظر می رسد که تنها تکه هایی از متن اصلی در متن لورم
-                                        اپیسوم که امروزه استفاده می شود باقی مانده است. "</p>
-                                    <h6 class="text-primary">- کارلوس <small class="text-muted">P.A</small></h6>
+                                    <p class="text-muted mt-2" style="text-align: justify">"ممنون پیدا سرویس. چطور تشکر کنم از این همه حرفه‌ای بودن؟ حتما خیلی از دوستان با نوسانات برقی این روزها دست و پنجه نرم می‌کنند. رفتن برق از مشکلات بسیار بد و جدی است که در تابستان همگی شاهد و درگیر آن بودیم. من هم از این قاعده مستثنا نبودم اما پیدا سرویس ماندگار خیلی به تعهدش پایبند بود و یک گوشی نو تحویلم داد. به جرات تنها شرکتی هستید که به مشتری تا این حد احترام می‌گذارید."</p>
+                                    <h6 class="text-primary">- نیشتمان وثوقی</h6>
                                 </div>
                             </div>
                         </div>
-
                         <div class="tiny-slide">
-                            <div class="d-flex client-testi m-2" data-aos="fade-up" data-aos-duration="2200">
-                                <img src="{{ URL::asset('main/images/client/04.jpg')}}"
+                            <div class="d-flex client-testi m-2 h-100" data-aos="fade-up" data-aos-duration="1000">
+                                <img src="{{ URL::asset('main/images/user/4.jpg')}}"
                                      class="avatar avatar-small client-image rounded shadow"
                                      alt="">
                                 <div class="flex-1 content p-3 shadow rounded bg-white position-relative">
@@ -497,16 +479,14 @@
                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
                                     </ul>
-                                    <p class="text-muted mt-2">" به نظر می رسد که تنها تکه هایی از متن اصلی در متن لورم
-                                        اپیسوم که امروزه استفاده می شود باقی مانده است. "</p>
-                                    <h6 class="text-primary">- چری استین <small class="text-muted">مدیر </small></h6>
+                                    <p class="text-muted mt-2" style="text-align: justify">"به نظر من فراگارانتی پیدا سرویس با استانداردهای جهانی برابری دارد. ما به خاطر شغل پدرم چندین سال در کشورهای خارجی و اروپایی زندگی کردیم و گارانتی که شرکت‌ها برای محصولات ارائه می‌دهند برای ما مثل رؤیا بود. حالا بعد از چندین سال من با شرکتی آشنا شدم که فراگارانتی در اختیار مشتریانش قرار می‌دهد این یعنی نهایت تخصص. من فراگارانتی را تهیه کردم. مراحل ثبت‌نام و خرید خیلی راحت انجام شد. سپاس از تیم کاربلد پیدا سرویس و سایت خوب‌شان."</p>
+                                    <h6 class="text-primary">- هومان کاظمی</h6>
                                 </div>
                             </div>
                         </div>
-
                         <div class="tiny-slide">
-                            <div class="d-flex client-testi m-2" data-aos="fade-up" data-aos-duration="2400">
-                                <img src="{{ URL::asset('main/images/client/05.jpg')}}"
+                            <div class="d-flex client-testi m-2 h-100" data-aos="fade-up" data-aos-duration="1000">
+                                <img src="{{ URL::asset('main/images/user/3.jpg')}}"
                                      class="avatar avatar-small client-image rounded shadow"
                                      alt="">
                                 <div class="flex-1 content p-3 shadow rounded bg-white position-relative">
@@ -517,16 +497,14 @@
                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
                                     </ul>
-                                    <p class="text-muted mt-2">" به نظر می رسد که تنها تکه هایی از متن اصلی در متن لورم
-                                        اپیسوم که امروزه استفاده می شود باقی مانده است. "</p>
-                                    <h6 class="text-primary">- دین لوس <small class="text-muted">توسعه دهنده </small></h6>
+                                    <p class="text-muted mt-2" style="text-align: justify">"فراگارانتی؟! مگه داریم؟! مگه می‌شه؟! در ایران گارانتی محصولات هم از خریدار حمایت نمی‌کند، باور کردن فراگارانتی چیزی بیشتر از سطح پذیرشم بود! ادعای بزرگی که باید برای من به اثبات می‌رسید. پس در اولین فرصت از سایت کارهای خرید را انجام دادم، سایتی که به نظرم یوزر فرندلی کار شده و بدون سردرگمی راحت می‌شود خرید کرد. به این فکر می‌کردم حالا چطوری بفهمم به تعهداتی که دادند پایبند هستند که وسواس عجیبم در پاک کردن وسایل در دوران کرونا باعث شد گوشی همراهم از کار بیافتد. الان دیگر مطمئنم پیدا سرویس ماندگار <span class="text-warning">#تاهمیشه</span> اینجاست."</p>
+                                    <h6 class="text-primary">- نازنین وطنی</h6>
                                 </div>
                             </div>
                         </div>
-
                         <div class="tiny-slide">
-                            <div class="d-flex client-testi m-2" data-aos="fade-up" data-aos-duration="2800">
-                                <img src="{{ URL::asset('main/images/client/06.jpg')}}"
+                            <div class="d-flex client-testi m-2 h-100" data-aos="fade-up" data-aos-duration="1000">
+                                <img src="{{ URL::asset('main/images/user/6.jpg')}}"
                                      class="avatar avatar-small client-image rounded shadow"
                                      alt="">
                                 <div class="flex-1 content p-3 shadow rounded bg-white position-relative">
@@ -537,9 +515,8 @@
                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
                                     </ul>
-                                    <p class="text-muted mt-2">" به نظر می رسد که تنها تکه هایی از متن اصلی در متن لورم
-                                        اپیسوم که امروزه استفاده می شود باقی مانده است. "</p>
-                                    <h6 class="text-primary">- جیل شبی <small class="text-muted">طراح </small></h6>
+                                    <p class="text-muted mt-2" style="text-align: justify">"من خودم فروشنده موبایل هستم. درگیری مشتری‌ها برای تهیه گارانتی را همیشه از نزدیک دیده‌ام و یا دردسرهای بعد از خرابی گوشی‌ها را ... بعضی وقت‌ها گوشی‌ها برای تعمیر به مراکزی فرستاده می‌شوند که صلاحیت ندارند و گوشی از چند قسمت دیگر هم عیب پیدا می‌کند. با تحقیق دقیق و زیاد مطمئن شدم که فراگارانتی پیدا سرویس یکی از بهترین‌های بازار است. شرکتی که مشتریان را ارجح بر سود خود می‌داند و برد - برد فعالیت می‌کند."</p>
+                                    <h6 class="text-primary">- پارسا اسماعیلی</h6>
                                 </div>
                             </div>
                         </div>
@@ -558,13 +535,13 @@
                 <div class="col-lg-6">
                     <div class="section-title text-center text-lg-start">
                         <h6 class="text-primary">وبلاگ </h6>
-                        <h4 class="title mb-4 mb-lg-0">آخرین اخبار سایت <br> و بروز رسانی ها را دنبال کنید</h4>
+                        <h4 class="title mb-4 mb-lg-0">آخرین مقالات، اخبار سایت <br> و بروزرسانی ها را دنبال کنید !</h4>
                     </div>
                 </div><!--end col-->
 
                 <div class="col-lg-6">
                     <div class="section-title text-center text-lg-start">
-                        <p class="text-muted mb-0 mx-auto para-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus, aliquam amet atque autem consequuntur cumque cupiditate, dolorum ea iste laborum magnam nemo quae quas quibusdam quo sint voluptatem voluptatum.</p>
+                        <p class="text-muted mb-0 mx-auto para-desc" style="text-align: justify">مشتریان و مخاطبان محترم در بخش وبلاگ می‌توانند در جریان آخرین و به روزترین اخبار و اطلاعات در زمینه‌ی گوشی‌های همراه، لپ‌تاپ و تبلت قرار گیرند. همچنین اطلاعات مفیدی در زمینه‌ی گارانتی و فراگارانتی دریافت خواهند کرد. شرکت <span class="text-primary fw-bold">پیدا سرویس ماندگار</span> در تلاش است اخبار مربوط به حوزه‌ تکنولوژی تلفن همراه و محصولاتی از این دست را در اختیار مشتریان بگذارد و آگاهی بیشتری برای دوست‌داران این حوزه فراهم آورد.</p>
                     </div>
                 </div><!--end col-->
             </div><!--end row-->
@@ -644,4 +621,29 @@
     <!--end blog section-->
 @endsection
 @section('custom_js')
+    <script>
+        function windowScroll() {
+            const navbar = document.getElementById("topnav");
+            const logo = document.getElementById("img_logo");
+            const topIMG = "{{ URL::asset('front/img/logo-white-1.png') }}";
+            const sclIMG = "{{ URL::asset('front/img/logo-colored-1.png') }}";
+            if(navbar!=null){
+                if (
+                    document.body.scrollTop >= 50 ||
+                    document.documentElement.scrollTop >= 50
+                ) {
+                    navbar.classList.add("nav-sticky");
+                    logo.src= sclIMG;
+                } else {
+                    navbar.classList.remove("nav-sticky");
+                    logo.src= topIMG;
+                }
+            }
+        }
+
+        window.addEventListener('scroll', (ev) => {
+            ev.preventDefault();
+            windowScroll();
+        })
+    </script>
 @endsection

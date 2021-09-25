@@ -1,7 +1,7 @@
 @extends('profile.layouts.master')
 @section('title','داشبورد')
 @section('content')
-    <div id="kt_content_container" class="container">
+    {{--<div id="kt_content_container" class="container">
         <!--begin::Row-->
         <div class="row gy-5 g-xl-8">
             <div class="col-xl-4">
@@ -2401,5 +2401,5 @@
             <!--end::Tables Widget 10-->
         </div>
         <!--end::Row-->
-    </div>
+    </div>--}}
 @endsection
