@@ -30,7 +30,6 @@ use \App\Http\Controllers\HTMLPDFController;
 
 /* front */
 Route::get('/', 'HomeController@index')->name('index');
-Route::get('/html-pdf', [HTMLPDFController::class,'htmlPdf'])->name('htmlPdf');
 Route::get('/test/{id}', function ($id){
 
     //dd($id);
@@ -82,6 +81,7 @@ Route::prefix('panel')->group(function () {
             Route::get('/upload-photo/{id}',[MobileWarrantyController::class , 'uploadPhoto'])->name('uploadPhoto');
             Route::post('/insert-photo/{mobile_warranty}',[MobileWarrantyController::class , 'insertPhotos'])->name('insertPhoto');
             Route::get('/print/{id}',[MobileWarrantyController::class,'print'])->name('print');
+            Route::get('/html-pdf', [HTMLPDFController::class,'htmlPdf'])->name('htmlPdf');
         });
     });
 });

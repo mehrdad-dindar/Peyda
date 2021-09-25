@@ -15,6 +15,7 @@ use App\Models\UserRequest;
 use App\Models\Wallet;
 use Carbon\Carbon;
 use Crypt;
+use DateTime;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -34,9 +35,25 @@ class MobileWarrantyController extends Controller
     public function print($id)
     {
         $warranty=Mobile_warranty::find($id);
+        $activation_date=explode(' ',Helpers::convertDateTimeToShamsi($warranty->activation_date))[0];
+        //dd($activation_date);
+        $warranty['start_date']=$activation_date;
+        //$year=explode('/',$activation_date)[0];
+        $startDateVerta=new Verta($warranty->activation_date);
+        $endDateVerta=$startDateVerta->addYear(1);
+        $warranty['remained_days']=abs($endDateVerta->diffDays());
+        $warranty['phoneName']=$warranty->getPhoneName($warranty);
+
+        $uses=$warranty->warrantyuses->toArray();
+
+        foreach($uses as $key=>$use){
+            $uses[$key]['created_at_shamsi']=explode(' ',Helpers::convertDateTimeToShamsi($use['created_at']))[0];
+            //dd($use['created_at_shamsi']);
+        }
+
         if($warranty->owner_id==auth()->user()->id) {
             $wallet = Wallet::where('user_id', \auth()->user()->id)->first();
-            return view('profile.print', compact(['wallet','warranty']));
+            return view('profile.print', compact(['wallet','warranty','uses']));
         }else{
             abort(404);
         }
