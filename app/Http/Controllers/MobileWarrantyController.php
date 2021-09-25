@@ -36,7 +36,7 @@ class MobileWarrantyController extends Controller
         $warranty=Mobile_warranty::find($id);
         if($warranty->owner_id==auth()->user()->id) {
             $wallet = Wallet::where('user_id', \auth()->user()->id)->first();
-            return view('profile.print', compact('wallet'));
+            return view('profile.print', compact(['wallet','warranty']));
         }else{
             abort(404);
         }

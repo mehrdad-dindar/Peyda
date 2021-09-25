@@ -28,17 +28,17 @@
                             <!--begin::Wrapper-->
                             <div class="m-0">
                                 <!--begin::Label-->
-                                <div class="fw-bolder fs-3 text-gray-800 mb-8">Invoice #34782</div>
+                                <div class="fw-bolder fs-3 text-gray-800 mb-8">اطلاعات فراگارانتی</div>
                                 <!--end::Label-->
                                 <!--begin::Row-->
                                 <div class="row g-5 mb-11">
                                     <!--end::Col-->
                                     <div class="col-sm-6">
                                         <!--end::Label-->
-                                        <div class="fw-bold fs-7 text-gray-600 mb-1">Issue Date:</div>
+                                        <div class="fw-bold fs-7 text-gray-600 mb-1">شناسه:</div>
                                         <!--end::Label-->
                                         <!--end::Col-->
-                                        <div class="fw-bolder fs-6 text-gray-800">12 Apr 2021</div>
+                                        <div class="fw-bolder fs-6 text-gray-800">{{$}}</div>
                                         <!--end::Col-->
                                     </div>
                                     <!--end::Col-->
