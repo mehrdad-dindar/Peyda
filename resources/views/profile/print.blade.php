@@ -16,7 +16,8 @@
                             <div class="d-flex flex-stack pb-10">
                                 <!--begin::Logo-->
                                 <a href="#">
-                                    <img alt="Logo" src="assets/media/svg/brand-logos/code-lab.svg">
+                                    <img alt="Logo" src="{{URL::asset('front/img/Logo.png')}}">
+                                    {{-- // TODO change logo --}}
                                 </a>
                                 <!--end::Logo-->
                                 <!--begin::Action-->
@@ -184,68 +185,6 @@
                         <!--end::Invoice 2 content-->
                     </div>
                     <!--end::Content-->
-                    <!--begin::Sidebar-->
-                    <div class="m-0">
-                        <!--begin::Invoice 2 sidebar-->
-                        <div class="d-print-none border border-dashed border-gray-300 card-rounded h-lg-100 min-w-md-350px p-9 bg-lighten">
-                            <!--begin::Labels-->
-                            <div class="mb-8">
-                                <span class="badge badge-light-success me-2">Approved</span>
-                                <span class="badge badge-light-warning">Pending Payment</span>
-                            </div>
-                            <!--end::Labels-->
-                            <!--begin::Title-->
-                            <h6 class="mb-8 fw-boldest text-gray-600 text-hover-primary">PAYMENT DETAILS</h6>
-                            <!--end::Title-->
-                            <!--begin::Item-->
-                            <div class="mb-6">
-                                <div class="fw-bold text-gray-600 fs-7">Paypal:</div>
-                                <div class="fw-bolder text-gray-800 fs-6">codelabpay@codelab.co</div>
-                            </div>
-                            <!--end::Item-->
-                            <!--begin::Item-->
-                            <div class="mb-6">
-                                <div class="fw-bold text-gray-600 fs-7">Account:</div>
-                                <div class="fw-bolder text-gray-800 fs-6">Nl24IBAN34553477847370033
-                                    <br>AMB NLANBZTC</div>
-                            </div>
-                            <!--end::Item-->
-                            <!--begin::Item-->
-                            <div class="mb-15">
-                                <div class="fw-bold text-gray-600 fs-7">Payment Term:</div>
-                                <div class="fw-bolder fs-6 text-gray-800 d-flex align-items-center">14 days
-                                    <span class="fs-7 text-danger d-flex align-items-center">
-													<span class="bullet bullet-dot bg-danger mx-2"></span>Due in 7 days</span></div>
-                            </div>
-                            <!--end::Item-->
-                            <!--begin::Title-->
-                            <h6 class="mb-8 fw-boldest text-gray-600 text-hover-primary">PROJECT OVERVIEW</h6>
-                            <!--end::Title-->
-                            <!--begin::Item-->
-                            <div class="mb-6">
-                                <div class="fw-bold text-gray-600 fs-7">Project Name</div>
-                                <div class="fw-bolder fs-6 text-gray-800">SaaS App Quickstarter
-                                    <a href="#" class="link-primary ps-1">View Project</a></div>
-                            </div>
-                            <!--end::Item-->
-                            <!--begin::Item-->
-                            <div class="mb-6">
-                                <div class="fw-bold text-gray-600 fs-7">Completed By:</div>
-                                <div class="fw-bolder text-gray-800 fs-6">Mr. Dewonte Paul</div>
-                            </div>
-                            <!--end::Item-->
-                            <!--begin::Item-->
-                            <div class="m-0">
-                                <div class="fw-bold text-gray-600 fs-7">Time Spent:</div>
-                                <div class="fw-bolder fs-6 text-gray-800 d-flex align-items-center">230 Hours
-                                    <span class="fs-7 text-success d-flex align-items-center">
-													<span class="bullet bullet-dot bg-success mx-2"></span>35$/h Rate</span></div>
-                            </div>
-                            <!--end::Item-->
-                        </div>
-                        <!--end::Invoice 2 sidebar-->
-                    </div>
-                    <!--end::Sidebar-->
                 </div>
                 <!--end::Layout-->
             </div>

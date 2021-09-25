@@ -255,15 +255,23 @@ class WarrantyController extends Controller
         $status = $request->get('status');
         $user_id = $request->get('user_id');
         $warranty_use_id=$request->get('warranty_use_id');
-        if ($status == 1) {
-            $percentage=$request->get('percentage');
-            $descriptions = 'استفاده از فراگارانتی شما تایید شده است.';
-            $warranty_use=WarrantyUse::query()->where('id', '=', $warranty_use_id)->update([
-                'percentage' => $percentage,
-                'status'=>true
-            ]);
-            $done=1;
-        } else {
+        $warranty_id=WarrantyUse::find($warranty_use_id)->Mobile_warranty->id;
+        $warranty=Mobile_warranty::find($warranty_id);
+        $percentage = $request->get('percentage');
+        //dd($warranty->usable_percentage-$percentage);
+        if($warranty->usable_percentage-$percentage>=0) {
+            if ($status == 1) {
+                $descriptions = 'استفاده از فراگارانتی شما تایید شده است.';
+                $warranty_use = WarrantyUse::query()->where('id', '=', $warranty_use_id)->update([
+                    'percentage' => $percentage,
+                    'status' => true
+                ]);
+                $done = 1;
+                $warranty->update([
+                    'usable_percentage'=>$warranty->usable_percentage-$percentage
+                ]);
+            }
+        }else {
             $warranty_use=WarrantyUse::query()->where('id', '=', $warranty_use_id)->update([
                 'status'=>false
             ]);

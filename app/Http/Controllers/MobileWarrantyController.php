@@ -31,6 +31,17 @@ class MobileWarrantyController extends Controller
         return $this->middleware('auth');
     }
 
+    public function print($id)
+    {
+        $warranty=Mobile_warranty::find($id);
+        if($warranty->owner_id==auth()->user()->id) {
+            $wallet = Wallet::where('user_id', \auth()->user()->id)->first();
+            return view('profile.print', compact('wallet'));
+        }else{
+            abort(404);
+        }
+    }
+
     public function bimeh_add($error = '')
     {
         $myPhoneDisplay = '';

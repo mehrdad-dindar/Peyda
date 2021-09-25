@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mobile_warranty;
 use App\Models\NotificationUser;
 use App\Models\Status;
+use App\Models\UserRequest;
 use App\Models\WarrantyUse;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -64,9 +65,20 @@ class Controller extends BaseController
 
     public static function getUsesWarraties()
     {
-        $uses=WarrantyUse::query()->where('status','=',1)->get();
+        $key=0;
+        $uses=WarrantyUse::query()->where('status','=',null)->orWhere('status','=',0)
+            ->get();
 
-        return $uses;
+        foreach ($uses as $use){
+            if($use->userrequests()->exists()) {
+                if ($use->userrequests->toArray()[0]['done'] == 0) {
+                    $key++;
+                }
+            }
+
+        }
+
+        return $key;
     }
 
 }
