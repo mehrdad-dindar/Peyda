@@ -27,14 +27,14 @@
                         @csrf
                         <div class="row">
                             @foreach($imgs as $img)
-                                <label class="col-md-4 col-form-label fw-bold fs-6">{{$img->name}}</label>
-                                <div class="col-md-6">
+                                <label class="col-md-4 col-form-label fw-bold fs-6 mb-2">{{$img->name}}</label>
+                                <div class="col-6 col-md-4 mb-2">
                                     <!--begin::Image input-->
                                     <div class="image-input " data-kt-image-input="true"
-                                         style="background-image: url('{{ URL::asset('uploads/reserved/reserved_image_upload.png') }}'); opacity: 0.7; background-size: 50%; background-position: center">
+                                         style="background-image: url('{{ URL::asset('uploads/reserved/reserved_image_upload.png') }}'); opacity: 0.7; background-position: center">
                                         <!--begin::Preview existing avatar-->
-                                        <div class="image-input-wrapper w-225px h-150px"
-                                             style="background-image: url('{{ URL::asset('uploads/reserved/reserved_image_upload.png') }}'); opacity: 0.7; background-size: 50%; background-position: center"></div>
+                                        <div class="image-input-wrapper w-125       px h-125px"
+                                             style="background-image: url('{{ URL::asset('uploads/reserved/reserved_image_upload.png') }}'); opacity: 0.7; background-position: center"></div>
                                         <!--end::Preview existing avatar-->
                                         <!--begin::Label-->
                                         <label
@@ -45,7 +45,8 @@
                                             <!--begin::Inputs-->
                                             <input type="file" class="disabled-input" name="{{$img->html_id}}"
                                                    accept=".png, .jpg, .jpeg"/>
-                                            <input type="hidden" class="disabled-input" name="type_{{$img->html_id}}" value="{{$img->id}}"
+                                            <input type="hidden" class="disabled-input" name="type_{{$img->html_id}}"
+                                                   value="{{$img->id}}"
                                                    accept=".png, .jpg, .jpeg"/>
                                             <input type="hidden" name="{{$img->html_id}}_remove"/>
                                             <!--end::Inputs-->
@@ -71,8 +72,12 @@
 
                                     <!--end::Image input-->
                                     <!--begin::Hint-->
-                                    <div class="form-text">{{$img->discription}}</div>
+                                    <div class="form-text">{{$img->description}}</div>
                                     <!--end::Hint-->
+                                </div>
+                                <div class="col-6 p-3 col-md-2 mb-2">
+                                    <span class="badge badge-primary">مثال:</span>
+                                    <img src="{{ URL::asset('uploads/reserved/'.$img->sample_URL) }}" class="img-fluid rounded" alt="">
                                 </div>
                                 <div class="separator dashed-h my-5"></div>
                             @endforeach
