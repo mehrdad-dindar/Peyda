@@ -56,6 +56,10 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
+        $phoneName=User::getPhoneName($user);
+        $user['phoneName']=$phoneName;
+        //dd($user['phoneName']);
+
         $userrequest=UserRequest::query()
             ->where([['user_requestable_type','=','App\Models\User'],
                 ['user_requestable_id','=',$id]])->first();
@@ -96,7 +100,6 @@ class UserController extends Controller
             $user=User::query()->where('id', '=', $user_id)->update([
                 'status' => 1
             ]);
-
 
             User::find($user_id)->userrequests()->update(['done'=>1]);
         } else {

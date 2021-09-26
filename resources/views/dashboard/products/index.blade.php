@@ -31,10 +31,8 @@
                                             <th>ردیف</th>
                                             <th>نام</th>
                                             <th>قیمت</th>
-                                            <th>برند</th>
                                             <th>دسته بندی</th>
                                             <th>تصویر</th>
-                                            <th>گالری</th>
                                             <th>تخفیف</th>
                                             <th>ویژگی ها</th>
                                             <th>عملیات</th>
@@ -45,14 +43,9 @@
                                             <tr>
                                                 <td>{{$key+1}}</td>
                                                 <td>{{ $row->name }}</td>
-                                                <td>{{ number_format($row->cost) }}</td>
-                                                <td>{{ $row->brand->name }}</td>
+                                                <td>{{--{{ number_format($row->cost) }}--}}</td>
                                                 <td>{{ $row->category->title }}</td>
                                                 <td><img width="70px" src="{{URL::asset('uploads/products').'/'.$row->image}}" alt="{{$row->name}}" title="{{$row->name}}"></td>
-                                                <td>
-                                                    <a href="{{route('products.pictures.index',$row)}}"
-                                                       class="btn btn-warning">گالری</a>
-                                                </td>
                                                 <td>
                                                     @if(!$row->discount()->exists())
 

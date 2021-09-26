@@ -91,7 +91,7 @@
                                     <div class="form-group">
                                         <div class="checkbox d-inline">
                                             <h3 name="h3_user_name" class="card-title">مدل گوشی</h3>
-                                            <label for="h3_user_name">{{optional($user->phone_model)->name}}</label>
+                                            <label for="h3_user_name">{{$user->phoneName}}</label>
                                         </div>
                                     </div>
 
@@ -105,6 +105,10 @@
                                                     <a class="single_gallery_item col-sm-6 col-xl-3 mb-30"
                                                        @if($user->melli_card!=null) href="{{URL::asset('uploads/melli_cards').'/'.$user->melli_card}}" @endif><img
                                                             @if($user->melli_card!=null) src="{{URL::asset('uploads/melli_cards').'/'.$user->melli_card}}"
+                                                            @endif alt=""></a>
+                                                    <a class="single_gallery_item col-sm-6 col-xl-3 mb-30"
+                                                       @if($user->melli_card_back!=null) href="{{URL::asset('uploads/melli_cards').'/'.$user->melli_card}}" @endif><img
+                                                            @if($user->melli_card_back!=null) src="{{URL::asset('uploads/melli_cards').'/'.$user->melli_card_back}}"
                                                             @endif alt=""></a>
                                                     <!-- Single Gallery Area -->
                                                 </div>
