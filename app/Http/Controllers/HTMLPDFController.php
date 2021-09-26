@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helpers;
 use App\Models\Mobile_warranty;
 use App\Models\Wallet;
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use App\Helpers\MyCustomPDFWithWatermark;
 use TCPDF;
@@ -102,10 +103,16 @@ class HTMLPDFController extends Controller
 // add a page
         $pdf->AddPage();
 
-        $header = '<img src="'.$_SERVER["DOCUMENT_ROOT"]."front/img/Logo.png".'" />';
-        $mylogo=$_SERVER["DOCUMENT_ROOT"]."front/img/Logo.png";
+        $mylogo=$_SERVER["DOCUMENT_ROOT"]."front/img/logo-colored.png";
 // set default header data
-        $pdf->Image($mylogo,95,2,20,20,'PNG','https://peydaservice.com','',true,'300','',false,false,0,false,false,false);
+        $pdf->Image($mylogo,175,4,20,20,'PNG','https://peydaservice.com','',true,'300','',false,false,0,false,false,false);
+        $pdf->SetXY(15, 20);
+
+        $pdf->setRTL(false);
+        $output = '<h5 class="d-inline">'.Verta::createDate().'</h5>';
+        $pdf->writeHTML($output, true, false, false, false, '');
+        $pdf->writeHTML("<hr>", true, false, false, false, '');
+
         $pdf->SetXY(15, 20);
 // Persian and English content
         $htmlpersian = '';
