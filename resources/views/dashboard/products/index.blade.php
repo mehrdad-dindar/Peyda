@@ -30,7 +30,7 @@
                                         <tr>
                                             <th>ردیف</th>
                                             <th>نام</th>
-                                            <th>قیمت</th>
+                                            <th>قیمت (تومان)</th>
                                             <th>دسته بندی</th>
                                             <th>تصویر</th>
                                             <th>تخفیف</th>
@@ -41,16 +41,16 @@
                                         <tbody>
                                         @foreach($products as $key=>$row)
                                             <tr>
-                                                <td>{{$key+1}}</td>
-                                                <td>{{ $row->name }}</td>
-                                                <td>{{--{{ number_format($row->cost) }}--}}</td>
-                                                <td>{{ $row->category->title }}</td>
-                                                <td><img width="70px" src="{{URL::asset('uploads/products').'/'.$row->image}}" alt="{{$row->name}}" title="{{$row->name}}"></td>
-                                                <td>
+                    <td>{{$key+1}}</td>
+                    <td>{{ $row->name }}</td>
+                    <td>@foreach($row->getPrices($row->cost) as $key=>$price) {{number_format($price['cost'])}} @if($key+1!=sizeof($row->getPrices($row['cost']))) - @endif @endforeach</td>
+                    <td>{{ $row->category->title }}</td>
+                    <td><img width="70px" src="{{URL::asset('uploads/products').'/'.$row->image}}" alt="{{$row->name}}" title="{{$row->name}}"></td>
+                    <td>
                                                     @if(!$row->discount()->exists())
 
                                                         <a href="{{route('products.discounts.create',$row)}}"
-                                                           class="btn btn-success">ایجاد تخفیف</a>
+                                                           class="btn btn-success">تخفیفات</a>
 
                                                     @else
 

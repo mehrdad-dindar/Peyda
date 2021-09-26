@@ -75,35 +75,37 @@
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <table id="attr_product">
+                                                            <div id="attr_product">
                                                                 @foreach($product['color_cost'] as $color_cost)
-                                                                    <tr>
-                                                                        <td>
-                                                                            <div class="d-inline-block mr-2">
-                                                                                <input disabled type="number"
-                                                                                       value="{{$color_cost['price']}}"
-                                                                                       placeholder="قیمت" name="cost_old[]"
-                                                                                       id="cost" class="form-control"/>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="padding: 1px;">
-                                                                            <div class="d-inline-block mr-2">
-                                                                                <input disabled type="color"
-                                                                                       value="{{$color_cost['color']}}"
-                                                                                       placeholder="رنگ" name="color_old[]"
-                                                                                       id="color"/>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="padding: 2px;">
-                                                                            <div
-                                                                                class="btn btn-danger remove-attr-product">
-                                                                                حذف
-                                                                            </div>
-                                                                        </td>
+                                                                    <div>
+                                                                        <div class="d-inline-block mr-2">
+                                                                            <input disabled type="number"
+                                                                                   value="{{$color_cost['price']}}"
+                                                                                   placeholder="قیمت" name="cost_old[]"
+                                                                                   id="cost" class="form-control"/>
+                                                                            <input type="hidden"
+                                                                                   value="{{$color_cost['price']}}"
+                                                                                   placeholder="قیمت" name="cost_old[]"
+                                                                                   id="cost" class="form-control"/>
+                                                                        </div>
 
-                                                                    </tr>
+                                                                        <div class="d-inline-block mr-2">
+                                                                            <input disabled type="color"
+                                                                                   value="{{$color_cost['color']}}"
+                                                                                   placeholder="رنگ" name="color_old[]"
+                                                                                   id="color"/>
+                                                                            <input type="hidden"
+                                                                                   value="{{$color_cost['color']}}"
+                                                                                   placeholder="رنگ" name="color_old[]"
+                                                                                   id="color"/>
+                                                                        </div>
+                                                                        <div onclick="delete_row(this)"
+                                                                            class="btn btn-danger remove-attr-product">
+                                                                            حذف
+                                                                        </div>
+                                                                    </div>
                                                                 @endforeach
-                                                            </table>
+                                                            </div>
                                                             <div class="partners">
                                                                 <div class="partner pb-2 d-flex align-items-center">
                                                                     <div class="d-inline-block mr-2">
@@ -160,13 +162,14 @@
     <script src="{{URL::asset('admin/js/default-assets/notification-active.js')}}"></script>
     <script>
 
-        $("#attr_product").on("click", ".remove-attr-product", function () {
-            $(this).closest("tr").remove();
-        });
+        function delete_row(e) {
+            e.parentElement.remove();
+        }
 
     </script>
 
     <script>
+
         $(document).ready(function () {
 
             var data_fo = $('.partner').html();

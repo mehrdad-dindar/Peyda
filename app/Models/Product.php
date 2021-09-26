@@ -93,4 +93,14 @@ class Product extends Model
         return json_encode((object)$result);
 
     }
+
+    public static function getPrices($json)
+    {
+        $result=array();
+        $array=json_decode($json);
+        foreach ($array as $arr){
+            array_push($result,['cost'=>$arr->cost,'color'=>$arr->color]);
+        }
+        return $result;
+    }
 }

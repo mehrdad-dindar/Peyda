@@ -19,6 +19,7 @@ class ProductController extends Controller
      */
     public function index()
     {
+
         return view('dashboard.products.index',[
                 'products'=>Product::all()
             ]);
@@ -118,7 +119,7 @@ class ProductController extends Controller
     public function update(ProductUpdateRequest $request, Product $product)
     {
 
-        dd($request->all());
+        //dd($request->all());
         $costs = array_merge($request['cost'], $request['cost_old']);
         $colors = array_merge($request['color'], $request['color_old']);
         $cost=Product::saveColorCostJson($costs,$colors);
