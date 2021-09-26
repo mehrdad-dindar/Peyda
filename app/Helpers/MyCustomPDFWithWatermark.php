@@ -15,10 +15,10 @@ class MyCustomPDFWithWatermark extends TCPDF {
         $this->SetAutoPageBreak(false, 0);
 
         // Define the path to the image that you want to use as watermark.
-        $img_file = $_SERVER["DOCUMENT_ROOT"]."front/img/Logo.png";
+        $img_file = $_SERVER["DOCUMENT_ROOT"]."front/img/999999.png";
 
         // Render the image
-        $this->Image($img_file, 0, 0, 223, 280, '', '', '', false, 300, '', false, false, 0);
+        $this->Image($img_file, 5, 50, 200, 200, '', '', '', false, 300, '', false, false, 0);
 
         // Restore the auto-page-break status
         $this->SetAutoPageBreak($auto_page_break, $bMargin);

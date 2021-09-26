@@ -9,6 +9,7 @@ use App\Models\Setting;
 use App\Models\User;
 use App\Models\UserRequest;
 use App\Traits\Notifications;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -25,6 +26,16 @@ class UserController extends Controller
             ->leftJoin('notifications as n','n.id','=','un.notification_id')->where([['users.id', '!=',auth()->user()->id],['users.user_type','!=','admin']])->groupBy('users.id')->get(['users.*','n.sender_id']);*/
 
         $users=User::query()->where('role_id','!=',1)->orderBy('id','desc')->get();
+
+        foreach ($users as $user){
+            $userrequest=$user->userrequests()->first();
+            dd($userrequest->updated_at->toArray());
+            if($user->updated_at){
+
+            }
+        }
+
+
         /*$users=User::find(2);
         dd($users=$users->userrequests->toArray());*/
 
@@ -75,6 +86,7 @@ class UserController extends Controller
     {
         $status = $request->get('status');
         $user_id = $request->get('user_id');
+
         if ($status == 1) {
             $descriptions = 'احراز هویت شما تایید شده است.';
             $user=User::query()->where('id', '=', $user_id)->update([
@@ -118,6 +130,9 @@ class UserController extends Controller
             //dd($notification);
         }
 
+        $user=User::find($user_id);
+
+        $user->userrequests()->update(['updated_at'=>Carbon::now()->toDateTimeString()]);
         return redirect()->back()->with('success', 'تغییرات با موفقیت اعمال شد.');
     }
 
