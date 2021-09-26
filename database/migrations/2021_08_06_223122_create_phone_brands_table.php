@@ -16,8 +16,11 @@ class CreatePhoneBrandsTable extends Migration
         Schema::create('phone_brands', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->string('logo')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
+
     }
 
     /**

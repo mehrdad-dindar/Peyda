@@ -66,7 +66,7 @@
     src: url('fonts/iransans/eot/IRANSansWeb_Black.eot');
     src: url('fonts/iransans/eot/IRANSansWeb_Black.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
     url('fonts/iransans/woff2/IRANSansWeb_Black.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
-	
+
 	url('fonts/iransans/woff/IRANSansWeb_Black.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
     url('fonts/iransans/ttf/IRANSansWeb_Black.ttf') format('truetype');
 }
@@ -313,7 +313,7 @@
     src: url('fonts/dana/eot/dana-medium.eot');
     src: url('fonts/dana/eot/dana-medium.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
     url('fonts/dana/woff2/dana-medium.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
-	
+
 	url('fonts/dana/woff/dana-medium.woff') format('woff');  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
 }
 @font-face {
@@ -401,7 +401,7 @@
     font-family: dana;
     font-style: italic;
     font-weight: 500;
-	
+
 	src: url('fonts/dana/eot/dana-mediumitalic.eot');
     src: url('fonts/dana/eot/dana-mediumitalic.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
     url('fonts/dana/woff2/dana-mediumitalic.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
@@ -482,7 +482,7 @@
 @font-face {
     font-family: anjoman;
     font-style: normal;
-	
+
 	font-weight: bold;
     src: url('fonts/anjoman/eot/Anjoman-Bold.eot?#') format('eot'),  /* IE6ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ8 */
     url('fonts/anjoman/woff/Anjoman-Bold.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
@@ -2029,7 +2029,10 @@ button:not(:disabled) {
  cursor:not-allowed
 }
 .avatar.avatar-ex-sm {
- max-height:25px
+    max-height:25px
+}
+.avatar.avatar-ex-sm.nokarto {
+    max-height:40px !important
 }
 .avatar.avatar-md-sm {
  height:45px;
@@ -2814,7 +2817,7 @@ padding: 60px 0
 #topnav .navigation-menu>li:hover>a,
 #topnav .navigation-menu>li.active>a {
  color:#2f55d4 !important
-}
+}/*
 #topnav .navigation-menu>li>a {
  display:block;
  color:#3c4858;
@@ -2829,11 +2832,11 @@ padding: 60px 0
  font-family:iransansdn;
  padding-right:15px;
  padding-left:15px
-}
+}*/
 #topnav .navigation-menu>li>a:hover,
 #topnav .navigation-menu>li>a:active {
  color:#2f55d4
-}
+}/*
 #topnav .navigation-menu .has-submenu .menu-arrow {
  border:solid #3c4858;
  border-radius:0.5px;
@@ -2847,7 +2850,7 @@ padding: 60px 0
  transition:all 0.5s;
  left:-1px;
  top:30px
-}
+}*/
 #topnav .navigation-menu .has-submenu:hover .menu-arrow {
  -webkit-transform:rotate(-225deg);
  transform:rotate(-225deg)
@@ -5372,3 +5375,76 @@ ul .t-ltr-dark {
   display:none
  }
 }
+.bg-custom-gray{
+    background: #202942;
+}
+.defaultscroll.sticky .navigation-menu > li > a{
+    display: block;
+    color: #fff;
+    font-size: 13px;
+    background-color: transparent !important;
+    font-weight: 700;
+    letter-spacing: 0px;
+    line-height: 24px;
+    text-transform: uppercase;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    font-family: iransansdn;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.defaultscroll.sticky.nav-sticky .navigation-menu > li > a{
+    display: block;
+    color: #3c4858;
+    font-size: 13px;
+    background-color: transparent !important;
+    font-weight: 700;
+    letter-spacing: 0px;
+    line-height: 24px;
+    text-transform: uppercase;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    font-family: iransansdn;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.defaultscroll.sticky .navigation-menu .has-submenu .menu-arrow {
+    border: solid #fff;
+    border-top-width: medium;
+    border-right-width: medium;
+    border-bottom-width: medium;
+    border-left-width: medium;
+    border-radius: 0.5px;
+    border-width: 0 0 2px 2px;
+    display: inline-block;
+    padding: 3px;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    position: absolute;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    left: -1px;
+    top: 30px;
+}
+.defaultscroll.sticky.nav-sticky .navigation-menu .has-submenu .menu-arrow {
+    border: solid #3c4858;
+    border-top-width: medium;
+    border-right-width: medium;
+    border-bottom-width: medium;
+    border-left-width: medium;
+    border-radius: 0.5px;
+    border-width: 0 0 2px 2px;
+    display: inline-block;
+    padding: 3px;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    position: absolute;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    left: -1px;
+    top: 30px;
+}
+
+
