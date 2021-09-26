@@ -15,10 +15,10 @@ use Elibyy\TCPDF\Facades\TCPDF as PDF;
 
 class HTMLPDFController extends Controller
 {
-    /*public function __construct()
+    public function __construct()
     {
         $this->middleware(['auth']);
-    }*/
+    }
 //    public function htmlPdf($id)
 //    {
 //        $warranty=self::getPrintWarranty($id)['warranty'];
