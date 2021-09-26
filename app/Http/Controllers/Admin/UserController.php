@@ -27,12 +27,16 @@ class UserController extends Controller
 
         $users=User::query()->where('role_id','!=',1)->orderBy('id','desc')->get();
 
-        foreach ($users as $user){
+        foreach ($users as $key=>$user){
             $userrequest=$user->userrequests()->first();
-            /*dd($userrequest->updated_at->toArray());
-            if($user->updated_at){
+            $userrequest_update=$userrequest->updated_at;
+            $user_update=$user->updated_at;
 
-            }*/
+            if($userrequest_update->lte($user_update)){
+                $users[$key]['new']=1;
+            }else{
+                $users[$key]['new']=0;
+            }
         }
 
 
