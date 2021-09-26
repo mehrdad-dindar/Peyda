@@ -29,10 +29,10 @@ class UserController extends Controller
 
         foreach ($users as $user){
             $userrequest=$user->userrequests()->first();
-            /*dd($userrequest->updated_at->toArray());
+            dd($userrequest->updated_at->toArray());
             if($user->updated_at){
 
-            }*/
+            }
         }
 
 

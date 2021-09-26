@@ -109,7 +109,7 @@ class HTMLPDFController extends Controller
         $pdf->SetXY(15, 20);
 
         $pdf->setRTL(false);
-        $output = '<h5 class="d-inline">'.Verta::createDate().'</h5>';
+        $output = '<h5 class="d-inline">'.str_replace('-','/',Verta::createDate()).'</h5>';
         $pdf->writeHTML($output, true, false, false, false, '');
         $pdf->writeHTML("<hr>", true, false, false, false, '');
 
