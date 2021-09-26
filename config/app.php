@@ -234,7 +234,7 @@ return [
         'Payment' => Shetabit\Payment\Facade\Payment::class,
         'Helpers' => App\Helpers\Helpers::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
-
+        'PDF' => Elibyy\TCPDF\Facades\TCPDF::class
     ],
 
 ];

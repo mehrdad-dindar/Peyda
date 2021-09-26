@@ -15,6 +15,7 @@
                                     <table class="table text-center">
                                         <thead>
                                         <tr>
+                                            <th>ردیف</th>
                                             <th>کاربر</th>
                                             <th>ایمیل</th>
                                             <th>وضعیت</th>
@@ -24,8 +25,9 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($users as $user)
+                                        @foreach($users as $key=>$user)
                                         <tr>
+                                            <td>{{$key+1}}<h6 class="d-inline"><span class="badge ml-1 fw-bolder badge-danger">جدید</span></h6></td>
                                             <td>
                                                 <img class="chat-img ml-2 border-radius-50"
                                                                            src="{{ $user->avatar ? URL::asset('uploads/avatars/'.$user->avatar) : URL::asset('admin/img/member-img/1.png') }}" alt="{{ $user->getFullNameAttribute($user) }}">
@@ -53,7 +55,7 @@
 
                                                         <a style="color: white;" class="btn btn-secondary btn-sm">احراز هویت</a>
                                                     @endif
-                                                @elseif($user->status==1))
+                                                @elseif($user->status==1)
 
                                                     <a href="{{ route('dashboard') }}/users/edit/{{$user->id}}/1" class="btn btn-primary btn-sm">شناسنامه</a>
                                                 @endif
