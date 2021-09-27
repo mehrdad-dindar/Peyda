@@ -48,12 +48,12 @@ class MobileWarrantyController extends Controller
 
     public function bimeh_add($error = '')
     {
-        $myPhoneDisplay = '';
+        $pb_name = Phone_model::find(auth()->user()->phone_model_id)->phone_brand;
+        $myPhoneDisplay = $pb_name->name . " / " . auth()->user()->phone_model->name;
 
         //dd(auth()->user()->phone_model_other);
         if (auth()->user()->phone_model_other != null) {
             //dd($myPhone->other_model);
-            $pb_name = Phone_model::find(auth()->user()->phone_model_id)->phone_brand;
             $myPhoneDisplay = $pb_name->name . " / " . auth()->user()->phone_model_other;
         }
 

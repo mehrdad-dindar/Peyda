@@ -123,4 +123,29 @@
 <!--Note: All init js like tiny slider, counter, countdown, maintenance, lightbox, gallery, swiper slider, aos animation etc.-->
 <script src="{{ URL::asset('main/js/app.js')}}"></script>
 <!--Note: All important javascript like page loader, menu, sticky menu, menu-toggler, one page menu etc. -->
+<script>
+    function windowScroll() {
+        const navbar = document.getElementById("topnav");
+        const logo = document.getElementById("img_logo");
+        const topIMG = "{{ URL::asset('front/img/logo-white-1.png') }}";
+        const sclIMG = "{{ URL::asset('front/img/logo-colored-1.png') }}";
+        if(navbar!=null){
+            if (
+                document.body.scrollTop >= 50 ||
+                document.documentElement.scrollTop >= 50
+            ) {
+                navbar.classList.add("nav-sticky");
+                logo.src= sclIMG;
+            } else {
+                navbar.classList.remove("nav-sticky");
+                logo.src= topIMG;
+            }
+        }
+    }
+
+    window.addEventListener('scroll', (ev) => {
+        ev.preventDefault();
+        windowScroll();
+    })
+</script>
 @yield('custom_js')

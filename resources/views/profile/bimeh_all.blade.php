@@ -60,7 +60,7 @@
                                 </td>
 
                                 <td>
-                                    <span class="badge badge-{{$row->status->color}}">{{$row->status->text}}</span>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_{{$row->id}}" class="badge badge-{{$row->status->color}}">{{$row->status->text}}</a>
                                 </td>
                                 <td class="text-end">
                                     @if($row->status->id==4 || $row->status->id==6)
@@ -617,7 +617,7 @@
 																				<span
                                                                                     class="fs-3 fw-bolder text-gray-900 mb-2 d-block">آپلود تصاویر</span>
                                                                                 <span
-                                                                                    class="fw-bold fs-4 text-muted">فعال سازی فراگارانتی {{$row->phone_model->phone_brand->name. " / " . $row->phone_model->name}}</span>
+                                                                                    class="fw-bold fs-4 text-muted">فعال سازی فراگارانتی {{$row->phone_name}}</span>
 																			</span>
                                                                 <!--end::Info-->
 																		</span>

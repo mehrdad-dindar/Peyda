@@ -127,34 +127,34 @@
                                     <!--end::Label-->
                                 </div>
                                 <!--end::Step 3-->
-{{--
-                                <!--begin::Step 4-->
-                                <div class="stepper-item mx-2 my-4" data-kt-stepper-element="nav">
-                                    <!--begin::Line-->
-                                    <div class="stepper-line w-40px"></div>
-                                    <!--end::Line-->
+                            {{--
+                                                            <!--begin::Step 4-->
+                                                            <div class="stepper-item mx-2 my-4" data-kt-stepper-element="nav">
+                                                                <!--begin::Line-->
+                                                                <div class="stepper-line w-40px"></div>
+                                                                <!--end::Line-->
 
-                                    <!--begin::Icon-->
-                                    <div class="stepper-icon w-40px h-40px">
-                                        <i class="stepper-check fas fa-check"></i>
-                                        <span class="stepper-number">4</span>
-                                    </div>
-                                    <!--begin::Icon-->
+                                                                <!--begin::Icon-->
+                                                                <div class="stepper-icon w-40px h-40px">
+                                                                    <i class="stepper-check fas fa-check"></i>
+                                                                    <span class="stepper-number">4</span>
+                                                                </div>
+                                                                <!--begin::Icon-->
 
-                                    <!--begin::Label-->
-                                    <div class="stepper-label">
-                                        <h3 class="stepper-title">
-                                            آپلود عکس موبایل
-                                        </h3>
+                                                                <!--begin::Label-->
+                                                                <div class="stepper-label">
+                                                                    <h3 class="stepper-title">
+                                                                        آپلود عکس موبایل
+                                                                    </h3>
 
-                                        <div class="stepper-desc">
-                                            Description
-                                        </div>
-                                    </div>
-                                    <!--end::Label-->
-                                </div>
-                                <!--end::Step 4-->--}}
-                                <!--begin::Step 4-->
+                                                                    <div class="stepper-desc">
+                                                                        Description
+                                                                    </div>
+                                                                </div>
+                                                                <!--end::Label-->
+                                                            </div>
+                                                            <!--end::Step 4-->--}}
+                            <!--begin::Step 4-->
                                 <div class="stepper-item mx-2 my-4" data-kt-stepper-element="nav">
                                     <!--begin::Line-->
                                     <div class="stepper-line w-40px"></div>
@@ -314,10 +314,11 @@
                                                                 <label for="" class="form-label">انتخاب برند</label>
                                                                 <select
                                                                     name="new_phone_brand" id="new_phone_brand"
+                                                                    data-dropdown-parent="#kt_modal_create_project"
                                                                     aria-label="انتخاب برند"
                                                                     data-control="select2"
                                                                     data-placeholder="انتخاب برند"
-                                                                    class="form-select form-select-solid form-select-lg fw-bold">
+                                                                    class="disabled-input form-select form-select-solid form-select-lg fw-bold">
                                                                     <option></option>
                                                                     @foreach($brands as $row)
                                                                         <option
@@ -331,6 +332,7 @@
                                                                 <label for="" class="form-label">انتخاب مدل</label>
                                                                 <select
                                                                     name="new_phone_model" id="new_phone_model"
+                                                                    data-dropdown-parent="#kt_modal_create_project"
                                                                     aria-label="انتخاب مدل"
                                                                     data-control="select2"
                                                                     data-placeholder="انتخاب مدل"
@@ -341,21 +343,23 @@
                                                                             value="{{$model->id}}">{{$model->name}}</option>
                                                                     @endforeach
                                                                 </select>
-                                                                <input type='hidden' name='other_model' id='other_model'>
+                                                                <input type='hidden' name='other_model'
+                                                                       id='other_model'>
 
                                                             </div>
                                                         </div>
-                                                    </div>
-
-                                                    <div class="my_other_model row mb-6 d-none">
-                                                        <!--begin::Label-->
-                                                        <label class="col-lg-4 col-form-label fw-bold fs-6">مدل گوشی جدید</label>
-                                                        <!--end::Label-->
-                                                        <!--begin::Col-->
-                                                        <div class="col-lg-6 fv-row">
-                                                            <input type="text" name="other_phone_model" class="disabled-input form-control form-control-lg form-control-solid">
+                                                        <div class="my_other_model row mb-6" style="display:none;">
+                                                            <!--begin::Label-->
+                                                            <label class="col-lg-4 col-form-label fw-bold fs-6">مدل گوشی
+                                                                جدید</label>
+                                                            <!--end::Label-->
+                                                            <!--begin::Col-->
+                                                            <div class="col-lg-6 fv-row">
+                                                                <input type="text" name="other_phone_model"
+                                                                       class="disabled-input form-control form-control-lg form-control-solid">
+                                                            </div>
+                                                            <!--end::Col-->
                                                         </div>
-                                                        <!--end::Col-->
                                                     </div>
                                                 </div>
                                                 <!--end::Input group-->
@@ -387,10 +391,11 @@
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
                                                     <select id="cc_price_select" class="form-select form-select-solid"
-                                                            data-control="select2"
-                                                            data-hide-search="true" data-placeholder="Select..."
+                                                            aria-label="انتخاب بازه قیمت دستگاه" data-control="select2"
+                                                            data-placeholder="انتخاب بازه قیمت دستگاه"
+                                                            data-dropdown-parent="#kt_modal_create_project"
                                                             name="price_range">
-                                                        <option></option>
+                                                        <option value="">انتخاب بازه قیمت دستگاه</option>
                                                         @foreach($commitment_ceilings as $cc)
                                                             <option value="{{$cc->id}}"
                                                                     data-price="{{$cc->price}}">{{$cc->price_range}}</option>
@@ -471,7 +476,8 @@
                                                 <div class="d-flex flex-stack flex-grow-1">
                                                     <!--begin::Content-->
                                                     <div class="fw-bold">
-                                                        <h4 class="text-primary fw-bolder">بیمه آتش سوزی منزل مسکونی</h4>
+                                                        <h4 class="text-primary fw-bolder">بیمه آتش سوزی منزل
+                                                            مسکونی</h4>
                                                         <div class="fs-6 text-primary">تا سقف 50 میلیون تومان</div>
                                                     </div>
                                                     <!--end::Content-->
@@ -530,6 +536,7 @@
                                                             aria-label="انتخاب مبلغ"
                                                             data-control="select2"
                                                             data-placeholder="انتخاب مبلغ"
+                                                            data-dropdown-parent="#kt_modal_create_project"
                                                             class="form-select form-select-solid form-select-lg fw-bold">
                                                         <option></option>
                                                         @foreach($fire_commitment_ceilings as $fcc)
@@ -599,9 +606,9 @@
     <script src="{{ URL::asset('js/jquery.number.min.js')}}"></script>
     <script src="{{ URL::asset('js/bimeh_add.js')}}"></script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
 
-            $('#new_phone_brand').on('change',function(){
+            $('#new_phone_brand').on('change', function () {
 
                 var getUrl = window.location;
 
@@ -609,34 +616,27 @@
                 //alert(new_val);
                 $.ajax({
                     type: "POST",
-                    url: getUrl .protocol + "//" + getUrl.host+"/panel/mobile_change",
-                    cache:false,
-                    data: {"_token": "{{ csrf_token() }}"
-                    ,"id" : new_val},
+                    url: getUrl.protocol + "//" + getUrl.host + "/panel/mobile_change",
+                    cache: false,
+                    data: {
+                        "_token": "{{ csrf_token() }}"
+                        , "id": new_val
+                    },
                     error: function (xhr) {
                         alert(xhr.responseText);
                     },
-                    success: function(data) {
-                    // Check the output of ajax call on firebug console
-                    //console.log(data);
-                    //alert(data);
-                    var obj = jQuery.parseJSON(data);
-                    $('#new_phone_model').html(obj[0]);
-                    //alert(data);
-                    $('#other_model').val(obj[1]);
+                    success: function (data) {
+                        // Check the output of ajax call on firebug console
+                        //console.log(data);
+                        //alert(data);
+                        var obj = jQuery.parseJSON(data);
+                        $('#new_phone_model').html(obj[0]);
+                        //alert(data);
+                        $('#other_model').val(obj[1]);
                     }
                 });
 
             });
-        });
-        $('#new_phone_model').on('change', function() {
-            var other_model = $('#new_phone_model').find(':selected').val();
-
-            if (other_model === 'others') {
-                $('.my_other_model').removeClass('d-none');
-            }else {
-                $('.my_other_model').addClass('d-none');
-            }
         });
     </script>
     @if(isset($error))
