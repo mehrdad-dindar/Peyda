@@ -28,7 +28,8 @@ class ProductUpdateRequest extends FormRequest
             'slug'=>['required','alpha_dash'],
             'category_id'=>['required','exists:categories,id'],
             'brand_id'=>['required','exists:brands,id'],
-            'cost'=>['required','min:1000','integer'],
+            'cost'=>['required'],
+            'color'=>['required'],
             'image'=>['nullable','mimes:jpg,jpeg,png,mpeg','min:5','max:4096'],
             'description'=>['required']
         ];

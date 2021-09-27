@@ -27,11 +27,15 @@ class UserController extends Controller
 
         $users=User::query()->where('role_id','!=',1)->orderBy('id','desc')->get();
 
-        foreach ($users as $user){
+        foreach ($users as $key=>$user){
             $userrequest=$user->userrequests()->first();
-            dd($userrequest->updated_at->toArray());
-            if($user->updated_at){
+            $userrequest_update=$userrequest->updated_at;
+            $user_update=$user->updated_at;
 
+            if($userrequest_update->lte($user_update)){
+                $users[$key]['new']=1;
+            }else{
+                $users[$key]['new']=0;
             }
         }
 
@@ -51,6 +55,10 @@ class UserController extends Controller
     public function create($id,$auth='')
     {
         $user = User::find($id);
+
+        $phoneName=User::getPhoneName($user);
+        $user['phoneName']=$phoneName;
+        //dd($user['phoneName']);
 
         $userrequest=UserRequest::query()
             ->where([['user_requestable_type','=','App\Models\User'],
@@ -92,7 +100,6 @@ class UserController extends Controller
             $user=User::query()->where('id', '=', $user_id)->update([
                 'status' => 1
             ]);
-
 
             User::find($user_id)->userrequests()->update(['done'=>1]);
         } else {

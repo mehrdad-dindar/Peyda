@@ -28,9 +28,10 @@ class ProductRequest extends FormRequest
             'slug'=>['required','unique:products,slug','alpha_dash'],
             'category_id'=>['required','exists:categories,id'],
             'brand_id'=>['required','exists:brands,id'],
-            'cost'=>['required','min:1000','integer'],
+            'cost'=>['required'],
             'image'=>['required','mimes:jpg,jpeg,png,mpeg','min:5','max:4096'],
-            'description'=>['required']
+            'description'=>['required'],
+            'color'=>['required'],
         ];
     }
 }

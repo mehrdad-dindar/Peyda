@@ -83,4 +83,24 @@ class Product extends Model
             ->withPivot(['value'])
             ->withTimestamps();
     }
+
+    public static function saveColorCostJson($costs,$color)
+    {
+        $result=array();
+        foreach ($costs as $key=>$cost){
+            array_push($result,['cost'=>$cost,'color'=>$color[$key]]);
+        }
+        return json_encode((object)$result);
+
+    }
+
+    public static function getPrices($json)
+    {
+        $result=array();
+        $array=json_decode($json);
+        foreach ($array as $arr){
+            array_push($result,['cost'=>$arr->cost,'color'=>$arr->color]);
+        }
+        return $result;
+    }
 }
