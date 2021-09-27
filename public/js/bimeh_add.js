@@ -34,3 +34,13 @@ stepper.on("kt.stepper.next", function (stepper) {
 stepper.on("kt.stepper.previous", function (stepper) {
     stepper.goPrevious(); // go previous step
 });
+
+$('#new_phone_model').on('change', function () {
+    var other_model = $('#new_phone_model').find(':selected').val();
+
+    if (other_model === 'others') {
+        $('.my_other_model').slideToggle();
+    } else {
+        $('.my_other_model').slideUp("slow");
+    }
+});
