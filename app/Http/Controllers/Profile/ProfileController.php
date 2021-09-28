@@ -139,11 +139,8 @@ class ProfileController extends Controller
             ->where([['user_requestable_type','=','App\Models\User'],
                 ['user_requestable_id','=',$user->id]])->first();
 
-        if($userrequest!=null){
-            $user->userrequests()->update(['updated_at'=>Carbon::now()->toDateTimeString()]);
-            //dd('if');
-        }else{
-
+        if($userrequest==null){
+            //dd('else');
             $userrequest1= new UserRequest();
             $user->userrequests()->save($userrequest1);
         }

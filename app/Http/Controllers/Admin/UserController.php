@@ -32,10 +32,15 @@ class UserController extends Controller
             $userrequest_update=$userrequest->updated_at;
             $user_update=$user->updated_at;
 
-            if($userrequest_update->lte($user_update)){
-                $users[$key]['new']=1;
-            }else{
-                $users[$key]['new']=0;
+                if ($userrequest_update->lte($user_update)) {
+                    if ($userrequest->done == 0) {
+                        $users[$key]['new'] = 1;
+                    } else {
+                        $users[$key]['new'] = 0;
+
+                    }
+                }else {
+                    $users[$key]['new'] = 0;
             }
         }
 
@@ -110,32 +115,18 @@ class UserController extends Controller
 
         $notifUser=Notification::query()->join('user_notifications as un','un.notification_id','=','notifications.id')->where([['un.receiver_id','=',$user_id],['notifications.type','=',1]])->first(['notifications.id']);
 
-        if(sizeof($notifUser->toArray())==0) {
+        $notif=new Notification();
+        $notif->setSenderId($admin_id);
+        $notif->setType(1);
+        $notif->setTitle('احراز هویت');
+        $notif->setBody($descriptions);
+        $notif->setLink($link);
 
-            //dd('if');
+        $userNotif=new NotificationUser();
+        $userNotif->setReceiverId($user_id);
 
-            $notif=new Notification();
-            $notif->setSenderId($admin_id);
-            $notif->setType(1);
-            $notif->setTitle('احراز هویت');
-            $notif->setBody($descriptions);
-            $notif->setLink($link);
+        $this->addNotif($notif,$userNotif);
 
-            $userNotif=new NotificationUser();
-            $userNotif->setReceiverId($user_id);
-
-            $this->addNotif($notif,$userNotif);
-
-        }else{
-
-            $notification = Notification::find($notifUser->id)->update([
-
-                'body' => $descriptions,
-                'title'=>'احراز هویت'
-
-            ]);
-            //dd($notification);
-        }
 
         $user=User::find($user_id);
 

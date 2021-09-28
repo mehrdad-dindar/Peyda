@@ -35,7 +35,7 @@
 									<small class="text-muted fs-7 fw-bold my-1 ms-1">
                                         @if(auth()->user()->status==0)
                                             <div class="col-lg-8 d-flex align-items-center">
-                                                <span class="badge badge-danger">جهت استفاده از خدمات، پروفایل کاربری خود را تکمیل کنید.</span>
+                                                <span style="cursor: pointer" onclick="window.location.href='{{route('edit_profile')}}'" class="badge badge-danger">جهت استفاده از خدمات، پروفایل کاربری خود را تکمیل کنید.</span>
 
                                             </div>
                                         @endif</small>

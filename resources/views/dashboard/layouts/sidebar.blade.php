@@ -58,7 +58,7 @@
                     <li class="treeview">
                         <a href="javascript:void(0)"><i class="zmdi zmdi-apps"></i> <span>کاربران</span> <i class="fa fa-angle-left"></i></a>
                         <ul class="treeview-menu">
-                            <li><a href="{{ route('dashboard') }}/users">همه کاربران</a></li>
+                            <li><a href="{{ route('dashboard') }}/users"> همه کاربران @if(\App\Http\Controllers\Controller::getNewUsersNum()>0) <span class="badge badge-pill badge-danger" style="display: inline;width: max-content;flex: unset;">{{\App\Http\Controllers\Controller::getNewUsersNum()}}</span> @endif</a></li>
                             <li><a href="#">ایجاد کاربر</a></li>
                             <li><a href="{{ route('profile') }}">پروفایل من</a></li>
                         </ul>
