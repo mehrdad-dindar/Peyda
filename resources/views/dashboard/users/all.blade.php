@@ -27,7 +27,7 @@
                                         <tbody>
                                         @foreach($users as $key=>$user)
                                         <tr>
-                                            <td>{{$key+1}}<h6 class="d-inline">@if($user->new==1)<span class="badge ml-1 fw-bolder badge-danger">جدید</span>@endif</h6></td>
+                                            <td>{{$key+1}}<h6 class="d-inline"><span class="badge ml-1 fw-bolder badge-danger">جدید</span></h6></td>
                                             <td>
                                                 <img class="chat-img ml-2 border-radius-50"
                                                                            src="{{ $user->avatar ? URL::asset('uploads/avatars/'.$user->avatar) : URL::asset('admin/img/member-img/1.png') }}" alt="{{ $user->getFullNameAttribute($user) }}">

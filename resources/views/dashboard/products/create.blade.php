@@ -13,26 +13,27 @@
         @endforeach
     @endif
     <div class="main-content">
-        <!-- Basic Form area Start -->
-        <div class="container-fluid">
-            <!-- Form row -->
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-7 box-margin">
-                    <div class="contact-form-area">
-                        <div class="card">
-                            <div class="card-body">
-                                <form method="post" action="{{route('products.store')}}" enctype="multipart/form-data">
-                                    @csrf
-                                    <h4 class="card-title">فرم محصول</h4>
-                                    <div class="container">
+    <!-- Basic Form area Start -->
+    <div class="container-fluid">
+        <!-- Form row -->
+        <div class="row">
+            <div class="col-12 box-margin">
+                <div class="contact-form-area">
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="post" action="{{route('products.store')}}" enctype="multipart/form-data">
+                                @csrf
+                                <h4 class="card-title">فرم محصول</h4>
+                                <div class="container">
 
                                         <label for="slug">عنوان</label>
-                                        <input type="text" id="name" name="name" class="form-control"
-                                               placeholder="عنوان">
+                                        <input type="text" id="name" name="name"  class="form-control" placeholder="عنوان">
 
                                         <label for="slug">نامک</label>
-                                        <input type="text" id="slug" name="slug" class="form-control"
-                                               placeholder="نامک">
+                                        <input type="text" id="slug" name="slug"  class="form-control" placeholder="نامک">
+
+                                        <label for="cost">قیمت</label>
+                                        <input type="number" id="cost" name="cost"  class="form-control mb-20" placeholder="قیمت">
 
                                         <label for="country">دسته بندی</label>
                                         <select id="category_id" name="category_id" class="form-control">
@@ -50,81 +51,33 @@
                                             @endforeach
                                         </select>
 
-                                        <div class="form-group mb-10">
+                                    <div class="form-group mb-10">
 
-                                            <label for="description">توضیحات</label>
-                                            <textarea name="description" id="description"
-                                                      class="form-control"></textarea>
-
-                                        </div>
-
-                                        <label for="image">عکس</label>
-                                        <input type="file" name="image" id="image" class="form-control">
-                                        <div class="form-group add-field mt-5">
-                                            <label>قیمت و رنگ</label>
-                                            <div class="partners">
-                                                <div class="partner d-flex align-items-center">
-                                                    <div class="d-inline-block mr-2">
-                                                        <input type="number" placeholder="قیمت" name="cost[]"
-                                                               id="cost" class="form-control"/>
-                                                    </div>
-                                                    <div class="d-inline-block mr-3">
-                                                        <input type="color" placeholder="رنگ" name="color[]"
-                                                               id="color"/>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div class="btn btn-success add-more" style="margin-top: 10px;"><span>+ بیشتر</span>
-                                            </div>
-                                        </div>
-
-                                        <input class="btn btn-primary btn-block mt-15" type="submit" value="ارسال">
-
+                                        <label for="description">توضیحات</label>
+                                        <textarea name="description" id="description" class="form-control"></textarea>
 
                                     </div>
-                                </form>
-                            </div>
+
+                                    <label for="image">عکس</label>
+                                    <input type="file" name="image" id="image" class="form-control">
+
+                                    <input class="btn btn-primary btn-block mt-15" type="submit" value="ارسال">
+
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-
             </div>
 
         </div>
+
     </div>
+</div>
 @endsection
 @section('custom_js')
     <script src="{{URL::asset('admin/js/default-assets/file-upload.js')}}"></script>
     <script src="{{URL::asset('admin/js/default-assets/basic-form.js')}}"></script>
     <script src="{{URL::asset('admin/js/default-assets/bootstrap-growl.js')}}"></script>
     <script src="{{URL::asset('admin/js/default-assets/notification-active.js')}}"></script>
-    <script>
-        $(document).ready(function () {
-
-            var data_fo = $('.partner').html();
-            var sd = '<div class="btn btn-danger remove-add-more">حذف</div>';
-            var max_fields = 5; //maximum input boxes allowed
-            var wrapper = $(".partners"); //Fields wrapper
-            var add_button = $(".add-more"); //Add button ID
-
-            var x = 1; //initlal text box count
-            $(add_button).click(function (e) { //on add input button click
-                e.preventDefault();
-                if (x < max_fields) { //max input box allowed
-                    x++; //text box increment
-                    var partnerClone = $('.partner').first().clone();
-                    $(sd).appendTo(partnerClone);
-                    $(wrapper).append(partnerClone);
-                }
-            });
-
-            $(wrapper).on("click", ".remove-add-more", function (e) { //user click on remove text
-                e.preventDefault();
-                $(this).parent('.partner').remove();
-                $(this).remove();
-                x--;
-            });
-        });
-    </script>
 @endsection

@@ -15,11 +15,10 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-
         return view('dashboard.products.index',[
                 'products'=>Product::all()
             ]);
@@ -28,7 +27,7 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -42,17 +41,11 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\Response
      */
     public function store(ProductRequest $request)
     {
-
-        $cost=Product::saveColorCostJson($request['cost'],$request['color']);
-        /*$array=json_decode($json);
-        foreach ($array as $arr){
-            dd($arr->color);
-        }*/
-
+        //dd('not null');
         $file = $request->file('image');
         //die();
         $image_name = time() . $file->getClientOriginalName();
@@ -67,7 +60,7 @@ class ProductController extends Controller
             'slug' => $request->get('slug'),
             'brand_id' => $request->get('brand_id'),
             'category_id' => $request->get('category_id'),
-            'cost' => $cost,
+            'cost' => $request->get('cost'),
             'description'=>$request->get('description'),
             'image' => $image_name,
         ]);
@@ -90,18 +83,10 @@ class ProductController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Product  $product
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
     {
-        $array=json_decode($product->cost);
-        $color_cost=array();
-        foreach ($array as $arr){
-            //dd($arr->color);
-            array_push($color_cost,['color'=>$arr->color,'price'=>$arr->cost]);
-        }
-        $product['color_cost']=$color_cost;
-
         return view('dashboard.products.edit',[
             'product'=>$product,
             'categories'=> Category::all(),
@@ -114,16 +99,10 @@ class ProductController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
     public function update(ProductUpdateRequest $request, Product $product)
     {
-
-        //dd($request->all());
-        $costs = array_merge($request['cost'], $request['cost_old']);
-        $colors = array_merge($request['color'], $request['color_old']);
-        $cost=Product::saveColorCostJson($costs,$colors);
-
         $slugIsUnique=Product::query()->where('slug',$request->get('slug'))
             ->where('id','!=',$product->id)
             ->exists();
@@ -148,7 +127,7 @@ class ProductController extends Controller
             'slug' => $request->get('slug',$product->slug),
             'brand_id' => $request->get('brand_id',$product->brand_id),
             'category_id' => $request->get('category_id',$product->category_id),
-            'cost' => $cost,
+            'cost' => $request->get('cost',$product->cost),
             'description'=>$request->get('description',$product->description),
             'image' => $image_name,
         ]);
@@ -171,5 +150,4 @@ class ProductController extends Controller
 
         return redirect(route('products.index'));
     }
-
 }
