@@ -300,8 +300,6 @@
                         @if(auth()->user()->melli_card)
                             <div class="symbol w-225px h-150px symbol-fixed position-relative">
                                 <img src="{{ URL::asset('uploads/melli_cards/'.auth()->user()->melli_card) }}" class="w-225px h-150px"/>
-                                <div
-                                    class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
                             </div>
                         @else
                             <div class="col-lg-8 d-flex align-items-center">
@@ -326,8 +324,6 @@
                         @if(auth()->user()->melli_card_back)
                             <div class="symbol w-225px h-150px symbol-fixed position-relative">
                                 <img src="{{ URL::asset('uploads/melli_cards/'.auth()->user()->melli_card_back) }}" class="w-225px h-150px"/>
-                                <div
-                                    class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
                             </div>
                         @else
                             <div class="col-lg-8 d-flex align-items-center">
