@@ -493,7 +493,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
-                                <select name="phone_model_id" id="phone_model" aria-label="Select a Country"
+                                <select name="phone_model_id" id="phone_model" aria-label="مدل گوشی انتخاب کنید"
                                         data-control="select2"
                                         data-placeholder="مدل گوشی خود را انتخاب کنید"
                                         class="disabled-input @error('phone_model_id') is-invalid @enderror form-select form-select-solid form-select-lg fw-bold"
@@ -511,7 +511,7 @@
                                     @endforeach
                                     <option value="others" @if(auth()->user()->phone_model_other!=null) selected @endif >سایر</option>
                                 </select>
-                                <input type='hidden' @if(auth()->user()->phone_model_other==null) value="{{auth()->user()->phone_model_id}}" @endif name='other_model' id='other_model'>
+                                <input type='hidden' @if(auth()->user()->phone_model_id!=null) value="{{auth()->user()->phone_model_id}}" @endif name='other_model' id='other_model'>
 
                             </div>
                             <!--end::Col-->
