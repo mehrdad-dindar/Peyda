@@ -26,6 +26,7 @@ class CreateMobileWarrantiesTable extends Migration
             $table->unsignedBigInteger('commitment_ceiling_id')->nullable;
             $table->boolean('fire_gift')->default(false);
             $table->unsignedBigInteger('status_id');
+            $table->string('tax')->nullable();
             $table->integer('usable_percentage')->default(100);
             $table->unsignedBigInteger('addition_fire_commitment_id')->nullable();
             $table->timestamps();

@@ -47,17 +47,69 @@
                         id="#kt_header_menu" data-kt-menu="true">
                         <div class="menu-item here show me-lg-1">
                             <a class="menu-link active py-3" href="{{ route('index') }}">
-                                <span class="menu-title">صفحه اصلی</span>
-                            </a>
-                        </div>
-                        <div class="menu-item me-lg-1">
-                            <a class="menu-link py-3" href="#">
-                                <span class="menu-title">مقالات</span>
+                                <span class="menu-title">خانه</span>
                             </a>
                         </div>
                         <div class="menu-item me-lg-1">
                             <a class="menu-link py-3" href="#">
                                 <span class="menu-title">درباره ما</span>
+                            </a>
+                        </div>
+                        <div class="menu-item me-lg-1">
+                            <a class="menu-link py-3" href="#">
+                                <span class="menu-title">فراگارانتی</span>
+                            </a>
+                        </div>
+                        <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start"
+                             class="menu-item menu-lg-down-accordion me-lg-1">
+												<span class="menu-link py-3">
+													<span class="menu-title">سایر خدمات </span>
+													<span class="menu-arrow ms-1"></span>
+												</span>
+                            <div
+                                class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
+                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}"
+                                     data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
+														<span class="menu-link py-3">
+															<span class="menu-icon">
+																<i class="bi bi-archive fs-3"></i>
+															</span>
+															<span class="menu-title">بیمه آتش‌سوزی</span>
+														</span>
+                                </div>
+                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}"
+                                     data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
+														<span class="menu-link py-3">
+															<span class="menu-icon">
+																<i class="bi bi-person fs-2"></i>
+															</span>
+															<span class="menu-title">بیمه زلزله</span>
+                                                            <span
+                                                                class="badge bg-primary ms-2">به زودی</span>
+														</span>
+                                </div>
+                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}"
+                                     data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
+														<span class="menu-link py-3">
+															<span class="menu-icon">
+																<i class="bi bi-sticky fs-3"></i>
+															</span>
+															<span class="menu-title">بیمه اعضای بدن</span>
+                                                            <span
+                                                                class="badge bg-primary ms-2">به زودی</span>
+														</span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item me-lg-1">
+                            <a class="menu-link py-3" href="#">
+                                <span class="menu-title">فروشگاه محصولات</span>
+                            </a>
+                        </div>
+                        <div class="menu-item me-lg-1">
+                            <a class="menu-link py-3" href="#">
+                                <span class="menu-title">اخبار و مقالات</span>
                             </a>
                         </div>
                         <div class="menu-item me-lg-1">
@@ -78,28 +130,30 @@
                     <!--begin::Activities-->
                     <div class="d-flex align-items-center ms-1 ms-lg-3">
                         <style>
-                            .fa-stack[data-count]:after{
-                                position:absolute;
+                            .fa-stack[data-count]:after {
+                                position: absolute;
                                 right: 80%;
                                 top: 39%;
                                 content: attr(data-count);
                                 font-size: 11%;
-                                padding:.6em;
-                                border-radius:999px;
-                                line-height:.75em;
+                                padding: .6em;
+                                border-radius: 999px;
+                                line-height: .75em;
                                 color: white;
-                                background:rgba(255,0,0,.85);
-                                text-align:center;
-                                min-width:1em;
-                                font-weight:bold;
+                                background: rgba(255, 0, 0, .85);
+                                text-align: center;
+                                min-width: 1em;
+                                font-weight: bold;
                             }
                         </style>
                         <!--begin::Drawer toggle-->
 
-                        <div  class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px" id="kt_activities_toggle">
+                        <div class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px"
+                             id="kt_activities_toggle">
 
                             @if(sizeof(\App\Http\Controllers\Controller::getNotification(auth()->user()->id))>0)
-                                <span class="fa-stack fa-5x has-badge" data-count="{{sizeof(\App\Http\Controllers\Controller::getNotification(auth()->user()->id))}}">
+                                <span class="fa-stack fa-5x has-badge"
+                                      data-count="{{sizeof(\App\Http\Controllers\Controller::getNotification(auth()->user()->id))}}">
                                   <i class="fa fa-circle fa-stack-2x"></i>
                                   <i class="fa fa-bell fa-stack-1x fa-inverse"></i>
                                 </span>
@@ -112,8 +166,12 @@
                     <!--begin::User-->
                     <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
                         <!--begin::Menu wrapper-->
-                        <div class="cursor-pointer symbol symbol-circle symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
-                            <img src="@if(auth()->user()->avatar){{URL::asset('uploads/avatars').'/'.auth()->user()->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif" alt="metronic" />
+                        <div class="cursor-pointer symbol symbol-circle symbol-30px symbol-md-40px"
+                             data-kt-menu-trigger="click" data-kt-menu-attach="parent"
+                             data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
+                            <img
+                                src="@if(auth()->user()->avatar){{URL::asset('uploads/avatars').'/'.auth()->user()->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif"
+                                alt="metronic"/>
                         </div>
                         <!--begin::Menu-->
                         <div
@@ -124,7 +182,8 @@
                                 <div class="menu-content d-flex align-items-center px-3">
                                     <!--begin::Avatar-->
                                     <div class="symbol symbol-circle symbol-50px me-5">
-                                        <img alt="Logo" src="@if(auth()->user()->avatar){{URL::asset('uploads/avatars').'/'.auth()->user()->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif" />
+                                        <img alt="Logo"
+                                             src="@if(auth()->user()->avatar){{URL::asset('uploads/avatars').'/'.auth()->user()->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif"/>
                                     </div>
                                     <!--end::Avatar-->
                                     <!--begin::Username-->
@@ -148,7 +207,8 @@
                                     <span class="menu-text">کیف پول</span>
                                     <span class="menu-badge">
                                         <span class="badge badge-light-danger fw-bolder fs-7">
-                                            <span class="peyda_price">{{number_format(Crypt::decryptString($wallet->value))}}</span> تومان
+                                            <span
+                                                class="peyda_price">{{number_format(Crypt::decryptString($wallet->value))}}</span> تومان
                                         </span>
                                     </span>
                                 </a>

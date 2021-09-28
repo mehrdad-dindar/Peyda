@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\melliCode;
+use App\Rules\postalCode;
 
 class EditProfileRequest extends FormRequest
 {
@@ -30,10 +32,10 @@ class EditProfileRequest extends FormRequest
             'l_name'=>['required'],
             'city_id'=>['required'],
             'address'=>['required'],
-            'phone_num'=>['required'],
-            'melli_code'=>['required'],
+            'melli_code'=>['required',new melliCode(),'digits:10'],
             'phone_model_id'=>['required'],
-            'email'=>['required'],
+            'email'=>['required','email:rfc,dns'],
+            'postal_code' => ['required',new postalCode(),'digits:10']
         ];
 
         if(User::find(auth()->user()->id)->avatar==null){

@@ -32,31 +32,15 @@ use \App\Http\Controllers\TicketController;
 /* front */
 Route::get('/', 'HomeController@index')->name('index');
 Route::post('/validation', 'HomeController@validation')->name('validation');
-Route::get('/test', function (){
+Route::get('/test/{id}', function ($id){
 
     //dd($id);
     /*$warranty=\App\Models\Mobile_warranty::find($id)->first();
     $qrcode=QrCode::size(100)->generate(md5($warranty->id.' __ '.$warranty->created_at));
     return view('test',['qrcode'=>$qrcode]);*/
 
-    /*$user= User::find($id);
-    return $user->notificationuser->notification_id;*/
-    $users = User::query()->where('role_id', '!=', 1)->get();
-
-    $key=0;
-
-    foreach ($users as $key => $user) {
-        $userrequest = $user->userrequests()->first();
-        $userrequest_update = $userrequest->updated_at;
-        $user_update = $user->updated_at;
-
-        //echo $userrequest->admin_id;
-        if ($userrequest->admin_id == auth()->user()->id && $userrequest_update->lte($user_update) && $userrequest->done == 0) {
-
-        }
-
-    }
-    return $key;
+    $user= User::find($id);
+    return $user->notificationuser->notification_id;
 
 });
 

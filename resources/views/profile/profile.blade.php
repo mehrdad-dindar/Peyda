@@ -2,6 +2,38 @@
 @section('title','پروفایل کاربری')
 @section('content')
     <div id="kt_content_container" class="container">
+    @if(!auth()->user()->status)
+        <!--begin::Notice-->
+            <div class="notice mb-5 d-flex bg-light-warning rounded border-warning border border-dashed p-6">
+                <!--begin::Icon-->
+                <!--begin::Svg Icon | path: icons/duotone/Code/Warning-1-circle.svg-->
+                <span class="svg-icon svg-icon-2tx svg-icon-warning me-4">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
+                                                 viewBox="0 0 24 24" version="1.1">
+												<circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10"/>
+												<rect fill="#000000" x="11" y="7" width="2" height="8" rx="1"/>
+												<rect fill="#000000" x="11" y="16" width="2" height="2" rx="1"/>
+											</svg>
+										</span>
+                <!--end::Svg Icon-->
+                <!--end::Icon-->
+
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-stack flex-grow-1">
+                    <!--begin::Content-->
+                    <div class="fw-bold">
+                        <h4 class="text-gray-900 fw-bolder">پروفایل کاربری خود را تکمیل نمایید !</h4>
+                        <div class="fs-6 text-gray-700">جهت استفاده از تمام امکانات سایت لطفا
+                            <a class="fw-bolder" href="{{route('edit_profile')}}">پروفایل کاربری</a>
+                            خود را تکمیل نمایید.
+                        </div>
+                    </div>
+                    <!--end::Content-->
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::Notice-->
+    @endif
         <!--begin::Navbar-->
         <div class="card mb-5 mb-xl-10">
             <div class="card-body pt-9 pb-0">
@@ -91,18 +123,28 @@
                                             <!--end::Svg Icon-->{{ auth()->user()->city->name }}</a>
                                     @endif
                                     @if(auth()->user()->email)
-                                    <a class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
+                                        <a href="" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+                                            <!--begin::Svg Icon | path: icons/duotone/Communication/Mail-at.svg-->
+                                            <span class="svg-icon svg-icon-4 me-1">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24px"
+                                                                     height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                    <path
+                                                                        d="M11.575,21.2 C6.175,21.2 2.85,17.4 2.85,12.575 C2.85,6.875 7.375,3.05 12.525,3.05 C17.45,3.05 21.125,6.075 21.125,10.85 C21.125,15.2 18.825,16.925 16.525,16.925 C15.4,16.925 14.475,16.4 14.075,15.65 C13.3,16.4 12.125,16.875 11,16.875 C8.25,16.875 6.85,14.925 6.85,12.575 C6.85,9.55 9.05,7.1 12.275,7.1 C13.2,7.1 13.95,7.35 14.525,7.775 L14.625,7.35 L17,7.35 L15.825,12.85 C15.6,13.95 15.85,14.825 16.925,14.825 C18.25,14.825 19.025,13.725 19.025,10.8 C19.025,6.9 15.95,5.075 12.5,5.075 C8.625,5.075 5.05,7.75 5.05,12.575 C5.05,16.525 7.575,19.1 11.575,19.1 C13.075,19.1 14.625,18.775 15.975,18.075 L16.8,20.1 C15.25,20.8 13.2,21.2 11.575,21.2 Z M11.4,14.525 C12.05,14.525 12.7,14.35 13.225,13.825 L14.025,10.125 C13.575,9.65 12.925,9.425 12.3,9.425 C10.65,9.425 9.45,10.7 9.45,12.375 C9.45,13.675 10.075,14.525 11.4,14.525 Z"
+                                                                        fill="#000000"/>
+                                                                </svg>
+                                                            </span>
+                                            <!--end::Svg Icon-->{{ auth()->user()->email }}</a>
+
+                                    @endif
+                                    <a href="" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                                         <!--begin::Svg Icon | path: icons/duotone/Communication/Mail-at.svg-->
                                         <span class="svg-icon svg-icon-4 me-1">
-															<svg xmlns="http://www.w3.org/2000/svg" width="24px"
-                                                                 height="24px" viewBox="0 0 24 24" version="1.1">
-																<path
-                                                                    d="M11.575,21.2 C6.175,21.2 2.85,17.4 2.85,12.575 C2.85,6.875 7.375,3.05 12.525,3.05 C17.45,3.05 21.125,6.075 21.125,10.85 C21.125,15.2 18.825,16.925 16.525,16.925 C15.4,16.925 14.475,16.4 14.075,15.65 C13.3,16.4 12.125,16.875 11,16.875 C8.25,16.875 6.85,14.925 6.85,12.575 C6.85,9.55 9.05,7.1 12.275,7.1 C13.2,7.1 13.95,7.35 14.525,7.775 L14.625,7.35 L17,7.35 L15.825,12.85 C15.6,13.95 15.85,14.825 16.925,14.825 C18.25,14.825 19.025,13.725 19.025,10.8 C19.025,6.9 15.95,5.075 12.5,5.075 C8.625,5.075 5.05,7.75 5.05,12.575 C5.05,16.525 7.575,19.1 11.575,19.1 C13.075,19.1 14.625,18.775 15.975,18.075 L16.8,20.1 C15.25,20.8 13.2,21.2 11.575,21.2 Z M11.4,14.525 C12.05,14.525 12.7,14.35 13.225,13.825 L14.025,10.125 C13.575,9.65 12.925,9.425 12.3,9.425 C10.65,9.425 9.45,10.7 9.45,12.375 C9.45,13.675 10.075,14.525 11.4,14.525 Z"
-                                                                    fill="#000000"/>
-															</svg>
-														</span>
-                                        <!--end::Svg Icon-->{{ auth()->user()->email }}</a>
-                                    @endif
+                                                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <path d="M11.914857,14.1427403 L14.1188827,11.9387145 C14.7276032,11.329994 14.8785122,10.4000511 14.4935235,9.63007378 L14.3686433,9.38031323 C13.9836546,8.61033591 14.1345636,7.680393 14.7432841,7.07167248 L17.4760882,4.33886839 C17.6713503,4.14360624 17.9879328,4.14360624 18.183195,4.33886839 C18.2211956,4.37686904 18.2528214,4.42074752 18.2768552,4.46881498 L19.3808309,6.67676638 C20.2253855,8.3658756 19.8943345,10.4059034 18.5589765,11.7412615 L12.560151,17.740087 C11.1066115,19.1936265 8.95659008,19.7011777 7.00646221,19.0511351 L4.5919826,18.2463085 C4.33001094,18.1589846 4.18843095,17.8758246 4.27575484,17.613853 C4.30030124,17.5402138 4.34165566,17.4733009 4.39654309,17.4184135 L7.04781491,14.7671417 C7.65653544,14.1584211 8.58647835,14.0075122 9.35645567,14.3925008 L9.60621621,14.5173811 C10.3761935,14.9023698 11.3061364,14.7514608 11.914857,14.1427403 Z" id="Path-76" fill="#000000"></path>
+</svg>
+
+                                                            </span>
+                                        <!--end::Svg Icon-->{{ auth()->user()->phone_num }}</a>
                                 </div>
                                 <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
                                     <a href="#"
@@ -256,14 +298,36 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 d-flex align-items-center">
                         @if(auth()->user()->melli_card)
-                            <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                                <img src="{{ URL::asset('uploads/melli_cards/'.auth()->user()->melli_card) }}" alt="image"/>
-                                <div
-                                    class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
+                            <div class="symbol w-225px h-150px symbol-fixed position-relative">
+                                <img src="{{ URL::asset('uploads/melli_cards/'.auth()->user()->melli_card) }}" class="w-225px h-150px"/>
                             </div>
                         @else
                             <div class="col-lg-8 d-flex align-items-center">
                                 <span class="badge badge-danger">تصویر کارت ملی آپلود نشده</span>
+                            </div>
+                        @endif
+                    </div>
+
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--end::Input group-->
+                <div class="row mb-7">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 fw-bold text-muted">تصویر پشت کارت ملی
+                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
+                           title="تصویر پشت کارت ملی باید تایید شود"></i></label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8 d-flex align-items-center">
+                        @if(auth()->user()->melli_card_back)
+                            <div class="symbol w-225px h-150px symbol-fixed position-relative">
+                                <img src="{{ URL::asset('uploads/melli_cards/'.auth()->user()->melli_card_back) }}" class="w-225px h-150px"/>
+                            </div>
+                        @else
+                            <div class="col-lg-8 d-flex align-items-center">
+                                <span class="badge badge-danger">تصویر پشت کارت ملی آپلود نشده</span>
                             </div>
                         @endif
                     </div>
@@ -335,38 +399,7 @@
                     <!--end::Col-->
                 </div>
                 <!--end::Input group-->
-            @if(!auth()->user()->status)
-                <!--begin::Notice-->
-                    <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
-                        <!--begin::Icon-->
-                        <!--begin::Svg Icon | path: icons/duotone/Code/Warning-1-circle.svg-->
-                        <span class="svg-icon svg-icon-2tx svg-icon-warning me-4">
-											<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
-                                                 viewBox="0 0 24 24" version="1.1">
-												<circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10"/>
-												<rect fill="#000000" x="11" y="7" width="2" height="8" rx="1"/>
-												<rect fill="#000000" x="11" y="16" width="2" height="2" rx="1"/>
-											</svg>
-										</span>
-                        <!--end::Svg Icon-->
-                        <!--end::Icon-->
 
-                        <!--begin::Wrapper-->
-                        <div class="d-flex flex-stack flex-grow-1">
-                            <!--begin::Content-->
-                            <div class="fw-bold">
-                                <h4 class="text-gray-900 fw-bolder">پروفایل کاربری خود را تکمیل نمایید !</h4>
-                                <div class="fs-6 text-gray-700">جهت استفاده از تمام امکانات سایت لطفا
-                                    <a class="fw-bolder" href="{{route('edit_profile')}}">پروفایل کاربری</a>
-                                    خود را تکمیل نمایید.
-                                </div>
-                            </div>
-                            <!--end::Content-->
-                        </div>
-                        <!--end::Wrapper-->
-                    </div>
-                    <!--end::Notice-->
-                @endif
             </div>
             <!--end::Card body-->
         </div>
@@ -374,4 +407,9 @@
     </div>
 @endsection
 @section('custom_js')
+    @if(isset($msg))
+        <script>
+            toastr.success('{{$msg}}','اطلاعات تکمیل شد!')
+        </script>
+    @endif
 @endsection

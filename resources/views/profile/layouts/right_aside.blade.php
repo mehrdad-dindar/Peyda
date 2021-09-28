@@ -76,14 +76,6 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="#">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">انواع فراگارانتی</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
                             <a @if(auth()->user()->status==1) class="menu-link"
                                href="{{ route('receive_create') }}"
                                @else

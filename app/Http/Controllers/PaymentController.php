@@ -41,9 +41,9 @@ class PaymentController extends Controller
         if ($mobilewarranty->addition_fire_commitment_id != null) {
             $fire_addition_price = $mobilewarranty->Fire_commitment_ceiling->price;
         }
-        $amount = (int)$fire_addition_price + (int)$mobilewarranty->Commitment_ceiling->price;
+        $amount = (int)$fire_addition_price + (int)$mobilewarranty->Commitment_ceiling->price+$mobilewarranty->tax;
         $invoice = new Invoice();
-        $invoice->amount($amount);
+        $invoice->amount((int)$amount);
         $paymentId = md5(uniqid());
 
         if ($request->pay_methode == 1) {
@@ -197,7 +197,7 @@ class PaymentController extends Controller
             if ($mobilewarranty->addition_fire_commitment_id != 0) {
                 $fire_addition_price = Fire_commitment_ceiling::find($mobilewarranty->addition_fire_commitment_id)->price;
             }
-            $amount = $fire_addition_price + $price_range;
+            $amount = $fire_addition_price + $price_range+(int)$mobilewarranty->tax;
             $receipt = Payment::amount($amount)
                 ->transactionId($request->Authority)
                 ->verify();

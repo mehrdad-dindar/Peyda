@@ -1,5 +1,5 @@
 @extends('profile.layouts.master')
-@section('title','دریافت فراگارانتی')
+@section('title','دریافت فراگارانتی از شخص دیگر')
 @section('custom_head')
 @endsection
 @section('content')
@@ -24,6 +24,7 @@
                                     <div class="mb-10">
                                         <label for="transfer_code" class="required form-label">کد انتقال</label>
                                         <input type="text" class="form-control form-control-solid" name="transfer_code"/>
+                                        <span class="text-muted">جهت دریافت فراگارانتی از شخص دیگر، کدانتقالی که به شما تحویل شده است را در کادر فوق وارد نمایید و بر روی دکمه ثبت کلیک کنید.</span>
                                     </div>
                                 </div>
                             </div>

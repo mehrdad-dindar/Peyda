@@ -124,6 +124,16 @@
 <script src="{{ URL::asset('main/js/app.js')}}"></script>
 <!--Note: All important javascript like page loader, menu, sticky menu, menu-toggler, one page menu etc. -->
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const topIMG = "{{ URL::asset('front/img/logo-white-1.png') }}";
+        const sclIMG = "{{ URL::asset('front/img/logo-colored-1.png') }}";
+        const logo = document.getElementById("img_logo");
+        if (screen.width >= 991) {
+            logo.src = topIMG;
+        }else {
+            logo.src= sclIMG;
+        }
+    });
     function windowScroll() {
         const navbar = document.getElementById("topnav");
         const logo = document.getElementById("img_logo");
@@ -138,7 +148,11 @@
                 logo.src= sclIMG;
             } else {
                 navbar.classList.remove("nav-sticky");
-                logo.src= topIMG;
+                if (screen.width > 991) {
+                    logo.src = topIMG;
+                }else {
+                    logo.src= sclIMG;
+                }
             }
         }
     }

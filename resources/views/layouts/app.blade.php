@@ -16,15 +16,14 @@
 
 </head>
 <body class="login-area">
-
 <!-- Preloader -->
 <div id="preloader">
     <div id="ctn-preloader" class="ont-preloader">
         <div class="animation-preloader">
             <div class="spinner"></div>
             <div class="txt-loading">
-                    <span data-text-preloader="پیدا‌سرویس" class="letters-loading">
-                        پیدا‌سرویس
+                    <span data-text-preloader="پیدا‌ سرویس ماندگار" class="letters-loading">
+                        پیدا‌ سرویس ماندگار
                      </span>
             </div>
             <p class="text-center">درحال اجرا</p>

@@ -40,7 +40,7 @@
                                         <label
                                             class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                                             data-kt-image-input-action="change" data-bs-toggle="tooltip"
-                                            title="Change avatar">
+                                            title="آپلود تصویر">
                                             <i class="bi bi-pencil-fill fs-7"></i>
                                             <!--begin::Inputs-->
                                             <input type="file" class="disabled-input" name="{{$img->html_id}}"

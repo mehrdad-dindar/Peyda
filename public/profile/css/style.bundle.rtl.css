@@ -50844,3 +50844,10 @@ body {
 .h-150px{
     height: 150px;
 }
+.bg-blue {
+    background-color: #0097D0 !important;
+}
+
+.bg-blue:hover {
+    background-color: #006083 !important;
+}

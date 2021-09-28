@@ -35,13 +35,13 @@ class MobileWarrantyController extends Controller
     public function print($id)
     {
 
-        $warranty=self::getPrintWarranty($id)['warranty'];
-        $uses=self::getPrintWarranty($id)['uses'];
+        $warranty = self::getPrintWarranty($id)['warranty'];
+        $uses = self::getPrintWarranty($id)['uses'];
 
-        if($warranty->owner_id==auth()->user()->id) {
+        if ($warranty->owner_id == auth()->user()->id) {
             $wallet = Wallet::where('user_id', \auth()->user()->id)->first();
-            return view('profile.print', compact(['wallet','warranty','uses']));
-        }else{
+            return view('profile.print', compact(['wallet', 'warranty', 'uses']));
+        } else {
             abort(404);
         }
     }
@@ -107,10 +107,6 @@ class MobileWarrantyController extends Controller
 
     public function save(Request $request)
     {
-        //dd($request->all());
-        /*ddd($request->toArray());*/
-        //$phone_model_id = '';
-        /*dd($request);*/
         $other_model = null;
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
 
@@ -127,9 +123,9 @@ class MobileWarrantyController extends Controller
         if ($request['warranty_type'] == 1) {
             $phone_model_id = $request['my_phone_model'];
             $phone_model_id = auth()->user()->phone_model_id;
-            if(auth()->user()->phone_model_other!=null){
+            if (auth()->user()->phone_model_other != null) {
                 $other_model = auth()->user()->phone_model_other;
-            }else{
+            } else {
                 $other_model = null;
             }
         } else {
@@ -147,6 +143,7 @@ class MobileWarrantyController extends Controller
                 $other_model = null;
             }
         }
+
         if ($request['warranty_type'] != null && $request['price_range'] != null) {
             $data = Mobile_warranty::create([
                 'owner_id' => $request['owner_id'],
@@ -162,6 +159,14 @@ class MobileWarrantyController extends Controller
                 'addition_fire_commitment_id' => $request['fire_addition_price'],
             ]);
             $data->save();
+            if ($data->addition_fire_commitment_id != null) {
+                $data->tax = ($data->Fire_commitment_ceiling->price + $data->Commitment_ceiling->price) * (9 / 100);
+                $data->save();
+            } else {
+                $data->tax = ($data->Commitment_ceiling->price) * (9 / 100);
+                $data->save();
+            }
+
             return $this->cart();
         } else {
             $this->bimeh_add('لطفا همه فیلدها را با دقت پرکنید.');
@@ -184,7 +189,7 @@ class MobileWarrantyController extends Controller
         }
 
         $phoneName = $invoice->phone_model->phone_brand->name . " / " . $modelName;
-        $invoice['phone_name']=$phoneName;
+        $invoice['phone_name'] = $phoneName;
 
         return view('profile.cart')
             ->with([
@@ -214,7 +219,7 @@ class MobileWarrantyController extends Controller
 
     public function insertPhotos(Request $request, $id)
     {
-        dd($request->all(),$id);
+        dd($request->all(), $id);
         $prefix = $imageList = '';
         $imageFields = ImageField::all();
         $key = 0;
@@ -226,7 +231,7 @@ class MobileWarrantyController extends Controller
                     $file = $request->file($row->html_id);
                     $file_name = time() . $file->getClientOriginalName();
                     $file->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/warranty_images/', $file_name);
-                    $file_pic = MobileImage::create(['URL' => $file_name, 'type' => (int) $request['type_'.$row->html_id]]);
+                    $file_pic = MobileImage::create(['URL' => $file_name, 'type' => (int)$request['type_' . $row->html_id]]);
 
                     $imageList .= $prefix . $file_pic->id;
                     $prefix = ',';
@@ -238,23 +243,23 @@ class MobileWarrantyController extends Controller
 
         if ($key == 7) {
 
-            $mobileWarranty=Mobile_warranty::find($id);
+            $mobileWarranty = Mobile_warranty::find($id);
 
             Mobile_warranty::query()->where('id', $id)->update([
                 'images' => $imageList,
                 'status_id' => 6
             ]);
 
-            $userrequest=UserRequest::query()
-                ->where([['user_requestable_type','=','App\Models\Mobile_warranty'],
-                    ['user_requestable_id','=',$id]])->first();
+            $userrequest = UserRequest::query()
+                ->where([['user_requestable_type', '=', 'App\Models\Mobile_warranty'],
+                    ['user_requestable_id', '=', $id]])->first();
 
-            if($userrequest!=null){
-                $mobileWarranty->userrequests()->update(['updated_at'=>Carbon::now()->toDateTimeString()]);
+            if ($userrequest != null) {
+                $mobileWarranty->userrequests()->update(['updated_at' => Carbon::now()->toDateTimeString()]);
                 //dd('if');
-            }else{
+            } else {
 
-                $userrequest1= new UserRequest();
+                $userrequest1 = new UserRequest();
                 $mobileWarranty->userrequests()->save($userrequest1);
             }
 
