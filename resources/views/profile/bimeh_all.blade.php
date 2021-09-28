@@ -50,7 +50,7 @@
                                     <span class="text-muted fw-bold text-muted d-block fs-7">یک سال پس از تایید</span>
                                 </td>
                                 <td class="text-dark fw-bolder text-hover-primary fs-6"><span
-                                        class="peyda_price">{{$row->addition_fire_commitment_id != null ? number_format($row->Commitment_ceiling->price+$row->Fire_commitment_ceiling->price) : number_format($row->Commitment_ceiling->price)}}</span>
+                                        class="peyda_price">{{$row->addition_fire_commitment_id != null ? number_format($row->Commitment_ceiling->price+$row->Fire_commitment_ceiling->price+$row->tax) : number_format($row->Commitment_ceiling->price+$row->tax)}}</span>
                                     تومان
                                 </td>
                                 <td>
