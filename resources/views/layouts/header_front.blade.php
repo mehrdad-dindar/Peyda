@@ -147,7 +147,7 @@
         <div id="navigation">
             <!-- Navigation Menu-->
             <ul class="navigation-menu">
-                <li><a href="{{ route('index') }}" class="sub-menu-item">صفحه اصلی </a></li>
+                <li><a href="{{ route('index') }}" class="sub-menu-item">خانه</a></li>
                 <li><a href="#" class="sub-menu-item">درباره ما</a></li>
                 <li><a href="#" class="sub-menu-item">فراگارانتی</a></li>
                 <li class="has-submenu parent-menu-item">
