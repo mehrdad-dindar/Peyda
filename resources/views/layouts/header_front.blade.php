@@ -36,7 +36,9 @@
             </li>
             @guest
                 <li class="list-inline-item mb-0 pe-1">
-                    <a href="{{ route('login') }}" class="btn btn-primary">ورود / عضویت</a>
+                    {{--<a href="{{ route('login') }}" class="btn btn-primary">ورود / عضویت</a>--}}
+                    <a href="{{ route('login') }}" type="button" class="btn btn-icon btn-primary"><i class="uil uil-user align-middle icons"></i>
+                    </a>
                 </li>
             @else
                 <li class="list-inline-item mb-0 pe-1">
