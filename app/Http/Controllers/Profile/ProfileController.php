@@ -36,11 +36,12 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function profile()
+    public function profile($msg ='')
     {
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         return view('profile.profile')->with([
             'wallet' => $wallet,
+            'msg'=>$msg
         ]);
 
     }
@@ -78,6 +79,7 @@ class ProfileController extends Controller
         return Validator::make($request, [
             'f_name' => 'max:20',
             'l_name' => 'max:20',
+            'melli_code' => 'max:10|melliCode',
             'avatar' => 'dimensions:max_width=150,max_height=150'
         ]);
 
@@ -85,7 +87,6 @@ class ProfileController extends Controller
 
     protected function save_profile(EditProfileRequest $request)
     {
-
         $v = verta()
             ->timestamp($request['birthday_tmp'] / 1000)
             ->formatGregorian('Y-m-d 09:i:s');
@@ -109,24 +110,23 @@ class ProfileController extends Controller
             $melli_card_back->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/melli_cards/', $melli_card_back_name);
             $user->melli_card_back = $melli_card_back_name;
         }
-        if($request->get('phone_model_id')=='others'){
-            $phone_model=$request['other_model'];
-            $other_model=$request['other_phone_model'];
-        }else{
-            $phone_model=$request['phone_model_id'];
-            $other_model=null;
+        if ($request->get('phone_model_id') == 'others') {
+            $phone_model = $request['other_model'];
+            $other_model = $request['other_phone_model'];
+        } else {
+            $phone_model = $request['phone_model_id'];
+            $other_model = null;
         }
 
 
         //dd($request->all());
         $user->f_name = $request['f_name'];
         $user->l_name = $request['l_name'];
-        if ($request['birthday_tmp']!=null) {
+        if ($request['birthday_tmp'] != null) {
             $user->birthday = $v;
         }
 
         $user->melli_code = $request['melli_code'];
-        $user->phone_num = $request['phone_num'];
         $user->city_id = $request['city_id'];
         $user->address = $request['address'];
         $user->email = $request['email'];
@@ -135,27 +135,27 @@ class ProfileController extends Controller
         $user->phone_model_other = $other_model;
         $user->save();
 
-        $userrequest=UserRequest::query()
-            ->where([['user_requestable_type','=','App\Models\User'],
-                ['user_requestable_id','=',$user->id]])->first();
+        $userrequest = UserRequest::query()
+            ->where([['user_requestable_type', '=', 'App\Models\User'],
+                ['user_requestable_id', '=', $user->id]])->first();
 
-        if($userrequest==null){
+        if ($userrequest == null) {
             //dd('else');
-            $userrequest1= new UserRequest();
+            $userrequest1 = new UserRequest();
             $user->userrequests()->save($userrequest1);
         }
 
         //dd($birthday_timestamp);
-        return back()->with('success' , 'اطلاعات با موفقیت تغییر یافت.');
+        return $this->profile('اطلاعات پروفایل کاربری توسط شما تکمیل شد؛ پس از بررسی و در صورت تایید اطلاعات، پروفایل کاربری شما فعال خواهد شد و می‌توانید از کلیه امکانات پیدا سرویس ماندگار بهره‌مند شوید. نتیجه از طریق پیامک برای شما ارسال خواهد شد.');
 
     }
 
     public function mobile_change(Request $request)
     {
 
-        $options=[];
-        $array=array();
-        $html='';
+        $options = [];
+        $array = array();
+        $html = '';
         $id = $request->get('id');
         if (isset($id)) {
             // Capture selected country
@@ -172,17 +172,17 @@ class ProfileController extends Controller
 
             }
             $html .= "<option value='others'>سایر</option>";
-            array_push($options,$html);
+            array_push($options, $html);
 
             $array = array(
                 'options' => $options,
                 'other_model' => $result[0]['id']
-        );
+            );
         }
         $out = array_values($array);
         return json_encode($out);
 
-      }
+    }
 
 
 }

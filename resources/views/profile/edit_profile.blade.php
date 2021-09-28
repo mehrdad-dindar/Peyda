@@ -123,7 +123,7 @@
                                             <!--end::Svg Icon-->{{ auth()->user()->city->name }}</a>
                                     @endif
                                     @if(auth()->user()->email)
-                                        <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
+                                        <a href="" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                                             <!--begin::Svg Icon | path: icons/duotone/Communication/Mail-at.svg-->
                                             <span class="svg-icon svg-icon-4 me-1">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24px"
@@ -134,7 +134,17 @@
                                                                 </svg>
                                                             </span>
                                             <!--end::Svg Icon-->{{ auth()->user()->email }}</a>
+
                                     @endif
+                                    <a href="" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+                                        <!--begin::Svg Icon | path: icons/duotone/Communication/Mail-at.svg-->
+                                        <span class="svg-icon svg-icon-4 me-1">
+                                                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <path d="M11.914857,14.1427403 L14.1188827,11.9387145 C14.7276032,11.329994 14.8785122,10.4000511 14.4935235,9.63007378 L14.3686433,9.38031323 C13.9836546,8.61033591 14.1345636,7.680393 14.7432841,7.07167248 L17.4760882,4.33886839 C17.6713503,4.14360624 17.9879328,4.14360624 18.183195,4.33886839 C18.2211956,4.37686904 18.2528214,4.42074752 18.2768552,4.46881498 L19.3808309,6.67676638 C20.2253855,8.3658756 19.8943345,10.4059034 18.5589765,11.7412615 L12.560151,17.740087 C11.1066115,19.1936265 8.95659008,19.7011777 7.00646221,19.0511351 L4.5919826,18.2463085 C4.33001094,18.1589846 4.18843095,17.8758246 4.27575484,17.613853 C4.30030124,17.5402138 4.34165566,17.4733009 4.39654309,17.4184135 L7.04781491,14.7671417 C7.65653544,14.1584211 8.58647835,14.0075122 9.35645567,14.3925008 L9.60621621,14.5173811 C10.3761935,14.9023698 11.3061364,14.7514608 11.914857,14.1427403 Z" id="Path-76" fill="#000000"></path>
+</svg>
+
+                                                            </span>
+                                        <!--end::Svg Icon-->{{ auth()->user()->phone_num }}</a>
                                 </div>
                                 <!--end::Info-->
                             </div>
@@ -308,7 +318,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
-                                <input type="text" name="melli_code"
+                                <input type="text" name="melli_code" maxlength="10" maxlength="10"
                                        class="disabled-input @error('melli_code') is-invalid @enderror form-control form-control-lg form-control-solid"  @if($flag==1) disabled @endif
                                        value="@if(auth()->user()->melli_code != null){{auth()->user()->melli_code}}@endif"/>
                             </div>
@@ -323,7 +333,7 @@
                             <!--begin::Col-->
                             <div class="col-lg-6">
                                 <!--begin::Image input-->
-                                <div class="image-input " data-kt-image-input="true" style="background-image: url('http://localhost:8000/profile/media/mellicard/sample.jpg')">
+                                <div class="image-input " data-kt-image-input="true" style="background-image: url('{{ URL::asset('profile/media/mellicard/sample.jpg')}}')">
                                     <!--begin::Preview existing avatar-->
                                     <div class="image-input-wrapper w-225px h-150px" style="background-image: @if(auth()->user()->melli_card!=null) url({{URL::asset('uploads')}}/melli_cards/{{auth()->user()->melli_card}})  @else url({{URL::asset('profile')}}/media/mellicard/sample.jpg) @endif"></div>
                                     <!--end::Preview existing avatar-->
@@ -403,15 +413,14 @@
                             <label class="col-lg-4 col-form-label fw-bold fs-6">
                                 <span class="">شماره تلفن همراه</span>
                                 <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
-                                   title="Phone number must be active"></i>
+                                   title="شماره تلفن همراه قابل ویرایش نیست"></i>
                             </label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
-                                <input type="tel" name="phone_num"
-                                       class="disabled-input @error('phone_num') is-invalid @enderror form-control form-control-lg form-control-solid"
-                                       @if($flag==1) disabled @endif
-                                       placeholder="Phone number"
+                                <input type="tel"
+                                       class="disabled-input form-control form-control-lg form-control-solid"
+                                       disabled
                                        value="{{auth()->user()->phone_num}}"/>
                             </div>
                             <!--end::Col-->
@@ -462,7 +471,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
-                                <input type="text" name="postal_code"
+                                <input type="text" name="postal_code" maxlength="10" maxlength="10"
                                        class="disabled-input @error('postal_code') is-invalid @enderror form-control form-control-lg form-control-solid"
                                        @if($flag==1) disabled @endif
                                        value="{{auth()->user()->postal_code}}">
@@ -478,7 +487,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
-                                <input type="text" name="email"
+                                <input type="email" name="email"
                                        class="disabled-input @error('email') is-invalid @enderror form-control form-control-lg form-control-solid" placeholder="ایمیل"
                                        @if($flag==1) disabled @endif
                                        value="{{auth()->user()->email}}">
@@ -652,7 +661,5 @@
         });
 
     </script>
-
-
 @endsection
 
