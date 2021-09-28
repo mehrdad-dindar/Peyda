@@ -134,7 +134,6 @@
                                                                 </svg>
                                                             </span>
                                             <!--end::Svg Icon-->{{ auth()->user()->email }}</a>
-
                                     @endif
                                     <a href="" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                                         <!--begin::Svg Icon | path: icons/duotone/Communication/Mail-at.svg-->
