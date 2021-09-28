@@ -40,6 +40,7 @@ Route::get('/test', function (){
 
     /*$user= User::find($id);
     return $user->notificationuser->notification_id;*/
+
     $users = User::query()->where('role_id', '!=', 1)->get();
 
     $key=0;
@@ -49,12 +50,13 @@ Route::get('/test', function (){
         $userrequest_update = $userrequest->updated_at;
         $user_update = $user->updated_at;
 
-        //echo $userrequest->admin_id;
+        echo $userrequest->admin_id;
         if ($userrequest->admin_id == auth()->user()->id && $userrequest_update->lte($user_update) && $userrequest->done == 0) {
 
         }
 
     }
+    die();
     return $key;
 
 });

@@ -69,6 +69,29 @@
                             <li><a href="{{route('dashboard')}}/settings/brand">گوشی ها</a></li>
                             <li><a href="{{ route('roles.index') }}">نقش ها</a></li>
                         </ul>
+                        <ul class="treeview-menu">
+                            <li class="treeview">
+                                <a href="javascript:void(0)"><i class="zmdi zmdi-apps"></i> <span>ظاهری</span> <i class="fa fa-angle-left"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="{{ route('products.create') }}">پنل</a></li>
+                                </ul>
+                                <ul>
+                                    <li><a href="{{ route('categories.index') }}"><i class="zmdi zmdi-view-dashboard"></i><span>دسته بندی ها</span></a></li>
+                                </ul>
+                                <ul>
+                                    <li><a href="{{ route('brands.index') }}"><i class="zmdi zmdi-view-dashboard"></i><span>برندها</span></a></li>
+                                </ul>
+                                <ul>
+                                    <li class="treeview">
+                                        <a href="javascript:void(0)"><i class="zmdi zmdi-apps"></i> <span>ویژگی ها</span> <i class="fa fa-angle-left"></i></a>
+                                        <ul class="treeview-menu">
+                                            <li><a href="{{ route('propertyGroups.index') }}">گروه ویژگی ها</a></li>
+                                            <li><a href="{{ route('properties.index') }}">لیست ویژگی ها</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
                     <li><a href="{{ route('dashboard') }}"><i class="zmdi zmdi-view-dashboard"></i><span>اعلانات</span></a></li>
                 </ul>
