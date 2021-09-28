@@ -298,14 +298,40 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 d-flex align-items-center">
                         @if(auth()->user()->melli_card)
-                            <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                                <img src="{{ URL::asset('uploads/melli_cards/'.auth()->user()->melli_card) }}" alt="image"/>
+                            <div class="symbol w-225px h-150px symbol-fixed position-relative">
+                                <img src="{{ URL::asset('uploads/melli_cards/'.auth()->user()->melli_card) }}" class="w-225px h-150px"/>
                                 <div
                                     class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
                             </div>
                         @else
                             <div class="col-lg-8 d-flex align-items-center">
                                 <span class="badge badge-danger">تصویر کارت ملی آپلود نشده</span>
+                            </div>
+                        @endif
+                    </div>
+
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--end::Input group-->
+                <div class="row mb-7">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 fw-bold text-muted">تصویر پشت کارت ملی
+                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"
+                           title="تصویر پشت کارت ملی باید تایید شود"></i></label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8 d-flex align-items-center">
+                        @if(auth()->user()->melli_card_back)
+                            <div class="symbol w-225px h-150px symbol-fixed position-relative">
+                                <img src="{{ URL::asset('uploads/melli_cards/'.auth()->user()->melli_card_back) }}" class="w-225px h-150px"/>
+                                <div
+                                    class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
+                            </div>
+                        @else
+                            <div class="col-lg-8 d-flex align-items-center">
+                                <span class="badge badge-danger">تصویر پشت کارت ملی آپلود نشده</span>
                             </div>
                         @endif
                     </div>
