@@ -268,9 +268,6 @@
                         </div>
                         <!--end::Menu item-->--}}
                         <!--begin::Menu item-->
-                            <div class="menu-item px-5 my-1">
-                                <a href="#" class="menu-link px-5">تنظیمات</a>
-                            </div>
                             <!--end::Menu item-->
                             <!--begin::Menu item-->
                             <div class="menu-item px-5">

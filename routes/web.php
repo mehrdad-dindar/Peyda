@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\Shop\PropertyController;
 use \App\Http\Controllers\Admin\Shop\ProductPropertyController;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use \App\Http\Controllers\HTMLPDFController;
+use \App\Http\Controllers\TicketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +41,6 @@ Route::get('/test', function (){
 
     /*$user= User::find($id);
     return $user->notificationuser->notification_id;*/
-
     $users = User::query()->where('role_id', '!=', 1)->get();
 
     $key=0;
@@ -50,13 +50,12 @@ Route::get('/test', function (){
         $userrequest_update = $userrequest->updated_at;
         $user_update = $user->updated_at;
 
-        echo $userrequest->admin_id;
+        //echo $userrequest->admin_id;
         if ($userrequest->admin_id == auth()->user()->id && $userrequest_update->lte($user_update) && $userrequest->done == 0) {
 
         }
 
     }
-    die();
     return $key;
 
 });
@@ -103,12 +102,21 @@ Route::prefix('panel')->group(function () {
             Route::get('/html-pdf/{id}', [HTMLPDFController::class,'htmlPdf'])->name('htmlPdf');
         });
     });
+
+    Route::get('/ticketing/overview', [TicketController::class,'overview'])->name('ticketOverviews');
+
+    Route::get('/ticketing/index', [TicketController::class,'index'])->name('tickets');
+    Route::get('/ticketing/create', [TicketController::class,'create'])->name('createTicket');
+    Route::post('/ticketing/store',[TicketController::class,'store'])->name('storeTicket');
+    Route::post('/ticketing/store/{id}',[TicketController::class,'storeThisTicket'])->name('storeThisTicket');
+    Route::get('/ticketing/view/{id}',[TicketController::class,'viewTicket'])->name('viewTicket');
+
 });
 
 
 /* Dashboard */
-Route::prefix('dashboard')->middleware([CheckPermission::class. ':view-dashboard','auth'])
-            ->group(function () {
+Route::prefix('dashboard')->middleware([CheckPermission::class. ':view-dashboard','auth'])->group(function () {
+
     Route::get('/', 'Admin\HomeController@index')->name('dashboard');
     Route::prefix('/users')->group(function (){
         Route::get('/', 'Admin\UserController@index');
@@ -166,6 +174,12 @@ Route::prefix('dashboard')->middleware([CheckPermission::class. ':view-dashboard
         Route::get('/model/{id}', 'Admin\SettingsController@getPhoneModel')->name('getPhoneModel');
         Route::get('/model/delete/{id}/{brand_id}', 'Admin\SettingsController@deletePhoneModel')->name('deletePhoneModel');
         Route::post('/model/store/{id}', 'Admin\SettingsController@storePhoneModel')->name('storePhoneModel');
+
+        Route::prefix('/views')->group(function (){
+            Route::get('/panel',[\App\Http\Controllers\Admin\SettingsController::class,'getPanelSlider'])->name('panelViews');
+            Route::post('/panel/add',[\App\Http\Controllers\Admin\SettingsController::class,'addPanelSlider'])->name('addPanelSlider');
+            Route::get('/panel/delete/{panelSlider}',[\App\Http\Controllers\Admin\SettingsController::class,'deletePanelSlider'])->name('deletePanelSlider');
+        });
     });
 
 });

@@ -8,6 +8,7 @@ use App\Http\Requests\EditProfileRequest;
 use App\Models\city;
 use App\Models\Notification;
 use App\Models\NotificationUser;
+use App\Models\PanelSlider;
 use App\Models\Phone_brand;
 use App\Models\Phone_model;
 use App\Models\User;
@@ -31,8 +32,10 @@ class ProfileController extends Controller
     public function index()
     {
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        $panelSliders=PanelSlider::all();
         return view('profile.index')->with([
             'wallet' => $wallet,
+            'panelSliders'=>$panelSliders
         ]);
     }
 

@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        Eloquent::unguard();
+        /*Eloquent::unguard();
         $this->call([Phone_brandsTableSeeder::class]);
         $this->command->info('Phone Brand Table Seeder');
         $path = 'app/dev_doc/phone_brands.sql';
@@ -27,15 +27,15 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Phone Model Table Seeder');
         $path = 'app/dev_doc/phone_models.sql';
         DB::unprepared(file_get_contents($path));
-        $this->command->info('Phone Model Table Seeded!');
+        $this->command->info('Phone Model Table Seeded!');*/
 
         // \App\Models\User::factory(10)->create();
         $this->call([CitiesTableSeeder::class,
                     Commitment_CeilingsTableSeeder::class,
                     Fire_commitment_ceilingsTableSeeder::class,
-                    /*Phone_brandsTableSeeder::class,*/
+                    Phone_brandsTableSeeder::class,
                     FlashMessagesSeeder::class,
-                    /*Phone_modelsTableSeeder::class,*/
+                    Phone_modelsTableSeeder::class,
                     StatusTableSeeder::class,
                     ImageFieldTableSeeder::class,
                     SettingsTableSeeder::class,
@@ -44,7 +44,8 @@ class DatabaseSeeder extends Seeder
                     RoleSeeder::class,
                     UsersTableSeeder::class,
                     CategoriesSeeder::class,
-                    BrandsSeeder::class
+                    BrandsSeeder::class,
+                    UnitSeeder::class
         ]);
 
     }

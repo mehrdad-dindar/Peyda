@@ -112,6 +112,16 @@
                     </div>
                 </div>
 
+                <div class="menu-item py-2">
+                    <a class="menu-link menu-center" href="{{ route('tickets') }}" data-bs-trigger="hover"
+                       data-bs-dismiss="click" data-bs-placement="left">
+										<span class="menu-icon me-0">
+											<i class="bi bi-messenger fs-2"></i>
+										</span>
+                        <span class="menu-title">پشتیبانی</span>
+                    </a>
+                </div>
+
             </div>
             <!--end::Menu-->
         </div>

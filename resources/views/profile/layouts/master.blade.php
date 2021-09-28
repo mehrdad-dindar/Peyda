@@ -226,7 +226,7 @@
 		<!--begin::Javascript-->
 		<!--begin::Global Javascript Bundle-->
 		<script src="{{ URL::asset('profile/plugins/global/plugins.bundle.js')}}"></script>
-		<script src="{{ URL::asset('profile/js/scripts.bundle.js')}}"></script>peyment
+		<script src="{{ URL::asset('profile/js/scripts.bundle.js')}}"></script>
         <script src="{{ URL::asset('js/jquery.number.min.js')}}"></script>
         <script>
         // TODO change number formatting

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PanelSliderRequest;
+use App\Models\PanelSlider;
 use App\Models\Phone_brand;
 use App\Models\Phone_model;
 use Illuminate\Http\Request;
@@ -48,6 +50,45 @@ class SettingsController extends Controller
         $phoneModel->save();
 
         return redirect(route('getPhoneModel',$id));
+    }
+
+    public function getPanelSlider()
+    {
+        $panelSlider=PanelSlider::all();
+        return view('dashboard.settings.panel.index',['panelSlider'=>$panelSlider]);
+    }
+
+    public function addPanelSlider(PanelSliderRequest $panelSliderRequest)
+    {
+
+        //dd($panelSliderRequest->all());
+        $file = $panelSliderRequest->file('slider_img_url');
+        //die();
+        $image_name = time() . $file->getClientOriginalName();
+
+        $file->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/panel/sliders/', $image_name);
+
+        $panelSlider=PanelSlider::query()->create([
+            'img_url'=>$image_name,
+            'link'=>$panelSliderRequest->slider_link
+        ]);
+
+        if($panelSlider!=null){
+            return redirect()->back()->with(['success'=>'اسلایدر مورد نظر با موفقیت اضافه شد']);
+        }else{
+            return redirect()->back()->with(['error'=>'خطا در افزودن اسلایدر!']);
+        }
+    }
+
+    public function deletePanelSlider(PanelSlider $panelSlider)
+    {
+        $deleted=$panelSlider->delete();
+        if($deleted){
+            return redirect()->back()->with(['success'=>'اسلایدر موردنظر با موفقیت حذف شد']);
+        }
+        else{
+            return redirect()->back()->with(['error'=>'خطا در حذف داده!']);
+        }
     }
 
 }

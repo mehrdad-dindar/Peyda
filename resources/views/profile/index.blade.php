@@ -19,33 +19,21 @@
                             <!--begin::Carousel-->
                             <div class="carousel-inner pt-8">
                                 <!--begin::Item-->
-                                <div class="carousel-item active">
-                                    <img src="{{ URL::asset('profile/media/product-demos/demo1.png') }}" alt=""
-                                         style="height: 110px">
-                                </div>
-                                <!--end::Item-->
-
-                                <!--begin::Item-->
-                                <div class="carousel-item">
-                                    <img src="{{ URL::asset('profile/media/product-demos/demo2.png') }}" alt=""
-                                         style="height: 110px">
-                                </div>
-                                <!--end::Item-->
-
-                                <!--begin::Item-->
-                                <div class="carousel-item">
-                                    <img src="{{ URL::asset('profile/media/product-demos/demo3.png') }}" alt=""
-                                         style="height: 110px">
-                                </div>
+                                @foreach($panelSliders as $key=>$panelSlider)
+                                    <div class="carousel-item @if($key==0) active @endif">
+                                        <img onclick="window.location.href='{{$panelSlider->link}}'" src="{{ URL::asset('uploads/panel/sliders/'.$panelSlider->img_url) }}" alt=""
+                                             style="height: 110px">
+                                    </div>
+                                @endforeach
                                 <!--end::Item-->
                             </div>
                             <!--end::Carousel-->
                             <!--begin::Carousel Indicators-->
                             <ol class="p-0 m-0 carousel-indicators carousel-indicators-dots">
-                                <li data-bs-target="#kt_carousel_1_carousel" data-bs-slide-to="0"
-                                    class="ms-1 active"></li>
-                                <li data-bs-target="#kt_carousel_1_carousel" data-bs-slide-to="1" class="ms-1"></li>
-                                <li data-bs-target="#kt_carousel_1_carousel" data-bs-slide-to="2" class="ms-1"></li>
+                                @foreach($panelSliders as $key=>$panelSlider)
+                                    <li data-bs-target="#kt_carousel_1_carousel" data-bs-slide-to="{{$key}}"
+                                        class="ms-1 @if($key==0) active @endif"></li>
+                                @endforeach
                             </ol>
                             <!--end::Carousel Indicators-->
                         </div>
