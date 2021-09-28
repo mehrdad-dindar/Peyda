@@ -1,8 +1,62 @@
 @extends('profile.layouts.master')
 @section('title','داشبورد')
 @section('content')
-    {{--<div id="kt_content_container" class="container">
-        <!--begin::Row-->
+    <div id="kt_content_container" class="container">
+        <div class="row gy-5 g-xl-8">
+            <div class="col-12">
+                <div class="card card-xl-stretch mb-xl-8">
+                    <!--begin::Body-->
+                    <div class="card-header">
+                        <div class="card-title m-0">
+                            <h3 class="fw-bolder m-0">تبلیغات</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="kt_carousel_1_carousel" class="carousel carousel-custom slide" data-bs-ride="carousel"
+                             data-bs-interval="3000">
+                            <!--end::Heading-->
+
+                            <!--begin::Carousel-->
+                            <div class="carousel-inner pt-8">
+                                <!--begin::Item-->
+                                <div class="carousel-item active">
+                                    <img src="{{ URL::asset('profile/media/product-demos/demo1.png') }}" alt=""
+                                         style="height: 110px">
+                                </div>
+                                <!--end::Item-->
+
+                                <!--begin::Item-->
+                                <div class="carousel-item">
+                                    <img src="{{ URL::asset('profile/media/product-demos/demo2.png') }}" alt=""
+                                         style="height: 110px">
+                                </div>
+                                <!--end::Item-->
+
+                                <!--begin::Item-->
+                                <div class="carousel-item">
+                                    <img src="{{ URL::asset('profile/media/product-demos/demo3.png') }}" alt=""
+                                         style="height: 110px">
+                                </div>
+                                <!--end::Item-->
+                            </div>
+                            <!--end::Carousel-->
+                            <!--begin::Carousel Indicators-->
+                            <ol class="p-0 m-0 carousel-indicators carousel-indicators-dots">
+                                <li data-bs-target="#kt_carousel_1_carousel" data-bs-slide-to="0"
+                                    class="ms-1 active"></li>
+                                <li data-bs-target="#kt_carousel_1_carousel" data-bs-slide-to="1" class="ms-1"></li>
+                                <li data-bs-target="#kt_carousel_1_carousel" data-bs-slide-to="2" class="ms-1"></li>
+                            </ol>
+                            <!--end::Carousel Indicators-->
+                        </div>
+                    </div>
+                    <!--end::Body-->
+                </div>
+
+
+            </div>
+        </div>
+        {{--<!--begin::Row-->
         <div class="row gy-5 g-xl-8">
             <div class="col-xl-4">
                 <!--begin::Statistics Widget 5-->
@@ -2400,6 +2454,6 @@
             </div>
             <!--end::Tables Widget 10-->
         </div>
-        <!--end::Row-->
-    </div>--}}
+        <!--end::Row-->--}}
+    </div>
 @endsection
