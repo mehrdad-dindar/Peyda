@@ -6,7 +6,7 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="xs-d-none mb-50-xs break-320-576-none">
-                        <img src="admin/img/bg-img/1.png" alt="">
+                        <img src="{{ URL::asset('front/img/login.png') }}" alt="">
                     </div>
                 </div>
 
