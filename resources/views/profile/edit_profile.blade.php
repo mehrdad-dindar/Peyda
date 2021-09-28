@@ -519,7 +519,7 @@
                         <!--end::Input group-->
 
                         <!--begin::Input group-->
-                        <div class="my_other_model row mb-6 @if(auth()->user()->phone_model_other==null) d-none @endif">
+                        <div class="my_other_model row mb-6" @if(auth()->user()->phone_model_other==null) style="display: none;" @endif>
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label fw-bold fs-6">مدل گوشی من</label>
                             <!--end::Label-->
@@ -613,9 +613,9 @@
             var other_model = $('#phone_model').find(':selected').val();
 
             if (other_model === 'others') {
-                $('.my_other_model').removeClass('d-none');
+                $('.my_other_model').slideToggle();
             }else {
-                $('.my_other_model').addClass('d-none');
+                $('.my_other_model').slideUp("slow");
             }
         });
 
