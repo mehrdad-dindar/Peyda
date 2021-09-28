@@ -6,6 +6,7 @@ use App\Helpers\Helpers;
 use App\Models\Mobile_warranty;
 use App\Models\NotificationUser;
 use App\Models\Status;
+use App\Models\User;
 use App\Models\UserRequest;
 use App\Models\WarrantyUse;
 use Hekmatinasser\Verta\Verta;
@@ -105,4 +106,23 @@ class Controller extends BaseController
         return $data;
     }
 
+    public static function getNewUsersNum()
+    {
+        $users = User::query()->where('role_id', '!=', 1)->get();
+
+        $i=0;
+
+        foreach ($users as $key => $user) {
+            $userrequest = $user->userrequests()->first();
+            $userrequest_update = $userrequest->updated_at;
+            $user_update = $user->updated_at;
+
+            //echo $userrequest->admin_id;
+            if ($userrequest->admin_id == auth()->user()->id && $userrequest_update->lte($user_update) && $userrequest->done == 0) {
+                $i++;
+            }
+
+        }
+        return $i;
+    }
 }
