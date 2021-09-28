@@ -5,6 +5,38 @@
 @endsection
 @section('content')
     <div id="kt_content_container" class="container">
+    @if(!auth()->user()->status)
+        <!--begin::Notice-->
+            <div class="notice mb-5 d-flex bg-light-warning rounded border-warning border border-dashed p-6">
+                <!--begin::Icon-->
+                <!--begin::Svg Icon | path: icons/duotone/Code/Warning-1-circle.svg-->
+                <span class="svg-icon svg-icon-2tx svg-icon-warning me-4">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
+                                                 viewBox="0 0 24 24" version="1.1">
+												<circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10"/>
+												<rect fill="#000000" x="11" y="7" width="2" height="8" rx="1"/>
+												<rect fill="#000000" x="11" y="16" width="2" height="2" rx="1"/>
+											</svg>
+										</span>
+                <!--end::Svg Icon-->
+                <!--end::Icon-->
+
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-stack flex-grow-1">
+                    <!--begin::Content-->
+                    <div class="fw-bold">
+                        <h4 class="text-gray-900 fw-bolder">پروفایل کاربری خود را تکمیل نمایید !</h4>
+                        <div class="fs-6 text-gray-700">جهت استفاده از تمام امکانات سایت لطفا
+                            <a class="fw-bolder" href="{{route('edit_profile')}}">پروفایل کاربری</a>
+                            خود را تکمیل نمایید.
+                        </div>
+                    </div>
+                    <!--end::Content-->
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::Notice-->
+    @endif
     <!--begin::Navbar-->
         <div class="card mb-5 mb-xl-10">
             <div class="card-body pt-9 pb-0">
@@ -262,7 +294,7 @@
                                 <input type="hidden" value="{{$v = Verta::instance(auth()->user()->birthday)}}">
                                 <input class="form-control @error('birthday') is-invalid @enderror form-control-solid" id="birthday"
                                        value="@if(auth()->user()->birthday != null){{ \App\Helpers\Helpers::toPersianNumOnly($v->format('Y/n/j')) }}@endif"
-                                       placeholder="--/--/----"/>
+                                       placeholder="--/--/----" autocomplete="off"/>
                                 <input type="hidden" name="birthday_tmp" id="birthday_tmp"/>
                             </div>
                             <!--end::Col-->
