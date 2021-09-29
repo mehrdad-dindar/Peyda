@@ -212,3 +212,27 @@ Route::get('/home',function (){
 /* Blog Archive */
 
 /* Single Blog */
+/*abaout us*/
+Route::get('/about_us',function (){
+    return view('pages.about_us');
+});
+/*services*/
+Route::get('/our_services',function (){
+    return view('pages.our_services');
+});
+/*gifts*/
+Route::get('/gifts',function (){
+    return view('pages.gifts');
+});
+/*use_services*/
+Route::get('/use_services',function (){
+    return view('pages.use_services');
+});
+/*blog archive*/
+Route::get('/archive_blog',function (){
+    return view('pages.archive_blog');
+});
+/*blog*/
+Route::get('/blog',function (){
+    return view('pages.blog');
+});
