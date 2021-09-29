@@ -22,6 +22,16 @@ class TicketController extends Controller
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         $tickets=Ticket::query()->where('sender_id',auth()->user()->id)->orderBy('updated_at','desc')->get();
         $units=Unit::all();
+
+        foreach ($tickets as $key=>$ticket){
+            $ticketDeltail=TicketDetail::query()->where('ticket_id',$ticket->id)->orderBy('created_at','desc')->first();
+            if($ticketDeltail->response!=null){
+                $tickets[$key]['new']=1;
+            }else{
+                $tickets[$key]['new']=0;
+            }
+        }
+
         return view('profile.ticketing.index',['tickets'=>$tickets,'wallet'=>$wallet,'units'=>$units]);
     }
 
@@ -51,6 +61,7 @@ class TicketController extends Controller
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         $tickets=TicketDetail::query()->where('ticket_id','=',$id)->orderBy('id','desc')->get();
         $units=Unit::all();
+
         return view('profile.ticketing.viewticket',['wallet'=>$wallet,'units'=>$units,'tickets'=>$tickets,'ticket'=>$ticket,'id'=>$id,$msg=>$msgBody]);
     }
 
@@ -61,6 +72,46 @@ class TicketController extends Controller
             return redirect()->back()->with('success','تیکت موردنظر با موفقیت بسته شد.');
         }else{
             return redirect()->back()->with('error','بستن تیکت با خطا مواجه شد!');
+        }
+    }
+
+    public function adminTickets()
+    {
+        $tickets=Ticket::query()->where('closed',0)->orderBy('importance','desc')->orderBy('updated_at','desc')->get();
+
+        foreach ($tickets as $key=>$ticket){
+            $ticketDeltail=TicketDetail::query()->where('ticket_id',$ticket->id)->orderBy('created_at','desc')->first();
+            if($ticketDeltail->response==null){
+                $tickets[$key]['new']=1;
+            }else{
+                $tickets[$key]['new']=0;
+            }
+        }
+
+        return view('dashboard.ticketing.index',['tickets'=>$tickets]);
+    }
+
+    public function showResponse($id)
+    {
+        $ticketDetails=TicketDetail::query()->where('ticket_id',$id)->get();
+
+        return view('dashboard.ticketing.create',['ticketDetails'=>$ticketDetails,'id'=>$id]);
+    }
+
+    public function addResponse(Request $request, $id)
+    {
+        Ticket::query()->where('id',$id)->update(['seen'=>0]);
+        $ticketDetails=TicketDetail::query()->where('ticket_id',$id)->orderBy('created_at','desc')->first()->update([
+            'admin_id'=>auth()->user()->id,
+            'response'=>$request->response
+        ]);
+
+        if($ticketDetails==1){
+
+            return redirect()->back()->with('success','پاسخ تیکت موردنظر ثبت شد.');
+
+        }else{
+            return redirect()->back()->with('error','ثبت پاسخ موردنظر با خطا مواجه شد!');
         }
     }
 

@@ -87,7 +87,7 @@
                                                     <span class="badge badge-light my-1">{{$ticket->unit->name}}</span>
                                                     <!--end::Label-->
                                                     <!--begin::Label-->
-                                                    @if(!$ticket->seen)
+                                                    @if($ticket->new==1 && $ticket->seen==0)
                                                         <span class="badge badge-light-success my-1 ms-1">پاسخ داده شده</span>
                                                     @endif
                                                     <!--end::Label-->

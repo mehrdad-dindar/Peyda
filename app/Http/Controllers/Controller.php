@@ -7,6 +7,7 @@ use App\Models\Mobile_warranty;
 use App\Models\NotificationUser;
 use App\Models\Status;
 use App\Models\Ticket;
+use App\Models\TicketDetail;
 use App\Models\User;
 use App\Models\UserRequest;
 use App\Models\WarrantyUse;
@@ -115,21 +116,33 @@ class Controller extends BaseController
 
         foreach ($users as $key => $user) {
             $userrequest = $user->userrequests()->first();
-            $userrequest_update = $userrequest->updated_at;
-            $user_update = $user->updated_at;
+            if($userrequest!=null) {
+                $userrequest_update = $userrequest->updated_at;
+                $user_update = $user->updated_at;
 
-            //echo $userrequest->admin_id;
-            if ($userrequest->admin_id == auth()->user()->id && $userrequest_update->lte($user_update) && $userrequest->done == 0) {
-                $i++;
+                //echo $userrequest->admin_id;
+                if ($userrequest->admin_id == auth()->user()->id && $userrequest_update->lte($user_update) && $userrequest->done == 0) {
+                    $i++;
+                }
             }
-
         }
         return $i;
     }
 
     public static function getTicketNum()
     {
-        return Ticket::query()->where([['seen','=',0],['sender_id','=',auth()->user()->id]])->count();
+        $tickets=Ticket::query()->where([['seen','=',0],['sender_id','=',auth()->user()->id]])->get();
+        $i=0;
+
+        foreach ($tickets as $ticket){
+            $ticketDeltail=TicketDetail::query()->where('ticket_id',$ticket->id)->orderBy('created_at','desc')->first();
+            if($ticketDeltail->response!=null){
+                $i++;
+            }
+        }
+
+        return $i;
+
     }
 
 }
