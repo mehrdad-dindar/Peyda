@@ -44,11 +44,24 @@ class TicketController extends Controller
 
     public function viewTicket($id,$msg='',$msgBody='')
     {
-        Ticket::query()->where('id',$id)->update(['seen'=>1]);
+        $ticket=Ticket::find($id);
+        if(!$ticket->seen){
+            Ticket::query()->where('id',$id)->update(['seen'=>1]);
+        }
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         $tickets=TicketDetail::query()->where('ticket_id','=',$id)->orderBy('id','desc')->get();
         $units=Unit::all();
-        return view('profile.ticketing.viewticket',['wallet'=>$wallet,'units'=>$units,'tickets'=>$tickets,'id'=>$id,$msg=>$msgBody]);
+        return view('profile.ticketing.viewticket',['wallet'=>$wallet,'units'=>$units,'tickets'=>$tickets,'ticket'=>$ticket,'id'=>$id,$msg=>$msgBody]);
+    }
+
+    public function closeTicket($id)
+    {
+        $ticket=Ticket::query()->where('id',$id)->update(['closed'=>1]);
+        if($ticket==1){
+            return redirect()->back()->with('success','تیکت موردنظر با موفقیت بسته شد.');
+        }else{
+            return redirect()->back()->with('error','بستن تیکت با خطا مواجه شد!');
+        }
     }
 
     public function overview()

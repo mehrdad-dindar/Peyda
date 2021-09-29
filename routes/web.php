@@ -95,6 +95,8 @@ Route::prefix('panel')->group(function () {
     Route::post('/ticketing/store/{id}',[TicketController::class,'storeThisTicket'])->name('storeThisTicket');
     Route::get('/ticketing/view/{id}',[TicketController::class,'viewTicket'])->name('viewTicket');
 
+    Route::get('/ticketing/close/{id}',[TicketController::class,'closeTicket'])->name('closeTicket');
+
 });
 
 

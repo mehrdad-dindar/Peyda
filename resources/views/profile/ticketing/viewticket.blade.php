@@ -17,37 +17,58 @@
             <!--begin::Card-->
             <div class="card">
                 <!--begin::Card body-->
+                <div class="card-header pt-5">
+                    <h3 class="card-title align-items-start flex-column">
+                        <span class="card-label fw-bolder fs-3 mb-1 fs-2">جزییات تیکت</span>
+
+                    </h3>
+                    @if(!$ticket->closed)
+                        <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="" data-bs-original-title="Click to add a user">
+                            <a onclick="javascript: return confirm('آیا اطمینان به بستن تیکت دارید؟');" href="{{route('closeTicket',[$ticket->id])}}" class="btn btn-sm btn-light-dark" >
+                                <!--begin::Svg Icon | path: icons/duotone/Communication/Add-user.svg-->
+
+                                <!--end::Svg Icon-->بستن تیکت</a>
+                        </div>
+                    @endif
+                </div>
+                {{--<div class="card-header">
+                    <div class="card-title m-0">
+                        <h3 class="fw-bolder m-0">جزییات تیکت</h3>
+                    </div>
+                </div>--}}
+                @if($ticket->closed==0)
                 <div class="card-body">
                     <!--begin::Layout-->
                     <div class="d-flex flex-column flex-xl-row p-7">
                         <!--begin::Content-->
                         <div class="flex-lg-row-fluid me-xl-15 mb-20 mb-xl-0">
                             <!--begin::Ticket view-->
-                            <form method="post" action="{{route('storeThisTicket',$id)}}">
-                                @csrf
-                                <div class="mb-0">
-                                    <!--begin::Input group-->
-                                    <div class="d-flex flex-column mb-8 fv-row">
-                                        <label class=" required fs-6 fw-bold mb-2">توضیحات</label>
-                                        <textarea class="form-control form-control-solid" rows="4" name="descriptions"
-                                                  placeholder="توضیحات خود را اینجا بنویسید."></textarea>
+                                <form method="post" action="{{route('storeThisTicket',$id)}}">
+                                    @csrf
+                                    <div class="mb-0">
+                                        <!--begin::Input group-->
+                                        <div class="d-flex flex-column mb-8 fv-row">
+                                            <label class=" required fs-6 fw-bold mb-2">توضیحات</label>
+                                            <textarea class="form-control form-control-solid" rows="4" name="descriptions"
+                                                      placeholder="توضیحات خود را اینجا بنویسید."></textarea>
+                                        </div>
+                                        <div class="text-center mb-5">
+                                            <input type="submit" name="xxx" value="ثبت" class="btn  btn-primary">
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Actions-->
                                     </div>
-                                    <div class="text-center mb-5">
-                                        <input type="submit" name="xxx" value="ثبت" class="btn  btn-primary">
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Actions-->
-                                </div>
-                            </form>
+                                </form>
                             <!--end::Ticket view-->
                         </div>
                         <!--end::Content-->
                     </div>
                     <!--end::Layout-->
                 </div>
+            @endif
 
                 <!--begin::Card body-->
-                <div class="card-body" id="kt_drawer_chat_messenger_body">
+                <div class="card-body mt-0" id="kt_drawer_chat_messenger_body">
                     <!--begin::Messages-->
                     <div class="scroll-y me-n5 pe-5" data-kt-element="messages" data-kt-scroll="true"
                          data-kt-scroll-activate="true" data-kt-scroll-height="auto"
