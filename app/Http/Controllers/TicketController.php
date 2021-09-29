@@ -45,8 +45,7 @@ class TicketController extends Controller
     public function viewTicket($id,$msg='',$msgBody='')
     {
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
-        $tickets=Ticket::query()
-            ->join('ticket_details as td','td.ticket_id','=','tickets.id')->orderBy('td.id','desc')->get(['tickets.*','td.*']);
+        $tickets=TicketDetail::query()->where('ticket_id','=',$id)->orderBy('id','desc')->get();
         $units=Unit::all();
         return view('profile.ticketing.viewticket',['wallet'=>$wallet,'units'=>$units,'tickets'=>$tickets,'id'=>$id,$msg=>$msgBody]);
     }

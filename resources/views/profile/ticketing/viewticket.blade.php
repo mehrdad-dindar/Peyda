@@ -89,7 +89,7 @@
                                         <div class="me-3">
                                             <span class="text-muted fs-7 mb-1">{{--5 mins--}}</span>
                                             <a href="#"
-                                               class="fs-5 fw-bolder text-gray-900 text-hover-primary ms-1">@if($ticket->admin_id!=null) {{\App\Models\User::getFullNameAttribute(\App\Models\User::find($ticket->admin_id))}}
+                                               class="fs-5 fw-bolder text-gray-900 text-hover-primary ms-1">@if($ticket->ticket->admin_id!=null) {{\App\Models\User::getFullNameAttribute(\App\Models\User::find($ticket->ticket->admin_id))}}
                                                 @else ادمین @endif</a>
                                         </div>
                                         <!--end::Details-->
