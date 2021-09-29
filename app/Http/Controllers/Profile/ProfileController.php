@@ -39,11 +39,14 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function profile()
+    public function profile($msg='',$msgBody='')
     {
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        $user=User::find(auth()->user()->id);
         return view('profile.profile')->with([
             'wallet' => $wallet,
+            'user'=>$user,
+            $msg=>$msgBody
         ]);
 
     }
@@ -147,12 +150,13 @@ class ProfileController extends Controller
             $user->userrequests()->save($userrequest1);
         }
         $msg = 'اطلاعات پروفایل کاربری توسط شما تکمیل شد؛ پس از بررسی و در صورت تایید اطلاعات، پروفایل کاربری شما فعال خواهد شد و می‌توانید از کلیه امکانات پیدا سرویس ماندگار بهره‌مند شوید. نتیجه از طریق پیامک برای شما ارسال خواهد شد.';
+        return $this->profile('msg',$msg);
         //dd($birthday_timestamp);
-        $wallet = Wallet::where('user_id',  auth()->id())->first();
-        return view('profile.profile')->with([
+        /*return view('profile.profile')->with([
             'wallet' => $wallet,
             'msg'=>$msg
-        ]);
+        ]);*/
+
     }
 
     public function mobile_change(Request $request)

@@ -2,7 +2,7 @@
 @section('title','پروفایل کاربری')
 @section('content')
     <div id="kt_content_container" class="container">
-    @if(!auth()->user()->status)
+    @if(!$user->status)
         <!--begin::Notice-->
             <div class="notice mb-5 d-flex bg-light-warning rounded border-warning border border-dashed p-6">
                 <!--begin::Icon-->
@@ -42,8 +42,8 @@
                     <!--begin: Pic-->
                     <div class="me-7 mb-4">
                         <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                            <img src="@if(auth()->user()->avatar)
-                            {{URL::asset('uploads/avatars').'/'.auth()->user()->avatar}}
+                            <img src="@if($user->avatar)
+                            {{URL::asset('uploads/avatars').'/'.$user->avatar}}
                             @else
                             {{ URL::asset('profile/media/avatars/user.jpg') }}
                             @endif" alt="image"/>
@@ -61,7 +61,7 @@
                                 <!--begin::Name-->
                                 <div class="d-flex align-items-center mb-2">
                                     <a href="{{ route('profile') }}"
-                                       class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">{{ auth()->user()->f_name." ".auth()->user()->l_name }}</a>
+                                       class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">{{ $user->f_name." ".$user->l_name }}</a>
                                     <a href="{{ route('profile') }}">
                                         <!--begin::Svg Icon | path: icons/duotone/Design/Verified.svg-->
                                         <span class="svg-icon svg-icon-1 svg-icon-primary">
@@ -101,9 +101,9 @@
 																</g>
 															</svg>
 														</span>
-                                                {{auth()->user()->role->title_fa}}
+                                                {{$user->role->title_fa}}
                                     <!--end::Svg Icon--></a>
-                                    @if(auth()->user()->city)
+                                    @if($user->city)
                                         <a href="#"
                                            class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                                             <!--begin::Svg Icon | path: icons/duotone/Map/Marker1.svg-->
@@ -120,9 +120,9 @@
 																</g>
 															</svg>
 														</span>
-                                            <!--end::Svg Icon-->{{ auth()->user()->city->name }}</a>
+                                            <!--end::Svg Icon-->{{ $user->city->name }}</a>
                                     @endif
-                                    @if(auth()->user()->email)
+                                    @if($user->email)
                                         <a href="" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                                             <!--begin::Svg Icon | path: icons/duotone/Communication/Mail-at.svg-->
                                             <span class="svg-icon svg-icon-4 me-1">
@@ -133,7 +133,7 @@
                                                                         fill="#000000"/>
                                                                 </svg>
                                                             </span>
-                                            <!--end::Svg Icon-->{{ auth()->user()->email }}</a>
+                                            <!--end::Svg Icon-->{{ $user->email }}</a>
                                     @endif
                                     <a href="" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                                         <!--begin::Svg Icon | path: icons/duotone/Communication/Mail-at.svg-->
@@ -143,13 +143,13 @@
 </svg>
 
                                                             </span>
-                                        <!--end::Svg Icon-->{{ auth()->user()->phone_num }}</a>
+                                        <!--end::Svg Icon-->{{ $user->phone_num }}</a>
                                 </div>
                                 <div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
                                     <a href="#"
                                        class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                                         <!--begin::Svg Icon | path: icons/duotone/General/User.svg-->
-                                        @if(auth()->user()->status==0)
+                                        @if($user->status==0)
                                             <div class="col-lg-8 d-flex align-items-center">
                                                 <span class="badge badge-danger">احراز هویت تایید نشده</span>
                                             </div>
@@ -219,7 +219,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
-                        <span class="fw-bolder fs-6 text-gray-800">{{ auth()->user()->f_name." ".auth()->user()->l_name }}</span>
+                        <span class="fw-bolder fs-6 text-gray-800">{{ $user->f_name." ".$user->l_name }}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -232,7 +232,7 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         <span
-                            class="fw-bold text-gray-800 fs-6">{{ auth()->user()->city_id != null ? auth()->user()->city->name : "--------" }}</span>
+                            class="fw-bold text-gray-800 fs-6">{{ $user->city_id != null ? $user->city->name : "--------" }}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -245,7 +245,7 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         <span
-                            class="fw-bold text-gray-800 fs-6">{{ auth()->user()->address != null ? auth()->user()->address : "--------" }}</span>
+                            class="fw-bold text-gray-800 fs-6">{{ $user->address != null ? $user->address : "--------" }}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -260,9 +260,9 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 d-flex align-items-center">
                         <span
-                            class="fw-bolder fs-6 text-gray-800 me-2">{{ auth()->user()->phone_num != null ? auth()->user()->phone_num : "--------" }}</span>
-                        @if(auth()->user()->phone_num)
-                            @if(auth()->user()->phone_num_verified_at)
+                            class="fw-bolder fs-6 text-gray-800 me-2">{{ $user->phone_num != null ? $user->phone_num : "--------" }}</span>
+                        @if($user->phone_num)
+                            @if($user->phone_num_verified_at)
                                 <span class="badge badge-success">تایید شده</span>
                             @else
                                 <span class="badge badge-danger">تایید نشده</span>
@@ -281,7 +281,7 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         <span
-                            class="fw-bold text-gray-800 fs-6">{{ auth()->user()->melli_code != null ? \App\Helpers\Helpers::toPersianNumOnly(auth()->user()->melli_code) : "--------" }}</span>
+                            class="fw-bold text-gray-800 fs-6">{{ $user->melli_code != null ? \App\Helpers\Helpers::toPersianNumOnly($user->melli_code) : "--------" }}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -296,9 +296,9 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 d-flex align-items-center">
-                        @if(auth()->user()->melli_card)
+                        @if($user->melli_card)
                             <div class="symbol w-225px h-150px symbol-fixed position-relative">
-                                <img src="{{ URL::asset('uploads/melli_cards/'.auth()->user()->melli_card) }}" class="w-225px h-150px"/>
+                                <img src="{{ URL::asset('uploads/melli_cards/'.$user->melli_card) }}" class="w-225px h-150px"/>
                             </div>
                         @else
                             <div class="col-lg-8 d-flex align-items-center">
@@ -320,9 +320,9 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 d-flex align-items-center">
-                        @if(auth()->user()->melli_card_back)
+                        @if($user->melli_card_back)
                             <div class="symbol w-225px h-150px symbol-fixed position-relative">
-                                <img src="{{ URL::asset('uploads/melli_cards/'.auth()->user()->melli_card_back) }}" class="w-225px h-150px"/>
+                                <img src="{{ URL::asset('uploads/melli_cards/'.$user->melli_card_back) }}" class="w-225px h-150px"/>
                             </div>
                         @else
                             <div class="col-lg-8 d-flex align-items-center">
@@ -344,7 +344,7 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         <span
-                            class="fw-bold text-gray-800 fs-6">{{ auth()->user()->birthday != null ? \App\Helpers\Helpers::toPersianNumOnly(Verta(auth()->user()->birthday)->format('Y/m/d')) : "--/--/----" }}</span>
+                            class="fw-bold text-gray-800 fs-6">{{ $user->birthday != null ? \App\Helpers\Helpers::toPersianNumOnly(Verta($user->birthday)->format('Y/m/d')) : "--/--/----" }}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -357,7 +357,7 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         <span
-                            class="fw-bold text-gray-800 fs-6">{{ auth()->user()->phone_model_id != null ? auth()->user()->phone_model->phone_brand->name : "----------------" }}</span>
+                            class="fw-bold text-gray-800 fs-6">{{ $user->phone_model_id != null ? $user->phone_model->phone_brand->name : "----------------" }}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -370,7 +370,7 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
                         <span
-                            class="fw-bold text-gray-800 fs-6">{{ auth()->user()->phone_model_id != null ? auth()->user()->phone_model->name : "----------------" }}</span>
+                            class="fw-bold text-gray-800 fs-6">{{ $user->phone_model_id != null ? $user->phone_model->name : "----------------" }}</span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -386,9 +386,9 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 d-flex align-items-center">
                         <span
-                            class="fw-bolder fs-6 text-gray-800 me-2">{{ auth()->user()->email != null ? auth()->user()->email : "xxxxxxx@xxxxx.xxx" }}</span>
-                        @if(auth()->user()->email)
-                            @if(auth()->user()->email_verified_at)
+                            class="fw-bolder fs-6 text-gray-800 me-2">{{ $user->email != null ? $user->email : "xxxxxxx@xxxxx.xxx" }}</span>
+                        @if($user->email)
+                            @if($user->email_verified_at)
                                 <span class="badge badge-success">تایید شده</span>
                             @else
                                 <span class="badge badge-danger">تایید نشده</span>
