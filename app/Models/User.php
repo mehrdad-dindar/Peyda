@@ -129,14 +129,19 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
 
     public static function getPhoneName(User $user)
     {
-        $brand_name=optional($user->phone_model->phone_brand)->name;
+        if ($user->phone_model != null) {
+            $brand_name = optional($user->phone_model->phone_brand)->name;
 
-        if($user->phone_model_other!=null){
-            $model_name=$user->phone_model_other;
+            if ($user->phone_model_other != null) {
+                $model_name = $user->phone_model_other;
+            } else {
+                $model_name = optional($user->phone_model)->name;
+            }
+            return $brand_name . ' / ' . $model_name;
         }else{
-            $model_name=optional($user->phone_model)->name;
+            return '';
+
         }
-        return $brand_name. ' / '.$model_name;
-    }
+}
 
 }

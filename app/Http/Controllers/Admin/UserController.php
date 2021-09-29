@@ -27,10 +27,11 @@ class UserController extends Controller
 
         $users=User::query()->where('role_id','!=',1)->orderBy('id','desc')->get();
 
-        foreach ($users as $key=>$user){
-            $userrequest=$user->userrequests()->first();
-            $userrequest_update=$userrequest->updated_at;
-            $user_update=$user->updated_at;
+        foreach ($users as $key=>$user) {
+            $userrequest = $user->userrequests()->first();
+            if ($userrequest != null) {
+                $userrequest_update = $userrequest->updated_at;
+                $user_update = $user->updated_at;
 
                 if ($userrequest_update->lte($user_update)) {
                     if ($userrequest->done == 0) {
@@ -39,8 +40,9 @@ class UserController extends Controller
                         $users[$key]['new'] = 0;
 
                     }
-                }else {
+                } else {
                     $users[$key]['new'] = 0;
+                }
             }
         }
 
@@ -69,21 +71,23 @@ class UserController extends Controller
             ->where([['user_requestable_type','=','App\Models\User'],
                 ['user_requestable_id','=',$id]])->first();
 
-        if($userrequest->admin_id==null){
-            $user->userrequests()->update(['admin_id'=>auth()->user()->id]);
+        if($userrequest!=null) {
+            if ($userrequest->admin_id == null) {
+                $user->userrequests()->update(['admin_id' => auth()->user()->id]);
 
-            $link = '/panel/edit_profile';
+                $link = '/panel/edit_profile';
 
-            $notif=new Notification();
-            $notif->setSenderId(auth()->user()->id);
-            $notif->setType(1);
-            $notif->setLink($link);
+                $notif = new Notification();
+                $notif->setSenderId(auth()->user()->id);
+                $notif->setType(1);
+                $notif->setLink($link);
 
-            $userNotif=new NotificationUser();
-            $userNotif->setReceiverId($user->id);
+                $userNotif = new NotificationUser();
+                $userNotif->setReceiverId($user->id);
 
-            $this->addNotif($notif,$userNotif);
+                $this->addNotif($notif, $userNotif);
 
+            }
         }
 
         return view('dashboard.users.create', ['user'=>$user,'auth'=>$auth]);
