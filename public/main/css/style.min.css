@@ -2812,7 +2812,7 @@ padding: 60px 0
  float:right;
  display:block;
  position:relative;
- margin:0 10px
+ margin:0 0px;
 }
 #topnav .navigation-menu>li:hover>a,
 #topnav .navigation-menu>li.active>a {
@@ -5446,5 +5446,7 @@ ul .t-ltr-dark {
     left: -1px;
     top: 30px;
 }
-
+.list-unstyled.footer-list.mt-4 {
+    font-size: 13px;
+}
 

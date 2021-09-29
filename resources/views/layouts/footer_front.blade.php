@@ -7,44 +7,42 @@
                     <img src="{{ URL::asset('front/img/logo-white-1.png')}}" height="90" alt="">
                 </a>
                 <p class="mt-4" style="text-align: justify">پیدا سرویس ماندگار، بزرگترین و تخصصی ترین مرکز خصوصی ارائه دهنده خدمات فراگارانتی گوشی های تلفن همراه در ایران !</p>
-                <ul class="list-unstyled social-icon foot-social-icon mb-0 mt-4">
-                    <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="facebook"
-                                                                                                 class="fea icon-sm fea-social"></i></a>
-                    </li>
-                    <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i
-                                data-feather="instagram" class="fea icon-sm fea-social"></i></a></li>
-                    <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="twitter"
-                                                                                                 class="fea icon-sm fea-social"></i></a>
-                    </li>
-                    <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="linkedin"
-                                                                                                 class="fea icon-sm fea-social"></i></a>
-                    </li>
-                </ul><!--end icon-->
+
+                <li style="list-style: none"><a href="#" class="text-foot"><i class="uil uil-map-marker me-1"></i> زعفرانیه خیابان مقدس اردبیلی پاساژ میلان طبقه دوم پلاک ۱۴۴ </a></li>
+                <li style="list-style: none"><a href="#" class="text-foot"><i class="uil uil-phone me-1"></i> 02154893647 </a></li>
+                <li style="list-style: none"><a href="mailto:info@peydaservice.com" class="text-foot"><i class="uil uil-envelope me-1"></i> info@peydaservice.com </a></li>
+                <li style="list-style: none"><a href="#" class="text-foot"><i class="uil uil-mailbox me-1"></i> ۱۹۸۶۵۷۳۹۷۱ </a></li>
+
             </div><!--end col-->
 
             <div class="col-lg-2 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0" data-aos="fade-up" data-aos-duration="1400">
-                <h5 class="text-light footer-head">شرکت </h5>
+                <h5 class="text-light footer-head">پیدا سرویس ماندگار </h5>
                 <ul class="list-unstyled footer-list mt-4">
-                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> درباره ما </a></li>
-                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> خدمات </a></li>
-                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> تیم </a></li>
-                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> قیمت گذاری </a></li>
-                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> ویژگی ها </a></li>
-                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> گفت و گو </a></li>
-                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> وبلاگ </a></li>
-                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> ورود </a></li>
+                    <li><a href="{{route('about_us')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> درباره ما </a></li>
+                    <li><a href="{{route('our_services')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> فراگارانتی چیست؟ </a></li>
+                    <li><a href="{{route('use_services')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> خدمات تحت پوشش  </a></li>
+                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> خرید فراگارانتی </a></li>
+                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> شرایط و ضوابط </a></li>
+                    <li><a href="{{route('archive_blog')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> آخرین اخبار و مقالات </a></li>
+                    <li><a href="{{route('contact_us')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> تماس با ما </a></li>
                 </ul>
             </div><!--end col-->
 
             <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0" data-aos="fade-up" data-aos-duration="1800">
                 <h5 class="text-light footer-head">لینک های مفید </h5>
                 <ul class="list-unstyled footer-list mt-4">
-                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> محافظت از حریم خصوصی
+                    <li><a href="{{route('login')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> 	ورود / عضویت
                         </a></li>
-                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> پرداخت امن </a></li>
-                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> خدمات سایت </a></li>
-                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> مستند </a></li>
-                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> حریم خصوصی </a></li>
+                    <li><a href="{{route('shop')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> فروشگاه محصولات  </a></li>
+                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> سایر خدمات </a></li>
+                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> بیمه آتش‌سوزی منزل </a><span
+                            class="badge bg-primary ms-2">به زودی</span></li>
+                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> بیمه زلزله </a><span
+                            class="badge bg-primary ms-2">به زودی</span></li>
+                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> بیمه اعضای بدن </a><span
+                            class="badge bg-primary ms-2">به زودی</span></li>
+                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> هر ایرانی یک وکیل  </a><span
+                            class="badge bg-primary ms-2">به زودی</span></li>
                 </ul>
             </div><!--end col-->
 
@@ -70,6 +68,19 @@
                                        value="خبرنامه">
                             </div>
                         </div>
+                        <ul class="list-unstyled social-icon foot-social-icon mb-0 mt-4">
+                            <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="facebook"
+                                                                                                         class="fea icon-sm fea-social"></i></a>
+                            </li>
+                            <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i
+                                        data-feather="instagram" class="fea icon-sm fea-social"></i></a></li>
+                            <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="twitter"
+                                                                                                         class="fea icon-sm fea-social"></i></a>
+                            </li>
+                            <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="linkedin"
+                                                                                                         class="fea icon-sm fea-social"></i></a>
+                            </li>
+                        </ul><!--end icon-->
                     </div>
                 </form>
             </div><!--end col-->
