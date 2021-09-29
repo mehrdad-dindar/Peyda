@@ -4,14 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\NewTicketRequest;
 use App\Http\Requests\StoreThisTicketRequest;
+use App\Models\Notification;
+use App\Models\NotificationUser;
 use App\Models\Ticket;
 use App\Models\TicketDetail;
 use App\Models\Unit;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
+use App\Traits\Notifications;
 
 class TicketController extends Controller
 {
+    use Notifications;
     /**
      * Display a listing of the resource.
      *
@@ -107,7 +111,21 @@ class TicketController extends Controller
             'response' => $request->response
         ]);
 
+        $ticket=Ticket::find($id);
+
         if ($ticketDetails == 1) {
+            $notif=new Notification();
+            $notif->setSenderId(auth()->user()->id);
+            $notif->setType(1);
+            $notif->setTitle('تیکت پشتیبانی');
+            $notif->setBody('پاسخ تیکت پشتیبانی داده شد.');
+            $notif->setLink('/panel/ticketing/view/'.$id);
+
+            $userNotif=new NotificationUser();
+            $userNotif->setReceiverId($ticket->sender_id);
+
+            $this->addNotif($notif,$userNotif);
+
 
             return redirect()->back()->with('success', 'پاسخ تیکت موردنظر ثبت شد.');
 
