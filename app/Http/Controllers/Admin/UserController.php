@@ -90,7 +90,7 @@ class UserController extends Controller
             }
         }
 
-        return view('dashboard.users.create', ['user'=>$user,'auth'=>$auth]);
+        return view('dashboard.users.create', ['user'=>$user,'auth'=>$auth,'users']);
     }
 
     /**
