@@ -42,6 +42,7 @@ class ProfileController extends Controller
     public function profile()
     {
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        //$userrequest=auth()->user()->userrequests();
         return view('profile.profile')->with([
             'wallet' => $wallet,
         ]);
