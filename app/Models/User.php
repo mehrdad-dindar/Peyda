@@ -94,7 +94,7 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
 
     public function notificationuser()
     {
-        return $this->hasMany(NotificationUser::class,'receiver_id','id');
+        return $this->hasMany(NotificationUser::class, 'receiver_id', 'id');
     }
 
     public function role()
@@ -116,6 +116,7 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
     {
         return ucfirst($this->f_name) . ' ' . ucfirst($this->l_name);
     }
+
     public static function getFullNameAttribute(User $user)
     {
         $full_name = ucfirst($user->f_name) . ' ' . ucfirst($user->l_name);
@@ -124,7 +125,7 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
 
     public function userrequests()
     {
-        return $this->morphMany(UserRequest::class,'user_requestable');
+        return $this->morphMany(UserRequest::class, 'user_requestable');
     }
 
     public static function getPhoneName(User $user)
@@ -138,10 +139,16 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
                 $model_name = optional($user->phone_model)->name;
             }
             return $brand_name . ' / ' . $model_name;
-        }else{
+        } else {
             return '';
 
         }
-}
+    }
+
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class,'sender_id','id');
+    }
 
 }
