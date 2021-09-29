@@ -115,12 +115,14 @@ class Controller extends BaseController
 
         foreach ($users as $key => $user) {
             $userrequest = $user->userrequests()->first();
-            $userrequest_update = $userrequest->updated_at;
-            $user_update = $user->updated_at;
+            if($userrequest!=null) {
+                $userrequest_update = $userrequest->updated_at;
+                $user_update = $user->updated_at;
 
-            //echo $userrequest->admin_id;
-            if ($userrequest->admin_id == auth()->user()->id && $userrequest_update->lte($user_update) && $userrequest->done == 0) {
-                $i++;
+                //echo $userrequest->admin_id;
+                if ($userrequest->admin_id == auth()->user()->id && $userrequest_update->lte($user_update) && $userrequest->done == 0) {
+                    $i++;
+                }
             }
 
         }
