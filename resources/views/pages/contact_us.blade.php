@@ -48,8 +48,15 @@
                         </div>
                         <div class="content mt-3">
                             <h5 class="fw-bold">تلفن </h5>
-                            <p class="text-muted">شروع به کار با لندریک که می تواند همه چیز را فراهم کند</p>
-                            <a href="#" class="text-primary">02156978455</a>
+                            <p class="text-muted">ساعات پاسخگویی 8 الی 22</p>
+                            <a href="#" class="text-primary">۰۲۱-۸۸۵۴۰۱۱۱
+                               </a><br>
+                            <a href="#" class="text-primary">
+                                ۰۲۱-۸۸۵۴۰۰۳۴
+                                </a><br>
+                            <a href="#" class="text-primary">
+
+                                ۰۲۱-۸۸۵۴۶۵۳۹</a>
                         </div>
                     </div>
                 </div><!--end col-->
@@ -61,7 +68,7 @@
                         </div>
                         <div class="content mt-3">
                             <h5 class="fw-bold">ایمیل </h5>
-                            <p class="text-muted">شروع به کار با لندریک که می تواند همه چیز را فراهم کند</p>
+                            <p class="text-muted">جهت ارتباط با ما به نشانی زیر ایمیل بزنید</p>
                             <a href="mailto:info@peydaservice.com" class="text-primary">info@peydaservice.com</a>
                         </div>
                     </div>
@@ -74,7 +81,7 @@
                         </div>
                         <div class="content mt-3">
                             <h5 class="fw-bold">موقعیت </h5>
-                            <p class="text-muted">زعفرانیه خیابان مقدس اردبیلی پاساژ میلان طبقه دوم پلاک ۱۴۴ </p>
+                            <p class="text-muted">تجریش خیابان مقدس اردبیلی پلاک 144 مجتمع تجاری میلان طبقه اول تجاری واحد 28 </p>
                             <a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7915.525673176609!2d46.32542404246615!3d38.06389198146334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzjCsDAzJzUzLjgiTiA0NsKwMTknMzkuNCJF!5e0!3m2!1sen!2s!4v1545664085241" data-type="iframe" class="video-play-icon text-primary lightbox">نمایش در گوگل</a>
                         </div>
                     </div>
@@ -86,8 +93,8 @@
                         </div>
                         <div class="content mt-3">
                             <h5 class="fw-bold">کدپستی </h5>
-                            <p class="text-muted">ارومیه، شاهین دژ، قزلناو, خیابان دانش, <br>ایران</p>
-                            <a href="#" class="text-primary">1986573971</a>
+                            <p class="text-muted">کد پستی ما</p>
+                            <a href="#" class="text-primary">1985675124</a>
                         </div>
                     </div>
                 </div>
