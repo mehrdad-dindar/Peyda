@@ -131,12 +131,27 @@ class Controller extends BaseController
 
     public static function getTicketNum()
     {
-        $tickets=Ticket::query()->where([['seen','=',0],['sender_id','=',auth()->user()->id]])->get();
+        $tickets=Ticket::query()->where([['seen','=',0],['sender_id','=',auth()->user()->id],['closed',0]])->get();
         $i=0;
 
         foreach ($tickets as $ticket){
             $ticketDeltail=TicketDetail::query()->where('ticket_id',$ticket->id)->orderBy('created_at','desc')->first();
             if($ticketDeltail->response!=null){
+                $i++;
+            }
+        }
+
+        return $i;
+
+    }
+    public static function getTicketNumAdmin()
+    {
+        $tickets=Ticket::query()->where([['seen',1],['closed',0]])->get();
+        $i=0;
+
+        foreach ($tickets as $ticket){
+            $ticketDeltail=TicketDetail::query()->where('ticket_id',$ticket->id)->orderBy('created_at','desc')->first();
+            if($ticketDeltail->response==null){
                 $i++;
             }
         }
