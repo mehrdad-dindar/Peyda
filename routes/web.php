@@ -182,17 +182,17 @@ Route::get('/logout', 'Auth\AuthController@logout')->name('logout');
 /* Shop & Archive & Search Result */
 Route::get('/shop',function (){
     return view('shop.index');
-})->name('shop');
+});
 
 /* Category */
 Route::get('/گوشی-موبایل',function (){
     return view('shop.archive');
-});
+})->name('shop');
 
 /* Single product */
 Route::get('/گوشی-موبایل/Samsung-galaxy-note-9',function (){
     return view('shop.product');
-});
+})->name('product');
 
 /* Cart */
 Route::get('/cart', function (){
@@ -209,30 +209,32 @@ Route::get('/home',function (){
     return view('front');
 });
 
-/* Blog Archive */
-
 /* Single Blog */
-/*abaout us*/
+/*abaut-us*/
 Route::get('/about_us',function (){
     return view('pages.about_us');
-});
+})->name('about_us');
 /*services*/
 Route::get('/our_services',function (){
     return view('pages.our_services');
-});
+})->name('our_services');;
 /*gifts*/
 Route::get('/gifts',function (){
     return view('pages.gifts');
-});
+})->name('gift');
 /*use_services*/
 Route::get('/use_services',function (){
     return view('pages.use_services');
-});
+})->name('use_services');
 /*blog archive*/
 Route::get('/archive_blog',function (){
     return view('pages.archive_blog');
-});
+})->name('archive_blog');
 /*blog*/
 Route::get('/blog',function (){
     return view('pages.blog');
 });
+/*contact_us*/
+Route::get('/contact_us',function (){
+    return view('pages.contact_us');
+})->name('contact_us');

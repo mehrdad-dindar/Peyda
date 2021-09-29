@@ -148,8 +148,8 @@
             <!-- Navigation Menu-->
             <ul class="navigation-menu">
                 <li><a href="{{ route('index') }}" class="sub-menu-item">خانه</a></li>
-                <li><a href="#" class="sub-menu-item">درباره ما</a></li>
-                <li><a href="#" class="sub-menu-item">فراگارانتی</a></li>
+                <li><a href="{{route('about_us')}}" class="sub-menu-item">درباره ما</a></li>
+                <li><a href="{{route('our_services')}}" class="sub-menu-item">فراگارانتی</a></li>
                 <li class="has-submenu parent-menu-item">
                     <a href="javascript:void(0)">سایر خدمات</a><span class="menu-arrow"></span>
                     <ul class="submenu">
@@ -158,10 +158,13 @@
                                     class="badge bg-primary ms-2">به زودی</span></a></li>
                         <li><a href="#" class="sub-menu-item">بیمه اعضای بدن <span
                                     class="badge bg-primary ms-2">به زودی</span></a></li>
+                        <li><a href="#" class="sub-menu-item">هر ایرانی یک وکیل <span
+                                    class="badge bg-primary ms-2">به زودی</span></a></li>
                     </ul>
                 </li>
-                <li><a href="#" class="sub-menu-item">فروشگاه محصولات</a></li>
-                <li><a href="#" class="sub-menu-item">اخبار و مقالات</a></li>
+                <li><a href="{{route('shop')}}" class="sub-menu-item">فروشگاه محصولات</a></li>
+                <li><a href="{{route('archive_blog')}}" class="sub-menu-item">اخبار و مقالات</a></li>
+                <li><a href="{{route('contact_us')}}" class="sub-menu-item">تماس با ما</a></li>
             </ul><!--end navigation menu-->
             <!--end login button-->
         </div><!--end navigation-->

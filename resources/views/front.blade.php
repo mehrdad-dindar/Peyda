@@ -98,10 +98,9 @@
                                         <p class="text-muted" style="text-align: justify" data-aos="fade-up" data-aos-duration="1400">کارشناسان مجرب شرکت پیدا سرویس ماندگار پس از سال‌ها تجربه و کار با تعهد به این نتیجه رسیدند که گارانتی‌های موجود باعث ایجاد رضایت لازم و کافی در مشتریان نخواهند شد و نیازهای اساسی ایشان را برآورده نمی‌کنند. پس از تحقیق و بررسی‌های بسیار در زمینه گارانتی محصولات الکترونیکی، شرکت پیدا سرویس ماندگار تصمیم بر ارائه خدمات فراگارانتی در حوزه گوشی‌های همراه و بعضی لوازم الکترونیک گرفت.
                                             شرکت پیدا سرویس ماندگار در تاریخ 02/04/1399 با شماره ثبت 560070 و شناسه ملی 14009225883 تأسیس شد. هدف از تأسیس، ارائه‌ی خدمات به مشتریانِ دارای گوشی‌های آکبند و دست دو است. پیدا سرویس ماندگار باور دارد که همه‌ی افراد و اقشار جامعه شایسته دریافت فراگارانتی برای محصولات الکترونیک خود اعم از تلفن همراه، تبلت و لپ‌تاپ هستند...</p>
                                         <div class="mt-4" data-aos="fade-up" data-aos-duration="1800">
-                                            <a href="#" class="text-primary p-1 px-2 shadow rounded me-3">ادامه
+                                            <a href="{{route('about_us')}}" class="text-primary p-1 px-2 shadow rounded me-3">ادامه
                                                 مطلب <i class="uil uil-angle-left-b"></i></a>
-                                            <a href="#" class="text-warning p-1 px-2 shadow rounded">وبلاگ
-                                                ها </a>
+                                            <a href="{{route('archive_blog')}}" class="text-warning p-1 px-2 shadow rounded">اخبار و مقالات مرتبط </a>
                                         </div>
                                     </div>
                                 </div><!--end col-->
@@ -127,10 +126,9 @@
                                         </ol>
                                         </p>
                                         <div class="mt-4" data-aos="fade-up" data-aos-duration="1800">
-                                            <a href="#" class="text-primary p-1 px-2 shadow rounded me-3">ادامه
+                                            <a href="{{route('our_services')}}" class="text-primary p-1 px-2 shadow rounded me-3">ادامه
                                                 مطلب <i class="uil uil-angle-left-b"></i></a>
-                                            <a href="#" class="text-warning p-1 px-2 shadow rounded">وبلاگ
-                                                ها </a>
+                                            <a href="{{route('archive_blog')}}" class="text-warning p-1 px-2 shadow rounded">اخبار و مقالات مرتبط</a>
                                         </div>
                                     </div>
                                 </div>  <!--end col-->
@@ -157,10 +155,9 @@
                                         {{-- TODO صفحه بیمه آتش سوزی --}}
                                         <p class="text-muted" style="text-align: justify" data-aos="fade-up" data-aos-duration="1400">شرکت پیدا سرویس ماندگار در جهت ارائه خدمات نوین و بی‌رقیب خود با تقدیم این هدیه‌ی ویژه و خاص به شما مشتریان گران‌قدر ثابت می‌کند تا چه اندازه به فکر رفاه و امنیت شما عزیزان است. خدماتی که شامل بیمه هستند می‌توانند در دسته‌ی جذاب‌ترین سرویس‌ها در نظر گرفته شوند. مدیران و کارشناسان مجرب شرکت پیدا سرویس ماندگار تصمیم گرفتند برای احترام هر چه بیشتر به مشتریان خود خدمات بیمه آتش‌سوزی منزل تا سقف 500،000،000 ریال را به صورت رایگان برای ایشان در نظر بگیرند. چنانچه تمایل داشته باشید مقدار ارزش بیمه را بیشتر نمائید می‌توانید با پرداخت هزینه‌ای جزئی اعتبارتان را افزایش دهید...</p>
                                         <div class="mt-4" data-aos="fade-up" data-aos-duration="1800">
-                                            <a href="#" class="text-primary p-1 px-2 shadow rounded me-3">ادامه
+                                            <a href="{{ route('gift') }}" class="text-primary p-1 px-2 shadow rounded me-3">ادامه
                                                 مطلب <i class="uil uil-angle-left-b"></i></a>
-                                            <a href="#" class="text-warning p-1 px-2 shadow rounded">وبلاگ
-                                                ها </a>
+                                            <a href="{{route('archive_blog')}}" class="text-warning p-1 px-2 shadow rounded">اخبار و مقالات مرتبط </a>
                                         </div>
                                     </div>
                                 </div>  <!--end col-->
