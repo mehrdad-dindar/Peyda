@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Shop;
 
 use App\Http\Requests\PropertyRequest;
-use App\Models\property;
+use App\Models\Property;
 use App\Http\Controllers\Controller;
 use App\Models\PropertyGroup;
 use Illuminate\Http\Request;
