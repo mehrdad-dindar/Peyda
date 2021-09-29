@@ -219,12 +219,12 @@ class MobileWarrantyController extends Controller
 
     public function insertPhotos(Request $request, $id)
     {
-        dd($request->all(), $id);
+        /*dd($request->all(), $id);*/
         $prefix = $imageList = '';
         $imageFields = ImageField::all();
         $key = 0;
 
-        if (sizeof($request->toArray()) - 19 == 7) {
+        if (sizeof($request->toArray()) - 15 == 7) {
             foreach ($imageFields as $row) {
 
                 if ($request->file($row->html_id)) {
