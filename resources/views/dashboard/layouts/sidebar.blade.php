@@ -78,6 +78,12 @@
                         </ul>
                     </li>
                     <li><a href="{{ route('dashboard') }}"><i class="zmdi zmdi-view-dashboard"></i><span>اعلانات</span></a></li>
+                    <li class="treeview">
+                        <a href="javascript:void(0)"><i class="zmdi zmdi-check"></i> <span>پشتیبانی</span> <i class="fa fa-angle-left"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{route('adminTickets')}}">تیکت ها@if(\App\Http\Controllers\Controller::getTicketNumAdmin()>0) <span class="badge badge-pill badge-danger" style="display: inline;width: max-content;flex: unset;">{{\App\Http\Controllers\Controller::getTicketNumAdmin()}}</span> @endif</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
         </div>

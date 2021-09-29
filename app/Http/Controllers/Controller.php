@@ -7,6 +7,7 @@ use App\Models\Mobile_warranty;
 use App\Models\NotificationUser;
 use App\Models\Status;
 use App\Models\Ticket;
+use App\Models\TicketDetail;
 use App\Models\User;
 use App\Models\UserRequest;
 use App\Models\WarrantyUse;
@@ -124,14 +125,39 @@ class Controller extends BaseController
                     $i++;
                 }
             }
-
         }
         return $i;
     }
 
     public static function getTicketNum()
     {
-        return Ticket::query()->where([['seen','=',0],['sender_id','=',auth()->user()->id]])->count();
+        $tickets=Ticket::query()->where([['seen','=',0],['sender_id','=',auth()->user()->id],['closed',0]])->get();
+        $i=0;
+
+        foreach ($tickets as $ticket){
+            $ticketDeltail=TicketDetail::query()->where('ticket_id',$ticket->id)->orderBy('created_at','desc')->first();
+            if($ticketDeltail->response!=null){
+                $i++;
+            }
+        }
+
+        return $i;
+
+    }
+    public static function getTicketNumAdmin()
+    {
+        $tickets=Ticket::query()->where([['seen',1],['closed',0]])->get();
+        $i=0;
+
+        foreach ($tickets as $ticket){
+            $ticketDeltail=TicketDetail::query()->where('ticket_id',$ticket->id)->orderBy('created_at','desc')->first();
+            if($ticketDeltail->response==null){
+                $i++;
+            }
+        }
+
+        return $i;
+
     }
 
 }

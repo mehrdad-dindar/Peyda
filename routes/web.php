@@ -94,6 +94,7 @@ Route::prefix('panel')->group(function () {
     Route::post('/ticketing/store',[TicketController::class,'store'])->name('storeTicket');
     Route::post('/ticketing/store/{id}',[TicketController::class,'storeThisTicket'])->name('storeThisTicket');
     Route::get('/ticketing/view/{id}',[TicketController::class,'viewTicket'])->name('viewTicket');
+    Route::get('/ticketing/close/{id}',[TicketController::class,'closeTicket'])->name('closeTicket');
 
 });
 
@@ -164,6 +165,12 @@ Route::prefix('dashboard')->middleware([CheckPermission::class. ':view-dashboard
             Route::post('/panel/add',[\App\Http\Controllers\Admin\SettingsController::class,'addPanelSlider'])->name('addPanelSlider');
             Route::get('/panel/delete/{panelSlider}',[\App\Http\Controllers\Admin\SettingsController::class,'deletePanelSlider'])->name('deletePanelSlider');
         });
+    });
+
+    Route::prefix('/tickets')->group(function (){
+        Route::get('/',[TicketController::class,'adminTickets'])->name('adminTickets');
+        Route::get('/show/answers/{id}',[TicketController::class,'showResponse'])->name('showResponse');
+        Route::post('/add/answer/{id}',[TicketController::class,'addResponse'])->name('addResponse');
     });
 
 });
