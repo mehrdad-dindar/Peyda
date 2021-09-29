@@ -6,6 +6,7 @@ use App\Helpers\Helpers;
 use App\Models\Mobile_warranty;
 use App\Models\NotificationUser;
 use App\Models\Status;
+use App\Models\Ticket;
 use App\Models\User;
 use App\Models\UserRequest;
 use App\Models\WarrantyUse;
@@ -125,4 +126,10 @@ class Controller extends BaseController
         }
         return $i;
     }
+
+    public static function getTicketNum()
+    {
+        return Ticket::query()->where([['seen','=',0],['sender_id','=',auth()->user()->id]])->count();
+    }
+
 }

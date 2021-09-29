@@ -20,7 +20,7 @@ class TicketController extends Controller
     public function index()
     {
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
-        $tickets=Ticket::query()->where('sender_id',auth()->user()->id)->get();
+        $tickets=Ticket::query()->where('sender_id',auth()->user()->id)->orderBy('updated_at','desc')->get();
         $units=Unit::all();
         return view('profile.ticketing.index',['tickets'=>$tickets,'wallet'=>$wallet,'units'=>$units]);
     }
@@ -44,6 +44,7 @@ class TicketController extends Controller
 
     public function viewTicket($id,$msg='',$msgBody='')
     {
+        Ticket::query()->where('id',$id)->update(['seen'=>1]);
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         $tickets=TicketDetail::query()->where('ticket_id','=',$id)->orderBy('id','desc')->get();
         $units=Unit::all();

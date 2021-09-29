@@ -64,7 +64,9 @@
                                         <!--begin::Details-->
                                         <div class="ms-3">
                                             <a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary me-1">شما</a>
-                                            <span class="text-muted fs-7 mb-1">{{--2 mins--}}</span>
+                                            <span class="text-muted fs-7 mb-1">
+                                                {{\Hekmatinasser\Verta\Verta::instance($ticket->created_at)->formatDifference()}}
+                                            </span>
                                         </div>
                                         <!--end::Details-->
                                     </div>
@@ -87,7 +89,8 @@
                                     <div class="d-flex align-items-center mb-2">
                                         <!--begin::Details-->
                                         <div class="me-3">
-                                            <span class="text-muted fs-7 mb-1">{{--5 mins--}}</span>
+                                            <span class="text-muted fs-7 mb-1">
+                                                {{\Hekmatinasser\Verta\Verta::instance($ticket->updated_at)->formatDifference()}}</span>
                                             <a href="#"
                                                class="fs-5 fw-bolder text-gray-900 text-hover-primary ms-1">@if($ticket->ticket->admin_id!=null) {{\App\Models\User::getFullNameAttribute(\App\Models\User::find($ticket->ticket->admin_id))}}
                                                 @else ادمین @endif</a>

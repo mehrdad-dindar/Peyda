@@ -105,12 +105,15 @@
                 </div>
 
                 <div class="menu-item py-2">
-                    <a class="menu-link menu-center" href="{{ route('tickets') }}" data-bs-trigger="hover"
+                    <a class="menu-link menu-center position-relative" href="{{ route('tickets') }}" data-bs-trigger="hover"
                        data-bs-dismiss="click" data-bs-placement="left">
 										<span class="menu-icon me-0">
 											<i class="bi bi-messenger fs-2"></i>
 										</span>
                         <span class="menu-title">پشتیبانی</span>
+                        @if(\App\Http\Controllers\Controller::getTicketNum()>0)
+                            <span class="badge rounded-circle badge-danger position-absolute top-25 end-0 p-2 me-2 mt-2">{{\App\Http\Controllers\Controller::getTicketNum()}}</span>
+                        @endif
                     </a>
                 </div>
 
