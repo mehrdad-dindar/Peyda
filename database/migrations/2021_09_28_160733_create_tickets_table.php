@@ -26,7 +26,7 @@ class CreateTicketsTable extends Migration
             $table->foreign('sender_id')
                 ->references('id')
                 ->on('users');
-            $table->boolean('seen')->nullable();
+            $table->boolean('seen')->default(1);
             $table->timestamps();
         });
     }

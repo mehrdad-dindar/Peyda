@@ -10,7 +10,6 @@
                         <div class="card-content bg-white">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h4 class="card-title">تیکت</h4>
-                                <a href="{{route('categories.create')}}" role="button" class="btn btn-primary d-flex align-items-center"><i class="zmdi zmdi-hc-2x zmdi-plus"></i></a>
                             </div>
                             <div class="card-body">
                                 <!-- Table with outer spacing -->
@@ -51,7 +50,7 @@
                                                         @endswitch
                                                     </td>
                                                     <td>
-                                                        <a href="{{ route('showResponse',[$row->id]) }}" class="btn btn-warning mb-2 mr-2">ارسال پاسخ</a>
+                                                        <a href="{{ route('showResponse',[$row->id]) }}" class="btn btn-warning mb-2 mr-2">مشاهده</a>
                                                         <a onclick="javascript: return confirm('آیا اطمینان به بستن تیکت دارید؟');" href="{{route('closeTicket',[$row->id])}}" class="btn btn-outline-danger  mb-2 mr-2">بستن تیکت</a>
                                                     </td>
                                                 </tr>

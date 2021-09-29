@@ -112,7 +112,7 @@
 										</span>
                         <span class="menu-title">پشتیبانی</span>
                         @if(\App\Http\Controllers\Controller::getTicketNum()>0)
-                            <span class="badge rounded-circle badge-danger position-absolute top-25 end-0 p-2 me-2 mt-2">{{\App\Http\Controllers\Controller::getTicketNum()}}</span>
+                            <span class="badge rounded-circle badge-danger position-absolute top-25 end-0" style="min-width: 25px !important;">{{\App\Http\Controllers\Controller::getTicketNum()}}</span>
                         @endif
                     </a>
                 </div>
