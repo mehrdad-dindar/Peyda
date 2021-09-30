@@ -32,6 +32,7 @@
             </svg>
         </div>
     </div>
+
     <!-- Hero End -->
 
     <!-- Start Privacy -->
