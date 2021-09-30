@@ -19,12 +19,13 @@
                     <li class="treeview">
                         <a href="javascript:void(0)"><i class="zmdi zmdi-apps"></i> <span>فراگارانتی‌ها</span> <i class="fa fa-angle-left"></i></a>
                         <ul class="treeview-menu">
-                            <li><a href="{{ route('dashboard') }}/warranties/create">ایجاد فراگارانتی جدید</a></li>
-                            <li><a href="{{ route('dashboard') }}/warranties">همه فراگارانتی‌ها</a></li>
+                            <li><a href="{{ route('dashboard') }}/warranties/create">ایجاد</a></li>
+                            <li><a href="{{ route('dashboard') }}/warranties">همه</a></li>
                             <li><a href="{{ route('waitingIndex') }}"><span>در انتظار تایید</span>@if(sizeof(\App\Http\Controllers\Controller::getWaitingWarranties())>0)<span class="badge badge-pill badge-danger" style="display: inline;width: max-content;flex: unset;">{{sizeof(\App\Http\Controllers\Controller::getWaitingWarranties())}}</span>@endif</a></li>
-                            <li><a href="{{ route('dashboard') }}/warranties/use"><span>استفاده از فراگارانتی</span>@if(\App\Http\Controllers\Controller::getUsesWarraties()>0)<span class="badge badge-pill badge-danger" style="display: inline;width: max-content;flex: unset;">{{\App\Http\Controllers\Controller::getUsesWarraties()}}</span>@endif</a></li>
-                            <li><a href="project-details.html">استعلام فراگارانتی</a></li>
-                            <li><a href="calendar.html">انواع فراگارانتی‌ها</a></li>
+                            <li><a href="{{ route('acceptedIndex') }}"><span>تایید شده ها</span>@if(sizeof(\App\Http\Controllers\Controller::getAcceptedWarranties())>0)<span class="badge badge-pill badge-danger" style="display: inline;width: max-content;flex: unset;">{{sizeof(\App\Http\Controllers\Controller::getAcceptedWarranties())}}</span>@endif</a></li>
+                            <li><a href="{{ route('incompleteIndex') }}"><span>ناقص ها</span>@if(sizeof(\App\Http\Controllers\Controller::getIncompleteWarranties())>0)<span class="badge badge-pill badge-danger" style="display: inline;width: max-content;flex: unset;">{{sizeof(\App\Http\Controllers\Controller::getIncompleteWarranties())}}</span>@endif</a></li>
+                            <li><a href="{{ route('dashboard') }}/warranties/use"><span>استفاده</span>@if(\App\Http\Controllers\Controller::getUsesWarraties()>0)<span class="badge badge-pill badge-danger" style="display: inline;width: max-content;flex: unset;">{{\App\Http\Controllers\Controller::getUsesWarraties()}}</span>@endif</a></li>
+                            <li><a href="project-details.html">استعلام</a></li>
                         </ul>
                     </li>
 

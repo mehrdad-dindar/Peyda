@@ -150,6 +150,8 @@ Route::prefix('dashboard')->middleware([CheckPermission::class. ':view-dashboard
 
     Route::get('/warranties', 'Admin\WarrantyController@index');
     Route::get('/warranties/waiting', [WarrantyController::class,'waitingIndex'])->name('waitingIndex');
+    Route::get('/warranties/accepted', [WarrantyController::class,'acceptedIndex'])->name('acceptedIndex');
+    Route::get('/warranties/incomplete', [WarrantyController::class,'incompleteIndex'])->name('incompleteIndex');
     Route::get('/warranties/create', 'Admin\WarrantyController@create');
     Route::get('/warranties/show/{id}', 'Admin\WarrantyController@show');
     Route::get('/warranties/use', 'Admin\WarrantyController@useWarranty');

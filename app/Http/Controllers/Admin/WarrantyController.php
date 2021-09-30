@@ -25,6 +25,19 @@ class WarrantyController extends Controller
 {
     use Notifications;
 
+    public function acceptedIndex()
+    {
+        return view('dashboard.warranty.accepted',
+            ['accepts' => self::getAcceptedWarranties()]);
+    }
+
+    public function incompleteIndex()
+    {
+        //dd(self::getIncompleteWarranties());
+        return view('dashboard.warranty.incomplete',
+            ['incompletes' => self::getIncompleteWarranties()]);
+    }
+
     public function index()
     {
         $warranties = Mobile_warranty::all();
