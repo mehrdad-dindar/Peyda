@@ -99,8 +99,9 @@ class TicketController extends Controller
     public function showResponse($id)
     {
         $ticketDetails = TicketDetail::query()->where('ticket_id', $id)->get();
+        $ticket=Ticket::find($id);
 
-        return view('dashboard.ticketing.create', ['ticketDetails' => $ticketDetails, 'id' => $id]);
+        return view('dashboard.ticketing.create', ['ticketDetails' => $ticketDetails, 'id' => $id,'ticket'=>$ticket]);
     }
 
     public function addResponse(Request $request, $id)

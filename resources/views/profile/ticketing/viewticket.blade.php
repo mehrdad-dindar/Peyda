@@ -76,6 +76,34 @@
                          data-kt-scroll-wrappers="#kt_drawer_chat_messenger_body" data-kt-scroll-offset="0px">
                         <!--begin::Message(in)-->
                         @foreach($tickets as $ticket)
+                            @if($ticket->response!=null)
+                                <div class="d-flex justify-content-end mb-10">
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex flex-column align-items-end">
+                                        <!--begin::User-->
+                                        <div class="d-flex align-items-center mb-2">
+                                            <!--begin::Details-->
+                                            <div class="me-3">
+                                            <span class="text-muted fs-7 mb-1">
+                                                {{\Hekmatinasser\Verta\Verta::instance($ticket->updated_at)->formatDifference()}}</span>
+                                                <a href="#"
+                                                   class="fs-5 fw-bolder text-gray-900 text-hover-primary ms-1">@if($ticket->ticket->admin_id!=null) {{\App\Models\User::getFullNameAttribute(\App\Models\User::find($ticket->ticket->admin_id))}}
+                                                    @else ادمین @endif</a>
+                                            </div>
+                                            <!--end::Details-->
+                                            <!--begin::Avatar-->
+                                            <!--end::Avatar-->
+                                        </div>
+                                        <!--end::User-->
+                                        <!--begin::Text-->
+                                        <div class="p-5 rounded bg-light-primary text-dark fw-bold mw-lg-400px text-end"
+                                             data-kt-element="message-text">{{$ticket->response}}
+                                        </div>
+                                        <!--end::Text-->
+                                    </div>
+                                    <!--end::Wrapper-->
+                                </div>
+                            @endif
                             <div class="d-flex justify-content-start mb-10">
                                 <!--begin::Wrapper-->
 
@@ -102,34 +130,6 @@
                             </div>
                             <!--end::Message(in)-->
                             <!--begin::Message(out)-->
-                        @if($ticket->response!=null)
-                            <div class="d-flex justify-content-end mb-10">
-                                <!--begin::Wrapper-->
-                                <div class="d-flex flex-column align-items-end">
-                                    <!--begin::User-->
-                                    <div class="d-flex align-items-center mb-2">
-                                        <!--begin::Details-->
-                                        <div class="me-3">
-                                            <span class="text-muted fs-7 mb-1">
-                                                {{\Hekmatinasser\Verta\Verta::instance($ticket->updated_at)->formatDifference()}}</span>
-                                            <a href="#"
-                                               class="fs-5 fw-bolder text-gray-900 text-hover-primary ms-1">@if($ticket->ticket->admin_id!=null) {{\App\Models\User::getFullNameAttribute(\App\Models\User::find($ticket->ticket->admin_id))}}
-                                                @else ادمین @endif</a>
-                                        </div>
-                                        <!--end::Details-->
-                                        <!--begin::Avatar-->
-                                        <!--end::Avatar-->
-                                    </div>
-                                    <!--end::User-->
-                                    <!--begin::Text-->
-                                    <div class="p-5 rounded bg-light-primary text-dark fw-bold mw-lg-400px text-end"
-                                         data-kt-element="message-text">{{$ticket->response}}
-                                    </div>
-                                    <!--end::Text-->
-                                </div>
-                                <!--end::Wrapper-->
-                            </div>
-                        @endif
                     @endforeach
                     <!--end::Message(out)-->
                     </div>

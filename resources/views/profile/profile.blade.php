@@ -206,7 +206,7 @@
                 </div>
                 <!--end::Card title-->
                 <!--begin::Action-->
-                <a href="{{route('edit_profile')}}" class="btn btn-primary align-self-center">ویرایش اطلاعات</a>
+                <a @if(!auth()->user()->status) href="{{route('edit_profile')}}" @else onclick="javascript: return alert('بعد از احراز هویت تنها از طریق ارسال تیکت میتوانید مشخصات خود را ویرایش نمایید.');" @endif class="btn btn-primary align-self-center">ویرایش اطلاعات</a>
                 <!--end::Action-->
             </div>
             <!--begin::Card header-->

@@ -26,4 +26,9 @@ class Ticket extends Model
         return $this->belongsTo(Unit::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class,'sender_id','id');
+    }
+
 }

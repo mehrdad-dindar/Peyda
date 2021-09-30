@@ -57,13 +57,13 @@
                                                     @endif
                                                 @elseif($user->status==1)
 
-                                                    <a href="{{ route('dashboard') }}/users/edit/{{$user->id}}/1" class="btn btn-primary btn-sm">شناسنامه</a>
+                                                    <a href="{{ route('dashboard') }}/users/edit/{{$user->id}}" class="btn btn-primary btn-sm">شناسنامه</a>
                                                 @endif
 
 
                                                 @else
 
-                                                    <a href="{{ route('dashboard') }}/users/edit/{{$user->id}}/1" class="btn btn-primary btn-sm">شناسنامه</a>
+                                                    <a href="{{ route('dashboard') }}/users/edit/{{$user->id}}" class="btn btn-primary btn-sm">شناسنامه</a>
                                             @endif
                                         </td>
                                     </tr>
