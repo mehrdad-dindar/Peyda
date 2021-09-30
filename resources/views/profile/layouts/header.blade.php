@@ -204,7 +204,7 @@
                             <!--begin::Menu item-->
                             <div class="menu-item px-5">
                                 <a href="{{ route('wallet') }}" class="menu-link px-5">
-                                    <span class="menu-text">کیف پول</span>
+                                    <span class="menu-text"><i class="bi bi-wallet-fill me-2"></i>کیف پول</span>
                                     <span class="menu-badge">
                                         <span class="badge badge-light-danger fw-bolder fs-7">
                                             <span
@@ -216,7 +216,10 @@
                             <!--end::Menu item-->
                             <!--begin::Menu item-->
                             <div class="menu-item px-5">
-                                <a href="{{ route('profile') }}" class="menu-link px-5">پروفایل من</a>
+                                <a href="{{ route('profile') }}" class="menu-link px-5"><i class="bi bi-person-circle me-2"></i>پروفایل من</a>
+                            </div>
+                            <div class="menu-item px-5">
+                                <a href="{{ route('walletHistory') }}" class="menu-link px-5"><i class="bi bi-currency-dollar me-2"></i>تاریخچه تراکنش‌ها</a>
                             </div>
                             <!--end::Menu item-->
                         {{--<!--begin::Menu item-->
@@ -332,6 +335,7 @@
                             <!--begin::Menu item-->
                             <div class="menu-item px-5">
                                 <a href="{{ route('logout') }}" class="menu-link px-5">
+                                    <i class="bi bi-box-arrow-left me-2"></i>
                                     خروج از سیستم
                                 </a>
                             </div>

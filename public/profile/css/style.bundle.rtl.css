@@ -282,7 +282,7 @@ button:focus:not(:focus-visible) {
 
 button, input, optgroup, select, textarea {
     margin: 0;
-    font-family: IRANSansX, inherit;
+    font-family: IRANSansX !important;
     font-size: inherit;
     line-height: inherit
 }

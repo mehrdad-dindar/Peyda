@@ -91,12 +91,12 @@
                                     <!--begin::Label-->
                                     <div class="stepper-label">
                                         <h3 class="stepper-title">
-                                            نوع فراگارانتی
+                                            انتخاب دستگاه
                                         </h3>
 
-                                        <div class="stepper-desc">
+                                        {{--<div class="stepper-desc">
                                             Description
-                                        </div>
+                                        </div>--}}
                                     </div>
                                     <!--end::Label-->
                                 </div>
@@ -122,9 +122,9 @@
                                             تعیین بازه قیمت
                                         </h3>
 
-                                        <div class="stepper-desc">
+                                        {{--<div class="stepper-desc">
                                             Description
-                                        </div>
+                                        </div>--}}
                                     </div>
                                     <!--end::Label-->
                                 </div>
@@ -172,7 +172,7 @@
                                     <!--begin::Label-->
                                     <div class="stepper-label">
                                         <h3 class="stepper-title">
-                                            هدیه همراه فراگارانتی
+                                            هدیه ویژه پیدا سرویس
                                         </h3>
 
                                         <div class="stepper-desc">
