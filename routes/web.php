@@ -75,13 +75,14 @@ Route::prefix('panel')->group(function () {
             Route::post('/store_use/{edit?}', 'UseWarrantyController@store')->name('store_use');
             Route::post('projects/media', 'UseWarrantyController@storeMedia')
                 ->name('projects.storeMedia');
-            Route::get('/add', 'MobileWarrantyController@bimeh_add')->name('bimeh_add');
+            Route::get('/add/{editId?}/{error?}', 'MobileWarrantyController@bimeh_add')->name('bimeh_add');
             Route::post('/save', 'MobileWarrantyController@save')->name('save');
+            Route::post('/edit/{id}', 'MobileWarrantyController@edit')->name('edit');
             Route::get('/cart/{id}', 'MobileWarrantyController@cart')->name('cart');
             Route::get('/{invoice_id}/purchase', 'PaymentController@purchase')->name('purchase');
             Route::get('/{invoice_id}/result', 'PaymentController@result')->name('purchase.result');
             Route::get('/upload-photo/{id}',[MobileWarrantyController::class , 'uploadPhoto'])->name('uploadPhoto');
-            Route::post('/insert-photo/{mobile_warranty}',[MobileWarrantyController::class , 'insertPhotos'])->name('insertPhoto');
+            Route::post('/insert-photo/{mobile_warranty}/{edit?}',[MobileWarrantyController::class , 'insertPhotos'])->name('insertPhoto');
             Route::get('/print/{id}',[MobileWarrantyController::class,'print'])->name('print');
             Route::get('/html-pdf/{id}', [HTMLPDFController::class,'htmlPdf'])->name('htmlPdf');
         });
