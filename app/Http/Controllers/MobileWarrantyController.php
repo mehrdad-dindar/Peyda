@@ -46,8 +46,81 @@ class MobileWarrantyController extends Controller
         }
     }
 
-    public function bimeh_add($error = '')
+    public function edit(Request $request,$id)
     {
+
+        //dd($request->all());
+        $other_model = null;
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+
+        if ($request['warranty_type'] == 1) {
+            $phone_model_id = $request['my_phone_model'];
+            $phone_model_id = auth()->user()->phone_model_id;
+            if (auth()->user()->phone_model_other != null) {
+                $other_model = auth()->user()->phone_model_other;
+            } else {
+                $other_model = null;
+            }
+        } else {
+            if ($request['new_phone_model'] == null) {
+
+                $this->bimeh_add('لطفا فیلد مدل گوشی را انتخاب کنید.');
+
+            } elseif ($request['new_phone_model'] == 'others') {
+                //dd('esleif');
+                $phone_model_id = $request['other_model'];
+                $other_model = $request['other_phone_model'];
+            } else {
+                //dd('else');
+                $phone_model_id = $request['new_phone_model'];
+                $other_model = null;
+            }
+        }
+
+        if ($request['warranty_type'] != null && $request['price_range'] != null) {
+            $data = Mobile_warranty::query()->where('id',$id)->update([
+                'phone_model_id' => $phone_model_id,
+                'phone_model_other' => $other_model,
+                'commitment_ceiling_id' => $request['price_range'],
+                'status_id' => 7,
+                'addition_fire_commitment_id' => $request['fire_addition_price'],
+            ]);
+            $data=Mobile_warranty::find($id);
+
+            if ($data->addition_fire_commitment_id != null) {
+                $data->tax = ($data->Fire_commitment_ceiling->price + $data->Commitment_ceiling->price) * (9 / 100);
+                $data->save();
+            } else {
+                $data->tax = ($data->Commitment_ceiling->price) * (9 / 100);
+                $data->save();
+            }
+            //$mobile_images=Helpers::getImageFromDb($data->images);
+
+            return $this->uploadPhoto($id,1);
+        } else {
+            $this->bimeh_add('لطفا همه فیلدها را با دقت پرکنید.');
+        }
+    }
+
+    public function bimeh_add($editId=0,$error = '')
+    {
+        $mobile_warranty='';
+
+        $phone_brand_first = Phone_brand::query()->first();
+        $phone_model_first = Phone_model::query()->where('phone_brand_id', '=', $phone_brand_first->id)->get();
+        if($editId!=0){
+            $mobile_warranty=Mobile_warranty::find($editId);
+            if($mobile_warranty!=null) {
+                if( $mobile_warranty->owner_id!=auth()->user()->id) {
+                    $mobile_warranty = null;
+                }else{
+                    $phone_model_first = Phone_model::query()->where('phone_brand_id', '=', $mobile_warranty->phone_model->phone_brand->id)->get();
+                }
+            }else{
+                abort(404);
+            }
+        }
+
         $pb_name = Phone_model::find(auth()->user()->phone_model_id)->phone_brand;
         $myPhoneDisplay = $pb_name->name . " / " . auth()->user()->phone_model->name;
 
@@ -58,8 +131,6 @@ class MobileWarrantyController extends Controller
         }
 
         $brands = Phone_brand::all();
-        $phone_brand_first = Phone_brand::query()->first();
-        $phone_model_first = Phone_model::query()->where('phone_brand_id', '=', $phone_brand_first->id)->get();
         $commitment_ceilings = Commitment_ceiling::all();
         $fire_commitment_ceilings = Fire_commitment_ceiling::all();
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
@@ -71,7 +142,8 @@ class MobileWarrantyController extends Controller
             ->with('commitment_ceilings', $commitment_ceilings)
             ->with('fire_commitment_ceilings', $fire_commitment_ceilings)
             ->with('wallet', $wallet)
-            ->with('error', $error);
+            ->with('error', $error)
+            ->with('mobile_warranty',$mobile_warranty);
         //return $phones;
     }
 
@@ -198,9 +270,16 @@ class MobileWarrantyController extends Controller
             ]);
     }
 
-    public function uploadPhoto($id, $err = '')
+    public function uploadPhoto($id, $edit=0,$err = '')
     {
         $msg = '';
+        $warranty = Mobile_warranty::find($id)->first();
+
+        if($edit=1){
+            $images=Helpers::getImageFromDb($warranty->images);
+        }else{
+            $images=null;
+        }
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         $warranty = Mobile_warranty::find($id)->first();
         $imgs = ImageField::all();
@@ -213,34 +292,67 @@ class MobileWarrantyController extends Controller
             'wallet' => $wallet,
             'imgs' => $imgs,
             'qrcode' => $qrcode,
+            'images'=>$images,
             $msg => $err
         ]);
     }
 
-    public function insertPhotos(Request $request, $id)
+    public function insertPhotos(Request $request, $id,$edit=0)
     {
-        /*dd($request->all(), $id);*/
+        //dd($request->all());
+        //$i=0;
         $prefix = $imageList = '';
         $imageFields = ImageField::all();
         $key = 0;
 
-        if (sizeof($request->toArray()) - 15 == 7) {
-            foreach ($imageFields as $row) {
+        if($edit==0) {
 
-                if ($request->file($row->html_id)) {
-                    $file = $request->file($row->html_id);
-                    $file_name = time() . $file->getClientOriginalName();
-                    $file->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/warranty_images/', $file_name);
-                    $file_pic = MobileImage::create(['URL' => $file_name, 'type' => (int)$request['type_' . $row->html_id]]);
+            if (sizeof($request->toArray()) - (2*sizeof($imageFields)+1) == 7) {
+                //dd('2');
+                //$i++;
+                foreach ($imageFields as $row) {
 
+                    if ($request->file($row->html_id)) {
+                        $file = $request->file($row->html_id);
+                        $file_name = time() . $file->getClientOriginalName();
+                        $file->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/warranty_images/', $file_name);
+                        $file_pic = MobileImage::create(['URL' => $file_name, 'type' => (int)$request['type_' . $row->html_id]]);
+
+                        $imageList .= $prefix . $file_pic->id;
+                        $prefix = ',';
+
+                        $key++;
+                    }
+                }
+            }
+        }
+        else{
+
+            if (sizeof($request->toArray()) - (2*sizeof($imageFields)+1) >= 0 && sizeof($request->toArray()) - (2*sizeof($imageFields)+1) <= 14 ) {
+                //$i++;
+                //dd($i);
+                foreach ($imageFields as $row) {
+
+                    if ($request->file($row->html_id)) {
+                        $file = $request->file($row->html_id);
+                        $file_name = time() . $file->getClientOriginalName();
+                        $file->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/warranty_images/', $file_name);
+                        $file_pic = MobileImage::create(['URL' => $file_name, 'type' => (int)$request['type_' . $row->html_id]]);
+
+
+                    }else{
+                        $file_pic = MobileImage::find(str_replace('hidden_','',$request['hidden_'.$row->html_id]));
+                    }
                     $imageList .= $prefix . $file_pic->id;
                     $prefix = ',';
-
                     $key++;
                 }
             }
         }
 
+        //dd($i);
+
+        //dd(sizeof($request->toArray()) - (3*sizeof($imageFields)+1));
         if ($key == 7) {
 
             $mobileWarranty = Mobile_warranty::find($id);
@@ -266,7 +378,7 @@ class MobileWarrantyController extends Controller
             return redirect(route('bimeh_all'))->with(['success' => 'عکس های موبایل با موفقیت آپلود شد.']);
 
         } else {
-            return $this->uploadPhoto($id, 'لطفا همه عکس ها رو آپلود کنید!');
+            return $this->uploadPhoto($id, 0,'لطفا همه عکس ها رو آپلود کنید!');
         }
 
     }

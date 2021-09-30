@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\WarrantyController;
+use \App\Http\Controllers\Admin\AdminNotificationController;
 use App\Http\Controllers\MobileWarrantyController;
+use \App\Http\Controllers\Admin\SettingsController;
 use App\Models\User;
+use \App\Http\Controllers\UserNotificationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Admin\Shop\CategoryController;
@@ -75,13 +78,14 @@ Route::prefix('panel')->group(function () {
             Route::post('/store_use/{edit?}', 'UseWarrantyController@store')->name('store_use');
             Route::post('projects/media', 'UseWarrantyController@storeMedia')
                 ->name('projects.storeMedia');
-            Route::get('/add', 'MobileWarrantyController@bimeh_add')->name('bimeh_add');
+            Route::get('/add/{editId?}/{error?}', 'MobileWarrantyController@bimeh_add')->name('bimeh_add');
             Route::post('/save', 'MobileWarrantyController@save')->name('save');
+            Route::post('/edit/{id}', 'MobileWarrantyController@edit')->name('edit');
             Route::get('/cart/{id}', 'MobileWarrantyController@cart')->name('cart');
             Route::get('/{invoice_id}/purchase', 'PaymentController@purchase')->name('purchase');
             Route::get('/{invoice_id}/result', 'PaymentController@result')->name('purchase.result');
             Route::get('/upload-photo/{id}',[MobileWarrantyController::class , 'uploadPhoto'])->name('uploadPhoto');
-            Route::post('/insert-photo/{mobile_warranty}',[MobileWarrantyController::class , 'insertPhotos'])->name('insertPhoto');
+            Route::post('/insert-photo/{mobile_warranty}/{edit?}',[MobileWarrantyController::class , 'insertPhotos'])->name('insertPhoto');
             Route::get('/print/{id}',[MobileWarrantyController::class,'print'])->name('print');
             Route::get('/html-pdf/{id}', [HTMLPDFController::class,'htmlPdf'])->name('htmlPdf');
         });
@@ -96,6 +100,7 @@ Route::prefix('panel')->group(function () {
     Route::get('/ticketing/view/{id}',[TicketController::class,'viewTicket'])->name('viewTicket');
     Route::get('/ticketing/close/{id}',[TicketController::class,'closeTicket'])->name('closeTicket');
 
+    Route::get('/notifications/{id}',[UserNotificationController::class,'index'])->name('userNotifications');
 });
 
 
@@ -117,6 +122,7 @@ Route::prefix('dashboard')->middleware([CheckPermission::class. ':view-dashboard
     Route::patch('/{category}',[Admin\Shop\CategoryController::class,'update'])->name('category-update');
     Route::get('/delete/{category}',[Admin\Shop\CategoryController::class,'destroy'])->name('category-delete');*/
 
+    Route::get('adminNotif',[AdminNotificationController::class,'index'])->name('adminNotif');
 
     Route::post('verify/brand_image', 'Admin\Shop\BrandController@verifyBrand')->name('verify.brand.image');
     Route::resource('brands','Admin\Shop\BrandController');
@@ -161,9 +167,9 @@ Route::prefix('dashboard')->middleware([CheckPermission::class. ':view-dashboard
         Route::post('/model/store/{id}', 'Admin\SettingsController@storePhoneModel')->name('storePhoneModel');
 
         Route::prefix('/views')->group(function (){
-            Route::get('/panel',[\App\Http\Controllers\Admin\SettingsController::class,'getPanelSlider'])->name('panelViews');
-            Route::post('/panel/add',[\App\Http\Controllers\Admin\SettingsController::class,'addPanelSlider'])->name('addPanelSlider');
-            Route::get('/panel/delete/{panelSlider}',[\App\Http\Controllers\Admin\SettingsController::class,'deletePanelSlider'])->name('deletePanelSlider');
+            Route::get('/panel',[SettingsController::class,'getPanelSlider'])->name('panelViews');
+            Route::post('/panel/add',[SettingsController::class,'addPanelSlider'])->name('addPanelSlider');
+            Route::get('/panel/delete/{panelSlider}',[SettingsController::class,'deletePanelSlider'])->name('deletePanelSlider');
         });
     });
 

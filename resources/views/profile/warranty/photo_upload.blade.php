@@ -23,63 +23,66 @@
                             بعد: </p></div>
                 </div>
                 <div class="container mt-10">
-                    <form method="post" action="{{route('insertPhoto',$id)}}" enctype="multipart/form-data">
+                    <form method="post" @if(isset($images[0])) action="{{route('insertPhoto',['mobile_warranty'=>$id,'edit'=>1])}}" @else action="{{route('insertPhoto',['mobile_warranty'=>$id])}}" @endif enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            @foreach($imgs as $img)
+                            @foreach($imgs as $key=>$img)
                                 <label class="col-md-4 col-form-label fw-bold fs-6 mb-2">{{$img->name}}</label>
-                                <div class="col-6 col-md-4 mb-2">
-                                    <!--begin::Image input-->
-                                    <div class="image-input " data-kt-image-input="true"
-                                         style="background-image: url('{{ URL::asset('uploads/reserved/reserved_image_upload.png') }}'); opacity: 0.7; background-position: center">
-                                        <!--begin::Preview existing avatar-->
-                                        <div class="image-input-wrapper w-125       px h-125px"
-                                             style="background-image: url('{{ URL::asset('uploads/reserved/reserved_image_upload.png') }}'); opacity: 0.7; background-position: center"></div>
-                                        <!--end::Preview existing avatar-->
-                                        <!--begin::Label-->
-                                        <label
-                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                            data-kt-image-input-action="change" data-bs-toggle="tooltip"
-                                            title="آپلود تصویر">
-                                            <i class="bi bi-pencil-fill fs-7"></i>
-                                            <!--begin::Inputs-->
-                                            <input type="file" class="disabled-input" name="{{$img->html_id}}"
-                                                   accept=".png, .jpg, .jpeg"/>
-                                            <input type="hidden" class="disabled-input" name="type_{{$img->html_id}}"
-                                                   value="{{$img->id}}"
-                                                   accept=".png, .jpg, .jpeg"/>
-                                            <input type="hidden" name="{{$img->html_id}}_remove"/>
-                                            <!--end::Inputs-->
-                                        </label>
-                                        <!--end::Label-->
-                                        <!--begin::Cancel-->
-                                        <span
-                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                            data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
-                                            title="Cancel avatar">
-                                                                <i class="bi bi-x fs-2"></i>
-                                                            </span>
-                                        <!--end::Cancel-->
-                                        <!--begin::Remove-->
-                                        <span
-                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                            data-kt-image-input-action="remove" data-bs-toggle="tooltip"
-                                            title="Remove avatar">
-                                                                <i class="bi bi-x fs-2"></i>
-                                                            </span>
-                                        <!--end::Remove-->
-                                    </div>
+                                    <div class="col-6 col-md-4 mb-2">
+                                        <!--begin::Image input-->
+                                        <div class="image-input " data-kt-image-input="true"
+                                             style="background-image: @if(!isset($images[$key])) url('{{ URL::asset('uploads/reserved/reserved_image_upload.png') }}'); @else url('{{ URL::asset('uploads/warranty_images/'.$images[$key]['URL']) }}'); @endif opacity: 0.7; background-position: center">
+                                            <!--begin::Preview existing avatar-->
+                                            <div class="image-input-wrapper w-125       px h-125px"
+                                                 style="background-image: @if(!isset($images[$key])) url('{{ URL::asset('uploads/reserved/reserved_image_upload.png') }}'); @else url('{{ URL::asset('uploads/warranty_images/'.$images[$key]['URL']) }}'); @endif opacity: 0.7; background-position: center"></div>
+                                            <!--end::Preview existing avatar-->
+                                            <!--begin::Label-->
+                                            <label
+                                                class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                data-kt-image-input-action="change" data-bs-toggle="tooltip"
+                                                title="آپلود تصویر">
+                                                <i class="bi bi-pencil-fill fs-7"></i>
+                                                <!--begin::Inputs-->
+                                                <input type="file" class="disabled-input" name="{{$img->html_id}}"
+                                                       accept=".png, .jpg, .jpeg"/>
+                                                <input type="hidden" class="disabled-input" name="type_{{$img->html_id}}"
+                                                       value="{{$img->id}}"
+                                                       accept=".png, .jpg, .jpeg"/>
+                                                <input type="hidden" name="{{$img->html_id}}_remove"/>
+                                                <!--end::Inputs-->
+                                            </label>
+                                            <!--end::Label-->
+                                            <!--begin::Cancel-->
+                                            <span
+                                                class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
+                                                title="Cancel avatar">
+                                                                    <i class="bi bi-x fs-2"></i>
+                                                                </span>
+                                            <!--end::Cancel-->
+                                            <!--begin::Remove-->
+                                            <span
+                                                class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                data-kt-image-input-action="remove" data-bs-toggle="tooltip"
+                                                title="Remove avatar">
+                                                                    <i class="bi bi-x fs-2"></i>
+                                                                </span>
+                                            <!--end::Remove-->
+                                        </div>
 
-                                    <!--end::Image input-->
-                                    <!--begin::Hint-->
-                                    <div class="form-text">{{$img->description}}</div>
-                                    <!--end::Hint-->
-                                </div>
-                                <div class="col-6 p-3 col-md-2 mb-2">
-                                    <span class="badge badge-primary">مثال:</span>
-                                    <img src="{{ URL::asset('uploads/reserved/'.$img->sample_URL) }}" class="img-fluid rounded" alt="">
-                                </div>
-                                <div class="separator dashed-h my-5"></div>
+                                        <!--end::Image input-->
+                                        <!--begin::Hint-->
+                                        <div class="form-text">{{$img->description}}</div>
+                                        <!--end::Hint-->
+                                    </div>
+                                @if(isset($images[$key]))
+                                    <div class="col-6 p-3 col-md-2 mb-2">
+                                        <span class="badge badge-primary">مثال:</span>
+                                        <img src="{{ URL::asset('uploads/reserved/'.$img->sample_URL) }}" class="img-fluid rounded" alt="">
+                                            <input type="hidden" name="hidden_{{$img->html_id}}" value="{{$img->id}}">
+                                    </div>
+                                @endif
+                                    <div class="separator dashed-h my-5"></div>
                             @endforeach
 
                             <input type="submit" value="ارسال" class="btn btn-success form-control">
