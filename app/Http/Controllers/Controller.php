@@ -68,6 +68,20 @@ class Controller extends BaseController
         return $waitings;
     }
 
+    public static function getAcceptedWarranties()
+    {
+        $accepts=Mobile_warranty::query()->where('status_id','=',2)->get();
+
+        return $accepts;
+    }
+
+    public static function getIncompleteWarranties()
+    {
+        $incomplete=Mobile_warranty::query()->where('status_id','=',7)->get();
+
+        return $incomplete;
+    }
+
     public static function getUsesWarraties()
     {
         $key=0;
