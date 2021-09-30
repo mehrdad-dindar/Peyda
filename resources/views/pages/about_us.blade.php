@@ -11,7 +11,7 @@
                 <div class="col-lg-12 text-center">
                     <div class="page-next-level">
                         <h3 class="title text-white title-dark"> از ما بیشتر بدانید </h3>
-                        <!-- <div class="page-next">
+                        {{--<div class="page-next">
                              <nav aria-label="breadcrumb" class="d-inline-block">
                                  <ul class="breadcrumb bg-white rounded shadow mb-0">
                                      <li class="breadcrumb-item"><a href="index.html">لنـدریـک </a></li>
@@ -19,7 +19,7 @@
                                      <li class="breadcrumb-item active" aria-current="page">جزئیات وبلاگ</li>
                                  </ul>
                              </nav>
-                         </div>-->
+                        </div>--}}
                     </div>
                 </div><!--end col-->
             </div><!--end row-->

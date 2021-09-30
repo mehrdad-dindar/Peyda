@@ -224,6 +224,9 @@ Route::get('/home',function (){
 });
 
 /* Single Blog */
+Route::get('/single'/*this is single slug*/,function (){
+    return view('pages.single');
+})->name('single');
 /*abaut-us*/
 Route::get('/about_us',function (){
     return view('pages.about_us');

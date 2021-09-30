@@ -17,13 +17,13 @@
                             <!--end::Heading-->
 
                             <!--begin::Carousel-->
-                            <div class="carousel-inner pt-8">
+                            <div class="carousel-inner ">
                                 <!--begin::Item-->
                                 @foreach($panelSliders as $key=>$panelSlider)
-                                    <div class="carousel-item @if($key==0) active @endif">
+                                    <a href="{{$panelSlider->link}}" class="carousel-item text-center @if($key==0) active @endif">
                                         <img onclick="window.location.href='{{$panelSlider->link}}'" src="{{ URL::asset('uploads/panel/sliders/'.$panelSlider->img_url) }}" alt=""
-                                             style="height: 110px">
-                                    </div>
+                                             style="height: 250px">
+                                    </a>
                                 @endforeach
                                 <!--end::Item-->
                             </div>
