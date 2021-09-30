@@ -5,6 +5,7 @@ use \App\Http\Controllers\Admin\AdminNotificationController;
 use App\Http\Controllers\MobileWarrantyController;
 use \App\Http\Controllers\Admin\SettingsController;
 use App\Models\User;
+use \App\Http\Controllers\UserNotificationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Admin\Shop\CategoryController;
@@ -19,7 +20,6 @@ use \App\Http\Controllers\Admin\Shop\ProductPropertyController;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use \App\Http\Controllers\HTMLPDFController;
 use \App\Http\Controllers\TicketController;
-use \App\Http\Controllers\Profile\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,7 +100,7 @@ Route::prefix('panel')->group(function () {
     Route::get('/ticketing/view/{id}',[TicketController::class,'viewTicket'])->name('viewTicket');
     Route::get('/ticketing/close/{id}',[TicketController::class,'closeTicket'])->name('closeTicket');
 
-    Route::get('/notifications/{id}',[NotificationController::class,'index'])->name('userNotifications');
+    Route::get('/notifications/{id}',[UserNotificationController::class,'index'])->name('userNotifications');
 });
 
 

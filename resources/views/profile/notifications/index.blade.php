@@ -49,22 +49,28 @@
                                     <th class="min-w-150px ps-9">تاریخ</th>
                                     <th class="min-w-175px px-0">موضوع</th>
                                     <th class="min-w-350px">توضیحات</th>
-                                    <th class="min-w-125px">لینک ارجاع</th>
+                                    <th class="min-w-125px">وضعیت</th>
                                     <th class="min-w-125px text-center">لینک ارجاع</th>
                                 </tr>
                                 </thead>
                                 <!--end::Thead-->
                                 <!--begin::Tbody-->
                                 <tbody class="fs-6 fw-bold text-gray-600">
-                                <tr>
-                                    <td class="ps-9">Nov 01, 2020</td>
-                                    <td class="ps-0">102445788</td>
-                                    <td>Darknight transparency 36 Icons Pack</td>
-                                    <td class="text-success">$38.00</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-light btn-sm btn-active-light-primary">Download</button>
-                                    </td>
-                                </tr>
+                                @foreach($notifications as $notif)
+                                    <tr>
+                                        <td class="ps-9">{{\Hekmatinasser\Verta\Verta::instance($notif->created_at)->format('Y/m/d')}}</td>
+                                        <td class="ps-0">{{$notif->notifications->title}}</td>
+                                        <td>{{$notif->notifications->body}}</td>
+                                        @if($notif->notifications->seen)
+                                            <td class="text-success">مشاهده شده</td>
+                                        @else
+                                            <td class="text-danger">مشاهده نشده</td>
+                                        @endif
+                                        <td class="text-center">
+                                            <button class="btn btn-light btn-sm btn-active-light-primary">لینک</button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                                 <!--end::Tbody-->
                             </table>
