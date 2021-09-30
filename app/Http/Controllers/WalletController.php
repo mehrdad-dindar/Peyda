@@ -197,4 +197,17 @@ class WalletController extends Controller
         }
 
     }
+
+    public function walletHistory()
+    {
+        $user_id = Auth::user()->id;
+        $history = (new WalletHistoryController())->history($user_id);
+        $wallet = Wallet::where('user_id', auth()->id())->first();
+
+        return view('profile.walletHistory')->with([
+            'user' => auth()->user(),
+            'history' => $history,
+            'wallet' => $wallet,
+        ]);
+    }
 }

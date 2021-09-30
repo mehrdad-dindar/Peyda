@@ -56,6 +56,7 @@ Route::prefix('panel')->group(function () {
     Route::post('/save_profile_info', 'Profile\ProfileController@save_profile')->name('save_profile_info');
     Route::prefix('wallet')->group(function (){
         Route::get('/', 'WalletController@index')->name('wallet');
+        Route::get('/walletHistory', 'WalletController@walletHistory')->name('walletHistory');
         Route::post('/increase_inventory', 'WalletController@purchase')->name('increase');
         Route::get('/increase_inventory/result', 'WalletController@result')->name('walletPurchase.result');
     });
