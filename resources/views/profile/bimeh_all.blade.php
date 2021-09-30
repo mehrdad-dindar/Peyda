@@ -44,13 +44,21 @@
                                 </td>
                                 <td>
                                     <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"></a>
-                                    <span class="text-muted fw-bold text-muted d-block fs-7">از زمان تایید</span>
+                                    <span class="text-muted fw-bold text-muted d-block fs-7">@if(isset($row->activation_date))
+                                        {{\Hekmatinasser\Verta\Verta::instance($row->activation_date)->format('Y/m/d')}}
+                                        @else
+                                                                                                 پس از تأیید فراگارنتی
+                                        @endif
+                                    </span>
                                 </td>
                                 <td>
-                                    <span class="text-muted fw-bold text-muted d-block fs-7">یک سال پس از تایید</span>
+                                    <span class="text-muted fw-bold text-muted d-block fs-7">@if(isset($row->activation_date)){{\Hekmatinasser\Verta\Verta::instance($row->activation_date)->addYear()->format('Y/m/d')}}
+                                        @else
+                                            یک سال پس از تأیید فراگارنتی
+                                        @endif</span>
                                 </td>
                                 <td class="text-dark fw-bolder text-hover-primary fs-6"><span
-                                        class="peyda_price">{{$row->addition_fire_commitment_id != null ? number_format($row->Commitment_ceiling->price+$row->Fire_commitment_ceiling->price+$row->tax) : number_format($row->Commitment_ceiling->price+$row->tax)}}</span>
+                                        class="peyda_price">{{$row->addition_fire_commitment_id != null ? number_format($row->Commitment_ceiling->price+$row->Fire_commitment_ceiling->price+$row->tax) : number_format($row->Commitment_ceiling->price+$row->tax)}}                                    </span>
                                     تومان
                                 </td>
                                 <td>
