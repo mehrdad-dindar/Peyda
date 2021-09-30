@@ -20,6 +20,7 @@
                 <div class="col-12 box-margin">
                     <div class="card">
                         <div class="card-body">
+                            @if($user->status==1) <span class="badge badge-success">تایید شده</span> @else <span class="badge badge-danger">تایید نشده</span> @endif
                             <h5 class="card-title mb-6">اطلاعات کاربر
                                 <button type="button" class="btn" aria-expanded="false"><img
                                         src="@if($user->avatar){{URL::asset('uploads/avatars').'/'.$user->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif"

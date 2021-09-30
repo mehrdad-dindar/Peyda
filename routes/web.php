@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\WarrantyController;
+use \App\Http\Controllers\Admin\AdminNotificationController;
 use App\Http\Controllers\MobileWarrantyController;
+use \App\Http\Controllers\Admin\SettingsController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +19,7 @@ use \App\Http\Controllers\Admin\Shop\ProductPropertyController;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use \App\Http\Controllers\HTMLPDFController;
 use \App\Http\Controllers\TicketController;
+use \App\Http\Controllers\Profile\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +100,7 @@ Route::prefix('panel')->group(function () {
     Route::get('/ticketing/view/{id}',[TicketController::class,'viewTicket'])->name('viewTicket');
     Route::get('/ticketing/close/{id}',[TicketController::class,'closeTicket'])->name('closeTicket');
 
+    Route::get('/notifications/{id}',[NotificationController::class,'index'])->name('userNotifications');
 });
 
 
@@ -118,6 +122,7 @@ Route::prefix('dashboard')->middleware([CheckPermission::class. ':view-dashboard
     Route::patch('/{category}',[Admin\Shop\CategoryController::class,'update'])->name('category-update');
     Route::get('/delete/{category}',[Admin\Shop\CategoryController::class,'destroy'])->name('category-delete');*/
 
+    Route::get('adminNotif',[AdminNotificationController::class,'index'])->name('adminNotif');
 
     Route::post('verify/brand_image', 'Admin\Shop\BrandController@verifyBrand')->name('verify.brand.image');
     Route::resource('brands','Admin\Shop\BrandController');
@@ -162,9 +167,9 @@ Route::prefix('dashboard')->middleware([CheckPermission::class. ':view-dashboard
         Route::post('/model/store/{id}', 'Admin\SettingsController@storePhoneModel')->name('storePhoneModel');
 
         Route::prefix('/views')->group(function (){
-            Route::get('/panel',[\App\Http\Controllers\Admin\SettingsController::class,'getPanelSlider'])->name('panelViews');
-            Route::post('/panel/add',[\App\Http\Controllers\Admin\SettingsController::class,'addPanelSlider'])->name('addPanelSlider');
-            Route::get('/panel/delete/{panelSlider}',[\App\Http\Controllers\Admin\SettingsController::class,'deletePanelSlider'])->name('deletePanelSlider');
+            Route::get('/panel',[SettingsController::class,'getPanelSlider'])->name('panelViews');
+            Route::post('/panel/add',[SettingsController::class,'addPanelSlider'])->name('addPanelSlider');
+            Route::get('/panel/delete/{panelSlider}',[SettingsController::class,'deletePanelSlider'])->name('deletePanelSlider');
         });
     });
 
