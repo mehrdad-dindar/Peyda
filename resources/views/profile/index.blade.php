@@ -13,7 +13,7 @@
                     </div>
                     <div class="card-body">
                         <div id="kt_carousel_1_carousel" class="carousel carousel-custom slide" data-bs-ride="carousel"
-                             data-bs-interval="3000">
+                             data-bs-interval="5000">
                             <!--end::Heading-->
 
                             <!--begin::Carousel-->
