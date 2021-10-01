@@ -57,19 +57,21 @@
                                 <!--begin::Tbody-->
                                 <tbody class="fs-6 fw-bold text-gray-600">
                                 @foreach($notifications as $notif)
-                                    <tr>
-                                        <td class="ps-9">{{\Hekmatinasser\Verta\Verta::instance($notif->created_at)->format('Y/m/d')}}</td>
-                                        <td class="ps-0">{{$notif->notifications->title}}</td>
-                                        <td>{{$notif->notifications->body}}</td>
-                                        @if($notif->notifications->seen)
-                                            <td class="text-success">مشاهده شده</td>
-                                        @else
-                                            <td class="text-danger">مشاهده نشده</td>
-                                        @endif
-                                        <td class="text-center">
-                                            <button class="btn btn-light btn-sm btn-active-light-primary">لینک</button>
-                                        </td>
-                                    </tr>
+                                    @if($notif->notifications->body!=null)
+                                        <tr>
+                                            <td class="ps-9">{{\Hekmatinasser\Verta\Verta::instance($notif->created_at)->format('Y/m/d')}}</td>
+                                            <td class="ps-0">{{$notif->notifications->title}}</td>
+                                            <td>{{$notif->notifications->body}}</td>
+                                            @if($notif->notifications->seen)
+                                                <td class="text-success">مشاهده شده</td>
+                                            @else
+                                                <td class="text-danger">مشاهده نشده</td>
+                                            @endif
+                                            <td class="text-center">
+                                                <button onclick="window.location.href='{{$notif->notifications->link}}'" class="btn btn-light btn-sm btn-active-light-primary" type="submit">لینک</button>
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                                 </tbody>
                                 <!--end::Tbody-->
