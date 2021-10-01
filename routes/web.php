@@ -86,6 +86,8 @@ Route::prefix('panel')->group(function () {
             Route::get('/{invoice_id}/result', 'PaymentController@result')->name('purchase.result');
             Route::get('/upload-photo/{id}',[MobileWarrantyController::class , 'uploadPhoto'])->name('uploadPhoto');
             Route::post('/insert-photo/{mobile_warranty}/{edit?}',[MobileWarrantyController::class , 'insertPhotos'])->name('insertPhoto');
+            Route::get('/edit-photo/{id}',[MobileWarrantyController::class , 'editPhoto'])->name('editPhoto');
+            Route::post('/update-photo/{id}',[MobileWarrantyController::class , 'updatePhoto'])->name('updatePhoto');
             Route::get('/print/{id}',[MobileWarrantyController::class,'print'])->name('print');
             Route::get('/html-pdf/{id}', [HTMLPDFController::class,'htmlPdf'])->name('htmlPdf');
         });

@@ -11,7 +11,7 @@ class ImageField extends Model
     protected $table='image_fields';
 
     public function MobileImages(){
-        return $this->hasMany(MobileImages::class);
+        return $this->hasMany(MobileImage::class);
     }
 
 }

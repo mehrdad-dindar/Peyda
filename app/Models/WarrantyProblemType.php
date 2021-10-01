@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class WarrantyProblemType extends Model
 {
     use HasFactory;
+
+    public function warrantyproblems()
+    {
+        return $this->belongsTo(WarrantyProblem::class);
+    }
+
 }

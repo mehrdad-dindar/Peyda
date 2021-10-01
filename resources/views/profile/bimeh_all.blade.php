@@ -60,7 +60,8 @@
                                 </td>
 
                                 <td>
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_{{$row->id}}" class="badge badge-{{$row->status->color}}">{{$row->status->text}}</a>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_{{$row->id}}"
+                                       class="badge badge-{{$row->status->color}}">{{$row->status->text}}</a>
                                 </td>
                                 <td class="text-end">
                                     @if($row->status->id==4 || $row->status->id==6)
@@ -443,23 +444,24 @@
                                                         <!--end::Option-->
                                                 @endif
                                                 @if($row->status->id == 2)
-                                                <!--begin::Option-->
-                                                    @if($row->usable_percentage>0)
-                                                        <label
-                                                            @if(sizeof($warranties)>0) onclick="window.location.href='{{route('bimeh_use',$row->id)}}'"
-                                                            @endif
-                                                            class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6">
-                                                            <!--begin::Input-->
-                                                            <input class="btn-check" type="radio" checked
-                                                                   name="warranty_type" value="1"/>
-                                                            <!--end::Input-->
+                                                    <!--begin::Option-->
+                                                        @if($row->usable_percentage>0)
+                                                            <label
+                                                                @if(sizeof($warranties)>0) onclick="window.location.href='{{route('bimeh_use',$row->id)}}'"
+                                                                @endif
+                                                                class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6">
+                                                                <!--begin::Input-->
+                                                                <input class="btn-check" type="radio" checked
+                                                                       name="warranty_type" value="1"/>
+                                                                <!--end::Input-->
 
-                                                            <!--begin::Label-->
-                                                            <span class="d-flex" id="first_select">
+                                                                <!--begin::Label-->
+                                                                <span class="d-flex" id="first_select">
                                                                                 <!--begin::Icon-->
-                                                                <!--begin::Svg Icon | path: icons/duotone/General/User.svg-->
+                                                                    <!--begin::Svg Icon | path: icons/duotone/General/User.svg-->
                                                                                 <span class="svg-icon svg-icon-3hx">
-                                                                                    <svg viewBox="0 0 24 24" version="1.1"
+                                                                                    <svg viewBox="0 0 24 24"
+                                                                                         version="1.1"
                                                                                          xmlns="http://www.w3.org/2000/svg"
                                                                                          xmlns:xlink="http://www.w3.org/1999/xlink">
         <g id="Stockholm-icons-/-General-/-Update" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -470,33 +472,33 @@
         </g>
     </svg>
                                                                                 </span>
-                                                                <!--end::Svg Icon-->
-                                                                <!--end::Icon-->
-                                                                <!--begin::Info-->
+                                                                    <!--end::Svg Icon-->
+                                                                    <!--end::Icon-->
+                                                                    <!--begin::Info-->
                                                                                 <span class="ms-4">
                                                                                     <span
                                                                                         class="fs-3 fw-bolder text-gray-900 mb-2 d-block">استفاده از فراگارانتی</span>
                                                                                 </span>
-                                                                <!--end::Info-->
+                                                                    <!--end::Info-->
                                                                             </span>
-                                                            <!--end::Label-->
-                                                        </label>
-                                                    @endif
+                                                                <!--end::Label-->
+                                                            </label>
+                                                        @endif
                                                     <!--end::Option-->
 
-                                                    <!--begin::Option-->
-                                                    <label
-                                                        @if(sizeof($warranties)>0) onclick="window.location.href='mobile/transfer_faraguaranty/{{$row->id}}'"
-                                                        @endif
-                                                        class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6">
-                                                        <!--begin::Input-->
-                                                        <input class="btn-check" type="radio" name="warranty_type"
-                                                               value="2"/>
-                                                        <!--end::Input-->
-                                                        <!--begin::Label-->
-                                                        <span class="d-flex" id="new_mobile_select_btn">
+                                                        <!--begin::Option-->
+                                                        <label
+                                                            @if(sizeof($warranties)>0) onclick="window.location.href='mobile/transfer_faraguaranty/{{$row->id}}'"
+                                                            @endif
+                                                            class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6">
+                                                            <!--begin::Input-->
+                                                            <input class="btn-check" type="radio" name="warranty_type"
+                                                                   value="2"/>
+                                                            <!--end::Input-->
+                                                            <!--begin::Label-->
+                                                            <span class="d-flex" id="new_mobile_select_btn">
 																			<!--begin::Icon-->
-                                                            <!--begin::Svg Icon-->
+                                                                <!--begin::Svg Icon-->
 																			<span class="svg-icon svg-icon-3hx">
 																				<svg xmlns="http://www.w3.org/2000/svg"
                                                                                      xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -522,34 +524,34 @@
 																					</g>
 																				</svg>
 																			</span>
-                                                            <!--end::Svg Icon-->
-                                                            <!--end::Icon-->
-                                                            <!--begin::Info-->
+                                                                <!--end::Svg Icon-->
+                                                                <!--end::Icon-->
+                                                                <!--begin::Info-->
 																			<span class="ms-4">
 																				<span
                                                                                     class="fs-3 fw-bolder text-gray-900 mb-2 d-block">انتقال فراگارانتی</span>
 																				{{--<span
                                                                                     class="fw-bold fs-4 text-muted">{{ $user->phone_brand->name." / ".$user->phone_model->name }}</span>--}}
 																			</span>
-                                                            <!--end::Info-->
+                                                                <!--end::Info-->
 																		</span>
-                                                        <!--end::Label-->
-                                                    </label>
-                                                    <!--end::Option-->
+                                                            <!--end::Label-->
+                                                        </label>
+                                                        <!--end::Option-->
 
-                                                    <!--begin::Option-->
-                                                    <label
-                                                        onclick="window.location.href='{{route('print',$row->id)}}'"
-                                                        class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6">
-                                                        <!--begin::Input-->
-                                                        <input class="btn-check" type="radio" checked
-                                                               name="warranty_type" value="1"/>
-                                                        <!--end::Input-->
+                                                        <!--begin::Option-->
+                                                        <label
+                                                            onclick="window.location.href='{{route('print',$row->id)}}'"
+                                                            class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6">
+                                                            <!--begin::Input-->
+                                                            <input class="btn-check" type="radio" checked
+                                                                   name="warranty_type" value="1"/>
+                                                            <!--end::Input-->
 
-                                                        <!--begin::Label-->
-                                                        <span class="d-flex" id="first_select">
+                                                            <!--begin::Label-->
+                                                            <span class="d-flex" id="first_select">
 																			<!--begin::Icon-->
-                                                            <!--begin::Svg Icon | path: icons/duotone/General/User.svg-->
+                                                                <!--begin::Svg Icon | path: icons/duotone/General/User.svg-->
 																			<span class="svg-icon svg-icon-3hx">
 																				<svg viewBox="0 0 24 24" version="1.1"
                                                                                      xmlns="http://www.w3.org/2000/svg"
@@ -562,20 +564,20 @@
     </g>
 </svg>
 																			</span>
-                                                            <!--end::Svg Icon-->
-                                                            <!--end::Icon-->
-                                                            <!--begin::Info-->
+                                                                <!--end::Svg Icon-->
+                                                                <!--end::Icon-->
+                                                                <!--begin::Info-->
 																			<span class="ms-4">
 																				<span
                                                                                     class="fs-3 fw-bolder text-gray-900 mb-2 d-block">چاپ فراگارانتی</span>
 																			</span>
-                                                            <!--end::Info-->
+                                                                <!--end::Info-->
 																		</span>
-                                                        <!--end::Label-->
-                                                    </label>
-                                                    <!--end::Option-->
+                                                            <!--end::Label-->
+                                                        </label>
+                                                        <!--end::Option-->
                                                     @endif
-                                                @if($row->status->id == 5)
+                                                    @if($row->status->id == 5)
                                                     <!--begin::Option-->
                                                         <label
                                                             @if(sizeof($warranties)>0) onclick="window.location.href='{{route('uploadPhoto',$row->id)}}'"
@@ -625,21 +627,23 @@
                                                         </label>
                                                         <!--end::Option-->
                                                     @endif
-                                                @if($row->status->id == 7)
+                                                    @if($row->status->id == 7)
                                                     <!--begin::Option-->
-                                                        <label
-                                                            @if(sizeof($warranties)>0) onclick="window.location.href='{{route('bimeh_add',['editId'=>$row->id])}}'"
-                                                            @endif
-                                                            class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6">
-                                                            <!--begin::Input-->
-                                                            <input class="btn-check" type="radio" checked
-                                                                   name="warranty_type" value="1"/>
-                                                            <!--end::Input-->
+                                                        @if(sizeof($warranties)>0)
+                                                            @if($warrantyProblemType==2)
+                                                                <label
+                                                                    onclick="window.location.href='{{route('editPhoto',['id'=>$row->id])}}'"
 
-                                                            <!--begin::Label-->
-                                                            <span class="d-flex" id="first_select">
+                                                                    class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6">
+                                                                    <!--begin::Input-->
+                                                                    <input class="btn-check" type="radio" checked
+                                                                           name="warranty_type" value="1"/>
+                                                                    <!--end::Input-->
+
+                                                                    <!--begin::Label-->
+                                                                    <span class="d-flex" id="first_select">
 																			<!--begin::Icon-->
-                                                                <!--begin::Svg Icon-->
+                                                                        <!--begin::Svg Icon-->
 																			<span class="svg-icon svg-icon-3hx">
 																				<svg viewBox="0 0 24 24" version="1.1"
                                                                                      xmlns="http://www.w3.org/2000/svg"
@@ -660,20 +664,22 @@
     </g>
 </svg>
 																			</span>
-                                                                <!--end::Svg Icon-->
-                                                                <!--end::Icon-->
-                                                                <!--begin::Info-->
+                                                                        <!--end::Svg Icon-->
+                                                                        <!--end::Icon-->
+                                                                        <!--begin::Info-->
 																			<span class="ms-4">
 																				<span
-                                                                                    class="fs-3 fw-bolder text-gray-900 mb-2 d-block">ویرایش فراگارانتی</span>
+                                                                                    class="fs-3 fw-bolder text-gray-900 mb-2 d-block">ویرایش تصاویر</span>
                                                                                 <span
                                                                                     class="fw-bold fs-4 text-muted"> {{$row->phone_name}}</span>
 																			</span>
-                                                                <!--end::Info-->
+                                                                        <!--end::Info-->
 																		</span>
-                                                            <!--end::Label-->
-                                                        </label>
+                                                                    <!--end::Label-->
+                                                                </label>
+                                                            @endif
                                                         <!--end::Option-->
+                                                        @endif
                                                     @endif
                                                 </div>
                                             </div>
