@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UseWarrantyRequest;
 use App\Models\Mobile_warranty;
 use App\Models\MobileImage;
 use App\Models\TransferWarranty;
@@ -45,7 +46,7 @@ class UseWarrantyController extends Controller
         }
     }
 
-    public function store(Request $request, $edit = null)
+    public function store(UseWarrantyRequest $request, $edit = null)
     {
 
         $descriptions = $request->get('descriptions');
@@ -107,14 +108,18 @@ class UseWarrantyController extends Controller
                 $addReq = WarrantyUse::find($warranty_use)->userrequests()->update(['updated_at'=>Carbon::now()->toDateTimeString()]);
             }
         }
+
+        $mobileWarrantyRec=Mobile_warranty::find(WarrantyUse::find($request_use_warranty_id)->warranty_id);
+
         $msg = null;
+
         if ($warrantyUse != null) {
 
             $notif = new Notification();
             $notif->setSenderId(auth()->user()->id);
             $notif->setType(3);
             $notif->setTitle('ثبت درخواست');
-            $notif->setBody('درخواست استفاده از فراگارانتی شما با موفقیت ثبت شد.');
+            $notif->setBody('درخواست استفاده از فراگارانتی تلفن همراه '.$mobileWarrantyRec->getPhoneName($mobileWarrantyRec).' شما با موفقیت ثبت شد.');
 
             $userNotif = new NotificationUser();
             $userNotif->setReceiverId(auth()->user()->id);
@@ -170,6 +175,7 @@ class UseWarrantyController extends Controller
         //dd($msg);
         $wallet = Wallet::where('user_id', auth()->id())->first();
 
+        $warranties=Mobile_warranty::query()->where('owner_id',auth()->id())->get();
         $useWarranty = WarrantyUse::query()->join('mobile_warranties as mw', 'mw.id', '=', 'warranty_uses.warranty_id')
             ->where('mw.owner_id', '=', auth()->user()->id)
             ->get(['warranty_uses.*']);
@@ -185,6 +191,7 @@ class UseWarrantyController extends Controller
                 ->with([
                     'useWarranty' => $useWarranty,
                     'wallet' => $wallet,
+                    'warranties'=>$warranties,
                     $msg=>'msg',
                 ]);
 
@@ -193,6 +200,7 @@ class UseWarrantyController extends Controller
             ->with([
                 'useWarranty' => $useWarranty,
                 'wallet' => $wallet,
+                'warranties'=>$warranties,
             ]);
     }
 

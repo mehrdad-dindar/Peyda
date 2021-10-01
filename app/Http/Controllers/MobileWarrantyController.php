@@ -13,6 +13,7 @@ use App\Models\Phone_brand;
 use App\Models\Phone_model;
 use App\Models\UserRequest;
 use App\Models\Wallet;
+use App\Models\WarrantyProblem;
 use Carbon\Carbon;
 use Crypt;
 use DateTime;
@@ -149,10 +150,18 @@ class MobileWarrantyController extends Controller
 
     public function bimeh_all()
     {
+        $warrantyProblemType=null;
         $wallet = Wallet::where('user_id', auth()->id())->first();
+
         $warranties = Mobile_warranty::where('owner_id', auth()->id())->orderBy('updated_at', 'desc')->get();
 
         foreach ($warranties as $warranty) {
+            $warrantyProblem=WarrantyProblem::query()->where('mobile_warranty_id',$warranty->id)->orderBy('updated_at','desc')->first();
+            if($warrantyProblem->id!=null){
+                $warrantyProblemType=$warrantyProblem->warranty_problem_type_id;
+            }else{
+                $warrantyProblemType=null;
+            }
             if ($warranty->phone_model_other != null) {
                 $pm_name = $warranty->phone_model_other;
             } else {
@@ -165,6 +174,7 @@ class MobileWarrantyController extends Controller
         return view('profile.bimeh_all')->with([
             'warranties' => $warranties,
             'wallet' => $wallet,
+            'warrantyProblemType'=>$warrantyProblemType
         ]);
     }
 
@@ -297,6 +307,27 @@ class MobileWarrantyController extends Controller
         ]);
     }
 
+    public function editPhoto($id,$err = '')
+    {
+        $msg='';
+        $warranty = Mobile_warranty::find($id)->first();
+        $images=Helpers::getImageFromDb($warranty->images);
+        $qrcode = QrCode::size(250)->generate(md5($id . ' __ ' . $warranty->created_at));
+
+        $imgs = ImageField::all();
+        $wallet = Wallet::where('user_id', auth()->id())->first();
+
+        if ($err != '') {
+            $msg = 'error';
+        }
+
+        return view('profile.warranty.photo_upload_edit',['images'=>$images,'imgs'=>$imgs,
+            'qrcode' => $qrcode,
+            'id' => $id,
+            $msg=>$err,
+            'wallet'=>$wallet]);
+    }
+
     public function insertPhotos(Request $request, $id,$edit=0)
     {
         //dd($request->all());
@@ -326,30 +357,8 @@ class MobileWarrantyController extends Controller
                 }
             }
         }
-        else{
 
-            if (sizeof($request->toArray()) - (2*sizeof($imageFields)+1) >= 0 && sizeof($request->toArray()) - (2*sizeof($imageFields)+1) <= 14 ) {
-                //$i++;
-                //dd($i);
-                foreach ($imageFields as $row) {
-
-                    if ($request->file($row->html_id)) {
-                        $file = $request->file($row->html_id);
-                        $file_name = time() . $file->getClientOriginalName();
-                        $file->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/warranty_images/', $file_name);
-                        $file_pic = MobileImage::create(['URL' => $file_name, 'type' => (int)$request['type_' . $row->html_id]]);
-
-
-                    }else{
-                        $file_pic = MobileImage::find(str_replace('hidden_','',$request['hidden_'.$row->html_id]));
-                    }
-                    $imageList .= $prefix . $file_pic->id;
-                    $prefix = ',';
-                    $key++;
-                }
-            }
-        }
-
+        //dd($key);
         //dd($i);
 
         //dd(sizeof($request->toArray()) - (3*sizeof($imageFields)+1));
@@ -382,4 +391,69 @@ class MobileWarrantyController extends Controller
         }
 
     }
+
+    public function updatePhoto(Request $request, $id)
+    {
+        $prefix = $imageList = '';
+        $imageFields = ImageField::all();
+        $key = 0;
+
+        if (sizeof($request->toArray()) - (2*sizeof($imageFields)+1) >= 0 && sizeof($request->toArray()) - (2*sizeof($imageFields)+1) <= 14 ) {
+            //$i++;
+            //dd($i);
+            //dd('inja');
+            foreach ($imageFields as $row) {
+
+                if ($request->has($row->html_id)) {
+                    $file = $request->file($row->html_id);
+                    $file_name = time() . $file->getClientOriginalName();
+                    $file->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/warranty_images/', $file_name);
+                    $file_pic = MobileImage::create(['URL' => $file_name, 'type' => (int)$request['type_' . $row->html_id]]);
+
+                    $imageList .= $prefix . $file_pic->id;
+                    $prefix = ',';
+                    $key++;
+
+                }else{
+                    $file_pic = MobileImage::find(str_replace('hidden_','',$request['hidden_'.$row->html_id]));
+                    if($file_pic!=null){
+
+                        $imageList .= $prefix . $file_pic->id;
+                        $prefix = ',';
+                        $key++;
+                    }
+                }
+            }
+        }
+
+        if ($key == 7) {
+
+            $mobileWarranty = Mobile_warranty::find($id);
+
+            Mobile_warranty::query()->where('id', $id)->update([
+                'images' => $imageList,
+                'status_id' => 6
+            ]);
+
+            $userrequest = UserRequest::query()
+                ->where([['user_requestable_type', '=', 'App\Models\Mobile_warranty'],
+                    ['user_requestable_id', '=', $id]])->first();
+
+            if ($userrequest != null) {
+                $mobileWarranty->userrequests()->update(['updated_at' => Carbon::now()->toDateTimeString()]);
+                //dd('if');
+            } else {
+
+                $userrequest1 = new UserRequest();
+                $mobileWarranty->userrequests()->save($userrequest1);
+            }
+
+            return redirect(route('bimeh_all'))->with(['success' => 'عکس های موبایل با موفقیت آپلود شد.']);
+
+        } else {
+            return $this->editPhoto($id,'لطفا همه عکس ها رو آپلود کنید!');
+        }
+
+    }
+
 }

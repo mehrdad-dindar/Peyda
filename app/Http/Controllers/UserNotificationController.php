@@ -35,9 +35,9 @@ class UserNotificationController extends Controller
         }
         //return Redirect::to($notif->link);
     }
-    public function index($id)
+    public function index()
     {
-        $notifications=NotificationUser::where('receiver_id',auth()->user()->id)->get();
+        $notifications=NotificationUser::query()->where('receiver_id',auth()->user()->id)->orderBy('updated_at','desc')->get();
 
         $wallet = Wallet::where('user_id', auth()->id())->first();
         return view('profile.notifications.index',['notifications'=>$notifications,'wallet'=>$wallet]);

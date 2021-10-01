@@ -10,9 +10,9 @@ class MobileImage extends Model
     use HasFactory;
     protected $table='mobile_images';
 
-    public function ImageFields()
+    public function ImageField()
     {
-        return $this->belongsTo(ImageFields::class);
+        return $this->belongsTo(ImageField::class);
     }
     protected $fillable=['URL','type','status'];
 }

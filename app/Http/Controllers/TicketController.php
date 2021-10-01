@@ -43,6 +43,13 @@ class TicketController extends Controller
     public function storeThisTicket(StoreThisTicketRequest $request, $id)
     {
         //dd($request->all());
+        $ticket=Ticket::query()->find($id);
+        if($ticket->closed==1){
+            $ticket->update([
+                'closed'=>0
+            ]);
+        }
+
         $ticketDetail = TicketDetail::query()->create([
             'ticket_id' => $id,
             'request' => $request->descriptions

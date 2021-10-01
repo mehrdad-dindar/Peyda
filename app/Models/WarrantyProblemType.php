@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ImageField extends Model
+class WarrantyProblemType extends Model
 {
     use HasFactory;
-    protected $table='image_fields';
 
-    public function MobileImages(){
-        return $this->hasMany(MobileImage::class);
+    public function warrantyproblems()
+    {
+        return $this->belongsTo(WarrantyProblem::class);
     }
 
 }

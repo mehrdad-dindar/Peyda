@@ -23,10 +23,10 @@
                             بعد: </p></div>
                 </div>
                 <div class="container mt-10">
-                    <form method="post" action="{{route('insertPhoto',$id)}}" enctype="multipart/form-data">
+                    <form method="post" action="{{route('updatePhoto',['id'=>$id])}}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            @foreach($imgs as $img)
+                            @foreach($imgs as $key=>$img)
                                 <label class="col-md-4 col-form-label fw-bold fs-6 mb-2">{{$img->name}}</label>
                                 <div class="col-6 col-md-4 mb-2">
                                     <!--begin::Image input-->
@@ -34,7 +34,10 @@
                                          style="background-image: url('{{ URL::asset('uploads/reserved/reserved_image_upload.png') }}'); opacity: 0.7; background-position: center">
                                         <!--begin::Preview existing avatar-->
                                         <div class="image-input-wrapper w-125       px h-125px"
-                                             style="background-image: url('{{ URL::asset('uploads/reserved/reserved_image_upload.png') }}'); opacity: 0.7; background-position: center"></div>
+
+                                             @if(isset($images[$key])) style="background-image: url('{{ URL::asset('uploads/warranty_images/'.$images[$key]['URL']) }}'); opacity: 0.7; background-position: center" @else style="background-image: url('{{ URL::asset('uploads/reserved/reserved_image_upload.png') }}'); opacity: 0.7; background-position: center" @endif
+
+                                             ></div>
                                         <!--end::Preview existing avatar-->
                                         <!--begin::Label-->
                                         <label
@@ -80,6 +83,9 @@
                                     <img src="{{ URL::asset('uploads/reserved/'.$img->sample_URL) }}" class="img-fluid rounded" alt="">
                                 </div>
                                 <div class="separator dashed-h my-5"></div>
+                                @if(isset($images[$key]))
+                                    <input type="hidden" name="hidden_{{$img->html_id}}" value="{{$images[$key]->id}}">
+                                @endif
                             @endforeach
 
                             <input type="submit" value="ارسال" class="btn btn-success form-control">

@@ -45,7 +45,8 @@ class DatabaseSeeder extends Seeder
                     UsersTableSeeder::class,
                     CategoriesSeeder::class,
                     BrandsSeeder::class,
-                    UnitSeeder::class
+                    UnitSeeder::class,
+                    WarrantyProblemTypeSeeder::class
         ]);
 
     }
