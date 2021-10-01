@@ -10,6 +10,16 @@
             <div class="card mb-2">
                 <!--begin::Card Body-->
                 <div class="card-body fs-6 py-15 px-10 py-lg-15 px-lg-15 text-gray-700">
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                @endif
                     <!--begin::Section-->
                     <form action="{{ route('store_use') }}" method="post" id="useForm">
                         @csrf
@@ -23,7 +33,7 @@
                         <div class="py-5">
                             <div class="rounded border p-10">
                                 <div class="mb-10">
-                                    <label class="form-label">عنوان*</label>
+                                    <label for="title" class="form-label required">عنوان</label>
                                     <input type="text" name="title" class="form-control" placeholder="شکستن صفحه" />
                                 </div>
                             </div>
@@ -31,7 +41,7 @@
                         <div class="py-5">
                             <div class="rounded border p-10">
                                 <div class="mb-10">
-                                    <label class="form-label">توضیحات</label>
+                                    <label for="descriptions" class="form-label required">توضیحات</label>
                                     <textarea name="descriptions" class="form-control" placeholder="شکستن اسکرین، خطوط کناره راست و..." ></textarea>
                                 </div>
                             </div>
@@ -42,7 +52,7 @@
                                     {{-- Name/Description fields, irrelevant for this article --}}
 
                                 <div class="form-group">
-                                    <label for="document">اسناد</label>
+                                    <label for="document" class="required">اسناد</label>
                                     <div class="needsclick dropzone" id="document-dropzone">
 
                                     </div>

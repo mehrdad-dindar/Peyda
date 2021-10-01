@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UseWarrantyRequest;
 use App\Models\Mobile_warranty;
 use App\Models\MobileImage;
 use App\Models\TransferWarranty;
@@ -45,7 +46,7 @@ class UseWarrantyController extends Controller
         }
     }
 
-    public function store(Request $request, $edit = null)
+    public function store(UseWarrantyRequest $request, $edit = null)
     {
 
         $descriptions = $request->get('descriptions');
