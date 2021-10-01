@@ -13,7 +13,8 @@ class Ticket extends Model
         'title',
         'importance',
         'unit_id',
-        'sender_id'
+        'sender_id',
+        'closed'
     ];
 
     public function ticketdetails()

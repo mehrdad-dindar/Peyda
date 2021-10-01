@@ -36,7 +36,6 @@
                         <h3 class="fw-bolder m-0">جزییات تیکت</h3>
                     </div>
                 </div>--}}
-                @if($ticket->closed==0)
                 <div class="card-body">
                     <!--begin::Layout-->
                     <div class="d-flex flex-column flex-xl-row p-7">
@@ -65,7 +64,6 @@
                     </div>
                     <!--end::Layout-->
                 </div>
-            @endif
 
                 <!--begin::Card body-->
                 <div class="card-body mt-0" id="kt_drawer_chat_messenger_body">
