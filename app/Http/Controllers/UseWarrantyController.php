@@ -175,6 +175,7 @@ class UseWarrantyController extends Controller
         //dd($msg);
         $wallet = Wallet::where('user_id', auth()->id())->first();
 
+        $warranties=Mobile_warranty::query()->where('owner_id',auth()->id())->get();
         $useWarranty = WarrantyUse::query()->join('mobile_warranties as mw', 'mw.id', '=', 'warranty_uses.warranty_id')
             ->where('mw.owner_id', '=', auth()->user()->id)
             ->get(['warranty_uses.*']);
@@ -190,6 +191,7 @@ class UseWarrantyController extends Controller
                 ->with([
                     'useWarranty' => $useWarranty,
                     'wallet' => $wallet,
+                    'warranties'=>$warranties,
                     $msg=>'msg',
                 ]);
 
@@ -198,6 +200,7 @@ class UseWarrantyController extends Controller
             ->with([
                 'useWarranty' => $useWarranty,
                 'wallet' => $wallet,
+                'warranties'=>$warranties,
             ]);
     }
 

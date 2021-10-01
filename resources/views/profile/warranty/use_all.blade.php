@@ -9,7 +9,13 @@
             <!--begin::Header-->
             <div class="card-header border-0 pt-5">
                 <h3 class="card-title align-items-start flex-column">
-                    <span class="card-label fw-bolder fs-3 mb-1">استفاده از فراگارانتی ها</span>
+                    <div class=" row d-flex justify-content-center">
+                        <span class="card-label fw-bolder fs-3 mb-1 col-md-11">استفاده از فراگارانتی ها</span>
+                        <span data-bs-toggle="modal" data-bs-target="#kt_modal_"
+                              class="badge badge-primary fs-4 col-md-1 d-flex justify-content-center align-items-center"
+                              style="
+  margin-left:auto;">+</span>
+                    </div>
                     {{-- <span class="text-muted mt-1 fw-bold fs-7">Over 500 orders</span>--}}
                 </h3>
             </div>
@@ -25,7 +31,8 @@
                         <tr class="fw-bolder text-muted">
                             <th class="w-25px">
                                 <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                    <input class="form-check-input" type="checkbox" value="1" data-kt-check="true" data-kt-check-target=".widget-13-check" />
+                                    <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
+                                           data-kt-check-target=".widget-13-check"/>
                                 </div>
                             </th>
                             <th class="min-w-150px">شناسه</th>
@@ -43,7 +50,8 @@
                             <tr>
                                 <td>
                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input widget-13-check" type="checkbox" value="{{$use->id}}" />
+                                        <input class="form-check-input widget-13-check" type="checkbox"
+                                               value="{{$use->id}}"/>
                                     </div>
                                 </td>
                                 <td>
@@ -51,7 +59,8 @@
                                 </td>
                                 <td>
                                     <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6"></a>
-                                    <span class="text-muted fw-bold text-muted d-block fs-7">{{$use->Mobile_warranty->phone_model->name}}</span>
+                                    <span
+                                        class="text-muted fw-bold text-muted d-block fs-7">{{$use->Mobile_warranty->phone_model->name}}</span>
                                 </td>
                                 <td>
                                     <a class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">{{$use->title}}</a>
@@ -62,22 +71,34 @@
                                     @if($use->status==1)
                                         <span class="badge badge-light-success">تایید شده</span>
                                     @elseif($use->status=='')
-                                        <span class="badge badge-warning text-dark">در حال بررسی جهت استفاده از خدمات</span>
+                                        <span
+                                            class="badge badge-warning text-dark">در حال بررسی جهت استفاده از خدمات</span>
                                     @else
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_{{$use->id}}" class="badge badge-danger">رد شده</a>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_{{$use->id}}"
+                                           class="badge badge-danger">رد شده</a>
 
                                     @endif
                                 </td>
                                 <td class="text-end">
                                     @if($use->status!='' && $use->status!=1)
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_{{$use->id}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_{{$use->id}}"
+                                           class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                             <!--begin::Svg Icon | path: icons/duotone/General/Settings-1.svg-->
                                             <span class="svg-icon svg-icon-3">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                                                <rect x="0" y="0" width="24" height="24" />
-                                                                                <path d="M7,3 L17,3 C19.209139,3 21,4.790861 21,7 C21,9.209139 19.209139,11 17,11 L7,11 C4.790861,11 3,9.209139 3,7 C3,4.790861 4.790861,3 7,3 Z M7,9 C8.1045695,9 9,8.1045695 9,7 C9,5.8954305 8.1045695,5 7,5 C5.8954305,5 5,5.8954305 5,7 C5,8.1045695 5.8954305,9 7,9 Z" fill="#000000" />
-                                                                                <path d="M7,13 L17,13 C19.209139,13 21,14.790861 21,17 C21,19.209139 19.209139,21 17,21 L7,21 C4.790861,21 3,19.209139 3,17 C3,14.790861 4.790861,13 7,13 Z M17,19 C18.1045695,19 19,18.1045695 19,17 C19,15.8954305 18.1045695,15 17,15 C15.8954305,15 15,15.8954305 15,17 C15,18.1045695 15.8954305,19 17,19 Z" fill="#000000" opacity="0.3" />
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                             xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                             width="24px" height="24px"
+                                                                             viewBox="0 0 24 24" version="1.1">
+                                                                            <g stroke="none" stroke-width="1"
+                                                                               fill="none" fill-rule="evenodd">
+                                                                                <rect x="0" y="0" width="24"
+                                                                                      height="24"/>
+                                                                                <path
+                                                                                    d="M7,3 L17,3 C19.209139,3 21,4.790861 21,7 C21,9.209139 19.209139,11 17,11 L7,11 C4.790861,11 3,9.209139 3,7 C3,4.790861 4.790861,3 7,3 Z M7,9 C8.1045695,9 9,8.1045695 9,7 C9,5.8954305 8.1045695,5 7,5 C5.8954305,5 5,5.8954305 5,7 C5,8.1045695 5.8954305,9 7,9 Z"
+                                                                                    fill="#000000"/>
+                                                                                <path
+                                                                                    d="M7,13 L17,13 C19.209139,13 21,14.790861 21,17 C21,19.209139 19.209139,21 17,21 L7,21 C4.790861,21 3,19.209139 3,17 C3,14.790861 4.790861,13 7,13 Z M17,19 C18.1045695,19 19,18.1045695 19,17 C19,15.8954305 18.1045695,15 17,15 C15.8954305,15 15,15.8954305 15,17 C15,18.1045695 15.8954305,19 17,19 Z"
+                                                                                    fill="#000000" opacity="0.3"/>
                                                                             </g>
                                                                         </svg>
                                                                     </span>
@@ -106,13 +127,22 @@
                                             <div class="modal-header">
                                                 <h5 class="modal-title">انتخاب کنید</h5>
                                                 <!--begin::Close-->
-                                                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                                                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2"
+                                                     data-bs-dismiss="modal" aria-label="Close">
                                                     <!--begin::Svg Icon | path: icons/duotone/Navigation/Close.svg-->
                                                     <span class="svg-icon svg-icon-2x">
-																		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-																			<g transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(4.000000, 4.000000)" fill="#000000">
-																				<rect fill="#000000" x="0" y="7" width="16" height="2" rx="1" />
-																				<rect fill="#000000" opacity="0.5" transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000)" x="0" y="7" width="16" height="2" rx="1" />
+																		<svg xmlns="http://www.w3.org/2000/svg"
+                                                                             xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                             width="24px" height="24px"
+                                                                             viewBox="0 0 24 24" version="1.1">
+																			<g transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(4.000000, 4.000000)"
+                                                                               fill="#000000">
+																				<rect fill="#000000" x="0" y="7"
+                                                                                      width="16" height="2" rx="1"/>
+																				<rect fill="#000000" opacity="0.5"
+                                                                                      transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000)"
+                                                                                      x="0" y="7" width="16" height="2"
+                                                                                      rx="1"/>
 																			</g>
 																		</svg>
 																	</span>
@@ -124,8 +154,9 @@
 
                                                 <div class="fv-row mb-15" data-kt-buttons="true">
                                                     <!--begin::Option-->
-                                                    <label onclick="window.location.href='{{route('bimeh_use_edit',$use->id)}}'"
-                                                    class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6 active">
+                                                    <label
+                                                        onclick="window.location.href='{{route('bimeh_use_edit',$use->id)}}'"
+                                                        class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6 active">
                                                         <!--begin::Input-->
                                                         <input class="btn-check" type="radio" checked
                                                                name="warranty_type" value="1"/>
@@ -174,7 +205,9 @@
 
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">بستن</button>
+                                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+                                                    بستن
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -445,21 +478,84 @@
                 </div>
                 <!--end::Table container-->
             </div>
-            <!--begin::Body-->
-        </div>
-        <!--end::Tables Widget 13-->
-    </div>
-@endsection
+            <div class="modal fade" tabindex="-1" id="kt_modal_">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">انتخاب کنید</h5>
+                            <!--begin::Close-->
+                            <div class="btn btn-icon btn-sm btn-active-light-primary ms-2"
+                                 data-bs-dismiss="modal" aria-label="Close">
+                                <!--begin::Svg Icon | path: icons/duotone/Navigation/Close.svg-->
+                                <span class="svg-icon svg-icon-2x">
+																		<svg xmlns="http://www.w3.org/2000/svg"
+                                                                             xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                             width="24px" height="24px"
+                                                                             viewBox="0 0 24 24" version="1.1">
+																			<g transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(4.000000, 4.000000)"
+                                                                               fill="#000000">
+																				<rect fill="#000000" x="0" y="7"
+                                                                                      width="16" height="2" rx="1"/>
+																				<rect fill="#000000" opacity="0.5"
+                                                                                      transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000)"
+                                                                                      x="0" y="7" width="16" height="2"
+                                                                                      rx="1"/>
+																			</g>
+																		</svg>
+																	</span>
+                                <!--end::Svg Icon-->
+                            </div>
+                            <!--end::Close-->
+                        </div>
+                        <div class="modal-body">
+                            <div class="fv-row mb-15" data-kt-buttons="true">
+                                <div class="fv-row">
+                                    <select id="warranty_select" name="fire_addition_price"
+                                            aria-label="انتخاب مبلغ"
+                                            data-control="select2"
+                                            data-placeholder="انتخاب مبلغ"
+                                            data-dropdown-parent="#kt_modal_"
+                                            class="form-control fs-3 form-select form-select-solid form-select-lg fw-bold">
+                                        @foreach($warranties as $warranty)
+                                            <option class="fs-2" value="{{$warranty->id}}">دستگاه
+                                                {{$warranty->getPhoneName($warranty) . ' - '. $warranty->activation_code}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" onclick="selectWarranty()" class="btn btn-success">ثبت</button>
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">بستن</button>
+                        </div>
+                        <!--begin::Body-->
+                    </div>
+                </div>
+            </div>
 
-@section('custom_js')
-    @if (isset($success))
-        <script>
-            toastr.success("پیام", 'درخواست شما با موفقیت ثبت شد!');
-        </script>
-    @elseif(isset($error))
-        <script>
-            toastr.error("خطا!", 'متاسفانه درخواست شما ثبت نشد!');
-        </script>
+            <!--end::Tables Widget 13-->
+        </div>
+        @endsection
+
+        @section('custom_js')
+            <script>
+            function selectWarranty(){
+                //alert('hi');
+                var option = $('#warranty_select').val();
+                //alert(option);
+                var linkURL = '/panel/warranty/mobile/use_faraguaranty/'+option //Your route url
+                window.location.href=linkURL;
+            }
+            </script>
+
+            @if (isset($success))
+                <script>
+                    toastr.success("پیام", 'درخواست شما با موفقیت ثبت شد!');
+                </script>
+            @elseif(isset($error))
+                <script>
+                    toastr.error("خطا!", 'متاسفانه درخواست شما ثبت نشد!');
+                </script>
     @endif
 @endsection
 
