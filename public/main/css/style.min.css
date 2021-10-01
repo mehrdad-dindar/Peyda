@@ -2188,7 +2188,7 @@ button:not(:disabled) {
  border-color:#2f55d4
 }
 .subcribe-form .btn {
- padding: 9px 20px;
+ padding: 10px 20px;
 }
 .subcribe-form input {
  padding:12px 20px;
@@ -2332,8 +2332,8 @@ button:not(:disabled) {
 .back-to-top {
  z-index:99;
  position:fixed;
- bottom:30px;
- left:30px;
+ bottom:40px;
+ right:40px;
  display:none;
  -webkit-transition:all 0.5s ease;
  transition:all 0.5s ease
@@ -3273,6 +3273,15 @@ padding: 60px 0
  #topnav .navbar-toggle .lines {
   margin-left:0 !important
  }
+    .bg-half-340 {
+        padding:150px 0;
+        background-size:cover;
+        -ms-flex-item-align:center;
+        -ms-grid-row-align:center;
+        align-self:center;
+        position:relative;
+        background-position:center center
+    }
 }
 .tagline {
  position:absolute;
@@ -3337,6 +3346,16 @@ padding: 60px 0
  position:relative;
  background-position:center center
 }
+
+.bg-half-300 {
+ padding:300px 0;
+ background-size:cover;
+ -ms-flex-item-align:center;
+ -ms-grid-row-align:center;
+ align-self:center;
+ position:relative;
+ background-position:center center
+}
 .bg-half-170 {
  padding:170px 0;
  background-size:cover;
@@ -3366,6 +3385,17 @@ padding: 60px 0
 }
 .bg-circle-gradiant {
  background:radial-gradient(circle at 50% 50%, rgba(47,85,212,0.1) 0%, rgba(47,85,212,0.1) 33.333%, rgba(47,85,212,0.3) 33.333%, rgba(47,85,212,0.3) 66.666%, rgba(47,85,212,0.5) 66.666%, rgba(47,85,212,0.5) 99.999%)
+}
+@media (max-width: 480px) {
+    .bg-half-300 {
+        padding:140px 0;
+        background-size:cover;
+        -ms-flex-item-align:center;
+        -ms-grid-row-align:center;
+        align-self:center;
+        position:relative;
+        background-position:center center
+    }
 }
 .it-home {
  -webkit-animation:animate-left-to-right 60s linear infinite;

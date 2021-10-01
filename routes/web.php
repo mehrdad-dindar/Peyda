@@ -226,15 +226,23 @@ Route::get('/home',function (){
 });
 
 /* Single Blog */
-Route::get('/single'/*this is single slug*/,function (){
-    return view('pages.single');
-})->name('single');
+Route::prefix('/blog')->group(function () {
+    Route::get('/اینترنت-ملی-چیست'/*this is single slug*/, function () {
+        return view('pages.single');
+    })->name('single');
+    Route::get('/معرفی-گوشی-های-کوچک',function (){
+        return view('pages.single_02');
+    })->name('single_02');
+    Route::get('/آیفون-13',function (){
+        return view('pages.single_03');
+    })->name('single_03');
+});
 /*abaut-us*/
 Route::get('/about_us',function (){
     return view('pages.about_us');
 })->name('about_us');
 /*services*/
-Route::get('/our_services',function (){
+Route::get('/warranty',function (){
     return view('pages.our_services');
 })->name('our_services');;
 /*gifts*/

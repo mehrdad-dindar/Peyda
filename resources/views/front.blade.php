@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <!-- Hero Start -->
-    <section class="bg-half-170 bg-custom-gray d-table w-100">
+    <section class="bg-custom-gray d-table w-100 d-flex flex-column align-items-center justify-content-center" style="height: 100vh;">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
@@ -185,7 +185,7 @@
                 <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
                     <div class="card categories h-100 text-center rounded border-0" style="min-height: 303px" data-aos="fade-up" data-aos-duration="1000">
                         <div class="card-body">
-                            <img src="{{ URL::asset('front/img/brocken.svg')}}" class="avatar avatar-small mb-3" alt="">
+                            <img src="{{ URL::asset('front/img/shop/brocken-01.png')}}" class="avatar avatar-small mb-3" alt="">
                             <h5><a href="#" class="text-dark">شکستگی بر اثر ضربه</a></h5>
                             <p class="text-muted mb-0 mt-3" style="text-align: justify">چنانچه گوشی همراه، تبلت و لپ‌تاپ‌تان دچار شکستگی و ضرب‌دیدگی شد، طبق تعهدات شرکت خسارت وارده در اسرع وقت جبران خواهدشد.</p>
                         </div>
@@ -195,7 +195,7 @@
                 <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
                     <div class="card categories h-100 text-center rounded border-0" style="min-height: 303px" data-aos="fade-up" data-aos-duration="1300">
                         <div class="card-body">
-                            <img src="{{ URL::asset('front/img/watered.svg')}}"
+                            <img src="{{ URL::asset('front/img/shop/watered-01.png')}}"
                                  class="avatar avatar-small mb-3" alt="">
                             <h5><a href="#" class="text-dark">آب‌خوردگی و نفوذ مایعات</a></h5>
                             <p class="text-muted mb-0 mt-3" style="text-align: justify">برای همه ما یک بار پیش آمده که گوشی‌مان داخل آب افتاده یا بر اثر رطوبت آسیب دیده باشد. با پیدا سرویس ماندگار دیگر نگرانی در زمینه این مسائل معنایی ندارد.</p>
@@ -206,7 +206,7 @@
                 <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
                     <div class="card categories h-100 text-center rounded border-0" style="min-height: 303px" data-aos="fade-up" data-aos-duration="1600">
                         <div class="card-body">
-                            <img src="{{ URL::asset('front/img/electricity.svg')}}" class="avatar avatar-small mb-3" alt="">
+                            <img src="{{ URL::asset('front/img/shop/electricity-01.png')}}" class="avatar avatar-small mb-3" alt="">
                             <h5><a href="#" class="text-dark">نوسانات ولتاژ برق</a></h5>
                             <p class="text-muted mb-0 mt-3" style="text-align: justify">نوسان و اتصالی برق از مسائل پر تکراری است که می‌تواند زیان‌های فراوانی را برای وسایل الکترونیکی ایجاد کند. کارشناسان پیدا سرویس خسارت‌های ناشی از نوسان برق را پشتیبانی می‌کنند.</p>
                         </div>
@@ -216,7 +216,7 @@
                 <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
                     <div class="card categories h-100 text-center rounded border-0" style="min-height: 303px" data-aos="fade-up" data-aos-duration="1900">
                         <div class="card-body">
-                            <img src="{{ URL::asset('front/img/chemical.svg')}}" class="avatar avatar-small mb-3" alt="">
+                            <img src="{{ URL::asset('front/img/shop/chemical-01.png')}}" class="avatar avatar-small mb-3" alt="">
                             <h5><a href="#" class="text-dark">الکل و نفوذ مواد شیمیایی</a></h5>
                             <p class="text-muted mb-0 mt-3" style="text-align: justify">محصولات الکترونیکی در اثر تماس با الکل و مواد شیمیایی آسیب می‌بینند و جایگزینی آن‌ها هزینه بالایی دارد اما پیدا سرویس <span class="text-warning">#تاهمیشه</span> نمی‌گذارد شما زیان ببینید.</p>
                         </div>
@@ -226,7 +226,7 @@
                 <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
                     <div class="card categories h-100 text-center rounded border-0" style="min-height: 303px" data-aos="fade-up" data-aos-duration="2200">
                         <div class="card-body">
-                            <img src="{{ URL::asset('front/img/accidents.svg')}}" class="avatar avatar-small mb-3"
+                            <img src="{{ URL::asset('front/img/shop/accidents-01-.png')}}" class="avatar avatar-small mb-3"
                                  alt="">
                             <h5><a href="#" class="text-dark">حوادث طبیعی و غیرمترقبه</a></h5>
                             <p class="text-muted mb-0 mt-3" style="text-align: justify">زلزله، سیل و آتش‌سوزی به وسایل الکترونیکی هم صدمه می‌زند. با خرید فراگارانتی پیدا سرویس می‌توانید گوشی، لپ‌تاپ و تبلت‌هایتان را در امان نگه‌دارید.</p>
@@ -237,7 +237,7 @@
                 <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
                     <div class="card categories h-100 text-center rounded border-0" style="min-height: 303px" data-aos="fade-up" data-aos-duration="2500">
                         <div class="card-body">
-                            <img src="{{ URL::asset('front/img/hardware.svg')}}" class="avatar avatar-small mb-3" alt="">
+                            <img src="{{ URL::asset('front/img/shop/hardware-01.png')}}" class="avatar avatar-small mb-3" alt="">
                             <h5><a href="#" class="text-dark">مشکلات سخت‌افزاری</a></h5>
                             <p class="text-muted mb-0 mt-3" style="text-align: justify">به وجود آمدن مشکلات سخت‌افزاری برای وسایلی همچون تلفن همراه و لپ‌تاپ ... امری عادی است، اما داشتن فراگارانتی پیدا سرویس برای جبران خسارات امری خارق‌العاده است.</p>
                         </div>
@@ -368,7 +368,7 @@
                         <div class="shop-image position-relative overflow-hidden rounded shadow">
                             <a href="{{-- TODO --}}"><img src="{{ URL::asset('front/img/R100W.jpg')}}" class="img-fluid" alt=""></a>
                             <a href="{{-- TODO --}}" class="overlay-work">
-                                <img src="{{ URL::asset('front/img/pack-proOne-R100W.jpg')}}" class="img-fluid" alt="">
+                                <img src="{{ URL::asset('front/img/shop/R100W.jpg')}}" class="img-fluid" alt="">
                             </a>
                             <ul class="list-unstyled shop-icons">
                                 <li><a href="#" class="btn btn-icon btn-pills btn-soft-danger"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart icons"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></a></li>
@@ -547,66 +547,64 @@
             </div><!--end row-->
 
             <div class="row">
-                {{--<div class="col-lg-4 col-md-6 mt-4 pt-2">
+                <div class="col-lg-4 col-md-6 tiny-slide mt-4 pt-2">
                     <div class="card blog rounded border-0 shadow">
                         <div class="position-relative">
-                            <img src="{{ URL::asset('main/images/blog/01.jpg')}}" class="card-img-top rounded-top" alt="...">
+                            <img src="{{ URL::asset('front/img/shop/iphone13/shakhes.jpg')}}" class="card-img-top rounded-top" alt="...">
                             <div class="overlay rounded-top bg-dark"></div>
                         </div>
                         <div class="card-body content">
-                            <h5><a href="#" class="card-title title text-dark">برنامه های خود را به روش خود طراحی کنید</a></h5>
+                            <h5><a href="{{route('single_03')}}" class="card-title title text-dark">دیدگاه سایت‌های معتبر حوزه فناوری در رابطه با آیفون ۱۳</a></h5>
                             <div class="post-meta d-flex justify-content-between mt-3">
                                 <ul class="list-unstyled mb-0">
-                                    <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="uil uil-heart me-1"></i>33</a></li>
-                                    <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="uil uil-comment me-1"></i>08</a></li>
+                                    <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="uil uil-heart me-1"></i>10</a></li>
+                                    <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="uil uil-comment me-1"></i>0</a></li>
                                 </ul>
-                                <a href="#" class="text-muted readmore">ادامه مطلب  <i class="uil uil-angle-left-b align-middle"></i></a>
+                                <a href="{{route('single_03')}}" class="text-muted readmore stretched-link">ادامه مطلب  <i class="uil uil-angle-left-b align-middle"></i></a>
                             </div>
                         </div>
                         <div class="author">
-                            <small class="text-light user d-block"><i class="uil uil-user"></i> کالوین لورس</small>
-                            <small class="text-light date"><i class="uil uil-calendar-alt"></i> اردیبهشت 1400</small>
+                            <small class="text-light user d-block"><i class="uil uil-user"></i> نویسنده پیدا سرویس</small>
+                            <small class="text-light date"><i class="uil uil-calendar-alt"></i> مهر 1400</small>
                         </div>
                     </div>
                 </div><!--end col-->
-
                 <div class="col-lg-4 col-md-6 tiny-slide mt-4 pt-2">
                     <div class="card blog rounded border-0 shadow">
                         <div class="position-relative">
-                            <img src="{{ URL::asset('main/images/blog/02.jpg')}}" class="card-img-top rounded-top" alt="...">
+                            <img src="{{ URL::asset('front/img/shop/0102/small_mobile/shakhes.jpg')}}" class="card-img-top rounded-top" alt="...">
                             <div class="overlay rounded-top bg-dark"></div>
                         </div>
                         <div class="card-body content">
-                            <h5><a href="#" class="card-title title text-dark">برنامه ها چگونه دنیای اطلاعات را تغییر می دهند</a></h5>
+                            <h5><a href="{{route('single_02')}}" class="card-title title text-dark">معرفی گوشی های کوچک لمسی بازار ایران + قیمت</a></h5>
                             <div class="post-meta d-flex justify-content-between mt-3">
                                 <ul class="list-unstyled mb-0">
-                                    <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="uil uil-heart me-1"></i>33</a></li>
-                                    <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="uil uil-comment me-1"></i>08</a></li>
+                                    <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="uil uil-heart me-1"></i>38</a></li>
+                                    <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="uil uil-comment me-1"></i>0</a></li>
                                 </ul>
-                                <a href="#" class="text-muted readmore">ادامه مطلب  <i class="uil uil-angle-left-b align-middle"></i></a>
+                                <a href="{{route('single_02')}}" class="text-muted readmore stretched-link">ادامه مطلب  <i class="uil uil-angle-left-b align-middle"></i></a>
                             </div>
                         </div>
                         <div class="author">
-                            <small class="text-light user d-block"><i class="uil uil-user"></i> کالوین لورس</small>
-                            <small class="text-light date"><i class="uil uil-calendar-alt"></i> اردیبهشت 1400</small>
+                            <small class="text-light user d-block"><i class="uil uil-user"></i> نویسنده پیدا سرویس</small>
+                            <small class="text-light date"><i class="uil uil-calendar-alt"></i> مهر 1400</small>
                         </div>
                     </div>
-                </div><!--end col-->--}}
-
+                </div><!--end col-->
                 <div class="col-lg-4 col-md-6 tiny-slide mt-4 pt-2">
                     <div class="card blog rounded border-0 shadow">
                         <div class="position-relative">
-                            <img src="{{ URL::asset('main/images/blog/03.jpg')}}" class="card-img-top rounded-top" alt="...">
+                            <img src="{{ URL::asset('front/img/shop/0102/shakhes-02.jpg')}}" class="card-img-top rounded-top" alt="...">
                             <div class="overlay rounded-top bg-dark"></div>
                         </div>
                         <div class="card-body content">
                             <h5><a href="{{route('single')}}" class="card-title title text-dark">اینترنت ملی چیست؟ نمونه‌هایی در کوبا، کره شمالی، روسیه و چین </a></h5>
                             <div class="post-meta d-flex justify-content-between mt-3">
                                 <ul class="list-unstyled mb-0">
-                                    <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="uil uil-heart me-1"></i>35</a></li>
+                                    <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="uil uil-heart me-1"></i>85</a></li>
                                     <li class="list-inline-item"><a href="#" class="text-muted comments"><i class="uil uil-comment me-1"></i>0</a></li>
                                 </ul>
-                                <a href="{{route('single')}}" class="text-muted readmore">ادامه مطلب  <i class="uil uil-angle-left-b align-middle"></i></a>
+                                <a href="{{route('single')}}" class="text-muted readmore stretched-link">ادامه مطلب  <i class="uil uil-angle-left-b align-middle"></i></a>
                             </div>
                         </div>
                         <div class="author">

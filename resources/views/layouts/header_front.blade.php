@@ -160,7 +160,7 @@
                             <a href="{{route('shop_cart')}}" class="btn btn-primary">نمایش سبد خرید </a>
                             <a href="{{ route('shop_checkout') }}" class="btn btn-primary">پرداخت </a>
                         </div>--}}
-                        <p class="text-muted text-start mt-1 mb-0">پیدا سرویس ماندگار</p>
+                        {{--<p class="text-muted text-start mt-1 mb-0">پیدا سرویس ماندگار</p>--}}
                     </div>
                 </div>
             </li>
@@ -200,7 +200,7 @@
                                     class="badge bg-primary ms-2">به زودی</span></a></li>
                     </ul>
                 </li>
-                <li><a href="{{route('shop')}}" class="sub-menu-item">فروشگاه محصولات</a></li>
+                <li><a href="{{route('shop')}}" class="sub-menu-item ms-md-3">فروشگاه محصولات</a></li>
                 <li><a href="{{route('archive_blog')}}" class="sub-menu-item">اخبار و مقالات</a></li>
                 <li><a href="{{route('contact_us')}}" class="sub-menu-item">تماس با ما</a></li>
             </ul><!--end navigation menu-->

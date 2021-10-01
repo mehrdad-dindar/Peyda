@@ -1,6 +1,13 @@
 @extends('layouts.app')
 @section('title' , 'ورود به سیستم')
 @section('content')
+    <div class="d-block d-md-none row d-flex justify-content-center">
+        <div class="col-5 mb-3">
+            <a href="{{route('index')}}" class="d-inline-block w-100">
+                <img src="{{URL::asset('front/img/logo-colored.png')}}" class="img-fluid" alt="">
+            </a>
+        </div>
+    </div>
     <div class="card">
         <div class="card-body p-4">
             <div class="row align-items-center">

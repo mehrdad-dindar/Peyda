@@ -1,6 +1,13 @@
 @extends('layouts.app')
 @section('title' , 'ورود به سیستم')
 @section('content')
+    <div class="d-block d-md-none row d-flex justify-content-center">
+        <div class="col-5 mb-3">
+            <a href="{{route('index')}}" class="d-inline-block w-100">
+                <img src="{{URL::asset('front/img/logo-colored.png')}}" class="img-fluid" alt="">
+            </a>
+        </div>
+    </div>
     <div class="card">
         <div class="card-body p-4">
             <div class="row align-items-center">
@@ -17,7 +24,7 @@
                     <form method="POST" action="{{ route('doLoginPhone') }}">
                         @csrf
                         @if($errors->any())
-                            <div class="col-md12">
+                            <div class="col-md-12">
                                 <div class="alert alert-danger">
                                     <ul>
                                         @foreach($errors->all() as $error)
@@ -31,7 +38,8 @@
                             <label class="float-left" for="phone_num">شماره همراه</label>
                             <input class="form-control  @error('phone_num') is-invalid @enderror" type="text"
                                    id="phone_num" name="phone_num" value="{{ old('phone_num') }}" required
-                                   autocomplete="phone_num" placeholder="0912XXXXXXX" autofocus minlength="11" maxlength="11">
+                                   autocomplete="phone_num" placeholder="0912XXXXXXX" autofocus minlength="11"
+                                   maxlength="11">
                             @error('phone_num')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

@@ -4,13 +4,13 @@
 @endsection
 @section('content')
     <!-- شوع آن -->
-    <section class="bg-half bg-light d-table w-100">
+    <section class="bg-half d-table w-100" style="background: url('{{ URL::asset('front/img/shop/contact.jpg')}}') center center; background-size: cover">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-12 text-center">
                     <div class="page-next-level">
-                        <h4 class="title">تماس با ما</h4>
-                        <div class="page-next">
+                        <h4 class="title text-shadow-title">تماس با ما</h4>
+                        {{--<div class="page-next">
                             <nav aria-label="breadcrumb" class="d-inline-block">
                                 <ul class="breadcrumb bg-white rounded shadow mb-0">
                                     <li class="breadcrumb-item"><a href="index.html">لنـدریـک </a></li>
@@ -19,7 +19,7 @@
                                     <li class="breadcrumb-item active" aria-current="page">تماس با ما یک</li>
                                 </ul>
                             </nav>
-                        </div>
+                        </div>--}}
                     </div>
                 </div>  <!--end col-->
             </div><!--end row-->
@@ -169,7 +169,7 @@
                 <div class="col-lg-7 col-md-6 order-1 order-md-2">
                     <div class="card border-0">
                         <div class="card-body p-0">
-                            <img src="{{URL::asset('main/images/contact.svg')}}" class="img-fluid" alt="">
+                            <img src="{{URL::asset('front/img/contact.png')}}" class="img-fluid" alt="">
                         </div>
                     </div>
                 </div><!--end col-->
