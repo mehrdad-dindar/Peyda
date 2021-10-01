@@ -25,8 +25,7 @@ class WalletController extends Controller
 
     public function index()
     {
-        $user_id = Auth::user()->id;
-        $history = (new WalletHistoryController())->history($user_id);
+        $history = (new WalletHistoryController())->history();
         $wallet = Wallet::where('user_id', auth()->id())->first();
         return view('profile.wallet')->with([
             'user' => auth()->user(),

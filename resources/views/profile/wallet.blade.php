@@ -40,7 +40,52 @@
                         <!--end::Top-->
                         <!--begin::Separator-->
                         <div class="separator separator-dashed my-10"></div>
-                        <!--end::Separator-->
+                        @if(isset($newAmount))
+                            <div class="mb-0">
+
+                                <!--begin::Alert-->
+                                <div
+                                    class="alert bg-light-danger d-flex flex-center flex-column py-10 px-10 px-lg-20 mb-10">
+                                    <!--begin::Icon-->
+                                    <span class="svg-icon svg-icon-5tx svg-icon-danger mb-5">
+                                    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                         xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M11.1669899,4.49941818 L2.82535718,19.5143571 C2.557144,19.9971408 2.7310878,20.6059441 3.21387153,20.8741573 C3.36242953,20.9566895 3.52957021,21 3.69951446,21 L21.2169432,21 C21.7692279,21 22.2169432,20.5522847 22.2169432,20 C22.2169432,19.8159952 22.1661743,19.6355579 22.070225,19.47855 L12.894429,4.4636111 C12.6064401,3.99235656 11.9909517,3.84379039 11.5196972,4.13177928 C11.3723594,4.22181902 11.2508468,4.34847583 11.1669899,4.49941818 Z"
+            id="Path-117" fill="#000000" opacity="0.3"></path>
+        <rect id="Rectangle-9" fill="#000000" x="11" y="9" width="2" height="7" rx="1"></rect>
+        <rect id="Rectangle-9-Copy" fill="#000000" x="11" y="17" width="2" height="2" rx="1"></rect>
+</svg>
+                                </span>
+                                    <!--end::Icon-->
+
+                                    <!--begin::Wrapper-->
+                                    <div class="text-center">
+                                        <!--begin::Title-->
+                                        <h1 class="fw-bolder mb-5">موجودی کیف پول شما کافی نیست !</h1>
+                                        <!--end::Title-->
+
+                                        <!--begin::Separator-->
+                                        <div class="separator separator-dashed border-danger opacity-25 mb-5"></div>
+                                        <!--end::Separator-->
+
+                                        <!--begin::Content-->
+                                        <div class="mb-9 text-dark">
+                                            جهت انجام خرید مورد نظر از درگاه مستقیم پرداخت بانکی استفاده نمایید و در
+                                            صورتی که قصد ادامه خرید با کیف پول خود را دارید از طریق فرم زیر نسبت به شارژ
+                                            کیف پول خود به میزان مندرج اقدام فرمایید !
+                                        </div>
+                                        <!--end::Content-->
+                                    </div>
+                                    <!--end::Wrapper-->
+                                </div>
+                                <!--end::Alert-->
+
+
+                            </div>
+                    @endif
+
+                    <!--end::Separator-->
                         <!--begin::Wrapper-->
                         <div class="mb-0">
                             @if ($errors->any())
@@ -103,12 +148,15 @@
                                     <tr class="border-bottom border-bottom-dashed" data-kt-element="item">
                                         <td class="pe-7">
                                             <input type="text" class="form-control form-control-solid mb-2" name="title"
-                                                   placeholder="عنوان برای این پرداخت" required/>
+                                                   placeholder="عنوان برای این پرداخت" required @if(isset($title))
+                                                   value="{{$title}}" @endif/>
                                         </td>
                                         <td>
                                             <input type="text" id="price"
                                                    class="form-control form-control-solid text-end" name="price"
-                                                   placeholder="0" required data-kt-element="price"/>
+                                                   placeholder="0" required data-kt-element="price"
+                                                   @if(isset($newAmount))
+                                                   value="{{$newAmount}}" @endif/>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -177,7 +225,9 @@
                                     <!--end::Title=-->
                                     <!--begin::Value=-->
                                     <td class="@if((int)Crypt::decryptString($i->value) < 0) text-danger @else text-success @endif">
-                                        <span class="peyda_price">{{\App\Helpers\Helpers::toPersianNum((int)Crypt::decryptString($i->value))}}</span> تومان
+                                        <span
+                                            class="peyda_price">{{\App\Helpers\Helpers::toPersianNum((int)Crypt::decryptString($i->value))}}</span>
+                                        تومان
                                     </td>
                                     <!--end::Value=-->
                                     <!--begin::Payment method=-->
@@ -244,12 +294,12 @@
 @endsection
 @section('custom_js')
     <script>
-        $('#price').on('keyup' ,function () {
+        $('#price').on('keyup', function () {
             var ccprice = $(this).val();
             $('#total-price').text(ccprice).number(true, 0);
             ccprice = ccprice // Replace the ".00" that we automatically add
                 .toString()
-                .replace(/\D/g,'') // Replace all that is not a number by nothing
+                .replace(/\D/g, '') // Replace all that is not a number by nothing
                 .replace(/,/g, "") // Replace privous comma by nothing
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ","); // And here the magic i don't really understand, but comes from a link that i send you ^^.
 

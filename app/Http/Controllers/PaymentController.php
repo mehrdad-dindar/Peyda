@@ -89,19 +89,16 @@ class PaymentController extends Controller
                 ]);
             }
         } else {
-            $msg = "موجودی کیف پول کافی نیست";
-            $mobilewarranty->status_id = 3;
-            $mobilewarranty->save();
-
             if ($invoice->getAmount() > Crypt::decryptString($wallet->value)) {
-                $warranties = Mobile_warranty::where('owner_id',auth()->id())->orderBy('created_at', 'desc')->get();
-
-                return redirect()->route('bimeh_all')->with([
-                    'status' => 'failed',
+                $newAmount = $invoice->getAmount() - Crypt::decryptString($wallet->value);
+                $title = 'افزایش موجودی کیف پول جهت خرید فراگارانتی';
+                $history = (new WalletHistoryController())->history();
+                return view('profile.wallet')->with([
+                    'user' => auth()->user(),
+                    'history' => $history,
                     'wallet' => $wallet,
-                    'message' => $msg,
-                    'warranties' => $warranties,
-                    'code' => -41,
+                    'title' => $title,
+                    'newAmount' => $newAmount,
                 ]);
             } else {
                 $transaction = $user->transactions()->create([
