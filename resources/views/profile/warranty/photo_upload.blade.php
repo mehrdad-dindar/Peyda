@@ -79,7 +79,7 @@
                                     <div class="col-6 p-3 col-md-2 mb-2">
                                         <span class="badge badge-primary">مثال:</span>
                                         <img src="{{ URL::asset('uploads/reserved/'.$img->sample_URL) }}" class="img-fluid rounded" alt="">
-                                            <input type="hidden" name="hidden_{{$img->html_id}}" value="{{$img->id}}">
+                                            <input type="hidden" name="hidden_{{$img->html_id}}" value="{{$images[$key]->id}}">
                                     </div>
                                 @endif
                                     <div class="separator dashed-h my-5"></div>
