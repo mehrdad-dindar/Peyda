@@ -69,7 +69,7 @@
 
                                 <td>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_{{$row->id}}"
-                                       class="badge badge-{{$row->status->color}}">{{$row->status->text}}</a>
+                                       class="badge badge-{{$row->status->color}}">@if($row->status_id==7) {{$row->warrantyProblemTypeName}} @else {{$row->status->text}} @endif</a>
                                 </td>
                                 <td class="text-end">
                                     @if($row->status->id==4 || $row->status->id==6)
@@ -638,7 +638,7 @@
                                                     @if($row->status->id == 7)
                                                     <!--begin::Option-->
                                                         @if(sizeof($warranties)>0)
-                                                            @if($warrantyProblemType==2)
+                                                            @if($row->warrantyProblemType==2)
                                                                 <label
                                                                     onclick="window.location.href='{{route('editPhoto',['id'=>$row->id])}}'"
 
@@ -685,7 +685,7 @@
 																		</span>
                                                                     <!--end::Label-->
                                                                 </label>
-                                                            @elseif($warrantyProblemType==3)
+                                                            @elseif($row->warrantyProblemType==3)
                                                                 <label
                                                                     onclick="window.location.href='{{route('editPhoto',['id'=>$row->id])}}'"
 
@@ -724,9 +724,9 @@
                                                                         <!--begin::Info-->
 																			<span class="ms-4">
 																				<span
-                                                                                    class="fs-3 fw-bolder text-gray-900 mb-2 d-block">ویرایش تصاویر</span>
+                                                                                    class="fs-3 fw-bolder text-gray-900 mb-2 d-block">پرداخت مابه التفاوت</span>
                                                                                 <span
-                                                                                    class="fw-bold fs-4 text-muted"> {{$row->phone_name}}</span>
+                                                                                    class="fw-bold fs-4 text-muted"> {{$row->problem_price}}</span>
 																			</span>
                                                                         <!--end::Info-->
 																		</span>
