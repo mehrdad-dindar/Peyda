@@ -198,12 +198,12 @@ Route::get('/logout', 'Auth\AuthController@logout')->name('logout');
 /* Shop & Archive & Search Result */
 Route::get('/shop',function (){
     return view('shop.index');
-});
+})->name('shop');
 
 /* Category */
 Route::get('/گوشی-موبایل',function (){
     return view('shop.archive');
-})->name('shop');
+});
 
 /* Single product */
 Route::get('/گوشی-موبایل/Samsung-galaxy-note-9',function (){
