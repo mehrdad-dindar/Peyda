@@ -16,7 +16,7 @@
             </div><!--end col-->
 
             <div class="col-lg-2 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0" data-aos="fade-up" data-aos-duration="1400">
-                <h5 class="text-light footer-head">پیدا سرویس ماندگار </h5>
+                <h5 class="text-light footer-head mt-5">پیدا سرویس ماندگار </h5>
                 <ul class="list-unstyled footer-list mt-4">
                     <li><a href="{{route('about_us')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> درباره ما </a></li>
                     <li><a href="{{route('our_services')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> فراگارانتی چیست؟ </a></li>
@@ -29,7 +29,7 @@
             </div><!--end col-->
 
             <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0" data-aos="fade-up" data-aos-duration="1800">
-                <h5 class="text-light footer-head">لینک های مفید </h5>
+                <h5 class="text-light footer-head mt-5">لینک های مفید </h5>
                 <ul class="list-unstyled footer-list mt-4">
                     <li><a href="{{route('login')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> 	ورود / عضویت
                         </a></li>
@@ -47,7 +47,7 @@
             </div><!--end col-->
 
             <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0" data-aos="fade-up" data-aos-duration="2200">
-                <h5 class="text-light footer-head">خبرنامه </h5>
+                <h5 class="text-light footer-head mt-5">خبرنامه </h5>
                 <p class="mt-4">ثبت نام کنید و آخرین اخبار و تخفیفات را از طریق ایمیل دریافت کنید.</p>
                 <form>
                     <div class="row">
