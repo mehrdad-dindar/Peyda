@@ -84,6 +84,43 @@
                          style="width: 300px;">
                         <div class="pb-4">
                             <a href="javascript:void(0)" class="d-flex align-items-center">
+                                <span class="text-muted">هیچ محصولی در سبد خرید نیست.</span>
+                            </a>
+                        </div>
+                        {{-- TODO Cart details--}}
+                        {{--<div class="pb-4">
+                            <a href="javascript:void(0)" class="d-flex align-items-center">
+                                <img src="images/shop/product/s-1.jpg" class="shadow rounded" style="max-height: 64px;"
+                                     alt="">
+                                <div class="flex-1 text-start ms-3">
+                                    <h6 class="text-dark mb-0">تی شرت (مردانه)</h6>
+                                    <p class="text-muted mb-0">230 هزار تومان</p>
+                                </div>
+                                <h6 class="text-dark mb-0">230 هزار تومان</h6>
+                            </a>
+
+                            <a href="javascript:void(0)" class="d-flex align-items-center mt-4">
+                                <img src="images/shop/product/s-2.jpg" class="shadow rounded" style="max-height: 64px;"
+                                     alt="">
+                                <div class="flex-1 text-start ms-3">
+                                    <h6 class="text-dark mb-0">کیسه </h6>
+                                    <p class="text-muted mb-0">50 هزار تومان | 2 عدد</p>
+                                </div>
+                                <h6 class="text-dark mb-0">100 هزار تومان</h6>
+                            </a>
+
+                            <a href="javascript:void(0)" class="d-flex align-items-center mt-4">
+                                <img src="images/shop/product/s-3.jpg" class="shadow rounded" style="max-height: 64px;"
+                                     alt="">
+                                <div class="flex-1 text-start ms-3">
+                                    <h6 class="text-dark mb-0">ساعت (مردانه)</h6>
+                                    <p class="text-muted mb-0">800 هزار تومان | 1 عدد</p>
+                                </div>
+                                <h6 class="text-dark mb-0">800 هزار تومان</h6>
+                            </a>
+                        </div>
+                        <div class="pb-4">
+                            <a href="javascript:void(0)" class="d-flex align-items-center">
                                 <img src="images/shop/product/s-1.jpg" class="shadow rounded" style="max-height: 64px;"
                                      alt="">
                                 <div class="flex-1 text-start ms-3">
@@ -122,8 +159,8 @@
                         <div class="mt-3 text-center">
                             <a href="{{route('shop_cart')}}" class="btn btn-primary">نمایش سبد خرید </a>
                             <a href="{{ route('shop_checkout') }}" class="btn btn-primary">پرداخت </a>
-                        </div>
-                        <p class="text-muted text-start mt-1 mb-0">پیداسرویس</p>
+                        </div>--}}
+                        <p class="text-muted text-start mt-1 mb-0">پیدا سرویس ماندگار</p>
                     </div>
                 </div>
             </li>
@@ -153,7 +190,8 @@
                 <li class="has-submenu parent-menu-item">
                     <a href="javascript:void(0)">سایر خدمات</a><span class="menu-arrow"></span>
                     <ul class="submenu">
-                        <li><a href="#" class="sub-menu-item">بیمه آتش‌سوزی</a></li>
+                        <li><a href="#" class="sub-menu-item">بیمه آتش‌سوزی <span
+                                    class="badge bg-primary ms-2">به زودی</span></a></li>
                         <li><a href="#" class="sub-menu-item">بیمه زلزله <span
                                     class="badge bg-primary ms-2">به زودی</span></a></li>
                         <li><a href="#" class="sub-menu-item">بیمه اعضای بدن <span
