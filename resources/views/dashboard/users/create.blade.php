@@ -21,12 +21,12 @@
                     <div class="card">
                         <div class="card-body">
                             @if($user->status==1) <span class="badge badge-success">تایید شده</span> @else <span class="badge badge-danger">تایید نشده</span> @endif
-                            <h5 class="card-title mb-6">اطلاعات کاربر
-                                <button type="button" class="btn" aria-expanded="false"><img
-                                        src="@if($user->avatar){{URL::asset('uploads/avatars').'/'.$user->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif"
-                                        alt=""></button>
-                            </h5>
-                            <span class="d-block mb-20"> </span>
+                            <h5 class="card-title mb-6">اطلاعات کاربر</h5>
+                            <span class="d-block mb-20">
+                                <a class="avatar-area mr-2" target="_blank" href="@if($user->avatar){{URL::asset('uploads/avatars').'/'.$user->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif">
+                                    <img src="@if($user->avatar){{URL::asset('uploads/avatars').'/'.$user->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif" alt="کاربر" class="thumb-xl mb-2 rounded-circle">
+                                </a>
+                            </span>
                             <div class="row">
                                 <div class="col-xl-4 col-md-6 ">
                                     <h5 class="card-title">پایه</h5>
@@ -52,7 +52,7 @@
                                     <div class="form-group">
                                         <div class="checkbox d-inline">
                                             <h3 name="h3_user_name" class="card-title">تاریخ تولد</h3>
-                                            <label for="h3_user_name">{{$user->birthday}}</label>
+                                            <label for="h3_user_name">{{\Hekmatinasser\Verta\Verta::instance($user->birthday)->format('Y/m/d')}}</label>
                                         </div>
                                     </div>
                                 </div>

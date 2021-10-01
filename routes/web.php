@@ -198,12 +198,12 @@ Route::get('/logout', 'Auth\AuthController@logout')->name('logout');
 /* Shop & Archive & Search Result */
 Route::get('/shop',function (){
     return view('shop.index');
-});
+})->name('shop');
 
 /* Category */
 Route::get('/گوشی-موبایل',function (){
     return view('shop.archive');
-})->name('shop');
+});
 
 /* Single product */
 Route::get('/گوشی-موبایل/Samsung-galaxy-note-9',function (){
@@ -226,15 +226,23 @@ Route::get('/home',function (){
 });
 
 /* Single Blog */
-Route::get('/single'/*this is single slug*/,function (){
-    return view('pages.single');
-})->name('single');
+Route::prefix('/blog')->group(function () {
+    Route::get('/اینترنت-ملی-چیست'/*this is single slug*/, function () {
+        return view('pages.single');
+    })->name('single');
+    Route::get('/معرفی-گوشی-های-کوچک',function (){
+        return view('pages.single_02');
+    })->name('single_02');
+    Route::get('/آیفون-13',function (){
+        return view('pages.single_03');
+    })->name('single_03');
+});
 /*abaut-us*/
 Route::get('/about_us',function (){
     return view('pages.about_us');
 })->name('about_us');
 /*services*/
-Route::get('/our_services',function (){
+Route::get('/warranty',function (){
     return view('pages.our_services');
 })->name('our_services');;
 /*gifts*/

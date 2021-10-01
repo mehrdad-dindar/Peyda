@@ -105,10 +105,22 @@
                 </div>
 
                 <div class="menu-item py-2">
+                    <a class="menu-link menu-center position-relative" href="{{ route('userNotifications',auth()->id()) }}" data-bs-trigger="hover"
+                       data-bs-dismiss="click" data-bs-placement="left">
+										<span class="menu-icon me-0">
+											<i class="bi bi-patch-exclamation"></i>
+										</span>
+                        <span class="menu-title">اعلانات</span>
+                        @if(\App\Http\Controllers\Controller::getTicketNum()>0)
+                            <span class="badge rounded-circle badge-danger position-absolute top-25 end-0" style="min-width: 25px !important;">{{\App\Http\Controllers\Controller::getTicketNum()}}</span>
+                        @endif
+                    </a>
+                </div>
+                <div class="menu-item py-2">
                     <a class="menu-link menu-center position-relative" href="{{ route('tickets') }}" data-bs-trigger="hover"
                        data-bs-dismiss="click" data-bs-placement="left">
 										<span class="menu-icon me-0">
-											<i class="bi bi-messenger fs-2"></i>
+											<i class="bi bi-headset"></i>
 										</span>
                         <span class="menu-title">پشتیبانی</span>
                         @if(\App\Http\Controllers\Controller::getTicketNum()>0)
@@ -121,7 +133,7 @@
                     <a class="menu-link menu-center position-relative" href="{{ route('wallet') }}" data-bs-trigger="hover"
                        data-bs-dismiss="click" data-bs-placement="left">
 										<span class="menu-icon me-0">
-											<i class="bi bi-wallet-fill"></i>
+											<i class="bi bi-wallet2"></i>
 										</span>
                         <span class="menu-title">کیف پول</span>
                     </a>

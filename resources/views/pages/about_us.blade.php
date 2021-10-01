@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <!-- Hero Start -->
-    <section class="bg-half d-table w-100" style="background: url('{{ URL::asset('main/images/1.jpg')}}') center center;">
+    <section class="bg-half d-table w-100" style="background: url('{{ URL::asset('front/img/shop/about.jpg')}}') center center;background-size: cover">
         <div class="bg-overlay"></div>
         <div class="container">
             <div class="row justify-content-center">
@@ -39,7 +39,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-12">
                             <h2 class="mt-4">از ما بیشتر بدانید</h2>
 
                             <p class="text-muted" style="text-align: justify">

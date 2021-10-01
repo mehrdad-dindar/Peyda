@@ -8,28 +8,28 @@
                 </a>
                 <p class="mt-4" style="text-align: justify">پیدا سرویس ماندگار، بزرگترین و تخصصی ترین مرکز خصوصی ارائه دهنده خدمات فراگارانتی گوشی های تلفن همراه در ایران !</p>
 
-                <li style="list-style: none"><a href="#" class="text-foot"><i class="uil uil-map-marker me-1"></i> زعفرانیه خیابان مقدس اردبیلی پاساژ میلان طبقه دوم پلاک ۱۴۴ </a></li>
-                <li style="list-style: none"><a href="#" class="text-foot"><i class="uil uil-phone me-1"></i> 02154893647 </a></li>
+                <li style="list-style: none"><a href="https://goo.gl/maps/nqiQebt1khAX4Js27" class="text-foot"><i class="uil uil-map-marker me-1"></i> تجریش، خیابان مقدس اردبیلی، پلاک 144، مجتمع تجاری میلان، طبقه اول تجاری، واحد 28</a></li>
+                <li style="list-style: none"><a href="tel:+982188540034" class="text-foot"><i class="uil uil-phone me-1"></i> 02188540034 - 02188540111 </a></li>
                 <li style="list-style: none"><a href="mailto:info@peydaservice.com" class="text-foot"><i class="uil uil-envelope me-1"></i> info@peydaservice.com </a></li>
-                <li style="list-style: none"><a href="#" class="text-foot"><i class="uil uil-mailbox me-1"></i> ۱۹۸۶۵۷۳۹۷۱ </a></li>
+                <li style="list-style: none"><a href="#" class="text-foot"><i class="uil uil-mailbox me-1"></i> 1985675124 </a></li>
 
             </div><!--end col-->
 
             <div class="col-lg-2 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0" data-aos="fade-up" data-aos-duration="1400">
-                <h5 class="text-light footer-head">پیدا سرویس ماندگار </h5>
+                <h5 class="text-light footer-head mt-5">پیدا سرویس ماندگار </h5>
                 <ul class="list-unstyled footer-list mt-4">
-                    <li><a href="{{route('about_us')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> درباره ما </a></li>
-                    <li><a href="{{route('our_services')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> فراگارانتی چیست؟ </a></li>
-                    <li><a href="{{route('use_services')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> خدمات تحت پوشش  </a></li>
-                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> خرید فراگارانتی </a></li>
-                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> شرایط و ضوابط </a></li>
+                    <li><a href="{{route('about_us')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> فراگارانتی چیست؟ </a></li>
+                    <li><a href="{{route('our_services')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> خدمات تحت پوشش  </a></li>
+                    <li><a href="{{route('panel')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> خرید فراگارانتی </a></li>
+                    <li><a href="{{route('use_services')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> شرایط و ضوابط </a></li>
                     <li><a href="{{route('archive_blog')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> آخرین اخبار و مقالات </a></li>
+                    <li><a href="{{route('about_us')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> درباره ما </a></li>
                     <li><a href="{{route('contact_us')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> تماس با ما </a></li>
                 </ul>
             </div><!--end col-->
 
             <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0" data-aos="fade-up" data-aos-duration="1800">
-                <h5 class="text-light footer-head">لینک های مفید </h5>
+                <h5 class="text-light footer-head mt-5">لینک های مفید </h5>
                 <ul class="list-unstyled footer-list mt-4">
                     <li><a href="{{route('login')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> 	ورود / عضویت
                         </a></li>
@@ -47,7 +47,7 @@
             </div><!--end col-->
 
             <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0" data-aos="fade-up" data-aos-duration="2200">
-                <h5 class="text-light footer-head">خبرنامه </h5>
+                <h5 class="text-light footer-head mt-5">خبرنامه </h5>
                 <p class="mt-4">ثبت نام کنید و آخرین اخبار و تخفیفات را از طریق ایمیل دریافت کنید.</p>
                 <form>
                     <div class="row">
@@ -72,7 +72,7 @@
                             <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="facebook"
                                                                                                          class="fea icon-sm fea-social"></i></a>
                             </li>
-                            <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i
+                            <li class="list-inline-item"><a href="https://instagram.com/peydaservice" class="rounded"><i
                                         data-feather="instagram" class="fea icon-sm fea-social"></i></a></li>
                             <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="twitter"
                                                                                                          class="fea icon-sm fea-social"></i></a>
