@@ -157,7 +157,7 @@ class MobileWarrantyController extends Controller
 
         foreach ($warranties as $warranty) {
             $warrantyProblem=WarrantyProblem::query()->where('mobile_warranty_id',$warranty->id)->orderBy('updated_at','desc')->first();
-            if($warrantyProblem->id!=null){
+            if($warrantyProblem!=null){
                 $warrantyProblemType=$warrantyProblem->warranty_problem_type_id;
             }else{
                 $warrantyProblemType=null;
