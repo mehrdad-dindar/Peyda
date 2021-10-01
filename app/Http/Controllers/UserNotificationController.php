@@ -35,7 +35,7 @@ class UserNotificationController extends Controller
         }
         //return Redirect::to($notif->link);
     }
-    public function index($id)
+    public function index()
     {
         $notifications=NotificationUser::where('receiver_id',auth()->user()->id)->get();
 

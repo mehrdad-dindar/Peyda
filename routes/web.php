@@ -100,7 +100,7 @@ Route::prefix('panel')->group(function () {
     Route::get('/ticketing/view/{id}',[TicketController::class,'viewTicket'])->name('viewTicket');
     Route::get('/ticketing/close/{id}',[TicketController::class,'closeTicket'])->name('closeTicket');
 
-    Route::get('/notifications/{id}',[UserNotificationController::class,'index'])->name('userNotifications');
+    Route::get('/notifications',[UserNotificationController::class,'index'])->name('userNotifications');
 });
 
 
@@ -180,6 +180,8 @@ Route::prefix('dashboard')->middleware([CheckPermission::class. ':view-dashboard
         Route::get('/show/answers/{id}',[TicketController::class,'showResponse'])->name('showResponse');
         Route::post('/add/answer/{id}',[TicketController::class,'addResponse'])->name('addResponse');
     });
+
+    Route::post('/add/images',[WarrantyController::class,'addImages'])->name('addImages');
 
 });
 Route::get('/get_model', 'PhoneBrandController@get_model');

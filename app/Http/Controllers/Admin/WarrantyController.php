@@ -6,6 +6,7 @@ use App\Helpers\Helpers;
 use App\Models\Commitment_ceiling;
 use App\Models\Fire_commitment_ceiling;
 use App\Models\FlashMessage;
+use App\Models\ImageField;
 use App\Models\Mobile_warranty;
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
@@ -29,6 +30,11 @@ class WarrantyController extends Controller
     {
         return view('dashboard.warranty.accepted',
             ['accepts' => self::getAcceptedWarranties()]);
+    }
+
+    public function addImages(Request $request)
+    {
+        dd($request->all());
     }
 
     public function incompleteIndex()
@@ -143,14 +149,17 @@ class WarrantyController extends Controller
             $phoneModel = $warranty->phone_model->name;
         }
 
+        $commitment_ceilings=Commitment_ceiling::all();
+
         $warranty['phoneModel'] = $phoneModel;
+        $imageFields=ImageField::all();
 
         if ($warranty != null) {
 
             $images = Helpers::getImageFromDb($warranty->images);
 
             //dd($images);
-            return view('dashboard.warranty.show', ['warranty' => $warranty, 'images' => $images]);
+            return view('dashboard.warranty.show', ['warranty' => $warranty, 'images' => $images, 'commitment_ceilings'=>$commitment_ceilings,'imageFields'=>$imageFields]);
         } else {
             abort(404);
         }
@@ -175,6 +184,10 @@ class WarrantyController extends Controller
             ]);
             $done = 0;
         }
+
+        Mobile_warranty::query()->where('id',$warranty_id)->update([
+            'commitment_ceiling_id'=>$request['commitment_ceilings']
+        ]);
         $admin_id = auth()->user()->id;
         $link = '/panel/warranty/mobile';
 
