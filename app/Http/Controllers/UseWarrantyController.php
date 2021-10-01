@@ -107,14 +107,18 @@ class UseWarrantyController extends Controller
                 $addReq = WarrantyUse::find($warranty_use)->userrequests()->update(['updated_at'=>Carbon::now()->toDateTimeString()]);
             }
         }
+
+        $mobileWarrantyRec=Mobile_warranty::find(WarrantyUse::find($request_use_warranty_id)->warranty_id);
+
         $msg = null;
+
         if ($warrantyUse != null) {
 
             $notif = new Notification();
             $notif->setSenderId(auth()->user()->id);
             $notif->setType(3);
             $notif->setTitle('ثبت درخواست');
-            $notif->setBody('درخواست استفاده از فراگارانتی شما با موفقیت ثبت شد.');
+            $notif->setBody('درخواست استفاده از فراگارانتی تلفن همراه '.$mobileWarrantyRec->getPhoneName($mobileWarrantyRec).' شما با موفقیت ثبت شد.');
 
             $userNotif = new NotificationUser();
             $userNotif->setReceiverId(auth()->user()->id);

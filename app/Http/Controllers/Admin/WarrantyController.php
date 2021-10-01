@@ -9,6 +9,7 @@ use App\Models\FlashMessage;
 use App\Models\ImageField;
 use App\Models\Mobile_warranty;
 use App\Http\Controllers\Controller;
+use App\Models\MobileImage;
 use App\Models\Notification;
 use App\Models\NotificationUser;
 use App\Models\Phone_brand;
@@ -16,6 +17,8 @@ use App\Models\Phone_model;
 use App\Models\Status;
 use App\Models\User;
 use App\Models\UserRequest;
+use App\Models\WarrantyProblem;
+use App\Models\WarrantyProblemType;
 use App\Models\WarrantyUse;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -32,9 +35,51 @@ class WarrantyController extends Controller
             ['accepts' => self::getAcceptedWarranties()]);
     }
 
-    public function addImages(Request $request)
+    public function addImages(Request $request,$id)
     {
-        dd($request->all());
+
+        //dd($request->all());
+
+        $key=0;
+
+        $imageFields=ImageField::all();
+        $prefix = $imageList = '';
+
+        if (sizeof($request->toArray()) > 9 && sizeof($request->toArray())<= 22 ) {
+            //$i++;
+            //dd($i);
+            foreach ($imageFields as $row) {
+
+                if ($request->file($row->html_id)) {
+                    $file = $request->file($row->html_id);
+                    $file_name = time() . $file->getClientOriginalName();
+                    $file->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/warranty_images/', $file_name);
+                    $file_pic = MobileImage::create(['URL' => $file_name, 'type' => (int)$request['type_' . $row->html_id]]);
+
+
+                }else{
+                    $file_pic = MobileImage::find(str_replace('hidden_','',$request['hidden_'.$row->html_id]));
+                }
+                $imageList .= $prefix . $file_pic->id;
+                $prefix = ',';
+                $key++;
+            }
+
+
+        }
+        if($key==7){
+
+            Mobile_warranty::query()->where('id', $id)->update([
+                'images' => $imageList,
+                'status_id' => 6
+            ]);
+
+            $key=0;
+            return redirect()->back()->with('success', 'تغییرات با موفقیت اعمال شد.');
+        }else{
+            $key=0;
+            return redirect()->back()->with('error', 'خطایی در اعمال تغییرات رخ داده است!');
+        }
     }
 
     public function incompleteIndex()
@@ -142,6 +187,7 @@ class WarrantyController extends Controller
 
         $warranty = Mobile_warranty::find($id);
         $warranty['phoneBrand'] = $warranty->phone_model->phone_brand->name;
+        $warrantyProblemTypes=WarrantyProblemType::all();
 
         if ($warranty->phone_model_other != null) {
             $phoneModel = $warranty->phone_model_other;
@@ -159,7 +205,7 @@ class WarrantyController extends Controller
             $images = Helpers::getImageFromDb($warranty->images);
 
             //dd($images);
-            return view('dashboard.warranty.show', ['warranty' => $warranty, 'images' => $images, 'commitment_ceilings'=>$commitment_ceilings,'imageFields'=>$imageFields]);
+            return view('dashboard.warranty.show', ['warranty' => $warranty, 'images' => $images, 'commitment_ceilings'=>$commitment_ceilings,'imageFields'=>$imageFields,'warrantyProblemTypes'=>$warrantyProblemTypes]);
         } else {
             abort(404);
         }
@@ -170,17 +216,48 @@ class WarrantyController extends Controller
         $status = $request->get('status');
         $user_id = $request->get('user_id');
         $warranty_id = $request->get('warranty_id');
-        if ($status == 1) {
+
+        if($status==1){
             $descriptions = 'فراگارانتی شما تایید شده است.';
             Mobile_warranty::query()->where('id', '=', $warranty_id)->update([
                 'status_id' => Status::query()->where('text', 'فعال')->first()->id,
                 'activation_date' => Carbon::now()->toDateTimeString()
             ]);
             $done = 1;
-        } else {
+            WarrantyProblem::query()->create([
+               'mobile_warranty_id'=>$warranty_id,
+               'warranty_problem_type_id'=>$status,
+            ]);
+        }elseif ($status==2){
             $descriptions = $request->get('descriptions');
             Mobile_warranty::query()->where('id', '=', $warranty_id)->update([
                 'status_id' => 7
+            ]);
+            WarrantyProblem::query()->create([
+                'mobile_warranty_id'=>$warranty_id,
+                'warranty_problem_type_id'=>$status,
+            ]);
+            $done = 0;
+        }elseif ($status==3 || $status==5){
+            $descriptions = $request->get('descriptions_1');
+            Mobile_warranty::query()->where('id', '=', $warranty_id)->update([
+                'status_id' => 7
+            ]);
+            WarrantyProblem::query()->create([
+                'mobile_warranty_id'=>$warranty_id,
+                'warranty_problem_type_id'=>$status,
+                'price'=>$request['bedehi_price']
+            ]);
+            $done = 0;
+        }else{
+            $descriptions = $request->get('descriptions_2');
+            Mobile_warranty::query()->where('id', '=', $warranty_id)->update([
+                'status_id' => 7
+            ]);
+            WarrantyProblem::query()->create([
+                'mobile_warranty_id'=>$warranty_id,
+                'warranty_problem_type_id'=>$status,
+                'price'=>$request['talab_price']
             ]);
             $done = 0;
         }
@@ -188,13 +265,16 @@ class WarrantyController extends Controller
         Mobile_warranty::query()->where('id',$warranty_id)->update([
             'commitment_ceiling_id'=>$request['commitment_ceilings']
         ]);
+        $mobile_warranty=Mobile_warranty::find($warranty_id);
+
         $admin_id = auth()->user()->id;
         $link = '/panel/warranty/mobile';
 
         $notif = new Notification();
         $notif->setSenderId($admin_id);
         $notif->setType(2);
-        $notif->setTitle('بررسی فراگارانتی');
+        $notif->setTitle('بررسی فراگارانتی تلفن همراه '.$mobile_warranty->getPhoneName($mobile_warranty));
+        $notif->setLink($link);
         $notif->setBody($descriptions);
 
         $userNotif = new NotificationUser();
@@ -280,6 +360,7 @@ class WarrantyController extends Controller
 
     public function admit_use(Request $request)
     {
+        $done = 0;
         $status = $request->get('status');
         $user_id = $request->get('user_id');
         $warranty_use_id = $request->get('warranty_use_id');
@@ -298,13 +379,13 @@ class WarrantyController extends Controller
                 $warranty->update([
                     'usable_percentage' => $warranty->usable_percentage - $percentage
                 ]);
+            }else {
+                $warranty_use = WarrantyUse::query()->where('id', '=', $warranty_use_id)->update([
+                    'status' => false
+                ]);
+                $descriptions = $request->get('descriptions');
+                $done = 0;
             }
-        } else {
-            $warranty_use = WarrantyUse::query()->where('id', '=', $warranty_use_id)->update([
-                'status' => false
-            ]);
-            $descriptions = $request->get('descriptions');
-            $done = 0;
         }
         $admin_id = auth()->user()->id;
         $link = '/panel/warranty/mobile/uses';

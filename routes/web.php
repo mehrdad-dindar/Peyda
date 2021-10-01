@@ -181,7 +181,7 @@ Route::prefix('dashboard')->middleware([CheckPermission::class. ':view-dashboard
         Route::post('/add/answer/{id}',[TicketController::class,'addResponse'])->name('addResponse');
     });
 
-    Route::post('/add/images',[WarrantyController::class,'addImages'])->name('addImages');
+    Route::post('/add/images/{id}',[WarrantyController::class,'addImages'])->name('addImages');
 
 });
 Route::get('/get_model', 'PhoneBrandController@get_model');

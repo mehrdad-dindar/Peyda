@@ -13,7 +13,7 @@
             <!-- Form row -->
 
             <style>
-                #hidden_div {
+                #hidden_div, #hidden_div_1,#hidden_div_2 {
                     display: none;
                 }
             </style>
@@ -140,15 +140,32 @@
                                     <div class="stacked-form-area">
 
                                         <label for="status">وضعیت</label>
-                                        <select name="status" onchange="showDiv(this)">
-                                            <option value="1" selected>تایید</option>
-                                            <option value="0">دارای نقص</option>
+                                        <select name="status" id="status" onchange="showDiv(this.options[this.selectedIndex].getAttribute('data-value'));">
+                                            @foreach($warrantyProblemTypes as $warrantyProblemType)
+                                                <option data-value="{{$warrantyProblemType->data_value}}" value="{{$warrantyProblemType->id}}" @if($warrantyProblemType->id==1) selected @endif>{{$warrantyProblemType->name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div id="hidden_div" class="col-12 mb-30">
                                         <h4 class="card-title mb-2">توضیحات</h4>
                                         <textarea class="form-control"
                                                   name="descriptions" id="simpleMdeExample" rows="10"></textarea>
+                                    </div>
+                                    <div id="hidden_div_1" class="col-12 mb-30">
+                                        <h4 class="card-title mb-2">مقدار بدهی</h4>
+                                        <input type="number" class="form-control"
+                                               name="bedehi_price" id="simpleMdeExample">
+                                        <h4 class="card-title mb-2">توضیحات</h4>
+                                        <textarea class="form-control"
+                                                  name="descriptions_1" rows="10"></textarea>
+                                    </div>
+                                    <div id="hidden_div_2" class="col-12 mb-30">
+                                        <h4 class="card-title mb-2">مقدار طلب</h4>
+                                        <input type="number" class="form-control"
+                                                  name="talab_price" id="simpleMdeExample">
+                                        <h4 class="card-title mb-2">توضیحات</h4>
+                                        <textarea class="form-control"
+                                                  name="descriptions_2" id="simpleMdeExample" rows="10"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -176,17 +193,23 @@
                         <div class="modal-header">
                             <h4 class="modal-title">عکس ها</h4>
                         </div>
-                        <form class="scroll" name="" action="{{route('addImages')}}" method="post"
+                        <form class="scroll" name="" action="{{route('addImages',$warranty->id)}}" method="post"
                               enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
                                 @foreach($imageFields as $key=>$imageField)
                                     <div class="form-control row d-flex justify-content-between">
-                                        <label class="col-md-5"
-                                               for="{{$imageField->html_id}}">{{$imageField->name}}</label>
-                                        <img class="mr-2 col-md-3"
-                                             src="@if(isset($images[$key])) {{URL::asset('uploads/warranty_images').'/'.$images[$key]->URL}} @endif"
-                                             alt="">
+                                        <input type="hidden" class="disabled-input" name="type_{{$imageField->html_id}}"
+                                               value="{{$imageField->id}}"
+                                               accept=".png, .jpg, .jpeg"/>
+                                        <h6 class="col-md-5"
+                                               >{{$imageField->name}}</h6>
+                                        @if(isset($images[$key]))
+                                            <img class="mr-2 col-md-3"
+                                                 src="{{URL::asset('uploads/warranty_images').'/'.$images[$key]->URL}}"
+                                                 alt="">
+                                            <input type="hidden" name="hidden_{{$imageField->html_id}}" value="{{$images[$key]->id}}">
+                                        @endif
                                         <input class="col-md-4" type="file" name="{{$imageField->html_id}}">
                                     </div>
                                 @endforeach
@@ -218,10 +241,25 @@
     <script src="{{URL::asset('admin/js/default-assets/modal-classes.js')}}"></script>
     <script>
         function showDiv(select) {
-            if (select.value == 0) {
+
+            //document.getElementById('hidden_div').style.display = "block";
+            //alert(select);
+            if (select == 0) {
                 document.getElementById('hidden_div').style.display = "block";
-            } else {
+                document.getElementById('hidden_div_1').style.display = "none";
+                document.getElementById('hidden_div_2').style.display = "none";
+            } else if(select==1) {
                 document.getElementById('hidden_div').style.display = "none";
+                document.getElementById('hidden_div_1').style.display = "block";
+                document.getElementById('hidden_div_2').style.display = "none";
+            }else if(select==2){
+                document.getElementById('hidden_div').style.display = "none";
+                document.getElementById('hidden_div_1').style.display = "none";
+                document.getElementById('hidden_div_2').style.display = "block";
+            }else if(select==3){
+                document.getElementById('hidden_div').style.display = "none";
+                document.getElementById('hidden_div_1').style.display = "none";
+                document.getElementById('hidden_div_2').style.display = "none";
             }
         }
     </script>
