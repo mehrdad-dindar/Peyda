@@ -29,6 +29,7 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
         'birthday',
         'phone_model_id',
         'email',
+        'status'
     ];
 
     use HasFactory, Notifiable;

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserRequest extends Model
 {
     use HasFactory;
+    protected $guarded=[];
 
     public function requestable()
     {

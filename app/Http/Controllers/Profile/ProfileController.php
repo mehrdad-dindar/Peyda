@@ -29,13 +29,14 @@ class ProfileController extends Controller
         $this->middleware(['auth', 'verified']);
     }
 
-    public function index()
+    public function index($msg='',$msgBody='')
     {
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         $panelSliders=PanelSlider::all();
         return view('profile.index')->with([
             'wallet' => $wallet,
-            'panelSliders'=>$panelSliders
+            'panelSliders'=>$panelSliders,
+            $msg=>$msgBody
         ]);
     }
 
@@ -138,6 +139,7 @@ class ProfileController extends Controller
         $user->postal_code = $request['postal_code'];
         $user->phone_model_id = $phone_model;
         $user->phone_model_other = $other_model;
+        $user->status=1;
         $user->save();
 
         $userrequest = UserRequest::query()
@@ -147,10 +149,21 @@ class ProfileController extends Controller
         if ($userrequest == null) {
             //dd('else');
             $userrequest1 = new UserRequest();
+            $userrequest1->done=1;
             $user->userrequests()->save($userrequest1);
         }
         $msg = 'اطلاعات پروفایل کاربری توسط شما تکمیل شد؛ پس از بررسی و در صورت تایید اطلاعات، پروفایل کاربری شما فعال خواهد شد و می‌توانید از کلیه امکانات پیدا سرویس ماندگار بهره‌مند شوید. نتیجه از طریق پیامک برای شما ارسال خواهد شد.';
-        return $this->profile('msg',$msg);
+
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        $panelSliders=PanelSlider::all();
+        return view('profile.index')->with([
+            'wallet' => $wallet,
+            'panelSliders'=>$panelSliders,
+            'success'=>$msg
+        ]);
+
+        /*return $this->index('success',$msg);*/
+        /*return redirect()->route('panel')->with('success',$msg);*/
         //dd($birthday_timestamp);
         /*return view('profile.profile')->with([
             'wallet' => $wallet,

@@ -2590,3 +2590,11 @@
         <!--end::Row-->--}}
     </div>
 @endsection
+@section('custom_js')
+    <script>
+        //toastr.success("aaaaaaaaa");
+        @if(isset($success))
+        toastr.success('{{$success}}');
+        @endif
+    </script>
+@endsection
