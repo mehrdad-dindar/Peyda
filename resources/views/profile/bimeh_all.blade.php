@@ -638,7 +638,7 @@
                                                     @if($row->status->id == 7)
                                                     <!--begin::Option-->
                                                         @if(sizeof($warranties)>0)
-                                                            @if($warrantyProblemType==2)
+                                                            @if($warrantyProblemType==2 || $warrantyProblemType==6)
                                                                 <label
                                                                     onclick="window.location.href='{{route('editPhoto',['id'=>$row->id])}}'"
 
