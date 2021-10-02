@@ -57,10 +57,8 @@ class UserController extends Controller
 
                 if ($userrequest_update->lte($user_update)) {
                     if ($userrequest->done == 0) {
-                        if($taeed==0) {
-                            unset($users[$key]);
-                        }
                         $users[$key]['new'] = 1;
+
                     } else {
                         $users[$key]['new'] = 0;
                     }
