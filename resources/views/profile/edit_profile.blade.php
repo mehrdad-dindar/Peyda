@@ -2,6 +2,8 @@
 @section('title','ویرایش اطلاعات حساب کاربری')
 @section('custom_head')
     <link rel="stylesheet" href="{{ URL::asset('profile/js/custom/p_datepicker/persian-datepicker-blue.min.css')}}"/>
+    <link rel="stylesheet" href="{{ URL::asset('front/persianDatePicker/css/persianDatepicker-default.css')}}"/>
+
 @endsection
 @section('content')
     <div id="kt_content_container" class="container">
@@ -48,7 +50,8 @@
                             <img
                                 src="@if(auth()->user()->avatar){{URL::asset('uploads/avatars').'/'.auth()->user()->avatar}} @else{{ URL::asset('profile/media/avatars/user.jpg') }}@endif"
                                 alt="image"/>
-                            <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
+                            <div
+                                class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
                         </div>
                     </div>
                     <!--end::Pic-->
@@ -123,7 +126,8 @@
                                             <!--end::Svg Icon-->{{ auth()->user()->city->name }}</a>
                                     @endif
                                     @if(auth()->user()->email)
-                                        <a href="" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+                                        <a href=""
+                                           class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                                             <!--begin::Svg Icon | path: icons/duotone/Communication/Mail-at.svg-->
                                             <span class="svg-icon svg-icon-4 me-1">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24px"
@@ -136,11 +140,15 @@
                                             <!--end::Svg Icon-->{{ auth()->user()->email }}</a>
 
                                     @endif
-                                    <a href="" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+                                    <a href=""
+                                       class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                                         <!--begin::Svg Icon | path: icons/duotone/Communication/Mail-at.svg-->
                                         <span class="svg-icon svg-icon-4 me-1">
-                                                                <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <path d="M11.914857,14.1427403 L14.1188827,11.9387145 C14.7276032,11.329994 14.8785122,10.4000511 14.4935235,9.63007378 L14.3686433,9.38031323 C13.9836546,8.61033591 14.1345636,7.680393 14.7432841,7.07167248 L17.4760882,4.33886839 C17.6713503,4.14360624 17.9879328,4.14360624 18.183195,4.33886839 C18.2211956,4.37686904 18.2528214,4.42074752 18.2768552,4.46881498 L19.3808309,6.67676638 C20.2253855,8.3658756 19.8943345,10.4059034 18.5589765,11.7412615 L12.560151,17.740087 C11.1066115,19.1936265 8.95659008,19.7011777 7.00646221,19.0511351 L4.5919826,18.2463085 C4.33001094,18.1589846 4.18843095,17.8758246 4.27575484,17.613853 C4.30030124,17.5402138 4.34165566,17.4733009 4.39654309,17.4184135 L7.04781491,14.7671417 C7.65653544,14.1584211 8.58647835,14.0075122 9.35645567,14.3925008 L9.60621621,14.5173811 C10.3761935,14.9023698 11.3061364,14.7514608 11.914857,14.1427403 Z" id="Path-76" fill="#000000"></path>
+                                                                <svg width="24px" height="24px" viewBox="0 0 24 24"
+                                                                     version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <path
+        d="M11.914857,14.1427403 L14.1188827,11.9387145 C14.7276032,11.329994 14.8785122,10.4000511 14.4935235,9.63007378 L14.3686433,9.38031323 C13.9836546,8.61033591 14.1345636,7.680393 14.7432841,7.07167248 L17.4760882,4.33886839 C17.6713503,4.14360624 17.9879328,4.14360624 18.183195,4.33886839 C18.2211956,4.37686904 18.2528214,4.42074752 18.2768552,4.46881498 L19.3808309,6.67676638 C20.2253855,8.3658756 19.8943345,10.4059034 18.5589765,11.7412615 L12.560151,17.740087 C11.1066115,19.1936265 8.95659008,19.7011777 7.00646221,19.0511351 L4.5919826,18.2463085 C4.33001094,18.1589846 4.18843095,17.8758246 4.27575484,17.613853 C4.30030124,17.5402138 4.34165566,17.4733009 4.39654309,17.4184135 L7.04781491,14.7671417 C7.65653544,14.1584211 8.58647835,14.0075122 9.35645567,14.3925008 L9.60621621,14.5173811 C10.3761935,14.9023698 11.3061364,14.7514608 11.914857,14.1427403 Z"
+        id="Path-76" fill="#000000"></path>
 </svg>
 
                                                             </span>
@@ -156,11 +164,13 @@
                                     <!--begin::Stats-->
                                     <div class="d-flex flex-wrap">
                                         <!--begin::Stat-->
-                                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                        <div
+                                            class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                             <!--begin::Number-->
                                             <div class="d-flex align-items-center">
                                                 <div class="fs-2 fw-bolder counted" data-kt-countup="true"
-                                                     data-kt-countup-value="4500" data-kt-countup-prefix="$"><span id="wallet-val">{{Crypt::decryptString($wallet->value)}}</span>
+                                                     data-kt-countup-value="4500" data-kt-countup-prefix="$"><span
+                                                        id="wallet-val">{{Crypt::decryptString($wallet->value)}}</span>
                                                     تومان
                                                 </div>
                                             </div>
@@ -211,7 +221,7 @@
             @endif
             <!--begin::Form-->
                 <form id="kt_account_profile_details_form" class="form" method="post"
-                      @if($flag!=1) action="{{ route('save_profile_info') }}"  @endif enctype="multipart/form-data">
+                      @if($flag!=1) action="{{ route('save_profile_info') }}" @endif enctype="multipart/form-data">
                     @if($flag!=1)
                         @csrf
                     @endif
@@ -222,15 +232,21 @@
                         <div class="row mb-6">
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label fw-bold fs-6">تصویر کاربر</label>
-                            <!--end::Label--><div class="col-lg-8">
+                            <!--end::Label-->
+                            <div class="col-lg-8">
                                 <!--begin::Image input-->
-                                <div class="image-input image-input-circle" data-kt-image-input="true" style="background-image: url({{URL::asset('profile')}}/media/avatars/user.jpg)">
+                                <div class="image-input image-input-circle" data-kt-image-input="true"
+                                     style="background-image: url({{URL::asset('profile')}}/media/avatars/user.jpg)">
                                     <!--begin::Image preview wrapper-->
-                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: @if(auth()->user()->avatar!=null) url({{URL::asset('uploads')}}/avatars/{{auth()->user()->avatar}}) @else url({{URL::asset('profile')}}/media/avatars/user.jpg) @endif"></div>
+                                    <div class="image-input-wrapper w-125px h-125px"
+                                         style="background-image: @if(auth()->user()->avatar!=null) url({{URL::asset('uploads')}}/avatars/{{auth()->user()->avatar}}) @else url({{URL::asset('profile')}}/media/avatars/user.jpg) @endif"></div>
                                     <!--end::Image preview wrapper-->
 
                                     <!--begin::Edit button-->
-                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" data-bs-dismiss="click" title="" data-bs-original-title="Change avatar">
+                                    <label
+                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                                        data-kt-image-input-action="change" data-bs-toggle="tooltip"
+                                        data-bs-dismiss="click" title="" data-bs-original-title="Change avatar">
                                         <i class="bi bi-pencil-fill fs-7"></i>
 
                                         <!--begin::Inputs-->
@@ -241,13 +257,19 @@
                                     <!--end::Edit button-->
 
                                     <!--begin::Cancel button-->
-                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" data-bs-dismiss="click" title="" data-bs-original-title="Cancel avatar">
+                                    <span
+                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
+                                        data-bs-dismiss="click" title="" data-bs-original-title="Cancel avatar">
          <i class="bi bi-x fs-2"></i>
      </span>
                                     <!--end::Cancel button-->
 
                                     <!--begin::Remove button-->
-                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" data-bs-dismiss="click" title="" data-bs-original-title="Remove avatar">
+                                    <span
+                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                                        data-kt-image-input-action="remove" data-bs-toggle="tooltip"
+                                        data-bs-dismiss="click" title="" data-bs-original-title="Remove avatar">
          <i class="bi bi-x fs-2"></i>
      </span>
                                     <!--end::Remove button-->
@@ -264,12 +286,13 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label  fw-bold fs-6">نام</label>
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6">نام</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="text" name="f_name"
-                                       class="disabled-input @error('f_name') is-invalid @enderror form-control form-control-lg form-control-solid mb-3 mb-lg-0" @if($flag==1) disabled @endif
+                                       class="disabled-input @error('f_name') is-invalid @enderror form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                       @if($flag==1) disabled @endif
                                        placeholder="نام " value="{{ auth()->user()->f_name }}"/>
                             </div>
                             <!--end::Col-->
@@ -280,12 +303,13 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label  fw-bold fs-6">نام خانوادگی</label>
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6">نام خانوادگی</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="text" name="l_name"
-                                       class="disabled-input @error('l_name') is-invalid @enderror form-control form-control-lg form-control-solid mb-3 mb-lg-0"  @if($flag==1) disabled @endif
+                                       class="disabled-input @error('l_name') is-invalid @enderror form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                       @if($flag==1) disabled @endif
                                        placeholder="نام خانوادگی " value="{{ auth()->user()->l_name }}"/>
                             </div>
                             <!--end::Col-->
@@ -300,12 +324,27 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
-                                {{--<input type="text" class="example1" />--}}
-                                <input type="hidden" value="{{$v = Verta::instance(auth()->user()->birthday)}}">
-                                <input class="form-control @error('birthday') is-invalid @enderror form-control-solid" id="birthday"
-                                       value="@if(auth()->user()->birthday != null){{ \App\Helpers\Helpers::toPersianNumOnly($v->format('Y/n/j')) }}@endif"
-                                       placeholder="--/--/----" autocomplete="off"/>
-                                <input type="hidden" name="birthday_tmp" id="birthday_tmp"/>
+                                <div class="input-group row">
+                                    <div class="form-floating col-4">
+                                        <input type="text" name="day" id="day" aria-label="First name"
+                                               class="form-control form-control-solid">
+                                        <label for="day">روز</label>
+                                    </div>
+                                    <div class="form-floating col-4">
+                                        <input type="text" name="month" id="month" aria-label="First name"
+                                               class="form-control form-control-solid">
+                                        <label for="month">ماه</label>
+                                    </div>
+                                    <div class="form-floating col-4">
+                                        <input type="text" name="year" id="year" aria-label="Last name"
+                                               class="form-control form-control-solid">
+                                        <label for="year">سال</label>
+                                    </div>
+                                </div>
+                            {{--<input type="text" class="example1" />--}}
+                            <!--                                <input type="hidden" >
+
+                                <input type="hidden" name="birthday_tmp" id="birthday_tmp"/>-->
                             </div>
                             <!--end::Col-->
                         </div>
@@ -314,97 +353,16 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label  fw-bold fs-6">کد ملی</label>
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6">کد ملی</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
-                                <input type="text" name="melli_code" maxlength="10" maxlength="10"
-                                       class="disabled-input @error('melli_code') is-invalid @enderror form-control form-control-lg form-control-solid"  @if($flag==1) disabled @endif
+                                <input type="text" name="melli_code" maxlength="10"
+                                       class="disabled-input @error('melli_code') is-invalid @enderror form-control form-control-lg form-control-solid"
+                                       @if($flag==1) disabled @endif
                                        value="@if(auth()->user()->melli_code != null){{auth()->user()->melli_code}}@endif"/>
                             </div>
                             <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="row mb-6">
-                                <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-bold fs-6">عکس روی کارت ملی</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-6">
-                                <!--begin::Image input-->
-                                <div class="image-input " data-kt-image-input="true" style="background-image: url('{{ URL::asset('profile/media/mellicard/sample.jpg')}}')">
-                                    <!--begin::Preview existing avatar-->
-                                    <div class="image-input-wrapper w-225px h-150px" style="background-image: @if(auth()->user()->melli_card!=null) url({{URL::asset('uploads')}}/melli_cards/{{auth()->user()->melli_card}})  @else url({{URL::asset('profile')}}/media/mellicard/sample.jpg) @endif"></div>
-                                    <!--end::Preview existing avatar-->
-                                    <!--begin::Label-->
-                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar">
-                                        <i class="bi bi-pencil-fill fs-7"></i>
-                                        <!--begin::Inputs-->
-                                        <input type="file" class="@error('melli_card') is-invalid @enderror" value="{{auth()->user()->melli_card}}" name="melli_card" accept=".png, .jpg, .jpeg">
-                                        <input type="hidden" name="melli_card_remove">
-                                        <!--end::Inputs-->
-                                    </label>
-                                    <!--end::Label-->
-                                    <!--begin::Cancel-->
-                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="Cancel avatar">
-                                                        <i class="bi bi-x fs-2"></i>
-                                                    </span>
-                                    <!--end::Cancel-->
-                                    <!--begin::Remove-->
-                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="Remove avatar">
-                                                        <i class="bi bi-x fs-2"></i>
-                                                    </span>
-                                    <!--end::Remove-->
-                                </div>
-
-                                <!--end::Image input-->
-                                <!--begin::Hint-->
-                                <div class="form-text">عکس روی کارت ملی خود را آپلود کنید</div>
-                                <!--end::Hint-->
-                            </div>
-                                <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="row mb-6">
-                                <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-bold fs-6">عکس پشت کارت ملی</label>
-                            <!--end::Label-->
-                            <!--begin::Col-->
-                            <div class="col-lg-6">
-                                <!--begin::Image input-->
-                                <div class="image-input " data-kt-image-input="true" style="background-image: url({{URL::asset('profile')}}/media/mellicard/melli_card_back.jpg)">
-                                    <!--begin::Preview existing avatar-->
-                                    <div class="image-input-wrapper w-225px h-150px" style="background-image: @if(auth()->user()->melli_card_back!=null) url({{URL::asset('uploads')}}/melli_cards/{{auth()->user()->melli_card_back}})  @else url({{URL::asset('profile')}}/media/mellicard/melli_card_back.jpg) @endif"></div>
-                                    <!--end::Preview existing avatar-->
-                                    <!--begin::Label-->
-                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar">
-                                        <i class="bi bi-pencil-fill fs-7"></i>
-                                        <!--begin::Inputs-->
-                                        <input type="file" name="melli_card_back" class="@error('melli_card_back') is-invalid @enderror" accept=".png, .jpg, .jpeg">
-                                        <input type="hidden" name="melli_card_back_remove">
-                                        <!--end::Inputs-->
-                                    </label>
-                                    <!--end::Label-->
-                                    <!--begin::Cancel-->
-                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="Cancel avatar">
-                                                        <i class="bi bi-x fs-2"></i>
-                                                    </span>
-                                    <!--end::Cancel-->
-                                    <!--begin::Remove-->
-                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="Remove avatar">
-                                                        <i class="bi bi-x fs-2"></i>
-                                                    </span>
-                                    <!--end::Remove-->
-                                </div>
-
-                                <!--end::Image input-->
-                                <!--begin::Hint-->
-                                <div class="form-text">عکس پشت کارت ملی خود را آپلود کنید</div>
-                                <!--end::Hint-->
-                            </div>
-                                <!--end::Col-->
                         </div>
                         <!--end::Input group-->
                         <!--begin::Input group-->
@@ -429,7 +387,7 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-bold fs-6">استان</label>
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6">استان</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row ">
@@ -440,7 +398,8 @@
                                         @if($flag==1) disabled @endif>
                                     <option value="">انتخاب استان</option>
                                     @foreach($cities as $city)
-                                        <option value="{{$city->id}}" @if(auth()->user()->city_id == $city->id) selected @endif>{{$city->name}}</option>
+                                        <option value="{{$city->id}}"
+                                                @if(auth()->user()->city_id == $city->id) selected @endif>{{$city->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -450,7 +409,7 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-bold fs-6">آدرس</label>
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6">آدرس</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
@@ -488,7 +447,8 @@
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
                                 <input type="email" name="email"
-                                       class="disabled-input @error('email') is-invalid @enderror form-control form-control-lg form-control-solid" placeholder="ایمیل"
+                                       class="disabled-input @error('email') is-invalid @enderror form-control form-control-lg form-control-solid"
+                                       placeholder="ایمیل"
                                        @if($flag==1) disabled @endif
                                        value="{{auth()->user()->email}}">
                             </div>
@@ -500,7 +460,7 @@
                         <!--begin::Input group-->
                         <div class="row mb-6 ">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-bold fs-6">
+                            <label class="col-lg-4 required col-form-label fw-bold fs-6">
                                 <span class="">برند گوشی</span>
                             </label>
                             <!--end::Label-->
@@ -528,7 +488,7 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-bold fs-6">
+                            <label class="col-lg-4 required col-form-label fw-bold fs-6">
                                 <span class="">مدل گوشی</span>
                             </label>
                             <!--end::Label-->
@@ -543,16 +503,20 @@
                                     @foreach($phone_models as $model)
                                         @if(auth()->user()->phone_model!=null)
                                             @if(auth()->user()->phone_model->phone_brand->id==$model->phone_brand_id)
-                                            <option value="{{$model->id}}"
-                                                    @if(auth()->user()->phone_model_other==null)
+                                                <option value="{{$model->id}}"
+                                                        @if(auth()->user()->phone_model_other==null)
                                                         @if(auth()->user()->phone_model_id == $model->id) selected @endif @endif>{{$model->name}}</option>
 
                                             @endif
                                         @endif
                                     @endforeach
-                                    <option value="others" @if(auth()->user()->phone_model_other!=null) selected @endif >سایر</option>
+                                    <option value="others"
+                                            @if(auth()->user()->phone_model_other!=null) selected @endif >سایر
+                                    </option>
                                 </select>
-                                <input type='hidden' @if(auth()->user()->phone_model_id!=null) value="{{auth()->user()->phone_model_id}}" @endif name='other_model' id='other_model'>
+                                <input type='hidden'
+                                       @if(auth()->user()->phone_model_id!=null) value="{{auth()->user()->phone_model_id}}"
+                                       @endif name='other_model' id='other_model'>
 
                             </div>
                             <!--end::Col-->
@@ -560,31 +524,35 @@
                         <!--end::Input group-->
 
                         <!--begin::Input group-->
-                        <div class="my_other_model row mb-6" @if(auth()->user()->phone_model_other==null) style="display: none;" @endif>
+                        <div class="my_other_model row mb-6"
+                             @if(auth()->user()->phone_model_other==null) style="display: none;" @endif>
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label fw-bold fs-6">مدل گوشی من</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
-                                <input type="text" name="other_phone_model" @if(auth()->user()->phone_model_other!=null) value="{{auth()->user()->phone_model_other}}" @endif
+                                <input type="text" name="other_phone_model"
+                                       @if(auth()->user()->phone_model_other!=null) value="{{auth()->user()->phone_model_other}}"
+                                       @endif
                                        class="disabled-input form-control form-control-lg form-control-solid">
                             </div>
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
 
-                    <!--end::Card body-->
-                    <!--begin::Actions-->
-                    <div class="card-footer d-flex justify-content-end py-6 px-9">
-                        @if($flag==1)
+                        <!--end::Card body-->
+                        <!--begin::Actions-->
+                        <div class="card-footer d-flex justify-content-end py-6 px-9">
+                            @if($flag==1)
 
-                        @else
-                            <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">ذخیره
-                                اطلاعات
-                            </button>
-                        @endif
-                    </div>
-                    <!--end::Actions-->
+                            @else
+                                <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">
+                                    ذخیره
+                                    اطلاعات
+                                </button>
+                            @endif
+                        </div>
+                        <!--end::Actions-->
                     </div>
                 </form>
                 <!--end::Form-->
@@ -604,37 +572,39 @@
     <script>
         $('#wallet-val').number(true, 0);
     </script>
-    <script type="text/javascript">
-        $('#birthday').persianDatepicker({
-            observer: true,
-            autoClose: true,
-            format: 'YYYY/MM/DD',
-            altField: '#birthday_tmp',
-            initialValueType: 'persian',
-            initialValue: false,
-            z: '+3:30',
-        });
-        persianDate().format('x');
-    </script>
+    <!--    <script type="text/javascript">
+            $('#birthday').persianDatepicker({
+                observer: true,
+                autoClose: true,
+                format: 'YYYY/MM/DD',
+                altField: '#birthday_tmp',
+                initialValueType: 'persian',
+                initialValue: false,
+                z: '+3:30',
+            });
+            persianDate().format('x');
+        </script>-->
     <script>
 
-        $(document).ready(function(){
+        $(document).ready(function () {
 
-            $('#phone_brand').on('change',function(){
+            $('#phone_brand').on('change', function () {
                 var getUrl = window.location;
 
                 var new_val = $("#phone_brand option:selected").val();
                 //alert(new_val);
                 $.ajax({
                     type: "POST",
-                    url: getUrl .protocol + "//" + getUrl.host+"/panel/mobile_change",
-                    cache:false,
-                    data: {"_token": "{{ csrf_token() }}"
-                        ,"id" : new_val},
+                    url: getUrl.protocol + "//" + getUrl.host + "/panel/mobile_change",
+                    cache: false,
+                    data: {
+                        "_token": "{{ csrf_token() }}"
+                        , "id": new_val
+                    },
                     error: function (xhr) {
                         alert(xhr.responseText);
                     },
-                    success: function(data) {
+                    success: function (data) {
                         // Check the output of ajax call on firebug console
                         //console.log(data);
                         //alert(data);
@@ -650,16 +620,17 @@
         });
     </script>
     <script>
-        $('#phone_model').on('change', function() {
+        $('#phone_model').on('change', function () {
             var other_model = $('#phone_model').find(':selected').val();
 
             if (other_model === 'others') {
                 $('.my_other_model').slideToggle();
-            }else {
+            } else {
                 $('.my_other_model').slideUp("slow");
             }
         });
 
     </script>
+
 @endsection
 

@@ -67,10 +67,10 @@
                                         <!--end::Label-->
                                         <!--end::Text-->
                                         <div
-                                            class="fw-bolder fs-6 text-gray-800">{{auth()->user()->f_name." ".auth()->user()->l_name}}</div>
+                                            class="fw-bolder fs-6 text-gray-800">{{$user->f_name." ".$user->l_name}}</div>
                                         <!--end::Text-->
                                         <!--end::Description-->
-                                        <div class="fw-bold fs-7 text-gray-600">{{auth()->user()->address}}</div>
+                                        <div class="fw-bold fs-7 text-gray-600">{{$user->address}}</div>
                                         <!--end::Description-->
                                     </div>
                                     <!--end::Col-->

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -150,6 +151,31 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
     public function tickets()
     {
         return $this->hasMany(Ticket::class,'sender_id','id');
+    }
+
+    public static function getYear()
+    {
+        if(auth()->user()->birthday!=null) {
+            return ((int)Verta::instance(auth()->user()->birthday)->format('Y'));
+        }else{
+            return '';
+        }
+    }
+    public static function getMonth()
+    {
+        if(auth()->user()->birthday!=null) {
+            return ((int)Verta::instance(auth()->user()->birthday)->format('m'));
+        }else{
+            return '';
+        }
+    }
+    public static function getDay()
+    {
+        if(auth()->user()->birthday!=null) {
+            return ((int)Verta::instance(auth()->user()->birthday)->format('d'));
+        }else{
+            return '';
+        }
     }
 
     public function subscriber()

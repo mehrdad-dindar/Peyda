@@ -16,6 +16,7 @@ class CreateMobileWarrantiesTable extends Migration
         Schema::create('mobile_warranties', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('owner_id');
+            $table->unsignedBigInteger('buyer_id')->nullable();
             $table->unsignedBigInteger('phone_model_id')->nullable;
             $table->string('phone_model_other')->nullable();
             $table->timeStamp('expiry_date')->nullable();
@@ -33,6 +34,10 @@ class CreateMobileWarrantiesTable extends Migration
         });
         Schema::table('mobile_warranties',function (Blueprint $table){
             $table->foreign('owner_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+            $table->foreign('buyer_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');

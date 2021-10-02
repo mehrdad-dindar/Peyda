@@ -14,6 +14,7 @@ class Mobile_warranty extends Model
      */
     protected $fillable = [
         'owner_id',
+        'buyer_id',
         'phone_model_id',
         'expiry_date',
         'activation_code',
@@ -43,6 +44,11 @@ class Mobile_warranty extends Model
     public function User()
     {
         return $this->belongsTo(User::class,'owner_id');
+    }
+
+    public function BuyerUser()
+    {
+        return $this->belongsTo(User::class,'buyer_id');
     }
 
     public function phone_model()
