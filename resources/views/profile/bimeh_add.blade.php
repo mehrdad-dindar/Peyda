@@ -1,5 +1,7 @@
 @extends('profile.layouts.master')
 @section('title','افزودن فراگارانتی')
+@section('custom_head')
+@endsection
 @section('content')
     <div id="kt_content_container" class="container">
         <!--begin::Card-->
@@ -103,7 +105,7 @@
 
                                 <!--end::Step 1-->
 
-                                <!--begin::Step 3-->
+                                <!--begin::Step 2-->
                                 <div class="stepper-item mx-2 my-4" data-kt-stepper-element="nav">
                                     <!--begin::Line-->
                                     <div class="stepper-line w-40px"></div>
@@ -120,6 +122,33 @@
                                     <div class="stepper-label">
                                         <h3 class="stepper-title">
                                             تعیین بازه قیمت
+                                        </h3>
+
+                                        {{--<div class="stepper-desc">
+                                            Description
+                                        </div>--}}
+                                    </div>
+                                    <!--end::Label-->
+                                </div>
+                                <!--end::Step 2-->
+
+                                <!--begin::Step 3-->
+                                <div class="stepper-item mx-2 my-4" data-kt-stepper-element="nav">
+                                    <!--begin::Line-->
+                                    <div class="stepper-line w-40px"></div>
+                                    <!--end::Line-->
+
+                                    <!--begin::Icon-->
+                                    <div class="stepper-icon w-40px h-40px">
+                                        <i class="stepper-check fas fa-check"></i>
+                                        <span class="stepper-number">3</span>
+                                    </div>
+                                    <!--begin::Icon-->
+
+                                    <!--begin::Label-->
+                                    <div class="stepper-label">
+                                        <h3 class="stepper-title">
+                                            مالک فراگارانتی
                                         </h3>
 
                                         {{--<div class="stepper-desc">
@@ -165,7 +194,7 @@
                                     <!--begin::Icon-->
                                     <div class="stepper-icon w-40px h-40px">
                                         <i class="stepper-check fas fa-check"></i>
-                                        <span class="stepper-number">3</span>
+                                        <span class="stepper-number">4</span>
                                     </div>
                                     <!--begin::Icon-->
 
@@ -187,7 +216,9 @@
 
                             <!--begin::Form-->
                             <form class="form w-lg-500px mx-auto" novalidate="novalidate"
-                                  id="kt_stepper_add_mobile_warranty_form" method="POST" @if($mobile_warranty!=null) action="{{route('edit',$mobile_warranty->id)}}" @else action="{{route('save')}}" @endif>
+                                  id="kt_stepper_add_mobile_warranty_form" method="POST"
+                                  @if($mobile_warranty!=null) action="{{route('edit',$mobile_warranty->id)}}"
+                                  @else action="{{route('save')}}" @endif>
                                 @csrf
                                 <input type="hidden" name="owner_id" value="{{ auth()->user()->id }}">
                                 <!--begin::Group-->
@@ -492,7 +523,8 @@
                                                                             @foreach($brands as $row)
                                                                                 <option
 
-                                                                                    value="{{$row->id}}" @if($row->id==$mobile_warranty->phone_model->phone_brand->id) selected @endif >{{$row->name}}</option>
+                                                                                    value="{{$row->id}}"
+                                                                                    @if($row->id==$mobile_warranty->phone_model->phone_brand->id) selected @endif >{{$row->name}}</option>
                                                                             @endforeach
                                                                         </select>
                                                                     </div>
@@ -511,11 +543,17 @@
                                                                             <option></option>
                                                                             @foreach($models_first as $model)
                                                                                 <option
-                                                                                    value="{{$model->id}}" @if($model->id==$mobile_warranty->phone_model_id) selected @endif>{{$model->name}}</option>
+                                                                                    value="{{$model->id}}"
+                                                                                    @if($model->id==$mobile_warranty->phone_model_id) selected @endif>{{$model->name}}</option>
                                                                             @endforeach
-                                                                            <option value="others" @if($mobile_warranty->phone_model_other!=null) selected @endif>سایر</option>
+                                                                            <option value="others"
+                                                                                    @if($mobile_warranty->phone_model_other!=null) selected @endif>
+                                                                                سایر
+                                                                            </option>
                                                                         </select>
-                                                                        <input type='hidden' @if($mobile_warranty->phone_model_other!=null)  value="{{$mobile_warranty->phone_model_id}}" @endif name='other_model'
+                                                                        <input type='hidden'
+                                                                               @if($mobile_warranty->phone_model_other!=null)  value="{{$mobile_warranty->phone_model_id}}"
+                                                                               @endif name='other_model'
                                                                                id='other_model'>
 
                                                                     </div>
@@ -530,14 +568,15 @@
                                                                     <!--begin::Col-->
                                                                     <div class="col-lg-6 fv-row">
                                                                         <input type="text" name="other_phone_model"
-                                                                               class="disabled-input form-control form-control-lg form-control-solid" @if($mobile_warranty->phone_model_other!=null) value="{{$mobile_warranty->phone_model_other}}" @endif>
+                                                                               class="disabled-input form-control form-control-lg form-control-solid"
+                                                                               @if($mobile_warranty->phone_model_other!=null) value="{{$mobile_warranty->phone_model_other}}" @endif>
                                                                     </div>
                                                                     <!--end::Col-->
                                                                 </div>
                                                             </div>
 
-                                                        @endif
-                                                    @else
+                                                    @endif
+                                                @else
 
                                                     <!--begin::Option-->
                                                         <label
@@ -708,9 +747,9 @@
                                         </div>
                                         <!--end::Type-->
                                     </div>
-                                    <!--begin::Step 1-->
+                                    <!--end::Step 1-->
 
-                                    <!--begin::Step 3-->
+                                    <!--begin::Step 2-->
                                     <div class="flex-column" data-kt-stepper-element="content">
                                         <!--begin::Wrapper-->
                                         <div class="w-100">
@@ -737,7 +776,9 @@
                                                             name="price_range">
                                                         <option value="">انتخاب بازه قیمت دستگاه</option>
                                                         @foreach($commitment_ceilings as $cc)
-                                                            <option value="{{$cc->id}}" @if($mobile_warranty!=null) @if($cc->id==$mobile_warranty->commitment_ceiling_id) selected @endif @endif
+                                                            <option value="{{$cc->id}}"
+                                                                    @if($mobile_warranty!=null) @if($cc->id==$mobile_warranty->commitment_ceiling_id) selected
+                                                                    @endif @endif
                                                                     data-price="{{$cc->price}}">{{$cc->price_range}}</option>
                                                         @endforeach
                                                     </select>
@@ -772,9 +813,224 @@
                                         </div>
                                         <!--end::Wrapper-->
                                     </div>
+                                    <!--end::Step 2-->
 
                                     <!--begin::Step 3-->
+                                    <div class="flex-column" data-kt-stepper-element="content">
+                                        <!--begin::Wrapper-->
+                                        <div class="w-100">
+                                            <!--begin::Heading-->
+                                            <div class="pb-12">
+                                                <!--begin::Title-->
+                                                <h1 class="fw-bolder text-dark">مالک فراگارانتی</h1>
+                                                <!--end::Title-->
+                                                <!--begin::Description-->
+                                                <span class="text-muted">برای چه کسی فراگارانتی ثبت میکنید ؟</span>
+                                                <span class="text-danger d-block">* یکی را انتخاب کنید</span>
+                                                <!--end::Description-->
+                                            </div>
+                                            <!--end::Heading-->
+                                            <!--begin::Input group-->
+                                            <div class="fv-row mb-15" data-kt-buttons="true">
+                                                <!--begin::Option-->
+                                                <label
+                                                    class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6">
+                                                    <!--begin::Input-->
+                                                    <input class="btn-check" type="radio"
+                                                           name="warranty_owner" value="1"/>
+                                                    <!--end::Input-->
 
+                                                    <input type="hidden" name="my_id"
+                                                           value="{{auth()->user()->id}}">
+                                                    <!--begin::Label-->
+                                                    <span class="d-flex" id="im_owner_btn">
+                                                                            <!--begin::Icon-->
+                                                        <!--begin::Svg Icon | path: icons/duotone/General/User.svg-->
+                                                        <span class="svg-icon svg-icon-3hx">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                     width="24px" height="24px"
+                                                                                     viewBox="0 0 24 24" version="1.1">
+                                                                                    <g stroke="none" stroke-width="1"
+                                                                                       fill="none" fill-rule="evenodd">
+                                                                                        <polygon
+                                                                                            points="0 0 24 0 24 24 0 24"/>
+                                                                                        <path
+                                                                                            d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+                                                                                            fill="#000000"
+                                                                                            fill-rule="nonzero"
+                                                                                            opacity="0.3"/>
+                                                                                        <path
+                                                                                            d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+                                                                                            fill="#000000"
+                                                                                            fill-rule="nonzero"/>
+                                                                                    </g>
+                                                                                </svg>
+                                                                            </span>
+                                                        <!--end::Svg Icon-->
+                                                        <!--end::Icon-->
+                                                        <!--begin::Info-->
+                                                        <span class="ms-4">
+                                                            <span class="fs-3 fw-bolder text-gray-900 mb-2 d-block">مالک فراگارانتی خودم هستم</span>
+                                                            <span class="fw-bold fs-4 text-muted">{{ auth()->user()->getFullNameAttribute(auth()->user()) }}</span>
+                                                        </span>
+                                                        <!--end::Info-->
+                                                    </span>
+                                                    <!--end::Label-->
+                                                </label>
+                                                <!--end::Option-->
+                                                <div id="im_owner" class="row"
+                                                     style="display:none;">
+                                                    <div class="col-md-6">
+                                                        <div class="mb-10">
+                                                            <label class="form-label">نام</label>
+                                                            <input type="text" class="form-control" placeholder="name@example.com">
+                                                        </div>
+                                                        <div class="mb-10">
+                                                            <label class="form-label">تاریخ تولد</label>
+                                                            <input class="birthday form-control" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="mb-10">
+                                                            <label class="form-label">نام خانوادگی</label>
+                                                            <input type="text" class="form-control" placeholder="name@example.com">
+                                                        </div>
+                                                    </div>
+                                                    <div class="my_other_model row mb-6"
+                                                         style="display:none;">
+                                                        <!--begin::Label-->
+                                                        <label class="col-lg-4 col-form-label fw-bold fs-6">مدل
+                                                            گوشی
+                                                            جدید</label>
+                                                        <!--end::Label-->
+                                                        <!--begin::Col-->
+                                                        <div class="col-lg-6 fv-row">
+                                                            <input type="text" name="other_phone_model"
+                                                                   class="disabled-input form-control form-control-lg form-control-solid">
+                                                        </div>
+                                                        <!--end::Col-->
+                                                    </div>
+                                                </div>
+
+                                                <!--begin::Option-->
+                                                <label
+                                                    class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6">
+                                                    <!--begin::Input-->
+                                                    <input class="btn-check" type="radio"
+                                                           name="warranty_owner"
+                                                           value="2"/>
+                                                    <!--end::Input-->
+                                                    <!--begin::Label-->
+                                                    <span class="d-flex" id="other_owner_btn">
+                                                                            <!--begin::Icon-->
+                                                        <!--begin::Svg Icon-->
+                                                                            <span class="svg-icon svg-icon-3hx">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                     width="24px" height="24px"
+                                                                                     viewBox="0 0 24 24" version="1.1">
+                                                                                    <g stroke="none" stroke-width="1"
+                                                                                       fill="none" fill-rule="evenodd">
+                                                                                        <rect x="5" y="5" width="5"
+                                                                                              height="5" rx="1"
+                                                                                              fill="#000000"/>
+                                                                                        <rect x="14" y="5" width="5"
+                                                                                              height="5" rx="1"
+                                                                                              fill="#000000"
+                                                                                              opacity="0.3"/>
+                                                                                        <rect x="5" y="14" width="5"
+                                                                                              height="5" rx="1"
+                                                                                              fill="#000000"
+                                                                                              opacity="0.3"/>
+                                                                                        <rect x="14" y="14" width="5"
+                                                                                              height="5" rx="1"
+                                                                                              fill="#000000"
+                                                                                              opacity="0.3"/>
+                                                                                    </g>
+                                                                                </svg>
+                                                                            </span>
+                                                        <!--end::Svg Icon-->
+                                                        <!--end::Icon-->
+                                                        <!--begin::Info-->
+                                                                            <span class="ms-4">
+                                                                                <span
+                                                                                    class="fs-3 fw-bolder text-gray-900 mb-2 d-block">مالک فراگارانتی شخص دیگری هست</span>
+                                                                                {{--<span
+                                                                                    class="fw-bold fs-4 text-muted">{{ auth()->user()->phone_brand->name." / ".auth()->user()->phone_model->name }}</span>--}}
+                                                                            </span>
+                                                        <!--end::Info-->
+                                                                        </span>
+                                                    <!--end::Label-->
+                                                </label>
+                                                <!--end::Option-->
+                                                <div id="other_owner" class="row"
+                                                     style="display:none;">
+                                                    <div class="col-md-6">
+                                                        <div class="mb-10">
+                                                            <label for="" class="form-label">انتخاب
+                                                                برند</label>
+                                                            <select
+                                                                name="new_phone_brand" id="new_phone_brand"
+                                                                data-dropdown-parent="#kt_modal_create_project"
+                                                                aria-label="انتخاب برند"
+                                                                data-control="select2"
+                                                                data-placeholder="انتخاب برند"
+                                                                class="disabled-input form-select form-select-solid form-select-lg fw-bold">
+                                                                <option></option>
+                                                                @foreach($brands as $row)
+                                                                    <option
+                                                                        value="{{$row->id}}">{{$row->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="mb-10">
+                                                            <label for="" class="form-label">انتخاب
+                                                                مدل</label>
+                                                            <select
+                                                                name="new_phone_model" id="new_phone_model"
+                                                                data-dropdown-parent="#kt_modal_create_project"
+                                                                aria-label="انتخاب مدل"
+                                                                data-control="select2"
+                                                                data-placeholder="انتخاب مدل"
+                                                                class="form-select form-select-solid form-select-lg fw-bold">
+                                                                <option></option>
+                                                                @foreach($models_first as $model)
+                                                                    <option
+                                                                        value="{{$model->id}}">{{$model->name}}</option>
+                                                                @endforeach
+                                                                <option value="others">سایر</option>
+                                                            </select>
+                                                            <input type='hidden' name='other_model'
+                                                                   id='other_model'>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="my_other_model row mb-6"
+                                                         style="display:none;">
+                                                        <!--begin::Label-->
+                                                        <label class="col-lg-4 col-form-label fw-bold fs-6">مدل
+                                                            گوشی
+                                                            جدید</label>
+                                                        <!--end::Label-->
+                                                        <!--begin::Col-->
+                                                        <div class="col-lg-6 fv-row">
+                                                            <input type="text" name="other_phone_model"
+                                                                   class="disabled-input form-control form-control-lg form-control-solid">
+                                                        </div>
+                                                        <!--end::Col-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end::Input group-->
+                                        </div>
+                                        <!--end::Wrapper-->
+                                    </div>
+                                    <!--end::Step 3-->
+
+                                    <!--begin::Step 4-->
                                     <div class="flex-column" data-kt-stepper-element="content">
                                         <!--begin::Wrapper-->
                                         <div class="w-100">
@@ -880,7 +1136,9 @@
                                                             class="form-select form-select-solid form-select-lg fw-bold">
                                                         <option></option>
                                                         @foreach($fire_commitment_ceilings as $fcc)
-                                                            <option value="{{ $fcc->id }}" @if($mobile_warranty!=null) @if($fcc->id==$mobile_warranty->addition_fire_commitment_id) selected @endif @endif
+                                                            <option value="{{ $fcc->id }}"
+                                                                    @if($mobile_warranty!=null) @if($fcc->id==$mobile_warranty->addition_fire_commitment_id) selected
+                                                                    @endif @endif
                                                                     data-price="{{$fcc->price}}">{{$fcc->addition_price}}</option>
                                                         @endforeach
                                                     </select>
@@ -891,7 +1149,7 @@
                                         </div>
                                         <!--end::Wrapper-->
                                     </div>
-                                    <!--begin::Step 4-->
+                                    <!--end::Step 4-->
                                 </div>
                                 <!--end::Group-->
 
@@ -950,6 +1208,8 @@
     <script src="{{ URL::asset('js/jquery.number.min.js')}}"></script>
     <script src="{{ URL::asset('js/bimeh_add.js')}}"></script>
     <script>
+
+
         $(document).ready(function () {
 
             $('#new_phone_brand').on('change', function () {

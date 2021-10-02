@@ -149,13 +149,16 @@ class MobileWarrantyController extends Controller
         //return $phones;
     }
 
-    public function bimeh_all()
+    public function bimeh_all($status='')
     {
         $warrantyProblemType=null;
         $wallet = Wallet::where('user_id', auth()->id())->first();
 
-        $warranties = Mobile_warranty::where('owner_id', auth()->id())->orderBy('updated_at', 'desc')->get();
-
+        if($status!=''){
+            $warranties = Mobile_warranty::where([['owner_id', auth()->id()],['status_id',$status]])->orderBy('updated_at', 'desc')->get();
+        }else{
+            $warranties = Mobile_warranty::where('owner_id', auth()->id())->orderBy('updated_at', 'desc')->get();
+        }
         foreach ($warranties as $key=>$warranty) {
             $warrantyProblem=WarrantyProblem::query()->where('mobile_warranty_id',$warranty->id)->orderBy('updated_at','desc')->first();
             if($warrantyProblem!=null){

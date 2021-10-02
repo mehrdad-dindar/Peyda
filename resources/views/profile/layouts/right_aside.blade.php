@@ -77,6 +77,45 @@
                         </div>
                         <div class="menu-item">
                             <a @if(auth()->user()->status==1) class="menu-link"
+                                   href="{{ route('bimeh_all',[6]) }}"
+                               @else
+                                class="menu-link disabled-a"
+
+                               @endif >
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">در انتظار تاییدها</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a @if(auth()->user()->status==1) class="menu-link"
+                                   href="{{ route('bimeh_all',[2]) }}"
+                               @else
+                                class="menu-link disabled-a"
+
+                               @endif >
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">تایید شده ها</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a @if(auth()->user()->status==1) class="menu-link"
+                                   href="{{ route('bimeh_all',[7]) }}"
+                               @else
+                                class="menu-link disabled-a"
+
+                               @endif >
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">رد شده ها</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a @if(auth()->user()->status==1) class="menu-link"
                                href="{{ route('receive_create') }}"
                                @else
                                class="menu-link disabled-a"
