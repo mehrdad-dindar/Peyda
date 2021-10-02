@@ -11,7 +11,7 @@ class WarrantyProblemType extends Model
 
     public function warrantyproblems()
     {
-        return $this->belongsTo(WarrantyProblem::class);
+        return $this->hasMany(WarrantyProblem::class);
     }
 
 }

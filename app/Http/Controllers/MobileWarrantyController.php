@@ -14,6 +14,7 @@ use App\Models\Phone_model;
 use App\Models\UserRequest;
 use App\Models\Wallet;
 use App\Models\WarrantyProblem;
+use App\Models\WarrantyProblemType;
 use Carbon\Carbon;
 use Crypt;
 use DateTime;
@@ -155,10 +156,13 @@ class MobileWarrantyController extends Controller
 
         $warranties = Mobile_warranty::where('owner_id', auth()->id())->orderBy('updated_at', 'desc')->get();
 
-        foreach ($warranties as $warranty) {
+        foreach ($warranties as $key=>$warranty) {
             $warrantyProblem=WarrantyProblem::query()->where('mobile_warranty_id',$warranty->id)->orderBy('updated_at','desc')->first();
             if($warrantyProblem!=null){
-                $warrantyProblemType=$warrantyProblem->warranty_problem_type_id;
+                $warranty['problem_price']=$warrantyProblem->price;
+                $warranty['warrantyProblemType']=$warrantyProblem->warranty_problem_type_id;
+                $warrantyproblemtype=WarrantyProblemType::query()->join('warranty_problems as pm','pm.warranty_problem_type_id','warranty_problem_types.id')->where('pm.id',$warrantyProblem->id)->first();
+                $warranty['warrantyProblemTypeName']=$warrantyproblemtype->name;
             }else{
                 $warrantyProblemType=null;
             }
@@ -171,10 +175,10 @@ class MobileWarrantyController extends Controller
             $warranty['phone_name'] = $pb_brand . " / " . $pm_name;
         }
 
+
         return view('profile.bimeh_all')->with([
             'warranties' => $warranties,
             'wallet' => $wallet,
-            'warrantyProblemType'=>$warrantyProblemType
         ]);
     }
 
