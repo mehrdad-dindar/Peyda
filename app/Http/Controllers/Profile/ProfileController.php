@@ -133,9 +133,8 @@ class ProfileController extends Controller
         //dd($request->all());
         $user->f_name = $request['f_name'];
         $user->l_name = $request['l_name'];
-        if ($request['birthday'] != null) {
-            $user->birthday = $request['birthday'];
-        }
+
+        $user->birthday = Carbon::instance($v->datetime());;
 
         $user->melli_code = $request['melli_code'];
         $user->city_id = $request['city_id'];
