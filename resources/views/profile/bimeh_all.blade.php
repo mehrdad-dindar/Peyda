@@ -69,7 +69,7 @@
 
                                 <td>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#kt_modal_{{$row->id}}"
-                                       class="badge badge-{{$row->status->color}}">{{$row->status->text}}</a>
+                                       class="badge badge-{{$row->status->color}}">@if($row->status_id==7) {{$row->warrantyProblemTypeName}} @else {{$row->status->text}} @endif</a>
                                 </td>
                                 <td class="text-end">
                                     @if($row->status->id==4 || $row->status->id==6)
