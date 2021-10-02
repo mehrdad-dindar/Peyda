@@ -33,7 +33,7 @@ class MobileWarrantyRequest extends FormRequest
             'l_name' => ['required_without:l_name_other'],
             'city_id' => ['required_without:city_id_other'],
             'address' => ['required_without:address_other'],
-            'melli_code' => ['required_without:melli_code_other', new melliCode(), 'digits:10'],
+            'melli_code_other' => ['required_without:melli_code', new melliCode(), 'digits:10'],
             'email' => ['nullable', 'email:rfc,dns'],
             'email_other' => ['nullable', 'email:rfc,dns'],
             'postal_code_other' => ['required_if:postal_code,null', new postalCode(), 'digits:10'],

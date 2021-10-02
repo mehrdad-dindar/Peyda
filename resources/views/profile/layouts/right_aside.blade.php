@@ -140,6 +140,20 @@
                                 <span class="menu-title">استفاده از فراگارانتی</span>
                             </a>
                         </div>
+
+                        <div class="menu-item">
+                            <a @if(auth()->user()->status==1) class="menu-link"
+                               href="{{ route('bimeh_bought') }}"
+                               @else
+                               class="menu-link disabled-a"
+
+                                @endif >
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">فراگارانتی های دیگر اشخاص</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
 

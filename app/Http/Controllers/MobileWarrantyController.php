@@ -269,13 +269,9 @@ class MobileWarrantyController extends Controller
             }
         } else {
             $email = User::where('email', $request['email_other'])->first();
-            $phone_num = User::where('phone_num', $request['phone_num_other'])->first();
-            if ($email && $phone_num) {
-                return redirect()->back()->withErrors(['لطفا ایمیل تکراری وارد نکنید!', 'لطفا شماره موبایل تکراری وارد نکنید!']);
-            } elseif ($email && !$phone_num) {
+            //$phone_num = User::where('phone_num', $request['phone_num_other'])->first();
+            if ($email ) {
                 return redirect()->back()->withErrors(['لطفا ایمیل تکراری وارد نکنید!']);
-            } elseif (!$email && $phone_num) {
-                return redirect()->back()->withErrors(['لطفا شماره موبایل تکراری وارد نکنید!']);
             } else {
 
                 $v = $v->setDateTime($request['year_other'], $request['month_other'], $request['day_other'], null, null, null);
@@ -287,27 +283,55 @@ class MobileWarrantyController extends Controller
                 if ($request['year_other'] != null && $request['month_other'] != null && $request['day_other'] != null) {
                     $userBirthday1 = $userBirthday;
                 }
+                $ownerUser=User::query()->where('phone_num',$request['phone_num_other'])->first();
+                $ownerUserEmail=User::query()->where('email',$request['email'])->first();
+                if($ownerUser!=null){
+                    $ownerUser->update([
+                       'f_name' => $request['f_name_other'],
+                       'l_name' => $request['l_name_other'],
+                       'birthday' => $userBirthday1,
+                       'postal_code' => $request['postal_code_other'],
+                       'melli_code' => $request['melli_code_other'],
+                       'city_id' => $request['city_id_other'],
+                       'address' => $request['address_other'],
+                       'email' => $request['email_other'],
+                    ]);
+                }elseif ($ownerUserEmail!=null){
 
-                $ownerUser = User::query()->create([
-                    'f_name' => $request['f_name_other'],
-                    'l_name' => $request['l_name_other'],
-                    'birthday' => $userBirthday1,
-                    'role_id'=>2,
-                    'phone_num'=>$request['phone_num_other'],
-                    'postal_code' => $request['postal_code_other'],
-                    'melli_code' => $request['melli_code_other'],
-                    'city_id' => $request['city_id_other'],
-                    'address' => $request['address_other'],
-                    'email' => $request['email_other'],
-                    'phone_model_id'=>$phone_model_id,
-                    'phone_model_other'=>$other_model
-                ]);
+                    $ownerUserEmail->update([
+                        'f_name' => $request['f_name_other'],
+                        'l_name' => $request['l_name_other'],
+                        'birthday' => $userBirthday1,
+                        'postal_code' => $request['postal_code_other'],
+                        'melli_code' => $request['melli_code_other'],
+                        'city_id' => $request['city_id_other'],
+                        'address' => $request['address_other'],
+                        'email' => $request['email_other'],
+                    ]);
+                }
+                else {
+
+                    $ownerUser = User::query()->create([
+                        'f_name' => $request['f_name_other'],
+                        'l_name' => $request['l_name_other'],
+                        'birthday' => $userBirthday1,
+                        'role_id' => 2,
+                        'phone_num' => $request['phone_num_other'],
+                        'postal_code' => $request['postal_code_other'],
+                        'melli_code' => $request['melli_code_other'],
+                        'city_id' => $request['city_id_other'],
+                        'address' => $request['address_other'],
+                        'email' => $request['email_other'],
+                        'phone_model_id' => $phone_model_id,
+                        'phone_model_other' => $other_model
+                    ]);
+                    Wallet::create([
+                        'user_id' => $ownerUser->id,
+                        'value'=>\Crypt::encryptString('0')
+                    ]);
+                }
                 $owner_id = $ownerUser->id;
 
-                Wallet::create([
-                    'user_id' => $owner_id,
-                    'value'=>\Crypt::encryptString('0')
-                ]);
             }
         }
 
@@ -341,6 +365,44 @@ class MobileWarrantyController extends Controller
         }
     }
 
+    public function bimeh_bought($status = '')
+    {
+
+        $warrantyProblemType = null;
+        $wallet = Wallet::where('user_id', auth()->id())->first();
+
+        if ($status != '') {
+            $warranties = Mobile_warranty::where([['buyer_id', auth()->id()], ['status_id', $status]])->orderBy('updated_at', 'desc')->get();
+        } else {
+            $warranties = Mobile_warranty::where('buyer_id', auth()->id())->orderBy('updated_at', 'desc')->get();
+        }
+        foreach ($warranties as $key => $warranty) {
+            $warrantyProblem = WarrantyProblem::query()->where('mobile_warranty_id', $warranty->id)->orderBy('updated_at', 'desc')->first();
+            if ($warrantyProblem != null) {
+                $warranty['problem_price'] = $warrantyProblem->price;
+                $warranty['warrantyProblemType'] = $warrantyProblem->warranty_problem_type_id;
+                $warrantyproblemtype = WarrantyProblemType::query()->join('warranty_problems as pm', 'pm.warranty_problem_type_id', 'warranty_problem_types.id')->where('pm.id', $warrantyProblem->id)->first();
+                $warranty['warrantyProblemTypeName'] = $warrantyproblemtype->name;
+            } else {
+                $warrantyProblemType = null;
+            }
+            if ($warranty->phone_model_other != null) {
+                $pm_name = $warranty->phone_model_other;
+            } else {
+                $pm_name = $warranty->phone_model->name;
+            }
+            $pb_brand = $warranty->phone_model->phone_brand->name;
+            $warranty['phone_name'] = $pb_brand . " / " . $pm_name;
+        }
+
+
+        return view('profile.bimeh_all')->with([
+            'warranties' => $warranties,
+            'wallet' => $wallet,
+        ]);
+
+    }
+
     public function cart($id = null)
     {
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
@@ -370,26 +432,32 @@ class MobileWarrantyController extends Controller
         $msg = '';
         $warranty = Mobile_warranty::find($id)->first();
 
-        if ($edit = 1) {
-            $images = Helpers::getImageFromDb($warranty->images);
-        } else {
-            $images = null;
+        if($warranty->buyer_id==auth()->id() || $warranty->owner_id==auth()->id()) {
+
+
+            if ($edit = 1) {
+                $images = Helpers::getImageFromDb($warranty->images);
+            } else {
+                $images = null;
+            }
+            $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+            $warranty = Mobile_warranty::find($id)->first();
+            $imgs = ImageField::all();
+            $qrcode = QrCode::size(250)->generate(md5($id . ' __ ' . $warranty->created_at));
+            if ($err != '') {
+                $msg = 'error';
+            }
+            return view('profile.warranty.photo_upload', [
+                'id' => $id,
+                'wallet' => $wallet,
+                'imgs' => $imgs,
+                'qrcode' => $qrcode,
+                'images' => $images,
+                $msg => $err
+            ]);
+        }else{
+            abort(404);
         }
-        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
-        $warranty = Mobile_warranty::find($id)->first();
-        $imgs = ImageField::all();
-        $qrcode = QrCode::size(250)->generate(md5($id . ' __ ' . $warranty->created_at));
-        if ($err != '') {
-            $msg = 'error';
-        }
-        return view('profile.warranty.photo_upload', [
-            'id' => $id,
-            'wallet' => $wallet,
-            'imgs' => $imgs,
-            'qrcode' => $qrcode,
-            'images' => $images,
-            $msg => $err
-        ]);
     }
 
     public function editPhoto($id, $err = '')
