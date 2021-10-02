@@ -1,10 +1,11 @@
 @extends('layouts.master_front')
-@section('title','صفحه نخست')
+@section('title','تماس با ما')
 @section('custom_css')
 @endsection
 @section('content')
     <!-- شوع آن -->
-    <section class="bg-half d-table w-100" style="background: url('{{ URL::asset('front/img/shop/contact.jpg')}}') center center; background-size: cover">
+    <section class="bg-half d-table w-100"
+             style="background: url('{{ URL::asset('front/img/shop/contact.jpg')}}') center center; background-size: cover">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-12 text-center">
@@ -50,10 +51,10 @@
                             <h5 class="fw-bold">تلفن </h5>
                             <p class="text-muted">ساعات پاسخگویی 8 الی 22</p>
                             <a href="#" class="text-primary">۰۲۱-۸۸۵۴۰۱۱۱
-                               </a><br>
+                            </a><br>
                             <a href="#" class="text-primary">
                                 ۰۲۱-۸۸۵۴۰۰۳۴
-                                </a><br>
+                            </a><br>
                             <a href="#" class="text-primary">
 
                                 ۰۲۱-۸۸۵۴۶۵۳۹</a>
@@ -81,8 +82,10 @@
                         </div>
                         <div class="content mt-3">
                             <h5 class="fw-bold">موقعیت </h5>
-                            <p class="text-muted">تجریش خیابان مقدس اردبیلی پلاک 144 مجتمع تجاری میلان طبقه اول تجاری واحد 28 </p>
-                            <a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7915.525673176609!2d46.32542404246615!3d38.06389198146334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzjCsDAzJzUzLjgiTiA0NsKwMTknMzkuNCJF!5e0!3m2!1sen!2s!4v1545664085241" data-type="iframe" class="video-play-icon text-primary lightbox">نمایش در گوگل</a>
+                            <p class="text-muted">تجریش خیابان مقدس اردبیلی پلاک 144 مجتمع تجاری میلان طبقه اول تجاری
+                                واحد 28 </p>
+                            <a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7915.525673176609!2d46.32542404246615!3d38.06389198146334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzjCsDAzJzUzLjgiTiA0NsKwMTknMzkuNCJF!5e0!3m2!1sen!2s!4v1545664085241"
+                               data-type="iframe" class="video-play-icon text-primary lightbox">نمایش در گوگل</a>
                         </div>
                     </div>
                 </div>
@@ -108,55 +111,73 @@
                     <div class="card shadow rounded border-0">
                         <div class="card-body py-5">
                             <h4 class="card-title">در تماس باشید !</h4>
-                            <div class="custom-form mt-3">
-                                <form method="post" name="myForm" onsubmit="return validateForm()">
-                                    <p id="error-msg" class="mb-0"></p>
-                                    <div id="simple-msg"></div>
+                            <div class="mt-3">
+                                <form method="POST" action="{{route('save_contact')}}">
+                                    @csrf
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="mb-3">
-                                                <label class="form-label">نام شما <span class="text-danger">*</span></label>
+                                                <label class="form-label">نام شما <span
+                                                        class="text-danger">*</span></label>
                                                 <div class="form-icon position-relative">
                                                     <i data-feather="user" class="fea icon-sm icons"></i>
-                                                    <input name="name" id="name" type="text" class="form-control ps-5" placeholder="نام :">
+                                                    <input name="name" id="name" type="text" class="form-control ps-5" placeholder="نام و نام خانوادگی :" required>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label class="form-label">ایمیل شما <span class="text-danger">*</span></label>
+                                                <label class="form-label">شماره همراه <span class="text-danger">*</span></label>
+                                                <div class="form-icon position-relative">
+                                                    <i data-feather="phone" class="fea icon-sm icons"></i>
+                                                    <input name="phone_num" id="phone_num" type="text" class="form-control ps-5"
+                                                           required placeholder="0912xxxxxxx">
+                                                </div>
+                                            </div>
+                                        </div><!--end col-->
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">ایمیل شما <span class="text-muted" style="font-size: 8px">( اختیاری)</span></label>
                                                 <div class="form-icon position-relative">
                                                     <i data-feather="mail" class="fea icon-sm icons"></i>
-                                                    <input name="email" id="email" type="email" class="form-control ps-5" placeholder="ایمیل :">
+                                                    <input name="email" id="email" type="email"
+                                                           class="form-control ps-5" placeholder="test@example.com">
                                                 </div>
                                             </div>
                                         </div><!--end col-->
 
                                         <div class="col-12">
                                             <div class="mb-3">
-                                                <label class="form-label">موضوع </label>
+                                                <label class="form-label">موضوع <span
+                                                        class="text-danger">*</span></label>
                                                 <div class="form-icon position-relative">
                                                     <i data-feather="book" class="fea icon-sm icons"></i>
-                                                    <input name="subject" id="subject" class="form-control ps-5" placeholder="موضوع  :">
+                                                    <input name="subject" id="subject" class="form-control ps-5"
+                                                           placeholder="موضوع  :">
                                                 </div>
                                             </div>
                                         </div><!--end col-->
 
                                         <div class="col-12">
                                             <div class="mb-3">
-                                                <label class="form-label">نظرات  <span class="text-danger">*</span></label>
+                                                <label class="form-label">نظرات <span
+                                                        class="text-danger">*</span></label>
                                                 <div class="form-icon position-relative">
-                                                    <i data-feather="message-circle" class="fea icon-sm icons clearfix"></i>
-                                                    <textarea name="comments" id="comments" rows="4" class="form-control ps-5" placeholder="پیام :"></textarea>
+                                                    <i data-feather="message-circle"
+                                                       class="fea icon-sm icons clearfix"></i>
+                                                    <textarea name="comments" id="comments" rows="4"
+                                                              class="form-control ps-5" placeholder="پیام :"></textarea>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    @captcha
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="d-grid">
-                                                <button type="submit" id="submit" name="send" class="btn btn-primary">ارسال پیام</button>
+                                                <input type="submit" class="btn btn-primary" value="ارسال پیام">
                                             </div>
                                         </div><!--end col-->
                                     </div><!--end row-->
@@ -181,9 +202,11 @@
                 <div class="col-12 p-0">
                     <div class="card map border-0">
                         <div class="card-body p-0">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3236.1140039925394!2d51.40919461172771!3d35.79713446652771!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e06162c8a49ff%3A0x8094d5252f917e0!2sMilan%20Shopping%20Center!5e0!3m2!1sen!2s!4v1632903020550!5m2!1sen!2s" width="1200" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3236.1140039925394!2d51.40919461172771!3d35.79713446652771!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e06162c8a49ff%3A0x8094d5252f917e0!2sMilan%20Shopping%20Center!5e0!3m2!1sen!2s!4v1632903020550!5m2!1sen!2s"
+                                width="1200" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
-                          {{--  <iframe src="" style="border:0" allowfullscreen></iframe>--}}
+                            {{--  <iframe src="" style="border:0" allowfullscreen></iframe>--}}
                         </div>
                     </div>
                 </div><!--end col-->

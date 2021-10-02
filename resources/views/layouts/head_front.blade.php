@@ -1,5 +1,5 @@
 <meta charset="utf-8"/>
-<title>@yield('title')</title>
+<title>پیدا سرویس ماندگار | @yield('title')</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {{-- TODO change metas --}}
 <meta name="description" content="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"/>

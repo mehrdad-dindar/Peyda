@@ -51,12 +51,12 @@
                             </a>
                         </div>
                         <div class="menu-item me-lg-1">
-                            <a class="menu-link py-3" href="#">
+                            <a class="menu-link py-3" href="{{route('about_us')}}">
                                 <span class="menu-title">درباره ما</span>
                             </a>
                         </div>
                         <div class="menu-item me-lg-1">
-                            <a class="menu-link py-3" href="#">
+                            <a class="menu-link py-3" href="{{route('our_services')}}">
                                 <span class="menu-title">فراگارانتی</span>
                             </a>
                         </div>
@@ -72,16 +72,18 @@
                                      data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
 														<span class="menu-link py-3">
 															<span class="menu-icon">
-																<i class="bi bi-archive fs-3"></i>
+																<i class="bi bi-sticky fs-3"></i>
 															</span>
 															<span class="menu-title">بیمه آتش‌سوزی</span>
+                                                            <span
+                                                                class="badge bg-primary ms-2">به زودی</span>
 														</span>
                                 </div>
                                 <div data-kt-menu-trigger="{default:'click', lg: 'hover'}"
                                      data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
 														<span class="menu-link py-3">
 															<span class="menu-icon">
-																<i class="bi bi-person fs-2"></i>
+																<i class="bi bi-sticky fs-2"></i>
 															</span>
 															<span class="menu-title">بیمه زلزله</span>
                                                             <span
@@ -100,20 +102,32 @@
 														</span>
 
                                 </div>
+                                <div data-kt-menu-trigger="{default:'click', lg: 'hover'}"
+                                     data-kt-menu-placement="right-start" class="menu-item menu-lg-down-accordion">
+														<span class="menu-link py-3">
+															<span class="menu-icon">
+																<i class="bi bi-sticky fs-3"></i>
+															</span>
+															<span class="menu-title">هر ایرانی یک وکیل</span>
+                                                            <span
+                                                                class="badge bg-primary ms-2">به زودی</span>
+														</span>
+
+                                </div>
                             </div>
                         </div>
                         <div class="menu-item me-lg-1">
-                            <a class="menu-link py-3" href="#">
+                            <a class="menu-link py-3" href="{{route('shop')}}">
                                 <span class="menu-title">فروشگاه محصولات</span>
                             </a>
                         </div>
                         <div class="menu-item me-lg-1">
-                            <a class="menu-link py-3" href="#">
+                            <a class="menu-link py-3" href="{{route('archive_blog')}}">
                                 <span class="menu-title">اخبار و مقالات</span>
                             </a>
                         </div>
                         <div class="menu-item me-lg-1">
-                            <a class="menu-link py-3" href="#">
+                            <a class="menu-link py-3" href="{{route('contact_us')}}">
                                 <span class="menu-title">تماس با ما</span>
                             </a>
                         </div>

@@ -177,6 +177,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Shetabit\Payment\Provider\PaymentServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+        AlbertCht\InvisibleReCaptcha\InvisibleReCaptchaServiceProvider::class,
 
     ],
 
