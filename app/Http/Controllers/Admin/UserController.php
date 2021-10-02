@@ -20,13 +20,35 @@ class UserController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index($status='')
     {
         /*$users = User::query()->leftJoin('user_notifications as un', 'users.id','=','un.receiver_id')
             ->leftJoin('notifications as n','n.id','=','un.notification_id')->where([['users.id', '!=',auth()->user()->id],['users.user_type','!=','admin']])->groupBy('users.id')->get(['users.*','n.sender_id']);*/
 
-        $users=User::query()->where('role_id','!=',1)->orderBy('id','desc')->get();
+        if($status!=null) {
+            if ($status == 1) {
+                $users = User::query()->where([['role_id', '!=', 1], ['status',1]])->orderBy('id', 'desc')->get();
+            }elseif($status==0){
+                $users = User::query()->where([['role_id', '!=', 1], ['status',0]])->orderBy('id', 'desc')->get();
+            }else{
+                $users = User::query()->where([['role_id', '!=', 1], ['status',0]])->orderBy('id', 'desc')->get();
+                $users=$this->userNewRequestCheck($users,0);
+            }
+        }else {
+            $users = User::query()->where('role_id', '!=', 1)->orderBy('id', 'desc')->get();
+            $users=$this->userNewRequestCheck($users);
+        }
 
+
+        /*$users=User::find(2);
+        dd($users=$users->userrequests->toArray());*/
+
+        return view('dashboard.users.all', compact(['users']));
+        //return $usersAuth;
+    }
+
+    public function userNewRequestCheck($users,$taeed=1)
+    {
         foreach ($users as $key=>$user) {
             $userrequest = $user->userrequests()->first();
             if ($userrequest != null) {
@@ -36,9 +58,9 @@ class UserController extends Controller
                 if ($userrequest_update->lte($user_update)) {
                     if ($userrequest->done == 0) {
                         $users[$key]['new'] = 1;
+
                     } else {
                         $users[$key]['new'] = 0;
-
                     }
                 } else {
                     $users[$key]['new'] = 0;
@@ -46,12 +68,8 @@ class UserController extends Controller
             }
         }
 
+        return $users;
 
-        /*$users=User::find(2);
-        dd($users=$users->userrequests->toArray());*/
-
-        return view('dashboard.users.all', compact(['users']));
-        //return $usersAuth;
     }
 
     /**

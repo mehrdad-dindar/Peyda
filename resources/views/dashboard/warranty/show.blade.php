@@ -82,10 +82,10 @@
                                         <div class="form-group">
                                             <div class="checkbox d-inline">
                                                 <h3 name="h3_user_name" class="card-title">بازه قیمت</h3>
-                                                <select name="commitment_ceilings" class="select2 form-control">
+                                                <select id="commitment_ceilings" onchange="selectOnChange(this.options[this.selectedIndex].getAttribute('data-price'),{{$warranty->Commitment_ceiling->price}})" name="commitment_ceilings" class="select2 form-control">
                                                     @foreach($commitment_ceilings as $commitment_ceiling)
-                                                        <option value="{{$commitment_ceiling->id}}"
-                                                                @if($commitment_ceiling->id==$warranty['commitment_ceiling_id']) selected @endif>{{$commitment_ceiling->price_range}}</option>
+                                                        <option data-price="{{$commitment_ceiling->price}}" value="{{$commitment_ceiling->id}}"
+                                                                @if($commitment_ceiling->id==$warranty['commitment_ceiling_id']) selected @endif>{{$commitment_ceiling->price_range. ' - '. number_format($commitment_ceiling->price)}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -126,6 +126,16 @@
 
                                     </div>
                                 </div>
+
+                                <h4> هزینه پرداخت شده توسط کاربر </h4>
+                                <h6>هزینه فراگارانتی + ۹٪ ارزش افزوده: {{number_format($warranty->Commitment_ceiling->price + (9*$warranty->Commitment_ceiling->price)/100) . ' تومان '}}</h6>
+                                @if($warranty->addition_fire_commitment_id != null)
+                                    <h6>هزینه بیمه آتش سوزی + ۹٪ ارزش افزوده: {{number_format($warranty->Fire_commitment_ceiling->price + (9*$warranty->Fire_commitment_ceiling->price)/100) . ' تومان '}}</h6>
+                                @endif
+
+                                <h6>هزینه کل: @if($warranty->addition_fire_commitment_id != null)
+                                        {{number_format($warranty->Fire_commitment_ceiling->price + (9*$warranty->Fire_commitment_ceiling->price)/100 + $warranty->Commitment_ceiling->price + (9*$warranty->Commitment_ceiling->price)/100) . ' تومان '}}@else {{number_format($warranty->Commitment_ceiling->price + (9*$warranty->Commitment_ceiling->price)/100) . ' تومان '}} @endif</h6>
+
                             </div>
                         </div>
                     </div>
@@ -154,7 +164,7 @@
                                     <div id="hidden_div_1" class="col-12 mb-30">
                                         <h4 class="card-title mb-2">مقدار بدهی</h4>
                                         <input type="number" class="form-control"
-                                               name="bedehi_price" id="simpleMdeExample">
+                                               name="bedehi_price" id="bedehi_price">
                                         <h4 class="card-title mb-2">توضیحات</h4>
                                         <textarea class="form-control"
                                                   name="descriptions_1" rows="10"></textarea>
@@ -162,7 +172,7 @@
                                     <div id="hidden_div_2" class="col-12 mb-30">
                                         <h4 class="card-title mb-2">مقدار طلب</h4>
                                         <input type="number" class="form-control"
-                                                  name="talab_price" id="simpleMdeExample">
+                                                  name="talab_price" id="talab_price" value="">
                                         <h4 class="card-title mb-2">توضیحات</h4>
                                         <textarea class="form-control"
                                                   name="descriptions_2" id="simpleMdeExample" rows="10"></textarea>
@@ -240,6 +250,13 @@
     <script src="{{URL::asset('admin/js/default-assets/modaleffects.js')}}"></script>
     <script src="{{URL::asset('admin/js/default-assets/modal-classes.js')}}"></script>
     <script>
+
+
+        function selectOnChange(select,minus){
+            document.getElementById('talab_price').value=select-minus-9*(select-minus)/100;
+            document.getElementById('bedehi_price').value=select-minus+9*(select-minus)/100;
+        }
+
         function showDiv(select) {
 
             //document.getElementById('hidden_div').style.display = "block";

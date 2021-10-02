@@ -246,7 +246,7 @@ class WarrantyController extends Controller
             WarrantyProblem::query()->create([
                 'mobile_warranty_id'=>$warranty_id,
                 'warranty_problem_type_id'=>$status,
-                'price'=>$request['bedehi_price']
+                'price'=>abs($request['bedehi_price'])
             ]);
             $done = 0;
         }else{
@@ -257,7 +257,7 @@ class WarrantyController extends Controller
             WarrantyProblem::query()->create([
                 'mobile_warranty_id'=>$warranty_id,
                 'warranty_problem_type_id'=>$status,
-                'price'=>$request['talab_price']
+                'price'=>abs($request['talab_price'])
             ]);
             $done = 0;
         }
