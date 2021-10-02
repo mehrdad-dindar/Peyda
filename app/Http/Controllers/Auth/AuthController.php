@@ -153,7 +153,7 @@ class AuthController extends Controller
         auth()->logout();
         /*session()->forget('user_id');
         session()->forget('phone_num');*/
-        return redirect()->back();
+        return redirect()->route('index');
     }
 
 }
