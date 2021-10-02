@@ -24,7 +24,8 @@ class SubscriberController extends Controller
         }
         $subscriber->email = $request->email;
         $subscriber->save();
-        return redirect('/')->with('success');
+        /* TODO Send Tanks Email */
+        return redirect()->back()->with(['success'=>'عضویت شما در خبرنامه پیدا سرویس ثبت شد !']);
 
     }
 }

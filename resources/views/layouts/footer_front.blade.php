@@ -143,33 +143,35 @@
 <!-- Back to top -->
 {{--{{ dd($success) }}--}}
 @if (session('success'))
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-    <div id="SuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header bg-success text-white">
-            <strong class="me-auto">خبرنامه</strong>
-            <small>الآن</small>
-            <button type="button" class="btn-close text-white" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body">
-            عضویت شما در خبرنامه پیدا سرویس ثبت شد !
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="SuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true"
+             data-bs-autohide="false">
+            <div class="toast-header bg-success text-white">
+                <strong class="me-auto"><i class="uil uil-check-circle h4"></i></strong>
+                <small>الآن</small>
+                <button type="button" class="btn-close text-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                {{session('success')}}
+            </div>
         </div>
     </div>
-</div>
 @endif
 @if ($errors->any())
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 12">
-        <div id="ErrorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="10000">
+        <div id="ErrorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="8000"
+             data-bs-autohide="false">
             <div class="toast-header bg-danger text-white">
                 <strong class="me-auto">خبرنامه</strong>
                 <small>الآن</small>
                 <button type="button" class="btn-close text-white" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
             <div class="toast-body">
-                <ul>
+                <ol>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
-                </ul>
+                </ol>
             </div>
         </div>
     </div>
@@ -228,13 +230,15 @@
         ev.preventDefault();
         windowScroll();
     })
-
+    @if (session('success'))
     var toastSuccess = document.getElementById('SuccessToast')
     var toastSucc = new bootstrap.Toast(toastSuccess)
     toastSucc.show()
-
+    @endif
+    @if ($errors->any())
     var toastError = document.getElementById('ErrorToast')
     var toastErr = new bootstrap.Toast(toastError)
     toastErr.show()
+    @endif
 </script>
 @yield('custom_js')

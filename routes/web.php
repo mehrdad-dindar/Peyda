@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\WarrantyController;
 use \App\Http\Controllers\Admin\AdminNotificationController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MobileWarrantyController;
 use \App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\SubscriberController;
@@ -270,6 +271,5 @@ Route::get('/blog',function (){
     return view('pages.blog');
 });
 /*contact_us*/
-Route::get('/contact_us',function (){
-    return view('pages.contact_us');
-})->name('contact_us');
+Route::get('/contact_us',[ContactController::class, 'index'])->name('contact_us');
+Route::post('/contact_us',[ContactController::class, 'save'])->name('save_contact');
