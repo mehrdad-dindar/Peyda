@@ -8,8 +8,18 @@
         <div class="card">
             <!--begin::Card body-->
             <div class="card-body p-0">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+            @endif
                 <!--begin::Heading-->
                 <div class="card-px text-center py-20 my-10">
+
                     <!--begin::Title-->
                     <h2 class="fs-2x fw-bolder mb-10">فراگارانتی </h2>
                     <!--end::Title-->
@@ -1024,19 +1034,19 @@
                                                         <div class="col-md-12">
                                                             <div class="mb-10">
                                                                 <label class="required form-label">شماره تلفن همراه</label>
-                                                                <input type="text" name="phone_num" class="form-control">
+                                                                <input type="text" name="phone_num_other" class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="mb-10">
                                                                 <label class="required form-label">نام</label>
-                                                                <input type="text" name="f_name" class="form-control">
+                                                                <input type="text" name="f_name_other" class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="mb-10">
                                                                 <label class="required form-label">نام خانوادگی</label>
-                                                                <input type="text" name="l_name" class="form-control" >
+                                                                <input type="text" name="l_name_other" class="form-control" >
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1046,17 +1056,17 @@
                                                                 <label class="required form-label">تاریخ تولد</label>
                                                                 <div class="input-group row m-0 p-0">
                                                                     <div class="form-floating col-4">
-                                                                        <input type="text" name="day" id="day" aria-label="First name"
+                                                                        <input type="text" name="day_other" id="day" aria-label="First name"
                                                                                class="form-control form-control-solid">
                                                                         <label for="day">روز</label>
                                                                     </div>
                                                                     <div class="form-floating col-4">
-                                                                        <input type="text" name="month" id="month" aria-label="First name"
+                                                                        <input type="text" name="month_other" id="month" aria-label="First name"
                                                                                class="form-control form-control-solid">
                                                                         <label for="month">ماه</label>
                                                                     </div>
                                                                     <div class="form-floating col-4">
-                                                                        <input type="text" name="year" id="year" aria-label=""
+                                                                        <input type="text" name="year_other" id="year" aria-label=""
                                                                                class="form-control form-control-solid">
                                                                         <label for="year">سال</label>
                                                                     </div>
@@ -1068,13 +1078,13 @@
                                                         <div class="col-md-6">
                                                             <div class="mb-10">
                                                                 <label class="required form-label">کدملی</label>
-                                                                <input type="text" name="melli_code" class="form-control" placeholder="">
+                                                                <input type="text" name="melli_code_other" class="form-control" placeholder="">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="mb-10">
                                                                 <label class="form-label">ایمیل</label>
-                                                                <input type="text" name="email" class="form-control" placeholder="">
+                                                                <input type="text" name="email_other" class="form-control" placeholder="">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1082,13 +1092,13 @@
                                                         <div class="col-md-6">
                                                             <div class="mb-10">
                                                                 <label class="required form-label">کدپستی</label>
-                                                                <input type="text" name="postal_code" class="form-control" placeholder="">
+                                                                <input type="text" name="postal_code_other" class="form-control" placeholder="">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="mb-10">
                                                                 <label class="required form-label">استان</label>
-                                                                <select name="city_id" id="city_id" aria-label="Select a city"
+                                                                <select name="city_id_other" id="city_id" aria-label="Select a city"
                                                                         data-control="select2"
                                                                         data-placeholder="استان محل سکونت خود را انتخاب کنید"
                                                                         class="disabled-input @error('city_id') is-invalid @enderror form-select form-select-solid form-select-lg fw-bold">
@@ -1104,7 +1114,7 @@
                                                             <div class="mb-10">
                                                                 <label class="required form-label">آدرس</label>
                                                                 <div class="col-lg-12 fv-row">
-                                                                    <input type="text" name="address"
+                                                                    <input type="text" name="address_other"
                                                                            class="disabled-input @error('address') is-invalid @enderror form-control form-control-lg form-control-solid">
                                                                 </div>
                                                             </div>

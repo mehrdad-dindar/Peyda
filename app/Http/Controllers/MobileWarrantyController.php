@@ -50,7 +50,7 @@ class MobileWarrantyController extends Controller
         }
     }
 
-    public function edit(Request $request,$id)
+    public function edit(Request $request, $id)
     {
 
         //dd($request->all());
@@ -82,14 +82,14 @@ class MobileWarrantyController extends Controller
         }
 
         if ($request['warranty_type'] != null && $request['price_range'] != null) {
-            $data = Mobile_warranty::query()->where('id',$id)->update([
+            $data = Mobile_warranty::query()->where('id', $id)->update([
                 'phone_model_id' => $phone_model_id,
                 'phone_model_other' => $other_model,
                 'commitment_ceiling_id' => $request['price_range'],
                 'status_id' => 7,
                 'addition_fire_commitment_id' => $request['fire_addition_price'],
             ]);
-            $data=Mobile_warranty::find($id);
+            $data = Mobile_warranty::find($id);
 
             if ($data->addition_fire_commitment_id != null) {
                 $data->tax = ($data->Fire_commitment_ceiling->price + $data->Commitment_ceiling->price) * (9 / 100);
@@ -100,28 +100,28 @@ class MobileWarrantyController extends Controller
             }
             //$mobile_images=Helpers::getImageFromDb($data->images);
 
-            return $this->uploadPhoto($id,1);
+            return $this->uploadPhoto($id, 1);
         } else {
             $this->bimeh_add('لطفا همه فیلدها را با دقت پرکنید.');
         }
     }
 
-    public function bimeh_add($editId=0,$error = '')
+    public function bimeh_add($editId = 0, $error = '')
     {
-        $mobile_warranty='';
+        $mobile_warranty = '';
 
         $cities = city::all();
         $phone_brand_first = Phone_brand::query()->first();
         $phone_model_first = Phone_model::query()->where('phone_brand_id', '=', $phone_brand_first->id)->get();
-        if($editId!=0){
-            $mobile_warranty=Mobile_warranty::find($editId);
-            if($mobile_warranty!=null) {
-                if( $mobile_warranty->owner_id!=auth()->user()->id) {
+        if ($editId != 0) {
+            $mobile_warranty = Mobile_warranty::find($editId);
+            if ($mobile_warranty != null) {
+                if ($mobile_warranty->owner_id != auth()->user()->id) {
                     $mobile_warranty = null;
-                }else{
+                } else {
                     $phone_model_first = Phone_model::query()->where('phone_brand_id', '=', $mobile_warranty->phone_model->phone_brand->id)->get();
                 }
-            }else{
+            } else {
                 abort(404);
             }
         }
@@ -141,7 +141,7 @@ class MobileWarrantyController extends Controller
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
 
         return view('profile.bimeh_add')
-            ->with('cities',$cities)
+            ->with('cities', $cities)
             ->with('myPhoneName', $myPhoneDisplay)
             ->with('brands', $brands)
             ->with('models_first', $phone_model_first)
@@ -149,29 +149,29 @@ class MobileWarrantyController extends Controller
             ->with('fire_commitment_ceilings', $fire_commitment_ceilings)
             ->with('wallet', $wallet)
             ->with('error', $error)
-            ->with('mobile_warranty',$mobile_warranty);
+            ->with('mobile_warranty', $mobile_warranty);
         //return $phones;
     }
 
-    public function bimeh_all($status='')
+    public function bimeh_all($status = '')
     {
-        $warrantyProblemType=null;
+        $warrantyProblemType = null;
         $wallet = Wallet::where('user_id', auth()->id())->first();
 
-        if($status!=''){
-            $warranties = Mobile_warranty::where([['owner_id', auth()->id()],['status_id',$status]])->orderBy('updated_at', 'desc')->get();
-        }else{
+        if ($status != '') {
+            $warranties = Mobile_warranty::where([['owner_id', auth()->id()], ['status_id', $status]])->orderBy('updated_at', 'desc')->get();
+        } else {
             $warranties = Mobile_warranty::where('owner_id', auth()->id())->orderBy('updated_at', 'desc')->get();
         }
-        foreach ($warranties as $key=>$warranty) {
-            $warrantyProblem=WarrantyProblem::query()->where('mobile_warranty_id',$warranty->id)->orderBy('updated_at','desc')->first();
-            if($warrantyProblem!=null){
-                $warranty['problem_price']=$warrantyProblem->price;
-                $warranty['warrantyProblemType']=$warrantyProblem->warranty_problem_type_id;
-                $warrantyproblemtype=WarrantyProblemType::query()->join('warranty_problems as pm','pm.warranty_problem_type_id','warranty_problem_types.id')->where('pm.id',$warrantyProblem->id)->first();
-                $warranty['warrantyProblemTypeName']=$warrantyproblemtype->name;
-            }else{
-                $warrantyProblemType=null;
+        foreach ($warranties as $key => $warranty) {
+            $warrantyProblem = WarrantyProblem::query()->where('mobile_warranty_id', $warranty->id)->orderBy('updated_at', 'desc')->first();
+            if ($warrantyProblem != null) {
+                $warranty['problem_price'] = $warrantyProblem->price;
+                $warranty['warrantyProblemType'] = $warrantyProblem->warranty_problem_type_id;
+                $warrantyproblemtype = WarrantyProblemType::query()->join('warranty_problems as pm', 'pm.warranty_problem_type_id', 'warranty_problem_types.id')->where('pm.id', $warrantyProblem->id)->first();
+                $warranty['warrantyProblemTypeName'] = $warrantyproblemtype->name;
+            } else {
+                $warrantyProblemType = null;
             }
             if ($warranty->phone_model_other != null) {
                 $pm_name = $warranty->phone_model_other;
@@ -198,8 +198,9 @@ class MobileWarrantyController extends Controller
         ]);
     }
 
-    public function save(Request $request)
+    public function save(MobileWarrantyRequest $request)
     {
+        $owner_id = auth()->id();
         $other_model = null;
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
 
@@ -238,42 +239,82 @@ class MobileWarrantyController extends Controller
         }
         $v = verta();
 
-        $v = $v->setDateTime($request['year'], $request['month'], $request['day'], null,null,null);
-        if($request['warranty_owner']==1){
-            $user = auth()->user();
-            $user->f_name = $request['f_name'];
-            $user->l_name = $request['l_name'];
-            $userBirthday=Carbon::instance($v->datetime());
+        //dd($request['warranty_owner']);
+        if ($request['warranty_owner'] == 1) {
 
-            if($request['year']!=null && $request['month']!=null && $request['day']!=null)  {
-                $user->birthday = $userBirthday;
+            $email = User::where('email', $request['email'])->first();
+            if ($email) {
+                return redirect()
+                    ->back()
+                    ->withErrors(['لطفا ایمیل تکراری وارد نکنید.']);
+            } else {
+
+
+                $v = $v->setDateTime($request['year'], $request['month'], $request['day'], null, null, null);
+                $user = auth()->user();
+                $user->f_name = $request['f_name'];
+                $user->l_name = $request['l_name'];
+                $userBirthday = Carbon::instance($v->datetime());
+
+                if ($request['year'] != null && $request['month'] != null && $request['day'] != null) {
+                    $user->birthday = $userBirthday;
+                }
+
+                $user->melli_code = $request['melli_code'];
+                $user->city_id = $request['city_id'];
+                $user->address = $request['address'];
+                $user->email = $request['email'];
+                $user->postal_code = $request['postal_code'];
+                $user->save();
             }
+        } else {
+            $email = User::where('email', $request['email_other'])->first();
+            $phone_num = User::where('phone_num', $request['phone_num_other'])->first();
+            if ($email && $phone_num) {
+                return redirect()->back()->withErrors(['لطفا ایمیل تکراری وارد نکنید!', 'لطفا شماره موبایل تکراری وارد نکنید!']);
+            } elseif ($email && !$phone_num) {
+                return redirect()->back()->withErrors(['لطفا ایمیل تکراری وارد نکنید!']);
+            } elseif (!$email && $phone_num) {
+                return redirect()->back()->withErrors(['لطفا شماره موبایل تکراری وارد نکنید!']);
+            } else {
 
-            $user->melli_code = $request['melli_code'];
-            $user->city_id = $request['city_id'];
-            $user->address = $request['address'];
-            $user->email = $request['email'];
-            $user->postal_code = $request['postal_code'];
-            $user->save();
-        }else{
+                $v = $v->setDateTime($request['year_other'], $request['month_other'], $request['day_other'], null, null, null);
 
-            $userBirthday=Carbon::instance($v->datetime());
+                $userBirthday1 = null;
+                $userBirthday = Carbon::instance($v->datetime());
 
-            User::query()->create([
-                'f_name'=>$request['f_name'],
-                'l_name'=>$request['l_name'],
-                'birthday'=>$userBirthday,
-                'postal_code'=>$request['postal_code'],
-                'melli_code'=>$request['melli_code'],
-                'city_id'=>$request['city_id'],
-                'address'=>$request['address'],
-                'email'=>$request['email'],
-            ]);
+
+                if ($request['year_other'] != null && $request['month_other'] != null && $request['day_other'] != null) {
+                    $userBirthday1 = $userBirthday;
+                }
+
+                $ownerUser = User::query()->create([
+                    'f_name' => $request['f_name_other'],
+                    'l_name' => $request['l_name_other'],
+                    'birthday' => $userBirthday1,
+                    'role_id'=>2,
+                    'phone_num'=>$request['phone_num_other'],
+                    'postal_code' => $request['postal_code_other'],
+                    'melli_code' => $request['melli_code_other'],
+                    'city_id' => $request['city_id_other'],
+                    'address' => $request['address_other'],
+                    'email' => $request['email_other'],
+                    'phone_model_id'=>$phone_model_id,
+                    'phone_model_other'=>$other_model
+                ]);
+                $owner_id = $ownerUser->id;
+
+                Wallet::create([
+                    'user_id' => $owner_id,
+                    'value'=>\Crypt::encryptString('0')
+                ]);
+            }
         }
 
         if ($request['warranty_type'] != null && $request['price_range'] != null) {
             $data = Mobile_warranty::create([
-                'owner_id' => $request['owner_id'],
+                'buyer_id' => auth()->id(),
+                'owner_id' => $owner_id,
                 'phone_model_id' => $phone_model_id,
                 'phone_model_other' => $other_model,
                 'expiry_date' => null,
@@ -294,7 +335,7 @@ class MobileWarrantyController extends Controller
                 $data->save();
             }
 
-            return $this->cart();
+            return $this->cart($data->id);
         } else {
             $this->bimeh_add('لطفا همه فیلدها را با دقت پرکنید.');
         }
@@ -303,11 +344,9 @@ class MobileWarrantyController extends Controller
     public function cart($id = null)
     {
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
-        if ($id == null) {
-            $invoice = Mobile_warranty::where('owner_id', auth()->user()->id)->orderBy('updated_at', 'desc')->first();
-        } else {
-            $invoice = Mobile_warranty::find($id);
-        }
+
+        $invoice = Mobile_warranty::find($id);
+
 
         if ($invoice->phone_model_other != null) {
             $modelName = $invoice->phone_model_other;
@@ -322,18 +361,19 @@ class MobileWarrantyController extends Controller
             ->with([
                 'invoice' => $invoice,
                 'wallet' => $wallet,
+                'user'=>$invoice->User
             ]);
     }
 
-    public function uploadPhoto($id, $edit=0,$err = '')
+    public function uploadPhoto($id, $edit = 0, $err = '')
     {
         $msg = '';
         $warranty = Mobile_warranty::find($id)->first();
 
-        if($edit=1){
-            $images=Helpers::getImageFromDb($warranty->images);
-        }else{
-            $images=null;
+        if ($edit = 1) {
+            $images = Helpers::getImageFromDb($warranty->images);
+        } else {
+            $images = null;
         }
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         $warranty = Mobile_warranty::find($id)->first();
@@ -347,16 +387,16 @@ class MobileWarrantyController extends Controller
             'wallet' => $wallet,
             'imgs' => $imgs,
             'qrcode' => $qrcode,
-            'images'=>$images,
+            'images' => $images,
             $msg => $err
         ]);
     }
 
-    public function editPhoto($id,$err = '')
+    public function editPhoto($id, $err = '')
     {
-        $msg='';
+        $msg = '';
         $warranty = Mobile_warranty::find($id)->first();
-        $images=Helpers::getImageFromDb($warranty->images);
+        $images = Helpers::getImageFromDb($warranty->images);
         $qrcode = QrCode::size(250)->generate(md5($id . ' __ ' . $warranty->created_at));
 
         $imgs = ImageField::all();
@@ -366,14 +406,14 @@ class MobileWarrantyController extends Controller
             $msg = 'error';
         }
 
-        return view('profile.warranty.photo_upload_edit',['images'=>$images,'imgs'=>$imgs,
+        return view('profile.warranty.photo_upload_edit', ['images' => $images, 'imgs' => $imgs,
             'qrcode' => $qrcode,
             'id' => $id,
-            $msg=>$err,
-            'wallet'=>$wallet]);
+            $msg => $err,
+            'wallet' => $wallet]);
     }
 
-    public function insertPhotos(Request $request, $id,$edit=0)
+    public function insertPhotos(Request $request, $id, $edit = 0)
     {
         //dd($request->all());
         //$i=0;
@@ -381,9 +421,9 @@ class MobileWarrantyController extends Controller
         $imageFields = ImageField::all();
         $key = 0;
 
-        if($edit==0) {
+        if ($edit == 0) {
 
-            if (sizeof($request->toArray()) - (2*sizeof($imageFields)+1) == 7) {
+            if (sizeof($request->toArray()) - (2 * sizeof($imageFields) + 1) == 7) {
                 //dd('2');
                 //$i++;
                 foreach ($imageFields as $row) {
@@ -432,7 +472,7 @@ class MobileWarrantyController extends Controller
             return redirect(route('bimeh_all'))->with(['success' => 'عکس های موبایل با موفقیت آپلود شد.']);
 
         } else {
-            return $this->uploadPhoto($id, 0,'لطفا همه عکس ها رو آپلود کنید!');
+            return $this->uploadPhoto($id, 0, 'لطفا همه عکس ها رو آپلود کنید!');
         }
 
     }
@@ -443,7 +483,7 @@ class MobileWarrantyController extends Controller
         $imageFields = ImageField::all();
         $key = 0;
 
-        if (sizeof($request->toArray()) - (2*sizeof($imageFields)+1) >= 0 && sizeof($request->toArray()) - (2*sizeof($imageFields)+1) <= 14 ) {
+        if (sizeof($request->toArray()) - (2 * sizeof($imageFields) + 1) >= 0 && sizeof($request->toArray()) - (2 * sizeof($imageFields) + 1) <= 14) {
             //$i++;
             //dd($i);
             //dd('inja');
@@ -459,9 +499,9 @@ class MobileWarrantyController extends Controller
                     $prefix = ',';
                     $key++;
 
-                }else{
-                    $file_pic = MobileImage::find(str_replace('hidden_','',$request['hidden_'.$row->html_id]));
-                    if($file_pic!=null){
+                } else {
+                    $file_pic = MobileImage::find(str_replace('hidden_', '', $request['hidden_' . $row->html_id]));
+                    if ($file_pic != null) {
 
                         $imageList .= $prefix . $file_pic->id;
                         $prefix = ',';
@@ -496,7 +536,7 @@ class MobileWarrantyController extends Controller
             return redirect(route('bimeh_all'))->with(['success' => 'عکس های موبایل با موفقیت آپلود شد.']);
 
         } else {
-            return $this->editPhoto($id,'لطفا همه عکس ها رو آپلود کنید!');
+            return $this->editPhoto($id, 'لطفا همه عکس ها رو آپلود کنید!');
         }
 
     }

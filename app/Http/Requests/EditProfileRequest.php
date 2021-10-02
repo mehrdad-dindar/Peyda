@@ -37,10 +37,9 @@ class EditProfileRequest extends FormRequest
             'phone_model_id'=>['required'],
             'email'=>['nullable','email:rfc,dns'],
             'postal_code' => ['nullable',new postalCode(),'digits:10'],
-            'day'=>['required','integer','between:1,31'],
-            'month'=>['required','integer','between:1,12'],
-            'year'=>['required','integer','between:1310,'.$verta],
-            'price_range'=>['required']
+            'day' => ['nullable', 'integer', 'between:1,31'],
+            'month' => ['nullable', 'integer', 'between:1,12'],
+            'year' => ['nullable', 'integer', 'between:1310,' . $verta],
         ];
 
         if(User::find(auth()->user()->id)->avatar==null){

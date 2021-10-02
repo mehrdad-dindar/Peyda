@@ -25,6 +25,7 @@
                             <li><a href="{{ route('acceptedIndex') }}"><span>تایید شده ها</span>@if(sizeof(\App\Http\Controllers\Controller::getAcceptedWarranties())>0)<span class="badge badge-pill badge-danger" style="display: inline;width: max-content;flex: unset;">{{sizeof(\App\Http\Controllers\Controller::getAcceptedWarranties())}}</span>@endif</a></li>
                             <li><a href="{{ route('incompleteIndex') }}"><span>ناقص ها</span>@if(sizeof(\App\Http\Controllers\Controller::getIncompleteWarranties())>0)<span class="badge badge-pill badge-danger" style="display: inline;width: max-content;flex: unset;">{{sizeof(\App\Http\Controllers\Controller::getIncompleteWarranties())}}</span>@endif</a></li>
                             <li><a href="{{ route('dashboard') }}/warranties/use"><span>استفاده</span>@if(\App\Http\Controllers\Controller::getUsesWarraties()>0)<span class="badge badge-pill badge-danger" style="display: inline;width: max-content;flex: unset;">{{\App\Http\Controllers\Controller::getUsesWarraties()}}</span>@endif</a></li>
+                            <li><a href="{{ route('dashboard') }}/warranties">فراگارانتی های خریداری شده</a></li>
                             <li><a href="project-details.html">استعلام</a></li>
                         </ul>
                     </li>

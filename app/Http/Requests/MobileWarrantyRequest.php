@@ -29,17 +29,19 @@ class MobileWarrantyRequest extends FormRequest
         $verta = Verta::now()->format('Y');
 
         return [
-            'f_name' => ['required'],
-            'l_name' => ['required'],
-            'day' => ['nullable', 'integer', 'between:1,31'],
-            'city_id' => ['required'],
-            'address' => ['required'],
-            'melli_code' => ['required', new melliCode(), 'digits:10'],
-            'phone_model_id' => ['required'],
+            'f_name' => ['required_without:f_name_other'],
+            'l_name' => ['required_without:l_name_other'],
+            'city_id' => ['required_without:city_id_other'],
+            'address' => ['required_without:address_other'],
+            'melli_code' => ['required_without:melli_code_other', new melliCode(), 'digits:10'],
             'email' => ['nullable', 'email:rfc,dns'],
-            'postal_code' => ['nullable', new postalCode(), 'digits:10'],
-            'month' => ['nullable', 'integer', 'between:1,12'],
-            'year' => ['nullable', 'integer', 'between:1310,' . $verta]
+            'email_other' => ['nullable', 'email:rfc,dns'],
+            'postal_code_other' => ['required_if:postal_code,null', new postalCode(), 'digits:10'],
+            'day_other'=>['required_if:day,null','integer','between:1,31'],
+            'month_other'=>['required_if:month,null','integer','between:1,12'],
+            'year_other'=>['required_if:year,null','integer','between:1310,'.$verta],
+            'phone_num_other'=>['required_without:day'],
+            'price_range'=>['required']
         ];
     }
 }
