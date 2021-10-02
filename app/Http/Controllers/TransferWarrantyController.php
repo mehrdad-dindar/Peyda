@@ -56,6 +56,7 @@ class TransferWarrantyController extends Controller
                     'transfer_code' => $transfer_code->transfer_code,
                     'warranty_id' => $warranty_id,
                     'wallet'=>$wallet,
+                    'first_level'=>'برای انتقال فراگارانتی، این کد را در اختیار کاربر دوم قرار دهید.'
                 ]);
         } else {
             //dd('null hast');
@@ -72,17 +73,25 @@ class TransferWarrantyController extends Controller
                 'warranty_id' => $warranty_id]);
 
             if ($warranty_up != null) {
-                $msg = 'success';
+
+                return view('profile.warranty.transfer',
+                    [
+                        'success' => 'برای انتقال فراگارانتی، این کد را در اختیار کاربر دوم قرار دهید.',
+                        'transfer_code' => $transfer_code,
+                        'warranty_id' => $warranty_id,
+                        'wallet'=>$wallet,
+                    ]);
             } else {
-                $msg = 'error';
+
+                return view('profile.warranty.transfer',
+                    [
+                        'error' => 'متاسفانه درخواست شما ثبت نشد!',
+                        'transfer_code' => $transfer_code,
+                        'warranty_id' => $warranty_id,
+                        'wallet'=>$wallet,
+                    ]);
             }
-            return view('profile.warranty.transfer',
-                [
-                    $msg => 'done',
-                    'transfer_code' => $transfer_code,
-                    'warranty_id' => $warranty_id,
-                    'wallet'=>$wallet,
-                ]);
+
         }
 
     }
@@ -101,6 +110,8 @@ class TransferWarrantyController extends Controller
         $transfer_code = $request->get('transfer_code');
 
         $transfer = Mobile_warranty::query()->join('transfer_warranties as tw', 'tw.warranty_id', '=', 'mobile_warranties.id')->where([['tw.receiver_id', '=', null], ['mobile_warranties.transfer_code', '=', $transfer_code]])->whereRaw('DATEDIFF(Now(),tw.created_at)<1')->first(['mobile_warranties.*', 'tw.sender_id as sender_id']);
+
+        $wallet = Wallet::where('user_id', auth()->id())->first();
 
         if ($transfer != null) {
             $transfer_up = TransferWarranty::query()->update(['receiver_id' => auth()->user()->id]);
@@ -132,22 +143,33 @@ class TransferWarrantyController extends Controller
 
                     $this->addNotif($notif, $userNotif);
 
-                    $msg = 'success';
+                    return view('profile.warranty.receive',[
+                        'wallet' =>$wallet,
+                        'transfer_code' => $transfer_code,
+                        'success' => 'done',
+                    ]);
                 } else {
-                    $msg = 'error';
+                    return view('profile.warranty.receive',[
+                        'wallet' =>$wallet,
+                        'transfer_code' => $transfer_code,
+                        'error' => 'done',
+                    ]);
                 }
             } else {
-                $msg = 'error';
+                return view('profile.warranty.receive',[
+                    'wallet' =>$wallet,
+                    'transfer_code' => $transfer_code,
+                    'error' => 'done',
+                ]);
             }
         } else {
-            $msg = 'error';
-        }
-        $wallet = Wallet::where('user_id', auth()->id())->first();
-        return redirect()->back()->with(
-            [
-                $msg => 'done',
+            return view('profile.warranty.receive',[
+                'wallet' =>$wallet,
                 'transfer_code' => $transfer_code,
-                'wallet'=>$wallet]);
+                'error' => 'done',
+            ]);
+        }
+
     }
 
 }
