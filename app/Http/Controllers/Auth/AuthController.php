@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Wallet;
 use App\Rules\Recaptcha;
 use Carbon\Carbon;
+use Crypt;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -66,12 +67,11 @@ class AuthController extends Controller
     public function doLoginPhone(Request $request)
     {
         //dd(Role::query()->where('title','user')->first()->id);
-        $data = $request->all();
         /*if (!session()->has('phone_num')) {
             session()->put("phone_num", $request->phone_num);
         }*/
         $this->validate($request, [
-            'phone_num' => 'required|numeric|digits:11||digits:11',
+            'phone_num' => 'required|numeric|digits:11|regex:/(09)[0-9]{9}/',
             //TODO فعال سازی ریکپچا
             /*'g-recaptcha-response' => ['required',new Recaptcha()],*/
         ]);
@@ -84,7 +84,7 @@ class AuthController extends Controller
                 ]);
             Wallet::create([
                 'user_id' => $newUser->id,
-                'value'=>\Crypt::encryptString('0')
+                'value'=>Crypt::encryptString('0')
             ]);
         });
         if($newUser!=null){
@@ -131,7 +131,7 @@ class AuthController extends Controller
         if (!$token->isValid())
             return redirect()->back()->withErrors(['کد تأیید منقضی شده است.']);
 
-        if ($token->code !== $request->get('code'))
+        if (Crypt::decryptString($token->code) !== $request->get('code'))
             return redirect()->back()->withErrors(['کد تأیید اشتباه است.']);
 
         $token->update([

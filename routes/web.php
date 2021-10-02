@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\Admin\WarrantyController;
 use \App\Http\Controllers\Admin\AdminNotificationController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MobileWarrantyController;
 use \App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\SubscriberController;
 use App\Models\User;
 use \App\Http\Controllers\UserNotificationController;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +37,9 @@ use \App\Http\Controllers\TicketController;
 /* front */
 Route::get('/', 'HomeController@index')->name('index');
 Route::post('/validation', 'HomeController@validation')->name('validation');
+Route::post('/subscribe',[SubscriberController::class,'subscription'])->name('subscription');
+/* TODO UnSubscribe */
+/*Route::post('/unsubscribe',[SubscriberController::class,'unsubscription'])->name('unsubscription');*/
 Route::get('/test/{id}', function ($id){
 
     //dd($id);
@@ -267,6 +272,5 @@ Route::get('/blog',function (){
     return view('pages.blog');
 });
 /*contact_us*/
-Route::get('/contact_us',function (){
-    return view('pages.contact_us');
-})->name('contact_us');
+Route::get('/contact_us',[ContactController::class, 'index'])->name('contact_us');
+Route::post('/contact_us',[ContactController::class, 'save'])->name('save_contact');

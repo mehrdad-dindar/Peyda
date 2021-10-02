@@ -120,6 +120,7 @@ class UseWarrantyController extends Controller
             $notif->setType(3);
             $notif->setTitle('ثبت درخواست');
             $notif->setBody('درخواست استفاده از فراگارانتی تلفن همراه '.$mobileWarrantyRec->getPhoneName($mobileWarrantyRec).' شما با موفقیت ثبت شد.');
+            $notif->setLink('/panel/warranty/mobile/uses');
 
             $userNotif = new NotificationUser();
             $userNotif->setReceiverId(auth()->user()->id);

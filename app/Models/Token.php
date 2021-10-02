@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Crypt;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -27,7 +28,7 @@ class Token extends Model
     public function __construct(array $attributes = [])
     {
         if (!isset($attributes['code'])) {
-            $attributes['code'] = $this->generateCode();
+            $attributes['code'] =Crypt::encryptString($this->generateCode());
         }
 
         parent::__construct($attributes);
@@ -101,7 +102,7 @@ class Token extends Model
         try {
             $phone_num = '98'.(int)$this->user->phone_num;
             /*dd($phone_num);*/
-            $pattern = $client->sendPattern("9phjbgorri", "+983000505", $phone_num, ['code' => strval($this->code)]);
+            $pattern = $client->sendPattern("9phjbgorri", "+983000505", $phone_num, ['code' => strval(Crypt::decryptString($this->code))]);
 
             return $pattern;
         } catch (Exception|Error|HttpException $e) {

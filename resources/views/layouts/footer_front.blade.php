@@ -6,50 +6,70 @@
                 <a href="#" class="logo-footer">
                     <img src="{{ URL::asset('front/img/logo-white-1.png')}}" height="90" alt="">
                 </a>
-                <p class="mt-4" style="text-align: justify">پیدا سرویس ماندگار، بزرگترین و تخصصی ترین مرکز خصوصی ارائه دهنده خدمات فراگارانتی گوشی های تلفن همراه در ایران !</p>
+                <p class="mt-4" style="text-align: justify">پیدا سرویس ماندگار، بزرگترین و تخصصی ترین مرکز خصوصی ارائه
+                    دهنده خدمات فراگارانتی گوشی های تلفن همراه در ایران !</p>
 
-                <li style="list-style: none"><a href="https://goo.gl/maps/nqiQebt1khAX4Js27" class="text-foot"><i class="uil uil-map-marker me-1"></i> تجریش، خیابان مقدس اردبیلی، پلاک 144، مجتمع تجاری میلان، طبقه اول تجاری، واحد 28</a></li>
-                <li style="list-style: none"><a href="tel:+982188540034" class="text-foot"><i class="uil uil-phone me-1"></i> 02188540034 - 02188540111 </a></li>
-                <li style="list-style: none"><a href="mailto:info@peydaservice.com" class="text-foot"><i class="uil uil-envelope me-1"></i> info@peydaservice.com </a></li>
-                <li style="list-style: none"><a href="#" class="text-foot"><i class="uil uil-mailbox me-1"></i> 1985675124 </a></li>
+                <li style="list-style: none"><a href="https://goo.gl/maps/nqiQebt1khAX4Js27" class="text-foot"><i
+                            class="uil uil-map-marker me-1"></i> تجریش، خیابان مقدس اردبیلی، پلاک 144، مجتمع تجاری
+                        میلان، طبقه اول تجاری، واحد 28</a></li>
+                <li style="list-style: none"><a href="tel:+982188540034" class="text-foot"><i
+                            class="uil uil-phone me-1"></i> 02188540034 - 02188540111 </a></li>
+                <li style="list-style: none"><a href="mailto:info@peydaservice.com" class="text-foot"><i
+                            class="uil uil-envelope me-1"></i> info@peydaservice.com </a></li>
+                <li style="list-style: none"><a href="#" class="text-foot"><i class="uil uil-mailbox me-1"></i>
+                        1985675124 </a></li>
 
             </div><!--end col-->
 
             <div class="col-lg-2 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0" data-aos="fade-up" data-aos-duration="1400">
                 <h5 class="text-light footer-head mt-5">پیدا سرویس ماندگار </h5>
                 <ul class="list-unstyled footer-list mt-4">
-                    <li><a href="{{route('about_us')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> فراگارانتی چیست؟ </a></li>
-                    <li><a href="{{route('our_services')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> خدمات تحت پوشش  </a></li>
-                    <li><a href="{{route('panel')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> خرید فراگارانتی </a></li>
-                    <li><a href="{{route('use_services')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> شرایط و ضوابط </a></li>
-                    <li><a href="{{route('archive_blog')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> آخرین اخبار و مقالات </a></li>
-                    <li><a href="{{route('about_us')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> درباره ما </a></li>
-                    <li><a href="{{route('contact_us')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> تماس با ما </a></li>
+                    <li><a href="{{route('about_us')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i>
+                            فراگارانتی چیست؟ </a></li>
+                    <li><a href="{{route('our_services')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i>
+                            خدمات تحت پوشش </a></li>
+                    <li><a href="{{route('panel')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> خرید
+                            فراگارانتی </a></li>
+                    <li><a href="{{route('use_services')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i>
+                            شرایط و ضوابط </a></li>
+                    <li><a href="{{route('archive_blog')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i>
+                            آخرین اخبار و مقالات </a></li>
+                    <li><a href="{{route('about_us')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i>
+                            درباره ما </a></li>
+                    <li><a href="{{route('contact_us')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i>
+                            تماس با ما </a></li>
                 </ul>
             </div><!--end col-->
 
             <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0" data-aos="fade-up" data-aos-duration="1800">
                 <h5 class="text-light footer-head mt-5">لینک های مفید </h5>
                 <ul class="list-unstyled footer-list mt-4">
-                    <li><a href="{{route('login')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> 	ورود / عضویت
+                    <li><a href="{{route('login')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> ورود /
+                            عضویت
                         </a></li>
-                    <li><a href="{{route('shop')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> فروشگاه محصولات  </a></li>
+                    <li><a href="{{route('shop')}}" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> فروشگاه
+                            محصولات </a></li>
                     <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> سایر خدمات </a></li>
-                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> بیمه آتش‌سوزی منزل </a><span
+                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> بیمه آتش‌سوزی منزل
+                        </a><span
                             class="badge bg-primary ms-2">به زودی</span></li>
                     <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> بیمه زلزله </a><span
                             class="badge bg-primary ms-2">به زودی</span></li>
                     <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> بیمه اعضای بدن </a><span
                             class="badge bg-primary ms-2">به زودی</span></li>
-                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> هر ایرانی یک وکیل  </a><span
+                    <li><a href="#" class="text-foot"><i class="uil uil-angle-left-b me-1"></i> هر ایرانی یک وکیل
+                        </a><span
                             class="badge bg-primary ms-2">به زودی</span></li>
                 </ul>
             </div><!--end col-->
 
             <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0" data-aos="fade-up" data-aos-duration="2200">
+
                 <h5 class="text-light footer-head mt-5">خبرنامه </h5>
                 <p class="mt-4">ثبت نام کنید و آخرین اخبار و تخفیفات را از طریق ایمیل دریافت کنید.</p>
-                <form>
+                <form action="{{route('subscription')}}" method="POST" id="subscription-form"
+                      enctype="multipart/form-data">
+                    @csrf
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="foot-subscribe mb-3">
@@ -62,6 +82,7 @@
                                 </div>
                             </div>
                         </div>
+                        @captcha
                         <div class="col-lg-12">
                             <div class="d-grid">
                                 <input type="submit" id="submitsubscribe" name="send" class="btn btn-soft-primary"
@@ -69,16 +90,19 @@
                             </div>
                         </div>
                         <ul class="list-unstyled social-icon foot-social-icon mb-0 mt-4">
-                            <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="facebook"
-                                                                                                         class="fea icon-sm fea-social"></i></a>
+                            <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i
+                                        data-feather="facebook"
+                                        class="fea icon-sm fea-social"></i></a>
                             </li>
                             <li class="list-inline-item"><a href="https://instagram.com/peydaservice" class="rounded"><i
                                         data-feather="instagram" class="fea icon-sm fea-social"></i></a></li>
-                            <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="twitter"
-                                                                                                         class="fea icon-sm fea-social"></i></a>
+                            <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i
+                                        data-feather="twitter"
+                                        class="fea icon-sm fea-social"></i></a>
                             </li>
-                            <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i data-feather="linkedin"
-                                                                                                         class="fea icon-sm fea-social"></i></a>
+                            <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i
+                                        data-feather="linkedin"
+                                        class="fea icon-sm fea-social"></i></a>
                             </li>
                         </ul><!--end icon-->
                     </div>
@@ -117,8 +141,41 @@
 <a onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-primary back-to-top"><i
         data-feather="arrow-up" class="icons"></i></a>
 <!-- Back to top -->
-
-
+{{--{{ dd($success) }}--}}
+@if (session('success'))
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="SuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true"
+             data-bs-autohide="false">
+            <div class="toast-header bg-success text-white">
+                <strong class="me-auto"><i class="uil uil-check-circle h4"></i></strong>
+                <small>الآن</small>
+                <button type="button" class="btn-close text-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                {{session('success')}}
+            </div>
+        </div>
+    </div>
+@endif
+@if ($errors->any())
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 12">
+        <div id="ErrorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="8000"
+             data-bs-autohide="false">
+            <div class="toast-header bg-danger text-white">
+                <strong class="me-auto">خبرنامه</strong>
+                <small>الآن</small>
+                <button type="button" class="btn-close text-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <ol>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ol>
+            </div>
+        </div>
+    </div>
+@endif
 <!-- javascript -->
 <script src="{{ URL::asset('main/js/bootstrap.bundle.min.js')}}"></script>
 <!-- SLIDER -->
@@ -135,34 +192,35 @@
 <script src="{{ URL::asset('main/js/app.js')}}"></script>
 <!--Note: All important javascript like page loader, menu, sticky menu, menu-toggler, one page menu etc. -->
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         const topIMG = "{{ URL::asset('front/img/logo-white-1.png') }}";
         const sclIMG = "{{ URL::asset('front/img/logo-colored-1.png') }}";
         const logo = document.getElementById("img_logo");
         if (screen.width >= 991) {
             logo.src = topIMG;
-        }else {
-            logo.src= sclIMG;
+        } else {
+            logo.src = sclIMG;
         }
     });
+
     function windowScroll() {
         const navbar = document.getElementById("topnav");
         const logo = document.getElementById("img_logo");
         const topIMG = "{{ URL::asset('front/img/logo-white-1.png') }}";
         const sclIMG = "{{ URL::asset('front/img/logo-colored-1.png') }}";
-        if(navbar!=null){
+        if (navbar != null) {
             if (
                 document.body.scrollTop >= 50 ||
                 document.documentElement.scrollTop >= 50
             ) {
                 navbar.classList.add("nav-sticky");
-                logo.src= sclIMG;
+                logo.src = sclIMG;
             } else {
                 navbar.classList.remove("nav-sticky");
                 if (screen.width > 991) {
                     logo.src = topIMG;
-                }else {
-                    logo.src= sclIMG;
+                } else {
+                    logo.src = sclIMG;
                 }
             }
         }
@@ -172,5 +230,15 @@
         ev.preventDefault();
         windowScroll();
     })
+    @if (session('success'))
+    var toastSuccess = document.getElementById('SuccessToast')
+    var toastSucc = new bootstrap.Toast(toastSuccess)
+    toastSucc.show()
+    @endif
+    @if ($errors->any())
+    var toastError = document.getElementById('ErrorToast')
+    var toastErr = new bootstrap.Toast(toastError)
+    toastErr.show()
+    @endif
 </script>
 @yield('custom_js')
