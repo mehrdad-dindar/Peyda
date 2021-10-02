@@ -152,4 +152,9 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
         return $this->hasMany(Ticket::class,'sender_id','id');
     }
 
+    public function subscriber()
+    {
+        return $this->hasMany(Subscriber::class);
+    }
+
 }

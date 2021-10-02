@@ -7,8 +7,8 @@
     "require": {
         "php": "^8.0",
         "ext-gd": "*",
-        "ext-http": "*",
         "ext-soap": "*",
+        "albertcht/invisible-recaptcha": "^1.9",
         "elibyy/tcpdf-laravel": "^8.1",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
