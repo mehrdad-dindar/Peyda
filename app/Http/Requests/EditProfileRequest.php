@@ -33,17 +33,18 @@ class EditProfileRequest extends FormRequest
             'l_name'=>['required'],
             'city_id'=>['required'],
             'address'=>['required'],
-            'melli_code'=>['nullable',new melliCode(),'digits:10'],
+            'melli_code'=>['required',new melliCode(),'digits:10'],
             'phone_model_id'=>['required'],
             'email'=>['nullable','email:rfc,dns'],
             'postal_code' => ['nullable',new postalCode(),'digits:10'],
-            'day'=>['nullable','integer','between:1,31'],
-            'month'=>['nullable','integer','between:1,12'],
-            'year'=>['nullable','integer','between:1310,'.$verta]
+            'day'=>['required','integer','between:1,31'],
+            'month'=>['required','integer','between:1,12'],
+            'year'=>['required','integer','between:1310,'.$verta],
+            'price_range'=>['required']
         ];
 
         if(User::find(auth()->user()->id)->avatar==null){
-            $rules['avatar']=['required','mimes:jpg,jpeg,png,mpeg','max:4096','min:5'];
+            $rules['avatar']=['nullable','mimes:jpg,jpeg,png,mpeg','max:4096','min:5'];
         }
         /*if(User::find(auth()->user()->id)->melli_card==null){
             $rules['melli_card']=['required','mimes:jpg,jpeg,png,mpeg','max:4096','min:5'];

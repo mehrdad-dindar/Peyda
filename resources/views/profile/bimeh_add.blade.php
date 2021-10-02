@@ -879,37 +879,90 @@
                                                     <!--end::Label-->
                                                 </label>
                                                 <!--end::Option-->
-                                                <div id="im_owner" class="row"
-                                                     style="display:none;">
-                                                    <div class="col-md-6">
-                                                        <div class="mb-10">
-                                                            <label class="form-label">نام</label>
-                                                            <input type="text" class="form-control" placeholder="name@example.com">
+                                                <div id="im_owner" style="display:none;">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="mb-10">
+                                                                <label class="required form-label">نام</label>
+                                                                <input type="text" name="f_name" value="{{auth()->user()->f_name}}" class="form-control">
+                                                            </div>
                                                         </div>
-                                                        <div class="mb-10">
-                                                            <label class="form-label">تاریخ تولد</label>
-                                                            <input class="birthday form-control" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="mb-10">
-                                                            <label class="form-label">نام خانوادگی</label>
-                                                            <input type="text" class="form-control" placeholder="name@example.com">
+                                                        <div class="col-md-6">
+                                                            <div class="mb-10">
+                                                                <label class="required form-label">نام خانوادگی</label>
+                                                                <input value="{{auth()->user()->l_name}}" type="text" name="l_name" class="form-control" >
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="my_other_model row mb-6"
-                                                         style="display:none;">
-                                                        <!--begin::Label-->
-                                                        <label class="col-lg-4 col-form-label fw-bold fs-6">مدل
-                                                            گوشی
-                                                            جدید</label>
-                                                        <!--end::Label-->
-                                                        <!--begin::Col-->
-                                                        <div class="col-lg-6 fv-row">
-                                                            <input type="text" name="other_phone_model"
-                                                                   class="disabled-input form-control form-control-lg form-control-solid">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="mb-10">
+                                                                <label class="required form-label">تاریخ تولد</label>
+                                                                <div class="input-group row m-0 p-0">
+                                                                    <div class="form-floating col-4">
+                                                                        <input type="text" name="day" id="day" aria-label="First name" value="{{auth()->user()->getDay()}}"
+                                                                               class="form-control form-control-solid">
+                                                                        <label for="day">روز</label>
+                                                                    </div>
+                                                                    <div class="form-floating col-4">
+                                                                        <input type="text" name="month" id="month" aria-label="First name" value="{{auth()->user()->getMonth()}}"
+                                                                               class="form-control form-control-solid">
+                                                                        <label for="month">ماه</label>
+                                                                    </div>
+                                                                    <div class="form-floating col-4">
+                                                                        <input type="text" name="year" id="year" aria-label="" value="{{auth()->user()->getYear()}}"
+                                                                               class="form-control form-control-solid">
+                                                                        <label for="year">سال</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <!--end::Col-->
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="mb-10">
+                                                                <label class="required form-label">کدملی</label>
+                                                                <input type="text" value="{{auth()->user()->melli_code}}" name="melli_code" class="form-control" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="mb-10">
+                                                                <label class="form-label">ایمیل</label>
+                                                                <input type="text" value="{{auth()->user()->email}}" name="email" class="form-control" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="mb-10">
+                                                                <label class="required form-label">کدپستی</label>
+                                                                <input type="text" value="{{auth()->user()->postal_code}}" name="postal_code" class="form-control" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="mb-10">
+                                                                <label class="required form-label">استان</label>
+                                                                <select name="city_id" id="city_id" aria-label="Select a city"
+                                                                        data-control="select2"
+                                                                        data-placeholder="استان محل سکونت خود را انتخاب کنید"
+                                                                        class="disabled-input @error('city_id') is-invalid @enderror form-select form-select-solid form-select-lg fw-bold">
+                                                                    <option value="">انتخاب استان</option>
+                                                                    @foreach($cities as $city)
+                                                                        <option value="{{$city->id}}"
+                                                                                @if(auth()->user()->city_id == $city->id) selected @endif>{{$city->name}}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="mb-10">
+                                                                <label class="required form-label">آدرس</label>
+                                                                <div class="col-lg-12 fv-row">
+                                                                    <input type="text" name="address"
+                                                                           class="disabled-input @error('address') is-invalid @enderror form-control form-control-lg form-control-solid" value="{{auth()->user()->address}}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -966,61 +1019,96 @@
                                                 <!--end::Option-->
                                                 <div id="other_owner" class="row"
                                                      style="display:none;">
-                                                    <div class="col-md-6">
-                                                        <div class="mb-10">
-                                                            <label for="" class="form-label">انتخاب
-                                                                برند</label>
-                                                            <select
-                                                                name="new_phone_brand" id="new_phone_brand"
-                                                                data-dropdown-parent="#kt_modal_create_project"
-                                                                aria-label="انتخاب برند"
-                                                                data-control="select2"
-                                                                data-placeholder="انتخاب برند"
-                                                                class="disabled-input form-select form-select-solid form-select-lg fw-bold">
-                                                                <option></option>
-                                                                @foreach($brands as $row)
-                                                                    <option
-                                                                        value="{{$row->id}}">{{$row->name}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="mb-10">
-                                                            <label for="" class="form-label">انتخاب
-                                                                مدل</label>
-                                                            <select
-                                                                name="new_phone_model" id="new_phone_model"
-                                                                data-dropdown-parent="#kt_modal_create_project"
-                                                                aria-label="انتخاب مدل"
-                                                                data-control="select2"
-                                                                data-placeholder="انتخاب مدل"
-                                                                class="form-select form-select-solid form-select-lg fw-bold">
-                                                                <option></option>
-                                                                @foreach($models_first as $model)
-                                                                    <option
-                                                                        value="{{$model->id}}">{{$model->name}}</option>
-                                                                @endforeach
-                                                                <option value="others">سایر</option>
-                                                            </select>
-                                                            <input type='hidden' name='other_model'
-                                                                   id='other_model'>
 
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-10">
+                                                                <label class="required form-label">شماره تلفن همراه</label>
+                                                                <input type="text" name="phone_num" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="mb-10">
+                                                                <label class="required form-label">نام</label>
+                                                                <input type="text" name="f_name" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="mb-10">
+                                                                <label class="required form-label">نام خانوادگی</label>
+                                                                <input type="text" name="l_name" class="form-control" >
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="my_other_model row mb-6"
-                                                         style="display:none;">
-                                                        <!--begin::Label-->
-                                                        <label class="col-lg-4 col-form-label fw-bold fs-6">مدل
-                                                            گوشی
-                                                            جدید</label>
-                                                        <!--end::Label-->
-                                                        <!--begin::Col-->
-                                                        <div class="col-lg-6 fv-row">
-                                                            <input type="text" name="other_phone_model"
-                                                                   class="disabled-input form-control form-control-lg form-control-solid">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="mb-10">
+                                                                <label class="required form-label">تاریخ تولد</label>
+                                                                <div class="input-group row m-0 p-0">
+                                                                    <div class="form-floating col-4">
+                                                                        <input type="text" name="day" id="day" aria-label="First name"
+                                                                               class="form-control form-control-solid">
+                                                                        <label for="day">روز</label>
+                                                                    </div>
+                                                                    <div class="form-floating col-4">
+                                                                        <input type="text" name="month" id="month" aria-label="First name"
+                                                                               class="form-control form-control-solid">
+                                                                        <label for="month">ماه</label>
+                                                                    </div>
+                                                                    <div class="form-floating col-4">
+                                                                        <input type="text" name="year" id="year" aria-label=""
+                                                                               class="form-control form-control-solid">
+                                                                        <label for="year">سال</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <!--end::Col-->
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="mb-10">
+                                                                <label class="required form-label">کدملی</label>
+                                                                <input type="text" name="melli_code" class="form-control" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="mb-10">
+                                                                <label class="form-label">ایمیل</label>
+                                                                <input type="text" name="email" class="form-control" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="mb-10">
+                                                                <label class="required form-label">کدپستی</label>
+                                                                <input type="text" name="postal_code" class="form-control" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="mb-10">
+                                                                <label class="required form-label">استان</label>
+                                                                <select name="city_id" id="city_id" aria-label="Select a city"
+                                                                        data-control="select2"
+                                                                        data-placeholder="استان محل سکونت خود را انتخاب کنید"
+                                                                        class="disabled-input @error('city_id') is-invalid @enderror form-select form-select-solid form-select-lg fw-bold">
+                                                                    <option value="">انتخاب استان</option>
+                                                                    @foreach($cities as $city)
+                                                                        <option value="{{$city->id}}"
+                                                                                >{{$city->name}}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="mb-10">
+                                                                <label class="required form-label">آدرس</label>
+                                                                <div class="col-lg-12 fv-row">
+                                                                    <input type="text" name="address"
+                                                                           class="disabled-input @error('address') is-invalid @enderror form-control form-control-lg form-control-solid">
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

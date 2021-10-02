@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helpers;
 use App\Http\Requests\MobileWarrantyRequest;
+use App\Models\city;
 use App\Models\Commitment_ceiling;
 use App\Models\Fire_commitment_ceiling;
 use App\Models\ImageField;
@@ -11,6 +12,7 @@ use App\Models\Mobile_warranty;
 use App\Models\MobileImage;
 use App\Models\Phone_brand;
 use App\Models\Phone_model;
+use App\Models\User;
 use App\Models\UserRequest;
 use App\Models\Wallet;
 use App\Models\WarrantyProblem;
@@ -108,6 +110,7 @@ class MobileWarrantyController extends Controller
     {
         $mobile_warranty='';
 
+        $cities = city::all();
         $phone_brand_first = Phone_brand::query()->first();
         $phone_model_first = Phone_model::query()->where('phone_brand_id', '=', $phone_brand_first->id)->get();
         if($editId!=0){
@@ -138,6 +141,7 @@ class MobileWarrantyController extends Controller
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
 
         return view('profile.bimeh_add')
+            ->with('cities',$cities)
             ->with('myPhoneName', $myPhoneDisplay)
             ->with('brands', $brands)
             ->with('models_first', $phone_model_first)
@@ -231,6 +235,40 @@ class MobileWarrantyController extends Controller
                 $phone_model_id = $request['new_phone_model'];
                 $other_model = null;
             }
+        }
+        $v = verta();
+
+        $v = $v->setDateTime($request['year'], $request['month'], $request['day'], null,null,null);
+        if($request['warranty_owner']==1){
+            $user = auth()->user();
+            $user->f_name = $request['f_name'];
+            $user->l_name = $request['l_name'];
+            $userBirthday=Carbon::instance($v->datetime());
+
+            if($request['year']!=null && $request['month']!=null && $request['day']!=null)  {
+                $user->birthday = $userBirthday;
+            }
+
+            $user->melli_code = $request['melli_code'];
+            $user->city_id = $request['city_id'];
+            $user->address = $request['address'];
+            $user->email = $request['email'];
+            $user->postal_code = $request['postal_code'];
+            $user->save();
+        }else{
+
+            $userBirthday=Carbon::instance($v->datetime());
+
+            User::query()->create([
+                'f_name'=>$request['f_name'],
+                'l_name'=>$request['l_name'],
+                'birthday'=>$userBirthday,
+                'postal_code'=>$request['postal_code'],
+                'melli_code'=>$request['melli_code'],
+                'city_id'=>$request['city_id'],
+                'address'=>$request['address'],
+                'email'=>$request['email'],
+            ]);
         }
 
         if ($request['warranty_type'] != null && $request['price_range'] != null) {

@@ -96,11 +96,9 @@ class ProfileController extends Controller
         /*$v = verta()
             ->timestamp($request['birthday_tmp'] / 1000)
             ->formatGregorian('Y-m-d 09:i:s');*/
-        $v = verta();
         /*$v->year = $request['year'];
         $v->month = $request['month']; // عدد 13 برای ثبت سال آینده اولین ماه
         $v->day = $request['day'];*/
-        $v = $v->setDateTime($request['year'], $request['month'], $request['day'], null,null,null);
         $user = User::findOrFail($request['id']);
 
         if ($request->file('avatar')) {
@@ -133,8 +131,13 @@ class ProfileController extends Controller
         //dd($request->all());
         $user->f_name = $request['f_name'];
         $user->l_name = $request['l_name'];
+        $v = verta();
+        $v = $v->setDateTime($request['year'], $request['month'], $request['day'], null,null,null);
+        $userBirthday=Carbon::instance($v->datetime());
 
-        $user->birthday = Carbon::instance($v->datetime());;
+        if($request['year']!=null && $request['month']!=null && $request['day']!=null)  {
+            $user->birthday = $userBirthday;
+        }
 
         $user->melli_code = $request['melli_code'];
         $user->city_id = $request['city_id'];

@@ -286,7 +286,7 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label  fw-bold fs-6">نام</label>
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6">نام</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
@@ -303,7 +303,7 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label  fw-bold fs-6">نام خانوادگی</label>
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6">نام خانوادگی</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
@@ -353,11 +353,11 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label  fw-bold fs-6">کد ملی</label>
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6">کد ملی</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
-                                <input type="text" name="melli_code" maxlength="10" maxlength="10"
+                                <input type="text" name="melli_code" maxlength="10"
                                        class="disabled-input @error('melli_code') is-invalid @enderror form-control form-control-lg form-control-solid"
                                        @if($flag==1) disabled @endif
                                        value="@if(auth()->user()->melli_code != null){{auth()->user()->melli_code}}@endif"/>
@@ -387,7 +387,7 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-bold fs-6">استان</label>
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6">استان</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row ">
@@ -409,7 +409,7 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-bold fs-6">آدرس</label>
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6">آدرس</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-6 fv-row">
@@ -460,7 +460,7 @@
                         <!--begin::Input group-->
                         <div class="row mb-6 ">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-bold fs-6">
+                            <label class="col-lg-4 required col-form-label fw-bold fs-6">
                                 <span class="">برند گوشی</span>
                             </label>
                             <!--end::Label-->
@@ -488,7 +488,7 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-bold fs-6">
+                            <label class="col-lg-4 required col-form-label fw-bold fs-6">
                                 <span class="">مدل گوشی</span>
                             </label>
                             <!--end::Label-->

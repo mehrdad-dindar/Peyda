@@ -2,6 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\melliCode;
+use App\Rules\postalCode;
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Foundation\Http\FormRequest;
 
 class MobileWarrantyRequest extends FormRequest
@@ -23,9 +26,20 @@ class MobileWarrantyRequest extends FormRequest
      */
     public function rules()
     {
+        $verta = Verta::now()->format('Y');
+
         return [
-            'imei1'                 =>              'required|digits:15',
-            'imei2'                 =>              'digits:15',
+            'f_name' => ['required'],
+            'l_name' => ['required'],
+            'day' => ['nullable', 'integer', 'between:1,31'],
+            'city_id' => ['required'],
+            'address' => ['required'],
+            'melli_code' => ['required', new melliCode(), 'digits:10'],
+            'phone_model_id' => ['required'],
+            'email' => ['nullable', 'email:rfc,dns'],
+            'postal_code' => ['nullable', new postalCode(), 'digits:10'],
+            'month' => ['nullable', 'integer', 'between:1,12'],
+            'year' => ['nullable', 'integer', 'between:1310,' . $verta]
         ];
     }
 }
