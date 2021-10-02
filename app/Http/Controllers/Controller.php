@@ -108,8 +108,9 @@ class Controller extends BaseController
         //dd($activation_date);
         $warranty['start_date']=$activation_date;
         //$year=explode('/',$activation_date)[0];
-        $endDateVerta=$startDateVerta->addYear(1)->format('Y/m/d');
-        $warranty['endDate']=$endDateVerta;
+        $endDateVerta=$startDateVerta->addYear(1);
+        $warranty['endDate']=$endDateVerta->format('Y/m/d');
+        $warranty['remained_days']=abs($endDateVerta->diffDays());
         $warranty['phoneName']=$warranty->getPhoneName($warranty);
 
         $uses=$warranty->warrantyuses->toArray();
