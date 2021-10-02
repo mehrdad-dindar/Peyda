@@ -57,13 +57,19 @@
 @endsection
 @section('custom_js')
 
-    @if (isset($success))
+    @if(!empty($first_level))
         <script>
-            toastr.success("ثبت درخواست", 'برای انتقال فراگارانتی، این کد را در اختیار کاربر دوم قرار دهید.');
+            toastr.success( '{{$first_level}}',"ثبت درخواست");
         </script>
-    @elseif(isset($error))
+    @endif
+
+    @if (isset($success) && !empty($success))
         <script>
-            toastr.error("خطا", 'متاسفانه درخواست شما ثبت نشد!');
+            toastr.success('{{$success}}',"ثبت درخواست");
+        </script>
+    @elseif(isset($error) && !empty($error))
+        <script>
+            toastr.error("خطا", '{{$error}}');
         </script>
     @endif
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>

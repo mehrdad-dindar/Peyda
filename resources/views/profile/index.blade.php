@@ -21,8 +21,8 @@
                                 <!--begin::Item-->
                                 @foreach($panelSliders as $key=>$panelSlider)
                                     <a href="{{$panelSlider->link}}" class="carousel-item text-center @if($key==0) active @endif">
-                                        <img onclick="window.location.href='{{$panelSlider->link}}'" src="{{ URL::asset('uploads/panel/sliders/'.$panelSlider->img_url) }}" alt=""
-                                             style="height: 250px">
+                                        <img onclick="window.location.href='{{$panelSlider->link}}'" src="{{ URL::asset('uploads/panel/sliders/'.$panelSlider->img_url) }}" alt="" class="img-fluid"
+                                             style="max-height: 250px">
                                     </a>
                                 @endforeach
                                 <!--end::Item-->
