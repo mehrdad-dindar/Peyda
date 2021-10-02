@@ -93,9 +93,14 @@ class ProfileController extends Controller
 
     protected function save_profile(EditProfileRequest $request)
     {
-        $v = verta()
+        /*$v = verta()
             ->timestamp($request['birthday_tmp'] / 1000)
-            ->formatGregorian('Y-m-d 09:i:s');
+            ->formatGregorian('Y-m-d 09:i:s');*/
+        $v = verta();
+        /*$v->year = $request['year'];
+        $v->month = $request['month']; // عدد 13 برای ثبت سال آینده اولین ماه
+        $v->day = $request['day'];*/
+        $v = $v->setDateTime($request['year'], $request['month'], $request['day'], null,null,null);
         $user = User::findOrFail($request['id']);
 
         if ($request->file('avatar')) {
@@ -104,7 +109,7 @@ class ProfileController extends Controller
             $avatar->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/avatars/', $avatar_name);
             $user->avatar = $avatar_name;
         }
-        if ($request->file('melli_card')) {
+        /*if ($request->file('melli_card')) {
             $melli_card = $request->file('melli_card');
             $melli_card_name = time() . $melli_card->getClientOriginalName();
             $melli_card->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/melli_cards/', $melli_card_name);
@@ -115,7 +120,7 @@ class ProfileController extends Controller
             $melli_card_back_name = time() . $melli_card_back->getClientOriginalName();
             $melli_card_back->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/melli_cards/', $melli_card_back_name);
             $user->melli_card_back = $melli_card_back_name;
-        }
+        }*/
         if ($request->get('phone_model_id') == 'others') {
             $phone_model = $request['other_model'];
             $other_model = $request['other_phone_model'];
@@ -128,8 +133,8 @@ class ProfileController extends Controller
         //dd($request->all());
         $user->f_name = $request['f_name'];
         $user->l_name = $request['l_name'];
-        if ($request['birthday_tmp'] != null) {
-            $user->birthday = $v;
+        if ($request['birthday'] != null) {
+            $user->birthday = $request['birthday'];
         }
 
         $user->melli_code = $request['melli_code'];
