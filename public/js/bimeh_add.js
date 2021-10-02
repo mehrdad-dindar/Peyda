@@ -19,6 +19,15 @@ $('#fcc_price_select').change(function () {
     $("#fcc_price_show").slideDown("slow");
 });
 
+$("#im_owner_btn").click(function () {
+    $("#im_owner").slideToggle();
+    $("#other_owner").slideUp("slow");
+});
+$("#other_owner_btn").click(function () {
+    $("#other_owner").slideToggle();
+    $("#im_owner").slideUp("slow");
+});
+
 // Stepper lement
 var element = document.querySelector("#kt_stepper_add_mobile_warranty");
 
