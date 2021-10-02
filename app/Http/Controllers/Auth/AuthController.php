@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Wallet;
 use App\Rules\Recaptcha;
 use Carbon\Carbon;
+use Crypt;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -83,7 +84,7 @@ class AuthController extends Controller
                 ]);
             Wallet::create([
                 'user_id' => $newUser->id,
-                'value'=>\Crypt::encryptString('0')
+                'value'=>Crypt::encryptString('0')
             ]);
         });
         if($newUser!=null){
@@ -130,7 +131,7 @@ class AuthController extends Controller
         if (!$token->isValid())
             return redirect()->back()->withErrors(['کد تأیید منقضی شده است.']);
 
-        if ($token->code !== $request->get('code'))
+        if (Crypt::decryptString($token->code) !== $request->get('code'))
             return redirect()->back()->withErrors(['کد تأیید اشتباه است.']);
 
         $token->update([
