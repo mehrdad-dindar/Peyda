@@ -103,13 +103,13 @@ class Controller extends BaseController
     public function getPrintWarranty($warrantyId)
     {
         $warranty=Mobile_warranty::find($warrantyId);
-        $activation_date=explode(' ',Helpers::convertDateTimeToShamsi($warranty->activation_date))[0];
+        $startDateVerta=new Verta($warranty->activation_date);
+        $activation_date=$startDateVerta->format('Y/m/d');
         //dd($activation_date);
         $warranty['start_date']=$activation_date;
         //$year=explode('/',$activation_date)[0];
-        $startDateVerta=new Verta($warranty->activation_date);
-        $endDateVerta=$startDateVerta->addYear(1);
-        $warranty['remained_days']=abs($endDateVerta->diffDays());
+        $endDateVerta=$startDateVerta->addYear(1)->format('Y/m/d');
+        $warranty['endDate']=$endDateVerta;
         $warranty['phoneName']=$warranty->getPhoneName($warranty);
 
         $uses=$warranty->warrantyuses->toArray();

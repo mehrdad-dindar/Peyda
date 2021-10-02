@@ -109,9 +109,15 @@ class HTMLPDFController extends Controller
         $pdf->SetXY(15, 20);
 
         $pdf->setRTL(false);
+
+        $output = '<h2 class="d-inline">کارت فراگارانتی پیداسرویس ماندگار</h2>';
+        $pdf->writeHTML($output, true, false, false, true, 'C');
+
         $output = '<h5 class="d-inline">'.str_replace('-','/',Verta::createDate()).'</h5>';
-        $pdf->writeHTML($output, true, false, false, false, '');
+        $pdf->writeHTML($output, true, false, false, true, 'L');
         $pdf->writeHTML("<hr>", true, false, false, false, '');
+
+
 
         $pdf->SetXY(15, 20);
 // Persian and English content
@@ -139,7 +145,7 @@ class HTMLPDFController extends Controller
         <td>'.$warranty->activation_code.'<span style="color: purple;">شناسه: </span></td>
     </tr>
     <tr>
-        <td>'.Helpers::toPersianNumOnly($warranty->remained_days).'<span style="color: purple;">تعداد روزهای باقیمانده: </span></td>
+        <td>'.Helpers::toPersianNumOnly($warranty->endDate).'<span style="color: purple;">تاریخ پایان: </span></td>
         <td>%'.Helpers::toPersianNumOnly($warranty->usable_percentage).'<span style="color: purple;">درصد باقیمانده: </span> </td>
     </tr>
     <tr>
