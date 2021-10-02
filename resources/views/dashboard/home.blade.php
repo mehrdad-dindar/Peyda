@@ -18,11 +18,11 @@
                         <div class="dashboard-clock ltr">
                             <span>دوشنبه 15 آبان</span><br>
                             <ul class="d-flex align-items-center justify-content-end">
-                                <li id="hours">12</li>
+                                <li id="hours">0</li>
                                 <li>:</li>
-                                <li id="min">10</li>
+                                <li id="min">0</li>
                                 <li>:</li>
-                                <li id="sec">14</li>
+                                <li id="sec">0</li>
                             </ul>
                         </div>
                     </div>
