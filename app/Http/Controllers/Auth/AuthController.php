@@ -156,9 +156,5 @@ class AuthController extends Controller
         return redirect()->route('index');
     }
 
-    public function doVerifyEmail()
-    {
-        return view('emails.sendVerifyNotice');
-    }
 
 }

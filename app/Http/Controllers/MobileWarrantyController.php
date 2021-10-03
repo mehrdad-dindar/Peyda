@@ -242,7 +242,7 @@ class MobileWarrantyController extends Controller
         //dd($request['warranty_owner']);
         if ($request['warranty_owner'] == 1) {
 
-            $email = User::where('email', $request['email'])->first();
+            $email = User::where([['email', $request['email']],['id','!=',auth()->id()]])->first();
             if ($email) {
                 return redirect()
                     ->back()

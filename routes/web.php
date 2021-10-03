@@ -23,6 +23,7 @@ use \App\Http\Controllers\Admin\Shop\ProductPropertyController;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use \App\Http\Controllers\HTMLPDFController;
 use \App\Http\Controllers\TicketController;
+use \App\Http\Controllers\Profile\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -204,8 +205,8 @@ Route::post('/login-phone', [AuthController::class,'doLoginPhone'])->name('doLog
 Route::post('/login-email', [AuthController::class,'doLoginEmail'])->name('doLoginEmail');
 Route::get('/verify', [AuthController::class,'verify'])->name('verify');
 Route::post('/doVerify', [AuthController::class,'doVerify'])->name('doVerify');
-Route::get('/email/verify', [AuthController::class ,'doVerifyEmail'])->name('verification.notice');
-Route::get('/email/verify/{id}/{hash}', [AuthController::class ,'checkVerifyEmail'])->name('verification.verify');
+Route::get('/verify-email', [ProfileController::class ,'doVerifyEmail'])->name('verification.notice');
+Route::get('/email/verify/{userid}/{hash}', [ProfileController::class ,'checkVerifyEmail'])->name('verification.verify');
 Route::post('/email/verification-notification', [AuthController::class ,'VerifyEmail'])->name('verify.notice');
 Route::get('/logout', [AuthController::class,'logout'])->name('logout');
 

@@ -130,6 +130,11 @@ class User extends Authenticatable /*implements MustVerifyEmail*/
         return $this->morphMany(UserRequest::class, 'user_requestable');
     }
 
+    public function emails()
+    {
+        return $this->morphMany(Email::class, 'emailable');
+    }
+
     public static function getPhoneName(User $user)
     {
         if ($user->phone_model != null) {

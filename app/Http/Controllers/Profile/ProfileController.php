@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Profile;
 use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EditProfileRequest;
+use App\Mail\verifyEmail;
 use App\Models\city;
+use App\Models\Email;
 use App\Models\Notification;
 use App\Models\NotificationUser;
 use App\Models\PanelSlider;
@@ -19,11 +21,15 @@ use Crypt;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Mail;
 use Redirect;
+use App\Traits\Emails;
+use function Symfony\Component\String\u;
 
 class ProfileController extends Controller
 {
 
+    use Emails;
     public function __construct()
     {
         $this->middleware(['auth', 'verified']);
@@ -39,6 +45,8 @@ class ProfileController extends Controller
             $msg=>$msgBody
         ]);
     }
+
+
 
     public function profile($msg='',$msgBody='')
     {
@@ -213,5 +221,37 @@ class ProfileController extends Controller
 
     }
 
+    public function doVerifyEmail(Request $request)
+    {
+        $user = $request->user();
 
+        $rand=Rand(1000,9999);
+
+        $code=md5($rand);
+        Mail::to($user)->send(new verifyEmail($user,$code));
+
+        $email=$this->addEmail($user);
+        if (!$email->isValid())
+            return redirect()->back()->withErrors(['کد تأیید منقضی شده است.']);
+
+        $email?->update(['code' => $code]);
+
+        return view('emails.sendVerifyNotice');
+    }
+    public function checkVerifyEmail($userid,$hash)
+    {
+        //dd('465636eb4a7ff4b267f3b765d07a02da'== $hash);
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        $email=Email::query()->where([['emailable_id',$userid],['emailable_type','App\Models\User'],['code',$hash]])->orderBy('updated_at','desc')->first();
+        //dd($email);
+        if($email->exists()){
+            User::query()->where('id',$userid)->update(['email_verified_at'=>Carbon::now()->toDateTimeString()]);
+            return view('emails.emailVerifyCallback',
+                ['status'=>'success',
+                'wallet'=>$wallet
+            ]);
+        }else{
+            return view('emails.emailVerifyCallback',['status'=>'failed']);
+        }
+    }
 }
