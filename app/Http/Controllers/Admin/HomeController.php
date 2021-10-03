@@ -16,22 +16,22 @@ class HomeController extends Controller
 
     public function saleReportCurrent()
     {
-        $todaySales = Transaction::whereDate('created_at', Carbon::today())->get();
+        $todaySales = Transaction::where([['created_at', Carbon::today()],['status',2]])->get();
         $todaySum=0;
         foreach ($todaySales as $todaySale){
             $todaySum += $todaySale->paid;
         }
-        $weekSales = Transaction::whereDate('created_at','>=', Carbon::now()->startOfWeek())->get();
+        $weekSales = Transaction::where([['created_at','>=', Carbon::now()->startOfWeek()],['status',2]])->get();
         $weekSum=0;
         foreach ($weekSales as $weekSale){
             $weekSum += $weekSale->paid;
         }
-        $monthSales = Transaction::whereDate('created_at','>=', Carbon::now()->startOfMonth())->get();
+        $monthSales = Transaction::where([['created_at','>=', Carbon::now()->startOfMonth()],['status',2]])->get();
         $monthSum=0;
         foreach ($monthSales as $monthSale){
             $monthSum += $monthSale->paid;
         }
-        $yearSales = Transaction::whereDate('created_at','>=', Carbon::now()->startOfYear())->get();
+        $yearSales = Transaction::where([['created_at','>=', Carbon::now()->startOfYear()],['status',2]])->get();
         $yearSum=0;
         foreach ($yearSales as $yearSale){
             $yearSum += $yearSale->paid;

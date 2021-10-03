@@ -56,7 +56,7 @@
 
             <div class="row">
                 <!-- Earning Area -->
-                <div class="col-md-6 box-margin height-card">
+                <div class="col-md-12 box-margin height-card">
                     <div class="card bg-primary earning-date">
                         <div class="card-body">
                             <div class="dashboard-tab-area">
@@ -145,7 +145,7 @@
                 </div>
 
 
-                <div class="col-md-8 box-margin">
+                {{--<div class="col-md-8 box-margin">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">خلاصه سفارش</h5>
@@ -1309,7 +1309,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>--}}
             </div>
         </div>
     </div>
