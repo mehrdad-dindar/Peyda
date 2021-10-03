@@ -27,7 +27,7 @@
                                         @foreach($warranties as $key=>$warranty)
                                             <tr>
                                                 <td>{{$key+1}}</td>
-                                                <td>{{ $warranty-> user->getFullName()}}</td>
+                                                <td><a href="{{route('userCreate',['id'=>$warranty->User->id])}}">{{ $warranty-> user->getFullName()}}</a> </td>
 
                                                 <td>{{$warranty ->Commitment_ceiling-> price_range}}</td>
 

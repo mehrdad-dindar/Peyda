@@ -119,7 +119,7 @@ Route::prefix('dashboard')->middleware([CheckPermission::class. ':view-dashboard
     Route::get('/', 'Admin\HomeController@index')->name('dashboard');
     Route::prefix('/users')->group(function (){
         Route::get('/all/{status?}', 'Admin\UserController@index')->name('all_users');
-        Route::get('/edit/{id}/{auth?}', 'Admin\UserController@create');
+        Route::get('/edit/{id}/{auth?}', 'Admin\UserController@create')->name('userCreate');
         Route::post('/auth', 'Admin\UserController@store');
     });
 

@@ -2591,10 +2591,17 @@
     </div>
 @endsection
 @section('custom_js')
+
     <script>
         //toastr.success("aaaaaaaaa");
         @if(isset($success))
         toastr.success('{{$success}}');
+        @endif
+    </script>
+    <script>
+        //toastr.success("aaaaaaaaa");
+        @if(session('status'))
+        toastr.success('{{session('status')}}');
         @endif
     </script>
 @endsection

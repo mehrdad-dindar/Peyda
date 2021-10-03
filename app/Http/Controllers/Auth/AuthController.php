@@ -71,7 +71,8 @@ class AuthController extends Controller
             session()->put("phone_num", $request->phone_num);
         }*/
         $this->validate($request, [
-            'phone_num' => 'required|numeric|digits:11|regex:/(09)[0-9]{9}/',
+            'phone_num' => 'required|numeric|digits:11||digits:11',
+            //'phone_num' => 'required|numeric|digits:11|regex:/(09)[0-9]{9}/',
             //TODO فعال سازی ریکپچا
             /*'g-recaptcha-response' => ['required',new Recaptcha()],*/
         ]);
@@ -131,7 +132,8 @@ class AuthController extends Controller
         if (!$token->isValid())
             return redirect()->back()->withErrors(['کد تأیید منقضی شده است.']);
 
-        if (Crypt::decryptString($token->code) !== $request->get('code'))
+        //if (Crypt::decryptString($token->code) !== $request->get('code'))
+        if ($token->code !== $request->get('code'))
             return redirect()->back()->withErrors(['کد تأیید اشتباه است.']);
 
         $token->update([

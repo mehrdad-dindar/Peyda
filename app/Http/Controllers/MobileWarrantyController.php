@@ -464,6 +464,7 @@ class MobileWarrantyController extends Controller
     {
         $msg = '';
         $warranty = Mobile_warranty::find($id)->first();
+        $user=User::find($warranty->owner_id);
         $images = Helpers::getImageFromDb($warranty->images);
         $qrcode = QrCode::size(250)->generate(md5($id . ' __ ' . $warranty->created_at));
 
@@ -478,7 +479,8 @@ class MobileWarrantyController extends Controller
             'qrcode' => $qrcode,
             'id' => $id,
             $msg => $err,
-            'wallet' => $wallet]);
+            'wallet' => $wallet,
+            'user'=>$user]);
     }
 
     public function insertPhotos(Request $request, $id, $edit = 0)
@@ -491,7 +493,7 @@ class MobileWarrantyController extends Controller
 
         if ($edit == 0) {
 
-            if (sizeof($request->toArray()) - (2 * sizeof($imageFields) + 1) == 7) {
+            if (sizeof($request->toArray()) - (2 * sizeof($imageFields) + 3) == 9) {
                 //dd('2');
                 //$i++;
                 foreach ($imageFields as $row) {
@@ -510,12 +512,24 @@ class MobileWarrantyController extends Controller
                 }
             }
         }
+        if($request->has('melli_card')){
+            $file = $request->file('melli_card');
+            $melli_card_name = time() . $file->getClientOriginalName();
+            $file->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/melli_cards/', $melli_card_name);
+            $key++;
+        }
+        if($request->has('melli_card_back')){
+            $file = $request->file('melli_card_back');
+            $melli_card_back_name = time() . $file->getClientOriginalName();
+            $file->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/melli_cards/', $melli_card_back_name);
+            $key++;
+        }
 
         //dd($key);
         //dd($i);
 
         //dd(sizeof($request->toArray()) - (3*sizeof($imageFields)+1));
-        if ($key == 7) {
+        if ($key == 9) {
 
             $mobileWarranty = Mobile_warranty::find($id);
 
@@ -523,6 +537,8 @@ class MobileWarrantyController extends Controller
                 'images' => $imageList,
                 'status_id' => 6
             ]);
+
+            User::query()->where('id',$mobileWarranty->owner_id)->update(['melli_card'=>$melli_card_name,'melli_card_back'=>$melli_card_back_name]);
 
             $userrequest = UserRequest::query()
                 ->where([['user_requestable_type', '=', 'App\Models\Mobile_warranty'],
@@ -537,7 +553,7 @@ class MobileWarrantyController extends Controller
                 $mobileWarranty->userrequests()->save($userrequest1);
             }
 
-            return redirect(route('bimeh_all'))->with(['success' => 'عکس های موبایل با موفقیت آپلود شد.']);
+            return redirect()->route('panel')->with(['status' => 'عکس های موبایل با موفقیت آپلود شد.']);
 
         } else {
             return $this->uploadPhoto($id, 0, 'لطفا همه عکس ها رو آپلود کنید!');
@@ -547,11 +563,13 @@ class MobileWarrantyController extends Controller
 
     public function updatePhoto(Request $request, $id)
     {
+
+        //dd($request);
         $prefix = $imageList = '';
         $imageFields = ImageField::all();
         $key = 0;
 
-        if (sizeof($request->toArray()) - (2 * sizeof($imageFields) + 1) >= 0 && sizeof($request->toArray()) - (2 * sizeof($imageFields) + 1) <= 14) {
+        if (sizeof($request->toArray()) - (2 * sizeof($imageFields) + 1) >= 0 && sizeof($request->toArray()) - (2 * sizeof($imageFields) + 1) <= 16) {
             //$i++;
             //dd($i);
             //dd('inja');
@@ -579,7 +597,22 @@ class MobileWarrantyController extends Controller
             }
         }
 
-        if ($key == 7) {
+
+        if($request->has('melli_card')){
+            $file = $request->file('melli_card');
+            $melli_card_name = time() . $file->getClientOriginalName();
+            $file->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/melli_cards/', $melli_card_name);
+            $key++;
+        }
+        if($request->has('melli_card_back')){
+            $file = $request->file('melli_card_back');
+            $melli_card_back_name = time() . $file->getClientOriginalName();
+            $file->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/melli_cards/', $melli_card_back_name);
+            $key++;
+        }
+
+
+        if ($key == 9) {
 
             $mobileWarranty = Mobile_warranty::find($id);
 
@@ -587,6 +620,8 @@ class MobileWarrantyController extends Controller
                 'images' => $imageList,
                 'status_id' => 6
             ]);
+
+            User::query()->where('id',$mobileWarranty->owner_id)->update(['melli_card'=>$melli_card_name,'melli_card_back'=>$melli_card_back_name]);
 
             $userrequest = UserRequest::query()
                 ->where([['user_requestable_type', '=', 'App\Models\Mobile_warranty'],
