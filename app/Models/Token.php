@@ -28,9 +28,7 @@ class Token extends Model
     public function __construct(array $attributes = [])
     {
         if (!isset($attributes['code'])) {
-            /*$attributes['code'] =Crypt::encryptString($this->generateCode());*/
-
-            $attributes['code'] = $this->generateCode();
+            $attributes['code'] =Crypt::encryptString($this->generateCode());
         }
 
         parent::__construct($attributes);
