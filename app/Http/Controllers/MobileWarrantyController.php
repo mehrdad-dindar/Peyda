@@ -269,7 +269,7 @@ class MobileWarrantyController extends Controller
                 $user->save();
             }
         } else {
-            $email = User::where('email', $request['email_other'])->first();
+            $email = User::where([['email', $request['email_other']],['id','!=',auth()->id()]])->first();
             //$phone_num = User::where('phone_num', $request['phone_num_other'])->first();
             if ($email ) {
                 return redirect()->back()->withErrors(['لطفا ایمیل تکراری وارد نکنید!']);
@@ -285,7 +285,7 @@ class MobileWarrantyController extends Controller
                     $userBirthday1 = $userBirthday;
                 }
                 $ownerUser=User::query()->where('phone_num',$request['phone_num_other'])->first();
-                $ownerUserEmail=User::query()->where('email',$request['email'])->first();
+                $ownerUserEmail=User::query()->where('email',$request['email_other'])->first();
                 if($ownerUser!=null){
                     $ownerUser->update([
                        'f_name' => $request['f_name_other'],
@@ -299,7 +299,7 @@ class MobileWarrantyController extends Controller
                     ]);
                 }elseif ($ownerUserEmail!=null){
 
-                    $ownerUserEmail->update([
+                    User::query()->where('id',$ownerUserEmail->id)->update([
                         'f_name' => $request['f_name_other'],
                         'l_name' => $request['l_name_other'],
                         'birthday' => $userBirthday1,
@@ -309,6 +309,7 @@ class MobileWarrantyController extends Controller
                         'address' => $request['address_other'],
                         'email' => $request['email_other'],
                     ]);
+                    $ownerUser=User::find($ownerUserEmail->id);
                 }
                 else {
 
