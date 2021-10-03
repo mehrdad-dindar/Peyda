@@ -36,11 +36,11 @@
                                         @foreach($notifications as $key=>$row)
                                             <tr>
                                                 <td>{{$key+1}}</td>
-                                                <td>{{$row->title }}</td>
-                                                <td>{{$row->body}}</td>
-                                                <td>{{$row->users->getFullNameAttribute($row->users)}}</td>
-                                                <td>{{$row->body}}</td>
-                                                <td>{{$row->body}}</td>
+                                                <td>{{$row->notifications->title }}</td>
+                                                <td>{{$row->notifications->body}}</td>
+                                                <td>{{$row->users->getFullNameAttribute($row->users)}} - <span @if($row->users->role->id==1) class="badge badge-dark text-light " @else class="badge badge-primary" @endif  style="font-size: 10px;">{{$row->users->role->title_fa}}</span></td>
+                                                <td>{{$row->notifications->sender->getFullNameAttribute($row->notifications->sender)}} - <span @if($row->notifications->sender->role->id==1) class="badge badge-dark text-light " @else class="badge badge-primary" @endif style="font-size: 10px;">{{$row->notifications->sender->role->title_fa}}</span></td>
+                                                <td>@if($row->done==0) <span class="badge badge-danger" style="font-size: 10px;">مشاهده نشده</span> @else <span class="badge badge-success" style="font-size: 10px;">مشاهده شده</span> @endif</td>
                                             </tr>
                                         @endforeach
                                         </tbody>
