@@ -932,7 +932,7 @@
                                                         <div class="col-md-6">
                                                             <div class="mb-10">
                                                                 <label class="required form-label">کدملی</label>
-                                                                <input type="text" value="{{auth()->user()->melli_code}}" name="melli_code" class="form-control" placeholder="">
+                                                                <input type="text" value="{{auth()->user()->melli_code}}" name="melli_code" class="form-control" placeholder="" minlength="10" max="10">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
@@ -1056,17 +1056,17 @@
                                                                 <label class="required form-label">تاریخ تولد</label>
                                                                 <div class="input-group row m-0 p-0">
                                                                     <div class="form-floating col-4">
-                                                                        <input type="text" name="day_other" id="day" aria-label="First name"
+                                                                        <input type="number" max="31" min="1" maxlength="2" minlength="1" name="day_other" id="day" aria-label="First name"
                                                                                class="form-control form-control-solid">
                                                                         <label for="day">روز</label>
                                                                     </div>
                                                                     <div class="form-floating col-4">
-                                                                        <input type="text" name="month_other" id="month" aria-label="First name"
+                                                                        <input type="number" max="12" min="1" maxlength="2" minlength="1" name="month_other" id="month" aria-label="First name"
                                                                                class="form-control form-control-solid">
                                                                         <label for="month">ماه</label>
                                                                     </div>
                                                                     <div class="form-floating col-4">
-                                                                        <input type="text" name="year_other" id="year" aria-label=""
+                                                                        <input type="number" min="1310" max="{{\Hekmatinasser\Verta\Verta::now()->format('Y')}}" maxlength="4" minlength="1" name="year_other" id="year" aria-label=""
                                                                                class="form-control form-control-solid">
                                                                         <label for="year">سال</label>
                                                                     </div>
