@@ -16,6 +16,11 @@ class Notification extends Model
             'seen',
             'body'];
 
+    public function sender()
+    {
+        return $this->belongsTo(User::class,'sender_id','id');
+    }
+
     public function notificationusers()
     {
         return $this->hasMany(NotificationUser::class,'notification_id','id');

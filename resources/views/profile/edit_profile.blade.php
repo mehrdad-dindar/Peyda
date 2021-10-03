@@ -326,17 +326,17 @@
                             <div class="col-lg-6 fv-row">
                                 <div class="input-group row">
                                     <div class="form-floating col-4">
-                                        <input type="text" name="day" id="day" aria-label="First name"
+                                        <input type="number" max="31" min="1" maxlength="2" minlength="1" name="day" id="day" aria-label="First name"
                                                class="form-control form-control-solid">
                                         <label for="day">روز</label>
                                     </div>
                                     <div class="form-floating col-4">
-                                        <input type="text" name="month" id="month" aria-label="First name"
+                                        <input type="number" max="12" min="1" maxlength="2" minlength="1" name="month" id="month" aria-label="First name"
                                                class="form-control form-control-solid">
                                         <label for="month">ماه</label>
                                     </div>
                                     <div class="form-floating col-4">
-                                        <input type="text" name="year" id="year" aria-label="Last name"
+                                        <input type="number" min="1310" max="{{\Hekmatinasser\Verta\Verta::now()->format('Y')}}" maxlength="4" minlength="1" name="year" id="year" aria-label="Last name"
                                                class="form-control form-control-solid">
                                         <label for="year">سال</label>
                                     </div>

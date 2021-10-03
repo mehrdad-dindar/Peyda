@@ -82,6 +82,111 @@
                                 <div class="separator dashed-h my-5"></div>
                             @endforeach
 
+                                <label class="col-md-4 col-form-label fw-bold fs-6 mb-2">عکس روی کارت ملی</label>
+                                <div class="col-6 col-md-4 mb-2">
+                                    <!--begin::Image input-->
+                                    <div class="image-input " data-kt-image-input="true"
+                                         style="background-image: url('{{ URL::asset('uploads/reserved/reserved_image_upload.png') }}'); opacity: 0.7; background-position: center">
+                                        <!--begin::Preview existing avatar-->
+                                        <div class="image-input-wrapper w-125       px h-125px"
+                                             style="background-image: url('{{ URL::asset('uploads/reserved/reserved_image_upload.png') }}'); opacity: 0.7; background-position: center"></div>
+                                        <!--end::Preview existing avatar-->
+                                        <!--begin::Label-->
+                                        <label
+                                                class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                data-kt-image-input-action="change" data-bs-toggle="tooltip"
+                                                title="آپلود تصویر">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" class="disabled-input" name="melli_card"
+                                                   accept=".png, .jpg, .jpeg"/>
+
+                                            <input type="hidden" name="melli_card_remove"/>
+                                            <!--end::Inputs-->
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Cancel-->
+                                        <span
+                                                class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
+                                                title="Cancel avatar">
+                                                                <i class="bi bi-x fs-2"></i>
+                                                            </span>
+                                        <!--end::Cancel-->
+                                        <!--begin::Remove-->
+                                        <span
+                                                class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                data-kt-image-input-action="remove" data-bs-toggle="tooltip"
+                                                title="Remove avatar">
+                                                                <i class="bi bi-x fs-2"></i>
+                                                            </span>
+                                        <!--end::Remove-->
+                                    </div>
+
+                                    <!--end::Image input-->
+                                    <!--begin::Hint-->
+                                    <div class="form-text"></div>
+                                    <!--end::Hint-->
+                                </div>
+                                <div class="col-6 p-3 col-md-2 mb-2">
+                                    <span class="badge badge-primary">مثال:</span>
+                                    <img src="{{ URL::asset('profile/media/mellicard/sample.jpg') }}" class="img-fluid rounded" alt="">
+                                </div>
+                                <div class="separator dashed-h my-5"></div>
+
+
+
+                                <label class="col-md-4 col-form-label fw-bold fs-6 mb-2">پشت کارت ملی</label>
+                                <div class="col-6 col-md-4 mb-2">
+                                    <!--begin::Image input-->
+                                    <div class="image-input " data-kt-image-input="true"
+                                         style="background-image: url('{{ URL::asset('uploads/reserved/reserved_image_upload.png') }}'); opacity: 0.7; background-position: center">
+                                        <!--begin::Preview existing avatar-->
+                                        <div class="image-input-wrapper w-125       px h-125px"
+                                             style="background-image: url('{{ URL::asset('uploads/reserved/reserved_image_upload.png') }}'); opacity: 0.7; background-position: center"></div>
+                                        <!--end::Preview existing avatar-->
+                                        <!--begin::Label-->
+                                        <label
+                                                class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                data-kt-image-input-action="change" data-bs-toggle="tooltip"
+                                                title="آپلود تصویر">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" class="disabled-input" name="melli_card_back"
+                                                   accept=".png, .jpg, .jpeg"/>
+                                            <input type="hidden" name="melli_card_back_remove"/>
+                                            <!--end::Inputs-->
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Cancel-->
+                                        <span
+                                                class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
+                                                title="Cancel avatar">
+                                                                <i class="bi bi-x fs-2"></i>
+                                                            </span>
+                                        <!--end::Cancel-->
+                                        <!--begin::Remove-->
+                                        <span
+                                                class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                data-kt-image-input-action="remove" data-bs-toggle="tooltip"
+                                                title="Remove avatar">
+                                                                <i class="bi bi-x fs-2"></i>
+                                                            </span>
+                                        <!--end::Remove-->
+                                    </div>
+
+                                    <!--end::Image input-->
+                                    <!--begin::Hint-->
+                                    <div class="form-text"></div>
+                                    <!--end::Hint-->
+                                </div>
+                                <div class="col-6 p-3 col-md-2 mb-2">
+                                    <span class="badge badge-primary">مثال:</span>
+                                    <img src="{{ URL::asset('profile/media/mellicard/melli_card_back.jpg') }}" class="img-fluid rounded" alt="">
+                                </div>
+                                <div class="separator dashed-h my-5"></div>
+
                             <input type="submit" value="ارسال" class="btn btn-success form-control">
 
                         </div>

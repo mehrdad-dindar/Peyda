@@ -29,7 +29,7 @@
                                                 @if($waiting->userrequests->toArray()[0]['done']==0)
                                             <tr>
                                                 <td>{{$key+1}}</td>
-                                                <td>{{ $waiting-> user->getFullName()}}</td>
+                                                <td><a href="{{route('userCreate',['id'=>$waiting->user->id])}}">{{ $waiting-> user->getFullName()}}</a></td>
 
                                                 <td>{{$waiting ->Commitment_ceiling-> price_range}}</td>
 
