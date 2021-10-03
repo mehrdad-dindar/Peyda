@@ -277,7 +277,7 @@ class WarrantyController extends Controller
         $mobile_warranty=Mobile_warranty::find($warranty_id);
 
         $admin_id = auth()->user()->id;
-        $link = '/panel/warranty/mobile';
+        $link = '/panel/warranty/mobile/all';
 
         $notif = new Notification();
         $notif->setSenderId($admin_id);

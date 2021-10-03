@@ -93,6 +93,8 @@ Route::prefix('panel')->group(function () {
             Route::get('/cart/{id}', 'MobileWarrantyController@cart')->name('cart');
             Route::get('/{invoice_id}/purchase', 'PaymentController@purchase')->name('purchase');
             Route::get('/{invoice_id}/result', 'PaymentController@result')->name('purchase.result');
+            Route::get('/{id}/problemPurchase', 'PaymentController@problemPurchase')->name('problemPurchase');
+            Route::get('/{id}/problemResult', 'PaymentController@problemResult')->name('problemPurchase.result');
             Route::get('/upload-photo/{id}',[MobileWarrantyController::class , 'uploadPhoto'])->name('uploadPhoto');
             Route::post('/insert-photo/{mobile_warranty}/{edit?}',[MobileWarrantyController::class , 'insertPhotos'])->name('insertPhoto');
             Route::get('/edit-photo/{id}',[MobileWarrantyController::class , 'editPhoto'])->name('editPhoto');
@@ -121,7 +123,7 @@ Route::prefix('dashboard')->middleware([CheckPermission::class. ':view-dashboard
     Route::get('/', 'Admin\HomeController@index')->name('dashboard');
     Route::prefix('/users')->group(function (){
         Route::get('/all/{status?}', 'Admin\UserController@index')->name('all_users');
-        Route::get('/edit/{id}/{auth?}', 'Admin\UserController@create');
+        Route::get('/edit/{id}/{auth?}', 'Admin\UserController@create')->name('userCreate');
         Route::post('/auth', 'Admin\UserController@store');
     });
 

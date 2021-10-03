@@ -18,22 +18,18 @@
                         <div class="dashboard-clock ltr">
                             <span>دوشنبه 15 آبان</span><br>
                             <ul class="d-flex align-items-center justify-content-end">
-                                <li id="hours">12</li>
+                                <li id="hours">0</li>
                                 <li>:</li>
-                                <li id="min">10</li>
+                                <li id="min">0</li>
                                 <li>:</li>
-                                <li id="sec">14</li>
+                                <li id="sec">0</li>
                             </ul>
-                        </div>
-                        <div class="dashboard-btn-group d-flex align-items-center">
-                            <a href="#" class="btn btn-primary ml-1"><i class="ti-settings"></i></a>
-                            <a href="#" class="btn btn-primary ml-1"><i class="ti-plus"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
+            {{--<div class="row">
                 <!-- Time Date Area -->
                 <div class="col-12 box-margin">
                     <div class="card bg-boxshadow">
@@ -56,144 +52,89 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>--}}
 
             <div class="row">
                 <!-- Earning Area -->
-                <div class="col-md-6 box-margin height-card">
+                <div class="col-md-12 box-margin height-card">
                     <div class="card bg-primary earning-date">
                         <div class="card-body">
                             <div class="dashboard-tab-area">
-                                <h5 class="text-white card-title">درآمد</h5>
+                                <h5 class="text-white card-title">گزارش فروش</h5>
                                 <div class="bd-example bd-example-tabs">
                                     <div class="tab-content" id="tabContent-pills">
-                                        <div class="tab-pane fade" id="earnings-mon" role="tabpanel"
-                                             aria-labelledby="pills-earnings-mon">
+                                        <div class="tab-pane fade active show" id="earnings-today" role="tabpanel"
+                                             aria-labelledby="pills-earnings-today">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div>
-                                                    <h2 class="text-white mb-3 font-30">359،234<i
-                                                            class="arrow_up"></i></h2>
-                                                    <span class="text-white mb-3 d-block">درآمد کل</span>
+                                                    <h2 class="text-white mb-3 font-30">{{\App\Helpers\Helpers::toPersianNum($current['todaySum'])}}<i class="arrow_up"></i></h2>
+                                                    <span class="text-white mb-3 d-block">تومان</span>
                                                 </div>
                                                 <div class="dashboard-tab-thumb">
-                                                    <img src="admin/img/bg-img/6.svg" alt="">
+                                                    <img src="{{URL::asset('admin/img/bg-img/6.svg')}}" alt="">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="earnings-tue" role="tabpanel"
-                                             aria-labelledby="pills-earnings-tue">
+                                        <div class="tab-pane fade" id="earnings-this-week" role="tabpanel"
+                                             aria-labelledby="pills-earnings-this-week">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div>
-                                                    <h2 class="text-white mb-3 font-30">22،234<i
+                                                    <h2 class="text-white mb-3 font-30">{{\App\Helpers\Helpers::toPersianNum($current['weekSum'])}}<i
                                                             class="arrow_up"></i></h2>
-                                                    <span class="text-white mb-3 d-block">درآمد کل</span>
+                                                    <span class="text-white mb-3 d-block">تومان</span>
                                                 </div>
                                                 <div class="dashboard-tab-thumb">
-                                                    <img src="admin/img/bg-img/6.svg" alt="">
+                                                    <img src="{{URL::asset('admin/img/bg-img/6.svg')}}" alt="">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="earnings-wed" role="tabpanel"
-                                             aria-labelledby="pills-earnings-wed">
+                                        <div class="tab-pane fade" id="earnings-this-month" role="tabpanel"
+                                             aria-labelledby="pills-earnings-this-month">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div>
-                                                    <h2 class="text-white mb-3 font-30">198،234<i
+                                                    <h2 class="text-white mb-3 font-30">{{\App\Helpers\Helpers::toPersianNum($current['monthSum'])}}<i
                                                             class="arrow_up"></i></h2>
-                                                    <span class="text-white mb-3 d-block">درآمد کل</span>
+                                                    <span class="text-white mb-3 d-block">تومان</span>
                                                 </div>
                                                 <div class="dashboard-tab-thumb">
-                                                    <img src="admin/img/bg-img/6.svg" alt="">
+                                                    <img src="{{URL::asset('admin/img/bg-img/6.svg')}}" alt="">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="earnings-thu" role="tabpanel"
-                                             aria-labelledby="pills-earnings-thu">
+                                        <div class="tab-pane fade" id="earnings-this-year" role="tabpanel"
+                                             aria-labelledby="pills-earnings-this-year">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div>
-                                                    <h2 class="text-white mb-3 font-30">256،234 <i
+                                                    <h2 class="text-white mb-3 font-30">{{\App\Helpers\Helpers::toPersianNum($current['yearSum'])}}<i
                                                             class="arrow_up"></i></h2>
-                                                    <span class="text-white mb-3 d-block">درآمد کل</span>
+                                                    <span class="text-white mb-3 d-block">تومان</span>
                                                 </div>
                                                 <div class="dashboard-tab-thumb">
-                                                    <img src="admin/img/bg-img/6.svg" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="earnings-fri" role="tabpanel"
-                                             aria-labelledby="pills-earnings-fri">
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div>
-                                                    <h2 class="text-white mb-3 font-30">256،234<i
-                                                            class="arrow_up"></i></h2>
-                                                    <span class="text-white mb-3 d-block">درآمد کل</span>
-                                                </div>
-                                                <div class="dashboard-tab-thumb">
-                                                    <img src="admin/img/bg-img/6.svg" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="earnings-sat" role="tabpanel"
-                                             aria-labelledby="pills-earnings-sat">
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div>
-                                                    <h2 class="text-white mb-3 font-30">548،234<i
-                                                            class="arrow_up"></i></h2>
-                                                    <span class="text-white mb-3 d-block">درآمد کل</span>
-                                                </div>
-                                                <div class="dashboard-tab-thumb">
-                                                    <img src="admin/img/bg-img/6.svg" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade active show" id="earnings-sun" role="tabpanel"
-                                             aria-labelledby="pills-earnings-sun">
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div>
-                                                    <h2 class="text-white mb-3 font-30">459،234<i
-                                                            class="arrow_up"></i></h2>
-                                                    <span class="text-white mb-3 d-block">درآمد کل</span>
-                                                </div>
-                                                <div class="dashboard-tab-thumb">
-                                                    <img src="admin/img/bg-img/6.svg" alt="">
+                                                    <img src="{{URL::asset('admin/img/bg-img/6.svg')}}" alt="">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <ul class="nav nav-pills align-items-center" id="pills-tab" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active show" id="pills-earnings-sat"
-                                               data-toggle="pill" href="#earnings-sat" role="tab"
-                                               aria-controls="earnings-sat" aria-selected="false">نشسته</a>
+                                            <a class="nav-link active show" id="pills-earnings-today"
+                                               data-toggle="pill" href="#earnings-today" role="tab"
+                                               aria-controls="earnings-today" aria-selected="false">امروز</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link show" id="pills-earnings-sun" data-toggle="pill"
-                                               href="#earnings-sun" role="tab" aria-controls="earnings-sun"
-                                               aria-selected="true">آفتاب</a>
+                                            <a class="nav-link show" id="pills-earnings-this-week" data-toggle="pill"
+                                               href="#earnings-this-week" role="tab" aria-controls="earnings-this-week"
+                                               aria-selected="true">هفته جاری</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="pills-earnings-mon" data-toggle="pill"
-                                               href="#earnings-mon" role="tab" aria-controls="earnings-mon"
-                                               aria-selected="false">دوشنبه</a>
+                                            <a class="nav-link show" id="pills-earnings-this-month" data-toggle="pill"
+                                               href="#earnings-this-month" role="tab" aria-controls="earnings-this-month"
+                                               aria-selected="false">ماه جاری</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link show" id="pills-earnings-tue" data-toggle="pill"
-                                               href="#earnings-tue" role="tab" aria-controls="earnings-tue"
-                                               aria-selected="false">سه شنبه</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link show" id="pills-earnings-wed" data-toggle="pill"
-                                               href="#earnings-wed" role="tab" aria-controls="earnings-wed"
-                                               aria-selected="false">چهارشنبه</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link show" id="pills-earnings-thu" data-toggle="pill"
-                                               href="#earnings-thu" role="tab" aria-controls="earnings-thu"
-                                               aria-selected="false">پنجشنبه</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link show" id="pills-earnings-fri" data-toggle="pill"
-                                               href="#earnings-fri" role="tab" aria-controls="earnings-fri"
-                                               aria-selected="false">جمعه</a>
+                                            <a class="nav-link show" id="pills-earnings-this-year" data-toggle="pill"
+                                               href="#earnings-this-year" role="tab" aria-controls="earnings-this-year"
+                                               aria-selected="false">سال جاری</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -203,29 +144,8 @@
                     </div>
                 </div>
 
-                <!-- Best seller Area -->
-                <div class="col-md-6 height-card box-margin">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="font-20 mb-1">تبریک می گویم هیملا!</h5>
-                            <p class="mb-20">پرفروش ترین ماه</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="dashboard-content-right">
-                                    <h2 class="text-success font-36 font-weight-bold">59k تومان</h2>
-                                    <p class="font-15 font-weight-bold">شما امروز 65.6٪ <br>فروش بیشتر انجام
-                                        داده اید .</p>
-                                    <button type="button" class="btn btn-primary mt-15">مشاهده فروش</button>
-                                </div>
-                                <div class="dashboard-content-left wow shake" data-wow-delay="0.6s">
-                                    <img src="admin/img/bg-img/5.jpg" class="img-fluid" alt="داشبورد" width="180"
-                                         height="180">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-md-8 box-margin">
+                {{--<div class="col-md-8 box-margin">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">خلاصه سفارش</h5>
@@ -1389,7 +1309,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>--}}
             </div>
         </div>
     </div>

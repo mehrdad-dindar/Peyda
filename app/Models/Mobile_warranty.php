@@ -82,4 +82,9 @@ class Mobile_warranty extends Model
 
         return $phone_brand.' / '.$phone_model;
     }
+
+    public function WarrantyProblem()
+    {
+        return $this->hasMany( WarrantyProblem::class);
+    }
 }

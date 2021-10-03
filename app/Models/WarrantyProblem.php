@@ -18,7 +18,7 @@ class WarrantyProblem extends Model
 
     public function Mobile_warranty()
     {
-        return $this->belongsTo(Mobile_warranty::class,'warranty_id','id');
+        return $this->belongsTo(Mobile_warranty::class,'mobile_warranty_id','id');
     }
 
     public function warrantyproblemtype()
