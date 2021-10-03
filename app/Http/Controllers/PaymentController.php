@@ -330,10 +330,14 @@ class PaymentController extends Controller
             $transaction->transaction_result = $receipt;
             $transaction->status = Transaction::STATUS_SUCCESS;
             $transaction->save();
-            $mobilewarranty->mobile_warranty->status_id = 2;
+            if ($mobilewarranty->warranty_problem_type_id == 3) {
+                $mobilewarranty->mobile_warranty->status_id = 2;
+                UserRequest::query()->where([['user_requestable_id',$mobilewarranty->mobile_warranty->id ], ['user_requestable_type', 'App\Models\Mobile_warranty']])->orderBy('updated_at', 'desc')->first()->update(['done'=>1]);
+            }elseif ($mobilewarranty->warranty_problem_type_id == 5){
+                $mobilewarranty->mobile_warranty->status_id = 5;
+            }
             $mobilewarranty->mobile_warranty->save();
 
-            UserRequest::query()->where([['user_requestable_id',$mobilewarranty->mobile_warranty->id ], ['user_requestable_type', 'App\Models\Mobile_warranty']])->orderBy('updated_at', 'desc')->first()->update(['done'=>1]);
 
             return view('profile.warranty.peyment_result')->with([
                 'wallet' => $wallet,
@@ -356,6 +360,7 @@ class PaymentController extends Controller
                  * For manage error use this code ****
                  * */
                 $wallet_history->status = Transaction::STATUS_FAILED;
+
                 $wallet_history->update();
                 return view('profile.warranty.peyment_result')->with([
                     'wallet' => $wallet,

@@ -53,7 +53,7 @@
                 <div class="card-header">
                     <h3 class="card-title text-success">پرداخت موفق</h3>
                     <div class="card-toolbar">
-                        @if($mobilewarranty->warranty_problem_type->id == 5)
+                        @if($mobilewarranty->warranty_problem_type_id == 5)
                             <a href="{{route('editPhoto',[$mobilewarranty->mobile_warranty_id])}}" type="button"
                                class="btn btn-sm btn-light-danger border border-danger">
                                 ویرایش مدارک
