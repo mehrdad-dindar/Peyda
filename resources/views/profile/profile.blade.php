@@ -386,12 +386,12 @@
                     <!--begin::Col-->
                     <div class="col-lg-8 d-flex align-items-center">
                         <span
-                            class="fw-bolder fs-6 text-gray-800 me-2">{{ $user->email != null ? $user->email : "xxxxxxx@xxxxx.xxx" }}</span>
+                            class="fw-bolder fs-6 text-gray-800 me-2">{{ $user->email ?? "xxxxxxx@xxxxx.xxx" }}</span>
                         @if($user->email)
                             @if($user->email_verified_at)
                                 <span class="badge badge-success">تایید شده</span>
                             @else
-                                <span class="badge badge-danger">تایید نشده</span>
+                                <a href="{{route('verification.notice')}}" class="badge badge-danger">ارسال لینک تأیید</a>
                             @endif
                         @endif
                     </div>
