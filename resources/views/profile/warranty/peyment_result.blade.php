@@ -53,10 +53,17 @@
                 <div class="card-header">
                     <h3 class="card-title text-success">پرداخت موفق</h3>
                     <div class="card-toolbar">
-                        <a href="{{route('bimeh_all')}}" type="button"
-                           class="btn btn-sm btn-light-success border border-success">
-                            تکمیل مدارک
-                        </a>
+                        @if($mobilewarranty->warranty_problem_type->id == 5)
+                            <a href="{{route('editPhoto',[$mobilewarranty->mobile_warranty_id])}}" type="button"
+                               class="btn btn-sm btn-light-danger border border-danger">
+                                ویرایش مدارک
+                            </a>
+                        @else
+                            <a href="{{route('bimeh_all')}}" type="button"
+                               class="btn btn-sm btn-light-danger border border-danger">
+                                بازگشت و ادامه
+                            </a>
+                        @endif
                     </div>
                 </div>
                 <div class="card-body p-0">

@@ -167,6 +167,7 @@ class MobileWarrantyController extends Controller
             $warrantyProblem = WarrantyProblem::query()->where('mobile_warranty_id', $warranty->id)->orderBy('updated_at', 'desc')->first();
             if ($warrantyProblem != null) {
                 $warranty['problem_price'] = $warrantyProblem->price;
+                $warranty['problem_id'] = $warrantyProblem->id;
                 $warranty['warrantyProblemType'] = $warrantyProblem->warranty_problem_type_id;
                 $warrantyproblemtype = WarrantyProblemType::query()->join('warranty_problems as pm', 'pm.warranty_problem_type_id', 'warranty_problem_types.id')->where('pm.id', $warrantyProblem->id)->first();
                 $warranty['warrantyProblemTypeName'] = $warrantyproblemtype->name;
@@ -242,7 +243,7 @@ class MobileWarrantyController extends Controller
         //dd($request['warranty_owner']);
         if ($request['warranty_owner'] == 1) {
 
-            $email = User::where('email', $request['email'])->first();
+            $email = User::where([['email', $request['email']],['id','!=',auth()->id()]])->first();
             if ($email) {
                 return redirect()
                     ->back()

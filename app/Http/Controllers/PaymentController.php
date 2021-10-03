@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserRequest;
 use App\Models\Wallet;
 use App\Models\Wallet_history;
 use App\Models\WarrantyProblem;
@@ -67,7 +68,6 @@ class PaymentController extends Controller
                 });
 
                 $this->updateWalletHistory($user,$transaction,$phone_model,$amount,$mobilewarranty);
-                $warranties = Mobile_warranty::where('owner_id',auth()->id())->orderBy('created_at', 'desc')->get();
 
                 return $payment->pay()->render();
             } catch (PurchaseFailedException | Exception | SoapFault $e) {
@@ -167,7 +167,6 @@ class PaymentController extends Controller
         $mobilewarranty = Mobile_warranty::find($invoice_id);
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         $wallet_history = Wallet_history::where('user_id', '=', auth()->id())->orderBy('created_at', 'desc')->first();
-        $warranties = Mobile_warranty::where('owner_id',auth()->id())->orderBy('created_at', 'desc')->get();
 
         if ($request->missing('peyment_id')) {
             $this->status_failed();
@@ -247,20 +246,16 @@ class PaymentController extends Controller
 
     }
 
-    public function Information_defect_user_owed($invoice_id)
+    public function problemPurchase($invoice_id)
     {
         $user = Auth::user();
         $mobilewarranty = WarrantyProblem::find($invoice_id);
         $phone_model = $mobilewarranty->mobile_warranty->phone_model->name;
-        dd($phone_model);
-        $wallet = Wallet::where('user_id', auth()->id())->first();
-        $fire_addition_price = 0;
-        if ($mobilewarranty->addition_fire_commitment_id != null) {
-            $fire_addition_price = $mobilewarranty->Fire_commitment_ceiling->price;
-        }
-        $amount =$mobilewarranty->price;
+        $warranty_code = $mobilewarranty->mobile_warranty->activation_code;
+
+
         $invoice = new Invoice();
-        $invoice->amount((int)$amount);
+        $invoice->amount((int)$mobilewarranty->price);
         $paymentId = md5(uniqid());
         try {
             $transaction = $user->transactions()->create([
@@ -273,7 +268,7 @@ class PaymentController extends Controller
 
             $callbackUrl = route('problemPurchase.result', [$invoice_id, 'peyment_id' => $paymentId]);
             $payment = Payment::callbackUrl($callbackUrl);
-            $payment->config('description', 'مابه التفاوت فراگارانتی ' . $phone_model);
+            $payment->config('description', 'مابه التفاوت فراگارانتی ' . $phone_model.' با شناسه '.$warranty_code);
 
             $payment->purchase($invoice, function ($driver, $transactionid) use ($transaction) {
                 $transaction->transaction_id = $transactionid;
@@ -281,7 +276,7 @@ class PaymentController extends Controller
             });
 
             /*$this->updateWalletHistory($user,$transaction,$phone_model,$amount,$mobilewarranty);*/
-            $warranties = Mobile_warranty::where('owner_id',auth()->id())->orderBy('created_at', 'desc')->get();
+            /*$warranties = Mobile_warranty::where('owner_id',auth()->id())->orderBy('created_at', 'desc')->get();*/
 
             return $payment->pay()->render();
         } catch (PurchaseFailedException | Exception | SoapFault $e) {
@@ -291,17 +286,85 @@ class PaymentController extends Controller
 
             $mobilewarranty->status_id = 8;
             $mobilewarranty->save();
-
-            /*return redirect()->route('bimeh_all')->with([
-                'status' => 'failed',
-                'wallet' => $wallet,
-                'warranties' => $warranties,
-            ]);*/
+            /*$wallet = Wallet::where('user_id', "=", auth()->id())->first();
             return view('')->with([
                 'wallet' => $wallet,
                 'status' => 'failed',
 
+            ]);*/
+        }
+    }
+
+    public function problemResult(Request $request, $invoice_id)
+    {
+        $transaction = Transaction::where('peyment_id', $request->peyment_id)->first();
+        $mobilewarranty = WarrantyProblem::find($invoice_id);
+        $wallet = Wallet::where('user_id', "=", auth()->id())->first();
+        $wallet_history = Wallet_history::where('user_id', '=', auth()->id())->orderBy('created_at', 'desc')->first();
+
+        if ($request->missing('peyment_id')) {
+            $this->status_failed();
+        }
+
+        if (empty($transaction)) {
+            $this->status_failed();
+        }
+
+        if ($transaction->user_id <> Auth::id()) {
+            $this->status_failed();
+        }
+
+        if ($transaction->mobile_warranty_id <> $mobilewarranty->mobile_warranty->id) {
+            $this->status_failed();
+        }
+        if ($transaction->status <> Transaction::STATUS_PENDING) {
+            $this->status_failed();
+        }
+
+        try {
+
+            $receipt = Payment::amount($mobilewarranty->price)
+                ->transactionId($request->Authority)
+                ->verify();
+
+            $transaction->transaction_result = $receipt;
+            $transaction->status = Transaction::STATUS_SUCCESS;
+            $transaction->save();
+            $mobilewarranty->mobile_warranty->status_id = 2;
+            $mobilewarranty->mobile_warranty->save();
+
+            UserRequest::query()->where([['user_requestable_id',$mobilewarranty->mobile_warranty->id ], ['user_requestable_type', 'App\Models\Mobile_warranty']])->orderBy('updated_at', 'desc')->first()->update(['done'=>1]);
+
+            return view('profile.warranty.peyment_result')->with([
+                'wallet' => $wallet,
+                'status' => 'success',
+                'transaction'=>$transaction,
+                'mobilewarranty' => $mobilewarranty,
             ]);
+        } catch (Exception | InvalidPaymentException $e) {
+            if ($e->getCode() < 0) {
+                $transaction->status = Transaction::STATUS_FAILED;
+                $transaction->transaction_result = [
+                    'message' => $e->getMessage(),
+                    'code' => $e->getCode()
+                ];
+                $transaction->save();
+                $mobilewarranty->mobile_warranty->status_id = 8;
+                $mobilewarranty->mobile_warranty->save();
+
+                /*
+                 * For manage error use this code ****
+                 * */
+                $wallet_history->status = Transaction::STATUS_FAILED;
+                $wallet_history->update();
+                return view('profile.warranty.peyment_result')->with([
+                    'wallet' => $wallet,
+                    'status' => 'failed',
+                    'error'  => $e,
+                    'mobilewarranty' => $mobilewarranty,
+
+                ]);
+            }
         }
     }
 }

@@ -687,7 +687,7 @@
                                                                 </label>
                                                             @elseif($row->warrantyProblemType==3)
                                                                 <label
-                                                                    onclick="window.location.href='{{route('editPhoto',['id'=>$row->id])}}'"
+                                                                    onclick="window.location.href='{{route('problemPurchase',['id'=>$row->problem_id])}}'"
 
                                                                     class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6">
                                                                     <!--begin::Input-->
@@ -726,7 +726,7 @@
 																				<span
                                                                                     class="fs-3 fw-bolder text-gray-900 mb-2 d-block">پرداخت مابه التفاوت</span>
                                                                                 <span
-                                                                                    class="fw-bold fs-4 text-muted"> {{$row->problem_price}}</span>
+                                                                                    class="fw-bold fs-4 text-muted">  {{number_format($row->problem_price) . ' تومان '}}</span>
 																			</span>
                                                                         <!--end::Info-->
 																		</span>
@@ -734,7 +734,7 @@
                                                                 </label>
                                                             @elseif($row->warrantyProblemType==5)
                                                                 <label
-                                                                    onclick="window.location.href='{{route('editPhoto',['id'=>$row->id])}}'"
+                                                                    onclick="window.location.href='{{route('problemPurchase',['id'=>$row->problem_id])}}'"
 
                                                                     class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6">
                                                                     <!--begin::Label-->
@@ -768,7 +768,7 @@
 																				<span
                                                                                     class="fs-3 fw-bolder text-gray-900 mb-2 d-block">پرداخت مابه التفاوت</span>
                                                                                 <span
-                                                                                    class="fw-bold fs-4 text-muted"> {{$row->problem_price}}</span>
+                                                                                    class="fw-bold fs-4 text-muted"> {{number_format($row->problem_price) . ' تومان '}}</span>
 																			</span>
                                                                         <!--end::Info-->
 																		</span>
