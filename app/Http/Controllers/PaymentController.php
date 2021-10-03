@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Wallet;
 use App\Models\Wallet_history;
+use App\Models\WarrantyProblem;
 use Crypt;
 use Exception;
 use App\Models\Commitment_ceiling;
@@ -244,5 +245,63 @@ class PaymentController extends Controller
             }
         }
 
+    }
+
+    public function Information_defect_user_owed($invoice_id)
+    {
+        $user = Auth::user();
+        $mobilewarranty = WarrantyProblem::find($invoice_id);
+        $phone_model = $mobilewarranty->mobile_warranty->phone_model->name;
+        dd($phone_model);
+        $wallet = Wallet::where('user_id', auth()->id())->first();
+        $fire_addition_price = 0;
+        if ($mobilewarranty->addition_fire_commitment_id != null) {
+            $fire_addition_price = $mobilewarranty->Fire_commitment_ceiling->price;
+        }
+        $amount =$mobilewarranty->price;
+        $invoice = new Invoice();
+        $invoice->amount((int)$amount);
+        $paymentId = md5(uniqid());
+        try {
+            $transaction = $user->transactions()->create([
+                'user_id' => $user->id,
+                'mobile_warranty_id' => $invoice_id,
+                'paid' => $invoice->getAmount(),
+                'invoice_details' => $invoice,
+                'peyment_id' => $paymentId,
+            ]);
+
+            $callbackUrl = route('problemPurchase.result', [$invoice_id, 'peyment_id' => $paymentId]);
+            $payment = Payment::callbackUrl($callbackUrl);
+            $payment->config('description', 'مابه التفاوت فراگارانتی ' . $phone_model);
+
+            $payment->purchase($invoice, function ($driver, $transactionid) use ($transaction) {
+                $transaction->transaction_id = $transactionid;
+                $transaction->save();
+            });
+
+            /*$this->updateWalletHistory($user,$transaction,$phone_model,$amount,$mobilewarranty);*/
+            $warranties = Mobile_warranty::where('owner_id',auth()->id())->orderBy('created_at', 'desc')->get();
+
+            return $payment->pay()->render();
+        } catch (PurchaseFailedException | Exception | SoapFault $e) {
+            $transaction->transaction_result = $e;
+            $transaction->status = Transaction::STATUS_FAILED;
+            $transaction->save();
+
+            $mobilewarranty->status_id = 8;
+            $mobilewarranty->save();
+
+            /*return redirect()->route('bimeh_all')->with([
+                'status' => 'failed',
+                'wallet' => $wallet,
+                'warranties' => $warranties,
+            ]);*/
+            return view('')->with([
+                'wallet' => $wallet,
+                'status' => 'failed',
+
+            ]);
+        }
     }
 }
