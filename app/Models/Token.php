@@ -11,11 +11,12 @@ use IPPanel\Client;
 use IPPanel\Errors\Error;
 use IPPanel\Errors\HttpException;
 use IPPanel\Errors\ResponseCodes;
+use App\Traits\Sms;
 
 
 class Token extends Model
 {
-    use HasFactory;
+    use HasFactory,Sms;
 
     const EXPIRATION_TIME = 1; // minutes
 
@@ -90,7 +91,6 @@ class Token extends Model
 
     public function sendCode()
     {
-        $client = new Client("ZVglndyt2dqwXygCGLxtuFg48qRl2emwbJajIBgOFJo=");
         if (!$this->user) {
             throw new Exception("No user attached to this token.");
         }
@@ -99,21 +99,7 @@ class Token extends Model
             $this->code = $this->generateCode();
         }
 
-        try {
-            $phone_num = '98'.(int)$this->user->phone_num;
-            /*dd($phone_num);*/
-            $pattern = $client->sendPattern("9phjbgorri", "+983000505", $phone_num, ['code' => strval(Crypt::decryptString($this->code))]);
-
-            return $pattern;
-        } catch (Exception|Error|HttpException $e) {
-            /*dd($e->unwrap());*/
-            /*return $e->unwrap() ;
-            echo $e->getCode();*/
-            // TODO Sms Error
-            /*if ($e->code() == ResponseCodes::ErrUnprocessableEntity) {
-                echo "Unprocessable entity";
-            }*/
-        }
+        $this->sendPattern($this->user,'9phjbgorri',['code' => strval(Crypt::decryptString($this->code))]);
 
         return true;
     }

@@ -1,6 +1,6 @@
 @extends('profile.layouts.master')
 @if($status == 'failed')
-    @section('title','خطا در فعالسازی ایمیل : '.$error->getCode())
+    @section('title','خطا در فعالسازی ایمیل : ')
 @elseif($status == 'success')
     @section('title','فعالسازی ایمیل موفق')
 @endif
@@ -29,9 +29,9 @@
                             </span>
                         </div>
                         <div class="card-p col-md-9">
-                            <p>
+                            <h2>
                                 خطا در فعالسازی ایمیل. لطفا از طریق ارسال تیکت پیگیری نمایید.
-                            </p>
+                            </h2>
                         </div>
                     </div>
                     <div class="text-center p-4">
@@ -62,13 +62,8 @@
                         </div>
                         <div class="card-p mb-10 col-md-9">
                             <h2>
-                                با تشکر از اعتماد شما
-                            </h2>
-
-                            <p>
                                 فعالسازی ایمیل با موفقیت انجام شد.
-                            </p>
-
+                            </h2>
                         </div>
                     </div>
                     <div class="text-center p-4">

@@ -25,11 +25,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Traits\UserMobileWarranties;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Traits\Sms;
 
 class MobileWarrantyController extends Controller
 {
 
-    use UserMobileWarranties;
+    use UserMobileWarranties,Sms;
 
     public function __construct()
     {
@@ -351,6 +352,9 @@ class MobileWarrantyController extends Controller
                 'addition_fire_commitment_id' => $request['fire_addition_price'],
             ]);
             $data->save();
+
+            $this->sendPattern(auth()->user(),'ozv6axg5go',['name'=>auth()->user()->f_name,'phone_model'=>auth()->user()->getFullNameAttribute(auth()->user())]);
+
             if ($data->addition_fire_commitment_id != null) {
                 $data->tax = ($data->Fire_commitment_ceiling->price + $data->Commitment_ceiling->price) * (9 / 100);
                 $data->save();
@@ -536,6 +540,7 @@ class MobileWarrantyController extends Controller
                 $userrequest1 = new UserRequest();
                 $mobileWarranty->userrequests()->save($userrequest1);
             }
+            $this->sendPattern(auth()->user(),'upn8fbro7f',['name'=>auth()->user()->f_name,'date'=>Verta::now()->format('Y/m/d')]);
 
             return redirect(route('bimeh_all'))->with(['success' => 'عکس های موبایل با موفقیت آپلود شد.']);
 
@@ -600,6 +605,8 @@ class MobileWarrantyController extends Controller
                 $userrequest1 = new UserRequest();
                 $mobileWarranty->userrequests()->save($userrequest1);
             }
+
+            $this->sendPattern(auth()->user(),'upn8fbro7f',['name'=>auth()->user()->f_name,'date'=>Verta::now()->format('Y/m/d')]);
 
             return redirect(route('bimeh_all'))->with(['success' => 'عکس های موبایل با موفقیت آپلود شد.']);
 

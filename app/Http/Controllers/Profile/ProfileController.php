@@ -24,12 +24,13 @@ use Illuminate\Support\Facades\Validator;
 use Mail;
 use Redirect;
 use App\Traits\Emails;
+use App\Traits\Sms;
 use function Symfony\Component\String\u;
 
 class ProfileController extends Controller
 {
 
-    use Emails;
+    use Emails,Sms;
     public function __construct()
     {
         $this->middleware(['auth', 'verified']);
@@ -108,6 +109,9 @@ class ProfileController extends Controller
         $v->month = $request['month']; // عدد 13 برای ثبت سال آینده اولین ماه
         $v->day = $request['day'];*/
         $user = User::findOrFail($request['id']);
+
+        /*$this->sendPattern($user,'4altcglgrs',['name'=>$user->f_name]);*/
+        $this->sendPattern($user,'6ki49gc097',['name'=>$user->getFullNameAttribute($user)]);
 
         if ($request->file('avatar')) {
             $avatar = $request->file('avatar');
@@ -228,7 +232,9 @@ class ProfileController extends Controller
         $rand=Rand(1000,9999);
 
         $code=md5($rand);
-        Mail::to($user)->send(new verifyEmail($user,$code));
+        $var=new verifyEmail($user,$code);
+
+        self::sendEmail($user,$var);
 
         $email=$this->addEmail($user);
         if (!$email->isValid())
@@ -238,20 +244,22 @@ class ProfileController extends Controller
 
         return view('emails.sendVerifyNotice');
     }
+
     public function checkVerifyEmail($userid,$hash)
     {
         //dd('465636eb4a7ff4b267f3b765d07a02da'== $hash);
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         $email=Email::query()->where([['emailable_id',$userid],['emailable_type','App\Models\User'],['code',$hash]])->orderBy('updated_at','desc')->first();
         //dd($email);
-        if($email->exists()){
+        if($email!=null){
             User::query()->where('id',$userid)->update(['email_verified_at'=>Carbon::now()->toDateTimeString()]);
             return view('emails.emailVerifyCallback',
                 ['status'=>'success',
                 'wallet'=>$wallet
             ]);
         }else{
-            return view('emails.emailVerifyCallback',['status'=>'failed']);
+            return view('emails.emailVerifyCallback',['error'=>'خطا','status'=>'failed',
+                'wallet'=>$wallet]);
         }
     }
 }

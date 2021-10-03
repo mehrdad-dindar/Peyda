@@ -22,7 +22,7 @@
     <table cellpadding="0" cellspacing="0" style="direction: rtl; text-align: right; font-family: IRANSansfanum; font-size: 15px; font-weight: 400; max-width: 600px; border: none; margin: 0 auto; border-radius: 6px; overflow: hidden; background-color: #fff; box-shadow: 0 0 3px rgba(60, 72, 88, 0.15);">
         <thead>
         <tr style="background-color: #2f55d4; padding: 3px 0; border: none; line-height: 68px; text-align: center; color: #fff; font-size: 24px; letter-spacing: 1px;">
-            <th scope="col"><img src="{{URL::asset('front/img/logo-white-1.png')}}" height="24" alt=""></th>
+            <th scope="col"><img src="{{URL::asset('front/img/logo-white-1.png')}}" height="100" alt=""></th>
         </tr>
         </thead>
 
