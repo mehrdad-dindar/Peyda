@@ -34,15 +34,10 @@
         </tr>
         <tr>
             <td style="padding: 15px 24px 15px; color: #8492a6;">
-                فراگارانتی برای تلفن همراه {{$warranty->getPhoneName($warranty)}} با موفقیت خریداری شد.
-            </td>
-        </tr>
-
-        <tr>
-            <td style="padding: 15px 24px 0; color: #8492a6;">
-                با مراجعه به پنل کاربری خود اقدام به آپلود مدارک کنید.
-                https://peydaservice.com/panel
-                پیدا سرویس ماندگار
+                {{$user->getFullNameAttribute($user)}} پروفایل کاربری شما با موفقیت فعال شد!
+                اکنون می‌توانید نسبت به خرید فراگارانتی تلفن همراه اقدام نمایید.
+                پیدا سرویس ماندگار؛ آن‌سوی مرز‌های گارانتی تلفن همراه
+                https://peydaservice.com
             </td>
         </tr>
 

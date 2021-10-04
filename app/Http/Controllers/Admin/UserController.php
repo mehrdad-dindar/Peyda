@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\rejectAccount;
 use App\Models\Notification;
 use App\Models\NotificationUser;
 use App\Models\Setting;
@@ -11,12 +12,13 @@ use App\Models\UserRequest;
 use App\Traits\Notifications;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Traits\Sms;
 use App\Traits\Emails;
+use App\Traits\Sms;
 
 class UserController extends Controller
 {
-    use Notifications,Sms,Emails;
+    use Notifications, Emails, Sms;
+
     /**
      * Display a listing of the resource.
      *
@@ -49,7 +51,7 @@ class UserController extends Controller
         //return $usersAuth;
     }
 
-    public function userNewRequestCheck($users,$taeed=1)
+    public function userNewRequestCheck($users, $taeed = 1)
     {
         foreach ($users as $key=>$user) {
             $userrequest = $user->userrequests()->first();
@@ -134,8 +136,16 @@ class UserController extends Controller
             User::find($user_id)->userrequests()->update(['done'=>1]);
             $this->sendPattern($userRec,'6ki49gc097',['name'=>$userRec->getFullNameAttribute($userRec)]);
         } else {
+
+            if ($userRec->email) {
+                $var = new rejectAccount($userRec);
+                self::sendEmail($userRec, $var);
+                $email = $this->addEmail($userRec->email);
+
+                }
+
             $descriptions = $request->get('descriptions');
-            $this->sendPattern($userRec,'y8j4i7ebrl',['name'=>$userRec->getFullNameAttribute($userRec)]);
+            $this->sendPattern($userRec, 'y8j4i7ebrl', ['name' => $userRec->f_name ?? 'کاربر']);
         }
         $admin_id = $request->get('admin_id');
         $link = '/panel/edit_profile';

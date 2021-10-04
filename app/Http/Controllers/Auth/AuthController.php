@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Mail\BuyWarrantyEmail;
 use App\Mail\loginEmail;
+use App\Mail\WelcomeEmail;
 use App\Models\Role;
 use App\Models\Token;
 use App\Models\User;
@@ -19,7 +20,7 @@ use App\Traits\Emails;
 
 class AuthController extends Controller
 {
-    use Emails, Sms;
+    use Sms,Emails;
 
     public function __construct()
     {
@@ -151,18 +152,27 @@ class AuthController extends Controller
 
         auth()->login($user, $rememberMe);
 
+        $this->sendPattern($user, '0saq77pizr', ['h' => Verta::now()->format('H:m'), 'day' => Verta::now()->formatWord('l'), 'date' => Verta::now()->format('Y/m/d')]);
+
         if ($user->status == 0)
-            $this->sendPattern($user, '0saq77pizr', ['h' => Verta::now()->format('H:m'), 'day' => Verta::now()->formatWord('l'), 'date' => Verta::now()->format('Y/m/d')]);
+            $this->sendPattern($user,'szkx3x454l',['name'=>$user->f_name ?? "کاربر"]);
 
-        $this->sendPattern($user, 'szkx3x454l', ['name' => $user->f_name ?? "کاربر"]);
-
-        if (auth()->user()->email != null) {
+        if(auth()->user()->email!=null) {
             $var = new loginEmail(auth()->user());
 
             self::sendEmail(auth()->user(), $var);
 
             $email = $this->addEmail(auth()->user());
         }
+
+        if($user->email!=null) {
+            $var = new WelcomeEmail($user);
+
+            self::sendEmail($user, $var);
+
+            $this->addEmail($user);
+        }
+
         return redirect()->route('dashboard');
 
     }

@@ -62,9 +62,9 @@
                         <ul class="treeview-menu">
                             {{--<li><a href="#">جدید</a></li>--}}
                             <li><a href="{{ route('all_users') }}"> همه@if(\App\Http\Controllers\Controller::getNewUsersNum()>0) <span class="badge badge-pill badge-danger" style="display: inline;width: max-content;flex: unset;">{{\App\Http\Controllers\Controller::getNewUsersNum()}}</span> @endif</a></li>
-                            <li><a href="{{ route('all_users',[1]) }}">تایید شده ها</a></li>
-                            <li><a href="{{ route('all_users',[2]) }}">بررسی نشده ها</a></li>
-                            <li><a href="{{ route('all_users',[0]) }}">تایید نشده ها</a></li>
+                            <li class="d-flex"><a href="{{ route('all_users',[1]) }}">تایید شده ها</a>@if(\App\Http\Controllers\Controller::getUsersVerOrNotNum(1)>0) <span class="badge badge-pill badge-danger p-2 mr-2" style="display: inline;width: max-content;height: max-content;flex: unset;">{{\App\Http\Controllers\Controller::getUsersVerOrNotNum(1)}}</span> @endif</li>
+                            <li><a href="{{ route('all_users',[2]) }}"> بررسی نشده ها</a></li>
+                            <li class="d-flex"><a href="{{ route('all_users',[0]) }}">تایید نشده ها</a>@if(\App\Http\Controllers\Controller::getUsersVerOrNotNum(0)>0) <span class="badge badge-pill badge-danger p-2 mr-2" style="display: inline;width: max-content;height: max-content;flex: unset;">{{\App\Http\Controllers\Controller::getUsersVerOrNotNum(0)}}</span> @endif</li>
                             <li><a href="{{ route('profile') }}">پروفایل من</a></li>
                         </ul>
                     </li>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Helpers\Helpers;
+use App\Mail\IncompleteDocumentsEmail;
+use App\Mail\WarrantyActivation;
 use App\Models\Commitment_ceiling;
 use App\Models\Fire_commitment_ceiling;
 use App\Models\FlashMessage;
@@ -32,7 +34,7 @@ use App\Traits\Emails;
 
 class WarrantyController extends Controller
 {
-    use Notifications,Sms,Emails;
+    use Notifications, Sms, Emails;
 
     public function acceptedIndex()
     {
@@ -275,7 +277,13 @@ class WarrantyController extends Controller
             ]);
             $this->sendPattern($userRec,'ivm4o57jm4',['name'=>$userRec->f_name]);
             $done = 0;
-            /* Charge user wallet and wallet history */
+
+            $var = new IncompleteDocumentsEmail($userRec);
+
+            self::sendEmail($userRec, $var);
+
+            $this->addEmail($userRec);
+
             $wallet = Wallet::where('user_id',$user_id)->first();
             $wallethistory = new Wallet_history();
             $wallet->value = Crypt::encryptString((int)Crypt::decryptString($wallet->value) + (int)abs($request['talab_price']));

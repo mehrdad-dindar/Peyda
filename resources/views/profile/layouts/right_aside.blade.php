@@ -50,7 +50,7 @@
                             </div>
                         </div>
                         <div class="menu-item">
-                            <a @if(auth()->user()->status==1) class="menu-link"
+                            <a @if(\App\Http\Controllers\Controller::getUser()->status==1) class="menu-link"
                                href="{{ route('bimeh_add') }}"
                                @else
                                class="menu-link disabled-a"
@@ -63,7 +63,7 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a @if(auth()->user()->status==1) class="menu-link"
+                            <a @if(\App\Http\Controllers\Controller::getUser()->status==1) class="menu-link"
                                    href="{{ route('bimeh_all') }}"
                                @else
                                 class="menu-link disabled-a"
@@ -76,7 +76,7 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a @if(auth()->user()->status==1) class="menu-link"
+                            <a @if(\App\Http\Controllers\Controller::getUser()->status==1) class="menu-link"
                                    href="{{ route('bimeh_all',[6]) }}"
                                @else
                                 class="menu-link disabled-a"
@@ -89,7 +89,7 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a @if(auth()->user()->status==1) class="menu-link"
+                            <a @if(\App\Http\Controllers\Controller::getUser()->status==1) class="menu-link"
                                    href="{{ route('bimeh_all',[2]) }}"
                                @else
                                 class="menu-link disabled-a"
@@ -102,7 +102,7 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a @if(auth()->user()->status==1) class="menu-link"
+                            <a @if(\App\Http\Controllers\Controller::getUser()->status==1) class="menu-link"
                                    href="{{ route('bimeh_all',[7]) }}"
                                @else
                                 class="menu-link disabled-a"
@@ -115,7 +115,7 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a @if(auth()->user()->status==1) class="menu-link"
+                            <a @if(\App\Http\Controllers\Controller::getUser()->status==1) class="menu-link"
                                href="{{ route('receive_create') }}"
                                @else
                                class="menu-link disabled-a"
@@ -128,7 +128,7 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a @if(auth()->user()->status==1) class="menu-link"
+                            <a @if(\App\Http\Controllers\Controller::getUser()->status==1) class="menu-link"
                                href="{{ route('use_all') }}"
                                @else
                                class="menu-link disabled-a"
@@ -142,7 +142,7 @@
                         </div>
 
                         <div class="menu-item">
-                            <a @if(auth()->user()->status==1) class="menu-link"
+                            <a @if(\App\Http\Controllers\Controller::getUser()->status==1) class="menu-link"
                                href="{{ route('bimeh_bought') }}"
                                @else
                                class="menu-link disabled-a"

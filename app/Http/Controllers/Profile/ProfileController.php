@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Profile;
 use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EditProfileRequest;
+use App\Mail\verifyAccount;
 use App\Mail\verifyEmail;
 use App\Models\city;
 use App\Models\Email;
@@ -160,6 +161,12 @@ class ProfileController extends Controller
         $user->phone_model_other = $other_model;
         $user->status=1;
         $user->save();
+
+        if(auth()->user()->email!=null) {
+            $var = new verifyAccount(auth()->user());
+            self::sendEmail(auth()->user(), $var);
+            $this->addEmail(auth()->user());
+        }
 
         $userrequest = UserRequest::query()
             ->where([['user_requestable_type', '=', 'App\Models\User'],
