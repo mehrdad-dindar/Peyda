@@ -329,7 +329,7 @@ class MobileWarrantyController extends Controller
                     ]);
                     Wallet::create([
                         'user_id' => $ownerUser->id,
-                        'value'=>\Crypt::encryptString('0')
+                        'value'=>Crypt::encryptString('0')
                     ]);
                 }
                 $owner_id = $ownerUser->id;
@@ -354,7 +354,7 @@ class MobileWarrantyController extends Controller
             ]);
             $data->save();
 
-            $this->sendPattern(auth()->user(),'ozv6axg5go',['name'=>auth()->user()->f_name,'phone_model'=>auth()->user()->getFullNameAttribute(auth()->user())]);
+            $this->sendPattern(auth()->user(),'ozv6axg5go',['name'=>auth()->user()->f_name,'phone_model'=>$data->getPhoneName($data)]);
 
             if ($data->addition_fire_commitment_id != null) {
                 $data->tax = ($data->Fire_commitment_ceiling->price + $data->Commitment_ceiling->price) * (9 / 100);
