@@ -41,6 +41,7 @@
                                 <ul>
                                     <li><a href="{{ route('categories.index') }}"><i class="zmdi zmdi-view-dashboard"></i><span>دسته بندی ها</span></a></li>
                                 </ul>
+
                                 <ul>
                                     <li><a href="{{ route('brands.index') }}"><i class="zmdi zmdi-view-dashboard"></i><span>برندها</span></a></li>
                                 </ul>

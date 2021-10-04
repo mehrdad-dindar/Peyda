@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\BuyWarrantyEmail;
+use App\Mail\loginEmail;
 use App\Models\Role;
 use App\Models\Token;
 use App\Models\User;
@@ -152,6 +154,13 @@ class AuthController extends Controller
 
         $this->sendPattern($user,'szkx3x454l',['name'=>$user->f_name ?? "کاربر"]);
 
+        if(auth()->user()->email!=null) {
+            $var = new loginEmail(auth()->user());
+
+            self::sendEmail(auth()->user(), $var);
+
+            $email = $this->addEmail(auth()->user());
+        }
         return redirect()->route('dashboard');
 
     }

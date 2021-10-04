@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->foreignId('brand_id')->constrained();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->integer('cost');
+            $table->text('cost');
             $table->string('image');
             $table->text('description');
             $table->timestamps();

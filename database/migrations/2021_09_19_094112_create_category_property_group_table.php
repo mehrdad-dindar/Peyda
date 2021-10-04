@@ -14,8 +14,15 @@ class CreateCategoryPropertyGroupTable extends Migration
     public function up()
     {
         Schema::create('category_property_group', function (Blueprint $table) {
-            $table->foreignId('category_id')->constrained();
-            $table->foreignId('property_group_id')->constrained();
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')
+                ->references('id')->on('categories')
+                ->onDelete('cascade');
+            $table->unsignedBigInteger('property_group_id')->nullable();
+            $table->foreign('property_group_id')
+                ->references('id')->on('property_groups')
+                ->onDelete('cascade');
+            //$table->foreignId('property_group_id')->constrained();
 
             $table->primary(['category_id','property_group_id']);
         });

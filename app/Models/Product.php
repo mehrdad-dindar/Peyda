@@ -90,6 +90,7 @@ class Product extends Model
         foreach ($costs as $key=>$cost){
             array_push($result,['cost'=>$cost,'color'=>$color[$key]]);
         }
+        //dd();
         return json_encode((object)$result);
 
     }

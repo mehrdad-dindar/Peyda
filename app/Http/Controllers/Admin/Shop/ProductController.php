@@ -47,7 +47,9 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
 
+        //dd($request->all());
         $cost=Product::saveColorCostJson($request['cost'],$request['color']);
+        //dd($cost);
         /*$array=json_decode($json);
         foreach ($array as $arr){
             dd($arr->color);
