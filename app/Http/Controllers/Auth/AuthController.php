@@ -150,7 +150,7 @@ class AuthController extends Controller
 
         $this->sendPattern($user,'0saq77pizr',['h'=>Verta::now()->format('H:m'),'day'=>Verta::now()->formatWord('l'),'date'=>Verta::now()->format('Y/m/d')]);
 
-        $this->sendPattern($user,'szkx3x454l',['name'=>$user->f_name]);
+        $this->sendPattern($user,'szkx3x454l',['name'=>$user->f_name ?? "کاربر"]);
 
         return redirect()->route('dashboard');
 
