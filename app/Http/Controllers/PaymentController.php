@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BuyWarrantyEmail;
 use App\Models\User;
 use App\Models\UserRequest;
 use App\Models\Wallet;
@@ -23,10 +24,11 @@ use Shetabit\Multipay\Invoice;
 use Shetabit\Payment\Facade\Payment;
 use SoapFault;
 use App\Traits\UserMobileWarranties;
+use App\Traits\Emails;
 
 class PaymentController extends Controller
 {
-    use UserMobileWarranties;
+    use UserMobileWarranties,Emails;
 
     public function __construct()
     {
@@ -214,6 +216,12 @@ class PaymentController extends Controller
                     'warranties' => $warranties,
                 ]);*/
             /*dd($transaction->toArray());*/
+            $var=new BuyWarrantyEmail($mobilewarranty);
+
+            self::sendEmail(auth()->user(),$var);
+
+            $email=$this->addEmail(auth()->user());
+
             return view('profile.warranty.peyment_result')->with([
                 'wallet' => $wallet,
                 'status' => 'success',

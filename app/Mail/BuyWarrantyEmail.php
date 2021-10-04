@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Models\Mobile_warranty;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -12,15 +13,16 @@ class BuyWarrantyEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $warranty;
+    public $warranty, $user;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Mobile_warranty $mobile_warranty)
+    public function __construct(Mobile_warranty $mobile_warranty,User $user)
     {
         $this->warranty=$mobile_warranty;
+        $this->user=$user;
     }
 
     /**
@@ -30,6 +32,10 @@ class BuyWarrantyEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.warrantyEmail',['warranty'=>$this->warranty]);
+        return $this->view('emails.warrantyEmail',
+            [
+                'warranty'=>$this->warranty,
+                'user'=>$this->user
+            ]);
     }
 }

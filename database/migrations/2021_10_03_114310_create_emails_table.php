@@ -15,7 +15,7 @@ class CreateEmailsTable extends Migration
     {
         Schema::create('emails', function (Blueprint $table) {
             $table->id();
-            $table->text('code');
+            $table->text('code')->nullable();
             $table->unsignedBigInteger('emailable_id');
             $table->string('emailable_type');
             $table->boolean('seen')->default(0);
