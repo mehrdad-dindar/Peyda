@@ -1,5 +1,5 @@
 @extends('layouts.master_front')
-@section('title','صفحه نخست')
+@section('title','هدیه ویژه ما به شما')
 @section('custom_css')
 @endsection
 @section('content')

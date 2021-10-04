@@ -453,98 +453,101 @@
                                                 @endif
                                                 @if($row->status->id == 2)
                                                     <!--begin::Option-->
+                                                        @if(auth()->id()==$row->owner_id)
                                                         @if($row->usable_percentage>0)
+
+                                                                <label
+                                                                    @if(sizeof($warranties)>0) onclick="window.location.href='{{route('bimeh_use',$row->id)}}'"
+                                                                    @endif
+                                                                    class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6">
+                                                                    <!--begin::Input-->
+                                                                    <input class="btn-check" type="radio" checked
+                                                                           name="warranty_type" value="1"/>
+                                                                    <!--end::Input-->
+
+                                                                    <!--begin::Label-->
+                                                                    <span class="d-flex" id="first_select">
+                                                                                    <!--begin::Icon-->
+                                                                        <!--begin::Svg Icon | path: icons/duotone/General/User.svg-->
+                                                                                    <span class="svg-icon svg-icon-3hx">
+                                                                                        <svg viewBox="0 0 24 24"
+                                                                                             version="1.1"
+                                                                                             xmlns="http://www.w3.org/2000/svg"
+                                                                                             xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="Stockholm-icons-/-General-/-Update" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <rect id="bound" x="0" y="0" width="24" height="24"></rect>
+                <path
+                    d="M8.43296491,7.17429118 L9.40782327,7.85689436 C9.49616631,7.91875282 9.56214077,8.00751728 9.5959027,8.10994332 C9.68235021,8.37220548 9.53982427,8.65489052 9.27756211,8.74133803 L5.89079566,9.85769242 C5.84469033,9.87288977 5.79661753,9.8812917 5.74809064,9.88263369 C5.4720538,9.8902674 5.24209339,9.67268366 5.23445968,9.39664682 L5.13610134,5.83998177 C5.13313425,5.73269078 5.16477113,5.62729274 5.22633424,5.53937151 C5.384723,5.31316892 5.69649589,5.25819495 5.92269848,5.4165837 L6.72910242,5.98123382 C8.16546398,4.72182424 10.0239806,4 12,4 C16.418278,4 20,7.581722 20,12 C20,16.418278 16.418278,20 12,20 C7.581722,20 4,16.418278 4,12 L6,12 C6,15.3137085 8.6862915,18 12,18 C15.3137085,18 18,15.3137085 18,12 C18,8.6862915 15.3137085,6 12,6 C10.6885336,6 9.44767246,6.42282109 8.43296491,7.17429118 Z"
+                    id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
+            </g>
+        </svg>
+                                                                                    </span>
+                                                                        <!--end::Svg Icon-->
+                                                                        <!--end::Icon-->
+                                                                        <!--begin::Info-->
+                                                                                    <span class="ms-4">
+                                                                                        <span
+                                                                                            class="fs-3 fw-bolder text-gray-900 mb-2 d-block">استفاده از فراگارانتی</span>
+                                                                                    </span>
+                                                                        <!--end::Info-->
+                                                                                </span>
+                                                                    <!--end::Label-->
+                                                                </label>
+                                                            @endif
+                                                    <!--end::Option-->
+
+                                                        <!--begin::Option-->
                                                             <label
-                                                                @if(sizeof($warranties)>0) onclick="window.location.href='{{route('bimeh_use',$row->id)}}'"
+                                                                @if(sizeof($warranties)>0) onclick="window.location.href='mobile/transfer_faraguaranty/{{$row->id}}'"
                                                                 @endif
                                                                 class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6">
                                                                 <!--begin::Input-->
-                                                                <input class="btn-check" type="radio" checked
-                                                                       name="warranty_type" value="1"/>
+                                                                <input class="btn-check" type="radio" name="warranty_type"
+                                                                       value="2"/>
                                                                 <!--end::Input-->
-
                                                                 <!--begin::Label-->
-                                                                <span class="d-flex" id="first_select">
+                                                                <span class="d-flex" id="new_mobile_select_btn">
                                                                                 <!--begin::Icon-->
-                                                                    <!--begin::Svg Icon | path: icons/duotone/General/User.svg-->
+                                                                    <!--begin::Svg Icon-->
                                                                                 <span class="svg-icon svg-icon-3hx">
-                                                                                    <svg viewBox="0 0 24 24"
-                                                                                         version="1.1"
-                                                                                         xmlns="http://www.w3.org/2000/svg"
-                                                                                         xmlns:xlink="http://www.w3.org/1999/xlink">
-        <g id="Stockholm-icons-/-General-/-Update" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-            <rect id="bound" x="0" y="0" width="24" height="24"></rect>
-            <path
-                d="M8.43296491,7.17429118 L9.40782327,7.85689436 C9.49616631,7.91875282 9.56214077,8.00751728 9.5959027,8.10994332 C9.68235021,8.37220548 9.53982427,8.65489052 9.27756211,8.74133803 L5.89079566,9.85769242 C5.84469033,9.87288977 5.79661753,9.8812917 5.74809064,9.88263369 C5.4720538,9.8902674 5.24209339,9.67268366 5.23445968,9.39664682 L5.13610134,5.83998177 C5.13313425,5.73269078 5.16477113,5.62729274 5.22633424,5.53937151 C5.384723,5.31316892 5.69649589,5.25819495 5.92269848,5.4165837 L6.72910242,5.98123382 C8.16546398,4.72182424 10.0239806,4 12,4 C16.418278,4 20,7.581722 20,12 C20,16.418278 16.418278,20 12,20 C7.581722,20 4,16.418278 4,12 L6,12 C6,15.3137085 8.6862915,18 12,18 C15.3137085,18 18,15.3137085 18,12 C18,8.6862915 15.3137085,6 12,6 C10.6885336,6 9.44767246,6.42282109 8.43296491,7.17429118 Z"
-                id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
-        </g>
-    </svg>
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                         xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                         width="24px" height="24px"
+                                                                                         viewBox="0 0 24 24" version="1.1">
+                                                                                        <g stroke="none" stroke-width="1"
+                                                                                           fill="none" fill-rule="evenodd">
+                                                                                            <rect x="5" y="5" width="5"
+                                                                                                  height="5" rx="1"
+                                                                                                  fill="#000000"/>
+                                                                                            <rect x="14" y="5" width="5"
+                                                                                                  height="5" rx="1"
+                                                                                                  fill="#000000"
+                                                                                                  opacity="0.3"/>
+                                                                                            <rect x="5" y="14" width="5"
+                                                                                                  height="5" rx="1"
+                                                                                                  fill="#000000"
+                                                                                                  opacity="0.3"/>
+                                                                                            <rect x="14" y="14" width="5"
+                                                                                                  height="5" rx="1"
+                                                                                                  fill="#000000"
+                                                                                                  opacity="0.3"/>
+                                                                                        </g>
+                                                                                    </svg>
                                                                                 </span>
                                                                     <!--end::Svg Icon-->
                                                                     <!--end::Icon-->
                                                                     <!--begin::Info-->
                                                                                 <span class="ms-4">
                                                                                     <span
-                                                                                        class="fs-3 fw-bolder text-gray-900 mb-2 d-block">استفاده از فراگارانتی</span>
+                                                                                        class="fs-3 fw-bolder text-gray-900 mb-2 d-block">انتقال فراگارانتی</span>
+                                                                                    {{--<span
+                                                                                        class="fw-bold fs-4 text-muted">{{ $user->phone_brand->name." / ".$user->phone_model->name }}</span>--}}
                                                                                 </span>
                                                                     <!--end::Info-->
                                                                             </span>
                                                                 <!--end::Label-->
                                                             </label>
                                                         @endif
-                                                    <!--end::Option-->
-
-                                                        <!--begin::Option-->
-                                                        <label
-                                                            @if(sizeof($warranties)>0) onclick="window.location.href='mobile/transfer_faraguaranty/{{$row->id}}'"
-                                                            @endif
-                                                            class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6">
-                                                            <!--begin::Input-->
-                                                            <input class="btn-check" type="radio" name="warranty_type"
-                                                                   value="2"/>
-                                                            <!--end::Input-->
-                                                            <!--begin::Label-->
-                                                            <span class="d-flex" id="new_mobile_select_btn">
-																			<!--begin::Icon-->
-                                                                <!--begin::Svg Icon-->
-																			<span class="svg-icon svg-icon-3hx">
-																				<svg xmlns="http://www.w3.org/2000/svg"
-                                                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                                     width="24px" height="24px"
-                                                                                     viewBox="0 0 24 24" version="1.1">
-																					<g stroke="none" stroke-width="1"
-                                                                                       fill="none" fill-rule="evenodd">
-																						<rect x="5" y="5" width="5"
-                                                                                              height="5" rx="1"
-                                                                                              fill="#000000"/>
-																						<rect x="14" y="5" width="5"
-                                                                                              height="5" rx="1"
-                                                                                              fill="#000000"
-                                                                                              opacity="0.3"/>
-																						<rect x="5" y="14" width="5"
-                                                                                              height="5" rx="1"
-                                                                                              fill="#000000"
-                                                                                              opacity="0.3"/>
-																						<rect x="14" y="14" width="5"
-                                                                                              height="5" rx="1"
-                                                                                              fill="#000000"
-                                                                                              opacity="0.3"/>
-																					</g>
-																				</svg>
-																			</span>
-                                                                <!--end::Svg Icon-->
-                                                                <!--end::Icon-->
-                                                                <!--begin::Info-->
-																			<span class="ms-4">
-																				<span
-                                                                                    class="fs-3 fw-bolder text-gray-900 mb-2 d-block">انتقال فراگارانتی</span>
-																				{{--<span
-                                                                                    class="fw-bold fs-4 text-muted">{{ $user->phone_brand->name." / ".$user->phone_model->name }}</span>--}}
-																			</span>
-                                                                <!--end::Info-->
-																		</span>
-                                                            <!--end::Label-->
-                                                        </label>
                                                         <!--end::Option-->
 
                                                         <!--begin::Option-->

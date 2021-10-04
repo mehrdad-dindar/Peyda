@@ -86,7 +86,7 @@
                         <div class="col-lg-12">
                             <div class="d-grid">
                                 <input type="submit" id="submitsubscribe" name="send" class="btn btn-soft-primary"
-                                       value="خبرنامه">
+                                       value="عضویت در خبرنامه">
                             </div>
                         </div>
                         <ul class="list-unstyled social-icon foot-social-icon mb-0 mt-4">

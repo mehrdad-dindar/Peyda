@@ -1,5 +1,5 @@
 @extends('layouts.master_front')
-@section('title','صفحه نخست')
+@section('title','آرشیو وبلاگ')
 @section('custom_css')
 @endsection
 @section('content')
