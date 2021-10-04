@@ -19,7 +19,7 @@ use App\Traits\Emails;
 
 class AuthController extends Controller
 {
-    use Emails,Sms;
+    use Emails, Sms;
 
     public function __construct()
     {
@@ -56,20 +56,20 @@ class AuthController extends Controller
         return view('auth.login-email');
     }*/
 
-/*    public function doLoginEmail(Request $request)
-    {
-        $this->validate($request, [
-            'email' => 'required',
-            'password' => 'required'
-        ]);
+    /*    public function doLoginEmail(Request $request)
+        {
+            $this->validate($request, [
+                'email' => 'required',
+                'password' => 'required'
+            ]);
 
-        $data = $request->only('email', 'password');
-        $rememberMe = $request->input('remember_me');
-        if (auth()->attempt($data, $rememberMe))
-            return redirect()->route('index');
-        else
-            return redirect()->back()->withErrors('Either email or password is wrong.');
-    }*/
+            $data = $request->only('email', 'password');
+            $rememberMe = $request->input('remember_me');
+            if (auth()->attempt($data, $rememberMe))
+                return redirect()->route('index');
+            else
+                return redirect()->back()->withErrors('Either email or password is wrong.');
+        }*/
 
     public function doLoginPhone(Request $request)
     {
@@ -82,20 +82,20 @@ class AuthController extends Controller
             //TODO فعال سازی ریکپچا
             /*'g-recaptcha-response' => ['required',new Recaptcha()],*/
         ]);
-        $newUser=null;
-        $user = User::where('phone_num', $request->phone_num)->firstOr(function () use ($request,&$newUser) {
+        $newUser = null;
+        $user = User::where('phone_num', $request->phone_num)->firstOr(function () use ($request, &$newUser) {
 
             $newUser = User::create([
-                'role_id'   => Role::query()->where('title','user')->first()->id,
+                'role_id' => Role::query()->where('title', 'user')->first()->id,
                 'phone_num' => $request->phone_num,
-                ]);
+            ]);
             Wallet::create([
                 'user_id' => $newUser->id,
-                'value'=>Crypt::encryptString('0')
+                'value' => Crypt::encryptString('0')
             ]);
         });
-        if($newUser!=null){
-            $user=$newUser;
+        if ($newUser != null) {
+            $user = $newUser;
         }
 
         $token = Token::create([
@@ -151,11 +151,12 @@ class AuthController extends Controller
 
         auth()->login($user, $rememberMe);
 
-        $this->sendPattern($user,'0saq77pizr',['h'=>Verta::now()->format('H:m'),'day'=>Verta::now()->formatWord('l'),'date'=>Verta::now()->format('Y/m/d')]);
+        if ($user->status == 0)
+            $this->sendPattern($user, '0saq77pizr', ['h' => Verta::now()->format('H:m'), 'day' => Verta::now()->formatWord('l'), 'date' => Verta::now()->format('Y/m/d')]);
 
-        $this->sendPattern($user,'szkx3x454l',['name'=>$user->f_name ?? "کاربر"]);
+        $this->sendPattern($user, 'szkx3x454l', ['name' => $user->f_name ?? "کاربر"]);
 
-        if(auth()->user()->email!=null) {
+        if (auth()->user()->email != null) {
             $var = new loginEmail(auth()->user());
 
             self::sendEmail(auth()->user(), $var);
