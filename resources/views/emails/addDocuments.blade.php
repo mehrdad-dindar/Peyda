@@ -34,14 +34,7 @@
         </tr>
         <tr>
             <td style="padding: 15px 24px 15px; color: #8492a6;">
-                فراگارانتی برای تلفن همراه {{$warranty->getPhoneName($warranty)}} با موفقیت خریداری شد.
-            </td>
-        </tr>
-
-        <tr>
-            <td style="padding: 15px 24px 0; color: #8492a6;">
-                با مراجعه به پنل کاربری خود اقدام به آپلود مدارک کنید.
-                https://peydaservice.com/panel
+                {{$user->f_name ?? 'کاربر'}} عزیز مدارک شما در تاریخ {{\Hekmatinasser\Verta\Verta::now()->format('Y/m/d')}} با موفقیت ثبت شد. پس از بررسی، نتیجه فعالسازی فراگارانتی گوشی تلفن همراه شما، از طریق پیامک اطلاع‌رسانی خواهد شد.
                 پیدا سرویس ماندگار
             </td>
         </tr>

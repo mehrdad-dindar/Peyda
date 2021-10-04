@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\WelcomeEmail;
 use App\Models\Role;
 use App\Models\Token;
 use App\Models\User;
@@ -13,10 +14,11 @@ use Crypt;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use App\Traits\Sms;
+use App\Traits\Emails;
 
 class AuthController extends Controller
 {
-    use Sms;
+    use Sms,Emails;
 
     public function __construct()
     {
@@ -150,7 +152,16 @@ class AuthController extends Controller
 
         $this->sendPattern($user,'0saq77pizr',['h'=>Verta::now()->format('H:m'),'day'=>Verta::now()->formatWord('l'),'date'=>Verta::now()->format('Y/m/d')]);
 
-        $this->sendPattern($user,'szkx3x454l',['name'=>$user->f_name]);
+
+        $this->sendPattern($user,'szkx3x454l',['name'=>$user->f_name ?? 'کاربر']);
+
+        if($user->email!=null) {
+            $var = new WelcomeEmail($user);
+
+            self::sendEmail($user, $var);
+
+            $this->addEmail($user);
+        }
 
         return redirect()->route('dashboard');
 
