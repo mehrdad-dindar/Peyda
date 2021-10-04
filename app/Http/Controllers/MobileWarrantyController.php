@@ -276,15 +276,14 @@ class MobileWarrantyController extends Controller
                 return redirect()->back()->withErrors(['لطفا ایمیل تکراری وارد نکنید!']);
             } else {
 
-                $v = $v->setDateTime($request['year_other'], $request['month_other'], $request['day_other'], null, null, null);
+                $v = $v->setDateTime($request['year_other'], $request['month_other'], $request['day_other'], 0, 0, 0);
 
-                $userBirthday1 = null;
-                $userBirthday = Carbon::instance($v->datetime());
+                //$userBirthday1 = null;
+                $userBirthday = Carbon::parse($v->datetime())->toDateTimeString();
 
 
-                if ($request['year_other'] != null && $request['month_other'] != null && $request['day_other'] != null) {
-                    $userBirthday1 = $userBirthday;
-                }
+                $userBirthday1 = $userBirthday;
+
                 $ownerUser=User::query()->where('phone_num',$request['phone_num_other'])->first();
                 $ownerUserEmail=User::query()->where('email',$request['email_other'])->first();
                 if($ownerUser!=null){
@@ -313,21 +312,24 @@ class MobileWarrantyController extends Controller
                     $ownerUser=User::find($ownerUserEmail->id);
                 }
                 else {
+                    //dd($userBirthday1);
+                    $newUser= new User();
+                    $newUser->f_name=$request['f_name_other'];
+                    $newUser->l_name=$request['l_name_other'];
+                    $newUser->birthday=$userBirthday1;
+                    $newUser->role_id=2;
+                    $newUser->phone_num=$request['phone_num_other'];
+                    $newUser->postal_code=$request['postal_code_other'];
+                    $newUser->melli_code=$request['melli_code_other'];
+                    $newUser->city_id=$request['city_id_other'];
+                    $newUser->address=$request['address_other'];
+                    $newUser->email=$request['email_other'];
+                    $newUser->phone_model_id=$phone_model_id;
+                    $newUser->phone_model_other=$other_model;
+                    $newUser->save();
+                    $ownerUser=$newUser;
 
-                    $ownerUser = User::query()->create([
-                        'f_name' => $request['f_name_other'],
-                        'l_name' => $request['l_name_other'],
-                        'birthday' => $userBirthday1,
-                        'role_id' => 2,
-                        'phone_num' => $request['phone_num_other'],
-                        'postal_code' => $request['postal_code_other'],
-                        'melli_code' => $request['melli_code_other'],
-                        'city_id' => $request['city_id_other'],
-                        'address' => $request['address_other'],
-                        'email' => $request['email_other'],
-                        'phone_model_id' => $phone_model_id,
-                        'phone_model_other' => $other_model
-                    ]);
+                    //dd($newUser->toArray());
                     Wallet::create([
                         'user_id' => $ownerUser->id,
                         'value'=>Crypt::encryptString('0')
