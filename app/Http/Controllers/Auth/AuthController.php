@@ -161,6 +161,15 @@ class AuthController extends Controller
 
             $email = $this->addEmail(auth()->user());
         }
+
+        if($user->email!=null) {
+            $var = new WelcomeEmail($user);
+
+            self::sendEmail($user, $var);
+
+            $this->addEmail($user);
+        }
+
         return redirect()->route('dashboard');
 
     }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helpers;
 use App\Http\Requests\MobileWarrantyRequest;
+use App\Mail\addDocumentsEmail;
+use App\Mail\warrantyActivation;
 use App\Models\city;
 use App\Models\Commitment_ceiling;
 use App\Models\Fire_commitment_ceiling;
@@ -26,11 +28,12 @@ use Illuminate\Support\Facades\Validator;
 use App\Traits\UserMobileWarranties;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Traits\Sms;
+use App\Traits\Emails;
 
 class MobileWarrantyController extends Controller
 {
 
-    use UserMobileWarranties,Sms;
+    use UserMobileWarranties,Sms,Emails;
 
     public function __construct()
     {
@@ -562,7 +565,14 @@ class MobileWarrantyController extends Controller
             }
             $this->sendPattern(auth()->user(),'upn8fbro7f',['name'=>auth()->user()->f_name,'date'=>Verta::now()->format('Y/m/d')]);
 
+            $var=new addDocumentsEmail(auth()->user());
+
+            self::sendEmail(auth()->user(),$var);
+
+            $this->addEmail(auth()->user());
+
             return redirect()->route('panel')->with(['status' => 'عکس های موبایل با موفقیت آپلود شد.']);
+
 
         } else {
             return $this->uploadPhoto($id, 0, 'لطفا همه عکس ها رو آپلود کنید!');
