@@ -216,7 +216,7 @@ class PaymentController extends Controller
                     'warranties' => $warranties,
                 ]);*/
             /*dd($transaction->toArray());*/
-            $var=new BuyWarrantyEmail($mobilewarranty);
+            $var=new BuyWarrantyEmail($mobilewarranty,auth()->user());
 
             self::sendEmail(auth()->user(),$var);
 

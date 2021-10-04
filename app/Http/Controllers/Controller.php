@@ -179,7 +179,7 @@ class Controller extends BaseController
 
     public static function sendEmail($user,$var)
     {
-        Mail::to($user)->send($var);
+        Mail::to($user)->queue($var);
     }
 
 }
