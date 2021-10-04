@@ -52,7 +52,9 @@
                                     <div class="form-group">
                                         <div class="checkbox d-inline">
                                             <h3 name="h3_user_name" class="card-title">تاریخ تولد</h3>
+                                            @if($user->birthday)
                                             <label for="h3_user_name">{{\Hekmatinasser\Verta\Verta::instance($user->birthday)->format('Y/m/d')}}</label>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
