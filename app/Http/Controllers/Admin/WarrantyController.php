@@ -278,12 +278,6 @@ class WarrantyController extends Controller
             $this->sendPattern($userRec,'ivm4o57jm4',['name'=>$userRec->f_name]);
             $done = 0;
 
-            $var = new IncompleteDocumentsEmail($userRec);
-
-            self::sendEmail($userRec, $var);
-
-            $this->addEmail($userRec);
-
             $wallet = Wallet::where('user_id',$user_id)->first();
             $wallethistory = new Wallet_history();
             $wallet->value = Crypt::encryptString((int)Crypt::decryptString($wallet->value) + (int)abs($request['talab_price']));
@@ -293,6 +287,16 @@ class WarrantyController extends Controller
             $wallethistory->value = Crypt::encryptString(abs($request['talab_price']));
             $wallethistory->status = 1;
             $wallethistory->save();
+        }
+
+        if ($status==2 || $status==5 || $status==6){
+
+            $var = new IncompleteDocumentsEmail($userRec);
+
+            self::sendEmail($userRec, $var);
+
+            $this->addEmail($userRec);
+
         }
 
         Mobile_warranty::query()->where('id',$warranty_id)->update([
