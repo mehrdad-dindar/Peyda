@@ -220,12 +220,13 @@ class PaymentController extends Controller
 
             self::sendEmail(auth()->user(),$var);
 
-            $email=$this->addEmail(auth()->user());
+            $this->addEmail(auth()->user());
 
             return view('profile.warranty.peyment_result')->with([
                 'wallet' => $wallet,
                 'status' => 'success',
                 'transaction'=>$transaction,
+                'mobilewarranty'=>$mobilewarranty
 
             ]);
         } catch (Exception | InvalidPaymentException $e) {
@@ -257,13 +258,13 @@ class PaymentController extends Controller
     public function problemPurchase($invoice_id)
     {
         $user = Auth::user();
-        $mobilewarranty = WarrantyProblem::find($invoice_id);
-        $phone_model = $mobilewarranty->mobile_warranty->phone_model->name;
-        $warranty_code = $mobilewarranty->mobile_warranty->activation_code;
+        $warrantyProblem = WarrantyProblem::find($invoice_id);
+        $phone_model = $warrantyProblem->mobile_warranty->phone_model->name;
+        $warranty_code = $warrantyProblem->mobile_warranty->activation_code;
 
 
         $invoice = new Invoice();
-        $invoice->amount((int)$mobilewarranty->price);
+        $invoice->amount((int)$warrantyProblem->price);
         $paymentId = md5(uniqid());
         try {
             $transaction = $user->transactions()->create([
@@ -283,7 +284,7 @@ class PaymentController extends Controller
                 $transaction->save();
             });
 
-            /*$this->updateWalletHistory($user,$transaction,$phone_model,$amount,$mobilewarranty);*/
+            /*$this->updateWalletHistory($user,$transaction,$phone_model,$amount,$warrantyProblem);*/
             /*$warranties = Mobile_warranty::where('owner_id',auth()->id())->orderBy('created_at', 'desc')->get();*/
 
             return $payment->pay()->render();
@@ -292,8 +293,8 @@ class PaymentController extends Controller
             $transaction->status = Transaction::STATUS_FAILED;
             $transaction->save();
 
-            $mobilewarranty->status_id = 8;
-            $mobilewarranty->save();
+            $warrantyProblem->status_id = 8;
+            $warrantyProblem->save();
             /*$wallet = Wallet::where('user_id', "=", auth()->id())->first();
             return view('')->with([
                 'wallet' => $wallet,
@@ -306,7 +307,7 @@ class PaymentController extends Controller
     public function problemResult(Request $request, $invoice_id)
     {
         $transaction = Transaction::where('peyment_id', $request->peyment_id)->first();
-        $mobilewarranty = WarrantyProblem::find($invoice_id);
+        $warrantyProblem = WarrantyProblem::find($invoice_id);
         $wallet = Wallet::where('user_id', "=", auth()->id())->first();
         $wallet_history = Wallet_history::where('user_id', '=', auth()->id())->orderBy('created_at', 'desc')->first();
 
@@ -322,7 +323,7 @@ class PaymentController extends Controller
             $this->status_failed();
         }
 
-        if ($transaction->mobile_warranty_id <> $mobilewarranty->mobile_warranty->id) {
+        if ($transaction->mobile_warranty_id <> $warrantyProblem->mobile_warranty->id) {
             $this->status_failed();
         }
         if ($transaction->status <> Transaction::STATUS_PENDING) {
@@ -331,27 +332,27 @@ class PaymentController extends Controller
 
         try {
 
-            $receipt = Payment::amount($mobilewarranty->price)
+            $receipt = Payment::amount($warrantyProblem->price)
                 ->transactionId($request->Authority)
                 ->verify();
 
             $transaction->transaction_result = $receipt;
             $transaction->status = Transaction::STATUS_SUCCESS;
             $transaction->save();
-            if ($mobilewarranty->warranty_problem_type_id == 3) {
-                $mobilewarranty->mobile_warranty->status_id = 2;
-                UserRequest::query()->where([['user_requestable_id',$mobilewarranty->mobile_warranty->id ], ['user_requestable_type', 'App\Models\Mobile_warranty']])->orderBy('updated_at', 'desc')->first()->update(['done'=>1]);
-            }elseif ($mobilewarranty->warranty_problem_type_id == 5){
-                $mobilewarranty->mobile_warranty->status_id = 5;
+            if ($warrantyProblem->warranty_problem_type_id == 3) {
+                $warrantyProblem->mobile_warranty->status_id = 2;
+                UserRequest::query()->where([['user_requestable_id',$warrantyProblem->mobile_warranty->id ], ['user_requestable_type', 'App\Models\Mobile_warranty']])->orderBy('updated_at', 'desc')->first()->update(['done'=>1]);
+            }elseif ($warrantyProblem->warranty_problem_type_id == 5){
+                $warrantyProblem->mobile_warranty->status_id = 5;
             }
-            $mobilewarranty->mobile_warranty->save();
+            $warrantyProblem->mobile_warranty->save();
 
 
             return view('profile.warranty.peyment_result')->with([
                 'wallet' => $wallet,
                 'status' => 'success',
                 'transaction'=>$transaction,
-                'mobilewarranty' => $mobilewarranty,
+                'warrantyProblem' => $warrantyProblem,
             ]);
         } catch (Exception | InvalidPaymentException $e) {
             if ($e->getCode() < 0) {
@@ -361,8 +362,8 @@ class PaymentController extends Controller
                     'code' => $e->getCode()
                 ];
                 $transaction->save();
-                $mobilewarranty->mobile_warranty->status_id = 8;
-                $mobilewarranty->mobile_warranty->save();
+                $warrantyProblem->mobile_warranty->status_id = 8;
+                $warrantyProblem->mobile_warranty->save();
 
                 /*
                  * For manage error use this code ****
@@ -374,7 +375,7 @@ class PaymentController extends Controller
                     'wallet' => $wallet,
                     'status' => 'failed',
                     'error'  => $e,
-                    'mobilewarranty' => $mobilewarranty,
+                    'warrantyProblem' => $warrantyProblem,
 
                 ]);
             }

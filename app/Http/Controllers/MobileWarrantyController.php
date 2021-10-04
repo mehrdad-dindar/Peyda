@@ -438,9 +438,9 @@ class MobileWarrantyController extends Controller
     public function uploadPhoto($id, $edit = 0, $err = '')
     {
         $msg = '';
-        $warranty = Mobile_warranty::find($id)->first();
+        $warranty = Mobile_warranty::findOrFail($id);
 
-        if($warranty->buyer_id==auth()->id() || $warranty->owner_id==auth()->id()) {
+        if($warranty->buyer_id==auth()->user()->id || $warranty->owner_id==auth()->user()->id) {
 
 
             if ($edit = 1) {
@@ -449,7 +449,7 @@ class MobileWarrantyController extends Controller
                 $images = null;
             }
             $wallet = Wallet::where('user_id', "=", auth()->id())->first();
-            $warranty = Mobile_warranty::find($id)->first();
+            $warranty = Mobile_warranty::find($id);
             $imgs = ImageField::all();
             $qrcode = QrCode::size(250)->generate(md5($id . ' __ ' . $warranty->created_at));
             if ($err != '') {
@@ -471,7 +471,7 @@ class MobileWarrantyController extends Controller
     public function editPhoto($id, $err = '')
     {
         $msg = '';
-        $warranty = Mobile_warranty::find($id)->first();
+        $warranty = Mobile_warranty::findOrFail($id);
         $user=User::find($warranty->owner_id);
         $images = Helpers::getImageFromDb($warranty->images);
         $qrcode = QrCode::size(250)->generate(md5($id . ' __ ' . $warranty->created_at));
@@ -578,7 +578,7 @@ class MobileWarrantyController extends Controller
         $imageFields = ImageField::all();
         $key = 0;
 
-        if (sizeof($request->toArray()) - (2 * sizeof($imageFields) + 1) >= 0 && sizeof($request->toArray()) - (2 * sizeof($imageFields) + 1) <= 16) {
+        if (sizeof($request->toArray()) - (2 * sizeof($imageFields) + 1) >= 0 && sizeof($request->toArray()) - (2 * sizeof($imageFields) + 1) <= 20) {
             //$i++;
             //dd($i);
             //dd('inja');

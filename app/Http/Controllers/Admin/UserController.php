@@ -11,10 +11,12 @@ use App\Models\UserRequest;
 use App\Traits\Notifications;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Traits\Sms;
+use App\Traits\Emails;
 
 class UserController extends Controller
 {
-    use Notifications;
+    use Notifications,Sms,Emails;
     /**
      * Display a listing of the resource.
      *

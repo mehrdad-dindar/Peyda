@@ -124,7 +124,7 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">دریافت فراگارانتی از شخص دیگر</span>
+                                <span class="menu-title">دریافت از شخص دیگر</span>
                             </a>
                         </div>
                         <div class="menu-item">
@@ -151,7 +151,7 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">فراگارانتی های دیگر اشخاص</span>
+                                <span class="menu-title">اشخاص ثالث</span>
                             </a>
                         </div>
                     </div>

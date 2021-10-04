@@ -17,17 +17,22 @@ use App\Models\Phone_model;
 use App\Models\Status;
 use App\Models\User;
 use App\Models\UserRequest;
+use App\Models\Wallet;
+use App\Models\Wallet_history;
 use App\Models\WarrantyProblem;
 use App\Models\WarrantyProblemType;
 use App\Models\WarrantyUse;
 use Carbon\Carbon;
+use Crypt;
 use Illuminate\Http\Request;
 use Redirect;
 use App\Traits\Notifications;
+use App\Traits\Sms;
+use App\Traits\Emails;
 
 class WarrantyController extends Controller
 {
-    use Notifications;
+    use Notifications,Sms,Emails;
 
     public function acceptedIndex()
     {
@@ -216,6 +221,7 @@ class WarrantyController extends Controller
         $status = $request->get('status');
         $user_id = $request->get('user_id');
         $warranty_id = $request->get('warranty_id');
+        $mobile_warranty=Mobile_warranty::find($warranty_id);
 
         $userRec=User::find($user_id);
 
@@ -269,12 +275,21 @@ class WarrantyController extends Controller
             ]);
             $this->sendPattern($userRec,'ivm4o57jm4',['name'=>$userRec->f_name]);
             $done = 0;
+            /* Charge user wallet and wallet history */
+            $wallet = Wallet::where('user_id',$user_id)->first();
+            $wallethistory = new Wallet_history();
+            $wallet->value = Crypt::encryptString((int)Crypt::decryptString($wallet->value) + (int)abs($request['talab_price']));
+            $wallet->save();
+            $wallethistory->user_id = $user_id;
+            $wallethistory->title = "بازپرداخت مابه التفاوت فراگارانتی ".$mobile_warranty->activation_code;
+            $wallethistory->value = Crypt::encryptString(abs($request['talab_price']));
+            $wallethistory->status = 1;
+            $wallethistory->save();
         }
 
         Mobile_warranty::query()->where('id',$warranty_id)->update([
             'commitment_ceiling_id'=>$request['commitment_ceilings']
         ]);
-        $mobile_warranty=Mobile_warranty::find($warranty_id);
 
         $admin_id = auth()->user()->id;
         $link = '/panel/warranty/mobile/all';
