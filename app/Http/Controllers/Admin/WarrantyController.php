@@ -217,6 +217,8 @@ class WarrantyController extends Controller
         $user_id = $request->get('user_id');
         $warranty_id = $request->get('warranty_id');
 
+        $userRec=User::find($user_id);
+
         if($status==1){
             $descriptions = 'فراگارانتی شما تایید شده است.';
             Mobile_warranty::query()->where('id', '=', $warranty_id)->update([
@@ -228,6 +230,8 @@ class WarrantyController extends Controller
                'mobile_warranty_id'=>$warranty_id,
                'warranty_problem_type_id'=>$status,
             ]);
+            $this->sendPattern($userRec,'zej04juoco',['name'=>$userRec->f_name,'phone_model_name'=>$userRec->getPhoneName($userRec)]);
+
         }elseif ($status==2){
             $descriptions = $request->get('descriptions');
             Mobile_warranty::query()->where('id', '=', $warranty_id)->update([
@@ -237,6 +241,9 @@ class WarrantyController extends Controller
                 'mobile_warranty_id'=>$warranty_id,
                 'warranty_problem_type_id'=>$status,
             ]);
+
+            $this->sendPattern($userRec,'ivm4o57jm4',['name'=>$userRec->f_name]);
+
             $done = 0;
         }elseif ($status==3 || $status==5){
             $descriptions = $request->get('descriptions_1');
@@ -248,6 +255,7 @@ class WarrantyController extends Controller
                 'warranty_problem_type_id'=>$status,
                 'price'=>abs($request['bedehi_price'])
             ]);
+            $this->sendPattern($userRec,'ivm4o57jm4',['name'=>$userRec->f_name]);
             $done = 0;
         }else{
             $descriptions = $request->get('descriptions_2');
@@ -259,6 +267,7 @@ class WarrantyController extends Controller
                 'warranty_problem_type_id'=>$status,
                 'price'=>abs($request['talab_price'])
             ]);
+            $this->sendPattern($userRec,'ivm4o57jm4',['name'=>$userRec->f_name]);
             $done = 0;
         }
 

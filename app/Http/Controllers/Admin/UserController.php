@@ -121,6 +121,7 @@ class UserController extends Controller
     {
         $status = $request->get('status');
         $user_id = $request->get('user_id');
+        $userRec=User::find($user_id);
 
         if ($status == 1) {
             $descriptions = 'احراز هویت شما تایید شده است.';
@@ -129,8 +130,10 @@ class UserController extends Controller
             ]);
 
             User::find($user_id)->userrequests()->update(['done'=>1]);
+            $this->sendPattern($userRec,'6ki49gc097',['name'=>$userRec->getFullNameAttribute($userRec)]);
         } else {
             $descriptions = $request->get('descriptions');
+            $this->sendPattern($userRec,'y8j4i7ebrl',['name'=>$userRec->getFullNameAttribute($userRec)]);
         }
         $admin_id = $request->get('admin_id');
         $link = '/panel/edit_profile';

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\WarrantyController;
 use \App\Http\Controllers\Admin\AdminNotificationController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MobileWarrantyController;
 use \App\Http\Controllers\Admin\SettingsController;
@@ -22,6 +23,7 @@ use \App\Http\Controllers\Admin\Shop\ProductPropertyController;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use \App\Http\Controllers\HTMLPDFController;
 use \App\Http\Controllers\TicketController;
+use \App\Http\Controllers\Profile\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -197,15 +199,18 @@ Route::prefix('dashboard')->middleware([CheckPermission::class. ':view-dashboard
 });
 Route::get('/get_model', 'PhoneBrandController@get_model');
 
-Route::get('/login', 'Auth\AuthController@loginPhone')->name('login');
-Route::get('/login-email', 'Auth\AuthController@loginEmail')->name('loginEmail');
-Route::get('/register', 'Auth\AuthController@register')->name('register');
-Route::post('/register', 'Auth\AuthController@doRegister')->name('doRegister');
-Route::post('/login-phone', 'Auth\AuthController@doLoginPhone')->name('doLoginPhone');
-Route::post('/login-email', 'Auth\AuthController@doLoginEmail')->name('doLoginEmail');
-Route::get('/verify', 'Auth\AuthController@verify')->name('verify');
-Route::post('/doVerify', 'Auth\AuthController@doVerify')->name('doVerify');
-Route::get('/logout', 'Auth\AuthController@logout')->name('logout');
+Route::get('/login', [AuthController::class,'loginPhone'])->name('login');
+Route::get('/login-email', [AuthController::class,'loginEmail'])->name('loginEmail');
+Route::get('/register', [AuthController::class,'register'])->name('register');
+Route::post('/register', [AuthController::class,'doRegister'])->name('doRegister');
+Route::post('/login-phone', [AuthController::class,'doLoginPhone'])->name('doLoginPhone');
+Route::post('/login-email', [AuthController::class,'doLoginEmail'])->name('doLoginEmail');
+Route::get('/verify', [AuthController::class,'verify'])->name('verify');
+Route::post('/doVerify', [AuthController::class,'doVerify'])->name('doVerify');
+Route::get('/verify-email', [ProfileController::class ,'doVerifyEmail'])->name('verification.notice');
+Route::get('/email/verify/{userid}/{hash}', [ProfileController::class ,'checkVerifyEmail'])->name('verification.verify');
+Route::post('/email/verification-notification', [AuthController::class ,'VerifyEmail'])->name('verify.notice');
+Route::get('/logout', [AuthController::class,'logout'])->name('logout');
 
 /* Shop & Archive & Search Result */
 Route::get('/shop',function (){

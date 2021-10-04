@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helpers;
+use App\Mail\verifyEmail;
 use App\Models\Mobile_warranty;
 use App\Models\NotificationUser;
 use App\Models\Status;
@@ -16,6 +17,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Mail;
 
 class Controller extends BaseController
 {
@@ -173,6 +175,11 @@ class Controller extends BaseController
 
         return $i;
 
+    }
+
+    public static function sendEmail($user,$var)
+    {
+        Mail::to($user)->send($var);
     }
 
 }

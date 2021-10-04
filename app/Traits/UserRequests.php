@@ -1,5 +1,6 @@
 <?php
 namespace App\Traits;
+use App\Models\Mobile_warranty;
 use App\Models\UserRequest;
 
 trait UserRequests{

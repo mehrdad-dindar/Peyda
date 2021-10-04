@@ -10,10 +10,14 @@ use App\Models\Wallet;
 use App\Rules\Recaptcha;
 use Carbon\Carbon;
 use Crypt;
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
+use App\Traits\Sms;
 
 class AuthController extends Controller
 {
+    use Sms;
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
@@ -144,6 +148,10 @@ class AuthController extends Controller
 
         auth()->login($user, $rememberMe);
 
+        $this->sendPattern($user,'0saq77pizr',['h'=>Verta::now()->format('H:m'),'day'=>Verta::now()->formatWord('l'),'date'=>Verta::now()->format('Y/m/d')]);
+
+        $this->sendPattern($user,'szkx3x454l',['name'=>$user->f_name]);
+
         return redirect()->route('dashboard');
 
     }
@@ -155,5 +163,6 @@ class AuthController extends Controller
         session()->forget('phone_num');*/
         return redirect()->route('index');
     }
+
 
 }
