@@ -145,7 +145,7 @@ class UserController extends Controller
                 }
 
             $descriptions = $request->get('descriptions');
-            $this->sendPattern($userRec,'y8j4i7ebrl',['name'=>$userRec->getFullNameAttribute($userRec)]);
+            $this->sendPattern($userRec, 'y8j4i7ebrl', ['name' => $userRec->f_name ?? 'کاربر']);
         }
         $admin_id = $request->get('admin_id');
         $link = '/panel/edit_profile';

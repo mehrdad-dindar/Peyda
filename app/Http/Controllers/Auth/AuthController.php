@@ -15,10 +15,11 @@ use Crypt;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use App\Traits\Sms;
+use App\Traits\Emails;
 
 class AuthController extends Controller
 {
-    use Sms;
+    use Sms,Emails;
 
     public function __construct()
     {
