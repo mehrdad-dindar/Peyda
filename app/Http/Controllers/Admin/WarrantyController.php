@@ -240,6 +240,13 @@ class WarrantyController extends Controller
             ]);
             $this->sendPattern($userRec,'zej04juoco',['name'=>$userRec->f_name,'phone_model_name'=>$userRec->getPhoneName($userRec)]);
 
+            if($userRec->email) {
+                $var = new WarrantyActivation($userRec);
+
+                self::sendEmail($userRec, $var);
+
+                $this->addEmail($userRec);
+            }
         }elseif ($status==2){
             $descriptions = $request->get('descriptions');
             Mobile_warranty::query()->where('id', '=', $warranty_id)->update([
@@ -291,11 +298,14 @@ class WarrantyController extends Controller
 
         if ($status==2 || $status==5 || $status==6){
 
-            $var = new IncompleteDocumentsEmail($userRec);
 
-            self::sendEmail($userRec, $var);
+            if($userRec->email) {
+                $var = new IncompleteDocumentsEmail($userRec);
 
-            $this->addEmail($userRec);
+                self::sendEmail($userRec, $var);
+
+                $this->addEmail($userRec);
+            }
 
         }
 

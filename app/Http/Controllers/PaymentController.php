@@ -216,11 +216,13 @@ class PaymentController extends Controller
                     'warranties' => $warranties,
                 ]);*/
             /*dd($transaction->toArray());*/
-            $var=new BuyWarrantyEmail($mobilewarranty,auth()->user());
+            if(auth()->user()->email) {
+                $var = new BuyWarrantyEmail($mobilewarranty, auth()->user());
 
-            self::sendEmail(auth()->user(),$var);
+                self::sendEmail(auth()->user(), $var);
 
-            $this->addEmail(auth()->user());
+                $this->addEmail(auth()->user());
+            }
 
             return view('profile.warranty.peyment_result')->with([
                 'wallet' => $wallet,

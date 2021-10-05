@@ -570,12 +570,13 @@ class MobileWarrantyController extends Controller
             }
             $this->sendPattern(auth()->user(),'upn8fbro7f',['name'=>auth()->user()->f_name,'date'=>Verta::now()->format('Y/m/d')]);
 
-            $var=new addDocumentsEmail(auth()->user());
+            if(auth()->user()->email) {
+                $var = new addDocumentsEmail(auth()->user());
 
-            self::sendEmail(auth()->user(),$var);
+                self::sendEmail(auth()->user(), $var);
 
-            $this->addEmail(auth()->user());
-
+                $this->addEmail(auth()->user());
+            }
             return redirect()->route('panel')->with(['status' => 'عکس های موبایل با موفقیت آپلود شد.']);
 
         } else {
