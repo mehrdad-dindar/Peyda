@@ -35,7 +35,7 @@ class EditProfileRequest extends FormRequest
             'address'=>['required'],
             'melli_code'=>['required',new melliCode(),'digits:10'],
             'phone_model_id'=>['required'],
-            'email'=>['nullable','email:rfc,dns'],
+            'email'=>['nullable','email'],
             'postal_code' => ['nullable',new postalCode(),'digits:10'],
             'day' => ['nullable', 'integer', 'between:1,31'],
             'month' => ['nullable', 'integer', 'between:1,12'],
