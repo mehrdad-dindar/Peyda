@@ -1,6 +1,12 @@
 @extends('profile.layouts.master')
 @section('title','افزودن فراگارانتی')
 @section('custom_head')
+    <style>
+        li.select2-results__option {
+            direction: rtl;
+            text-align: right;
+        }
+    </style>
 @endsection
 @section('content')
     <div id="kt_content_container" class="container">
@@ -783,13 +789,15 @@
                                                             aria-label="انتخاب بازه قیمت دستگاه" data-control="select2"
                                                             data-placeholder="انتخاب بازه قیمت دستگاه"
                                                             data-dropdown-parent="#kt_modal_create_project"
-                                                            name="price_range">
+                                                            name="price_range"
+                                                    style="direction: rtl">
                                                         <option value="">انتخاب بازه قیمت دستگاه</option>
                                                         @foreach($commitment_ceilings as $cc)
                                                             <option value="{{$cc->id}}"
                                                                     @if($mobile_warranty!=null) @if($cc->id==$mobile_warranty->commitment_ceiling_id) selected
                                                                     @endif @endif
-                                                                    data-price="{{$cc->price}}">{{$cc->price_range}}</option>
+                                                                    data-price="{{$cc->price}}"
+                                                                    data-discount="{{$cc->discount}}">{{$cc->price_range}} </option>
                                                         @endforeach
                                                     </select>
                                                     <div id="cc_price_show_box"
@@ -912,17 +920,17 @@
                                                                     <div class="form-floating col-4">
                                                                         <input type="number" max="31" min="1" maxlength="2" minlength="1" name="day" id="day" aria-label="First name" value="{{auth()->user()->getDay()}}"
                                                                                class="form-control form-control-solid">
-                                                                        <label for="day">روز</label>
+                                                                        <label for="day" class="required">روز</label>
                                                                     </div>
                                                                     <div class="form-floating col-4">
                                                                         <input type="number" max="12" min="1" maxlength="2" minlength="1" name="month" id="month" aria-label="First name" value="{{auth()->user()->getMonth()}}"
                                                                                class="form-control form-control-solid">
-                                                                        <label for="month">ماه</label>
+                                                                        <label for="month" class="required">ماه</label>
                                                                     </div>
                                                                     <div class="form-floating col-4">
                                                                         <input type="number" min="1310" max="{{\Hekmatinasser\Verta\Verta::now()->format('Y')}}" maxlength="4" minlength="1"  name="year" id="year" aria-label="" value="{{auth()->user()->getYear()}}"
                                                                                class="form-control form-control-solid">
-                                                                        <label for="year">سال</label>
+                                                                        <label for="year" class="required">سال</label>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1058,17 +1066,17 @@
                                                                     <div class="form-floating col-4">
                                                                         <input type="number" max="31" min="1" maxlength="2" minlength="1" name="day_other" id="day" aria-label="First name"
                                                                                class="form-control form-control-solid">
-                                                                        <label for="day">روز</label>
+                                                                        <label for="day" class="required">روز</label>
                                                                     </div>
                                                                     <div class="form-floating col-4">
                                                                         <input type="number" max="12" min="1" maxlength="2" minlength="1" name="month_other" id="month" aria-label="First name"
                                                                                class="form-control form-control-solid">
-                                                                        <label for="month">ماه</label>
+                                                                        <label for="month" class="required">ماه</label>
                                                                     </div>
                                                                     <div class="form-floating col-4">
                                                                         <input type="number" min="1310" max="{{\Hekmatinasser\Verta\Verta::now()->format('Y')}}" maxlength="4" minlength="1" name="year_other" id="year" aria-label=""
                                                                                class="form-control form-control-solid">
-                                                                        <label for="year">سال</label>
+                                                                        <label for="year" class="required">سال</label>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1083,7 +1091,7 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="mb-10">
-                                                                <label class="form-label">ایمیل</label>
+                                                                <label class="form-label">ایمیل</label><span>اختیاری</span>
                                                                 <input type="text" name="email_other" class="form-control" placeholder="">
                                                             </div>
                                                         </div>
@@ -1364,4 +1372,49 @@
         </script>
 
     @endif
+
+<!--    <script>
+
+        function formatDiscount(price){
+            if (!state.id) {
+                return state.text;
+            }
+            price.text = price.text + " Hello !"
+            /*var price_withDiscount;
+            if(discount!=0){
+                price_withDiscount='<p><del>'+price+'</del> <strong class="text-danger">'+
+                    $.number(price-(discount*price)/100)+' تومان ' +'</strong></p>';
+            }else{
+                price_withDiscount=$.number(price)+ ' تومان ';
+            }
+            return price_range+' - '+ price_withDiscount;*/
+        }
+
+        $('#cc_price_select').select2({
+            templateResult: formatDiscount
+        })
+    </script>-->
+    <script>
+        $('#cc_price_select').select2({
+            dir: "ltr"
+        });
+        $('#cc_price_select').change(function () {
+            var ccprice = $('#cc_price_select').find(":selected").attr('data-price');
+            var ccdiscount = $('#cc_price_select').find(":selected").attr('data-discount');
+            //var price=0;
+            //alert(price);
+            $('#cc_price_show').text(ccprice).number(true, 0);
+            var str = $('#cc_price_show').text();
+            if(ccdiscount!=0){
+                price="<span><del>"+$.number(ccprice)+"</del> <strong class='text-primary'>"+
+                    $.number(ccprice-((ccdiscount*ccprice)/100))+"</strong> تومان</span><br><span class='text-primary'>تخفیف افتتاحیه فقط تا پایان مهرماه</span>";
+            }else{
+                price=$.number(ccprice)+ " تومان";
+            }
+            //alert(price);
+            $('#cc_price_show').html("هزینه فراگارانتی : " + price );
+            $("#cc_price_show_box").slideDown("slow");
+        });
+    </script>
+
 @endsection

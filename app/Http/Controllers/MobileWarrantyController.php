@@ -95,13 +95,16 @@ class MobileWarrantyController extends Controller
             ]);
             $data = Mobile_warranty::find($id);
 
+            $price_with_discount=($data->Commitment_ceiling->price-($data->Commitment_ceiling->discount*$data->Commitment_ceiling->price)/100);
+
             if ($data->addition_fire_commitment_id != null) {
-                $data->tax = ($data->Fire_commitment_ceiling->price + $data->Commitment_ceiling->price) * (9 / 100);
+                $data->tax = ($data->Fire_commitment_ceiling->price + $price_with_discount) * (9 / 100);
                 $data->save();
             } else {
-                $data->tax = ($data->Commitment_ceiling->price) * (9 / 100);
+                $data->tax = $price_with_discount * (9 / 100);
                 $data->save();
             }
+
             //$mobile_images=Helpers::getImageFromDb($data->images);
 
             return $this->uploadPhoto($id, 1);
@@ -248,7 +251,7 @@ class MobileWarrantyController extends Controller
         if ($request['warranty_owner'] == 1) {
 
             $email = User::where([['email', $request['email']],['id','!=',auth()->id()]])->first();
-            if ($email) {
+            if ($email && $email->email!=null) {
                 return redirect()
                     ->back()
                     ->withErrors(['لطفا ایمیل تکراری وارد نکنید.']);
@@ -275,7 +278,7 @@ class MobileWarrantyController extends Controller
         } else {
             $email = User::where([['email', $request['email_other']],['id','!=',auth()->id()]])->first();
             //$phone_num = User::where('phone_num', $request['phone_num_other'])->first();
-            if ($email ) {
+            if ($email && $email->email!=null) {
                 return redirect()->back()->withErrors(['لطفا ایمیل تکراری وارد نکنید!']);
             } else {
 
@@ -362,11 +365,13 @@ class MobileWarrantyController extends Controller
 
             $this->sendPattern(auth()->user(),'ozv6axg5go',['name'=>auth()->user()->f_name,'phone_model'=>$data->getPhoneName($data)]);
 
+            $price_with_discount=($data->Commitment_ceiling->price-($data->Commitment_ceiling->discount*$data->Commitment_ceiling->price)/100);
+
             if ($data->addition_fire_commitment_id != null) {
-                $data->tax = ($data->Fire_commitment_ceiling->price + $data->Commitment_ceiling->price) * (9 / 100);
+                $data->tax = ($data->Fire_commitment_ceiling->price + $price_with_discount) * (9 / 100);
                 $data->save();
             } else {
-                $data->tax = ($data->Commitment_ceiling->price) * (9 / 100);
+                $data->tax = $price_with_discount * (9 / 100);
                 $data->save();
             }
 

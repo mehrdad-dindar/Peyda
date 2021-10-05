@@ -103,6 +103,7 @@ class ProfileController extends Controller
 
     protected function save_profile(EditProfileRequest $request)
     {
+        //dd($request->all());
         /*$v = verta()
             ->timestamp($request['birthday_tmp'] / 1000)
             ->formatGregorian('Y-m-d 09:i:s');*/
@@ -150,6 +151,8 @@ class ProfileController extends Controller
 
         if($request['year']!=null && $request['month']!=null && $request['day']!=null)  {
             $user->birthday = $userBirthday;
+        }else{
+            $user->birthday=null;
         }
 
         $user->melli_code = $request['melli_code'];

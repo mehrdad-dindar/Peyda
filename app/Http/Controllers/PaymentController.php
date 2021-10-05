@@ -45,7 +45,7 @@ class PaymentController extends Controller
         if ($mobilewarranty->addition_fire_commitment_id != null) {
             $fire_addition_price = $mobilewarranty->Fire_commitment_ceiling->price;
         }
-        $amount = (int)$fire_addition_price + (int)$mobilewarranty->Commitment_ceiling->price+$mobilewarranty->tax;
+        $amount = (int)$fire_addition_price + (int)($mobilewarranty->Commitment_ceiling->price-(($mobilewarranty->Commitment_ceiling->discount*$mobilewarranty->Commitment_ceiling->price))/100)+$mobilewarranty->tax;
         $invoice = new Invoice();
         $invoice->amount((int)$amount);
         $paymentId = md5(uniqid());

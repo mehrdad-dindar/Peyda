@@ -16,6 +16,7 @@ class CreateCommitmentCeilingsTable extends Migration
         Schema::create('commitment_ceilings', function (Blueprint $table) {
             $table->id();
             $table->string('price_range');
+            $table->integer('discount')->default(0);
             $table->integer('price');
             $table->timestamps();
         });

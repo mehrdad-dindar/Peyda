@@ -4,13 +4,7 @@ $("#new_mobile_select_btn").click(function () {
 $("#first_select").click(function () {
     $("#new_mobile_select").slideUp("slow");
 });
-$('#cc_price_select').change(function () {
-    var ccprice = $('#cc_price_select').find(":selected").attr('data-price');
-    $('#cc_price_show').text(ccprice).number(true, 0);
-    var str = $('#cc_price_show').text();
-    $('#cc_price_show').text("هزینه فراگارانتی : " + str + " تومان");
-    $("#cc_price_show_box").slideDown("slow");
-});
+
 $('#fcc_price_select').change(function () {
     var ccprice = $('#fcc_price_select').find(":selected").attr('data-price');
     $('#fcc_price_show').text(ccprice).number(true, 0);
@@ -53,3 +47,19 @@ $('#new_phone_model').on('change', function () {
         $('.my_other_model').slideUp("slow");
     }
 });
+/*$('#cc_price_select').change(function () {
+            var ccprice = $('#cc_price_select').find(":selected").attr('data-price');
+            var ccdiscount = $('#cc_price_select').find(":selected").attr('data-discount');
+            var price=0;
+            $('#cc_price_show').text(ccprice).number(true, 0);
+            var str = $('#cc_price_show').text();
+            if(ccdiscount=='0'){
+                price="<span><del>"+ccprice+"</del> <strong class='text-danger'>"+
+                $.number(ccprice-((ccdiscount*ccprice)/100))+"</strong></span>";
+            }else{
+                price=$.number(ccprice);
+            }
+            alert(price);
+            $('#cc_price_show').html("هزینه فراگارانتی : " + <strong></strong> + " تومان");
+            $("#cc_price_show_box").slideDown("slow");
+        });*/

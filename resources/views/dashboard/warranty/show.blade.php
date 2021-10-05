@@ -82,10 +82,11 @@
                                         <div class="form-group">
                                             <div class="checkbox d-inline">
                                                 <h3 name="h3_user_name" class="card-title">بازه قیمت</h3>
-                                                <select id="commitment_ceilings" onchange="selectOnChange(this.options[this.selectedIndex].getAttribute('data-price'),{{$warranty->Commitment_ceiling->price}})" name="commitment_ceilings" class="select2 form-control">
+                                                <select id="commitment_ceilings" onchange="selectOnChange(this.options[this.selectedIndex].getAttribute('data-price'),{{($warranty->Commitment_ceiling->price-($warranty->Commitment_ceiling->discount*$warranty->Commitment_ceiling->price)/100)}})" name="commitment_ceilings" class="select2 form-control">
                                                     @foreach($commitment_ceilings as $commitment_ceiling)
-                                                        <option data-price="{{$commitment_ceiling->price}}" value="{{$commitment_ceiling->id}}"
-                                                                @if($commitment_ceiling->id==$warranty['commitment_ceiling_id']) selected @endif>{{$commitment_ceiling->price_range. ' - '. number_format($commitment_ceiling->price)}}</option>
+                                                        <option data-price="{{$commitment_ceiling->price}}"  data-discount="{{$commitment_ceiling->discount}}" value="{{$commitment_ceiling->id}}"
+                                                                @if($commitment_ceiling->id==$warranty['commitment_ceiling_id']) selected @endif>{{$cc->price_range}} - @if($cc->discount) <p><del>{{$cc->price}}</del> <strong class="text-danger">
+                                                                    {{number_format((($cc->discount*$cc->price)/100)+$cc->price). ' تومان '}}</strong></p> @else {{number_format($cc->price). ' تومان '}} @endif</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -128,7 +129,7 @@
                                 </div>
 
                                 <h4> هزینه پرداخت شده توسط کاربر </h4>
-                                <h6>هزینه فراگارانتی + ۹٪ ارزش افزوده: {{number_format($warranty->Commitment_ceiling->price + (9*$warranty->Commitment_ceiling->price)/100) . ' تومان '}}</h6>
+                                <h6>هزینه فراگارانتی + ۹٪ ارزش افزوده: {{number_format($warranty->Commitment_ceiling->price + (9*(($warranty->Commitment_ceiling->discount*$warranty->Commitment_ceiling->price)/100+$warranty->Commitment_ceiling->price))) . ' تومان '}}</h6>
                                 @if($warranty->addition_fire_commitment_id != null)
                                     <h6>هزینه بیمه آتش سوزی + ۹٪ ارزش افزوده: {{number_format($warranty->Fire_commitment_ceiling->price + (9*$warranty->Fire_commitment_ceiling->price)/100) . ' تومان '}}</h6>
                                 @endif

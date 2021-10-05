@@ -111,7 +111,11 @@
 
                                                     </span>
                                                 </td>
-                                                <td class="pt-6 text-dark fw-boldest text-center">{{ number_format($invoice->Commitment_ceiling->price, 0, ',', ',') }}
+                                                <td class="pt-6 text-dark fw-boldest text-center">
+                                                    @if($invoice->Commitment_ceiling->discount)<del class="text-muted">{{number_format($invoice->Commitment_ceiling->price)}}</del> {{ number_format($invoice->Commitment_ceiling->price-($invoice->Commitment_ceiling->discount*$invoice->Commitment_ceiling->price)/100) }}
+                                                    @else
+                                                        {{number_format($invoice->Commitment_ceiling->price)}}
+                                                    @endif
                                                     تومان
                                                 </td>
                                             </tr>
@@ -133,7 +137,7 @@
                                                     @if($invoice->addition_fire_commitment_id == null)
                                                         0 تومان
                                                     @else
-                                                        {{ number_format($invoice->Fire_commitment_ceiling->price, 0, ',', ',') }}
+                                                        {{ number_format($invoice->Fire_commitment_ceiling->price) }}
                                                         تومان
                                                     @endif
                                                 </td>
@@ -154,7 +158,7 @@
                                                 <!--begin::Label-->
                                                 <div
                                                     class="text-end fw-bolder fs-6 text-gray-800">
-                                                    {{$invoice->addition_fire_commitment_id!=null ? number_format($invoice->Fire_commitment_ceiling->price+$invoice->Commitment_ceiling->price, 0, ',', ',') : number_format($invoice->Commitment_ceiling->price, 0, ',', ',')  }}
+                                                    {{$invoice->addition_fire_commitment_id!=null ? number_format($invoice->Fire_commitment_ceiling->price+($invoice->Commitment_ceiling->price-($invoice->Commitment_ceiling->discount*$invoice->Commitment_ceiling->price)/100)) : number_format($invoice->Commitment_ceiling->price)  }}
                                                     تومان
                                                 </div>
                                                 <!--end::Label-->
@@ -166,7 +170,7 @@
                                                 <div class="fw-bold pe-10 text-gray-600 fs-7">مالیات 9%</div>
                                                 <!--end::Accountname-->
                                                 <!--begin::Label-->
-                                                <div class="text-end fw-bolder fs-6 text-gray-800">{{number_format($invoice->tax, 0, ',', ',')}} تومان</div>
+                                                <div class="text-end fw-bolder fs-6 text-gray-800">{{number_format($invoice->tax)}} تومان</div>
                                                 <!--end::Label-->
                                             </div>
                                             <!--end::Item-->
@@ -178,7 +182,7 @@
                                                 <!--begin::Label-->
                                                 <div
                                                     class="text-end fw-bolder fs-6 text-gray-800">
-                                                    {{$invoice->addition_fire_commitment_id!=null ? number_format($invoice->Fire_commitment_ceiling->price+$invoice->Commitment_ceiling->price+$invoice->tax, 0, ',', ',') : number_format($invoice->Commitment_ceiling->price+$invoice->tax, 0, ',', ',')  }}
+                                                    {{$invoice->addition_fire_commitment_id!=null ? number_format($invoice->Fire_commitment_ceiling->price+($invoice->Commitment_ceiling->price-($invoice->Commitment_ceiling->discount*$invoice->Commitment_ceiling->price)/100)+$invoice->tax) : number_format($invoice->Commitment_ceiling->price+$invoice->tax)  }}
                                                     تومان
                                                 </div>
                                                 <!--end::Label-->
