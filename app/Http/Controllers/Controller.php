@@ -84,6 +84,11 @@ class Controller extends BaseController
         return $incomplete;
     }
 
+    public static function getUsersVerOrNotNum($status)
+    {
+        return User::query()->where('status',$status)->count();
+    }
+
     public static function getUsesWarraties()
     {
         $key=0;
@@ -180,6 +185,11 @@ class Controller extends BaseController
     public static function sendEmail($user,$var)
     {
         Mail::to($user)->send($var);
+    }
+
+    public static function getUser()
+    {
+        return User::find(auth()->id());
     }
 
 }
