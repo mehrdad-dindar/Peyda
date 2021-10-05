@@ -1,5 +1,6 @@
 @extends('layouts.master_front')
 @section('title','صفحه نخست')
+@section('description','پیدا سرویس ماندگار، بزرگترین و تخصصی ترین مرکز خصوصی ارائه دهنده خدمات فراگارانتی گوشی های تلفن همراه در ایران')
 @section('custom_css')
 @endsection
 @section('content')
