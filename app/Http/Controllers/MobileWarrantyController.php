@@ -614,6 +614,7 @@ class MobileWarrantyController extends Controller
                 }
             }
         }
+        $mobileWarranty = Mobile_warranty::find($id);
 
 
         if($request->has('melli_card')){
@@ -621,25 +622,29 @@ class MobileWarrantyController extends Controller
             $melli_card_name = time() . $file->getClientOriginalName();
             $file->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/melli_cards/', $melli_card_name);
             $key++;
+        }else{
+            User::query()->where('id',$mobileWarranty->owner_id)->update(['melli_card'=>$request['hidden_melli_card']]);
+            $key++;
         }
+
         if($request->has('melli_card_back')){
             $file = $request->file('melli_card_back');
             $melli_card_back_name = time() . $file->getClientOriginalName();
             $file->move($_SERVER["DOCUMENT_ROOT"] . '/uploads/melli_cards/', $melli_card_back_name);
             $key++;
+        }else{
+            User::query()->where('id',$mobileWarranty->owner_id)->update(['melli_card_back'=>$request['hidden_melli_card_back']]);
+            $key++;
         }
 
+        //dd($request->all(),$key);
 
         if ($key == 9) {
-
-            $mobileWarranty = Mobile_warranty::find($id);
 
             Mobile_warranty::query()->where('id', $id)->update([
                 'images' => $imageList,
                 'status_id' => 6
             ]);
-
-            User::query()->where('id',$mobileWarranty->owner_id)->update(['melli_card'=>$melli_card_name,'melli_card_back'=>$melli_card_back_name]);
 
             $userrequest = UserRequest::query()
                 ->where([['user_requestable_type', '=', 'App\Models\Mobile_warranty'],
@@ -649,7 +654,6 @@ class MobileWarrantyController extends Controller
                 $mobileWarranty->userrequests()->update(['updated_at' => Carbon::now()->toDateTimeString()]);
                 //dd('if');
             } else {
-
                 $userrequest1 = new UserRequest();
                 $mobileWarranty->userrequests()->save($userrequest1);
             }

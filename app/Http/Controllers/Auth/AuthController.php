@@ -154,8 +154,14 @@ class AuthController extends Controller
 
         $this->sendPattern($user, '0saq77pizr', ['h' => Verta::now()->format('H:m'), 'day' => Verta::now()->formatWord('l'), 'date' => Verta::now()->format('Y/m/d')]);
 
+        if($user->f_name!=''){
+            $f_name=$user->f_name;
+        }else{
+            $f_name='کاربر';
+        }
+
         if ($user->status == 0)
-            $this->sendPattern($user,'szkx3x454l',['name'=>$user->f_name ?? "کاربر"]);
+            $this->sendPattern($user,'szkx3x454l',['name'=>$f_name]);
 
         if(auth()->user()->email!=null) {
             $var = new loginEmail(auth()->user());
